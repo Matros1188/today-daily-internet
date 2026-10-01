@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090b10">
-<meta name="description" content="TODAY — интернет, который живёт только сегодня.">
+<meta name="theme-color" content="#f4f1ea">
+<meta name="description" content="TODAY — интернет, который существует только сегодня.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon-192.png">
-<title>TODAY — Интернет только сегодня</title>
+<title>TODAY — интернет только сегодня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./config.js"></script>
 <link rel="stylesheet" href="./style.css">
@@ -15,29 +15,66 @@
 <body>
 <div id="app">
 <header class="topbar">
-  <div><div class="brand">TODAY</div><div class="brand-sub">ИНТЕРНЕТ, КОТОРЫЙ ЖИВЁТ ТОЛЬКО СЕГОДНЯ</div></div>
-  <div class="top-actions"><button id="installBtn" class="ghost hidden">НА ЭКРАН</button><button id="authBtn" class="avatar-btn">ВОЙТИ</button></div>
-</header>
-<main>
-<section class="hero">
-  <div><div class="eyebrow">СЕГОДНЯ · <span id="dateLabel">—</span></div><h1>Интернет,<br><span>который исчезает ночью.</span></h1><p>Каждый день новый вопрос, новая игра, новые люди и новые истории. Завтра всё начнётся заново.</p></div>
-  <div class="clock glass"><div class="mini">ДО ПОЛУНОЧИ</div><strong id="countdown">--:--:--</strong><button id="shareBtn" class="small-action">ПОДЕЛИТЬСЯ</button></div>
-</section>
-<section id="personalBar" class="personal glass hidden"></section>
-<section class="today-head"><div><div class="eyebrow">СОДЕРЖИМОЕ ДНЯ</div><h2>Что сегодня?</h2></div><div class="today-note">В 00:00 всё обновится</div></section>
-<section id="dailyGrid" class="daily-grid"></section>
-<section class="people">
-  <div class="section-head"><div><div class="eyebrow">ЛЮДИ СЕГОДНЯ</div><h2>Один след. Один день.</h2></div><div class="today-note">Завтра пост исчезнет</div></div>
-  <div class="composer glass">
-    <div id="guestComposer" class="guest"><span>Что ты хочешь оставить в сегодняшнем интернете?</span><button id="guestJoinBtn" class="primary">ВОЙТИ</button></div>
-    <div id="userComposer" class="hidden"><textarea id="postText" maxlength="280" placeholder="Твой пост дня…"></textarea><div class="composer-foot"><span id="charCount">0/280</span><button id="postBtn" class="primary">ОПУБЛИКОВАТЬ</button></div></div>
+  <button class="brand-button" id="brandBtn" aria-label="TODAY"><span class="brand-mark">T</span><span><b>TODAY</b><small>ТОЛЬКО СЕГОДНЯ</small></span></button>
+  <div class="top-actions">
+    <button id="installBtn" class="icon-button hidden" aria-label="На экран">＋</button>
+    <button id="profileBtn" class="profile-mini" aria-label="Профиль"><span id="profileAvatar">◉</span></button>
   </div>
-  <div id="postsList" class="posts"></div>
+</header>
+
+<main>
+<section class="day-strip">
+  <div>
+    <div class="tiny">СЕГОДНЯ · <span id="dateLabel">—</span></div>
+    <h1 id="dayTheme">ТВОЙ ДЕНЬ В ИНТЕРНЕТЕ</h1>
+  </div>
+  <div class="day-time"><span id="dayProgress">0%</span><strong id="countdown">--:--:--</strong><span>до полуночи</span></div>
+</section>
+
+<section class="livebar">
+  <span class="live-dot"></span><b id="liveCount">TODAY живёт сейчас</b><span id="liveMeta">обновляется в реальном времени</span>
+  <button id="notifyBtn" class="text-button">Уведомлять меня</button>
+</section>
+
+<section id="dailyGrid" class="daily-grid" aria-live="polite"></section>
+
+<section class="section-block social-block" id="peopleSection">
+  <div class="section-title-row">
+    <div><div class="tiny">ЛЮДИ СЕГОДНЯ</div><h2>Оставь свой след</h2></div>
+    <button id="peopleRefresh" class="text-button">обновить</button>
+  </div>
+  <div id="composer" class="composer-card">
+    <div class="composer-guest" id="guestComposer">
+      <div class="composer-avatar">✦</div><div class="composer-copy"><b>Что происходит у тебя сегодня?</b><span>Одна запись. Один день.</span></div>
+      <button id="joinBtn" class="primary-button">ВОЙТИ</button>
+    </div>
+    <div id="userComposer" class="hidden">
+      <textarea id="postText" maxlength="280" placeholder="Одна мысль, фото или момент сегодняшнего дня…"></textarea>
+      <div class="composer-bottom"><span id="charCount">0/280</span><label class="photo-button">📷<input id="postImage" type="file" accept="image/*" hidden></label><button id="postBtn" class="primary-button">В МИР</button></div>
+    </div>
+  </div>
+  <div id="postsList" class="posts-grid"></div>
+</section>
+
+<section class="section-block ranking-block">
+  <div class="section-title-row"><div><div class="tiny">ДЕНЬ</div><h2>Кто сегодня в игре</h2></div><span class="rank-note">завтра всё с нуля</span></div>
+  <div id="leaderboard" class="leaderboard"></div>
+</section>
+
+<section class="section-block profile-section hidden" id="mySection">
+  <div id="profilePanel"></div>
 </section>
 </main>
-<footer><span>TODAY · каждый день новый интернет</span><span id="footerDate">—</span></footer>
-</div>
-<div id="modal" class="modal hidden"><div class="modal-bg"></div><div class="modal-card glass"><button id="modalClose" class="modal-close">×</button><div id="modalContent"></div></div></div>
+
+<nav class="bottom-nav">
+  <button data-nav="home" class="active">⌂<span>TODAY</span></button>
+  <button data-nav="people">◉<span>ЛЮДИ</span></button>
+  <button data-nav="rank">♛<span>ТОП</span></button>
+  <button data-nav="me">✦<span>Я</span></button>
+</nav>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast"></div>
 <script src="./app.js"></script>
 </body>
 </html>
