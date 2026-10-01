@@ -5,25 +5,96 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f4f1ea">
 <meta name="description" content="TODAY — интернет, который живёт только сегодня.">
-<link rel="manifest" href="./manifest.webmanifest">
+<link rel="manifest" href="./manifest.webmanifest?v=166">
 <link rel="icon" href="./icon-192.png">
 <title>TODAY — интернет только сегодня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js"></script>
-<link rel="stylesheet" href="./style.css">
+<script src="./config.js?v=166"></script>
+<link rel="stylesheet" href="./style.css?v=166">
 </head>
 <body>
 <div id="app">
-<header class="topbar"><button class="brand-button" id="brandBtn"><span class="brand-mark">T</span><span><b>TODAY</b><small>ТОЛЬКО СЕГОДНЯ</small></span></button><div class="top-actions"><button id="installBtn" class="icon-button hidden">＋</button><button id="profileBtn" class="profile-mini"><span id="profileAvatar">✦</span></button></div></header>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="brand" id="brandBtn" aria-label="TODAY">
+      <span class="brand-mark">T</span>
+      <span class="brand-copy"><strong>TODAY</strong><small>ТОЛЬКО СЕГОДНЯ</small></span>
+    </button>
+    <div class="top-actions">
+      <button id="installBtn" class="top-btn hidden" type="button">НА ЭКРАН</button>
+      <button id="profileBtn" class="account-btn" type="button"><span id="profileAvatar">✦</span><b id="profileLabel">АККАУНТ</b></button>
+    </div>
+  </div>
+</header>
+
 <main>
-<section class="hero"><div><div class="eyebrow">СЕГОДНЯ · <span id="dateLabel">—</span></div><h1>ТВОЙ ИНТЕРНЕТ<br><em>ТОЛЬКО СЕГОДНЯ.</em></h1><p class="hero-copy">12 рубрик. Новый день. Ничего не повторяется.</p></div><div class="clock"><small>ДО ПОЛУНОЧИ</small><strong id="countdown">--:--:--</strong><span id="dayProgress">0%</span></div></section>
-<section class="livebar"><span class="live-dot"></span><b id="liveCount">TODAY живёт сейчас</b><span id="liveMeta">люди приходят прямо сейчас</span><button id="notifyBtn" class="text-button">уведомлять</button></section>
-<section id="dailyGrid" class="daily-grid"></section>
-<section id="community" class="community section-block"><div class="section-head"><div><div class="eyebrow">ЛЮДИ СЕГОДНЯ</div><h2>Что оставили люди</h2></div><button id="peopleRefresh" class="text-button">обновить</button></div><div id="communityFeed" class="community-feed"></div></section>
-<section class="section-block ranking-block"><div class="section-head"><div><div class="eyebrow">ДЕНЬ</div><h2>Кто сегодня в игре</h2></div><span class="rank-note">завтра всё с нуля</span></div><div id="leaderboard" class="leaderboard"></div></section>
-<section id="mySection" class="section-block profile-section hidden"><div id="profilePanel"></div></section>
+  <section class="masthead shell" id="homeSection">
+    <div class="masthead-copy">
+      <div class="eyebrow">СЕГОДНЯ · <span id="dateLabel">—</span></div>
+      <h1>ТВОЙ ИНТЕРНЕТ.<br><span>ТОЛЬКО СЕГОДНЯ.</span></h1>
+      <p>12 рубрик. Новый день. Завтра всё начнётся заново.</p>
+    </div>
+    <div class="day-clock">
+      <div class="clock-label">ДО ПОЛУНОЧИ</div>
+      <strong id="countdown">--:--:--</strong>
+      <div class="clock-bottom"><span id="dayProgress">0%</span><span>дня прошло</span></div>
+      <div class="progress"><i id="progressBar"></i></div>
+    </div>
+  </section>
+
+  <section class="status-row shell">
+    <div class="live-chip"><span class="live-dot"></span><strong id="liveCount">TODAY живёт сейчас</strong><span id="liveMeta">люди активны сегодня</span></div>
+    <div class="status-actions">
+      <span class="rubric-count"><b>12</b> РУБРИК</span>
+      <button id="notifyBtn" class="quiet-btn" type="button">Уведомить меня</button>
+    </div>
+  </section>
+
+  <section class="today-section shell" aria-labelledby="todayTitle">
+    <div class="section-head">
+      <div><div class="eyebrow">ПРЯМО СЕЙЧАС</div><h2 id="todayTitle">Что происходит сегодня</h2></div>
+      <span class="section-note">каждая рубрика живёт один день</span>
+    </div>
+    <div id="dailyGrid" class="daily-grid" aria-live="polite"></div>
+  </section>
+
+  <section class="community-section shell" id="peopleSection" aria-labelledby="peopleTitle">
+    <div class="section-head">
+      <div><div class="eyebrow">ЛЮДИ СЕГОДНЯ</div><h2 id="peopleTitle">Что оставили люди</h2></div>
+      <button id="peopleRefresh" class="quiet-btn" type="button">Обновить</button>
+    </div>
+    <div class="community-intro">Песни, истории, факты, тренды, моменты и следы — всё, что люди оставили в TODAY сегодня.</div>
+    <div id="communityFeed" class="community-feed"></div>
+  </section>
+
+  <section class="ranking-section shell" id="rankSection" aria-labelledby="rankTitle">
+    <div class="section-head">
+      <div><div class="eyebrow">РЕЙТИНГ ДНЯ</div><h2 id="rankTitle">Кто сегодня в игре</h2></div>
+      <span class="section-note">завтра счёт обнулится</span>
+    </div>
+    <div class="ranking-card">
+      <div id="leaderboard" class="leaderboard"></div>
+    </div>
+  </section>
 </main>
-<nav class="bottom-nav"><button data-nav="home" class="active">⌂<span>TODAY</span></button><button data-nav="people">◉<span>ЛЮДИ</span></button><button data-nav="rank">♛<span>ТОП</span></button><button data-nav="me">✦<span>Я</span></button></nav>
-<div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close">×</button><div id="modalContent"></div></div></div>
-<div id="toast" class="toast"></div>
-<script src="./app.js"></script></body></html>
+
+<footer class="footer shell"><span>TODAY</span><span>Один интернет. Один день.</span></footer>
+
+<nav class="bottom-nav" aria-label="Навигация">
+  <button data-nav="home" class="active" type="button"><span class="nav-icon">⌂</span><small>TODAY</small></button>
+  <button data-nav="people" type="button"><span class="nav-icon">◉</span><small>ЛЮДИ</small></button>
+  <button data-nav="rank" type="button"><span class="nav-icon">♛</span><small>ТОП</small></button>
+  <button data-nav="me" type="button"><span class="nav-icon">✦</span><small>Я</small></button>
+</nav>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="./app.js?v=166"></script>
+</body>
+</html>
