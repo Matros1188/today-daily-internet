@@ -81,29 +81,26 @@ function setupNavigation(){document.querySelectorAll(".bottom-nav button").forEa
 function setupInstall(){window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();state.deferredPrompt=e;$("installBtn").classList.remove("hidden")});$("installBtn").onclick=async()=>{if(!state.deferredPrompt)return;state.deferredPrompt.prompt();await state.deferredPrompt.userChoice;state.deferredPrompt=null;$("installBtn").classList.add("hidden")}}
 function setupModal(){ $("modalClose").onclick=closeModal;$("modal").querySelector(".modal-backdrop").onclick=closeModal;window.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()})}
 function notify(){if(!("Notification" in window))return toast("Уведомления не поддерживаются этим браузером");Notification.requestPermission().then(p=>toast(p==="granted"?"Уведомления включены":"Уведомления не разрешены"))}
-async function purgeCache(){try{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith("today-")&&k!=="today-static-today-194").map(k=>caches.delete(k)));if(navigator.serviceWorker){const regs=await navigator.serviceWorker.getRegistrations();for(const reg of regs)await reg.update()}}catch{}}
+async function purgeCache(){try{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k)));if(navigator.serviceWorker)for(const reg of await navigator.serviceWorker.getRegistrations())await reg.update()}catch(e){console.warn("TODAY cache purge",e)}}
+
 function decorateTodayHeadline(){
-  const root=document;
-  const exact=/^Всё\s*,?\s*что\s+происходит\s+только\s+сегодня[.!]?$/i;
-  const walker=document.createTreeWalker(root.body||root,NodeFilter.SHOW_TEXT);
+  const exact=/^Открой\.\s*Пока\s+это\s+сегодня[.!]?$/i;
+  const walker=document.createTreeWalker(document.body||document,NodeFilter.SHOW_TEXT);
   const nodes=[];
   while(walker.nextNode()){
     const n=walker.currentNode;
     if(!n.parentElement||n.parentElement.closest('script,style,noscript'))continue;
-    const text=n.nodeValue?.trim()||'';
-    if(exact.test(text))nodes.push(n);
+    const t=(n.nodeValue||'').trim();
+    if(exact.test(t))nodes.push(n);
   }
   for(const n of nodes){
     if(n.parentElement?.classList.contains('today-headline'))continue;
-    const raw=n.nodeValue.trim().replace(/[.!]+$/,'');
     const wrap=document.createElement('span');wrap.className='today-headline';
-    const parts=raw.match(/^(Всё\s*,?\s*что\s+происходит)\s+(только\s+сегодня)$/i);
-    if(!parts)continue;
-    wrap.append(document.createTextNode(parts[1]+' '));
-    const accent=document.createElement('span');accent.className='today-headline-accent';accent.textContent=parts[2];wrap.append(accent);
-    n.replaceWith(wrap);
+    const p=document.createElement('span');p.className='today-headline-prefix';p.textContent='Открой.';
+    const a=document.createElement('span');a.className='today-headline-accent';a.textContent='Пока это сегодня';
+    wrap.append(p,a);n.replaceWith(wrap);
   }
 }
 
-async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=194").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
+async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=196").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
 window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
