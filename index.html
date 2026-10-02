@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#f7f3ec">
 <meta name="color-scheme" content="light">
 <meta name="description" content="TODAY — интернет, который живёт только сегодня.">
-<link rel="manifest" href="./manifest.webmanifest?v=194">
+<link rel="manifest" href="./manifest.webmanifest?v=196">
 <link rel="icon" href="./icon-192.png">
 <title>TODAY — интернет только сегодня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js?v=194"></script>
-<link rel="stylesheet" href="./style.css?v=194">
+<script src="./config.js?v=196"></script>
+<link rel="stylesheet" href="./style.css?v=196">
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
@@ -19,10 +19,7 @@
 <div id="app">
 <header class="topbar">
   <div class="topbar-inner">
-    <button class="brand" id="brandBtn" type="button" aria-label="TODAY">
-      <span class="brand-mark">T</span>
-      <span class="brand-copy"><strong>TODAY</strong><small>ИНТЕРНЕТ ТОЛЬКО СЕГОДНЯ</small></span>
-    </button>
+    <button class="brand" id="brandBtn" type="button" aria-label="TODAY"><span class="today-brand-lockup" aria-label="TODAY"><span class="today-logo-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="todayLogoG" x1="9" y1="8" x2="56" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#4F7BFF"/><stop offset=".52" stop-color="#7C69E8"/><stop offset="1" stop-color="#2AB6C8"/></linearGradient><linearGradient id="todayLogoS" x1="25" y1="15" x2="44" y2="43" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9E5FF"/></linearGradient></defs><circle cx="32" cy="32" r="24" stroke="url(#todayLogoG)" stroke-width="5" stroke-linecap="round" stroke-dasharray="98 42" transform="rotate(-26 32 32)"/><path d="M11 39C18 45 29 51 41 48C50 46 55 40 57 33" stroke="#FFFFFF" stroke-opacity=".68" stroke-width="2.2" stroke-linecap="round"/><path d="M27.6 14.8L31.5 25.6L44 29.5L33 33.5L29.1 46L25.1 34.9L12.7 31L23.7 27.1L27.6 14.8Z" fill="url(#todayLogoS)" stroke="url(#todayLogoG)" stroke-width="2" stroke-linejoin="round"/><circle cx="50.5" cy="15" r="2.8" fill="#2AB6C8"/><circle cx="14" cy="18" r="1.8" fill="#7C69E8"/><circle cx="52" cy="47" r="1.8" fill="#4F7BFF"/><path d="M7 49L17 47" stroke="#4F7BFF" stroke-width="2" stroke-linecap="round" opacity=".62"/></svg></span><span class="today-brand-copy"><span class="today-brand-word">TODAY<span class="today-brand-dot">•</span></span><span class="today-brand-tag">OPEN · PLAY · REACT</span></span><span class="today-brand-line" aria-hidden="true"></span></span></button>
     <div class="top-actions">
       <div class="coin-badge" id="coinBadge" title="Монеты"><span>●</span><b id="coinCount">0</b></div>
       <button id="installBtn" class="top-btn hidden" type="button">НА ЭКРАН</button>
@@ -80,6 +77,6 @@
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button><div id="modalContent"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
-<script src="./app.js?v=194"></script>
+<script src="./app.js?v=196"></script>
 </body>
 </html>
