@@ -6,16 +6,13 @@
 <meta name="theme-color" content="#f7f3ec">
 <meta name="color-scheme" content="light">
 <meta name="description" content="TODAY — интернет, который живёт только сегодня.">
-<link rel="manifest" href="./manifest.webmanifest?v=208">
+<link rel="manifest" href="./manifest.webmanifest?v=209">
 <link rel="icon" href="./icon-192.png">
 <title>TODAY — интернет только сегодня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js?v=208"></script>
-<link rel="stylesheet" href="./style.css?v=208">
-
-<script>
-(()=>{try{if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});}}catch(e){}try{caches?.keys?.().then(keys=>Promise.all(keys.map(k=>caches.delete(k)))).catch(()=>{});}catch(e){}})();
-</script>
+<script src="./config.js?v=209"></script>
+<link rel="stylesheet" href="./style.css?v=209">
+<script>(function(){try{const u=new URL(location.href);if(u.searchParams.get("reset")==="209"){const p=[];if(navigator.serviceWorker)p.push(navigator.serviceWorker.getRegistrations().then(rs=>Promise.all(rs.map(r=>r.unregister()))));if(window.caches&&caches.keys)p.push(caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))));Promise.allSettled(p).catch(()=>{})}}catch(e){}})();</script>
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
@@ -36,7 +33,7 @@
 <section class="hero shell" id="homeSection">
   <div class="hero-copy">
     <div class="eyebrow">СЕГОДНЯ · <span id="dateLabel">—</span></div>
-    <h1>СЕГОДНЯ ЕСТЬ.<br><span>ЗАВТРА УЖЕ НЕТ.</span></h1>
+    <h1>ВСЁ, ЧТО ПРОИСХОДИТ<br><span>ТОЛЬКО СЕГОДНЯ.</span></h1>
     <p>12 рубрик, люди, игры и маленькие события, которые исчезнут в полночь.</p>
     <div class="hero-rail"><span class="pulse-dot"></span><strong id="activityNow">TODAY живёт сейчас</strong><span id="activityText">кто-то уже открыл день</span></div>
   </div>
@@ -81,6 +78,6 @@
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button><div id="modalContent"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
-<script src="./app.js?v=208"></script>
+<script src="./app.js?v=209"></script>
 </body>
 </html>
