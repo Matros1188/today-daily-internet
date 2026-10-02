@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<script>(function(){try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)))}catch(e){}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f4f6f9">
+<meta name="theme-color" content="#f7f3ec">
 <meta name="color-scheme" content="light">
 <meta name="description" content="TODAY — интернет, который живёт только сегодня.">
-<link rel="manifest" href="./manifest.webmanifest?v=210">
+<link rel="manifest" href="./manifest.webmanifest?v=213">
 <link rel="icon" href="./icon-192.png">
 <title>TODAY — интернет только сегодня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js?v=210"></script>
-<link rel="stylesheet" href="./style.css?v=210">
+<script src="./config.js?v=213"></script>
+<link rel="stylesheet" href="./style.css?v=213">
+<script>(async()=>{try{for(const r of await navigator.serviceWorker?.getRegistrations?.()||[]){try{await r.unregister()}catch{}}for(const k of await caches.keys()){if(/^today-static-/.test(k))try{await caches.delete(k)}catch{}}}catch(e){console.warn("TODAY cache reset",e)}})()</script>
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
@@ -20,7 +20,7 @@
 <div id="app">
 <header class="topbar">
   <div class="topbar-inner">
-    <button class="brand" id="brandBtn" type="button" aria-label="TODAY"><span class="today-brand-lockup" aria-label="TODAY"><span class="today-logo-mark" aria-hidden="true"><svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="todayLogoG" x1="9" y1="9" x2="63" y2="63" gradientUnits="userSpaceOnUse"><stop stop-color="#3B7CFF"/><stop offset=".42" stop-color="#7D55F5"/><stop offset=".74" stop-color="#23C8E8"/><stop offset="1" stop-color="#4BE1B0"/></linearGradient><linearGradient id="todayLogoG2" x1="30" y1="13" x2="55" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset=".58" stop-color="#E4DDFF"/><stop offset="1" stop-color="#BFEFFF"/></linearGradient><linearGradient id="todayLogoGold" x1="42" y1="4" x2="57" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF4AB"/><stop offset=".52" stop-color="#E6AA22"/><stop offset="1" stop-color="#A15A07"/></linearGradient><filter id="todayLogoShadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#315FE4" flood-opacity=".24"/></filter></defs><g filter="url(#todayLogoShadow)"><ellipse cx="36" cy="39" rx="28" ry="21" stroke="url(#todayLogoG)" stroke-width="5" stroke-linecap="round" transform="rotate(-19 36 39)" stroke-dasharray="112 38"/><ellipse cx="35" cy="36" rx="16.5" ry="16.5" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.48)" stroke-width="1.4"/><circle cx="35" cy="36" r="13.3" fill="#121A31" stroke="url(#todayLogoG)" stroke-width="2.7"/><path d="M24 40C28 26 40 23 48 31C42 32 38 37 37 47C32 46 27 44 24 40Z" fill="url(#todayLogoG)" opacity=".82"/><path d="M30.1 20.2L34.2 31.5L46.8 35.4L35.5 39.5L31.6 52L27.5 40.6L15 36.7L26.3 32.8L30.1 20.2Z" fill="url(#todayLogoG2)" stroke="#FFFFFF" stroke-opacity=".88" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 51C19 56 35 60 49 54C56 51 61 45 65 37" stroke="#24C8EC" stroke-width="2.4" stroke-linecap="round"/><path d="M50 18L52.7 10.5L55.8 17.5L63.3 20.1L56 22.9L53.4 30.3L50.4 23L43 20.4L50 18Z" fill="url(#todayLogoGold)" stroke="#FFF6C7" stroke-width="1.1"/><circle cx="60" cy="9" r="2.2" fill="#53E1BE"/><circle cx="11" cy="15" r="1.7" fill="#A56EFF"/><circle cx="62" cy="56" r="1.7" fill="#45B8FF"/></g></svg></span><span class="today-brand-copy"><span class="today-brand-word">TODAY<span class="today-brand-dot">•</span></span><span class="today-brand-tag">OPEN · PLAY · REACT</span></span><span class="today-brand-line" aria-hidden="true"></span></span></button>
+    <button class="brand" id="brandBtn" type="button" aria-label="TODAY"><span class="today-brand-lockup" aria-label="TODAY"><span class="today-logo-mark" aria-hidden="true"><svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="todayLogoG" x1="9" y1="9" x2="63" y2="63" gradientUnits="userSpaceOnUse"><stop stop-color="#3B7CFF"/><stop offset=".42" stop-color="#7D55F5"/><stop offset=".74" stop-color="#23C8E8"/><stop offset="1" stop-color="#4BE1B0"/></linearGradient></defs><circle cx="36" cy="36" r="27" stroke="url(#todayLogoG)" stroke-width="5"/><circle cx="36" cy="36" r="15" fill="#121A31"/><path d="M24 40C28 26 40 23 48 31C42 32 38 37 37 47C32 46 27 44 24 40Z" fill="url(#todayLogoG)" opacity=".82"/><path d="M30.1 20.2L34.2 31.5L46.8 35.4L35.5 39.5L31.6 52L27.5 40.6L15 36.7L26.3 32.8L30.1 20.2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/></svg></span><span class="today-brand-copy"><span class="today-brand-word">TODAY<span class="today-brand-dot">•</span></span><span class="today-brand-tag">OPEN · PLAY · REACT</span></span><span class="today-brand-line" aria-hidden="true"></span></span></button>
     <div class="top-actions">
       <div class="coin-badge" id="coinBadge" title="Монеты"><span>●</span><b id="coinCount">0</b></div>
       <button id="installBtn" class="top-btn hidden" type="button">НА ЭКРАН</button>
@@ -31,6 +31,8 @@
 
 <main>
 <section class="hero shell" id="homeSection">
+<span class="today-headline"><span class="today-headline-prefix">СЕГОДНЯ ЕСТЬ.</span><span class="today-headline-accent">ЗАВТРА УЖЕ НЕТ.</span></span>
+
   <div class="hero-copy">
     <div class="eyebrow">СЕГОДНЯ · <span id="dateLabel">—</span></div>
     <h1>ВСЁ, ЧТО ПРОИСХОДИТ<br><span>ТОЛЬКО СЕГОДНЯ.</span></h1>
@@ -78,6 +80,6 @@
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button><div id="modalContent"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
-<script src="./app.js?v=210"></script>
+<script src="./app.js?v=213"></script>
 </body>
 </html>
