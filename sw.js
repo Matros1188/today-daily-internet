@@ -1,6 +1,6 @@
-/* TODAY V18.1.9 */
-const CACHE_NAME="today-static-today-189";
-const APP_ASSETS=["./","./index.html","./style.css?v=189","./app.js?v=189","./config.js?v=189","./manifest.webmanifest?v=189"];
+/* TODAY V18.1.12 */
+const CACHE_NAME="today-static-today-192";
+const APP_ASSETS=["./","./index.html","./style.css?v=192","./app.js?v=192","./config.js?v=192","./manifest.webmanifest?v=192"];
 self.addEventListener("install",event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_ASSETS).catch(()=>{})))});
 self.addEventListener("activate",event=>{event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith("today-static-")&&key!==CACHE_NAME)await caches.delete(key);await self.clients.claim()})())});
 self.addEventListener("fetch",event=>{const req=event.request;if(req.method!=="GET")return;const url=new URL(req.url);if(url.origin!==self.location.origin)return;const appAsset=/\.(?:html|css|js|webmanifest)$/.test(url.pathname)||url.pathname.endsWith("/");if(appAsset){event.respondWith((async()=>{try{const net=await fetch(req,{cache:"no-store"});const c=await caches.open(CACHE_NAME);c.put(req,net.clone()).catch(()=>{});return net}catch{return (await caches.match(req))||new Response("Offline",{status:503})}})());return}event.respondWith((async()=>{const hit=await caches.match(req);if(hit)return hit;try{return await fetch(req)}catch{return new Response("Offline",{status:503})}})())});
