@@ -20,7 +20,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:
 @media(max-width:760px){body{padding-bottom:88px}.shell,.topbar-inner{width:min(100% - 20px,var(--max))}.topbar-inner{min-height:64px}.brand-copy small{display:none}.brand-mark{width:39px;height:39px}.brand-copy strong{font-size:17px}.coin-badge{height:39px}.account-btn{height:39px}.hero{padding-top:28px;grid-template-columns:1fr;gap:14px}.hero h1{font-size:clamp(46px,13vw,65px);line-height:.88}.hero-copy>p{font-size:14px}.hero-side{grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:10px}.clock-card,.scene-card{padding:18px;border-radius:20px}.clock-card strong{font-size:34px}.activity-strip{grid-template-columns:auto minmax(0,1fr);}.strip-actions{grid-column:1/-1;justify-content:space-between}.daily-grid{grid-template-columns:1fr}.daily-card,.daily-card.featured,.daily-card.secondary{grid-column:span 1;min-height:230px}.daily-card.featured h3,.daily-card.secondary h3{font-size:30px}.community-feed{grid-template-columns:1fr}.section-head h2{font-size:30px}.section-note{display:none}.rank-row{grid-template-columns:34px 34px minmax(0,1fr) auto}.modal{padding:10px}.modal-card{padding:20px;border-radius:22px;max-height:90vh}.shop-grid{grid-template-columns:1fr}.bundle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer{display:none}.pixel-pet{left:9px;bottom:82px}}
 @media(max-width:430px){.top-actions{gap:5px}.coin-badge{padding:0 8px}.account-btn{padding-right:8px;max-width:145px}.hero-side{grid-template-columns:1fr}.activity-strip{padding:10px}.profile-row{grid-template-columns:60px minmax(0,1fr)}.profile-big{width:60px;height:60px}.profile-row h2{font-size:26px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
-@supports not (backdrop-filter:blur(1px)){.topbar{background:#f7f3ec}}/* TODAY V18.1.12 — REAL LIQUID GLASS / 95% TRANSPARENT */
+@supports not (backdrop-filter:blur(1px)){.topbar{background:#f7f3ec}}/* TODAY V18.1.14 — REAL LIQUID GLASS / 95% TRANSPARENT */
 :root{--glass-fill:rgba(255,255,255,.045);--glass-rim:rgba(255,255,255,.48);--glass-shadow:0 28px 80px rgba(15,15,20,.16),inset 0 1px 0 rgba(255,255,255,.62),inset 0 -1px 0 rgba(255,255,255,.12);--glass-blur:34px}
 html,body{background:transparent!important}body{position:relative!important;isolation:isolate!important}
 #dailyBackdrop{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;overflow:hidden!important;background:transparent!important}#dailyBackdrop .daily-scene{opacity:.98!important;filter:saturate(1.14) contrast(1.05) brightness(1.02)!important;transform:scale(1.035)!important}
@@ -33,3 +33,135 @@ html,body{background:transparent!important}body{position:relative!important;isol
 .modal-backdrop{background:rgba(8,10,18,.08)!important;backdrop-filter:blur(14px) saturate(115%)!important;-webkit-backdrop-filter:blur(14px) saturate(115%)!important}.modal-card{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.025))!important}.bottom-nav{background:linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.02))!important}.bottom-nav button.active{background:rgba(255,255,255,.24)!important;color:#151515!important}
 .primary-button{background:rgba(21,21,21,.72)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}.composer input,.composer textarea,.mystery-guess-wrap input{background:rgba(255,255,255,.04)!important;border-color:rgba(255,255,255,.40)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.28)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}.file-label{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.018))!important}.mystery-guess-wrap{background:rgba(255,255,255,.035)!important;border-color:rgba(255,255,255,.40)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;box-shadow:var(--glass-shadow)}
 @media(max-width:760px){.daily-card,.community-card,.ranking-card,.rank-row,.scene-card,.clock-card,.activity-strip,.topbar,.bottom-nav,.modal-card,.profile-card{backdrop-filter:blur(26px) saturate(190%) contrast(107%)!important;-webkit-backdrop-filter:blur(26px) saturate(190%) contrast(107%)!important}}
+/* TODAY V18.1.14 — TYPOGRAPHY / READABILITY / TODAY HERO */
+:root{
+  --ink-strong:#122033;
+  --ink:#243248;
+  --ink-soft:#4b5b70;
+  --ink-faint:#68778b;
+  --ink-on-dark:#f7f9fc;
+  --accent:#2d5fe8;
+  --accent-deep:#2048b8;
+  --text-glow:0 1px 0 rgba(255,255,255,.72),0 10px 30px rgba(22,32,48,.08);
+}
+html,body{color:var(--ink-strong)!important}
+body,button,input,textarea,select{font-synthesis:none;text-rendering:optimizeLegibility}
+button,input,textarea,select{font:inherit}
+
+/* Main page typography */
+.hero h1,.hero h2,.hero h3,.daily-card h1,.daily-card h2,.daily-card h3,.scene-card h1,.scene-card h2,.scene-card h3,.community-card h1,.community-card h2,.community-card h3,.ranking-card h1,.ranking-card h2,.ranking-card h3,.modal-card h1,.modal-card h2,.modal-card h3{
+  color:var(--ink-strong)!important;
+  letter-spacing:-.025em!important;
+  text-shadow:var(--text-glow)!important;
+}
+.hero p,.hero-copy p,.daily-card p,.scene-card p,.community-card p,.ranking-card p,.modal-card p{
+  color:var(--ink)!important;
+  line-height:1.58!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.55)!important;
+}
+.hero small,.hero .muted,.hero .meta,.daily-card small,.daily-card .muted,.daily-card .meta,.scene-card small,.scene-card .muted,.scene-card .meta,.community-card small,.community-card .muted,.community-card .meta,.ranking-card small,.ranking-card .muted,.ranking-card .meta,.modal-card small,.modal-card .muted,.modal-card .meta{
+  color:var(--ink-soft)!important;
+}
+
+/* The phrase “Всё что происходит только сегодня” */
+.today-headline{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:.34em!important;
+  flex-wrap:wrap!important;
+  max-width:100%!important;
+  color:var(--ink-strong)!important;
+  font-weight:800!important;
+  letter-spacing:-.018em!important;
+  line-height:1.08!important;
+  text-wrap:balance!important;
+}
+.today-headline-accent{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:1.5em!important;
+  padding:.18em .50em!important;
+  border-radius:999px!important;
+  color:#173a98!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(226,235,255,.54))!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:0 8px 28px rgba(41,82,169,.12),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  text-shadow:none!important;
+  white-space:nowrap!important;
+  backdrop-filter:blur(18px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(160%)!important;
+}
+
+/* Section titles: clear, compact, premium */
+main h2,section h2{font-weight:800!important}
+.section-title,.section-heading,.block-title,.card-title{color:var(--ink-strong)!important}
+.eyebrow,.kicker,.section-kicker,.overline,.label,.field-label{
+  color:#42536a!important;
+  font-size:.72rem!important;
+  line-height:1.2!important;
+  font-weight:800!important;
+  letter-spacing:.095em!important;
+  text-transform:uppercase!important;
+}
+
+/* General text that tended to disappear into the background */
+.notice,.activity-strip,.activity-mini,.comment,.rank-row,.shop-item,.bundle,.reward-bar,.profile-stat,.file-label,.composer,.coin-badge{
+  color:var(--ink)!important;
+}
+.notice strong,.activity-strip strong,.activity-mini strong,.comment strong,.rank-row strong,.shop-item strong,.bundle strong,.reward-bar strong,.profile-stat strong,.composer strong,.coin-badge strong{color:var(--ink-strong)!important}
+.notice a,.activity-strip a,.activity-mini a,.comment a,.rank-row a,.shop-item a,.bundle a,.reward-bar a,.profile-stat a,.composer a{color:var(--accent-deep)!important;font-weight:750!important}
+
+/* Chips and metadata need a little visual backing */
+.meta,.muted,.subtle,.hint,.caption,.helper,.secondary-text{
+  color:var(--ink-soft)!important;
+}
+.meta,.hint,.caption,.helper{display:inline-block!important;padding:.16rem .46rem!important;border-radius:999px!important;background:rgba(255,255,255,.28)!important;border:1px solid rgba(255,255,255,.40)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.50)!important}
+
+/* Questions / options / answer areas */
+.question,.question-text,.prompt,.prompt-text,.mystery-clue,.mystery-text,.duel-question,.game-question{color:var(--ink-strong)!important;font-weight:700!important;text-shadow:0 1px 0 rgba(255,255,255,.62)!important;line-height:1.48!important}
+.option-btn{color:var(--ink-strong)!important;font-weight:720!important;line-height:1.35!important;text-align:left!important;text-shadow:0 1px 0 rgba(255,255,255,.72)!important}
+.option-btn::first-letter{font-weight:850!important}
+.option-btn:disabled{color:#556477!important;opacity:1!important}
+
+/* Forms: text must stay readable over glass */
+input,textarea,select{color:var(--ink-strong)!important}
+input::placeholder,textarea::placeholder{color:#6b7888!important;opacity:1!important}
+label{color:var(--ink-strong)!important;font-weight:700!important}
+.file-label{color:var(--ink-strong)!important;font-weight:750!important}
+.primary-button{color:#fff!important;font-weight:800!important;letter-spacing:.005em!important;box-shadow:0 14px 34px rgba(13,22,36,.20),inset 0 1px 0 rgba(255,255,255,.20)!important}
+.top-btn,.account-btn,.bottom-nav button,.coin-badge{color:var(--ink-strong)!important;font-weight:750!important}
+.bottom-nav button.active{font-weight:850!important}
+
+/* Stats / counters */
+.stat,.stat-value,.score,.coins,.count,.timer,.clock-card strong{color:var(--ink-strong)!important;text-shadow:var(--text-glow)!important}
+.stat-label,.stat small{color:var(--ink-soft)!important;font-weight:700!important}
+
+/* Feed readability */
+.community-feed{color:var(--ink)!important}
+.community-feed .post,.community-feed .feed-item,.community-feed article{color:var(--ink)!important}
+.community-feed .post p,.community-feed .feed-item p,.community-feed article p{color:var(--ink)!important;line-height:1.52!important}
+
+/* Dark/colored media tiles: force a readable glass caption instead of bare text */
+.scene-card .caption,.daily-card .caption,.community-card .caption{background:linear-gradient(180deg,rgba(10,18,30,.02),rgba(10,18,30,.18))!important;border-radius:14px!important;padding:.42rem .56rem!important}
+
+/* Prevent pale glass from washing out on bright day scenes */
+.daily-card,.scene-card,.clock-card,.community-card,.ranking-card,.modal-card,.profile-card,.activity-strip,.composer,.notice{
+  color:var(--ink)!important;
+}
+
+@media(max-width:760px){
+  .today-headline{font-size:clamp(1.35rem,7vw,2.1rem)!important;line-height:1.02!important;gap:.26em!important}
+  .today-headline-accent{padding:.16em .42em!important}
+  .hero h1{font-size:clamp(2rem,10vw,3.2rem)!important;line-height:.98!important}
+  .hero p,.hero-copy p{font-size:.96rem!important}
+  .eyebrow,.kicker,.section-kicker,.overline,.label,.field-label{font-size:.67rem!important}
+}
+/* TODAY V18.1.14 — PROFILE IDENTITY / SHOP BADGES / AVATAR PREVIEW */
+.today-name-shell{display:inline-flex!important;align-items:center!important;gap:.42rem!important;flex-wrap:wrap!important;vertical-align:middle!important;max-width:100%!important}
+.today-own-name{display:inline-block!important;font-size:1.14em!important;font-weight:900!important;line-height:1.02!important;letter-spacing:-.018em!important;color:var(--ink-strong)!important;text-shadow:0 1px 0 rgba(255,255,255,.72),0 5px 18px rgba(17,31,53,.08)!important}
+.today-gold-nick .today-own-name{background:linear-gradient(180deg,#fff5b6 0%,#e9b62a 42%,#a66a0a 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;text-shadow:0 1px 0 rgba(255,255,255,.90),0 4px 18px rgba(166,106,10,.24)!important}
+.today-name-badges{display:inline-flex!important;align-items:center!important;gap:.26rem!important;flex-wrap:wrap!important}.today-name-badge{display:inline-flex!important;align-items:center!important;gap:.22rem!important;padding:.22rem .48rem!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.62)!important;background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.18))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 5px 14px rgba(20,30,45,.08)!important;color:#324258!important;font-size:.64rem!important;font-weight:900!important;letter-spacing:.035em!important;line-height:1!important;white-space:nowrap!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}.today-name-badge.gold{color:#8b5a08!important;border-color:rgba(230,184,67,.55)!important;background:linear-gradient(135deg,rgba(255,246,184,.76),rgba(238,191,73,.27))!important}.today-name-badge.comet{color:#4e3aa8!important}.today-name-badge.aura{color:#8c3aa1!important}.today-name-badge.orbit{color:#256b92!important}.today-name-badge.rainbow{color:#2d6f8c!important}.today-name-badge.aurora{color:#296b5c!important}.today-name-badge.pet{color:#6f4b2f!important}.today-name-badge.spark{color:#8a641a!important}.today-name-badge.sticker{color:#6c548a!important}
+.account-btn .today-name-badges{display:none!important}.account-btn .today-own-name{font-size:1em!important}.community-meta .today-own-name,.rank-name .today-own-name{font-size:1em!important}
+.today-avatar-preview{display:flex!important;align-items:center!important;gap:.7rem!important;margin:.7rem 0 .85rem!important;padding:.65rem!important;border-radius:18px!important;border:1px solid rgba(255,255,255,.52)!important;background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(255,255,255,.10))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.66),0 10px 24px rgba(20,30,45,.07)!important}.today-avatar-preview img{width:54px!important;height:54px!important;flex:0 0 54px!important;border-radius:16px!important;object-fit:cover!important;border:1px solid rgba(255,255,255,.72)!important;box-shadow:0 7px 18px rgba(15,25,40,.13)!important}.today-avatar-preview .today-avatar-placeholder{display:grid!important;place-items:center!important;width:54px!important;height:54px!important;border-radius:16px!important;background:rgba(255,255,255,.34)!important;font-size:22px!important}.today-avatar-preview b{display:block!important;color:var(--ink-strong)!important;font-size:.9rem!important}.today-avatar-preview span{display:block!important;margin-top:2px!important;color:var(--ink-soft)!important;font-size:.74rem!important;line-height:1.3!important}
+.shop-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}.shop-item{min-height:230px!important;padding:18px!important;border-radius:24px!important;display:flex!important;flex-direction:column!important}.shop-item .shop-icon{width:54px!important;height:54px!important;display:grid!important;place-items:center!important;border-radius:18px!important;background:linear-gradient(135deg,rgba(255,255,255,.48),rgba(255,255,255,.13))!important;border:1px solid rgba(255,255,255,.58)!important;font-size:27px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 9px 22px rgba(15,25,40,.08)!important}.shop-item h3{margin:13px 0 6px!important;color:var(--ink-strong)!important;font-size:1.05rem!important;line-height:1.03!important}.shop-item p{margin:0!important;color:var(--ink-soft)!important;font-size:.82rem!important;line-height:1.42!important}.shop-item.is-owned{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.045))!important;border-color:rgba(255,255,255,.60)!important}.shop-item .shop-price{margin-top:auto!important;padding-top:14px!important;color:#315083!important;font-size:.78rem!important;font-weight:850!important}.shop-item .shop-buy-row{margin-top:9px!important}.shop-item.is-owned .shop-buy-row .secondary-button{width:100%!important;background:rgba(255,255,255,.34)!important;color:#26364d!important;border:1px solid rgba(255,255,255,.62)!important}.shop-item:not(.is-owned) .shop-price{display:inline-flex!important;align-items:center!important;gap:.25rem!important;width:max-content!important;padding:.32rem .55rem!important;border-radius:999px!important;background:rgba(255,255,255,.28)!important;border:1px solid rgba(255,255,255,.40)!important}.shop-item.is-owned .shop-price:empty{display:none!important}
+@media(max-width:900px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}@media(max-width:560px){.shop-grid{grid-template-columns:1fr!important}.today-name-badge{font-size:.58rem!important;padding:.21rem .39rem!important}.today-own-name{font-size:1.11em!important}}/* END TODAY V18.1.14 TYPOGRAPHY */
