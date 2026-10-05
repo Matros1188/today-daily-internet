@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <script>
-(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="218"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(e){}})();
+(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="219"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(e){}})();
 </script>
 
 <meta charset="utf-8">
@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#f7f3ec">
 <meta name="color-scheme" content="light">
 <meta name="description" content="TODAY — интернет, который живёт только сегодня.">
-<link rel="manifest" href="./manifest.webmanifest?v=218">
+<link rel="manifest" href="./manifest.webmanifest?v=219">
 <link rel="icon" href="./icon-192.png">
 <title>TODAY — интернет только сегодня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js?v=200"></script>
-<link rel="stylesheet" href="./style.css?v=218">
+<script src="./config.js?v=219"></script>
+<link rel="stylesheet" href="./style.css?v=219">
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
@@ -81,6 +81,6 @@
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button><div id="modalContent"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
-<script src="./app.js?v=218"></script>
+<script src="./app.js?v=219"></script>
 </body>
 </html>
