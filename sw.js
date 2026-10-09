@@ -1,6 +1,6 @@
 /* TODAY V18.1.21 — REAL LIQUID GLASS */
-const CACHE_NAME="today-static-20261009114321";
-const APP_ASSETS=["./","./index.html","./style.css?v=20261009114321","./app.js?v=20261009114321","./config.js?v=20261009114321","./manifest.webmanifest?v=20261009114321"];
+const CACHE_NAME="today-static-shop-20261009122342";
+const APP_ASSETS=["./","./index.html","./style.css?v=20261009122342","./app.js?v=20261009122342","./config.js?v=20261009122342","./manifest.webmanifest?v=20261009122342"];
 self.addEventListener("install",event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_ASSETS).catch(()=>{})))});
 self.addEventListener("activate",event=>{event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith("today-static-")&&key!==CACHE_NAME)await caches.delete(key);await self.clients.claim()})())});
 self.addEventListener("fetch",event=>{const req=event.request;if(req.method!=="GET")return;const url=new URL(req.url);if(url.origin!==self.location.origin)return;const appAsset=/\.(?:html|css|js|webmanifest)$/.test(url.pathname)||url.pathname.endsWith("/");if(appAsset){event.respondWith((async()=>{try{const net=await fetch(req,{cache:"no-store"});const c=await caches.open(CACHE_NAME);c.put(req,net.clone()).catch(()=>{});return net}catch{return (await caches.match(req))||new Response("Offline",{status:503})}})());return}event.respondWith((async()=>{const hit=await caches.match(req);if(hit)return hit;try{return await fetch(req)}catch{return new Response("Offline",{status:503})}})())});

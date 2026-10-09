@@ -15,8 +15,26 @@ function dayMoscow(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Mo
 function dayOfYear(dateStr){const d=new Date(dateStr+"T12:00:00Z");const y=d.getUTCFullYear();const start=new Date(Date.UTC(y,0,1));return Math.floor((d-start)/86400000)+1}
 function moscowParts(){const now=new Date();const f=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Moscow",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false,weekday:"short"}).formatToParts(now);const o={};for(const p of f)o[p.type]=p.value;return o}
 function tick(){const p=moscowParts();const left=(23-Number(p.hour))*3600+(59-Number(p.minute))*60+(60-Number(p.second));const total=86400;const remain=Math.max(0,left);$("countdown").textContent=[Math.floor(remain/3600),Math.floor(remain%3600/60),remain%60].map(n=>String(n).padStart(2,"0")).join(":");const used=total-remain;const pct=Math.min(100,Math.max(0,used/total*100));$("dayProgress").textContent=Math.round(pct)+"%";$("progressBar").style.width=pct+"%"}
-function openModal(html){$("modalContent").innerHTML=html;$("modal").classList.remove("hidden");document.body.style.overflow="hidden"}
-function closeModal(){$("modal").classList.add("hidden");document.body.style.overflow=""}
+function openModal(html){
+  const root=document.documentElement,body=document.body;
+  if(!root.classList.contains("today-modal-open")){
+    window.__todayModalScrollY=window.scrollY||0;
+    window.__todayModalBodyStyle={position:body.style.position,top:body.style.top,left:body.style.left,right:body.style.right,width:body.style.width,overflow:body.style.overflow};
+    root.classList.add("today-modal-open");
+    body.style.position="fixed";body.style.top=`-${window.__todayModalScrollY}px`;body.style.left="0";body.style.right="0";body.style.width="100%";body.style.overflow="hidden";
+  }
+  $("modalContent").innerHTML=html;
+  $("modal").classList.remove("hidden");
+}
+function closeModal(){
+  $("modal").classList.add("hidden");
+  const root=document.documentElement,body=document.body;
+  const old=window.__todayModalBodyStyle||{};
+  body.style.position=old.position||"";body.style.top=old.top||"";body.style.left=old.left||"";body.style.right=old.right||"";body.style.width=old.width||"";body.style.overflow=old.overflow||"";
+  root.classList.remove("today-modal-open");
+  const y=Number(window.__todayModalScrollY||0);window.__todayModalBodyStyle=null;
+  window.scrollTo(0,y);
+}
 function requireAuth(){if(state.session)return true;openModal(`<div class="eyebrow">TODAY</div><h2 id="modalTitle">Сохрани своё место в дне</h2><p>Чтобы отвечать, публиковать и собирать монеты, войди или создай аккаунт.</p><div class="composer"><input id="authEmail" type="email" autocomplete="email" placeholder="Почта"><input id="authPassword" type="password" autocomplete="current-password" placeholder="Пароль"><div class="composer-row"><button class="primary-button" onclick="authSignIn()">ВОЙТИ</button><button class="secondary-button" onclick="authSignUp()">СОЗДАТЬ</button></div></div>`);return false}
 async function ensureProfile(){if(!state.session)return;try{let {data,error}=await sb.from("profiles").select("id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level").eq("id",state.session.user.id).maybeSingle();if(error)throw error;if(!data){const email=state.session.user.email||"today";const local=email.split("@")[0].replace(/[^a-zA-Z0-9_а-яА-Я-]/g,"").slice(0,20)||"today";const ins=await sb.from("profiles").upsert({id:state.session.user.id,display_name:local,username:local,avatar_emoji:"✦",coins:0,streak:0,score_total:0,level:1},{onConflict:"id"}).select("id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level").single();if(ins.error)throw ins.error;data=ins.data}state.profile=data||null;updateAccountUI();await touchUserDay()}catch(e){console.warn("TODAY profile load failed",e);if(!state.profile)updateAccountUI()}}
 function updateAccountUI(){const p=state.profile||{};$("profileLabel").textContent=state.session?(p.display_name||p.username||"ПРОФИЛЬ").toUpperCase():"АККАУНТ";$("coinCount").textContent=String(Number(p.coins||0));const av=$("profileAvatar");if(p.avatar_url)av.innerHTML=`<img src="${esc(p.avatar_url)}" alt="">`;else av.textContent=p.avatar_emoji||"✦";}
@@ -86,18 +104,157 @@ async function touchPresence(){if(!state.session)return;const now=Date.now();if(
 async function saveProfile(){if(!requireAuth())return;const nickname=$("profileNick")?.value.trim();if(!nickname)return toast("Ник не может быть пустым");const file=$("profileFile")?.files?.[0];try{toast(file?"Сохраняю ник и фото…":"Сохраняю профиль…");const fd=new FormData();fd.append("kind","profile");fd.append("nickname",nickname);if(file)fd.append("image",file,file.name);const result=await userWriteSend(fd);if(!result.ok)return toast(result.detail?`${result.message} · ${result.detail}`:(result.message||"Не удалось сохранить профиль"));state.profile=result.profile||state.profile||{};updateAccountUI();closeModal();await meOpen();toast("Профиль сохранён");decorateOwnedIdentity()}catch(e){console.warn("TODAY profile save",e);toast(mediaErrorMessage(e,"Не удалось сохранить профиль"))}}
 function rewardRate(streak){if(streak>=100)return 10;if(streak>=50)return 5;if(streak>=20)return 4;if(streak>=10)return 2;if(streak>=5)return 1;return 0}
 function rewardNext(streak){if(streak<5)return 5;if(streak<10)return 10;if(streak<20)return 20;if(streak<50)return 50;if(streak<100)return 100;return 365}
-async function loadShop(){const [shop,owned]=await Promise.all([sb.from("shop_items").select("id,title,description,price_coins,icon,type,css_class,active").eq("active",true).order("price_coins",{ascending:true}),state.session?sb.from("user_shop_items").select("item_id,equipped").eq("user_id",state.session.user.id):Promise.resolve({data:[]})]);state.shop=shop.data||[];state.owned=owned.data||[];applyOwned()}
-function applyOwned(){document.body.classList.remove("effect-neon","effect-orbit","effect-aurora","effect-text-color","today-gold-nick");if($("pet"))$("pet").classList.add("hidden");const gold=(state.owned||[]).some(x=>x.item_id==="coin-glow");if(gold){document.body.classList.add("today-gold-nick");document.documentElement.classList.add("today-gold-nick")}else document.documentElement.classList.remove("today-gold-nick");for(const o of(state.owned||[])){const item=state.shop.find(x=>x.id===o.item_id);if(!item||!o.equipped)continue;if(item.css_class&&item.id!=="coin-glow")document.body.classList.add(item.css_class);if(item.type==="pet"&&$("pet")){$("pet").textContent=item.icon||"🐈";$("pet").classList.remove("hidden")}}decorateOwnedIdentity()}
-function ownedBadgeData(){const ids=new Set((state.owned||[]).map(x=>x.item_id));const out=[];const add=(id,label,icon,cls)=>{if(ids.has(id))out.push({id,label,icon,cls})};add("coin-glow","ЗОЛОТОЙ","●","gold");add("comet-avatar","КОМЕТА","☄","comet");add("rainbow-trace","РАДУГА","◌","rainbow");add("neon-aura","АУРА","✧","aura");add("orbit-ring","ОРБИТА","◎","orbit");add("aurora-night","СИЯНИЕ","☾","aurora");add("spark-frame","ИСКРЫ","✦","spark");add("pixel-stickers","СТИКЕРЫ","☺","sticker");add("pixel-cat","КОТ","🐈","pet");add("text-color","ЦВЕТ","◈","text-color");return out}
-function decorateOwnedIdentity(){const nick=String(state.profile?.display_name||"").trim();if(!nick)return;const badges=ownedBadgeData();document.documentElement.classList.toggle("today-gold-nick",badges.some(x=>x.id==="coin-glow"));const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode()){const n=walker.currentNode;const p=n.parentElement;if(!p||p.closest("script,style,noscript,input,textarea,select,option")||p.classList.contains("today-own-name")||p.closest(".today-post-name"))continue;if(n.nodeValue.trim()===nick)nodes.push(n)}for(const n of nodes){const p=n.parentElement;if(!p||p.closest(".today-name-shell"))continue;const shell=document.createElement("span");shell.className="today-name-shell";const name=document.createElement("span");name.className="today-own-name";name.textContent=nick;shell.append(name);if(badges.length){const wrap=document.createElement("span");wrap.className="today-name-badges";for(const b of badges){const el=document.createElement("span");el.className=`today-name-badge ${b.cls}`;el.innerHTML=`<span aria-hidden="true">${b.icon}</span>${b.label}`;el.title=b.label;wrap.append(el)}shell.append(wrap)}n.replaceWith(shell)}}
+async function loadShop(){
+  const [shop,owned]=await Promise.all([
+    sb.from("shop_items").select("id,title,description,price_coins,icon,type,css_class,active").order("price_coins",{ascending:true}),
+    state.session?sb.from("user_shop_items").select("item_id,equipped").eq("user_id",state.session.user.id):Promise.resolve({data:[],error:null})
+  ]);
+  if(shop.error)throw shop.error;
+  if(state.session&&owned.error)throw owned.error;
+  state.shop=Array.isArray(shop.data)?shop.data:[];
+  state.owned=Array.isArray(owned.data)?owned.data:[];
+  applyOwned();
+  return {shop:state.shop,owned:state.owned};
+}
+function applyOwned(){
+  const effects=["effect-neon","effect-orbit","effect-aurora","effect-text-color","today-gold-nick"];
+  document.body.classList.remove(...effects);document.documentElement.classList.remove(...effects);
+  const pet=$("pet");if(pet){pet.classList.add("hidden");pet.textContent=""}
+  const activeOwned=(state.owned||[]).filter(x=>!!x.equipped);
+  if(activeOwned.some(x=>x.item_id==="coin-glow")){
+    document.body.classList.add("today-gold-nick");document.documentElement.classList.add("today-gold-nick");
+  }
+  for(const own of activeOwned){
+    const item=state.shop.find(x=>x.id===own.item_id);if(!item)continue;
+    if(item.css_class&&item.id!=="coin-glow"){
+      document.body.classList.add(item.css_class);document.documentElement.classList.add(item.css_class);
+    }
+    if(item.type==="pet"&&pet){pet.textContent=item.icon||"🐈";pet.classList.remove("hidden")}
+  }
+  decorateOwnedIdentity();
+}
+function ownedBadgeData(){
+  const ids=new Set((state.owned||[]).filter(x=>!!x.equipped).map(x=>x.item_id));
+  const out=[];const add=(id,label,icon,cls)=>{if(ids.has(id))out.push({id,label,icon,cls})};
+  add("coin-glow","ЗОЛОТОЙ","●","gold");add("comet-avatar","КОМЕТА","☄","comet");add("rainbow-trace","РАДУГА","◌","rainbow");
+  add("neon-aura","АУРА","✧","aura");add("orbit-ring","ОРБИТА","◎","orbit");add("aurora-night","СИЯНИЕ","☾","aurora");
+  add("spark-frame","ИСКРЫ","✦","spark");add("pixel-stickers","СТИКЕРЫ","☺","sticker");add("pixel-cat","КОТ","🐈","pet");add("text-color","ЦВЕТ","◈","text-color");
+  return out;
+}
+function decorateOwnedIdentity(){
+  const nick=String(state.profile?.display_name||"").trim();
+  const badges=ownedBadgeData();
+  document.documentElement.classList.toggle("today-gold-nick",badges.some(x=>x.id==="coin-glow"));
+  const renderBadges=shell=>{
+    shell.querySelector(".today-name-badges")?.remove();
+    if(!badges.length)return;
+    const wrap=document.createElement("span");wrap.className="today-name-badges";
+    for(const b of badges){
+      const el=document.createElement("span");el.className=`today-name-badge ${b.cls}`;
+      const icon=document.createElement("span");icon.setAttribute("aria-hidden","true");icon.textContent=b.icon;
+      el.append(icon,document.createTextNode(b.label));el.title=b.label;wrap.append(el);
+    }
+    shell.append(wrap);
+  };
+  for(const shell of document.querySelectorAll(".today-name-shell")){
+    const name=shell.querySelector(".today-own-name");if(!name)continue;
+    if(!nick||name.textContent.trim()!==nick){shell.replaceWith(document.createTextNode(name.textContent));continue;}
+    renderBadges(shell);
+  }
+  if(!nick)return;
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const nodes=[];
+  while(walker.nextNode()){
+    const n=walker.currentNode;const p=n.parentElement;
+    if(!p||p.closest("script,style,noscript,input,textarea,select,option,.today-name-shell,.today-post-name"))continue;
+    if(n.nodeValue.trim()===nick)nodes.push(n);
+  }
+  for(const n of nodes){
+    const shell=document.createElement("span");shell.className="today-name-shell";
+    const name=document.createElement("span");name.className="today-own-name";name.textContent=nick;shell.append(name);
+    renderBadges(shell);n.replaceWith(shell);
+  }
+}
 function attachTodayLikeHandlers(){const feed=$("communityFeed");if(!feed||feed.dataset.likesReady)return;feed.dataset.likesReady="1";feed.addEventListener("click",async e=>{const btn=e.target.closest(".today-like-btn");if(!btn||!feed.contains(btn))return;await toggleTodayLike(btn.dataset.likeSource,btn.dataset.likeId,btn)})}
 async function toggleTodayLike(source,id,button){if(!requireAuth())return;const old=button.disabled;button.disabled=true;try{const {data,error}=await sb.rpc("toggle_today_like",{p_post_source:source,p_post_id:String(id),p_day:state.day});if(error||data?.ok===false)return toast(data?.message||error?.message||"Не удалось поставить лайк");button.classList.toggle("is-liked",!!data.liked);button.setAttribute("aria-pressed",data.liked?"true":"false");const icon=button.querySelector("span:first-child");const count=button.querySelector("b");if(icon)icon.textContent=data.liked?"♥":"♡";if(count)count.textContent=String(Number(data.likes||0))}finally{button.disabled=old}}
-async function buyItem(itemId){if(!requireAuth())return;const {data,error}=await sb.rpc("buy_shop_item",{p_item_id:itemId});if(error)return toast(error.message||"Не удалось купить");toast("Предмет добавлен в коллекцию");await Promise.all([ensureProfile(),loadShop()]);shopOpen()}
-async function equipItem(itemId){if(!requireAuth())return;const {error}=await sb.rpc("equip_shop_item",{p_item_id:itemId});if(error)return toast(error.message||"Не удалось надеть предмет");await loadShop();shopOpen();toast("Эффект применён")}
+function unwrapShopRpc(data){
+  let value=Array.isArray(data)?data[0]:data;
+  if(typeof value==="string"){try{value=JSON.parse(value)}catch{}}
+  return value&&typeof value==="object"?value:null;
+}
+function shopRpcError(payload,error,fallback){
+  if(error)return String(error.message||fallback).slice(0,220);
+  if(!payload)return fallback;
+  if(payload.ok===false)return String(payload.message||"Операция отклонена сервером").slice(0,220);
+  if(payload.ok!==true)return "Сервер не подтвердил операцию. Обнови магазин и проверь баланс.";
+  return "";
+}
+async function buyItem(itemId){
+  if(!requireAuth())return;
+  const item=state.shop.find(x=>String(x.id)===String(itemId));
+  if(!item||!item.active)return toast("Этот товар больше недоступен.");
+  const price=Number(item.price_coins);
+  if(!Number.isInteger(price)||price<1)return toast("Покупка заблокирована: у товара не настроена цена в монетах.");
+  const balance=Number(state.profile?.coins||0);
+  if(balance<price)return toast(`Недостаточно монет: нужно ${price}, у тебя ${balance}.`);
+  try{
+    const {data,error}=await sb.rpc("buy_shop_item_v2",{p_item_id:String(itemId)});
+    const payload=unwrapShopRpc(data);const message=shopRpcError(payload,error,"Не удалось купить предмет.");
+    if(message)return toast(message);
+    await Promise.all([ensureProfile(),loadShop()]);
+    window.__todayModalView="shop";await shopOpen();
+    toast(`Куплено: ${payload.title||item.title}. Баланс: ${Number(payload.coins??state.profile?.coins??0)} монет.`);
+  }catch(e){console.warn("TODAY shop purchase failed",e);toast("Не удалось подтвердить покупку. Проверь баланс и коллекцию.");}
+}
+async function equipItem(itemId){return setShopItemEquipped(itemId,true)}
+async function setShopItemEquipped(itemId,desired){
+  if(!requireAuth())return;
+  const view=window.__todayModalView||"shop";
+  try{
+    const {data,error}=await sb.rpc("set_shop_item_equipped",{p_item_id:String(itemId),p_equipped:!!desired});
+    const payload=unwrapShopRpc(data);const message=shopRpcError(payload,error,"Не удалось изменить предмет.");
+    if(message)return toast(message);
+    await Promise.all([ensureProfile(),loadShop()]);
+    if(view==="profile")await meOpen();else await shopOpen();
+    toast(desired?"Предмет включён.":"Предмет выключен.");
+  }catch(e){console.warn("TODAY collection toggle failed",e);toast("Не удалось обновить коллекцию. Попробуй ещё раз.");}
+}
 async function createCoinPayment(bundleId){if(!requireAuth())return;try{const token=(await sb.auth.getSession()).data.session?.access_token;const r=await fetch(`${C.supabaseUrl}/functions/v1/create-coin-payment`,{method:"POST",headers:{apikey:C.supabaseKey,Authorization:`Bearer ${token}`,"Content-Type":"application/json"},body:JSON.stringify({bundle_id:bundleId,return_url:location.href.split("?")[0]})});const data=await r.json();if(!r.ok)return toast(data.message||"Оплата пока не подключена");if(data.confirmation_url)location.href=data.confirmation_url}catch{toast("Сервис оплаты пока не отвечает")}}
 async function verifyReturnedPayment(){const q=new URLSearchParams(location.search);const order=q.get("order_id");if(!order)return;try{const token=(await sb.auth.getSession()).data.session?.access_token;if(!token)return;const r=await fetch(`${C.supabaseUrl}/functions/v1/verify-coin-payment`,{method:"POST",headers:{apikey:C.supabaseKey,Authorization:`Bearer ${token}`,"Content-Type":"application/json"},body:JSON.stringify({order_id:order})});const data=await r.json();if(data.ok&&Number(data.coins)>0){toast(`Оплата подтверждена · +${data.coins} монет`);await ensureProfile()}history.replaceState({},"",location.pathname)}catch{}}
-async function shopOpen(){if(!requireAuth())return;await Promise.all([ensureProfile(),loadShop()]);const p=state.profile||{};const items=state.shop.map(i=>{const owned=state.owned.some(x=>x.item_id===i.id);const eq=state.owned.some(x=>x.item_id===i.id&&x.equipped);const price=`● ${Number(i.price_coins)} монет`;return `<article class="shop-item ${owned?"is-owned":""} ${eq?"is-equipped":""}"><div class="shop-icon">${esc(i.icon||"✦")}</div><div class="shop-item-copy"><h3>${esc(i.title)}</h3><p>${esc(i.description)}</p></div><div class="shop-price">${owned?"":price}</div><div class="shop-buy-row">${owned?`<button class="secondary-button" onclick="equipItem('${i.id}')">${eq?"НАДЕТО":"НАДЕТЬ"}</button>`:`<button class="primary-button" onclick="buyItem('${i.id}')">КУПИТЬ</button>`}</div></article>`}).join("");openModal(`<div class="eyebrow">ВИЗУАЛЬНАЯ КОЛЛЕКЦИЯ</div><h2 id="modalTitle">${Number(p.coins||0)} монет</h2><p>Эффекты появляются рядом с ником и меняют его внешний вид.</p><div class="shop-grid">${items}</div><div class="section-head" style="margin-top:22px"><div><div class="eyebrow">МОНЕТЫ</div><h3 style="margin:7px 0 0">Пополнить баланс</h3></div></div><div class="bundle-grid">${[[50,50],[300,250],[600,500],[1000,800],[5000,4500]].map((b,i)=>`<button class="bundle" onclick="createCoinPayment('b${i+1}')"><strong>${b[0]}</strong><span>${b[1]} ₽</span></button>`).join("")}</div></div>`)}
-async function meOpen(){if(!requireAuth())return;await Promise.all([ensureProfile(),loadShop()]);const p=state.profile||{};const streak=Number(p.streak||0);const rate=rewardRate(streak);const target=rewardNext(streak);const pct=Math.min(100,streak/Math.max(1,target)*100);openModal(`<div class="eyebrow">МОЙ TODAY</div><div class="profile-card"><div class="profile-row"><div class="profile-big">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(p.avatar_emoji||"✦")}</div><div><h2 id="modalTitle">${esc(p.display_name||"Ты")}</h2><div class="small-note">@${esc(p.username||"today")}</div></div></div><div class="profile-stats"><div class="profile-stat"><b>${Number(p.score_total||0)}</b><span>общий XP</span></div><div class="profile-stat"><b>${Number(p.level||1)}</b><span>уровень</span></div><div class="profile-stat"><b>${streak}</b><span>серия дней</span></div><div class="profile-stat"><b>${Number(p.coins||0)}</b><span>монет</span></div></div><div class="reward-bar"><strong>${rate?`Серия ${streak} дней · сегодня +${rate} мон.`:"Дойди до 5 дней без пропусков — начнутся монеты."}</strong><div class="reward-track"><i style="width:${pct}%"></i></div><div class="small-note" style="margin-top:6px">Следующий рубеж: ${target} дней</div></div><div class="composer"><input id="profileNick" maxlength="32" value="${esc(p.display_name||"")}" placeholder="Твой ник"><label class="file-label"><span>ВЫБРАТЬ ФОТО АВАТАРА</span><input id="profileFile" type="file" accept="image/jpeg,image/png,image/webp" hidden></label><div class="composer-row"><button class="primary-button" onclick="saveProfile()">СОХРАНИТЬ</button><button class="secondary-button" onclick="shopOpen()">МАГАЗИН</button></div><div class="small-note">Ник и аватар проходят ту же строгую модерацию, что и публикации.</div></div><div class="card-actions"><button class="secondary-button" onclick="signOut()">ВЫЙТИ</button></div></div>`)}
+/* TODAY_SHOP_COLLECTION_FIX_START */
+function renderOwnedCollection(){
+  const owned=state.owned||[];
+  if(!owned.length)return `<div class="collection-empty"><div class="collection-empty-icon">✦</div><b>Коллекция пока пуста</b><p>Купленные эффекты останутся в аккаунте. Открой магазин, выбери предмет и включай его здесь.</p><button class="secondary-button" type="button" onclick="shopOpen()">ОТКРЫТЬ МАГАЗИН</button></div>`;
+  return `<div class="collection-grid">${owned.map(o=>{
+    const item=state.shop.find(x=>String(x.id)===String(o.item_id));
+    const title=item?.title||String(o.item_id);const icon=item?.icon||"✦";const description=item?.description||"Предмет из твоей коллекции.";
+    const isOn=!!o.equipped;
+    return `<article class="collection-item ${isOn?"is-equipped":""}"><div class="collection-item-icon">${esc(icon)}</div><div class="collection-item-copy"><h4>${esc(title)}</h4><p>${esc(description)}</p><span class="collection-status ${isOn?"is-on":""}">${isOn?"ВКЛЮЧЕНО":"КУПЛЕНО · ВЫКЛЮЧЕНО"}</span></div><button type="button" class="${isOn?"secondary-button":"primary-button"} collection-toggle" data-item-id="${esc(String(o.item_id))}" data-desired="${isOn?"false":"true"}" onclick="setShopItemEquipped(this.dataset.itemId,this.dataset.desired==='true')">${isOn?"ВЫКЛЮЧИТЬ":"ВКЛЮЧИТЬ"}</button></article>`;
+  }).join("")}</div>`;
+}
+async function shopOpen(){
+  if(!requireAuth())return;window.__todayModalView="shop";
+  try{await Promise.all([ensureProfile(),loadShop()])}catch(e){console.warn("TODAY shop load failed",e);return toast("Не удалось загрузить магазин или коллекцию.")}
+  const p=state.profile||{};const balance=Number(p.coins||0);
+  const items=state.shop.filter(i=>i.active).map(i=>{
+    const own=state.owned.find(x=>String(x.item_id)===String(i.id));const owned=!!own;const equipped=!!own?.equipped;const price=Number(i.price_coins);
+    const validPrice=Number.isInteger(price)&&price>0;const canAfford=validPrice&&balance>=price;
+    const priceLine=validPrice?`<span class="shop-price">● ${price} монет</span>`:`<span class="shop-price shop-price-invalid">ЦЕНА НЕ НАСТРОЕНА</span>`;
+    const action=owned
+      ? `<button type="button" class="${equipped?"secondary-button":"primary-button"}" data-item-id="${esc(String(i.id))}" data-desired="${equipped?"false":"true"}" onclick="setShopItemEquipped(this.dataset.itemId,this.dataset.desired==='true')">${equipped?"ВЫКЛЮЧИТЬ":"ВКЛЮЧИТЬ"}</button><span class="shop-owned-label">${equipped?"АКТИВЕН":"В КОЛЛЕКЦИИ"}</span>`
+      : `<button type="button" class="primary-button" data-item-id="${esc(String(i.id))}" onclick="buyItem(this.dataset.itemId)" ${canAfford?"":"disabled"}>${!validPrice?"НЕТ ЦЕНЫ":canAfford?"КУПИТЬ":"НЕ ХВАТАЕТ МОНЕТ"}</button>`;
+    return `<article class="shop-item ${owned?"is-owned":""} ${equipped?"is-equipped":""}"><div class="shop-icon">${esc(i.icon||"✦")}</div><div class="shop-item-copy"><h3>${esc(i.title)}</h3><p>${esc(i.description||"")}</p></div>${priceLine}<div class="shop-buy-row">${action}</div></article>`;
+  }).join("");
+  const catalogue=items||`<div class="notice">Сейчас нет доступных товаров.</div>`;
+  openModal(`<div class="shop-page"><div class="eyebrow">TODAY · ВИЗУАЛЬНАЯ КОЛЛЕКЦИЯ</div><div class="shop-title-row"><div><h2 id="modalTitle">Магазин</h2><p>Покупай предметы за монеты и включай только те, которые хочешь видеть.</p></div><div class="shop-balance"><span>ТВОЙ БАЛАНС</span><b>● ${balance}</b><small>монет</small></div></div><div class="shop-grid">${catalogue}</div><div class="section-head shop-money-head" style="margin-top:22px"><div><div class="eyebrow">ПОПОЛНЕНИЕ</div><h3 style="margin:7px 0 0">Монеты</h3></div></div><div class="bundle-grid">${[[50,50],[300,250],[600,500],[1000,800],[5000,4500]].map((b,i)=>`<button class="bundle" onclick="createCoinPayment('b${i+1}')"><strong>${b[0]}</strong><span>${b[1]} ₽</span></button>`).join("")}</div><p class="shop-footnote">Покупка предмета списывает монеты на сервере. Недостаточный баланс не позволит купить предмет.</p></div>`);
+}
+ /* TODAY_SHOP_COLLECTION_FIX_END */
+async function meOpen(){
+  if(!requireAuth())return;window.__todayModalView="profile";
+  try{await Promise.all([ensureProfile(),loadShop()])}catch(e){console.warn("TODAY profile/collection load failed",e);return toast("Не удалось загрузить кабинет и коллекцию.")}
+  const p=state.profile||{};const streak=Number(p.streak||0);const rate=rewardRate(streak);const target=rewardNext(streak);const pct=Math.min(100,streak/Math.max(1,target)*100);
+  openModal(`<div class="profile-page"><div class="eyebrow">МОЙ TODAY</div><div class="profile-card"><div class="profile-row"><div class="profile-big">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(p.avatar_emoji||"✦")}</div><div class="profile-ident"><h2 id="modalTitle">${esc(p.display_name||"Ты")}</h2><div class="small-note">@${esc(p.username||"today")}</div></div></div><div class="profile-stats"><div class="profile-stat"><b>${Number(p.score_total||0)}</b><span>общий XP</span></div><div class="profile-stat"><b>${Number(p.level||1)}</b><span>уровень</span></div><div class="profile-stat"><b>${streak}</b><span>серия дней</span></div><div class="profile-stat"><b>${Number(p.coins||0)}</b><span>монет</span></div></div><div class="reward-bar"><strong>${rate?`Серия ${streak} дней · сегодня +${rate} мон.`:"Дойди до 5 дней без пропусков — начнутся монеты."}</strong><div class="reward-track"><i style="width:${pct}%"></i></div><div class="small-note" style="margin-top:6px">Следующий рубеж: ${target} дней</div></div><div class="composer"><input id="profileNick" maxlength="32" value="${esc(p.display_name||"")}" placeholder="Твой ник"><label class="file-label"><span>ВЫБРАТЬ ФОТО АВАТАРА</span><input id="profileFile" type="file" accept="image/jpeg,image/png,image/webp" hidden></label><div class="composer-row"><button class="primary-button" onclick="saveProfile()">СОХРАНИТЬ</button><button class="secondary-button" onclick="shopOpen()">МАГАЗИН</button></div><div class="small-note">Ник и аватар проходят серверную модерацию.</div></div><section class="collection-section"><div class="collection-heading"><div><div class="eyebrow">ТВОИ ПОКУПКИ</div><h3>Моя коллекция</h3></div><span class="collection-count">${state.owned.length} предметов</span></div><p class="collection-intro">Купленные предметы сохраняются здесь. Включай и выключай золотой ник, питомца и другие эффекты в любое время.</p>${renderOwnedCollection()}</section><div class="card-actions"><button class="secondary-button" onclick="signOut()">ВЫЙТИ</button></div></div></div>`);
+  wireProfileAvatarPreview();
+}
 async function signOut(){await sb.auth.signOut();closeModal();state.session=null;state.profile=null;state.owned=[];applyOwned();updateAccountUI();toast("Ты вышел из аккаунта")}
 function setupNavigation(){document.querySelectorAll(".bottom-nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".bottom-nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");const target=btn.dataset.nav;if(target==="home")window.scrollTo({top:0,behavior:"smooth"});else if(target==="people")$("peopleSection").scrollIntoView({behavior:"smooth",block:"start"});else if(target==="rank")$("rankSection").scrollIntoView({behavior:"smooth",block:"start"});else if(target==="me")state.session?meOpen():requireAuth()}))}
 function setupInstall(){window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();state.deferredPrompt=e;$("installBtn").classList.remove("hidden")});$("installBtn").onclick=async()=>{if(!state.deferredPrompt)return;state.deferredPrompt.prompt();await state.deferredPrompt.userChoice;state.deferredPrompt=null;$("installBtn").classList.add("hidden")}}
@@ -144,5 +301,5 @@ function wireProfileAvatarPreview(){
   });
 }
 
-async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261009114321").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
-window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
+async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261009122342").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
+window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
