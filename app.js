@@ -141,37 +141,84 @@ function ownedBadgeData(){
   add("spark-frame","ИСКРЫ","✦","spark");add("pixel-stickers","СТИКЕРЫ","☺","sticker");add("pixel-cat","КОТ","🐈","pet");add("text-color","ЦВЕТ","◈","text-color");
   return out;
 }
+/* TODAY_SHOP_BADGE_LOOP_FIX */
 function decorateOwnedIdentity(){
   const nick=String(state.profile?.display_name||"").trim();
   const badges=ownedBadgeData();
-  document.documentElement.classList.toggle("today-gold-nick",badges.some(x=>x.id==="coin-glow"));
+  const signature=badges.map(b=>b.id).join("|");
+  document.documentElement.classList.toggle(
+    "today-gold-nick",
+    badges.some(x=>x.id==="coin-glow")
+  );
+
   const renderBadges=shell=>{
-    shell.querySelector(".today-name-badges")?.remove();
-    if(!badges.length)return;
-    const wrap=document.createElement("span");wrap.className="today-name-badges";
+    const current=shell.querySelector(".today-name-badges");
+
+    if(!badges.length){
+      if(current)current.remove();
+      return;
+    }
+
+    // Critical: do not remove/recreate identical DOM on every observer callback.
+    if(current && current.dataset.signature===signature)return;
+
+    if(current)current.remove();
+    const wrap=document.createElement("span");
+    wrap.className="today-name-badges";
+    wrap.dataset.signature=signature;
+
     for(const b of badges){
-      const el=document.createElement("span");el.className=`today-name-badge ${b.cls}`;
-      const icon=document.createElement("span");icon.setAttribute("aria-hidden","true");icon.textContent=b.icon;
-      el.append(icon,document.createTextNode(b.label));el.title=b.label;wrap.append(el);
+      const el=document.createElement("span");
+      el.className=`today-name-badge ${b.cls}`;
+
+      const icon=document.createElement("span");
+      icon.setAttribute("aria-hidden","true");
+      icon.textContent=b.icon;
+
+      el.append(icon,document.createTextNode(b.label));
+      el.title=b.label;
+      wrap.append(el);
     }
     shell.append(wrap);
   };
+
   for(const shell of document.querySelectorAll(".today-name-shell")){
-    const name=shell.querySelector(".today-own-name");if(!name)continue;
-    if(!nick||name.textContent.trim()!==nick){shell.replaceWith(document.createTextNode(name.textContent));continue;}
+    const name=shell.querySelector(".today-own-name");
+    if(!name)continue;
+
+    if(!nick || name.textContent.trim()!==nick){
+      shell.replaceWith(document.createTextNode(name.textContent));
+      continue;
+    }
     renderBadges(shell);
   }
+
   if(!nick)return;
-  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const nodes=[];
+
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  const nodes=[];
+
   while(walker.nextNode()){
-    const n=walker.currentNode;const p=n.parentElement;
-    if(!p||p.closest("script,style,noscript,input,textarea,select,option,.today-name-shell,.today-post-name"))continue;
+    const n=walker.currentNode;
+    const p=n.parentElement;
+    if(!p || p.closest(
+      "script,style,noscript,input,textarea,select,option,.today-name-shell,.today-post-name"
+    ))continue;
+
     if(n.nodeValue.trim()===nick)nodes.push(n);
   }
+
   for(const n of nodes){
-    const shell=document.createElement("span");shell.className="today-name-shell";
-    const name=document.createElement("span");name.className="today-own-name";name.textContent=nick;shell.append(name);
-    renderBadges(shell);n.replaceWith(shell);
+    const shell=document.createElement("span");
+    shell.className="today-name-shell";
+
+    const name=document.createElement("span");
+    name.className="today-own-name";
+    name.textContent=nick;
+    shell.append(name);
+
+    renderBadges(shell);
+    n.replaceWith(shell);
   }
 }
 function attachTodayLikeHandlers(){const feed=$("communityFeed");if(!feed||feed.dataset.likesReady)return;feed.dataset.likesReady="1";feed.addEventListener("click",async e=>{const btn=e.target.closest(".today-like-btn");if(!btn||!feed.contains(btn))return;await toggleTodayLike(btn.dataset.likeSource,btn.dataset.likeId,btn)})}
@@ -301,5 +348,5 @@ function wireProfileAvatarPreview(){
   });
 }
 
-async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261009122342").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
+async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261009123659").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
 window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
