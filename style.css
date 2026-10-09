@@ -76,3 +76,14 @@ html,body{background:transparent!important;color:var(--ink-strong)!important}bod
 .today-name-badge.text-color{color:#5044a5!important;background:linear-gradient(135deg,rgba(119,99,255,.20),rgba(41,180,220,.12))!important;border-color:rgba(109,99,223,.30)!important}.today-bot-color .today-post-name{background:linear-gradient(90deg,#3168ef 0%,#7657ef 42%,#d14fd2 72%,#16a8d1 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;text-shadow:0 6px 22px rgba(82,79,215,.18)!important}
 
 /* TODAY 18.1.19 headline */ .today-headline-prefix{white-space:nowrap}.today-headline-accent{letter-spacing:-.035em!important}
+
+/* TODAY_PUBLIC_LAUNCH_FIX_START */
+/* Generated 20261009114321. Only feed/ranking labels are constrained; full profile names remain untouched. */
+.today-post-identity{min-width:0!important;flex:1 1 auto!important;max-width:100%!important}
+.today-post-name-row{min-width:0!important;max-width:100%!important;flex-wrap:nowrap!important;gap:6px!important;overflow:hidden!important}
+.today-post-name{display:block!important;min-width:0!important;max-width:min(52vw,420px)!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;flex:0 1 auto!important}
+.today-bot-mark{flex:0 0 auto!important;max-width:100%!important;font-size:clamp(8px,1.7vw,10px)!important;padding:.23rem .34rem!important;letter-spacing:.025em!important}
+.rank-name{min-width:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+@media(max-width:430px){.today-post-name{max-width:calc(100vw - 195px)!important;font-size:clamp(.90rem,4.0vw,1.30rem)!important;letter-spacing:-.03em!important}}
+@media(max-width:340px){.today-post-name{max-width:calc(100vw - 195px)!important;font-size:clamp(.82rem,3.8vw,1.08rem)!important}.today-bot-mark{font-size:8px!important;padding:.19rem .26rem!important}}
+/* TODAY_PUBLIC_LAUNCH_FIX_END */
