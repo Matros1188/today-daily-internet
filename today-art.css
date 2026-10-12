@@ -6733,3 +6733,11 @@ input:focus,textarea:focus,select:focus{border-color:rgba(125,234,255,.51)!impor
 
 /* TODAY REMOVE NEW CHAPTER V1 */
 .today-art-visual{inset:0!important}
+
+/* TODAY_REMOVE_DAILY_CHAPTER_LABEL_V17 */
+/* The top caption is removed in markup; reclaim its empty reserved area. */
+.today-art-visual{inset:0!important}
+
+/* TODAY_MINI_GAMES_BOTTOM_NAV_V17 */
+.bottom-nav{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+
