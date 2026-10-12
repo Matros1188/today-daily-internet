@@ -19,82 +19,50 @@
     if(v&&typeof v==='object'&&v.ok===false)throw new Error(v.message||'Операция не выполнена.');
     return v||{};
   }
-  /* TODAY_SOCIAL_CLOSE_HOTFIX_V13 — a dedicated top-level close target + capture handlers */
-  function forceCloseSocialModal(){
+  /* TODAY_SOCIAL_CLOSE_HOTFIX_V14 — reliable click-based close handling */
+  function forceCloseSocialModal(event){
+    if(event){event.preventDefault?.();event.stopPropagation?.();}
     const modalRoot=byId('modal');
     if(!modalRoot)return;
-    const savedScrollY=Number(window.__todayModalScrollY ?? window.scrollY ?? 0);
-    const savedBodyStyle=window.__todayModalBodyStyle ? {...window.__todayModalBodyStyle} : null;
     try{stopPoll()}catch{}
-    try{if(typeof closeModal==='function')closeModal()}catch(err){console.warn('TODAY close fallback',err)}
     modalRoot.classList.add('hidden');
     modalRoot.classList.remove('today-social-modal');
-    const floatClose=byId('todaySocialCloseTop');
-    if(floatClose)floatClose.hidden=true;
     const root=document.documentElement,body=document.body;
-    if(savedBodyStyle){
-      for(const key of ['position','top','left','right','width','overflow'])body.style[key]=savedBodyStyle[key]||'';
-    }else{
-      body.style.position='';body.style.top='';body.style.left='';body.style.right='';body.style.width='';body.style.overflow='';
-    }
+    const saved=window.__todayModalBodyStyle||{};
+    body.style.position=saved.position||'';
+    body.style.top=saved.top||'';
+    body.style.left=saved.left||'';
+    body.style.right=saved.right||'';
+    body.style.width=saved.width||'';
+    body.style.overflow=saved.overflow||'';
     root.classList.remove('today-modal-open');
+    const savedScrollY=Number(window.__todayModalScrollY||0);
     window.__todayModalBodyStyle=null;
     window.__todayModalScrollY=null;
     try{window.scrollTo(0,savedScrollY)}catch{}
   }
-  function socialCloseEvent(event){
-    const modalRoot=byId('modal');
-    if(!modalRoot||modalRoot.classList.contains('hidden'))return;
-    if(event){event.preventDefault?.();event.stopPropagation?.();event.stopImmediatePropagation?.();}
-    forceCloseSocialModal();
-  }
-  function bindSocialCloseButton(button){
-    if(!button||button.dataset.todaySocialCloseBound==='1')return;
-    button.dataset.todaySocialCloseBound='1';
-    /* pointerup catches touch and mouse; click also supports keyboard activation. Both are idempotent. */
-    button.addEventListener('pointerup',socialCloseEvent,true);
-    button.addEventListener('click',socialCloseEvent,true);
-  }
-  function ensureSocialCloseButton(){
-    const modalRoot=byId('modal');
-    if(!modalRoot)return;
-    let button=byId('todaySocialCloseTop');
-    if(!button){
-      button=document.createElement('button');
-      button.id='todaySocialCloseTop';
-      button.type='button';
-      button.className='today-social-close-top';
-      button.setAttribute('aria-label','Закрыть окно');
-      button.setAttribute('title','Закрыть');
-      button.textContent='×';
-      modalRoot.appendChild(button);
-    }
-    button.hidden=false;
-    bindSocialCloseButton(button);
-  }
   function installModalSafety(){
-    if(!window.__TODAY_SOCIAL_MODAL_SAFETY_V13){
-      window.__TODAY_SOCIAL_MODAL_SAFETY_V13=true;
-      const closeTarget=(target,root)=>{
-        if(!target||!root)return false;
-        if(target.closest&&target.closest('#modalClose,#todaySocialCloseTop,.ts-panel-close'))return true;
-        return target===root.querySelector('.modal-backdrop');
-      };
-      ['click','pointerup'].forEach(type=>document.addEventListener(type,function(event){
-        const root=byId('modal');
-        if(!root||root.classList.contains('hidden')||!closeTarget(event.target,root))return;
-        socialCloseEvent(event);
-      },true));
-      document.addEventListener('keydown',function(event){
-        const root=byId('modal');
-        if(event.key!=='Escape'||!root||root.classList.contains('hidden'))return;
-        socialCloseEvent(event);
+    const modalRoot=byId('modal');
+    if(modalRoot&&modalRoot.dataset.todaySocialCloseSafetyV14!=='1'){
+      modalRoot.dataset.todaySocialCloseSafetyV14='1';
+      modalRoot.addEventListener('click',function(event){
+        const target=event.target instanceof Element?event.target:null;
+        if(!target||modalRoot.classList.contains('hidden'))return;
+        const closeButton=target.closest('#modalClose,#todaySocialCloseTop,.ts-panel-close');
+        const backdrop=target===modalRoot.querySelector('.modal-backdrop');
+        if(!closeButton&&!backdrop)return;
+        forceCloseSocialModal(event);
       },true);
     }
-    bindSocialCloseButton(byId('modalClose'));
-    bindSocialCloseButton(byId('todaySocialCloseTop'));
+    if(!window.__TODAY_SOCIAL_ESCAPE_CLOSE_V14){
+      window.__TODAY_SOCIAL_ESCAPE_CLOSE_V14=true;
+      document.addEventListener('keydown',function(event){
+        const modalRoot=byId('modal');
+        if(event.key!=='Escape'||!modalRoot||modalRoot.classList.contains('hidden'))return;
+        forceCloseSocialModal(event);
+      },true);
+    }
   }
-  /* The modal already exists above social.js in index.html; install before DOMContentLoaded. */
   installModalSafety();
   function modal(html){
     stopPoll();
@@ -102,7 +70,6 @@
     openModal(html);
     const root=byId('modal');
     if(root)root.classList.add('today-social-modal');
-    ensureSocialCloseButton();
   }
   function stopPoll(){if(chatPoll){clearInterval(chatPoll);chatPoll=null}activeChatId=null;}
   function panelShell(title,sub,content){return `<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY SOCIAL / ${VERSION}</div><h2>${h(title)}</h2>${sub?`<p>${h(sub)}</p>`:''}</div><span class="ts-orbit" aria-hidden="true">✦</span></div>${content}</section>`}
