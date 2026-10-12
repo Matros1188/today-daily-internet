@@ -32,7 +32,7 @@
   }
   function dayPanel(kind,index){
     const panel=document.createElement('div');panel.className='today-art-panel';panel.dataset.artKind=kind;panel.setAttribute('aria-hidden','true');
-    panel.innerHTML=`<div class="today-art-atmosphere"></div><div class="today-art-topline"><span>НОВАЯ ГЛАВА</span></div><div class="today-art-visual">${svgFor(kind,'day')}</div><div class="today-art-grain"></div>`;
+    panel.innerHTML=`<div class="today-art-atmosphere"></div><div class="today-art-visual">${svgFor(kind,'day')}</div><div class="today-art-grain"></div>`;
     return panel;
   }
   function decorateDaily(){
