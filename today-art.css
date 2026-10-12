@@ -5910,93 +5910,180 @@ small{
 
 /* TODAY PREMIUM TYPOGRAPHY V5 RECOVERY OVERRIDE V2 — BEGIN */
 :root{
-  --td-v5-ui:Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI Variable","Segoe UI",sans-serif;
-  --td-v5-display:Inter,"SF Pro Display","Segoe UI Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --td-v5-ui:"Manrope","Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --td-v5-display:"Onest","Manrope","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --td-v5-ink:#fbfcff;
-  --td-v5-secondary:#dbe5f7;
-  --td-v5-muted:#b4c3df;
-  --td-v5-lilac:#c8bdff;
+  --td-v5-secondary:#e0e8f8;
+  --td-v5-muted:#b7c5df;
+  --td-v5-lilac:#c9beff;
   --td-v5-mint:#9af0dc;
+  --td-v5-display-tracking:-.052em;
 }
 
-/* Expressive, premium typography with safe system fallbacks and clear hierarchy. */
+/* Real font files are loaded in <head>; these are safe fallbacks if offline. */
 html,body,button,input,textarea,select{
   font-family:var(--td-v5-ui)!important;
+  font-optical-sizing:auto;
   font-kerning:normal!important;
-  font-feature-settings:"kern" 1,"liga" 1,"calt" 1;
+  font-feature-settings:"kern" 1,"liga" 1,"calt" 1,"case" 1;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
-body{color:var(--td-v5-ink)!important;letter-spacing:-.008em}
+body{
+  color:var(--td-v5-ink)!important;
+  font-size:15px;
+  font-weight:450;
+  letter-spacing:-.012em;
+  font-variation-settings:normal;
+}
+strong,b{font-weight:760!important}
+small,.small,.muted,.helper-text{letter-spacing:.005em}
+::selection{background:rgba(154,240,220,.30);color:#fff}
+
+/* Brand: distinct geometry, tight silhouette, controlled weight. */
 .today-brand-word,.brand{
   font-family:var(--td-v5-display)!important;
-  font-weight:900!important;
-  letter-spacing:-.07em!important;
+  font-weight:850!important;
+  letter-spacing:-.067em!important;
+  line-height:.94!important;
+  font-kerning:normal!important;
   text-rendering:geometricPrecision;
 }
 .today-brand-tag,.eyebrow,.card-kicker,.kind-pill,.community-kind{
   font-family:var(--td-v5-ui)!important;
-  font-weight:850!important;
-  letter-spacing:.14em!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.155em!important;
+  line-height:1.45!important;
   text-transform:uppercase!important;
 }
+
+/* Hero: a deliberate typographic statement, not merely an oversized label. */
 .hero h1{
   font-family:var(--td-v5-display)!important;
-  font-size:clamp(46px,5.4vw,78px)!important;
-  font-weight:900!important;
-  line-height:.95!important;
-  letter-spacing:-.078em!important;
+  font-size:clamp(48px,6.05vw,86px)!important;
+  font-weight:850!important;
+  line-height:.94!important;
+  letter-spacing:-.073em!important;
+  font-optical-sizing:auto;
+  font-kerning:normal!important;
   text-wrap:balance;
+  max-width:12ch;
   color:var(--td-v5-ink)!important;
-  text-shadow:0 4px 34px rgba(149,166,255,.17)!important;
+  text-shadow:0 5px 34px rgba(149,166,255,.18)!important;
 }
-.hero-copy>p{font-size:clamp(15px,1.25vw,18px)!important;line-height:1.72!important;letter-spacing:-.012em!important;color:#d0dcf2!important}
+.hero-copy>p{
+  max-width:61ch;
+  font-family:var(--td-v5-ui)!important;
+  font-size:clamp(15px,1.22vw,17px)!important;
+  font-weight:450!important;
+  line-height:1.76!important;
+  letter-spacing:-.012em!important;
+  color:#d3def1!important;
+}
+
+/* Section titles: high authority, slightly more open than the hero. */
 .section-head h2{
   font-family:var(--td-v5-display)!important;
-  font-size:clamp(28px,3vw,40px)!important;
-  font-weight:900!important;
-  line-height:1.03!important;
-  letter-spacing:-.067em!important;
+  font-size:clamp(29px,3vw,41px)!important;
+  font-weight:820!important;
+  line-height:1.04!important;
+  letter-spacing:-.058em!important;
   color:var(--td-v5-ink)!important;
+  font-optical-sizing:auto;
   text-wrap:balance;
   text-shadow:0 3px 26px rgba(145,163,255,.12)!important;
 }
-.section-note{font-size:11px!important;font-weight:760!important;line-height:1.55!important;letter-spacing:.045em!important;color:var(--td-v5-muted)!important}
+.section-note{
+  font-family:var(--td-v5-ui)!important;
+  font-size:11px!important;
+  font-weight:650!important;
+  line-height:1.6!important;
+  letter-spacing:.025em!important;
+  color:var(--td-v5-muted)!important;
+}
+
+/* Daily cards: expressive heading plus calm, highly readable body copy. */
 .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{
   font-family:var(--td-v5-display)!important;
-  font-size:clamp(20px,1.7vw,25px)!important;
-  line-height:1.1!important;
-  font-weight:880!important;
-  letter-spacing:-.052em!important;
+  font-size:clamp(21px,1.72vw,25px)!important;
+  font-weight:780!important;
+  line-height:1.12!important;
+  letter-spacing:-.043em!important;
   color:var(--td-v5-ink)!important;
+  font-optical-sizing:auto;
   text-wrap:balance;
   overflow-wrap:anywhere;
-  text-shadow:0 2px 22px rgba(153,171,255,.13)!important;
+  text-shadow:0 2px 20px rgba(153,171,255,.12)!important;
 }
 .daily-card p,.daily-card.featured p,.daily-card.secondary p,.daily-card.standard p,
 .daily-card .card-body{
+  font-family:var(--td-v5-ui)!important;
   font-size:14px!important;
-  line-height:1.68!important;
-  font-weight:480!important;
-  letter-spacing:-.004em!important;
+  font-weight:450!important;
+  line-height:1.72!important;
+  letter-spacing:-.008em!important;
   color:var(--td-v5-secondary)!important;
+  text-wrap:pretty;
 }
-.card-kicker{font-size:9px!important;line-height:1.4!important;color:#c9d6ef!important}
-.kind-pill{font-size:9px!important;letter-spacing:.105em!important;color:#f0f4ff!important}
-.count-pill,.rank-score,.rank-number,.coin-badge,.progress{font-variant-numeric:tabular-nums lining-nums!important}
-.today-post-name{font-size:14px!important;font-weight:880!important;letter-spacing:-.025em!important;color:#f8faff!important}
-.today-post-meta{font-size:11px!important;font-weight:650!important;letter-spacing:.012em!important;color:#b9c8e2!important}
-.today-post-text{font-size:14px!important;line-height:1.78!important;letter-spacing:-.003em!important;color:#e8eefb!important}
+.card-kicker{font-size:9px!important;color:#cad7ef!important}
+.kind-pill{font-size:9px!important;letter-spacing:.115em!important;color:#f0f4ff!important}
+
+/* Social feed and profiles: creator names have hierarchy; body copy stays soft. */
+.today-post-name{
+  font-family:var(--td-v5-display)!important;
+  font-size:14px!important;
+  font-weight:760!important;
+  letter-spacing:-.027em!important;
+  line-height:1.25!important;
+  color:#f8faff!important;
+}
+.today-post-meta{
+  font-family:var(--td-v5-ui)!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  letter-spacing:.018em!important;
+  line-height:1.45!important;
+  color:#bccbe4!important;
+}
+.today-post-text{
+  font-family:var(--td-v5-ui)!important;
+  font-size:14px!important;
+  font-weight:450!important;
+  line-height:1.8!important;
+  letter-spacing:-.007em!important;
+  color:#e8eefb!important;
+  text-wrap:pretty;
+}
 .ts-post-card h4,.ts-channel-card h4,.ts-promo-head h3,.ts-profile-hero h3{
-  font-family:var(--td-v5-display)!important;font-weight:880!important;letter-spacing:-.045em!important;line-height:1.12!important;
+  font-family:var(--td-v5-display)!important;
+  font-weight:780!important;
+  letter-spacing:-.041em!important;
+  line-height:1.14!important;
+  text-wrap:balance;
 }
-.ts-post-card>p,.ts-channel-card p,.ts-promo-head p,.ts-profile-hero p{line-height:1.72!important;letter-spacing:-.004em!important}
+.ts-post-card>p,.ts-channel-card p,.ts-promo-head p,.ts-profile-hero p{
+  font-family:var(--td-v5-ui)!important;
+  font-weight:450!important;
+  line-height:1.74!important;
+  letter-spacing:-.006em!important;
+}
+
+/* Buttons and numbers: compact, crisp, not uniformly over-bold. */
 .primary-button,.secondary-button,.danger-button,.account-btn,.top-btn,.ts-mini,.ts-primary,.ts-promo-button{
-  font-family:var(--td-v5-ui)!important;font-weight:830!important;letter-spacing:-.012em!important;
+  font-family:var(--td-v5-ui)!important;
+  font-weight:750!important;
+  letter-spacing:-.015em!important;
+  font-kerning:normal!important;
 }
 .primary-button,.secondary-button,.danger-button{font-size:13px!important}
-.account-btn,.top-btn{font-size:12px!important;font-weight:850!important}
+.account-btn,.top-btn{font-size:12px!important;font-weight:780!important;letter-spacing:-.01em!important}
+.count-pill,.rank-score,.rank-number,.coin-badge,.progress,.stat-number{
+  font-variant-numeric:tabular-nums lining-nums!important;
+  font-feature-settings:"tnum" 1,"lnum" 1!important;
+  letter-spacing:-.025em;
+}
 
 /* Normalize Moment of the Day and Trend of the Day to a regular card footprint. */
 .daily-grid{grid-auto-flow:row!important;align-items:stretch!important;gap:17px!important}
@@ -6022,28 +6109,28 @@ body{color:var(--td-v5-ink)!important;letter-spacing:-.008em}
   flex:none!important;
 }
 .today-art-panel{border-radius:18px!important}
-.today-art-topline{font-size:8px!important;font-weight:820!important;letter-spacing:.15em!important}
+.today-art-topline{font-size:8px!important;font-weight:780!important;letter-spacing:.16em!important}
 
 @media(min-width:701px) and (max-width:1100px){
   .daily-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
   .daily-card.featured,.daily-card.secondary,.daily-card.standard{grid-column:span 1!important;grid-row:span 1!important;min-height:235px!important}
-  .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{font-size:clamp(19px,2.4vw,24px)!important}
+  .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{font-size:clamp(20px,2.35vw,24px)!important}
 }
 @media(max-width:700px){
   .daily-grid{grid-template-columns:minmax(0,1fr)!important;gap:11px!important}
   .daily-card.featured,.daily-card.secondary,.daily-card.standard{grid-column:span 1!important;grid-row:span 1!important;min-height:220px!important;height:auto!important}
-  .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{font-size:clamp(20px,5.4vw,24px)!important;line-height:1.1!important;letter-spacing:-.048em!important}
-  .daily-card p,.daily-card.featured p,.daily-card.secondary p,.daily-card.standard p{font-size:13px!important;line-height:1.66!important}
+  .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{font-size:clamp(20px,5.4vw,24px)!important;line-height:1.12!important;letter-spacing:-.04em!important}
+  .daily-card p,.daily-card.featured p,.daily-card.secondary p,.daily-card.standard p{font-size:13.5px!important;line-height:1.7!important}
   .today-card-illustrated.featured .today-art-panel,.today-card-illustrated.secondary .today-art-panel,.daily-card.featured .today-art-panel,.daily-card.secondary .today-art-panel,.today-art-panel{height:124px!important;min-height:124px!important;max-height:124px!important}
-  .section-head h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.03!important}
-  .hero h1{font-size:clamp(43px,12vw,61px)!important;line-height:.97!important;letter-spacing:-.075em!important}
-  .hero-copy>p{font-size:15px!important;line-height:1.68!important}
-  .today-post-text{font-size:13px!important;line-height:1.72!important}
+  .section-head h2{font-size:clamp(27px,7.5vw,35px)!important;line-height:1.05!important;letter-spacing:-.055em!important}
+  .hero h1{font-size:clamp(43px,11.5vw,62px)!important;line-height:.96!important;letter-spacing:-.07em!important;max-width:11.5ch}
+  .hero-copy>p{font-size:15px!important;line-height:1.72!important}
+  .today-post-text{font-size:13.5px!important;line-height:1.76!important}
 }
 @media(max-width:380px){
   .daily-card{padding:11px!important}
-  .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{font-size:20px!important}
-  .card-kicker{font-size:8px!important;letter-spacing:.12em!important}
+  .daily-card h3,.daily-card.featured h3,.daily-card.secondary h3,.daily-card.standard h3{font-size:20px!important;letter-spacing:-.035em!important}
+  .card-kicker{font-size:8px!important;letter-spacing:.13em!important}
 }
 @media(prefers-reduced-motion:reduce){.daily-card,.daily-card:hover{transition:none!important}}
 /* TODAY PREMIUM TYPOGRAPHY V5 RECOVERY OVERRIDE V2 — END */
