@@ -1,7 +1,7 @@
 /* TODAY SOCIAL LAYER V1 · persistent profiles, friends, 3 chat types and channels */
 (function(){
   'use strict';
-  const VERSION='TODAY-SOCIAL-V1';
+  const VERSION='TODAY-SOCIAL-V1.1';
   let activeChatId=null,activeChatTitle='',chatPoll=null,viewerId=null;
   const byId=id=>document.getElementById(id);
   const h=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -17,6 +17,53 @@
     if(typeof v==='string'){try{v=JSON.parse(v)}catch{}}
     if(v&&typeof v==='object'&&v.ok===false)throw new Error(v.message||'Операция не выполнена.');
     return v||{};
+  }
+  /* TODAY_SOCIAL_MODAL_SAFETY_V11 — close reliably on desktop and touch devices. */
+  function forceCloseSocialModal(){
+    const modalRoot=byId('modal');
+    if(!modalRoot)return;
+    const savedScrollY=Number(window.__todayModalScrollY ?? window.scrollY ?? 0);
+    const savedBodyStyle=window.__todayModalBodyStyle ? {...window.__todayModalBodyStyle} : null;
+    try{stopPoll()}catch{}
+    try{if(typeof closeModal==='function')closeModal()}catch(err){console.warn('TODAY modal close fallback',err)}
+    modalRoot.classList.add('hidden');
+    modalRoot.classList.remove('today-social-modal');
+    const root=document.documentElement,body=document.body;
+    if(savedBodyStyle){
+      for(const key of ['position','top','left','right','width','overflow'])body.style[key]=savedBodyStyle[key]||'';
+    }else{
+      body.style.position='';body.style.top='';body.style.left='';body.style.right='';body.style.width='';body.style.overflow='';
+    }
+    root.classList.remove('today-modal-open');
+    window.__todayModalBodyStyle=null;
+    window.__todayModalScrollY=null;
+    try{window.scrollTo(0,savedScrollY)}catch{}
+  }
+  function installModalSafety(){
+    if(window.__TODAY_SOCIAL_MODAL_SAFETY_V11)return;
+    window.__TODAY_SOCIAL_MODAL_SAFETY_V11=true;
+    /* Capture phase is intentional: this still works if another click handler is broken. */
+    document.addEventListener('click',function(event){
+      const modalRoot=byId('modal');
+      if(!modalRoot||modalRoot.classList.contains('hidden'))return;
+      const target=event.target;
+      const closeButton=target&&target.closest?target.closest('#modalClose,.ts-panel-close'):null;
+      const backdrop=target===modalRoot.querySelector('.modal-backdrop');
+      if(!closeButton&&!backdrop)return;
+      event.preventDefault();
+      event.stopPropagation();
+      if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+      forceCloseSocialModal();
+    },true);
+    document.addEventListener('keydown',function(event){
+      if(event.key!=='Escape')return;
+      const modalRoot=byId('modal');
+      if(!modalRoot||modalRoot.classList.contains('hidden'))return;
+      event.preventDefault();
+      event.stopPropagation();
+      if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+      forceCloseSocialModal();
+    },true);
   }
   function modal(html){stopPoll();if(typeof openModal==='function')openModal(html);else return;const m=byId('modal');if(m)m.classList.add('today-social-modal');}
   function stopPoll(){if(chatPoll){clearInterval(chatPoll);chatPoll=null}activeChatId=null;}
@@ -168,6 +215,7 @@
     if(a==='join-channel'){try{const d=await rpc('today_social_join_channel',{p_channel_id:id});notify(d.message||'Ты вступил в канал.');return openChannel(id)}catch(e){return notify(e.message)}}
   }
   function setup(){
+    installModalSafety();
     injectNav();injectPromo();document.addEventListener('click',e=>{const b=e.target.closest('[data-social-act]');if(!b)return;e.preventDefault();handleClick(b)});document.addEventListener('submit',onSubmit);
     const close=byId('modalClose');if(close)close.addEventListener('click',()=>{stopPoll();const m=byId('modal');if(m)m.classList.remove('today-social-modal')});
     const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();modalRoot.classList.remove('today-social-modal')}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
