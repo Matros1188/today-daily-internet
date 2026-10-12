@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <script>
-(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="220"||q.get("reset")==="221"||q.get("reset")==="222"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(e){}})();
+(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="220"||q.get("reset")==="221"||q.get("reset")==="222"||q.get("reset")==="223"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(e){}})();
 </script>
 
 <meta charset="utf-8">
@@ -10,13 +10,14 @@
 <meta name="theme-color" content="#080b14">
 <meta name="color-scheme" content="dark">
 <meta name="description" content="TODAY — в полночь дневная лента исчезает. Воспоминания, друзья и личные страницы остаются.">
-<link rel="manifest" href="./manifest.webmanifest?v=20261012065558">
+<link rel="manifest" href="./manifest.webmanifest?v=20261012101530">
 <link rel="icon" href="./icon-192.png">
 <title>TODAY — социальная сеть одного дня</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js?v=20261012065558"></script>
-<link rel="stylesheet" href="./style.css?v=20261012065558">
-<link rel="stylesheet" href="./social.css?v=20261012065558">
+<script src="./config.js?v=20261012101530"></script>
+<link rel="stylesheet" href="./style.css?v=20261012101530">
+<link rel="stylesheet" href="./social.css?v=20261012101530">
+<link rel="stylesheet" href="./today-art.css?v=20261012101530">
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
@@ -82,7 +83,8 @@
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button><div id="modalContent"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
-<script src="./app.js?v=20261012065558"></script>
-<script src="./social.js?v=20261012065558"></script>
+<script src="./app.js?v=20261012101530"></script>
+<script src="./social.js?v=20261012101530"></script>
+<script src="./today-art.js?v=20261012101530"></script>
 </body>
 </html>
