@@ -329,3 +329,56 @@ body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;bac
   .ts-post-card{padding:15px!important}
 }
 
+
+
+/* TODAY_SOCIAL_CLOSE_HOTFIX_V13_CSS — fixed, independently clickable close target */
+#modal.today-social-modal > #todaySocialCloseTop:not([hidden]){
+  position:fixed!important;
+  z-index:2147483000!important;
+  top:max(12px,env(safe-area-inset-top))!important;
+  right:max(12px,env(safe-area-inset-right))!important;
+  display:grid!important;
+  place-items:center!important;
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  padding:0!important;
+  margin:0!important;
+  border:1px solid rgba(205,220,245,.32)!important;
+  border-radius:15px!important;
+  background:rgba(17,26,43,.98)!important;
+  color:#f8fbff!important;
+  font:400 30px/1 Arial,sans-serif!important;
+  box-shadow:0 10px 34px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.1)!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  cursor:pointer!important;
+}
+#modal.today-social-modal > #todaySocialCloseTop:not([hidden]):hover{
+  background:rgba(36,51,77,.99)!important;
+  border-color:rgba(170,205,255,.62)!important;
+  transform:translateY(-1px)!important;
+}
+#modal.today-social-modal > #todaySocialCloseTop:not([hidden]):active{
+  transform:scale(.96)!important;
+}
+#modal.today-social-modal > #todaySocialCloseTop:focus-visible{
+  outline:3px solid #8ae7d0!important;
+  outline-offset:3px!important;
+}
+#modal.today-social-modal > #todaySocialCloseTop[hidden]{display:none!important}
+#modal.today-social-modal > .modal-card > #modalClose{display:none!important}
+#modal.today-social-modal .ts-panel-head{padding-right:62px!important}
+@media(max-width:640px){
+  #modal.today-social-modal > #todaySocialCloseTop:not([hidden]){
+    top:max(8px,env(safe-area-inset-top))!important;
+    right:max(8px,env(safe-area-inset-right))!important;
+    width:48px!important;height:48px!important;
+  }
+  #modal.today-social-modal .modal-card{padding-top:64px!important}
+  #modal.today-social-modal .ts-panel-head{padding-right:0!important}
+}

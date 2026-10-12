@@ -2,7 +2,7 @@
 /* TODAY SOCIAL LAYER V1 · persistent profiles, friends, 3 chat types and channels */
 (function(){
   'use strict';
-  const VERSION='TODAY-SOCIAL-V1.2';
+  const VERSION='TODAY-SOCIAL-V1.3';
   let activeChatId=null,activeChatTitle='',chatPoll=null,viewerId=null;
   const byId=id=>document.getElementById(id);
   const h=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -19,16 +19,18 @@
     if(v&&typeof v==='object'&&v.ok===false)throw new Error(v.message||'Операция не выполнена.');
     return v||{};
   }
-  /* TODAY_SOCIAL_MODAL_SAFETY_V11 — close reliably on desktop and touch devices. */
+  /* TODAY_SOCIAL_CLOSE_HOTFIX_V13 — a dedicated top-level close target + capture handlers */
   function forceCloseSocialModal(){
     const modalRoot=byId('modal');
     if(!modalRoot)return;
     const savedScrollY=Number(window.__todayModalScrollY ?? window.scrollY ?? 0);
     const savedBodyStyle=window.__todayModalBodyStyle ? {...window.__todayModalBodyStyle} : null;
     try{stopPoll()}catch{}
-    try{if(typeof closeModal==='function')closeModal()}catch(err){console.warn('TODAY modal close fallback',err)}
+    try{if(typeof closeModal==='function')closeModal()}catch(err){console.warn('TODAY close fallback',err)}
     modalRoot.classList.add('hidden');
     modalRoot.classList.remove('today-social-modal');
+    const floatClose=byId('todaySocialCloseTop');
+    if(floatClose)floatClose.hidden=true;
     const root=document.documentElement,body=document.body;
     if(savedBodyStyle){
       for(const key of ['position','top','left','right','width','overflow'])body.style[key]=savedBodyStyle[key]||'';
@@ -40,33 +42,68 @@
     window.__todayModalScrollY=null;
     try{window.scrollTo(0,savedScrollY)}catch{}
   }
-  function installModalSafety(){
-    if(window.__TODAY_SOCIAL_MODAL_SAFETY_V11)return;
-    window.__TODAY_SOCIAL_MODAL_SAFETY_V11=true;
-    /* Capture phase is intentional: this still works if another click handler is broken. */
-    document.addEventListener('click',function(event){
-      const modalRoot=byId('modal');
-      if(!modalRoot||modalRoot.classList.contains('hidden'))return;
-      const target=event.target;
-      const closeButton=target&&target.closest?target.closest('#modalClose,.ts-panel-close'):null;
-      const backdrop=target===modalRoot.querySelector('.modal-backdrop');
-      if(!closeButton&&!backdrop)return;
-      event.preventDefault();
-      event.stopPropagation();
-      if(event.stopImmediatePropagation)event.stopImmediatePropagation();
-      forceCloseSocialModal();
-    },true);
-    document.addEventListener('keydown',function(event){
-      if(event.key!=='Escape')return;
-      const modalRoot=byId('modal');
-      if(!modalRoot||modalRoot.classList.contains('hidden'))return;
-      event.preventDefault();
-      event.stopPropagation();
-      if(event.stopImmediatePropagation)event.stopImmediatePropagation();
-      forceCloseSocialModal();
-    },true);
+  function socialCloseEvent(event){
+    const modalRoot=byId('modal');
+    if(!modalRoot||modalRoot.classList.contains('hidden'))return;
+    if(event){event.preventDefault?.();event.stopPropagation?.();event.stopImmediatePropagation?.();}
+    forceCloseSocialModal();
   }
-  function modal(html){stopPoll();if(typeof openModal==='function')openModal(html);else return;const m=byId('modal');if(m)m.classList.add('today-social-modal');}
+  function bindSocialCloseButton(button){
+    if(!button||button.dataset.todaySocialCloseBound==='1')return;
+    button.dataset.todaySocialCloseBound='1';
+    /* pointerup catches touch and mouse; click also supports keyboard activation. Both are idempotent. */
+    button.addEventListener('pointerup',socialCloseEvent,true);
+    button.addEventListener('click',socialCloseEvent,true);
+  }
+  function ensureSocialCloseButton(){
+    const modalRoot=byId('modal');
+    if(!modalRoot)return;
+    let button=byId('todaySocialCloseTop');
+    if(!button){
+      button=document.createElement('button');
+      button.id='todaySocialCloseTop';
+      button.type='button';
+      button.className='today-social-close-top';
+      button.setAttribute('aria-label','Закрыть окно');
+      button.setAttribute('title','Закрыть');
+      button.textContent='×';
+      modalRoot.appendChild(button);
+    }
+    button.hidden=false;
+    bindSocialCloseButton(button);
+  }
+  function installModalSafety(){
+    if(!window.__TODAY_SOCIAL_MODAL_SAFETY_V13){
+      window.__TODAY_SOCIAL_MODAL_SAFETY_V13=true;
+      const closeTarget=(target,root)=>{
+        if(!target||!root)return false;
+        if(target.closest&&target.closest('#modalClose,#todaySocialCloseTop,.ts-panel-close'))return true;
+        return target===root.querySelector('.modal-backdrop');
+      };
+      ['click','pointerup'].forEach(type=>document.addEventListener(type,function(event){
+        const root=byId('modal');
+        if(!root||root.classList.contains('hidden')||!closeTarget(event.target,root))return;
+        socialCloseEvent(event);
+      },true));
+      document.addEventListener('keydown',function(event){
+        const root=byId('modal');
+        if(event.key!=='Escape'||!root||root.classList.contains('hidden'))return;
+        socialCloseEvent(event);
+      },true);
+    }
+    bindSocialCloseButton(byId('modalClose'));
+    bindSocialCloseButton(byId('todaySocialCloseTop'));
+  }
+  /* The modal already exists above social.js in index.html; install before DOMContentLoaded. */
+  installModalSafety();
+  function modal(html){
+    stopPoll();
+    if(typeof openModal!=='function')return;
+    openModal(html);
+    const root=byId('modal');
+    if(root)root.classList.add('today-social-modal');
+    ensureSocialCloseButton();
+  }
   function stopPoll(){if(chatPoll){clearInterval(chatPoll);chatPoll=null}activeChatId=null;}
   function panelShell(title,sub,content){return `<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY SOCIAL / ${VERSION}</div><h2>${h(title)}</h2>${sub?`<p>${h(sub)}</p>`:''}</div><span class="ts-orbit" aria-hidden="true">✦</span></div>${content}</section>`}
   function avatar(user,size=''){
