@@ -2713,3 +2713,2077 @@ select:focus-visible{
 }
 
 /* End TODAY PREMIUM DESIGN V3 — OBSIDIAN ATELIER */
+
+
+
+/* ================================================================
+   TODAY PREMIUM V4 — OBSIDIAN SIGNATURE
+   Stronger composition / editorial luxury / collectible categories
+   ================================================================ */
+
+:root{
+  --sig-bg:#050711;
+  --sig-obsidian:#0a101d;
+  --sig-panel:#111b2c;
+  --sig-panel-deep:#080e19;
+
+  --sig-white:#fbfcff;
+  --sig-text:#e1e8f5;
+  --sig-muted:#b2bfd5;
+
+  --sig-platinum:rgba(208,222,246,.38);
+  --sig-platinum-soft:rgba(190,208,239,.20);
+  --sig-champagne:#ead4a9;
+  --sig-ice:#b3d9ff;
+  --sig-jade:#9ce8d4;
+
+  --sig-shadow:0 34px 100px rgba(0,0,0,.42);
+  --sig-ease:cubic-bezier(.2,.78,.18,1);
+}
+
+
+/* ================================================================
+   GLOBAL SURFACE — глубина, свет, микроконтраст
+   ================================================================ */
+
+html{
+  background:var(--sig-bg)!important;
+  color-scheme:dark!important;
+  scroll-behavior:smooth;
+}
+
+body{
+  color:var(--sig-white)!important;
+
+  background:
+    radial-gradient(
+      ellipse at 4% 1%,
+      rgba(105,126,215,.24),
+      transparent 31%
+    ),
+    radial-gradient(
+      ellipse at 98% 8%,
+      rgba(74,190,174,.15),
+      transparent 27%
+    ),
+    radial-gradient(
+      ellipse at 82% 52%,
+      rgba(85,100,164,.08),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 48% 100%,
+      rgba(123,90,194,.16),
+      transparent 39%
+    ),
+    #050711!important;
+
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  font-kerning:normal;
+  font-feature-settings:"kern" 1,"liga" 1,"calt" 1;
+}
+
+::selection{
+  background:rgba(156,232,212,.29);
+  color:#fff;
+}
+
+.shell{
+  width:min(1480px,calc(100% - 56px))!important;
+}
+
+
+/* ================================================================
+   HEADER — выразительнее, плотнее, дороже
+   ================================================================ */
+
+.topbar{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,14,26,.99),
+      rgba(5,8,17,.96)
+    )!important;
+
+  border-bottom:1px solid rgba(199,215,245,.22)!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.04),
+    0 13px 40px rgba(0,0,0,.30)!important;
+
+  backdrop-filter:blur(32px) saturate(155%)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(155%)!important;
+}
+
+.topbar-inner{
+  width:min(1480px,calc(100% - 56px))!important;
+  min-height:82px!important;
+  gap:22px!important;
+}
+
+.today-brand-word,
+.brand{
+  color:#fff!important;
+  font-weight:850!important;
+  letter-spacing:-.058em!important;
+}
+
+.today-brand-tag{
+  color:#c0cbe0!important;
+  font-size:9px!important;
+  letter-spacing:.21em!important;
+}
+
+.today-logo-mark{
+  filter:
+    drop-shadow(0 0 15px rgba(156,174,255,.22))
+    drop-shadow(0 7px 20px rgba(0,0,0,.34))!important;
+}
+
+.account-btn,
+.top-btn{
+  border:1px solid rgba(196,213,247,.29)!important;
+  border-radius:15px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(43,55,80,.98),
+      rgba(13,20,35,.99)
+    )!important;
+
+  color:#f7f9ff!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.13),
+    inset 0 -1px rgba(0,0,0,.24),
+    0 9px 24px rgba(0,0,0,.23)!important;
+
+  transition:
+    transform .22s var(--sig-ease),
+    border-color .22s ease,
+    box-shadow .22s ease!important;
+}
+
+.account-btn:hover,
+.top-btn:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(207,225,255,.60)!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.16),
+    0 14px 33px rgba(0,0,0,.31),
+    0 0 25px rgba(130,162,232,.08)!important;
+}
+
+.account-btn:active,
+.top-btn:active{
+  transform:scale(.98)!important;
+}
+
+.coin-badge{
+  border:1px solid rgba(234,212,169,.56)!important;
+
+  background:
+    linear-gradient(
+      140deg,
+      rgba(86,65,35,.99),
+      rgba(29,25,21,.99)
+    )!important;
+
+  color:#fff1d3!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,245,218,.18),
+    inset 0 -1px rgba(0,0,0,.40),
+    0 9px 25px rgba(0,0,0,.24)!important;
+}
+
+.coin-badge span{
+  background:
+    linear-gradient(
+      145deg,
+      #fff8dc,
+      #f0d69d 48%,
+      #b17e3d
+    )!important;
+
+  color:#33230e!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 2px 6px rgba(0,0,0,.30)!important;
+}
+
+
+/* ================================================================
+   SOCIAL NAV — превращаем в выразительную панель управления
+   ================================================================ */
+
+.today-social-nav{
+  width:min(1480px,calc(100% - 56px))!important;
+  margin:19px auto 0!important;
+  padding:14px 17px!important;
+  gap:22px!important;
+
+  border:1px solid rgba(194,212,246,.30)!important;
+  border-radius:24px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(135,155,232,.15),
+      transparent 44%
+    ),
+    linear-gradient(
+      110deg,
+      rgba(24,35,58,.99),
+      rgba(8,14,26,.98) 64%,
+      rgba(10,27,34,.97)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -1px rgba(0,0,0,.31),
+    0 20px 48px rgba(0,0,0,.30)!important;
+
+  backdrop-filter:blur(32px) saturate(155%)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(155%)!important;
+}
+
+.ts-brand-chip b{
+  color:#fff!important;
+  font-size:9px!important;
+  letter-spacing:.19em!important;
+}
+
+.ts-brand-chip small{
+  color:#bbc7de!important;
+}
+
+.ts-live-dot{
+  background:#a8f3df!important;
+
+  box-shadow:
+    0 0 0 5px rgba(168,243,223,.10),
+    0 0 21px rgba(168,243,223,.43)!important;
+}
+
+.ts-nav-actions{
+  gap:9px!important;
+}
+
+.ts-nav-actions button{
+  position:relative!important;
+  overflow:hidden!important;
+
+  min-height:48px!important;
+  padding:9px 14px!important;
+  gap:10px!important;
+
+  border:1px solid rgba(190,209,246,.25)!important;
+  border-radius:15px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(47,62,91,.87),
+      rgba(14,22,38,.97)
+    )!important;
+
+  color:#f5f7ff!important;
+  font-size:11px!important;
+  font-weight:760!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.11),
+    0 5px 15px rgba(0,0,0,.14)!important;
+
+  transition:
+    transform .2s var(--sig-ease),
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease!important;
+}
+
+.ts-nav-actions button:hover,
+.ts-nav-actions button:focus-visible{
+  transform:translateY(-2px)!important;
+
+  border-color:rgba(205,227,255,.61)!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(62,81,119,.99),
+      rgba(17,36,49,.99)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.16),
+    0 11px 26px rgba(0,0,0,.28)!important;
+}
+
+.ts-nav-actions button .today-nav-icon{
+  width:33px!important;
+  height:31px!important;
+  flex:0 0 33px!important;
+
+  border:1px solid rgba(198,217,250,.30)!important;
+  border-radius:10px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(160,178,255,.31),
+      rgba(134,232,212,.14)
+    )!important;
+
+  color:#e0e8ff!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.14),
+    0 3px 8px rgba(0,0,0,.13)!important;
+}
+
+
+/* ================================================================
+   HERO — новый силуэт главного экрана
+   ================================================================ */
+
+.hero.shell{
+  position:relative!important;
+  isolation:isolate!important;
+
+  margin-top:29px!important;
+  padding:clamp(37px,5vw,73px)!important;
+
+  grid-template-columns:
+    minmax(0,1.27fr)
+    minmax(330px,.73fr)!important;
+
+  gap:clamp(28px,4vw,62px)!important;
+  align-items:center!important;
+
+  border:1px solid rgba(204,219,249,.34)!important;
+  border-radius:38px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 79% 5%,
+      rgba(157,158,255,.22),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 98% 100%,
+      rgba(93,225,205,.16),
+      transparent 33%
+    ),
+    linear-gradient(
+      128deg,
+      rgba(29,40,66,.99),
+      rgba(9,15,28,.99) 61%,
+      rgba(10,25,34,.99)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.17),
+    inset 0 -1px rgba(0,0,0,.32),
+    0 38px 110px rgba(0,0,0,.39)!important;
+
+  backdrop-filter:blur(34px) saturate(155%)!important;
+  -webkit-backdrop-filter:blur(34px) saturate(155%)!important;
+}
+
+/* Двойной стеклянный блик */
+.hero.shell:after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  inset:0;
+  border-radius:inherit;
+
+  background:
+    linear-gradient(
+      112deg,
+      rgba(255,255,255,.09),
+      transparent 19%,
+      transparent 72%,
+      rgba(255,255,255,.035)
+    );
+
+  opacity:.62;
+}
+
+.hero-copy{
+  z-index:2!important;
+}
+
+.hero-side{
+  z-index:2!important;
+  gap:15px!important;
+}
+
+/* Иллюстрация стала более заметной частью первого экрана */
+.today-hero-art{
+  right:-55px!important;
+  bottom:-53px!important;
+  width:min(56vw,520px)!important;
+  opacity:.72!important;
+
+  filter:
+    drop-shadow(0 20px 47px rgba(95,115,227,.15))
+    drop-shadow(0 0 34px rgba(128,198,232,.09))!important;
+}
+
+.hero h1,
+#homeSection h1{
+  max-width:950px!important;
+  font-size:clamp(50px,6.9vw,100px)!important;
+  font-weight:800!important;
+  line-height:.92!important;
+  letter-spacing:-.082em!important;
+  text-wrap:balance!important;
+
+  color:#fff!important;
+  text-shadow:0 6px 36px rgba(119,144,231,.12)!important;
+}
+
+.hero h1 span,
+#homeSection h1 span{
+  background:
+    linear-gradient(
+      105deg,
+      #f3e5c5 0%,
+      #d3c8ff 31%,
+      #b9d9ff 67%,
+      #a0efdc 100%
+    )!important;
+
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+}
+
+.hero-copy>p{
+  max-width:690px!important;
+  color:#d0d9eb!important;
+  font-size:clamp(15px,1.35vw,19px)!important;
+  line-height:1.82!important;
+}
+
+.eyebrow{
+  color:#d1d9ee!important;
+  letter-spacing:.22em!important;
+}
+
+.hero-rail{
+  margin-top:30px!important;
+  color:#becbe1!important;
+}
+
+.hero-rail strong{
+  color:#fff!important;
+}
+
+
+/* ================================================================
+   CLOCK + DAILY SCENE — самостоятельные драгоценные панели
+   ================================================================ */
+
+.clock-card,
+.scene-card{
+  position:relative!important;
+  overflow:hidden!important;
+
+  padding:26px!important;
+  border-radius:25px!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.15),
+    inset 0 -1px rgba(0,0,0,.35),
+    0 20px 45px rgba(0,0,0,.30)!important;
+}
+
+.clock-card{
+  border:1px solid rgba(194,212,248,.37)!important;
+
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(161,173,255,.24),
+      transparent 46%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(40,56,95,.99),
+      rgba(10,18,36,.99)
+    )!important;
+}
+
+.clock-card>span,
+.scene-card>span{
+  color:#d0d9ec!important;
+  font-size:9px!important;
+  letter-spacing:.20em!important;
+}
+
+.clock-card strong{
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.065em!important;
+  text-shadow:0 0 33px rgba(181,191,255,.13)!important;
+}
+
+.progress{
+  height:7px!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-radius:999px!important;
+  overflow:hidden!important;
+  background:rgba(255,255,255,.11)!important;
+}
+
+.progress i{
+  background:
+    linear-gradient(
+      90deg,
+      #e8d7b4,
+      #b7c9ff 42%,
+      #a1f0dc
+    )!important;
+
+  box-shadow:0 0 23px rgba(154,213,232,.42)!important;
+}
+
+.scene-card{
+  border:1px solid rgba(146,230,215,.34)!important;
+
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(109,236,206,.20),
+      transparent 48%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(22,60,63,.98),
+      rgba(8,20,33,.99)
+    )!important;
+}
+
+.scene-card strong{
+  color:#fff!important;
+  letter-spacing:-.052em!important;
+}
+
+.scene-card small{
+  color:#bed5d8!important;
+}
+
+.activity-strip{
+  border:1px solid rgba(192,210,244,.29)!important;
+  border-radius:20px!important;
+
+  background:
+    linear-gradient(
+      108deg,
+      rgba(25,36,58,.98),
+      rgba(8,14,26,.97) 71%,
+      rgba(12,30,36,.96)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.10),
+    0 16px 38px rgba(0,0,0,.24)!important;
+}
+
+.live-pill span,
+.ticker,
+.strip-actions{
+  color:#cbd5e7!important;
+}
+
+
+/* ================================================================
+   DAILY GRID — главное видимое изменение V4:
+   3 крупные колонки на ПК, 2 на планшете, 2 на телефоне
+   ================================================================ */
+
+.daily-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:21px!important;
+  align-items:stretch!important;
+}
+
+.daily-card{
+  --atelier-accent:#b7c9ff;
+
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+
+  min-width:0!important;
+  min-height:410px!important;
+  padding:19px!important;
+
+  border:1px solid rgba(194,211,244,.31)!important;
+  border-radius:29px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      color-mix(in srgb,var(--atelier-accent) 18%,transparent),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(127,149,229,.10),
+      transparent 49%
+    ),
+    linear-gradient(
+      148deg,
+      rgba(23,34,55,.995),
+      rgba(7,12,24,.998)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -1px rgba(0,0,0,.36),
+    0 21px 55px rgba(0,0,0,.30)!important;
+
+  transition:
+    transform .26s var(--sig-ease),
+    border-color .26s ease,
+    box-shadow .26s ease,
+    filter .26s ease!important;
+}
+
+/* Вертикальная световая грань — идентичность каждой рубрики */
+.daily-card:before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  top:24px;
+  bottom:24px;
+  left:0;
+  width:3px;
+  border-radius:0 5px 5px 0;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      var(--atelier-accent) 19%,
+      var(--atelier-accent) 78%,
+      transparent
+    );
+
+  box-shadow:
+    0 0 17px color-mix(in srgb,var(--atelier-accent) 55%,transparent),
+    0 0 34px color-mix(in srgb,var(--atelier-accent) 22%,transparent);
+}
+
+.daily-card:after{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.065),
+      transparent 29%,
+      transparent 68%,
+      rgba(255,255,255,.025)
+    )!important;
+}
+
+.daily-card:hover{
+  transform:translateY(-7px)!important;
+  border-color:color-mix(in srgb,var(--atelier-accent) 58%,white 8%)!important;
+  filter:brightness(1.045)!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.17),
+    inset 0 0 0 1px color-mix(in srgb,var(--atelier-accent) 13%,transparent),
+    0 30px 78px rgba(0,0,0,.40),
+    0 0 35px color-mix(in srgb,var(--atelier-accent) 9%,transparent)!important;
+}
+
+.daily-card.featured,
+.daily-card.secondary{
+  min-height:450px!important;
+  grid-column:span 2!important;
+
+  border-color:rgba(209,221,248,.38)!important;
+
+  background:
+    radial-gradient(
+      ellipse at 86% 0%,
+      color-mix(in srgb,var(--atelier-accent) 22%,transparent),
+      transparent 47%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(28,40,64,.997),
+      rgba(7,13,25,.998)
+    )!important;
+}
+
+.daily-card h3{
+  color:#fff!important;
+  font-size:clamp(23px,2.15vw,33px)!important;
+  font-weight:790!important;
+  letter-spacing:-.057em!important;
+  line-height:1.02!important;
+  text-wrap:balance;
+}
+
+.daily-card.featured h3,
+.daily-card.secondary h3{
+  font-size:clamp(31px,3.15vw,46px)!important;
+  letter-spacing:-.068em!important;
+}
+
+.daily-card p{
+  color:#d0d9eb!important;
+  font-size:13px!important;
+  line-height:1.82!important;
+}
+
+.card-kicker{
+  color:#b6c4dc!important;
+  font-size:10px!important;
+  letter-spacing:.035em!important;
+}
+
+.kind-pill{
+  border:1px solid color-mix(in srgb,var(--atelier-accent) 48%,transparent)!important;
+  border-radius:999px!important;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb,var(--atelier-accent) 19%,#172238),
+      rgba(7,13,24,.98)
+    )!important;
+
+  color:#fbfcff!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    0 5px 13px rgba(0,0,0,.16)!important;
+}
+
+.count-pill{
+  color:#c2cde1!important;
+  font-variant-numeric:tabular-nums;
+}
+
+.card-body .notice{
+  border-color:rgba(191,211,246,.27)!important;
+  border-radius:16px!important;
+
+  background:
+    linear-gradient(
+      130deg,
+      rgba(112,147,217,.16),
+      rgba(65,92,146,.065)
+    )!important;
+
+  color:#e0e8f6!important;
+}
+
+
+/* ================================================================
+   12 РУБРИК — у каждой свой узнаваемый цвет
+   ================================================================ */
+
+.daily-card.kind-question{--atelier-accent:#96caff}
+.daily-card.kind-game{--atelier-accent:#c1a9ff}
+.daily-card.kind-song{--atelier-accent:#83e7f0}
+.daily-card.kind-mystery{--atelier-accent:#d0b4ff}
+.daily-card.kind-challenge{--atelier-accent:#8ee9c2}
+.daily-card.kind-debate{--atelier-accent:#9ab7ff}
+.daily-card.kind-duel{--atelier-accent:#f0a9d6}
+.daily-card.kind-story{--atelier-accent:#ebd1a1}
+.daily-card.kind-fact{--atelier-accent:#b0e4b8}
+.daily-card.kind-trend{--atelier-accent:#8fd3f8}
+.daily-card.kind-moment{--atelier-accent:#79e2d5}
+.daily-card.kind-footprint{--atelier-accent:#dfc08d}
+
+/* Цвет категории становится виден не только на бейдже, но и в её иллюстрации */
+.daily-card[class*="kind-"] .today-art-panel{
+  border:1px solid color-mix(in srgb,var(--atelier-accent) 42%,transparent)!important;
+  border-radius:22px!important;
+
+  background-image:
+    radial-gradient(
+      ellipse at 50% 108%,
+      color-mix(in srgb,var(--atelier-accent) 35%,transparent),
+      transparent 63%
+    ),
+    radial-gradient(
+      ellipse at 92% 4%,
+      color-mix(in srgb,var(--atelier-accent) 17%,transparent),
+      transparent 43%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(37,49,76,.98),
+      rgba(7,13,26,.99)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.13),
+    inset 0 -1px rgba(0,0,0,.30),
+    0 13px 29px rgba(0,0,0,.23),
+    0 0 27px color-mix(in srgb,var(--atelier-accent) 7%,transparent)!important;
+}
+
+.daily-card[class*="kind-"] .today-art-panel:before{
+  background-image:
+    linear-gradient(
+      color-mix(in srgb,var(--atelier-accent) 12%,transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb,var(--atelier-accent) 12%,transparent) 1px,
+      transparent 1px
+    )!important;
+
+  background-size:22px 22px!important;
+}
+
+.daily-card[class*="kind-"] .today-art-panel:after{
+  border-color:color-mix(in srgb,var(--atelier-accent) 58%,transparent)!important;
+
+  box-shadow:
+    0 0 0 14px color-mix(in srgb,var(--atelier-accent) 8%,transparent),
+    0 0 0 31px color-mix(in srgb,var(--atelier-accent) 4%,transparent),
+    0 0 44px color-mix(in srgb,var(--atelier-accent) 12%,transparent)!important;
+}
+
+.today-generated-svg{
+  filter:
+    drop-shadow(0 14px 22px rgba(0,0,0,.34))
+    drop-shadow(0 0 15px rgba(170,194,255,.09))!important;
+}
+
+.today-art-topline{
+  color:#d2dbee!important;
+  font-size:8px!important;
+  letter-spacing:.20em!important;
+}
+
+.today-art-topline span:last-child{
+  border:1px solid rgba(202,219,248,.31)!important;
+  border-radius:8px!important;
+
+  background:rgba(4,9,19,.78)!important;
+  color:#fff!important;
+
+  box-shadow:inset 0 1px rgba(255,255,255,.09)!important;
+}
+
+/* Иллюстрации становятся крупной частью карточки */
+.today-art-panel{
+  height:207px!important;
+  margin-bottom:19px!important;
+}
+
+.today-card-illustrated.featured .today-art-panel,
+.today-card-illustrated.secondary .today-art-panel{
+  height:270px!important;
+}
+
+.today-card-illustrated .card-head{
+  margin-bottom:13px!important;
+}
+
+
+/* ================================================================
+   COMMUNITY FEED — публикации как аккуратные редакционные карточки
+   ================================================================ */
+
+.community-feed{
+  gap:19px!important;
+}
+
+.today-post-card{
+  border:1px solid rgba(191,210,244,.28)!important;
+  border-radius:25px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(128,149,233,.13),
+      transparent 46%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(23,34,54,.99),
+      rgba(7,13,25,.997)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.11),
+    inset 0 -1px rgba(0,0,0,.27),
+    0 20px 48px rgba(0,0,0,.29)!important;
+
+  transition:
+    transform .24s var(--sig-ease),
+    border-color .24s ease,
+    box-shadow .24s ease!important;
+}
+
+.today-post-card:hover{
+  transform:translateY(-4px)!important;
+  border-color:rgba(206,225,255,.46)!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.14),
+    0 29px 63px rgba(0,0,0,.38)!important;
+}
+
+.today-post-name{
+  color:#fff!important;
+  font-weight:800!important;
+  letter-spacing:-.02em!important;
+}
+
+.today-post-meta{
+  color:#c1cce0!important;
+}
+
+.community-kind{
+  border:1px solid rgba(190,211,248,.31)!important;
+  border-radius:9px!important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(104,137,207,.20),
+      rgba(82,108,160,.075)
+    )!important;
+
+  color:#e2ebff!important;
+  letter-spacing:.12em!important;
+}
+
+.today-post-text{
+  color:#e5ebf7!important;
+  font-size:13px!important;
+  line-height:1.84!important;
+}
+
+.today-post-media-wrap{
+  border:1px solid rgba(194,215,248,.32)!important;
+  border-radius:19px!important;
+
+  box-shadow:0 13px 33px rgba(0,0,0,.26)!important;
+}
+
+.today-post-actions{
+  border-top-color:rgba(193,211,246,.21)!important;
+}
+
+.today-like-btn{
+  min-height:39px!important;
+  border:1px solid rgba(191,211,247,.27)!important;
+  border-radius:12px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(42,56,82,.78),
+      rgba(13,21,36,.94)
+    )!important;
+
+  color:#e7edf9!important;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease!important;
+}
+
+.today-like-btn:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(214,231,255,.52)!important;
+}
+
+.today-like-btn.is-liked{
+  border-color:rgba(255,164,209,.51)!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(132,49,91,.38),
+      rgba(58,22,49,.50)
+    )!important;
+
+  color:#ffd3e5!important;
+}
+
+
+/* ================================================================
+   TOP / RANKING — более сильная визуальная иерархия
+   ================================================================ */
+
+.ranking-card{
+  border:1px solid rgba(197,215,247,.30)!important;
+  border-radius:27px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(138,155,224,.09),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(23,34,54,.99),
+      rgba(7,13,25,.999)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.09),
+    0 23px 59px rgba(0,0,0,.30)!important;
+}
+
+.rank-row{
+  min-height:70px!important;
+  border-bottom-color:rgba(190,208,243,.19)!important;
+  transition:background .18s ease!important;
+}
+
+.rank-row:hover{
+  background:rgba(146,169,231,.095)!important;
+}
+
+.rank-number{
+  border:1px solid rgba(192,212,248,.30)!important;
+  border-radius:12px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(51,69,105,.93),
+      rgba(15,25,43,.98)
+    )!important;
+
+  color:#f1f5ff!important;
+}
+
+.rank-avatar{
+  border-color:rgba(204,222,251,.42)!important;
+
+  box-shadow:
+    0 0 0 3px rgba(160,183,239,.065),
+    inset 0 1px rgba(255,255,255,.12)!important;
+}
+
+.rank-name{
+  color:#f7f9ff!important;
+  font-weight:760!important;
+}
+
+.rank-score{
+  color:#b8f6e5!important;
+  text-shadow:0 0 18px rgba(129,237,211,.14)!important;
+}
+
+
+/* ================================================================
+   SOCIAL MODALS — единая премиальная поверхность
+   ================================================================ */
+
+#modal .modal-backdrop{
+  background:rgba(2,4,12,.86)!important;
+
+  backdrop-filter:blur(20px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(145%)!important;
+}
+
+#modal .modal-card{
+  border:1px solid rgba(202,220,252,.39)!important;
+  border-radius:31px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 8% 0%,
+      rgba(117,143,238,.17),
+      transparent 39%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(19,29,48,.999),
+      rgba(5,10,21,.999)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.14),
+    inset 0 -1px rgba(0,0,0,.37),
+    0 44px 145px rgba(0,0,0,.77),
+    0 0 0 1px rgba(255,255,255,.025)!important;
+}
+
+#modal .modal-close{
+  border:1px solid rgba(204,221,251,.42)!important;
+  border-radius:15px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(57,74,108,.99),
+      rgba(17,28,46,.999)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.16),
+    0 10px 27px rgba(0,0,0,.31)!important;
+}
+
+#modal .modal-close:hover{
+  border-color:rgba(222,238,255,.73)!important;
+}
+
+.ts-panel-head{
+  border-bottom-color:rgba(196,214,247,.23)!important;
+  padding-bottom:23px!important;
+}
+
+.ts-panel-head h2{
+  color:#fff!important;
+  font-size:clamp(29px,3.6vw,44px)!important;
+  font-weight:810!important;
+  letter-spacing:-.075em!important;
+  line-height:1.00!important;
+}
+
+.ts-panel-head p{
+  color:#c2cee3!important;
+  line-height:1.82!important;
+}
+
+.ts-kicker{
+  color:#e1d0a9!important;
+  letter-spacing:.19em!important;
+}
+
+.ts-orbit.today-panel-illustration{
+  width:122px!important;
+  height:96px!important;
+  flex-basis:122px!important;
+
+  border:1px solid rgba(200,219,250,.36)!important;
+  border-radius:23px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 90%,
+      rgba(145,240,217,.19),
+      transparent 65%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(50,66,97,.99),
+      rgba(9,17,32,.999)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.15),
+    0 15px 35px rgba(0,0,0,.27)!important;
+}
+
+.ts-orbit.today-panel-illustration svg{
+  width:94px!important;
+  height:82px!important;
+}
+
+
+/* ================================================================
+   FRIENDS / PEOPLE — выделенные персональные карточки
+   ================================================================ */
+
+.ts-user-card{
+  border:1px solid rgba(192,211,247,.23)!important;
+  border-radius:18px!important;
+  padding:14px!important;
+
+  background:
+    linear-gradient(
+      112deg,
+      rgba(31,45,70,.77),
+      rgba(10,17,30,.86)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.075),
+    0 8px 19px rgba(0,0,0,.13)!important;
+}
+
+.ts-user-card:hover{
+  border-color:rgba(208,226,255,.47)!important;
+  background:
+    linear-gradient(
+      112deg,
+      rgba(45,64,96,.91),
+      rgba(13,25,42,.96)
+    )!important;
+}
+
+.ts-user-copy b{
+  color:#fff!important;
+  font-size:13px!important;
+  font-weight:800!important;
+}
+
+.ts-user-copy span{
+  color:#c0cde2!important;
+}
+
+.ts-avatar{
+  border:1px solid rgba(211,228,255,.48)!important;
+  border-radius:17px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      #536990,
+      #17253c
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.19),
+    0 5px 15px rgba(0,0,0,.24)!important;
+}
+
+.ts-avatar img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.ts-avatar.large{
+  border-radius:25px!important;
+  box-shadow:
+    0 0 0 4px rgba(188,210,247,.08),
+    0 0 0 1px rgba(211,228,255,.33),
+    inset 0 1px rgba(255,255,255,.20),
+    0 12px 30px rgba(0,0,0,.30)!important;
+}
+
+.ts-list-head h3{
+  color:#fff!important;
+  font-size:15px!important;
+  font-weight:790!important;
+}
+
+.ts-count{
+  border:1px solid rgba(202,221,249,.33)!important;
+  border-radius:10px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(54,72,105,.93),
+      rgba(15,25,42,.98)
+    )!important;
+
+  color:#f4f7ff!important;
+}
+
+
+/* ================================================================
+   SOCIAL BUTTONS — больше глубины, чётче отклик
+   ================================================================ */
+
+.ts-mini,
+.ts-primary,
+.ts-promo-button{
+  min-height:42px!important;
+  border-radius:13px!important;
+  font-weight:790!important;
+
+  transition:
+    transform .2s var(--sig-ease),
+    border-color .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease!important;
+}
+
+.ts-mini{
+  border:1px solid rgba(193,212,249,.31)!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(48,64,94,.95),
+      rgba(15,24,41,.99)
+    )!important;
+
+  color:#f4f7ff!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.11),
+    0 5px 14px rgba(0,0,0,.17)!important;
+}
+
+.ts-mini:hover{
+  border-color:rgba(215,231,255,.61)!important;
+  filter:brightness(1.07)!important;
+}
+
+.ts-mini-accent,
+.ts-primary{
+  border:1px solid rgba(244,240,255,.67)!important;
+
+  background:
+    linear-gradient(
+      112deg,
+      #EAD8B4 0%,
+      #D3CCF9 34%,
+      #B7D8F7 66%,
+      #9BE8D5 100%
+    )!important;
+
+  color:#0A1420!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.88),
+    inset 0 -1px rgba(74,85,113,.16),
+    0 10px 25px rgba(103,139,195,.22)!important;
+}
+
+.ts-primary:hover,
+.ts-mini:hover,
+.ts-promo-button:hover{
+  transform:translateY(-2px)!important;
+  filter:brightness(1.06)!important;
+}
+
+.ts-primary:active,
+.ts-mini:active,
+.ts-promo-button:active{
+  transform:scale(.985)!important;
+}
+
+.ts-status-chip{
+  border:1px solid rgba(156,232,212,.43)!important;
+  border-radius:11px!important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(75,181,155,.20),
+      rgba(30,100,93,.12)
+    )!important;
+
+  color:#d0faee!important;
+}
+
+
+/* ================================================================
+   INPUTS — чистые поверхности и яркий фокус
+   ================================================================ */
+
+.ts-form-card,
+.ts-settings-group,
+.ts-post-card,
+.ts-channel-card,
+.ts-chat-row,
+.ts-message-compose,
+.ts-inline-invite{
+  border:1px solid rgba(192,211,246,.28)!important;
+  border-radius:20px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24,36,58,.99),
+      rgba(7,14,26,.998)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.085),
+    0 13px 31px rgba(0,0,0,.20)!important;
+}
+
+.ts-form-card,
+.ts-settings-group{
+  padding:21px!important;
+}
+
+.ts-form-card h3,
+.ts-settings-title h3{
+  color:#fff!important;
+  font-weight:800!important;
+  letter-spacing:-.032em!important;
+}
+
+.ts-form-card p,
+.ts-settings-title p{
+  color:#c1cde2!important;
+  line-height:1.78!important;
+}
+
+.ts-form-card label,
+.ts-search-form label,
+.ts-settings-form label{
+  color:#e4eaf6!important;
+  font-weight:700!important;
+}
+
+.ts-form-card input,
+.ts-form-card textarea,
+.ts-form-card select,
+.ts-search-form input,
+.ts-settings-form select,
+.ts-settings-form input,
+.ts-message-compose textarea,
+.ts-inline-invite input{
+  min-height:44px!important;
+  border:1px solid rgba(194,213,249,.31)!important;
+  border-radius:13px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(4,9,19,.96),
+      rgba(10,18,32,.99)
+    )!important;
+
+  color:#fff!important;
+
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.24)!important;
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease!important;
+}
+
+.ts-form-card input:focus,
+.ts-form-card textarea:focus,
+.ts-form-card select:focus,
+.ts-search-form input:focus,
+.ts-settings-form select:focus,
+.ts-settings-form input:focus,
+.ts-message-compose textarea:focus,
+.ts-inline-invite input:focus{
+  border-color:rgba(156,232,212,.79)!important;
+  box-shadow:
+    0 0 0 4px rgba(156,232,212,.105),
+    inset 0 1px 3px rgba(0,0,0,.2)!important;
+  outline:none!important;
+}
+
+.ts-form-card input::placeholder,
+.ts-form-card textarea::placeholder,
+.ts-search-form input::placeholder,
+.ts-message-compose textarea::placeholder,
+.ts-inline-invite input::placeholder{
+  color:#92a0ba!important;
+}
+
+
+/* ================================================================
+   MY PAGE — персональная витрина
+   ================================================================ */
+
+.ts-profile-hero{
+  border:1px solid rgba(206,222,250,.40)!important;
+  border-radius:28px!important;
+  padding:25px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(159,143,255,.22),
+      transparent 53%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(89,225,204,.17),
+      transparent 43%
+    ),
+    linear-gradient(
+      132deg,
+      rgba(34,47,76,.99),
+      rgba(7,15,28,.999)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.14),
+    0 20px 47px rgba(0,0,0,.32)!important;
+}
+
+.ts-profile-hero h3{
+  color:#fff!important;
+  font-size:clamp(25px,3vw,36px)!important;
+  font-weight:830!important;
+  letter-spacing:-.06em!important;
+}
+
+.ts-profile-hero>div:nth-child(2)>span{
+  color:#E7D9B7!important;
+}
+
+.ts-profile-hero p{
+  color:#d2dced!important;
+  line-height:1.83!important;
+}
+
+.ts-friend-chip{
+  border:1px solid rgba(193,212,248,.29)!important;
+  border-radius:16px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(42,57,84,.91),
+      rgba(10,18,32,.98)
+    )!important;
+
+  color:#f4f7ff!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.085)!important;
+
+  transition:
+    transform .19s ease,
+    border-color .19s ease!important;
+}
+
+.ts-friend-chip:hover{
+  border-color:rgba(216,232,255,.57)!important;
+  transform:translateY(-2px)!important;
+}
+
+.ts-post-card{
+  padding:20px!important;
+  border-radius:22px!important;
+  margin-bottom:14px!important;
+}
+
+.ts-post-card h4{
+  color:#fff!important;
+  font-size:clamp(17px,2vw,22px)!important;
+  letter-spacing:-.04em!important;
+}
+
+.ts-post-card>p{
+  color:#dce4f2!important;
+  line-height:1.85!important;
+}
+
+.ts-post-meta{
+  color:#bdc9de!important;
+}
+
+.ts-post-tag{
+  color:#EAD7AE!important;
+}
+
+.ts-post-image-link{
+  border:1px solid rgba(201,221,251,.35)!important;
+  border-radius:19px!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.25)!important;
+}
+
+.ts-channel-card{
+  border-radius:22px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(130,152,234,.13),
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(23,35,57,.99),
+      rgba(7,14,26,.999)
+    )!important;
+}
+
+.ts-channel-symbol,
+.ts-chat-icon{
+  border:1px solid rgba(196,216,250,.33)!important;
+  border-radius:17px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(78,99,144,.48),
+      rgba(13,28,46,.91)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.14),
+    0 8px 20px rgba(0,0,0,.20)!important;
+}
+
+
+/* ================================================================
+   MESSAGES — разные оттенки сообщений
+   ================================================================ */
+
+.ts-chat-row{
+  transition:
+    border-color .18s ease,
+    transform .18s ease!important;
+}
+
+.ts-chat-row:hover{
+  border-color:rgba(210,228,255,.45)!important;
+  transform:translateY(-1px)!important;
+}
+
+.ts-chat-messages{
+  border:1px solid rgba(191,211,247,.25)!important;
+  border-radius:18px!important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3,8,17,.79),
+      rgba(8,15,27,.96)
+    )!important;
+}
+
+.ts-message{
+  border:1px solid rgba(190,209,246,.23)!important;
+  border-radius:17px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(36,50,74,.83),
+      rgba(11,20,34,.96)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.065)!important;
+}
+
+.ts-message.is-own{
+  border-color:rgba(156,232,212,.43)!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(36,98,91,.46),
+      rgba(10,39,41,.67)
+    )!important;
+}
+
+.ts-message-meta b{
+  color:#c5f8e9!important;
+}
+
+.ts-message p{
+  color:#e8edf7!important;
+}
+
+
+/* ================================================================
+   PROMOTION / EMPTY STATES / TOASTS
+   ================================================================ */
+
+.ts-promo-wrap{
+  border:1px solid rgba(204,220,248,.34)!important;
+  border-radius:28px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 98% 0%,
+      rgba(111,231,202,.19),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(181,157,255,.14),
+      transparent 46%
+    ),
+    linear-gradient(
+      118deg,
+      rgba(31,44,70,.99),
+      rgba(7,15,27,.999) 75%,
+      rgba(10,33,37,.99)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.13),
+    0 25px 61px rgba(0,0,0,.31)!important;
+}
+
+.ts-promo-head h3{
+  color:#fff!important;
+}
+
+.ts-promo-head p{
+  color:#c6d2e6!important;
+}
+
+.ts-promoted-card{
+  border:1px solid rgba(194,213,247,.28)!important;
+  border-radius:20px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(31,44,67,.97),
+      rgba(8,16,29,.99)
+    )!important;
+}
+
+.ts-promo-badge{
+  border-color:rgba(156,232,212,.41)!important;
+  background:rgba(86,191,167,.16)!important;
+  color:#D2FAEF!important;
+}
+
+.ts-empty{
+  border:1px solid rgba(193,212,247,.31)!important;
+  border-radius:21px!important;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(142,164,241,.14),
+      transparent 61%
+    ),
+    rgba(90,116,173,.09)!important;
+
+  color:#d2dced!important;
+}
+
+.ts-empty b{
+  color:#fff!important;
+}
+
+.toast{
+  border:1px solid rgba(202,220,250,.35)!important;
+  border-radius:17px!important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25,37,59,.999),
+      rgba(6,13,25,.999)
+    )!important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    0 20px 54px rgba(0,0,0,.40)!important;
+
+  color:#fff!important;
+}
+
+
+/* ================================================================
+   FOOTER — завершённость интерфейса
+   ================================================================ */
+
+.footer{
+  border-top-color:rgba(192,210,244,.23)!important;
+  color:#b6c2d9!important;
+}
+
+.footer strong{
+  color:#fafbff!important;
+  letter-spacing:.18em!important;
+}
+
+.footer span{
+  color:#acbbd4!important;
+}
+
+
+/* ================================================================
+   RESPONSIVE — сохраняем удобство на телефонах
+   ================================================================ */
+
+@media(max-width:1120px){
+  .shell,
+  .today-social-nav{
+    width:calc(100% - 34px)!important;
+  }
+
+  .topbar-inner{
+    width:calc(100% - 34px)!important;
+  }
+
+  .daily-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:15px!important;
+  }
+
+  .daily-card{
+    min-height:370px!important;
+  }
+
+  .daily-card.featured,
+  .daily-card.secondary{
+    min-height:410px!important;
+  }
+
+  .today-art-panel{
+    height:185px!important;
+  }
+
+  .today-card-illustrated.featured .today-art-panel,
+  .today-card-illustrated.secondary .today-art-panel{
+    height:220px!important;
+  }
+}
+
+@media(max-width:900px){
+  .hero.shell{
+    grid-template-columns:minmax(0,1fr)!important;
+    border-radius:29px!important;
+  }
+
+  .today-hero-art{
+    right:-6px!important;
+    bottom:-17px!important;
+    width:min(54vw,420px)!important;
+    opacity:.47!important;
+  }
+
+  .hero-side{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:auto!important;
+  }
+
+  .community-feed{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  .daily-card{
+    border-radius:23px!important;
+  }
+}
+
+@media(max-width:640px){
+  .shell,
+  .today-social-nav{
+    width:calc(100% - 22px)!important;
+  }
+
+  .topbar-inner{
+    width:calc(100% - 22px)!important;
+    min-height:68px!important;
+    gap:9px!important;
+  }
+
+  .today-social-nav{
+    margin-top:10px!important;
+    padding:9px!important;
+    border-radius:18px!important;
+  }
+
+  .ts-nav-actions{
+    gap:5px!important;
+  }
+
+  .ts-nav-actions button{
+    min-height:42px!important;
+    padding:6px 4px!important;
+    gap:4px!important;
+    border-radius:11px!important;
+    font-size:9px!important;
+  }
+
+  .ts-nav-actions button .today-nav-icon{
+    width:25px!important;
+    height:24px!important;
+    flex-basis:25px!important;
+    border-radius:8px!important;
+  }
+
+  .hero.shell{
+    margin-top:14px!important;
+    padding:23px 16px!important;
+    border-radius:23px!important;
+    gap:22px!important;
+  }
+
+  .hero h1,
+  #homeSection h1{
+    font-size:clamp(35px,9vw,52px)!important;
+    line-height:1.00!important;
+    letter-spacing:-.074em!important;
+  }
+
+  .hero-copy>p{
+    font-size:14px!important;
+    line-height:1.73!important;
+  }
+
+  .today-hero-art{
+    width:min(61vw,310px)!important;
+    opacity:.28!important;
+  }
+
+  .hero-side{
+    gap:9px!important;
+  }
+
+  .clock-card,
+  .scene-card{
+    min-height:150px!important;
+    padding:15px!important;
+    border-radius:17px!important;
+  }
+
+  .activity-strip{
+    padding:11px!important;
+    border-radius:15px!important;
+  }
+
+  .today-section,
+  .community-section,
+  .ranking-section{
+    margin-top:35px!important;
+  }
+
+  .section-head h2{
+    font-size:clamp(27px,7.5vw,36px)!important;
+  }
+
+  .daily-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+
+  .daily-card{
+    min-height:0!important;
+    padding:11px!important;
+    border-radius:17px!important;
+  }
+
+  .daily-card:before{
+    top:16px;
+    bottom:16px;
+    width:2px;
+  }
+
+  .daily-card.featured,
+  .daily-card.secondary{
+    min-height:0!important;
+    grid-column:span 2!important;
+  }
+
+  .daily-card h3{
+    font-size:clamp(17px,5vw,23px)!important;
+    line-height:1.08!important;
+    letter-spacing:-.047em!important;
+  }
+
+  .daily-card.featured h3,
+  .daily-card.secondary h3{
+    font-size:clamp(23px,6.5vw,31px)!important;
+  }
+
+  .daily-card p{
+    font-size:12px!important;
+    line-height:1.68!important;
+  }
+
+  .today-art-panel{
+    height:145px!important;
+    margin-bottom:12px!important;
+    border-radius:14px!important;
+  }
+
+  .today-card-illustrated.featured .today-art-panel,
+  .today-card-illustrated.secondary .today-art-panel{
+    height:185px!important;
+  }
+
+  .kind-pill{
+    padding:6px 8px!important;
+    font-size:8px!important;
+  }
+
+  .card-actions{
+    gap:6px!important;
+    margin-top:12px!important;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .danger-button{
+    min-height:39px!important;
+    padding:9px 10px!important;
+    font-size:10px!important;
+  }
+
+  .community-feed{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:11px!important;
+  }
+
+  .today-post-card{
+    padding:14px!important;
+    border-radius:18px!important;
+  }
+
+  #modal .modal-card{
+    border-radius:21px!important;
+  }
+
+  .ts-panel-head h2{
+    font-size:29px!important;
+  }
+
+  .ts-orbit.today-panel-illustration{
+    width:75px!important;
+    height:65px!important;
+    flex-basis:75px!important;
+    border-radius:15px!important;
+  }
+
+  .ts-orbit.today-panel-illustration svg{
+    width:61px!important;
+    height:55px!important;
+  }
+
+  .ts-profile-hero{
+    padding:15px!important;
+    border-radius:20px!important;
+  }
+
+  .ts-form-card,
+  .ts-settings-group{
+    padding:14px!important;
+    border-radius:16px!important;
+  }
+}
+
+@media(hover:none){
+  .daily-card:hover,
+  .today-post-card:hover,
+  .ts-user-card:hover,
+  .ts-friend-chip:hover{
+    transform:none!important;
+    filter:none!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *:before,
+  *:after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+/* End TODAY PREMIUM V4 — OBSIDIAN SIGNATURE */
