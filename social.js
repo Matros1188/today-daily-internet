@@ -207,41 +207,69 @@
     socialRouteBodyRestored = false;
   }
 
+  /* TODAY_SOCIAL_CLOSE_DIRECT_V22_BEGIN — close directly; never wait for history.back(). */
   function forceCloseSocialModal(event) {
     if (event) {
-      event.preventDefault?.();
-      event.stopPropagation?.();
+      try { event.preventDefault(); } catch (_) {}
+      try { event.stopPropagation(); } catch (_) {}
+      try { event.stopImmediatePropagation(); } catch (_) {}
     }
-    if (socialRouteActive) {
-      const state = history.state?.__todaySocialRouteV16;
-      if (state && state.session === socialRouteSession && Number(state.depth) === socialRouteDepth) {
-        history.back();
-      } else {
-        exitSocialPageRoute();
-      }
-      return;
-    }
-    const modalRoot = byId('modal');
-    if (!modalRoot) return;
-    try { stopPoll(); } catch (_) {}
-    modalRoot.classList.add('hidden');
-    modalRoot.classList.remove('today-social-modal', 'today-social-page');
-    const htmlRoot = document.documentElement;
+    const root = byId('modal');
+    const host = byId('modalContent');
+    const html = document.documentElement;
     const body = document.body;
-    const saved = window.__todayModalBodyStyle || {};
-    body.style.position = saved.position || '';
-    body.style.top = saved.top || '';
-    body.style.left = saved.left || '';
-    body.style.right = saved.right || '';
-    body.style.width = saved.width || '';
-    body.style.overflow = saved.overflow || '';
-    htmlRoot.classList.remove('today-modal-open', 'today-social-page-mode');
+    try { if (typeof stopPoll === 'function') stopPoll(); } catch (error) { console.warn('TODAY close polling cleanup', error); }
+    try { if (typeof stopTodayMiniGame === 'function') stopTodayMiniGame(); } catch (error) { console.warn('TODAY close game cleanup', error); }
+
+    const scrollValue = window.__todayModalScrollY;
+    const savedScrollY = (typeof scrollValue === 'number' && Number.isFinite(scrollValue))
+      ? scrollValue : Number(socialRouteOriginScrollY || 0);
+    const savedBody = (window.__todayModalBodyStyle && typeof window.__todayModalBodyStyle === 'object')
+      ? window.__todayModalBodyStyle
+      : (socialRouteOriginBodyStyle && typeof socialRouteOriginBodyStyle === 'object' ? socialRouteOriginBodyStyle : {});
+
+    const clearStyle = (node, keys) => {
+      if (!node || !node.style) return;
+      for (const key of keys) { try { node.style.removeProperty(key); } catch (_) {} }
+    };
+    if (root) {
+      clearStyle(root, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
+      const card = root.querySelector('.modal-card');
+      clearStyle(card, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
+      root.classList.add('hidden');
+      root.classList.remove('today-social-modal', 'today-social-page');
+      const bar = root.querySelector('#todaySocialPageBar');
+      if (bar) bar.remove();
+      for (const preview of root.querySelectorAll('[data-object-url]')) {
+        try { URL.revokeObjectURL(preview.dataset.objectUrl); } catch (_) {}
+        delete preview.dataset.objectUrl;
+      }
+    }
+    if (host) {
+      delete host.dataset.chatId;
+      clearStyle(host, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
+    }
+    body.style.position = savedBody.position || '';
+    body.style.top = savedBody.top || '';
+    body.style.left = savedBody.left || '';
+    body.style.right = savedBody.right || '';
+    body.style.width = savedBody.width || '';
+    body.style.overflow = savedBody.overflow || '';
+    html.classList.remove('today-modal-open', 'today-social-page-mode');
     body.classList.remove('today-social-page-mode');
-    const savedScrollY = Number(window.__todayModalScrollY || 0);
+
+    // Invalidate stale V16 history state in memory; closing must never call history.back().
+    socialRouteActive = false;
+    socialRouteSession = '';
+    socialRoutePages = [];
+    socialRouteDepth = 0;
+    socialRouteOriginBodyStyle = null;
+    socialRouteBodyRestored = false;
     window.__todayModalBodyStyle = null;
     window.__todayModalScrollY = null;
-    try { window.scrollTo(0, savedScrollY); } catch (_) {}
+    try { window.scrollTo(0, Math.max(0, savedScrollY)); } catch (_) {}
   }
+  /* TODAY_SOCIAL_CLOSE_DIRECT_V22_END */
 
   function installModalSafety() {
     const modalRoot = byId('modal');
