@@ -21,76 +21,271 @@
   }
   /* TODAY_SOCIAL_CLOSE_HOTFIX_V14 — reliable click-based close handling */
   /* TODAY_SOCIAL_MODAL_CLOSE_V15 — hard close path + scroll unlock */
-  function forceCloseSocialModal(event){
-    if(event){event.preventDefault?.();event.stopPropagation?.();event.stopImmediatePropagation?.();}
-    const modalRoot=byId('modal');
-    if(!modalRoot)return;
-    try{stopPoll()}catch{}
-    const closeButton=modalRoot.querySelector(':scope > #todaySocialCloseTop');
-    if(closeButton){closeButton.hidden=true;closeButton.setAttribute('aria-hidden','true');}
-    const root=document.documentElement,body=document.body;
-    const saved=window.__todayModalBodyStyle||{};
-    const savedScrollY=Number(window.__todayModalScrollY||0);
+
+  /* TODAY_SOCIAL_PAGES_V16_JS_BEGIN */
+  let socialRouteActive = false;
+  let socialRouteSession = '';
+  let socialRoutePages = [];
+  let socialRouteDepth = 0;
+  let socialRouteOriginScrollY = 0;
+  let socialRouteOriginBodyStyle = null;
+  let socialRouteBodyRestored = false;
+
+  function socialPageTitle(html) {
+    const holder = document.createElement('div');
+    holder.innerHTML = String(html || '');
+    const node = holder.querySelector('.ts-panel-head h2, h2, h3');
+    return String(node?.textContent || 'TODAY SOCIAL').trim().replace(/\s+/g, ' ').slice(0, 100) || 'TODAY SOCIAL';
+  }
+
+  function socialRouteState(depth) {
+    const oldState = history.state && typeof history.state === 'object' ? { ...history.state } : {};
+    oldState.__todaySocialRouteV16 = { session: socialRouteSession, depth };
+    return oldState;
+  }
+
+  function ensureSocialPageBar() {
+    const root = byId('modal');
+    if (!root) return null;
+    let bar = byId('todaySocialPageBar');
+    if (!bar) {
+      bar = document.createElement('header');
+      bar.id = 'todaySocialPageBar';
+      bar.setAttribute('aria-label', 'Навигация по разделу TODAY');
+      bar.innerHTML = `
+        <button type="button" id="todaySocialBackTop" aria-label="Вернуться на предыдущую страницу">
+          <span class="today-social-back-arrow" aria-hidden="true">←</span><span>НАЗАД</span>
+        </button>
+        <div class="today-social-route-title"><span>TODAY <i>/</i> SOCIAL</span><strong id="todaySocialPageTitle">TODAY SOCIAL</strong></div>
+        <button type="button" id="todaySocialExitTop" aria-label="Вернуться на предыдущую страницу">×</button>`;
+      root.appendChild(bar);
+    }
+    return bar;
+  }
+
+  function restorePageOriginScrollAndBody() {
+    const body = document.body;
+    const html = document.documentElement;
+    const saved = socialRouteOriginBodyStyle || {};
+    body.style.position = saved.position || '';
+    body.style.top = saved.top || '';
+    body.style.left = saved.left || '';
+    body.style.right = saved.right || '';
+    body.style.width = saved.width || '';
+    body.style.overflow = saved.overflow || '';
+    html.classList.remove('today-modal-open');
+    window.__todayModalBodyStyle = null;
+    window.__todayModalScrollY = null;
+    try { window.scrollTo(0, socialRouteOriginScrollY); } catch (_) {}
+  }
+
+  function resumeChatPollingForCurrentPage() {
+    if (!socialRouteActive) return;
+    const host = byId('modalContent');
+    const chatId = host?.dataset?.chatId || '';
+    if (!chatId || !host?.querySelector('#todayChatMessages')) return;
+    if (chatPoll) clearInterval(chatPoll);
+    activeChatId = chatId;
+    chatPoll = setInterval(() => {
+      const currentHost = byId('modalContent');
+      if (socialRouteActive && activeChatId === chatId && currentHost?.dataset?.chatId === chatId && currentHost.querySelector('#todayChatMessages')) {
+        renderMessages(chatId, false);
+      }
+    }, 2800);
+  }
+
+  function renderSocialPage(page, restoreScroll = false) {
+    const root = byId('modal');
+    const host = byId('modalContent');
+    if (!root || !host || !page) return;
+    try { stopPoll(); } catch (_) {}
+    root.classList.remove('hidden');
+    root.classList.add('today-social-modal', 'today-social-page');
+    document.documentElement.classList.add('today-social-page-mode');
+    document.body.classList.add('today-social-page-mode');
+    const bar = ensureSocialPageBar();
+    const titleNode = bar?.querySelector('#todaySocialPageTitle');
+    if (titleNode) titleNode.textContent = page.title || 'TODAY SOCIAL';
+    host.innerHTML = page.html;
+    if (page.chatId) host.dataset.chatId = page.chatId;
+    else delete host.dataset.chatId;
+    const card = root.querySelector('.modal-card');
+    if (card) card.scrollTop = restoreScroll ? Math.max(0, Number(page.scrollTop || 0)) : 0;
+    if (!socialRouteBodyRestored) {
+      restorePageOriginScrollAndBody();
+      socialRouteBodyRestored = true;
+    }
+    resumeChatPollingForCurrentPage();
+  }
+
+  function exitSocialPageRoute() {
+    const root = byId('modal');
+    const host = byId('modalContent');
+    try { stopPoll(); } catch (_) {}
+    if (root) {
+      root.classList.add('hidden');
+      root.classList.remove('today-social-modal', 'today-social-page');
+      root.querySelector('#todaySocialPageBar')?.remove();
+      for (const preview of root.querySelectorAll('.ts-photo-preview[data-object-url]')) {
+        try { URL.revokeObjectURL(preview.dataset.objectUrl); } catch (_) {}
+        delete preview.dataset.objectUrl;
+        preview.replaceChildren();
+        preview.hidden = true;
+      }
+    }
+    if (host) delete host.dataset.chatId;
+    document.documentElement.classList.remove('today-social-page-mode', 'today-modal-open');
+    document.body.classList.remove('today-social-page-mode');
+    restorePageOriginScrollAndBody();
+    // Keep the in-memory page stack for browser Forward. A new social navigation
+    // starts a fresh session and replaces this cache before creating its own history entries.
+    socialRouteActive = false;
+    socialRouteDepth = 0;
+    socialRouteBodyRestored = false;
+  }
+
+  function forceCloseSocialModal(event) {
+    if (event) {
+      event.preventDefault?.();
+      event.stopPropagation?.();
+    }
+    if (socialRouteActive) {
+      const state = history.state?.__todaySocialRouteV16;
+      if (state && state.session === socialRouteSession && Number(state.depth) === socialRouteDepth) {
+        history.back();
+      } else {
+        exitSocialPageRoute();
+      }
+      return;
+    }
+    const modalRoot = byId('modal');
+    if (!modalRoot) return;
+    try { stopPoll(); } catch (_) {}
     modalRoot.classList.add('hidden');
-    modalRoot.classList.remove('today-social-modal');
-    body.style.position=saved.position||'';
-    body.style.top=saved.top||'';
-    body.style.left=saved.left||'';
-    body.style.right=saved.right||'';
-    body.style.width=saved.width||'';
-    body.style.overflow=saved.overflow||'';
-    root.classList.remove('today-modal-open');
-    window.__todayModalBodyStyle=null;
-    window.__todayModalScrollY=null;
-    try{window.scrollTo(0,savedScrollY)}catch{}
+    modalRoot.classList.remove('today-social-modal', 'today-social-page');
+    const htmlRoot = document.documentElement;
+    const body = document.body;
+    const saved = window.__todayModalBodyStyle || {};
+    body.style.position = saved.position || '';
+    body.style.top = saved.top || '';
+    body.style.left = saved.left || '';
+    body.style.right = saved.right || '';
+    body.style.width = saved.width || '';
+    body.style.overflow = saved.overflow || '';
+    htmlRoot.classList.remove('today-modal-open', 'today-social-page-mode');
+    body.classList.remove('today-social-page-mode');
+    const savedScrollY = Number(window.__todayModalScrollY || 0);
+    window.__todayModalBodyStyle = null;
+    window.__todayModalScrollY = null;
+    try { window.scrollTo(0, savedScrollY); } catch (_) {}
   }
-  function installModalSafety(){
-    if(!window.__TODAY_SOCIAL_CLOSE_V15_CAPTURE){
-      window.__TODAY_SOCIAL_CLOSE_V15_CAPTURE=true;
-      document.addEventListener('click',function(event){
-        const target=event.target instanceof Element?event.target:null;
-        const modalRoot=byId('modal');
-        if(!target||!modalRoot||modalRoot.classList.contains('hidden'))return;
-        const closeButton=target.closest('#todaySocialCloseTop,#modalClose,.ts-panel-close');
-        const backdrop=target===modalRoot.querySelector('.modal-backdrop');
-        if(closeButton||backdrop)forceCloseSocialModal(event);
-      },true);
-    }
-    if(!window.__TODAY_SOCIAL_CLOSE_V15_ESCAPE){
-      window.__TODAY_SOCIAL_CLOSE_V15_ESCAPE=true;
-      document.addEventListener('keydown',function(event){
-        const modalRoot=byId('modal');
-        if(event.key!=='Escape'||!modalRoot||modalRoot.classList.contains('hidden'))return;
+
+  function installModalSafety() {
+    const modalRoot = byId('modal');
+    if (modalRoot && modalRoot.dataset.todaySocialPagesSafetyV16 !== '1') {
+      modalRoot.dataset.todaySocialPagesSafetyV16 = '1';
+      modalRoot.addEventListener('click', function (event) {
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target || modalRoot.classList.contains('hidden')) return;
+        const backButton = target.closest('#todaySocialBackTop, #todaySocialExitTop, #todaySocialCloseTop, #modalClose, .ts-panel-close');
+        const backdrop = target === modalRoot.querySelector('.modal-backdrop');
+        if (socialRouteActive) {
+          if (backButton) forceCloseSocialModal(event);
+          // In page mode the background is not a dismiss target. Only explicit Back controls navigate.
+          return;
+        }
+        if (!backButton && !backdrop) return;
         forceCloseSocialModal(event);
-      },true);
+      }, true);
+    }
+    if (!window.__TODAY_SOCIAL_ESCAPE_CLOSE_V16) {
+      window.__TODAY_SOCIAL_ESCAPE_CLOSE_V16 = true;
+      document.addEventListener('keydown', function (event) {
+        const modalRoot = byId('modal');
+        if (event.key !== 'Escape' || !modalRoot || modalRoot.classList.contains('hidden')) return;
+        forceCloseSocialModal(event);
+      }, true);
+    }
+    if (!window.__TODAY_SOCIAL_PAGES_POPSTATE_V16) {
+      window.__TODAY_SOCIAL_PAGES_POPSTATE_V16 = true;
+      window.addEventListener('popstate', function (event) {
+        const route = event.state?.__todaySocialRouteV16;
+        if (!socialRouteActive) {
+          // Browser Forward may return to a social page after Back had restored TODAY.
+          if (route && route.session === socialRouteSession) {
+            const forwardDepth = Number(route.depth);
+            const forwardPage = socialRoutePages[forwardDepth - 1];
+            if (Number.isInteger(forwardDepth) && forwardDepth >= 1 && forwardPage) {
+              socialRouteActive = true;
+              socialRouteDepth = forwardDepth;
+              socialRouteBodyRestored = false;
+              renderSocialPage(forwardPage, true);
+            }
+          }
+          return;
+        }
+        if (route && route.session === socialRouteSession) {
+          const depth = Number(route.depth);
+          const page = socialRoutePages[depth - 1];
+          if (Number.isInteger(depth) && depth >= 1 && page) {
+            socialRouteDepth = depth;
+            renderSocialPage(page, true);
+            return;
+          }
+        }
+        // Returning to the history entry that preceded the first social page restores TODAY.
+        exitSocialPageRoute();
+      });
     }
   }
+
   installModalSafety();
-  /* TODAY_SOCIAL_MODAL_CLOSE_V15 — mount a real, accessible close button */
-  function ensureSocialModalCloseButton(root,show=true){
-    if(!root)return null;
-    let button=root.querySelector(':scope > #todaySocialCloseTop');
-    if(!button){
-      button=document.createElement('button');
-      button.id='todaySocialCloseTop';
-      button.type='button';
-      button.textContent='×';
-      button.setAttribute('aria-label','Закрыть окно');
-      button.setAttribute('title','Закрыть');
-      root.appendChild(button);
+
+  function modal(html) {
+    const root = byId('modal');
+    const host = byId('modalContent');
+    if (!root || !host) return;
+    const title = socialPageTitle(html);
+
+    if (!socialRouteActive) {
+      if (typeof openModal !== 'function') return;
+      openModal(html); // Reuse the existing container, then release the old dialog body lock.
+      socialRouteOriginScrollY = Number(window.__todayModalScrollY || 0);
+      socialRouteOriginBodyStyle = { ...(window.__todayModalBodyStyle || {}) };
+      socialRouteSession = `today-social-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      socialRoutePages = [{ html: String(html), title, scrollTop: 0, chatId: null }];
+      socialRouteDepth = 1;
+      socialRouteActive = true;
+      socialRouteBodyRestored = false;
+      history.pushState(socialRouteState(1), '', location.href);
+      try { stopPoll(); } catch (_) {}
+      renderSocialPage(socialRoutePages[0], false);
+      return;
     }
-    button.hidden=!show;
-    button.setAttribute('aria-hidden',show?'false':'true');
-    button.setAttribute('data-today-social-close','v15');
-    return button;
+
+    const card = root.querySelector('.modal-card');
+    const current = socialRoutePages[socialRouteDepth - 1];
+    if (current) {
+      current.scrollTop = card ? card.scrollTop : 0;
+      current.chatId = host.dataset.chatId || current.chatId || null;
+    }
+    try { stopPoll(); } catch (_) {}
+
+    if (current && current.title === title) {
+      // Same page refreshed after an action: update in place instead of adding a duplicate history stop.
+      socialRoutePages[socialRouteDepth - 1] = { html: String(html), title, scrollTop: current.scrollTop, chatId: current.chatId };
+      history.replaceState(socialRouteState(socialRouteDepth), '', location.href);
+      renderSocialPage(socialRoutePages[socialRouteDepth - 1], true);
+      return;
+    }
+
+    socialRoutePages = socialRoutePages.slice(0, socialRouteDepth);
+    socialRouteDepth += 1;
+    socialRoutePages[socialRouteDepth - 1] = { html: String(html), title, scrollTop: 0, chatId: null };
+    history.pushState(socialRouteState(socialRouteDepth), '', location.href);
+    renderSocialPage(socialRoutePages[socialRouteDepth - 1], false);
   }
-  function modal(html){
-    stopPoll();
-    if(typeof openModal!=='function')return;
-    openModal(html);
-    const root=byId('modal');
-    if(root){root.classList.add('today-social-modal');ensureSocialModalCloseButton(root,true);}
-  }
+  /* TODAY_SOCIAL_PAGES_V16_JS_END */
   function stopPoll(){if(chatPoll){clearInterval(chatPoll);chatPoll=null}activeChatId=null;}
   function panelShell(title,sub,content){return `<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY SOCIAL / ${VERSION}</div><h2>${h(title)}</h2>${sub?`<p>${h(sub)}</p>`:''}</div><span class="ts-orbit" aria-hidden="true">✦</span></div>${content}</section>`}
   function avatar(user,size=''){
