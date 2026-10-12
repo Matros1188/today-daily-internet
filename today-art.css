@@ -4787,3 +4787,1123 @@ body{
 }
 
 /* End TODAY PREMIUM V4 — OBSIDIAN SIGNATURE */
+
+
+
+/* ================================================================
+   TODAY PREMIUM TYPOGRAPHY V5 — MANROPE ATELIER
+   Refined hierarchy / editorial rhythm / luxury typography
+   ================================================================ */
+
+:root{
+  --type-display:"Manrope","Inter","Avenir Next",system-ui,sans-serif;
+  --type-body:"Manrope","Inter","Avenir Next",system-ui,sans-serif;
+  --type-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+
+  --type-white:#FBFCFF;
+  --type-heading:#F8FAFF;
+  --type-body-color:#D8E1F0;
+  --type-secondary:#B5C2D9;
+  --type-muted:#96A5C1;
+
+  --type-lavender:#D2C8FF;
+  --type-ice:#C4E0FF;
+  --type-jade:#B6F0DF;
+  --type-champagne:#EAD8B5;
+
+  --type-display-tracking:-.065em;
+  --type-heading-tracking:-.047em;
+  --type-body-tracking:-.012em;
+}
+
+/* ------------------------------------------------
+   GLOBAL FONT RENDERING
+   ------------------------------------------------ */
+
+html{
+  font-family:var(--type-body)!important;
+  font-optical-sizing:auto;
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-kerning:normal;
+  font-feature-settings:"kern" 1,"liga" 1,"calt" 1;
+}
+
+body,
+#app,
+#app button,
+#app input,
+#app textarea,
+#app select,
+#modal,
+#modal button,
+#modal input,
+#modal textarea,
+#modal select,
+.toast{
+  font-family:var(--type-body)!important;
+  font-optical-sizing:auto;
+  font-synthesis:none;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+body{
+  font-size:14px!important;
+  line-height:1.68!important;
+  letter-spacing:var(--type-body-tracking)!important;
+  font-weight:470!important;
+}
+
+p{
+  text-wrap:pretty;
+}
+
+strong,b{
+  font-weight:760;
+}
+
+small{
+  letter-spacing:-.006em;
+}
+
+::placeholder{
+  font-family:var(--type-body)!important;
+  font-weight:470!important;
+  opacity:1;
+}
+
+/* ------------------------------------------------
+   DISPLAY TYPOGRAPHY — крупные смысловые акценты
+   ------------------------------------------------ */
+
+.hero h1,
+#homeSection h1{
+  font-family:var(--type-display)!important;
+  font-size:clamp(49px,6.8vw,98px)!important;
+  font-weight:800!important;
+  line-height:.935!important;
+  letter-spacing:-.083em!important;
+  text-wrap:balance!important;
+  font-optical-sizing:auto;
+  font-kerning:normal;
+}
+
+.hero h1 span,
+#homeSection h1 span{
+  font-family:var(--type-display)!important;
+  font-weight:800!important;
+  letter-spacing:-.079em!important;
+}
+
+.hero-copy>p{
+  font-family:var(--type-body)!important;
+  font-size:clamp(15px,1.25vw,18px)!important;
+  font-weight:470!important;
+  line-height:1.83!important;
+  letter-spacing:-.017em!important;
+  color:#D1DBED!important;
+  max-width:680px!important;
+}
+
+/* Малые надстрочные подписи */
+.eyebrow{
+  font-family:var(--type-mono)!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  line-height:1.65!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase;
+  color:#C7D2E7!important;
+}
+
+/* ------------------------------------------------
+   BRAND / HEADER / ACCOUNT
+   ------------------------------------------------ */
+
+.today-brand-word,
+.brand{
+  font-family:var(--type-display)!important;
+  font-size:clamp(21px,2vw,27px)!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:-.068em!important;
+}
+
+.today-brand-copy{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  letter-spacing:-.025em!important;
+}
+
+.today-brand-tag{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  letter-spacing:.16em!important;
+  line-height:1.5!important;
+}
+
+.account-btn,
+.top-btn{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:760!important;
+  letter-spacing:.005em!important;
+}
+
+.coin-badge{
+  font-family:var(--type-mono)!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.035em!important;
+}
+
+.coin-badge span{
+  font-family:var(--type-mono)!important;
+  font-weight:700!important;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ------------------------------------------------
+   SOCIAL NAVIGATION
+   ------------------------------------------------ */
+
+.ts-brand-chip b{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:600!important;
+  line-height:1.5!important;
+  letter-spacing:.14em!important;
+}
+
+.ts-brand-chip small{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  letter-spacing:-.015em!important;
+}
+
+.ts-nav-actions button{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:720!important;
+  line-height:1.25!important;
+  letter-spacing:-.018em!important;
+}
+
+.ts-nav-actions button .today-nav-icon{
+  font-family:var(--type-body)!important;
+}
+
+/* ------------------------------------------------
+   SECTION TITLES — редакционная иерархия
+   ------------------------------------------------ */
+
+.section-head h2{
+  font-family:var(--type-display)!important;
+  font-size:clamp(30px,3.35vw,46px)!important;
+  font-weight:800!important;
+  line-height:1.02!important;
+  letter-spacing:-.071em!important;
+  color:#FAFBFF!important;
+  text-wrap:balance!important;
+}
+
+.section-note{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  line-height:1.65!important;
+  letter-spacing:.045em!important;
+  color:#B5C3DB!important;
+}
+
+.community-intro{
+  font-family:var(--type-body)!important;
+  font-size:14px!important;
+  font-weight:470!important;
+  line-height:1.83!important;
+  letter-spacing:-.013em!important;
+  color:#C4D0E4!important;
+}
+
+/* ------------------------------------------------
+   DAILY CARDS — рубрики, заголовки и описания
+   ------------------------------------------------ */
+
+.daily-card h3{
+  font-family:var(--type-display)!important;
+  font-size:clamp(24px,2.15vw,34px)!important;
+  font-weight:790!important;
+  line-height:1.045!important;
+  letter-spacing:-.064em!important;
+  color:#FBFCFF!important;
+  text-wrap:balance!important;
+}
+
+.daily-card.featured h3,
+.daily-card.secondary h3{
+  font-family:var(--type-display)!important;
+  font-size:clamp(32px,3.15vw,47px)!important;
+  font-weight:800!important;
+  line-height:.995!important;
+  letter-spacing:-.073em!important;
+}
+
+.daily-card p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.82!important;
+  letter-spacing:-.01em!important;
+  color:#D1DBED!important;
+}
+
+.daily-card .notice{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  line-height:1.75!important;
+}
+
+.kind-pill{
+  font-family:var(--type-body)!important;
+  font-size:10px!important;
+  font-weight:780!important;
+  line-height:1.25!important;
+  letter-spacing:-.01em!important;
+}
+
+.count-pill{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  letter-spacing:-.035em!important;
+  font-variant-numeric:tabular-nums;
+  color:#C0CDE3!important;
+}
+
+.card-kicker{
+  font-family:var(--type-body)!important;
+  font-size:10px!important;
+  font-weight:520!important;
+  line-height:1.68!important;
+  letter-spacing:-.005em!important;
+  color:#B8C5DD!important;
+}
+
+/* Маленькая верхняя подпись внутри иллюстрации */
+.today-art-topline{
+  font-family:var(--type-mono)!important;
+  font-size:8px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  letter-spacing:.14em!important;
+}
+
+.today-art-topline span:last-child{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ------------------------------------------------
+   BUTTON TYPOGRAPHY — меньше крика, больше точности
+   ------------------------------------------------ */
+
+.primary-button,
+.secondary-button,
+.danger-button{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:780!important;
+  line-height:1.25!important;
+  letter-spacing:-.012em!important;
+}
+
+.quiet-btn{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  letter-spacing:.055em!important;
+}
+
+/* ------------------------------------------------
+   CLOCK / SCENE — цифры и временные значения
+   ------------------------------------------------ */
+
+.clock-card>span,
+.scene-card>span{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  letter-spacing:.15em!important;
+  line-height:1.6!important;
+}
+
+.clock-card strong{
+  font-family:var(--type-mono)!important;
+  font-size:clamp(31px,3.4vw,47px)!important;
+  font-weight:500!important;
+  line-height:1.06!important;
+  letter-spacing:-.075em!important;
+  font-variant-numeric:tabular-nums lining-nums;
+  font-feature-settings:"tnum" 1,"lnum" 1;
+}
+
+.scene-card strong{
+  font-family:var(--type-display)!important;
+  font-size:clamp(23px,2.35vw,32px)!important;
+  font-weight:800!important;
+  line-height:1.03!important;
+  letter-spacing:-.068em!important;
+}
+
+.scene-card small{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  line-height:1.68!important;
+}
+
+.live-pill{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:650!important;
+  letter-spacing:-.015em!important;
+}
+
+.live-pill b{
+  font-family:var(--type-mono)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  font-variant-numeric:tabular-nums;
+}
+
+.ticker{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  line-height:1.6!important;
+  letter-spacing:-.01em!important;
+}
+
+.strip-actions{
+  font-size:11px!important;
+  font-weight:600!important;
+}
+
+/* ------------------------------------------------
+   COMMUNITY FEED — имена, текст, метаданные
+   ------------------------------------------------ */
+
+.today-post-name{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  line-height:1.35!important;
+  letter-spacing:-.025em!important;
+  color:#FAFBFF!important;
+}
+
+.today-post-meta{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  line-height:1.6!important;
+  letter-spacing:-.035em!important;
+  font-variant-numeric:tabular-nums;
+  color:#B5C2DB!important;
+}
+
+.community-kind{
+  font-family:var(--type-mono)!important;
+  font-size:8px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  letter-spacing:.085em!important;
+}
+
+.today-post-text{
+  font-family:var(--type-body)!important;
+  font-size:14px!important;
+  font-weight:470!important;
+  line-height:1.84!important;
+  letter-spacing:-.012em!important;
+  color:#E1E8F5!important;
+  overflow-wrap:anywhere;
+}
+
+.today-post-actions{
+  font-family:var(--type-body)!important;
+}
+
+.today-like-btn{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:710!important;
+  line-height:1.3!important;
+  letter-spacing:-.014em!important;
+}
+
+.today-like-btn span{
+  font-variant-numeric:tabular-nums;
+}
+
+/* ------------------------------------------------
+   RANKING — спортивные цифры, аккуратные имена
+   ------------------------------------------------ */
+
+.rank-number{
+  font-family:var(--type-mono)!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  font-variant-numeric:tabular-nums;
+}
+
+.rank-name{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:760!important;
+  line-height:1.4!important;
+  letter-spacing:-.025em!important;
+}
+
+.rank-score{
+  font-family:var(--type-mono)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.025em!important;
+}
+
+/* ------------------------------------------------
+   MODALS — заголовки, пояснения, формы
+   ------------------------------------------------ */
+
+.ts-kicker{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  line-height:1.6!important;
+  letter-spacing:.15em!important;
+  color:#D4C8FF!important;
+}
+
+.ts-panel-head h2{
+  font-family:var(--type-display)!important;
+  font-size:clamp(29px,3.5vw,45px)!important;
+  font-weight:800!important;
+  line-height:1.01!important;
+  letter-spacing:-.076em!important;
+  color:#FBFCFF!important;
+  text-wrap:balance!important;
+}
+
+.ts-panel-head p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.82!important;
+  letter-spacing:-.012em!important;
+  color:#C1CDE2!important;
+}
+
+.ts-list-head h3{
+  font-family:var(--type-display)!important;
+  font-size:17px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  letter-spacing:-.042em!important;
+  color:#F7F9FF!important;
+}
+
+.ts-count{
+  font-family:var(--type-mono)!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  font-variant-numeric:tabular-nums;
+}
+
+.ts-user-copy b{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:780!important;
+  line-height:1.4!important;
+  letter-spacing:-.022em!important;
+  color:#F8FAFF!important;
+}
+
+.ts-user-copy span{
+  font-family:var(--type-mono)!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  line-height:1.5!important;
+  letter-spacing:-.025em!important;
+  color:#B6C3DA!important;
+}
+
+.ts-mini,
+.ts-primary,
+.ts-promo-button{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:760!important;
+  line-height:1.3!important;
+  letter-spacing:-.013em!important;
+}
+
+.ts-status-chip{
+  font-family:var(--type-body)!important;
+  font-size:10px!important;
+  font-weight:740!important;
+  line-height:1.4!important;
+  letter-spacing:-.005em!important;
+}
+
+/* ------------------------------------------------
+   FORMS — читаемые поля без мелкого системного текста
+   ------------------------------------------------ */
+
+.ts-form-card h3,
+.ts-settings-title h3{
+  font-family:var(--type-display)!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  letter-spacing:-.047em!important;
+  color:#FBFCFF!important;
+}
+
+.ts-form-card p,
+.ts-settings-title p{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:470!important;
+  line-height:1.78!important;
+  letter-spacing:-.008em!important;
+  color:#BFCBE0!important;
+}
+
+.ts-form-card label,
+.ts-search-form label,
+.ts-settings-form label{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:670!important;
+  line-height:1.65!important;
+  letter-spacing:-.013em!important;
+  color:#DDE5F2!important;
+}
+
+.ts-form-card label small,
+.ts-settings-form label small{
+  font-size:10px!important;
+  font-weight:500!important;
+  color:#AEBBD3!important;
+}
+
+.ts-form-card input,
+.ts-form-card textarea,
+.ts-form-card select,
+.ts-search-form input,
+.ts-settings-form select,
+.ts-settings-form input,
+.ts-message-compose textarea,
+.ts-inline-invite input{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:500!important;
+  line-height:1.6!important;
+  letter-spacing:-.008em!important;
+  color:#F8FAFF!important;
+}
+
+.ts-form-card input::placeholder,
+.ts-form-card textarea::placeholder,
+.ts-search-form input::placeholder,
+.ts-message-compose textarea::placeholder,
+.ts-inline-invite input::placeholder{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:450!important;
+  color:#8F9FBA!important;
+}
+
+/* ------------------------------------------------
+   PROFILE — имя становится главным элементом карточки
+   ------------------------------------------------ */
+
+.ts-profile-hero h3{
+  font-family:var(--type-display)!important;
+  font-size:clamp(27px,3vw,38px)!important;
+  font-weight:830!important;
+  line-height:1.02!important;
+  letter-spacing:-.071em!important;
+  color:#fff!important;
+  text-wrap:balance!important;
+}
+
+.ts-profile-hero>div:nth-child(2)>span{
+  font-family:var(--type-mono)!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  line-height:1.6!important;
+  letter-spacing:-.025em!important;
+}
+
+.ts-profile-hero p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.82!important;
+  letter-spacing:-.012em!important;
+}
+
+.ts-friend-chip{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:690!important;
+  line-height:1.35!important;
+  letter-spacing:-.018em!important;
+}
+
+.ts-post-card h4{
+  font-family:var(--type-display)!important;
+  font-size:clamp(18px,2vw,23px)!important;
+  font-weight:800!important;
+  line-height:1.14!important;
+  letter-spacing:-.052em!important;
+  color:#FBFCFF!important;
+}
+
+.ts-post-card>p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.84!important;
+  letter-spacing:-.01em!important;
+  color:#DBE4F2!important;
+}
+
+.ts-post-meta{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  line-height:1.6!important;
+  letter-spacing:-.025em!important;
+  font-variant-numeric:tabular-nums;
+}
+
+.ts-post-tag{
+  font-family:var(--type-body)!important;
+  font-size:10px!important;
+  font-weight:750!important;
+  letter-spacing:-.01em!important;
+}
+
+/* ------------------------------------------------
+   CHANNELS / MESSAGES / EMPTY STATES
+   ------------------------------------------------ */
+
+.ts-channel-card h4{
+  font-family:var(--type-display)!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1.17!important;
+  letter-spacing:-.048em!important;
+}
+
+.ts-channel-card p{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:470!important;
+  line-height:1.76!important;
+}
+
+.ts-channel-meta{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+
+.ts-chat-row-copy b,
+.ts-chat-row-copy strong{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:780!important;
+  line-height:1.4!important;
+  letter-spacing:-.024em!important;
+}
+
+.ts-chat-row-copy small,
+.ts-chat-row-meta{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  line-height:1.6!important;
+  letter-spacing:-.025em!important;
+}
+
+.ts-message p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.75!important;
+  letter-spacing:-.008em!important;
+}
+
+.ts-message-meta{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  line-height:1.5!important;
+}
+
+.ts-empty{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:470!important;
+  line-height:1.82!important;
+  letter-spacing:-.01em!important;
+}
+
+.ts-empty b{
+  font-family:var(--type-display)!important;
+  font-size:16px!important;
+  font-weight:790!important;
+  line-height:1.35!important;
+  letter-spacing:-.038em!important;
+}
+
+.ts-helper,
+.ts-muted,
+.ts-chat-footnote{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:470!important;
+  line-height:1.72!important;
+  color:#B5C2D9!important;
+}
+
+.ts-promo-head h3{
+  font-family:var(--type-display)!important;
+  font-size:clamp(25px,3vw,36px)!important;
+  font-weight:820!important;
+  line-height:1.04!important;
+  letter-spacing:-.063em!important;
+}
+
+.ts-promo-head p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.8!important;
+}
+
+.ts-promoted-card h4{
+  font-family:var(--type-display)!important;
+  font-size:18px!important;
+  font-weight:790!important;
+  line-height:1.2!important;
+  letter-spacing:-.04em!important;
+}
+
+.ts-promoted-card>p{
+  font-family:var(--type-body)!important;
+  font-size:13px!important;
+  font-weight:470!important;
+  line-height:1.82!important;
+}
+
+.ts-promoted-foot{
+  font-family:var(--type-mono)!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  line-height:1.65!important;
+  letter-spacing:-.02em!important;
+}
+
+/* ------------------------------------------------
+   FOOTER / STATUS / TOAST
+   ------------------------------------------------ */
+
+.footer{
+  font-family:var(--type-body)!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  line-height:1.7!important;
+}
+
+.footer strong{
+  font-family:var(--type-mono)!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.14em!important;
+}
+
+.toast{
+  font-family:var(--type-body)!important;
+  font-size:12px!important;
+  font-weight:620!important;
+  line-height:1.6!important;
+  letter-spacing:-.006em!important;
+}
+
+/* ------------------------------------------------
+   MOBILE TYPOGRAPHY — не уменьшаем текст слишком сильно
+   ------------------------------------------------ */
+
+@media(max-width:1120px){
+  .hero h1,
+  #homeSection h1{
+    font-size:clamp(48px,7vw,78px)!important;
+  }
+
+  .daily-card h3{
+    font-size:clamp(24px,2.9vw,33px)!important;
+  }
+
+  .daily-card.featured h3,
+  .daily-card.secondary h3{
+    font-size:clamp(31px,4vw,44px)!important;
+  }
+}
+
+@media(max-width:900px){
+  .hero h1,
+  #homeSection h1{
+    font-size:clamp(47px,8vw,76px)!important;
+    line-height:.97!important;
+  }
+
+  .section-head h2{
+    font-size:clamp(29px,4.4vw,40px)!important;
+  }
+
+  .today-post-text{
+    font-size:13px!important;
+  }
+}
+
+@media(max-width:640px){
+  body{
+    font-size:13px!important;
+    line-height:1.67!important;
+  }
+
+  .today-brand-word,
+  .brand{
+    font-size:22px!important;
+    letter-spacing:-.065em!important;
+  }
+
+  .today-brand-tag{
+    font-size:8px!important;
+    letter-spacing:.12em!important;
+  }
+
+  .ts-nav-actions button{
+    font-size:9px!important;
+    font-weight:750!important;
+    letter-spacing:-.025em!important;
+  }
+
+  .hero h1,
+  #homeSection h1{
+    font-size:clamp(35px,9vw,51px)!important;
+    line-height:1.00!important;
+    letter-spacing:-.078em!important;
+  }
+
+  .hero-copy>p{
+    font-size:14px!important;
+    line-height:1.75!important;
+  }
+
+  .eyebrow{
+    font-size:9px!important;
+    letter-spacing:.105em!important;
+  }
+
+  .section-head h2{
+    font-size:clamp(27px,7.4vw,35px)!important;
+    line-height:1.03!important;
+    letter-spacing:-.065em!important;
+  }
+
+  .section-note{
+    font-size:8px!important;
+    letter-spacing:.015em!important;
+  }
+
+  .daily-card h3{
+    font-size:clamp(17px,5.2vw,23px)!important;
+    line-height:1.08!important;
+    letter-spacing:-.055em!important;
+  }
+
+  .daily-card.featured h3,
+  .daily-card.secondary h3{
+    font-size:clamp(23px,6.4vw,31px)!important;
+    line-height:1.02!important;
+    letter-spacing:-.065em!important;
+  }
+
+  .daily-card p{
+    font-size:12px!important;
+    line-height:1.71!important;
+  }
+
+  .kind-pill{
+    font-size:9px!important;
+    letter-spacing:-.02em!important;
+  }
+
+  .count-pill{
+    font-size:8px!important;
+  }
+
+  .card-kicker{
+    font-size:10px!important;
+    line-height:1.62!important;
+  }
+
+  .clock-card strong{
+    font-size:clamp(25px,7vw,35px)!important;
+    letter-spacing:-.08em!important;
+  }
+
+  .clock-card>span,
+  .scene-card>span{
+    font-size:8px!important;
+    letter-spacing:.09em!important;
+  }
+
+  .scene-card strong{
+    font-size:clamp(21px,5.7vw,28px)!important;
+    letter-spacing:-.06em!important;
+  }
+
+  .today-post-name{
+    font-size:13px!important;
+  }
+
+  .today-post-meta{
+    font-size:9px!important;
+  }
+
+  .today-post-text{
+    font-size:13px!important;
+    line-height:1.77!important;
+  }
+
+  .today-like-btn{
+    font-size:11px!important;
+  }
+
+  .rank-name{
+    font-size:11px!important;
+  }
+
+  .rank-score{
+    font-size:10px!important;
+  }
+
+  .ts-panel-head h2{
+    font-size:clamp(27px,7vw,33px)!important;
+    line-height:1.02!important;
+    letter-spacing:-.067em!important;
+  }
+
+  .ts-panel-head p{
+    font-size:12px!important;
+    line-height:1.72!important;
+  }
+
+  .ts-list-head h3{
+    font-size:15px!important;
+  }
+
+  .ts-user-copy b{
+    font-size:12px!important;
+  }
+
+  .ts-user-copy span{
+    font-size:9px!important;
+  }
+
+  .ts-form-card h3,
+  .ts-settings-title h3{
+    font-size:17px!important;
+  }
+
+  .ts-form-card p,
+  .ts-settings-title p{
+    font-size:12px!important;
+  }
+
+  .ts-form-card label,
+  .ts-search-form label,
+  .ts-settings-form label{
+    font-size:12px!important;
+  }
+
+  .ts-form-card input,
+  .ts-form-card textarea,
+  .ts-form-card select,
+  .ts-search-form input,
+  .ts-settings-form select,
+  .ts-settings-form input,
+  .ts-message-compose textarea,
+  .ts-inline-invite input{
+    font-size:14px!important;
+  }
+
+  .ts-profile-hero h3{
+    font-size:clamp(24px,6.5vw,31px)!important;
+  }
+
+  .ts-post-card h4{
+    font-size:19px!important;
+    line-height:1.16!important;
+  }
+
+  .ts-post-card>p{
+    font-size:13px!important;
+  }
+
+  .ts-channel-card h4{
+    font-size:17px!important;
+  }
+
+  .ts-message p{
+    font-size:13px!important;
+  }
+
+  .ts-primary,
+  .ts-mini,
+  .primary-button,
+  .secondary-button{
+    font-size:11px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    transition-duration:.01ms!important;
+  }
+}
+
+/* End TODAY PREMIUM TYPOGRAPHY V5 — MANROPE ATELIER */
