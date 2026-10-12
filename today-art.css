@@ -87,7 +87,7 @@ button,input,textarea,select{font:inherit}button{touch-action:manipulation}butto
 .today-art-panel:after{content:"";position:absolute;right:-30px;top:-45px;width:135px;height:135px;border-radius:50%;border:1px solid color-mix(in srgb,var(--art-accent) 28%,transparent);box-shadow:0 0 0 14px color-mix(in srgb,var(--art-accent) 3%,transparent),0 0 0 31px color-mix(in srgb,var(--art-accent) 2%,transparent);pointer-events:none}
 .today-art-atmosphere{position:absolute;left:20%;bottom:-70px;width:60%;height:100px;border-radius:50%;background:var(--art-accent);opacity:.08;filter:blur(25px);pointer-events:none}
 .today-art-topline{position:absolute;left:13px;right:13px;top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:2;color:#AAB9D7;font-size:8px;font-weight:800;letter-spacing:.16em}
-.today-art-topline span:last-child{padding:5px 7px;border:1px solid rgba(180,200,240,.14);border-radius:7px;background:rgba(6,11,23,.35);font-variant-numeric:tabular-nums;color:#CED9F3;letter-spacing:.08em}
+.today-art-topline span:not(:first-child){padding:5px 7px;border:1px solid rgba(180,200,240,.14);border-radius:7px;background:rgba(6,11,23,.35);font-variant-numeric:tabular-nums;color:#CED9F3;letter-spacing:.08em}
 .today-art-visual{position:absolute;inset:22px 0 0;display:grid;place-items:center;pointer-events:none}
 .today-generated-svg{display:block;width:min(100%,260px);height:auto;max-height:100%;overflow:visible;filter:drop-shadow(0 12px 17px rgba(0,0,0,.14))}
 .today-art-grain{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.035) 48%,transparent 65%);opacity:.7}
@@ -6727,3 +6727,5 @@ input:focus,textarea:focus,select:focus{border-color:rgba(125,234,255,.51)!impor
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 /* TODAY IMMERSIVE PREMIUM REDESIGN V6 — END */
+
+/* TODAY_REMOVE_DAILY_COUNTERS_V1 */

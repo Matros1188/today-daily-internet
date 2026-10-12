@@ -32,7 +32,7 @@
   }
   function dayPanel(kind,index){
     const panel=document.createElement('div');panel.className='today-art-panel';panel.dataset.artKind=kind;panel.setAttribute('aria-hidden','true');
-    panel.innerHTML=`<div class="today-art-atmosphere"></div><div class="today-art-topline"><span>НОВАЯ ГЛАВА</span><span>${String(index+1).padStart(2,'0')} / 12</span></div><div class="today-art-visual">${svgFor(kind,'day')}</div><div class="today-art-grain"></div>`;
+    panel.innerHTML=`<div class="today-art-atmosphere"></div><div class="today-art-topline"><span>НОВАЯ ГЛАВА</span></div><div class="today-art-visual">${svgFor(kind,'day')}</div><div class="today-art-grain"></div>`;
     return panel;
   }
   function decorateDaily(){
@@ -97,3 +97,5 @@
   function boot(){scheduleDecorate();const observer=new MutationObserver(scheduleDecorate);observer.observe(document.body,{childList:true,subtree:true});window.TODAY_VECTOR_ART={version:VERSION,dayKinds:Object.keys(DAY),socialKinds:Object.keys(SOCIAL),svgFor};}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+
+/* TODAY_REMOVE_DAILY_COUNTERS_V1 */

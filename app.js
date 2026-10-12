@@ -62,12 +62,67 @@ async function loadDay(force=false){const next=dayMoscow();if(!force&&state.day=
 function renderItems(){const grid=$("dailyGrid");grid.innerHTML="";if(state.items.length!==12){grid.innerHTML=`<div class="notice">Сегодняшний день готовится: ${state.items.length}/12 рубрик.</div>`;return}state.items.forEach((x,i)=>{const [label,icon]=META[x.kind];const card=document.createElement("article");card.className=`daily-card ${cardLayout(i)} kind-${x.kind}`;card.style.animationDelay=(i*45)+"ms";card.innerHTML=`<div class="card-head"><span class="kind-pill">${esc(icon)} ${esc(label)}</span><span class="count-pill" id="count-${x.id}">${countFor(x.id)} действий</span></div><h3>${esc(x.title)}</h3><div class="card-body">${bodyCopy(x)}</div><div class="card-actions">${actionFor(x)}</div>`;grid.appendChild(card)})}
 async function loadStats(){if(!state.day)return;const [a,l]=await Promise.all([sb.rpc("today_interaction_stats",{p_day:state.day}),sb.rpc("today_live_count",{p_day:state.day})]);if(!a.error){state.stats=new Map((a.data||[]).map(r=>[r.content_id,Math.max(Number(r.total_votes||0),Number(r.total_actions||0))]));state.items.forEach(x=>{const el=$("count-"+x.id);if(el)el.textContent=countFor(x.id)+" действий"})}if(!l.error)$("liveCount").textContent=String(Number(l.data||0))}
 function relativeTime(ts){const m=Math.max(0,Math.floor((Date.now()-new Date(ts).getTime())/60000));return m<1?"только что":m<60?`${m} мин назад`:`${Math.floor(m/60)} ч назад`}
+/* TODAY_DAILY_BOT_DUPLICATE_GUARD_V1_BEGIN — same-day bot duplicate suppression */
+const TODAY_BOT_DUP_STOPWORDS = new Set([
+  "сегодня","вчера","завтра","просто","очень","когда","потому","почему","чтобы",
+  "который","которая","которые","которое","такой","такая","такие","этот","эта","эти",
+  "это","вот","уже","еще","может","можно","будто","кажется","иногда","часто","всегда",
+  "никогда","многие","люди","человек","самый","самое","самая","свой","свои","бывает",
+  "бывают","быть","были","было","будет","будут","есть","нет","для","при","над","под",
+  "без","про","или","если","чем","как","так","что","кто","куда","где","мне","меня",
+  "мой","моя","мои","твой","твоя","его","она","оно","они","нам","вам","нас","вас",
+  "все","всех","всем","тоже","даже","только","лишь","пока","после","перед","между",
+  "через","этого","этими","таких","один","одна","одно"
+]);
+function todayNormalizeBotText(value){
+  return String(value||"").normalize("NFKC").toLocaleLowerCase("ru-RU").replace(/ё/g,"е")
+    .replace(/\s+/g," ").replace(/[^\p{L}\p{N}]+/gu," ").trim().replace(/\s+/g," ");
+}
+function todayBotTokenSet(value){
+  return new Set(todayNormalizeBotText(value).split(" ").filter(t=>t.length>2&&!TODAY_BOT_DUP_STOPWORDS.has(t)));
+}
+function todayBotPostsAreDuplicates(left,right){
+  const a=todayNormalizeBotText(left?.body), b=todayNormalizeBotText(right?.body);
+  if(!a||!b)return false;
+  if(a===b)return a.length>=6;
+  // Near-match comparisons are conservative to avoid hiding genuinely different posts.
+  if(Math.min(a.length,b.length)<58)return false;
+  const A=todayBotTokenSet(a), B=todayBotTokenSet(b);
+  const minimum=Math.min(A.size,B.size);
+  if(minimum<6)return false;
+  let common=0;
+  for(const token of A)if(B.has(token))common++;
+  const union=A.size+B.size-common;
+  const containment=common/Math.max(1,minimum);
+  const jaccard=common/Math.max(1,union);
+  return containment>=0.78 || (minimum>=8 && jaccard>=0.70);
+}
+function dedupeDailyBotPosts(sortedRows){
+  const seenBotPosts=[];
+  let removed=0;
+  const kept=[];
+  for(const row of sortedRows){
+    if(!row?.is_demo){kept.push(row);continue;}
+    const body=String(row.body||"").trim();
+    if(!body){kept.push(row);continue;}
+    const duplicate=seenBotPosts.some(previous=>todayBotPostsAreDuplicates(previous,row));
+    if(duplicate){removed++;continue;}
+    seenBotPosts.push(row);kept.push(row);
+  }
+  if(removed>0 && !window.__TODAY_BOT_DUPLICATE_NOTICE){
+    window.__TODAY_BOT_DUPLICATE_NOTICE=true;
+    console.info(`[TODAY] Скрыто повторяющихся бот-публикаций за день: ${removed}`);
+  }
+  return kept;
+}
+/* TODAY_DAILY_BOT_DUPLICATE_GUARD_V1_END */
+
 async function loadCommunity(){
   const feed=$("communityFeed");
   if(!feed||!state.day)return;
   const [real,demo,profiles,bots,likeSummary]=await Promise.all([
     sb.from("today_publications").select("id,user_id,kind,body,image_url,image_path,created_at").eq("day_date",state.day).order("created_at",{ascending:false}).limit(48),
-    sb.from("demo_contributions").select("id,bot_id,kind,body,image_url,created_at,display_name,avatar_emoji,avatar_url,bonus_title,bonus_icon,bonus_item_id").eq("day_date",state.day).order("created_at",{ascending:false}).limit(48),
+    sb.from("demo_contributions").select("id,bot_id,kind,body,image_url,created_at,display_name,avatar_emoji,avatar_url,bonus_title,bonus_icon,bonus_item_id").eq("day_date",state.day).order("created_at",{ascending:false}).limit(250),
     sb.from("profiles").select("id,display_name,avatar_emoji,avatar_url").limit(500),
     sb.from("demo_bots").select("id,bot_no,display_name,avatar_emoji,avatar_url").eq("active",true).limit(100),
     sb.rpc("today_like_summary",{p_day:state.day})
@@ -78,7 +133,7 @@ async function loadCommunity(){
   const lm=new Map((likeSummary.data||[]).map(x=>[`${x.post_source}:${x.post_id}`,x]));
   const fallbackMedia=(r)=>{const p=String(r.image_path||"").trim();if(!p)return "";if(/^https?:\/\//i.test(p))return p;const base=String(C.supabaseUrl||"").replace(/\/$/,"");return `${base}/storage/v1/object/public/today-media-safe/${p.split("/").map(encodeURIComponent).join("/")}`};
   const normalize=(r,isDemo)=>{const prof=isDemo?null:pm.get(r.user_id);const bot=isDemo?bm.get(r.bot_id):null;const media=r.image_url||r.image_path||"";const fallback=fallbackMedia(r);return {...r,is_demo:isDemo,display_name:isDemo?(r.display_name||bot?.display_name||"TODAY"):(prof?.display_name||"Человек"),avatar_emoji:isDemo?(r.avatar_emoji||bot?.avatar_emoji||"✦"):(prof?.avatar_emoji||"✦"),avatar_url:isDemo?(r.avatar_url||bot?.avatar_url||""):(prof?.avatar_url||""),image_url:media,image_fallback:fallback,like_key:`${isDemo?"bot":"user"}:${r.id}`}};
-  const rows=[...(real.data||[]).map(r=>normalize(r,false)),...(demo.data||[]).map(r=>normalize(r,true))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,48);
+  const mergedRows=[...(real.data||[]).map(r=>normalize(r,false)),...(demo.data||[]).map(r=>normalize(r,true))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));const rows=dedupeDailyBotPosts(mergedRows).slice(0,48);
   if(!rows.length){feed.innerHTML='<div class="notice">Сегодня здесь появится то, что оставят люди.</div>';return}
   if($("activityTicker"))$("activityTicker").textContent=`${rows[0].display_name} ${rows[0].kind==="song"?"поделился песней":"оставил публикацию"} · ${relativeTime(rows[0].created_at)}`;
   /* TODAY_AAA_BOT_ICON_V1 — compact bot marker */
