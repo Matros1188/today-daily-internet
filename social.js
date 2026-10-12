@@ -20,15 +20,19 @@
     return v||{};
   }
   /* TODAY_SOCIAL_CLOSE_HOTFIX_V14 — reliable click-based close handling */
+  /* TODAY_SOCIAL_MODAL_CLOSE_V15 — hard close path + scroll unlock */
   function forceCloseSocialModal(event){
-    if(event){event.preventDefault?.();event.stopPropagation?.();}
+    if(event){event.preventDefault?.();event.stopPropagation?.();event.stopImmediatePropagation?.();}
     const modalRoot=byId('modal');
     if(!modalRoot)return;
     try{stopPoll()}catch{}
-    modalRoot.classList.add('hidden');
-    modalRoot.classList.remove('today-social-modal');
+    const closeButton=modalRoot.querySelector(':scope > #todaySocialCloseTop');
+    if(closeButton){closeButton.hidden=true;closeButton.setAttribute('aria-hidden','true');}
     const root=document.documentElement,body=document.body;
     const saved=window.__todayModalBodyStyle||{};
+    const savedScrollY=Number(window.__todayModalScrollY||0);
+    modalRoot.classList.add('hidden');
+    modalRoot.classList.remove('today-social-modal');
     body.style.position=saved.position||'';
     body.style.top=saved.top||'';
     body.style.left=saved.left||'';
@@ -36,26 +40,24 @@
     body.style.width=saved.width||'';
     body.style.overflow=saved.overflow||'';
     root.classList.remove('today-modal-open');
-    const savedScrollY=Number(window.__todayModalScrollY||0);
     window.__todayModalBodyStyle=null;
     window.__todayModalScrollY=null;
     try{window.scrollTo(0,savedScrollY)}catch{}
   }
   function installModalSafety(){
-    const modalRoot=byId('modal');
-    if(modalRoot&&modalRoot.dataset.todaySocialCloseSafetyV14!=='1'){
-      modalRoot.dataset.todaySocialCloseSafetyV14='1';
-      modalRoot.addEventListener('click',function(event){
+    if(!window.__TODAY_SOCIAL_CLOSE_V15_CAPTURE){
+      window.__TODAY_SOCIAL_CLOSE_V15_CAPTURE=true;
+      document.addEventListener('click',function(event){
         const target=event.target instanceof Element?event.target:null;
-        if(!target||modalRoot.classList.contains('hidden'))return;
-        const closeButton=target.closest('#modalClose,#todaySocialCloseTop,.ts-panel-close');
+        const modalRoot=byId('modal');
+        if(!target||!modalRoot||modalRoot.classList.contains('hidden'))return;
+        const closeButton=target.closest('#todaySocialCloseTop,#modalClose,.ts-panel-close');
         const backdrop=target===modalRoot.querySelector('.modal-backdrop');
-        if(!closeButton&&!backdrop)return;
-        forceCloseSocialModal(event);
+        if(closeButton||backdrop)forceCloseSocialModal(event);
       },true);
     }
-    if(!window.__TODAY_SOCIAL_ESCAPE_CLOSE_V14){
-      window.__TODAY_SOCIAL_ESCAPE_CLOSE_V14=true;
+    if(!window.__TODAY_SOCIAL_CLOSE_V15_ESCAPE){
+      window.__TODAY_SOCIAL_CLOSE_V15_ESCAPE=true;
       document.addEventListener('keydown',function(event){
         const modalRoot=byId('modal');
         if(event.key!=='Escape'||!modalRoot||modalRoot.classList.contains('hidden'))return;
@@ -64,12 +66,30 @@
     }
   }
   installModalSafety();
+  /* TODAY_SOCIAL_MODAL_CLOSE_V15 — mount a real, accessible close button */
+  function ensureSocialModalCloseButton(root,show=true){
+    if(!root)return null;
+    let button=root.querySelector(':scope > #todaySocialCloseTop');
+    if(!button){
+      button=document.createElement('button');
+      button.id='todaySocialCloseTop';
+      button.type='button';
+      button.textContent='×';
+      button.setAttribute('aria-label','Закрыть окно');
+      button.setAttribute('title','Закрыть');
+      root.appendChild(button);
+    }
+    button.hidden=!show;
+    button.setAttribute('aria-hidden',show?'false':'true');
+    button.setAttribute('data-today-social-close','v15');
+    return button;
+  }
   function modal(html){
     stopPoll();
     if(typeof openModal!=='function')return;
     openModal(html);
     const root=byId('modal');
-    if(root)root.classList.add('today-social-modal');
+    if(root){root.classList.add('today-social-modal');ensureSocialModalCloseButton(root,true);}
   }
   function stopPoll(){if(chatPoll){clearInterval(chatPoll);chatPoll=null}activeChatId=null;}
   function panelShell(title,sub,content){return `<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY SOCIAL / ${VERSION}</div><h2>${h(title)}</h2>${sub?`<p>${h(sub)}</p>`:''}</div><span class="ts-orbit" aria-hidden="true">✦</span></div>${content}</section>`}
