@@ -525,7 +525,7 @@
   }
 
   const TODAY_GAMES = {
-    match3: {title:'TODAY MATCH', subtitle:'Собирай линии из трёх и более кристаллов за 60 секунд.', label:'Три в ряд', symbol:'✦'},
+    match3: {title:'CRYSTAL CHRONICLES', subtitle:'30 сюжетных уровней, огранённые кристаллы, комбо и усилители за монеты TODAY.', label:'Кристаллы', symbol:'✦'},
     flappy: {title:'NIGHT FLIGHT', subtitle:'Одно касание — один взмах. Пролетай между воротами и побей рекорд.', label:'Полёт', symbol:'✈'},
     merge2048: {title:'MERGE 2048', subtitle:'Сдвигай числа, объединяй одинаковые плитки и доберись до 2048.', label:'Числа', symbol:'2048'},
     memory: {title:'REMEMBER', subtitle:'Открывай пары символов и заканчивай поле за минимальное число ходов.', label:'Память', symbol:'◈'}
@@ -712,14 +712,15 @@
     const ids = Object.keys(TODAY_GAMES);
     const cards = ids.map(id => {
       const g = TODAY_GAMES[id];
-      return `<article class="ts-game-card ts-game-${id}"><div class="ts-game-art" aria-hidden="true">${gameArtwork(id)}</div><div class="ts-game-card-copy"><span class="ts-kicker">TODAY ARCADE</span><h3>${h(g.title)}</h3><p>${h(g.subtitle)}</p><div class="ts-game-card-bottom"><small>Рекорд устройства: <b data-local-best="${id}">${gameBest(id)}</b></small><button class="ts-primary" data-social-act="play-game" data-game="${id}">Играть ↗</button></div></div></article>`;
+      return `<article class="ts-game-card ts-game-${id} ${id==='match3'?'ts-game-card-featured':''}"><div class="ts-game-art" aria-hidden="true">${gameArtwork(id)}</div><div class="ts-game-card-copy"><span class="ts-kicker">TODAY ARCADE</span><h3>${h(g.title)}</h3><p>${h(g.subtitle)}</p><div class="ts-game-card-bottom"><small>Рекорд устройства: <b data-local-best="${id}">${gameBest(id)}</b></small><button class="ts-primary" data-social-act="play-game" data-game="${id}">Играть ↗</button></div></div></article>`;
     }).join('');
-    const html = `<div class="ts-games-home"><div class="ts-games-hero"><span class="ts-kicker">МИКРОПЕРЕРЫВ · БОЛЬШИЕ РЕКОРДЫ</span><h3>Пять минут — только твои.</h3><p>Игры работают прямо в браузере, без установки и без звука по умолчанию. Начинай раунд одним касанием.</p></div><div class="ts-game-grid">${cards}</div><section class="ts-game-leaderboard"><div class="ts-list-head"><h3>Рекорды друзей</h3><span class="ts-count">СЕГОДНЯ</span></div><div class="ts-game-leaderboard-tabs">${ids.filter(id=>!EXTRA_GAME_IDS.includes(id)).map(id=>`<button class="ts-mini" data-game-act="leaderboard" data-game="${id}">${h(TODAY_GAMES[id].label)}</button>`).join('')}</div><div id="todayGameLeaderboard"><p class="ts-muted">Выбери игру, чтобы посмотреть рекорды друзей за сегодня. Личные рекорды доступны и без аккаунта.</p></div></section></div>`;
+    const html = `<div class="ts-games-home"><div class="ts-games-hero"><span class="ts-kicker">TODAY ORIGINAL · 30 СЮЖЕТНЫХ УРОВНЕЙ</span><h3>Собери историю из семи кристаллов.</h3><p>CRYSTAL CHRONICLES — главная аркада TODAY. Открывай главы, собирай комбо и возвращай сияние миру.</p><button type="button" class="ts-primary" data-social-act="play-game" data-game="match3">Продолжить кампанию ↗</button></div><div class="ts-game-grid">${cards}</div><section class="ts-game-leaderboard"><div class="ts-list-head"><h3>Рекорды друзей</h3><span class="ts-count">СЕГОДНЯ</span></div><div class="ts-game-leaderboard-tabs">${ids.filter(id=>!EXTRA_GAME_IDS.includes(id)).map(id=>`<button class="ts-mini" data-game-act="leaderboard" data-game="${id}">${h(TODAY_GAMES[id].label)}</button>`).join('')}</div><div id="todayGameLeaderboard"><p class="ts-muted">Выбери игру, чтобы посмотреть рекорды друзей за сегодня. Личные рекорды доступны и без аккаунта.</p></div></section></div>`;
     modal(panelShell('Мини-игры','Короткие игры TODAY — для дороги, очереди и свободной минуты.',html));
   }
 
   function openMiniGame(gameId) {
     stopTodayMiniGame();
+    if (gameId === 'match3') return openMatch3Campaign();
     const g = TODAY_GAMES[gameId];
     if (!g) return notify('Эта игра пока недоступна.');
     let board = '';
@@ -752,6 +753,11 @@
   function miniGameClick(button) {
     const action = button.dataset.gameAct;
     const game = button.dataset.game;
+    if (action === 'match3-level') { startMatch3Level(Number(button.dataset.level)); return; }
+    if (action === 'match3-retry') { startMatch3Level(Number(button.dataset.level)); return; }
+    if (action === 'match3-back') { openMatch3Campaign(); return; }
+    if (action === 'match3-booster-buy') { match3BuyBooster(button.dataset.booster); return; }
+    if (action === 'match3-booster-use') { match3ActivateBooster(button.dataset.booster); return; }
     if (handleExtraMiniGameAction(action, button)) return;
     if (action === 'leaderboard') { loadMiniGameLeaderboard(game); return; }
     if (action === 'merge-move') { todayMiniGameRuntime?.move?.(button.dataset.dir); return; }
@@ -800,19 +806,272 @@
     todayMiniGameCleanup=()=>{document.removeEventListener('keydown',keyHandler);host.removeEventListener('touchstart',touchStart);host.removeEventListener('touchend',touchEnd);};
   }
 
-  function initMatchGame() {
-    const host=byId('todayMatchBoard');if(!host)return;
-    const n=7, colors=['✦','◆','●','⬟','✚','✧'];let grid=[],selected=-1,score=0,time=60,ended=false,finished=false,timer=null,startTime=Date.now();
-    const random=()=>Math.floor(Math.random()*colors.length);
-    const findMatches=()=>{const out=new Set();for(let r=0;r<n;r++)for(let c=0;c<n;c++){const i=r*n+c;let j=c+1;while(j<n&&grid[r*n+j]===grid[i])j++;if(j-c>=3)for(let k=c;k<j;k++)out.add(r*n+k);j=r+1;while(j<n&&grid[j*n+c]===grid[i])j++;if(j-r>=3)for(let k=r;k<j;k++)out.add(k*n+c);}return out;};
-    const fill=()=>{grid=Array.from({length:n*n},()=>random());let guard=0;while(findMatches().size&&guard++<100)grid=Array.from({length:n*n},()=>random());};
-    const draw=()=>{host.innerHTML=grid.map((v,i)=>`<button class="ts-match-cell c${v} ${i===selected?'selected':''}" data-game-act="match-tap" data-i="${i}" aria-label="Кристалл ${i+1}">${colors[v]}</button>`).join('');const s=byId('todayMatchScore');if(s)s.textContent=score.toLocaleString('ru-RU');const tm=byId('todayMatchTimer');if(tm)tm.textContent=String(time);};
-    const resolve=()=>{let loops=0,matches=findMatches();while(matches.size&&loops++<10){score+=matches.size*10;for(const i of matches)grid[i]=-1;for(let c=0;c<n;c++){const vals=[];for(let r=n-1;r>=0;r--)if(grid[r*n+c]>=0)vals.push(grid[r*n+c]);for(let r=n-1;r>=0;r--)grid[r*n+c]=vals[n-1-r]===undefined?random():vals[n-1-r];}matches=findMatches();}draw();};
-    const tap=i=>{if(ended||!Number.isInteger(i)||i<0||i>=n*n)return;if(selected<0){selected=i;draw();return;}if(selected===i){selected=-1;draw();return;}const a={r:Math.floor(selected/n),c:selected%n},b={r:Math.floor(i/n),c:i%n};if(Math.abs(a.r-b.r)+Math.abs(a.c-b.c)!==1){selected=i;draw();return;}[grid[selected],grid[i]]=[grid[i],grid[selected]];const m=findMatches();if(!m.size){[grid[selected],grid[i]]=[grid[i],grid[selected]];const st=byId('todayMatchStatus');if(st)st.textContent='Нужна линия от трёх одинаковых кристаллов.';}else resolve();selected=-1;draw();};
-    fill();draw();todayMiniGameRuntime={id:'match3',tap};
-    timer=setInterval(()=>{if(!byId('todayMatchBoard')||ended){clearInterval(timer);return;}time--;const tm=byId('todayMatchTimer');if(tm)tm.textContent=String(time);if(time<=0){ended=true;clearInterval(timer);const st=byId('todayMatchStatus');if(st)st.textContent=`Время! Результат: ${score} очков.`;if(!finished){finished=true;saveGameResult('match3',score,60);}}},1000);
-    todayMiniGameCleanup=()=>clearInterval(timer);
+/* TODAY CRYSTAL CHRONICLES V25 BEGIN — 30-level match-3 campaign, animated faceted gems, story, boosters and saved progress. */
+  const MATCH3_CHAPTERS = [
+    {name:'Сады пробуждения', place:'ГЛАВА I · САДЫ ПРОБУЖДЕНИЯ', story:'Первый Кристалл Рассвета раскололся, и его осколки погасили свет древних садов. Луми, маленький хранитель сияния, просит тебя восстановить первые печати. Каждая очищенная доска возвращает один огонёк в мир.', reward:'Печать Рассвета'},
+    {name:'Лунная гавань', place:'ГЛАВА II · ЛУННАЯ ГАВАНЬ', story:'За серебряным мостом лежит гавань, где приливы двигают сами звёзды. Здесь кристаллы стали хитрее: точные обмены и цепные комбинации помогут открыть путь к Лунному маяку.', reward:'Лунный маяк'},
+    {name:'Изумрудный архив', place:'ГЛАВА III · ИЗУМРУДНЫЙ АРХИВ', story:'В глубине архива записана память мира. Страницы перепутаны, а печати требуют всё больше мастерства. Собирай редкие оттенки, береги ходы и используй усилители в нужный момент.', reward:'Живой свиток'},
+    {name:'Обсерватория огня', place:'ГЛАВА IV · ОБСЕРВАТОРИЯ ОГНЯ', story:'Звёздная машина разбудила янтарные и рубиновые жилы. Каждая серия очищений умножает силу кристаллов. Луми наконец вспоминает: тьму можно победить не скоростью, а умением видеть цепочки наперёд.', reward:'Солнечный ключ'},
+    {name:'Сердце Полуночи', place:'ГЛАВА V · СЕРДЦЕ ПОЛУНОЧИ', story:'Последний осколок спрятан в самом центре Полуночи. Впереди самые сложные доски, где каждый ход имеет значение. Собери все печати и верни TODAY его живое, меняющееся сияние.', reward:'Кристалл TODAY'}
+  ];
+  const MATCH3_GEMS = [
+    {name:'Аметист',c1:'#f0ddff',c2:'#b18aff',c3:'#6744d9',line:'#eadcff',mark:'✦'},
+    {name:'Сапфир',c1:'#d8f6ff',c2:'#66c8ff',c3:'#2360d5',line:'#d5f5ff',mark:'✧'},
+    {name:'Изумруд',c1:'#d7ffe8',c2:'#4ce0b2',c3:'#16856f',line:'#d5fff0',mark:'✦'},
+    {name:'Топаз',c1:'#fff2bf',c2:'#ffc56c',c3:'#d9752d',line:'#fff0c9',mark:'✧'},
+    {name:'Рубин',c1:'#ffd9e5',c2:'#ff719e',c3:'#c72f68',line:'#ffe0eb',mark:'✦'},
+    {name:'Лунный лёд',c1:'#f4f8ff',c2:'#aabde9',c3:'#667db9',line:'#ffffff',mark:'✧'},
+    {name:'Солнечный кристалл',c1:'#fff9cb',c2:'#f5df65',c3:'#b98728',line:'#fff8cf',mark:'✦'}
+  ];
+  const MATCH3_BOOSTERS = [
+    {id:'hammer',name:'Космический молот',desc:'Разрушает выбранный кристалл и соседей вокруг него.',price:90,icon:'⌁',button:'Молот'},
+    {id:'shuffle',name:'Переплетение',desc:'Перемешивает кристаллы, не расходуя ход.',price:65,icon:'⤨',button:'Перемешать'},
+    {id:'rainbow',name:'Радужный импульс',desc:'Удаляет все кристаллы выбранного цвета.',price:145,icon:'✦',button:'Радуга'},
+    {id:'moves',name:'Временной осколок',desc:'Добавляет 5 ходов в текущем уровне.',price:120,icon:'＋',button:'+5 ходов'}
+  ];
+  const MATCH3_LEVEL_NAMES = ['Первый свет','Тихий ручей','Садовая тропа','Семь искр','Пыльца звёзд','Мост хранителей','Лунные ступени','Звон маяка','Серебряный прибой','Песня прилива','Зал карт','Шёпот страниц','Зелёный символ','Тайный переплёт','Забытая формула','Янтарная линза','Огненный круг','Комета над башней','Танец рубинов','Испытание смотрителя','Граница света','Пульс Полуночи','Зеркальный зал','Последний архив','Порог вечности','Три солнца','Сияющая спираль','Сердце звезды','Последняя печать','Кристалл TODAY'];
+  const MATCH3_LEVELS = Array.from({length:30},(_,i)=>{
+    const id=i+1,chapter=Math.floor(i/6),colorGoal=(id>=4&&id%4===0)?{color:(id*3+1)%MATCH3_GEMS.length,count:10+Math.floor(id/3)}:null;
+    return {id,chapter,name:MATCH3_LEVEL_NAMES[i],moves:Math.max(21,30-Math.floor(i/4)),target:820+id*185,colorGoal,stars:[1.0,1.23,1.52]};
+  });
+  let match3Progress = null;
+  let match3ServerReady = false;
+  let match3ServerMessage = '';
+  let match3ActiveRun = null;
+  let match3GemUid = 1;
+  let match3CurrentUserId = '';
+  function match3StorageKey(){return 'today-crystal-chronicles-v25:'+(match3CurrentUserId||'guest');}
+
+  function match3LocalDefault(){return {unlocked_level:1,coins:null,inventory:{hammer:0,shuffle:0,rainbow:0,moves:0},levels:{}};}
+  function match3ReadLocal(){try{const raw=JSON.parse(localStorage.getItem(match3StorageKey())||'null');if(!raw||typeof raw!=='object')return match3LocalDefault();return {...match3LocalDefault(),...raw,inventory:{...match3LocalDefault().inventory,...(raw.inventory||{})},levels:{...(raw.levels||{})}};}catch(_){return match3LocalDefault();}}
+  function match3SaveLocal(){if(!match3Progress)return;try{localStorage.setItem(match3StorageKey(),JSON.stringify(match3Progress));}catch(_){}}
+  function match3ApplyCloud(data){
+    const local=match3ReadLocal(),levels={...local.levels};
+    for(const row of (Array.isArray(data.levels)?data.levels:[])){
+      const id=Number(row.level_id);if(id<1||id>30)continue;
+      levels[id]={completed:!!row.completed,best_score:Number(row.best_score||0),best_stars:Number(row.best_stars||0),best_moves:Number(row.best_moves||0),best_duration_sec:Number(row.best_duration_sec||0)};
+    }
+    return {unlocked_level:Math.max(1,Math.min(31,Number(data.unlocked_level||1))),coins:Math.max(0,Number(data.coins||0)),inventory:{...match3LocalDefault().inventory,...(data.inventory||{})},levels};
   }
+  async function match3RefreshProgress(){
+    const uid=await currentUser();match3CurrentUserId=uid?String(uid):'';const local=match3ReadLocal();match3ServerReady=false;match3ServerMessage='';
+    if(uid){
+      try{
+        const data=await todayWithTimeout(rpc('today_match3_get_progress'),9000,'Не удалось подключиться к хранилищу кампании за 9 секунд.');
+        if(!data||data.ok===false)throw new Error(data?.message||'Сервер не подтвердил загрузку прогресса.');
+        match3Progress=match3ApplyCloud(data);match3ServerReady=true;
+        // Local highscores can be merged into visible records, while server unlock state remains authoritative.
+        for(const [id,row] of Object.entries(local.levels||{})){
+          if(!match3Progress.levels[id])match3Progress.levels[id]=row;
+          else {match3Progress.levels[id].best_score=Math.max(Number(match3Progress.levels[id].best_score||0),Number(row.best_score||0));match3Progress.levels[id].best_stars=Math.max(Number(match3Progress.levels[id].best_stars||0),Number(row.best_stars||0));}
+        }
+        match3SaveLocal();return match3Progress;
+      }catch(error){match3ServerMessage=String(error?.message||error||'Онлайн-сохранение временно недоступно.');console.warn('TODAY Crystal Chronicles progress',error);}
+    } else {
+      match3ServerMessage='Войди в аккаунт, чтобы сохранять кампанию между устройствами и покупать усилители за монеты TODAY.';
+    }
+    match3Progress=local;return match3Progress;
+  }
+  function match3Stars(level,score){return score>=level.target*level.stars[2]?3:score>=level.target*level.stars[1]?2:1;}
+  function match3StoryForLevel(levelId){const level=MATCH3_LEVELS[Math.max(0,Math.min(29,levelId-1))];return MATCH3_CHAPTERS[level.chapter];}
+  function match3ProgressLabel(id){const row=match3Progress?.levels?.[String(id)]||match3Progress?.levels?.[id];return row&&row.completed?'★'.repeat(Math.max(1,Number(row.best_stars||1))):'';}
+  function match3BoosterMarkup(inGame=false){
+    return `<div class="ts-m3-booster-grid">${MATCH3_BOOSTERS.map(b=>{
+      const quantity=Math.max(0,Number(match3Progress?.inventory?.[b.id]||0));
+      if(inGame)return `<button type="button" class="ts-m3-booster-use" data-game-act="match3-booster-use" data-booster="${b.id}" ${quantity<1||!match3ServerReady?'disabled':''}><span class="ts-m3-booster-icon">${b.icon}</span><span><b>${b.button}</b><small>В наличии: ${quantity}</small></span></button>`;
+      const priceLine=match3Progress?.coins===null?'Баланс аккаунта недоступен':`● ${b.price} монет`;
+      const disabled=!match3ServerReady||!currentUserCached||Number(match3Progress?.coins||0)<b.price;
+      return `<article class="ts-m3-booster-card"><span class="ts-m3-booster-icon">${b.icon}</span><div><b>${b.name}</b><p>${b.desc}</p><small>В наличии: ${quantity}</small></div><button type="button" class="ts-m3-buy" data-game-act="match3-booster-buy" data-booster="${b.id}" ${disabled?'disabled':''}>${priceLine}</button></article>`;
+    }).join('')}</div>`;
+  }
+  let currentUserCached=false;
+  async function openMatch3Campaign(){
+    stopTodayMiniGame();await match3RefreshProgress();currentUserCached=!!(await currentUser());
+    const unlocked=Math.max(1,Math.min(31,Number(match3Progress?.unlocked_level||1)));
+    const activeLevel=MATCH3_LEVELS[Math.min(29,unlocked-1)];const chapter=MATCH3_CHAPTERS[activeLevel.chapter];
+    const chapters=MATCH3_CHAPTERS.map((c,chapterIndex)=>{
+      const start=chapterIndex*6+1,end=Math.min(30,start+5),chapterUnlocked=unlocked>=start,chapterDone=unlocked>end;
+      const levels=MATCH3_LEVELS.filter(l=>l.chapter===chapterIndex).map(l=>{
+        const row=match3Progress.levels?.[String(l.id)]||match3Progress.levels?.[l.id]||{};
+        const locked=l.id>unlocked,complete=!!row.completed;
+        return `<button type="button" class="ts-m3-level ${locked?'is-locked':''} ${complete?'is-complete':''} ${l.id===unlocked?'is-current':''}" data-game-act="match3-level" data-level="${l.id}" ${locked?'disabled':''} aria-label="Уровень ${l.id}: ${h(l.name)}${locked?', закрыт':''}"><span class="ts-m3-level-number">${locked?'◇':l.id}</span><b>${h(l.name)}</b><small>${complete?('★'.repeat(Math.max(1,Number(row.best_stars||1)))):locked?'ЗАКРЫТ':'ИГРАТЬ'}</small>${complete?`<em>${Number(row.best_score||0).toLocaleString('ru-RU')}</em>`:''}</button>`;
+      }).join('');
+      return `<section class="ts-m3-chapter ${chapterUnlocked?'':'is-locked'}"><div class="ts-m3-chapter-head"><span class="ts-m3-chapter-mark">${['✧','☾','❖','☀','✦'][chapterIndex]}</span><div><small>${h(c.place)}</small><h3>${h(c.name)}</h3><p>${start}—${end} уровни · ${chapterDone?'ГЛАВА ПРОЙДЕНА':chapterUnlocked?'ДОСТУПНО':'СНАЧАЛА ОТКРОЙ ПРЕДЫДУЩУЮ'}</p></div><b>${chapterDone?'✓':String(chapterIndex+1).padStart(2,'0')}</b></div><div class="ts-m3-level-grid">${levels}</div></section>`;
+    }).join('');
+    const localNote=match3ServerReady?'Прогресс синхронизируется с аккаунтом.':'<em>'+h(match3ServerMessage||'Пока доступно локальное сохранение.')+'</em>';
+    const storeTitle=currentUserCached?'Усилители за монеты TODAY':'Усилители доступны после входа в аккаунт';
+    const html=`<div class="ts-m3-campaign">
+      <section class="ts-m3-hero"><div class="ts-m3-hero-art" aria-hidden="true"><svg viewBox="0 0 520 220"><defs><linearGradient id="m3HeroGrad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f4deff"/><stop offset=".48" stop-color="#9d81ff"/><stop offset="1" stop-color="#4ae6d1"/></linearGradient><radialGradient id="m3HeroGlow"><stop stop-color="#8ef9e7" stop-opacity=".5"/><stop offset="1" stop-color="#8ef9e7" stop-opacity="0"/></radialGradient></defs><circle cx="260" cy="110" r="115" fill="url(#m3HeroGlow)"/><g stroke="#cae9ff" stroke-opacity=".34" fill="none"><circle cx="260" cy="110" r="82"/><circle cx="260" cy="110" r="102" stroke-dasharray="3 10"/></g><g transform="translate(260 105)"><path d="M0 -68 40 -22 27 36 0 63 -27 36 -40 -22Z" fill="url(#m3HeroGrad)" stroke="#f0ffff" stroke-opacity=".8" stroke-width="2"/><path d="M0 -68 0 63 -27 36 -40 -22Z" fill="#fff" fill-opacity=".18"/><path d="M0 -68 40 -22 0 0 -40 -22Z" fill="#fff" fill-opacity=".26"/><path d="M0 0 40 -22 27 36 0 63Z" fill="#101b44" fill-opacity=".16"/></g><g fill="#d2fff7"><path d="M136 52l5 13 13 5-13 5-5 13-5-13-13-5 13-5Z"/><path d="M374 149l4 10 10 4-10 4-4 10-4-10-10-4 10-4Z"/><circle cx="166" cy="166" r="3"/><circle cx="352" cy="52" r="2.5"/><circle cx="392" cy="79" r="2"/></g></svg></div><div class="ts-m3-hero-copy"><span class="ts-m3-eyebrow">TODAY ORIGINAL · КАМПАНИЯ</span><h2>CRYSTAL<br><span>CHRONICLES</span></h2><p>Собери семь цветов, восстанови древние печати и разбуди Кристалл TODAY. Тридцать уровней, пять глав и твой собственный путь.</p><div class="ts-m3-hero-stats"><span><b>${Math.max(0,unlocked-1)}</b><small>/ 30 пройдено</small></span><span><b>${Object.values(match3Progress.levels||{}).filter(x=>x?.completed).length}</b><small>побед</small></span><span><b>${match3Progress.coins===null?'—':Number(match3Progress.coins).toLocaleString('ru-RU')}</b><small>монет</small></span></div><div class="ts-m3-save-state"><span class="ts-m3-live-dot"></span>${localNote}</div></div></section>
+      <section class="ts-m3-story"><div class="ts-m3-section-label">ТЕКУЩАЯ ГЛАВА · ${chapterIndexText(activeLevel.chapter+1)}</div><h3>${h(chapter.name)}</h3><p>${h(chapter.story)}</p><div class="ts-m3-artifact"><span>✦</span><div><small>НАГРАДА ГЛАВЫ</small><b>${h(chapter.reward)}</b></div><span>Глава ${activeLevel.chapter+1}/5</span></div></section>
+      <div class="ts-m3-map-title"><div><span class="ts-m3-eyebrow">КАРТА ПУТЕШЕСТВИЯ</span><h3>Выбери уровень</h3></div><span class="ts-m3-progress-pill">${Math.min(30,unlocked-1)} / 30</span></div>
+      <div class="ts-m3-chapters">${chapters}</div>
+      <section class="ts-m3-store"><div class="ts-m3-map-title"><div><span class="ts-m3-eyebrow">СНАБЖЕНИЕ ХРАНИТЕЛЯ</span><h3>${storeTitle}</h3></div><span class="ts-m3-coin-pill">● ${match3Progress.coins===null?'—':Number(match3Progress.coins).toLocaleString('ru-RU')}</span></div><p>Усилители покупаются за те же золотые монеты, что и предметы магазина TODAY. Покупка подтверждается сервером и синхронизируется с аккаунтом.</p>${match3BoosterMarkup(false)}${!currentUserCached?'<p class="ts-m3-server-note">Войди в аккаунт, чтобы использовать монеты и переносить инвентарь между устройствами.</p>':''}</section>
+    </div>`;
+    modal(panelShell('CRYSTAL CHRONICLES','Главная аркадная кампания TODAY · 30 уровней',html));
+  }
+  function chapterIndexText(n){return String(n).padStart(2,'0');}
+  function match3GemSvg(color,uid){
+    const g=MATCH3_GEMS[color]||MATCH3_GEMS[0],gid='m3g'+String(uid).replace(/[^a-zA-Z0-9_-]/g,'');
+    const shapes=[
+      '<path d="M32 4 53 19 47 45 32 60 17 45 11 19Z"/>',
+      '<path d="M32 4 42 18 59 24 48 39 49 55 32 48 15 55 16 39 5 24 22 18Z"/>',
+      '<path d="M32 4 53 15 53 43 32 60 11 43 11 15Z"/>',
+      '<path d="M32 5 39 21 56 24 43 36 47 54 32 45 17 54 21 36 8 24 25 21Z"/>',
+      '<path d="M32 5 48 13 57 29 48 47 32 59 16 47 7 29 16 13Z"/>',
+      '<path d="M32 4 50 15 46 36 32 60 18 36 14 15Z"/>',
+      '<path d="M32 4 49 15 54 35 42 53 32 60 22 53 10 35 15 15Z"/>'
+    ];
+    return `<svg class="ts-m3-gem-svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><linearGradient id="${gid}" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="${g.c1}"/><stop offset=".45" stop-color="${g.c2}"/><stop offset="1" stop-color="${g.c3}"/></linearGradient><linearGradient id="${gid}s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><g filter="drop-shadow(0 3px 3px rgba(1,5,20,.38))">${shapes[color%shapes.length].replace('<path','<path fill="url(#'+gid+')" stroke="'+g.line+'" stroke-opacity=".8" stroke-width="1.7" stroke-linejoin="round"')}<path d="M32 4 32 60 17 45 11 19Z" fill="#fff" fill-opacity=".14"/><path d="M32 4 53 19 32 29 11 19Z" fill="url(#${gid}s)" fill-opacity=".65"/><path d="M32 29 47 45 32 60 17 45Z" fill="#091732" fill-opacity=".12"/><path d="M20 18 28 12" stroke="#fff" stroke-linecap="round" stroke-width="2.2" stroke-opacity=".9"/></g><path d="M32 4 42 20 32 29 22 20Z" fill="#fff" fill-opacity=".16"/></svg>`;
+  }
+  function match3LevelById(id){return MATCH3_LEVELS[Math.max(0,Math.min(29,Number(id)-1))]||MATCH3_LEVELS[0];}
+  function match3NewGem(color){return {uid:'g'+(match3GemUid++),color:Number.isInteger(color)?color:Math.floor(Math.random()*MATCH3_GEMS.length)};}
+  function match3FindMatches(cells){
+    const found=new Set(),n=8;
+    for(let r=0;r<n;r++){
+      let c=0;while(c<n){const idx=r*n+c,col=cells[idx]?.color;if(!Number.isInteger(col)){c++;continue;}let end=c+1;while(end<n&&cells[r*n+end]?.color===col)end++;if(end-c>=3)for(let j=c;j<end;j++)found.add(r*n+j);c=end;}
+    }
+    for(let c=0;c<n;c++){
+      let r=0;while(r<n){const idx=r*n+c,col=cells[idx]?.color;if(!Number.isInteger(col)){r++;continue;}let end=r+1;while(end<n&&cells[end*n+c]?.color===col)end++;if(end-r>=3)for(let j=r;j<end;j++)found.add(j*n+c);r=end;}
+    }
+    return [...found];
+  }
+  function match3HasValidMove(cells){
+    for(let i=0;i<64;i++){for(const j of [i%8<7?i+1:-1,i<56?i+8:-1]){if(j<0)continue;const t=cells[i];cells[i]=cells[j];cells[j]=t;const ok=match3FindMatches(cells).length>0;cells[j]=cells[i];cells[i]=t;if(ok)return true;}}return false;
+  }
+  function match3FreshBoard(){
+    let cells=Array.from({length:64},()=>match3NewGem());let tries=0;
+    while((match3FindMatches(cells).length||!match3HasValidMove(cells))&&tries++<100)cells=Array.from({length:64},()=>match3NewGem());
+    return cells;
+  }
+  function match3LevelObjective(level){
+    const colorGoal=level.colorGoal?` и собери ${level.colorGoal.count} кристаллов «${MATCH3_GEMS[level.colorGoal.color].name}»`:'';
+    return `Набери ${level.target.toLocaleString('ru-RU')} очков${colorGoal}.`;
+  }
+  async function startMatch3Level(levelId){
+    stopTodayMiniGame();await match3RefreshProgress();currentUserCached=!!(await currentUser());
+    const level=match3LevelById(levelId),unlocked=Math.max(1,Number(match3Progress?.unlocked_level||1));
+    if(level.id>unlocked){notify('Сначала пройди предыдущие уровни кампании.');return openMatch3Campaign();}
+    const story=match3StoryForLevel(level.id);
+    const html=`<div class="ts-m3-game" data-match3-level="${level.id}"><div class="ts-m3-level-toolbar"><button type="button" class="ts-mini" data-game-act="match3-back">← Карта кампании</button><span class="ts-m3-level-badge">ГЛАВА ${level.chapter+1} · УРОВЕНЬ ${String(level.id).padStart(2,'0')}</span></div><section class="ts-m3-level-intro"><span class="ts-m3-eyebrow">${h(story.place)}</span><h3>${h(level.name)}</h3><p>${h(match3LevelObjective(level))}</p></section><div class="ts-m3-game-hud"><div><small>ОЧКИ</small><b id="todayMatchScore">0</b></div><div><small>ЦЕЛЬ</small><b id="todayMatchTarget">${level.target.toLocaleString('ru-RU')}</b></div><div><small>ХОДЫ</small><b id="todayMatchMoves">${level.moves}</b></div><div><small>КОМБО</small><b id="todayMatchCombo">×1</b></div></div><div class="ts-m3-objectives"><div class="ts-m3-score-track"><i id="todayMatchScoreBar"></i></div><div class="ts-m3-objective-copy"><span id="todayMatchScoreLabel">0 / ${level.target.toLocaleString('ru-RU')} очков</span>${level.colorGoal?`<span id="todayMatchColorGoal">${MATCH3_GEMS[level.colorGoal.color].mark} ${MATCH3_GEMS[level.colorGoal.color].name}: <b>0 / ${level.colorGoal.count}</b></span>`:''}</div></div><div class="ts-m3-board-wrap"><div id="todayMatchBoard" class="ts-match-board ts-m3-board" role="group" aria-label="Игровое поле 8 на 8"></div><div id="todayMatch3Fx" class="ts-m3-fx" aria-hidden="true"></div></div><div class="ts-m3-status" id="todayMatchStatus" role="status">Меняй местами соседние кристаллы. Комбинации из трёх и больше исчезают.</div><div class="ts-m3-inventory"><div class="ts-m3-map-title"><div><span class="ts-m3-eyebrow">КАРМАН ХРАНИТЕЛЯ</span><h3>Усилители</h3></div><span class="ts-m3-coin-pill">● ${match3Progress.coins===null?'—':Number(match3Progress.coins).toLocaleString('ru-RU')}</span></div>${match3BoosterMarkup(true)}</div><div id="todayMatch3Result" class="ts-m3-result" hidden></div></div>`;
+    modal(panelShell('CRYSTAL CHRONICLES',`Уровень ${level.id} · ${h(level.name)}`,html));
+    initMatch3CampaignGame(level.id);
+  }
+  function initMatch3CampaignGame(levelId){
+    const host=byId('todayMatchBoard');if(!host)return;
+    const level=match3LevelById(levelId),run={level,cells:match3FreshBoard(),selected:-1,score:0,moves:level.moves,movesUsed:0,combo:1,collected:0,collectedByColor:{},startedAt:Date.now(),ended:false,busy:false,pendingBooster:'',serverReady:match3ServerReady};
+    match3ActiveRun=run;
+    const draw=(animate=true)=>{
+      const oldRects=new Map();if(animate)for(const el of host.querySelectorAll('[data-gem-uid]')){const rect=el.getBoundingClientRect();oldRects.set(el.dataset.gemUid,rect);}
+      host.innerHTML=run.cells.map((cell,i)=>cell?`<button type="button" class="ts-m3-gem gem-${cell.color} ${i===run.selected?'is-selected':''}" data-game-act="match-tap" data-i="${i}" data-gem-uid="${cell.uid}" aria-label="${h(MATCH3_GEMS[cell.color].name)}, клетка ${Math.floor(i/8)+1}-${i%8+1}">${match3GemSvg(cell.color,cell.uid)}</button>`:`<span class="ts-m3-empty" aria-hidden="true"></span>`).join('');
+      if(animate){requestAnimationFrame(()=>{for(const el of host.querySelectorAll('[data-gem-uid]')){const before=oldRects.get(el.dataset.gemUid),after=el.getBoundingClientRect();if(before){const dx=before.left-after.left,dy=before.top-after.top;if(Math.abs(dx)+Math.abs(dy)>1)try{el.animate([{transform:`translate(${dx}px,${dy}px) scale(.93)`},{transform:'translate(0,0) scale(1)'}],{duration:185,easing:'cubic-bezier(.2,.8,.2,1)'});}catch(_){}}else{try{el.animate([{transform:'translateY(-28px) scale(.72)',opacity:0},{transform:'translateY(0) scale(1)',opacity:1}],{duration:260,delay:Math.random()*65,easing:'cubic-bezier(.16,.78,.25,1)'});}catch(_){}}}});}
+      updateHud();
+    };
+    const updateHud=()=>{
+      const set=(id,value)=>{const el=byId(id);if(el)el.textContent=String(value);};
+      set('todayMatchScore',run.score.toLocaleString('ru-RU'));set('todayMatchMoves',run.moves);set('todayMatchCombo','×'+run.combo);
+      const pct=Math.min(100,run.score/Math.max(1,level.target)*100);const bar=byId('todayMatchScoreBar');if(bar)bar.style.width=pct+'%';set('todayMatchScoreLabel',`${run.score.toLocaleString('ru-RU')} / ${level.target.toLocaleString('ru-RU')} очков`);
+      if(level.colorGoal){let count=run.collectedByColor?.[level.colorGoal.color]||0;const goal=byId('todayMatchColorGoal');if(goal)goal.innerHTML=`${MATCH3_GEMS[level.colorGoal.color].mark} ${h(MATCH3_GEMS[level.colorGoal.color].name)}: <b>${count} / ${level.colorGoal.count}</b>`;}
+      for(const b of MATCH3_BOOSTERS){const btn=host.parentElement?.parentElement?.querySelector(`[data-game-act="match3-booster-use"][data-booster="${b.id}"]`);if(btn){const qty=Number(match3Progress?.inventory?.[b.id]||0);const small=btn.querySelector('small');if(small)small.textContent='В наличии: '+qty;btn.disabled=qty<1||!match3ServerReady||run.ended||run.busy;}}
+    };
+    const status=text=>{const el=byId('todayMatchStatus');if(el)el.textContent=text;};
+    const won=()=>run.score>=level.target&&(!level.colorGoal||Number(run.collectedByColor[level.colorGoal.color]||0)>=level.colorGoal.count);
+    const clearAndResolve=async(startSet,initialBonus=1)=>{
+      let indices=[...new Set(startSet)],chain=0;
+      while(indices.length&&chain<12&&!run.ended){
+        chain++;run.combo=chain;updateHud();
+        const toClear=new Set(indices);
+        for(const i of toClear){const el=host.querySelector(`[data-i="${i}"]`);if(el)el.classList.add('is-matching');}
+        const fx=byId('todayMatch3Fx');if(fx&&toClear.size>=4){fx.innerHTML=`<span class="ts-m3-combo-pop">${chain>1?'КОМБО ×'+chain:toClear.size>=5?'НЕВЕРОЯТНО!':'ОТЛИЧНО!'}</span>`;fx.firstElementChild?.animate([{transform:'translateY(12px) scale(.7)',opacity:0},{transform:'translateY(-12px) scale(1.1)',opacity:1},{transform:'translateY(-24px) scale(1)',opacity:0}],{duration:700,easing:'ease-out'});}
+        await new Promise(resolve=>setTimeout(resolve,205));
+        for(const i of toClear){const cell=run.cells[i];if(cell){run.score+=Math.round(80*chain*initialBonus);run.collectedByColor[cell.color]=(run.collectedByColor[cell.color]||0)+1;run.collected++;run.cells[i]=null;}}
+        collapseColumns(run.cells);draw(true);updateHud();await new Promise(resolve=>setTimeout(resolve,190));
+        indices=match3FindMatches(run.cells);
+      }
+      run.combo=1;updateHud();
+      if(won()){await match3Finish(true);return;}
+      if(run.moves<=0)await match3Finish(false);
+    };
+    const tap=async index=>{
+      if(run.ended||run.busy||!Number.isInteger(index)||index<0||index>=64)return;
+      if(run.pendingBooster){const b=run.pendingBooster;run.pendingBooster='';if(b==='hammer'){const r=Math.floor(index/8),c=index%8,remove=[];for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const rr=r+dr,cc=c+dc;if(rr>=0&&rr<8&&cc>=0&&cc<8)remove.push(rr*8+cc);}status('Космический молот разбил кристаллы!');await clearAndResolve(remove,1.15);return;}if(b==='rainbow'){const color=run.cells[index]?.color;if(!Number.isInteger(color))return;const remove=run.cells.map((cell,i)=>cell?.color===color?i:-1).filter(i=>i>=0);status('Радужный импульс очистил цвет «'+MATCH3_GEMS[color].name+'»!');await clearAndResolve(remove,1.25);return;}}
+      if(run.selected<0){run.selected=index;draw(false);status('Выбери соседний кристалл для обмена.');return;}
+      if(index===run.selected){run.selected=-1;draw(false);return;}
+      const r1=Math.floor(run.selected/8),c1=run.selected%8,r2=Math.floor(index/8),c2=index%8;
+      if(Math.abs(r1-r2)+Math.abs(c1-c2)!==1){run.selected=index;draw(false);status('Можно менять только соседние кристаллы.');return;}
+      const first=run.selected,second=index;run.selected=-1;run.busy=true;const tmp=run.cells[first];run.cells[first]=run.cells[second];run.cells[second]=tmp;draw(true);await new Promise(resolve=>setTimeout(resolve,190));
+      const matches=match3FindMatches(run.cells);
+      if(!matches.length){const back=run.cells[first];run.cells[first]=run.cells[second];run.cells[second]=back;draw(true);run.busy=false;status('Такой обмен не создаёт линию. Попробуй другой ход.');return;}
+      run.moves--;run.movesUsed++;updateHud();status('Кристаллы резонируют — цепочка продолжается!');await clearAndResolve(matches,1);run.busy=false;
+      if(!run.ended){draw(false);status('Ход за тобой. Ищи длинные линии для множителей.');}
+    };
+    run.tap=tap;host.innerHTML='';draw(false);todayMiniGameRuntime={id:'match3',tap};
+    todayMiniGameCleanup=()=>{run.ended=true;run.busy=true;};
+    function collapseColumns(cells){
+      for(let c=0;c<8;c++){
+        const survivors=[];for(let r=7;r>=0;r--){const cell=cells[r*8+c];if(cell)survivors.push(cell);}
+        for(let r=7;r>=0;r--){const offset=7-r;cells[r*8+c]=survivors[offset]||match3NewGem();}
+      }
+    }
+    async function match3Finish(isWin){
+      if(run.ended)return;run.ended=true;run.busy=true;run.combo=1;
+      const seconds=Math.max(1,Math.round((Date.now()-run.startedAt)/1000));const stars=isWin?match3Stars(level,run.score):0;
+      if(isWin){
+        const old=match3Progress.levels?.[String(level.id)]||{};
+        match3Progress.levels[String(level.id)]={completed:true,best_score:Math.max(Number(old.best_score||0),run.score),best_stars:Math.max(Number(old.best_stars||0),stars),best_moves:run.moves,best_duration_sec:seconds};
+        match3Progress.unlocked_level=Math.max(Number(match3Progress.unlocked_level||1),Math.min(31,level.id+1));
+        status('Уровень пройден! '+stars+' звезды получены.');
+      }else status('Ходы закончились. Можно переиграть уровень или купить усилитель на карте.');
+      match3SaveLocal();await saveGameResult('match3',run.score,seconds);
+      if(match3ServerReady&&await currentUser()){
+        try{const result=await todayWithTimeout(rpc('today_match3_save_result',{p_level_id:level.id,p_score:run.score,p_stars:stars,p_moves_used:Math.max(0,run.movesUsed),p_duration_sec:seconds,p_won:!!isWin,p_goal_color:level.colorGoal?level.colorGoal.color:-1,p_goal_count:level.colorGoal?Number(run.collectedByColor[level.colorGoal.color]||0):0}),8000,'Сервер не подтвердил результат уровня за 8 секунд.');if(result?.ok){match3Progress.unlocked_level=Math.max(match3Progress.unlocked_level,Number(result.unlocked_level||1));if(result.coins!==undefined)match3Progress.coins=Number(result.coins);match3ServerReady=true;match3SaveLocal();}else throw new Error(result?.message||'Результат не подтверждён.');}catch(error){console.warn('TODAY Crystal Chronicles result save',error);match3ServerMessage=String(error?.message||error);}
+      }
+      updateHud();
+      const panel=byId('todayMatch3Result');if(panel){panel.hidden=false;panel.innerHTML=`<div class="ts-m3-result-symbol">${isWin?'✦':'◇'}</div><span class="ts-m3-eyebrow">${isWin?'ПЕЧАТЬ ВОССТАНОВЛЕНА':'ПОПРОБУЙ ЕЩЁ РАЗ'}</span><h3>${isWin?'Уровень пройден!':'Почти получилось'}</h3><p>${isWin?`Ты набрал ${run.score.toLocaleString('ru-RU')} очков и получил ${stars} ${stars===1?'звезду':stars<5?'звезды':'звёзд'}.`:`Нужно ${level.target.toLocaleString('ru-RU')} очков${level.colorGoal?' и цель по цвету':''}.`}</p><div class="ts-m3-result-stars">${[1,2,3].map(n=>`<span class="${n<=stars?'earned':''}">★</span>`).join('')}</div><div class="ts-m3-result-actions"><button type="button" class="ts-primary" data-game-act="match3-retry" data-level="${level.id}">${isWin?'Переиграть ↻':'Попробовать снова ↻'}</button>${isWin&&level.id<30?`<button type="button" class="ts-primary ts-m3-next" data-game-act="match3-level" data-level="${level.id+1}" ${level.id+1>match3Progress.unlocked_level?'disabled':''}>Следующий уровень →</button>`:''}<button type="button" class="ts-mini" data-game-act="match3-back">К карте кампании</button></div>${match3ServerMessage&&!match3ServerReady?`<small class="ts-m3-server-note">Результат сохранён на этом устройстве. Синхронизация: ${h(match3ServerMessage)}</small>`:''}</div>`;}
+    }
+  }
+  async function match3BuyBooster(boosterId){
+    const item=MATCH3_BOOSTERS.find(x=>x.id===boosterId);if(!item)return;
+    if(!await currentUser()){notify('Войди в аккаунт, чтобы покупать усилители за монеты TODAY.');return;}
+    if(!match3ServerReady){notify('Онлайн-магазин усилителей временно недоступен. Вернись на карту и попробуй обновить её.');return;}
+    try{
+      const result=await todayWithTimeout(rpc('today_match3_buy_booster',{p_booster_id:boosterId}),9000,'Покупка не подтвердилась за 9 секунд.');
+      if(!result?.ok)throw new Error(result?.message||'Не удалось купить усилитель.');
+      match3Progress.coins=Number(result.coins??match3Progress.coins);match3Progress.inventory[boosterId]=Number(result.quantity??(Number(match3Progress.inventory[boosterId]||0)+1));match3SaveLocal();notify(`${item.name} куплен. Баланс: ${match3Progress.coins} монет.`);await openMatch3Campaign();
+    }catch(error){notify(String(error?.message||error||'Покупка не выполнена.'));}
+  }
+  async function match3ActivateBooster(boosterId){
+    const run=match3ActiveRun,item=MATCH3_BOOSTERS.find(x=>x.id===boosterId);if(!run||run.ended||run.busy||!item)return;
+    if(!match3ServerReady||!await currentUser()){notify('Для использования купленных усилителей нужен вход в аккаунт и онлайн-сохранение.');return;}
+    if(Number(match3Progress?.inventory?.[boosterId]||0)<1){notify('Этого усилителя нет в инвентаре. Открой карту кампании и купи его за монеты.');return;}
+    try{
+      const result=await todayWithTimeout(rpc('today_match3_use_booster',{p_booster_id:boosterId}),8000,'Сервер не подтвердил применение усилителя.');
+      if(!result?.ok)throw new Error(result?.message||'Не удалось применить усилитель.');
+      match3Progress.inventory[boosterId]=Number(result.quantity??Math.max(0,Number(match3Progress.inventory[boosterId]||0)-1));match3SaveLocal();
+      if(boosterId==='moves'){
+        run.moves+=5;const m=byId('todayMatchMoves');if(m)m.textContent=String(run.moves);
+        const st=byId('todayMatchStatus');if(st)st.textContent='Временной осколок добавил пять ходов!';
+      } else if(boosterId==='shuffle'){
+        run.busy=true;const colors=run.cells.map(c=>c.color);let attempt=0;
+        do { const shuffled=colors.slice().sort(()=>Math.random()-.5);run.cells.forEach((c,i)=>c.color=shuffled[i]);attempt++; }
+        while((match3FindMatches(run.cells).length||!match3HasValidMove(run.cells))&&attempt<50);
+        run.selected=-1;drawMatch3BoardFromRuntime(run,true);
+        const board=byId('todayMatchBoard');board?.classList.add('is-shuffling');setTimeout(()=>board?.classList.remove('is-shuffling'),480);
+        const st=byId('todayMatchStatus');if(st)st.textContent='Переплетение изменило расклад, ход сохранён.';
+        await new Promise(resolve=>setTimeout(resolve,220));run.busy=false;
+      } else if(boosterId==='hammer'||boosterId==='rainbow'){
+        run.pendingBooster=boosterId;const st=byId('todayMatchStatus');if(st)st.textContent=boosterId==='hammer'?'Космический молот готов: выбери кристалл для удара.':'Радужный импульс готов: выбери цвет, который нужно очистить.';
+      }
+      const root=byId('todayMatchBoard')?.closest('.ts-m3-game');for(const b of MATCH3_BOOSTERS){const node=root?.querySelector(`[data-game-act="match3-booster-use"][data-booster="${b.id}"]`);if(node){const q=Number(match3Progress.inventory[b.id]||0);const small=node.querySelector('small');if(small)small.textContent='В наличии: '+q;node.disabled=q<1||!match3ServerReady||run.ended;}}
+    }catch(error){notify(String(error?.message||error||'Не удалось применить усилитель.'));}
+  }
+  function drawMatch3BoardFromRuntime(run,animate=true){
+    const host=byId('todayMatchBoard');if(!host)return;
+    const oldRects=new Map();if(animate)for(const el of host.querySelectorAll('[data-gem-uid]'))oldRects.set(el.dataset.gemUid,el.getBoundingClientRect());
+    host.innerHTML=run.cells.map((cell,i)=>`<button type="button" class="ts-m3-gem gem-${cell.color} ${i===run.selected?'is-selected':''}" data-game-act="match-tap" data-i="${i}" data-gem-uid="${cell.uid}" aria-label="${h(MATCH3_GEMS[cell.color].name)}">${match3GemSvg(cell.color,cell.uid)}</button>`).join('');
+    if(animate)requestAnimationFrame(()=>{for(const el of host.querySelectorAll('[data-gem-uid]')){const before=oldRects.get(el.dataset.gemUid),after=el.getBoundingClientRect();if(before){const dx=before.left-after.left,dy=before.top-after.top;if(Math.abs(dx)+Math.abs(dy)>1)try{el.animate([{transform:`translate(${dx}px,${dy}px) scale(.93)`},{transform:'translate(0,0) scale(1)'}],{duration:200,easing:'cubic-bezier(.2,.8,.2,1)'});}catch(_){}}else{try{el.animate([{transform:'translateY(-30px) scale(.72)',opacity:0},{transform:'translateY(0) scale(1)',opacity:1}],{duration:255,delay:Math.random()*55,easing:'cubic-bezier(.16,.78,.25,1)'});}catch(_){}}}});
+  }
+  function initMatchGame(){return startMatch3Level(1);}
+  /* TODAY CRYSTAL CHRONICLES V25 END */
 
   function initMemoryGame() {
     const host=byId('todayMemoryBoard');if(!host)return;
