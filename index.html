@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <script>
-(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="231"||q.get("reset")==="220"||q.get("reset")==="229"||q.get("reset")==="228"||q.get("reset")==="227"||q.get("reset")==="225"||q.get("reset")==="226"||q.get("reset")==="221"||q.get("reset")==="222"||q.get("reset")==="223"||q.get("reset")==="224"||q.get("reset")==="230"||q.get("reset")==="232"||q.get("reset")==="233"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(e){}})();
+(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="231"||q.get("reset")==="220"||q.get("reset")==="229"||q.get("reset")==="228"||q.get("reset")==="227"||q.get("reset")==="225"||q.get("reset")==="226"||q.get("reset")==="221"||q.get("reset")==="222"||q.get("reset")==="223"||q.get("reset")==="224"||q.get("reset")==="230"||q.get("reset")==="232"||q.get("reset")==="233"||q.get("reset")==="234"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(e){}})();
 </script>
 
 <meta charset="utf-8">
@@ -95,7 +95,7 @@
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
 <script src="./app.js?v=20261012100713"></script>
-<script src="./social.js?v=20261012100713"></script>
+<script src="./social.js?v=20261012131500"></script>
 <script src="./today-art.js?v=20261012100713"></script>
 </body>
 </html>

@@ -293,11 +293,25 @@
     const url=String(user?.avatar_url||'');
     return `<span class="ts-avatar ${size}">${url?`<img src="${h(url)}" alt="" loading="lazy" referrerpolicy="no-referrer">`:h((user?.name||user?.username||'✦').trim().slice(0,1).toUpperCase()||'✦')}</span>`;
   }
+  function wireTopSocialNav(nav){
+    if(!nav||nav.dataset.todayDirectActionsBound==='1')return;
+    nav.dataset.todayDirectActionsBound='1';
+    nav.addEventListener('click',event=>{
+      const target=event.target&&typeof event.target.closest==='function'?event.target.closest('[data-social-act]'):null;
+      if(!target||!nav.contains(target))return;
+      event.preventDefault();event.stopPropagation();
+      Promise.resolve().then(()=>handleClick(target)).catch(error=>{
+        console.error('[TODAY social navigation]',error);
+        notify('Не удалось открыть раздел: '+String(error&&error.message||error||'неизвестная ошибка').slice(0,120));
+      });
+    });
+  }
   function injectNav(){
-    if(byId('todaySocialNav'))return;
+    const existing=byId('todaySocialNav');if(existing){wireTopSocialNav(existing);return;}
     const nav=document.createElement('nav');nav.id='todaySocialNav';nav.className='today-social-nav shell';nav.setAttribute('aria-label','Социальные разделы TODAY');
     nav.innerHTML=`<div class="ts-brand-chip"><span class="ts-live-dot"></span><span><b>YOUR SOCIAL SPACE</b><small>Люди остаются. День меняется.</small></span></div><div class="ts-nav-actions"><button data-social-act="chats"><span>◌</span>Сообщения</button><button data-social-act="friends"><span>♧</span>Друзья</button><button data-social-act="my-profile"><span>✦</span>Моя страница</button><button data-social-act="channels"><span>▤</span>Каналы</button><button data-social-act="settings"><span>⚙</span>Приватность и безопасность</button><button data-social-act="mini-games"><span>✦</span>Мини-игры</button></div>`;
     const top=document.querySelector('.topbar');if(top)top.insertAdjacentElement('afterend',nav);else document.body.prepend(nav);
+    wireTopSocialNav(nav);
   }
   function injectPromo(){
     if(byId('todayPromotedBlock'))return;
