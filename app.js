@@ -35,6 +35,48 @@ function closeModal(){
   const y=Number(window.__todayModalScrollY||0);window.__todayModalBodyStyle=null;
   window.scrollTo(0,y);
 }
+/* TODAY_AUTHOR_SUPPORT_V19_BEGIN */
+function openAuthorSupport(){
+  const cardNumber="4100119640925258";
+  openModal(`<section class="today-support-dialog" aria-label="Поддержать автора TODAY">
+    <div class="today-support-kicker"><span class="today-support-pulse"></span> ПОДДЕРЖКА TODAY</div>
+    <h2 id="modalTitle">Поддержать автора</h2>
+    <p class="today-support-intro">Спасибо, что TODAY есть в твоём дне. Поддержка добровольная и помогает проекту развиваться.</p>
+    <div class="today-support-bank-card">
+      <div class="today-support-card-top"><span>ПЕРЕВОД НА КАРТУ</span><span aria-hidden="true">✦</span></div>
+      <div class="today-support-number" id="todaySupportCardNumber">4100 1196 4092 5258</div>
+      <div class="today-support-card-bottom"><span class="today-support-pay-system">ЮМАНИ</span><span class="today-support-card-chip" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    </div>
+    <button class="today-support-copy-btn" type="button" onclick="copyAuthorCardNumber()"><span aria-hidden="true">▣</span> Скопировать номер карты</button>
+    <p class="today-support-copy-status" id="todaySupportCopyStatus" aria-live="polite">Номер будет скопирован без пробелов.</p>
+  </section>`);
+}
+async function copyAuthorCardNumber(){
+  const number="4100119640925258";
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      await navigator.clipboard.writeText(number);
+    }else{
+      const area=document.createElement("textarea");
+      area.value=number;area.setAttribute("readonly","");
+      area.style.position="fixed";area.style.opacity="0";area.style.pointerEvents="none";
+      document.body.appendChild(area);area.focus();area.select();area.setSelectionRange(0,area.value.length);
+      const copied=document.execCommand("copy");area.remove();
+      if(!copied)throw new Error("Браузер не разрешил копирование");
+    }
+    const status=document.getElementById("todaySupportCopyStatus");
+    if(status)status.textContent="Готово — номер карты скопирован.";
+    if(typeof toast==="function")toast("Номер карты скопирован");
+  }catch(error){
+    const status=document.getElementById("todaySupportCopyStatus");
+    if(status)status.textContent="Не удалось скопировать автоматически. Выдели номер карты и скопируй вручную.";
+    const node=document.getElementById("todaySupportCardNumber");
+    if(node){try{const range=document.createRange();range.selectNodeContents(node);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range)}catch(_){}}
+    console.warn("TODAY support copy",error);
+  }
+}
+/* TODAY_AUTHOR_SUPPORT_V19_END */
+
 function requireAuth(){if(state.session)return true;openModal(`<div class="eyebrow">TODAY</div><h2 id="modalTitle">Сохрани своё место в дне</h2><p>Чтобы отвечать, публиковать и собирать монеты, войди или создай аккаунт.</p><div class="composer"><input id="authEmail" type="email" autocomplete="email" placeholder="Почта"><input id="authPassword" type="password" autocomplete="current-password" placeholder="Пароль"><div class="composer-row"><button class="primary-button" onclick="authSignIn()">ВОЙТИ</button><button class="secondary-button" onclick="authSignUp()">СОЗДАТЬ</button></div></div>`);return false}
 async function ensureProfile(){if(!state.session)return;try{let {data,error}=await sb.from("profiles").select("id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level").eq("id",state.session.user.id).maybeSingle();if(error)throw error;if(!data){const email=state.session.user.email||"today";const local=email.split("@")[0].replace(/[^a-zA-Z0-9_а-яА-Я-]/g,"").slice(0,20)||"today";const ins=await sb.from("profiles").upsert({id:state.session.user.id,display_name:local,username:local,avatar_emoji:"✦",coins:0,streak:0,score_total:0,level:1},{onConflict:"id"}).select("id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level").single();if(ins.error)throw ins.error;data=ins.data}state.profile=data||null;updateAccountUI();await touchUserDay()}catch(e){console.warn("TODAY profile load failed",e);if(!state.profile)updateAccountUI()}}
 function updateAccountUI(){const p=state.profile||{};$("profileLabel").textContent=state.session?(p.display_name||p.username||"ПРОФИЛЬ").toUpperCase():"АККАУНТ";$("coinCount").textContent=String(Number(p.coins||0));const av=$("profileAvatar");if(p.avatar_url)av.innerHTML=`<img src="${esc(p.avatar_url)}" alt="">`;else av.textContent=p.avatar_emoji||"✦";}
@@ -414,5 +456,5 @@ function wireProfileAvatarPreview(){
   });
 }
 
-async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261012100713").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
-window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
+async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;const supportAuthorButton=$("supportAuthorBtn");if(supportAuthorButton)supportAuthorButton.onclick=openAuthorSupport;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261012133500").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
+window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.openAuthorSupport=openAuthorSupport;window.copyAuthorCardNumber=copyAuthorCardNumber;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();

@@ -94,30 +94,77 @@
     }, 2800);
   }
 
+  /* TODAY_SOCIAL_RENDER_GUARD_V19 — ensure visible route content and show diagnostic instead of blank background. */
   function renderSocialPage(page, restoreScroll = false) {
-    try { stopTodayMiniGame(); } catch (_) {}
     const root = byId('modal');
     const host = byId('modalContent');
     if (!root || !host || !page) return;
-    try { stopPoll(); } catch (_) {}
-    root.classList.remove('hidden');
-    root.classList.add('today-social-modal', 'today-social-page');
-    document.documentElement.classList.add('today-social-page-mode');
-    document.body.classList.add('today-social-page-mode');
-    const bar = ensureSocialPageBar();
-    const titleNode = bar?.querySelector('#todaySocialPageTitle');
-    if (titleNode) titleNode.textContent = page.title || 'TODAY SOCIAL';
-    host.innerHTML = page.html;
-    if (page.chatId) host.dataset.chatId = page.chatId;
-    else delete host.dataset.chatId;
-    const card = root.querySelector('.modal-card');
-    if (card) card.scrollTop = restoreScroll ? Math.max(0, Number(page.scrollTop || 0)) : 0;
-    if (!socialRouteBodyRestored) {
-      restorePageOriginScrollAndBody();
-      socialRouteBodyRestored = true;
+    try { if (typeof stopTodayMiniGame === 'function') stopTodayMiniGame(); } catch (error) { console.warn('TODAY game cleanup', error); }
+    try { if (typeof stopPoll === 'function') stopPoll(); } catch (error) { console.warn('TODAY polling cleanup', error); }
+    try {
+      root.classList.remove('hidden');
+      root.classList.add('today-social-modal', 'today-social-page');
+      document.documentElement.classList.add('today-social-page-mode');
+      document.body.classList.add('today-social-page-mode');
+      const bar = ensureSocialPageBar();
+      const titleNode = bar && bar.querySelector('#todaySocialPageTitle');
+      if (titleNode) titleNode.textContent = page.title || 'TODAY SOCIAL';
+      host.innerHTML = String(page.html || '').trim() || '<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY / SOCIAL</div><h2>Раздел пуст</h2><p>Не получено содержимое страницы. Нажми назад и открой раздел ещё раз.</p></div></div></section>';
+      if (page.chatId) host.dataset.chatId = page.chatId;
+      else delete host.dataset.chatId;
+      const card = root.querySelector('.modal-card');
+      const force = (node, key, value) => { if (node && node.style && node.style.setProperty) node.style.setProperty(key, value, 'important'); };
+      /* Explicit visibility protects the real content from the site's stacked modal styles. */
+      force(root, 'display', 'block'); force(root, 'visibility', 'visible'); force(root, 'opacity', '1');
+      force(root, 'position', 'fixed'); force(root, 'inset', '0'); force(root, 'z-index', '2147482000');
+      force(root, 'width', '100vw'); force(root, 'height', '100dvh'); force(root, 'overflow', 'hidden');
+      if (card) {
+        force(card, 'display', 'block'); force(card, 'visibility', 'visible'); force(card, 'opacity', '1');
+        force(card, 'position', 'absolute'); force(card, 'inset', '0'); force(card, 'z-index', '2');
+        force(card, 'width', '100%'); force(card, 'max-width', 'none'); force(card, 'height', '100dvh'); force(card, 'max-height', '100dvh');
+        force(card, 'overflow-x', 'hidden'); force(card, 'overflow-y', 'auto');
+      }
+      force(host, 'display', 'block'); force(host, 'visibility', 'visible'); force(host, 'opacity', '1');
+      force(host, 'position', 'relative'); force(host, 'z-index', '3'); force(host, 'width', '100%'); force(host, 'max-width', '1200px');
+      force(host, 'min-height', '60vh'); force(host, 'margin', '0 auto'); force(host, 'color', '#edf2fa');
+      host.querySelectorAll('.ts-panel,.ts-games-home,.ts-active-game,.ts-error-panel,.ts-loading-panel').forEach(node => {
+        force(node, 'visibility', 'visible'); force(node, 'opacity', '1');
+        try { if (getComputedStyle(node).display === 'none') force(node, 'display', 'block'); } catch (_) {}
+      });
+      if (!socialRouteBodyRestored) {
+        try { restorePageOriginScrollAndBody(); }
+        catch (error) { console.warn('TODAY page scroll restore', error); }
+        socialRouteBodyRestored = true;
+      }
+      try { resumeChatPollingForCurrentPage(); } catch (error) { console.warn('TODAY chat refresh', error); }
+      /* If a future CSS edit accidentally hides the panel, a one-time observer restores visibility. */
+      if (host.dataset.todayRenderGuard !== 'v19') {
+        host.dataset.todayRenderGuard = 'v19';
+        const observer = new MutationObserver(() => {
+          if (!root.classList.contains('today-social-page') || root.classList.contains('hidden')) return;
+          if (host.children.length && getComputedStyle(host).visibility !== 'visible') force(host, 'visibility', 'visible');
+          const first = host.firstElementChild;
+          if (first && getComputedStyle(first).display === 'none') force(first, 'display', 'block');
+        });
+        observer.observe(host, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
+        root.addEventListener('transitionend', () => {
+          if (!root.classList.contains('hidden')) force(host, 'visibility', 'visible');
+        }, { passive: true });
+      }
+    } catch (error) {
+      console.error('[TODAY social page render V19]', error);
+      try {
+        root.classList.remove('hidden');
+        root.classList.add('today-social-modal', 'today-social-page');
+        const card = root.querySelector('.modal-card');
+        if (card) card.style.setProperty('display', 'block', 'important');
+        host.style.setProperty('display', 'block', 'important');
+        host.style.setProperty('visibility', 'visible', 'important');
+        host.innerHTML = `<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY / SOCIAL</div><h2>Не удалось отобразить раздел</h2><p>Ошибка показана здесь вместо пустого фона. Вернись назад и попробуй ещё раз.</p><code>${h(String(error && error.message || error || 'неизвестная ошибка').slice(0, 500))}</code></div></div></section>`;
+      } catch (secondError) { console.error('[TODAY social render fallback]', secondError); }
     }
-    resumeChatPollingForCurrentPage();
   }
+  /* TODAY_SOCIAL_RENDER_GUARD_V19 END */
 
   function exitSocialPageRoute() {
     const root = byId('modal');

@@ -290,3 +290,28 @@ body{background:transparent!important;color:var(--ink-strong)!important;letter-s
 @media(hover:none){.daily-card:hover,.community-card:hover,.today-post-card:hover{transform:none!important}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 /* End TODAY_AAA_CYBER_GLASS_V1 */
+
+
+/* TODAY_AUTHOR_SUPPORT_V19_CSS_BEGIN */
+.today-support-btn{
+  position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:13px;align-self:flex-start;
+  min-height:62px;max-width:100%;margin:22px 0 0;padding:10px 16px;border:1px solid rgba(255,255,255,.28);border-radius:19px;
+  color:#f4f6ff;background:linear-gradient(135deg,rgba(123,103,255,.31),rgba(53,210,201,.13) 60%,rgba(255,255,255,.07));
+  box-shadow:inset 0 1px rgba(255,255,255,.20),0 12px 34px rgba(10,12,35,.18);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);
+  text-align:left;transition:transform .2s ease,border-color .2s ease,filter .2s ease;cursor:pointer
+}
+.today-support-btn:hover{transform:translateY(-2px);border-color:rgba(170,166,255,.72);filter:brightness(1.09)}
+.today-support-btn:active{transform:scale(.985)}
+.today-support-heart{display:grid;place-items:center;width:35px;height:35px;flex:0 0 35px;border-radius:12px;background:rgba(165,145,255,.20);border:1px solid rgba(207,198,255,.25);font-size:24px;line-height:1;color:#d9d3ff}
+.today-support-btn-copy{display:grid;gap:4px;min-width:0}.today-support-btn-copy strong{font-size:13px;font-weight:850;letter-spacing:-.02em}.today-support-btn-copy small{font-size:10px;color:rgba(236,240,255,.70);font-weight:550}.today-support-arrow{margin-left:10px;font-size:18px;color:#9cebe2}
+.today-support-dialog{position:relative;display:grid;gap:13px;max-width:540px;margin:0 auto;padding:8px 0 2px;color:#f0f4ff}
+.today-support-kicker{display:flex;align-items:center;gap:9px;color:#aebbe0;font:700 10px/1.4 "IBM Plex Mono",monospace;letter-spacing:.13em}.today-support-pulse{width:7px;height:7px;border-radius:50%;background:#83ead4;box-shadow:0 0 16px rgba(131,234,212,.7)}
+.today-support-dialog h2{margin:2px 0 0;font-size:clamp(28px,4.6vw,40px);line-height:1.05;letter-spacing:-.055em;font-weight:850;color:#f7f8ff}.today-support-intro{margin:0;color:rgba(226,233,250,.72);font-size:13px;line-height:1.65;max-width:460px}
+.today-support-bank-card{position:relative;overflow:hidden;display:grid;gap:25px;margin-top:6px;padding:23px;border-radius:23px;border:1px solid rgba(205,215,255,.21);background:radial-gradient(ellipse at 100% 0%,rgba(140,120,255,.27),transparent 43%),radial-gradient(ellipse at 0% 100%,rgba(80,220,202,.13),transparent 45%),linear-gradient(135deg,rgba(45,54,87,.83),rgba(15,22,41,.92));box-shadow:inset 0 1px rgba(255,255,255,.15),0 18px 45px rgba(0,0,0,.22)}
+.today-support-bank-card:after{content:"";position:absolute;inset:1px;border-radius:22px;pointer-events:none;background:linear-gradient(130deg,rgba(255,255,255,.10),transparent 45%,rgba(255,255,255,.02))}
+.today-support-card-top,.today-support-card-bottom{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px}.today-support-card-top{font:600 9px/1.3 "IBM Plex Mono",monospace;letter-spacing:.14em;color:#adbce0}.today-support-card-top span:last-child{font-size:21px;color:#d0cbff}
+.today-support-number{position:relative;z-index:1;font:600 clamp(19px,4.4vw,27px)/1.3 "IBM Plex Mono",monospace;letter-spacing:.035em;color:#fff;word-spacing:1px;white-space:nowrap}.today-support-card-bottom{padding-top:3px}.today-support-pay-system{font-size:12px;font-weight:900;letter-spacing:.16em;color:#d7f8f1}.today-support-card-chip{display:flex;gap:3px;align-items:center}.today-support-card-chip i{display:block;width:7px;height:7px;border-radius:50%;border:1px solid rgba(220,230,255,.65)}.today-support-card-chip i:nth-child(2){margin-left:-5px}
+.today-support-copy-btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:51px;width:100%;padding:13px 17px;border:1px solid rgba(151,236,221,.43);border-radius:15px;background:linear-gradient(110deg,rgba(108,221,205,.19),rgba(132,119,255,.18));color:#f0fffb;font-size:12px;font-weight:850;letter-spacing:.015em;box-shadow:inset 0 1px rgba(255,255,255,.12);transition:transform .18s ease,background .18s ease}.today-support-copy-btn:hover{transform:translateY(-1px);background:linear-gradient(110deg,rgba(108,221,205,.27),rgba(132,119,255,.24))}.today-support-copy-btn span{font-size:18px}.today-support-copy-status{min-height:16px;margin:0;text-align:center;color:#9eabc8;font-size:10px;line-height:1.5}
+@media(max-width:600px){.today-support-btn{min-height:58px;margin-top:17px;padding:9px 12px;gap:10px}.today-support-btn-copy strong{font-size:12px}.today-support-btn-copy small{font-size:9px}.today-support-dialog{gap:12px}.today-support-bank-card{padding:19px;gap:23px}.today-support-number{font-size:clamp(17px,5vw,23px);letter-spacing:0}.today-support-dialog h2{font-size:30px}}
+@media(prefers-reduced-motion:reduce){.today-support-btn,.today-support-copy-btn{transition:none}}
+/* TODAY_AUTHOR_SUPPORT_V19_CSS_END */
