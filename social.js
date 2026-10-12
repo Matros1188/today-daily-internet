@@ -74,6 +74,13 @@
       if (host && host.parentElement === card) card.insertBefore(bar, host);
       else card.prepend(bar);
     }
+    if (bar.dataset.todayCloseBound !== 'v24') {
+      bar.dataset.todayCloseBound = 'v24';
+      for (const id of ['todaySocialBackTop','todaySocialExitTop']) {
+        const button = bar.querySelector('#' + id);
+        if (button) button.addEventListener('click', forceCloseSocialModal, true);
+      }
+    }
     return bar;
   }
 
@@ -207,69 +214,34 @@
     socialRouteBodyRestored = false;
   }
 
-  /* TODAY_SOCIAL_CLOSE_DIRECT_V22_BEGIN — close directly; never wait for history.back(). */
+  /* TODAY_SOCIAL_CLOSE_DIRECT_V24_BEGIN — idempotent synchronous close; no history, scroll jumps or DOM teardown. */
   function forceCloseSocialModal(event) {
     if (event) {
       try { event.preventDefault(); } catch (_) {}
       try { event.stopPropagation(); } catch (_) {}
       try { event.stopImmediatePropagation(); } catch (_) {}
     }
-    const root = byId('modal');
-    const host = byId('modalContent');
-    const html = document.documentElement;
-    const body = document.body;
-    try { if (typeof stopPoll === 'function') stopPoll(); } catch (error) { console.warn('TODAY close polling cleanup', error); }
-    try { if (typeof stopTodayMiniGame === 'function') stopTodayMiniGame(); } catch (error) { console.warn('TODAY close game cleanup', error); }
-
-    const scrollValue = window.__todayModalScrollY;
-    const savedScrollY = (typeof scrollValue === 'number' && Number.isFinite(scrollValue))
-      ? scrollValue : Number(socialRouteOriginScrollY || 0);
-    const savedBody = (window.__todayModalBodyStyle && typeof window.__todayModalBodyStyle === 'object')
-      ? window.__todayModalBodyStyle
-      : (socialRouteOriginBodyStyle && typeof socialRouteOriginBodyStyle === 'object' ? socialRouteOriginBodyStyle : {});
-
-    const clearStyle = (node, keys) => {
-      if (!node || !node.style) return;
-      for (const key of keys) { try { node.style.removeProperty(key); } catch (_) {} }
-    };
-    if (root) {
-      clearStyle(root, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
-      const card = root.querySelector('.modal-card');
-      clearStyle(card, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
+    const root=byId('modal'),host=byId('modalContent'),html=document.documentElement,body=document.body;
+    try { if(typeof stopPoll==='function') stopPoll(); } catch (_) {}
+    try { if(typeof stopTodayMiniGame==='function') stopTodayMiniGame(); } catch (_) {}
+    const savedBody=(window.__todayModalBodyStyle&&typeof window.__todayModalBodyStyle==='object')?window.__todayModalBodyStyle:{};
+    const clearStyle=(node,keys)=>{if(!node||!node.style)return;for(const key of keys){try{node.style.removeProperty(key)}catch(_){}}};
+    if(root){
+      // Remove inline overrides first, so .hidden can actually hide this overlay.
+      clearStyle(root,['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
+      const card=root.querySelector('.modal-card');
+      clearStyle(card,['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
       root.classList.add('hidden');
-      root.classList.remove('today-social-modal', 'today-social-page');
-      const bar = root.querySelector('#todaySocialPageBar');
-      if (bar) bar.remove();
-      for (const preview of root.querySelectorAll('[data-object-url]')) {
-        try { URL.revokeObjectURL(preview.dataset.objectUrl); } catch (_) {}
-        delete preview.dataset.objectUrl;
-      }
+      root.classList.remove('today-social-modal','today-social-page');
+      // Keep the tiny nav bar in place. Reusing it avoids a teardown/mutation burst on every close.
     }
-    if (host) {
-      delete host.dataset.chatId;
-      clearStyle(host, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
-    }
-    body.style.position = savedBody.position || '';
-    body.style.top = savedBody.top || '';
-    body.style.left = savedBody.left || '';
-    body.style.right = savedBody.right || '';
-    body.style.width = savedBody.width || '';
-    body.style.overflow = savedBody.overflow || '';
-    html.classList.remove('today-modal-open', 'today-social-page-mode');
-    body.classList.remove('today-social-page-mode');
-
-    // Invalidate stale V16 history state in memory; closing must never call history.back().
-    socialRouteActive = false;
-    socialRouteSession = '';
-    socialRoutePages = [];
-    socialRouteDepth = 0;
-    socialRouteOriginBodyStyle = null;
-    socialRouteBodyRestored = false;
-    window.__todayModalBodyStyle = null;
-    window.__todayModalScrollY = null;
-    try { window.scrollTo(0, Math.max(0, savedScrollY)); } catch (_) {}
+    if(host){delete host.dataset.chatId;clearStyle(host,['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);}
+    body.style.position=savedBody.position||'';body.style.top=savedBody.top||'';body.style.left=savedBody.left||'';body.style.right=savedBody.right||'';body.style.width=savedBody.width||'';body.style.overflow=savedBody.overflow||'';
+    html.classList.remove('today-modal-open','today-social-page-mode');body.classList.remove('today-social-page-mode');
+    socialRouteActive=false;socialRouteSession='';socialRoutePages=[];socialRouteDepth=0;socialRouteOriginBodyStyle=null;socialRouteBodyRestored=false;
+    window.__todayModalBodyStyle=null;window.__todayModalScrollY=null;
   }
-  /* TODAY_SOCIAL_CLOSE_DIRECT_V22_END */
+  /* TODAY_SOCIAL_CLOSE_DIRECT_V24_END */
 
   function installModalSafety() {
     const modalRoot = byId('modal');
@@ -408,7 +380,7 @@
   function profilePostCard(p,own){
     const vis=p.visibility==='private'?'Только ты':p.visibility==='friends'?'Друзья':'Публично';
     const photo=p.image_url?`<a class="ts-post-image-link" href="${h(p.image_url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть фотографию в полном размере"><img class="ts-post-image" src="${h(p.image_url)}" alt="Фото в публикации" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>`:'';
-    return `<article class="ts-post-card"><div class="ts-post-meta"><span class="ts-post-tag">ЛИЧНАЯ СТРАНИЦА</span><time>${h(dateLabel(p.created_at))}</time><span>${h(vis)}</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}${photo}<p>${h(p.body).replace(/\n/g,'<br>')}</p>${own&&p.visibility==='public'?`<button class="ts-promo-button" data-social-act="promote-post" data-id="${h(p.id)}">✦ В «Что оставили сегодня» · 250 монет</button>`:''}<button class="ts-text-button" data-social-act="report" data-kind="profile_post" data-id="${h(p.id)}">Пожаловаться</button></article>`;
+    return `<article class="ts-post-card ${own?'ts-own-post':''}"><div class="ts-post-meta"><span class="ts-post-tag">ЛИЧНАЯ СТРАНИЦА</span><time>${h(dateLabel(p.created_at))}</time><span>${h(vis)}</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}${photo}<p>${h(p.body).replace(/\n/g,'<br>')}</p>${own&&p.visibility==='public'?`<button class="ts-promo-button" data-social-act="promote-post" data-id="${h(p.id)}">✦ В «Что оставили сегодня» · 250 монет</button>`:''}<button class="ts-text-button" data-social-act="report" data-kind="profile_post" data-id="${h(p.id)}">Пожаловаться</button></article>`;
   }
   async function signProfilePostPhotos(posts){
     return Promise.all((posts||[]).map(async p=>{
@@ -1029,6 +1001,6 @@
     const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();modalRoot.classList.remove('today-social-modal');for(const preview of modalRoot.querySelectorAll('.ts-photo-preview[data-object-url]')){try{URL.revokeObjectURL(preview.dataset.objectUrl)}catch{}delete preview.dataset.objectUrl;preview.replaceChildren();preview.hidden=true;}}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
     loadPromos();
   }
-  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openMiniGames,loadPromos};
+  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openMiniGames,loadPromos,close:()=>forceCloseSocialModal()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();

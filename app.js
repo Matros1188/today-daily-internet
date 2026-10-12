@@ -16,18 +16,38 @@ function dayOfYear(dateStr){const d=new Date(dateStr+"T12:00:00Z");const y=d.get
 function moscowParts(){const now=new Date();const f=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Moscow",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false,weekday:"short"}).formatToParts(now);const o={};for(const p of f)o[p.type]=p.value;return o}
 function tick(){const p=moscowParts();const left=(23-Number(p.hour))*3600+(59-Number(p.minute))*60+(60-Number(p.second));const total=86400;const remain=Math.max(0,left);$("countdown").textContent=[Math.floor(remain/3600),Math.floor(remain%3600/60),remain%60].map(n=>String(n).padStart(2,"0")).join(":");const used=total-remain;const pct=Math.min(100,Math.max(0,used/total*100));$("dayProgress").textContent=Math.round(pct)+"%";$("progressBar").style.width=pct+"%"}
 function openModal(html){
-  const root=document.documentElement,body=document.body;
-  if(!root.classList.contains("today-modal-open")){
+  const modalNode=$("modal"),root=document.documentElement,body=document.body;
+  const socialWindow=!!(modalNode&&(modalNode.classList.contains("today-social-modal")||modalNode.classList.contains("today-social-page")));
+  if(socialWindow){
+    // Social screens use their own overlay and must never leave BODY fixed/locked.
+    if(root.classList.contains("today-modal-open")){
+      const previous=window.__todayModalBodyStyle||{};
+      body.style.position=previous.position||"";body.style.top=previous.top||"";body.style.left=previous.left||"";body.style.right=previous.right||"";body.style.width=previous.width||"";body.style.overflow=previous.overflow||"";
+      root.classList.remove("today-modal-open");
+    }
+    window.__todayModalScrollY=window.scrollY||0;
+    window.__todayModalBodyStyle={position:body.style.position,top:body.style.top,left:body.style.left,right:body.style.right,width:body.style.width,overflow:body.style.overflow};
+    root.classList.remove("today-social-page-mode");body.classList.remove("today-social-page-mode");
+  }else if(!root.classList.contains("today-modal-open")){
     window.__todayModalScrollY=window.scrollY||0;
     window.__todayModalBodyStyle={position:body.style.position,top:body.style.top,left:body.style.left,right:body.style.right,width:body.style.width,overflow:body.style.overflow};
     root.classList.add("today-modal-open");
     body.style.position="fixed";body.style.top=`-${window.__todayModalScrollY}px`;body.style.left="0";body.style.right="0";body.style.width="100%";body.style.overflow="hidden";
   }
   $("modalContent").innerHTML=html;
-  $("modal").classList.remove("hidden");
+  modalNode.classList.remove("hidden");
 }
 function closeModal(){
-  $("modal").classList.add("hidden");
+  const modalNode=$("modal");
+  if(modalNode&&(modalNode.classList.contains("today-social-modal")||modalNode.classList.contains("today-social-page"))){
+    const closeSocial=window.TODAY_SOCIAL&&window.TODAY_SOCIAL.close;
+    if(typeof closeSocial==="function"){closeSocial();return;}
+    // Fail-safe fallback while social.js is still initializing.
+    modalNode.classList.add("hidden");modalNode.classList.remove("today-social-modal","today-social-page");
+    document.documentElement.classList.remove("today-modal-open","today-social-page-mode");document.body.classList.remove("today-social-page-mode");
+    window.__todayModalBodyStyle=null;window.__todayModalScrollY=null;return;
+  }
+  modalNode.classList.add("hidden");
   const root=document.documentElement,body=document.body;
   const old=window.__todayModalBodyStyle||{};
   body.style.position=old.position||"";body.style.top=old.top||"";body.style.left=old.left||"";body.style.right=old.right||"";body.style.width=old.width||"";body.style.overflow=old.overflow||"";
@@ -79,7 +99,7 @@ async function copyAuthorCardNumber(){
 
 function requireAuth(){if(state.session)return true;openModal(`<div class="eyebrow">TODAY</div><h2 id="modalTitle">Сохрани своё место в дне</h2><p>Чтобы отвечать, публиковать и собирать монеты, войди или создай аккаунт.</p><div class="composer"><input id="authEmail" type="email" autocomplete="email" placeholder="Почта"><input id="authPassword" type="password" autocomplete="current-password" placeholder="Пароль"><div class="composer-row"><button class="primary-button" onclick="authSignIn()">ВОЙТИ</button><button class="secondary-button" onclick="authSignUp()">СОЗДАТЬ</button></div></div>`);return false}
 async function ensureProfile(){if(!state.session)return;try{let {data,error}=await sb.from("profiles").select("id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level").eq("id",state.session.user.id).maybeSingle();if(error)throw error;if(!data){const email=state.session.user.email||"today";const local=email.split("@")[0].replace(/[^a-zA-Z0-9_а-яА-Я-]/g,"").slice(0,20)||"today";const ins=await sb.from("profiles").upsert({id:state.session.user.id,display_name:local,username:local,avatar_emoji:"✦",coins:0,streak:0,score_total:0,level:1},{onConflict:"id"}).select("id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level").single();if(ins.error)throw ins.error;data=ins.data}state.profile=data||null;updateAccountUI();await touchUserDay()}catch(e){console.warn("TODAY profile load failed",e);if(!state.profile)updateAccountUI()}}
-function updateAccountUI(){const p=state.profile||{};$("profileLabel").textContent=state.session?(p.display_name||p.username||"ПРОФИЛЬ").toUpperCase():"АККАУНТ";$("coinCount").textContent=String(Number(p.coins||0));const av=$("profileAvatar");if(p.avatar_url)av.innerHTML=`<img src="${esc(p.avatar_url)}" alt="">`;else av.textContent=p.avatar_emoji||"✦";}
+function updateAccountUI(){const p=state.profile||{};$("profileLabel").textContent=state.session?(p.display_name||p.username||"ПРОФИЛЬ").toUpperCase():"АККАУНТ";$("coinCount").textContent=String(Number(p.coins||0));const av=$("profileAvatar");if(p.avatar_url)av.innerHTML=`<img src="${esc(p.avatar_url)}" alt="">`;else av.textContent=p.avatar_emoji||"✦";decorateTodayAvatarEffects();applyTodayPostTextColor();}
 async function touchUserDay(){if(!state.session)return;try{const {data,error}=await sb.rpc("touch_user_day",{p_day:state.day});if(!error&&data){state.profile={...(state.profile||{}),...data};updateAccountUI();if(Number(data.reward||0)>0)toast(`Серия ${data.streak} дней · +${data.reward} монет`)}}catch{}}
 async function authSignIn(){const email=$("authEmail")?.value.trim();const password=$("authPassword")?.value;if(!email||!password)return toast("Введи почту и пароль");const {error}=await sb.auth.signInWithPassword({email,password});if(error)return toast(error.message);closeModal();toast("Добро пожаловать в TODAY")}
 async function authSignUp(){const email=$("authEmail")?.value.trim();const password=$("authPassword")?.value;if(!email||!password)return toast("Введи почту и пароль");if(password.length<6)return toast("Пароль: минимум 6 символов");const {error}=await sb.auth.signUp({email,password});if(error)return toast(error.message);closeModal();toast("Аккаунт создан. Проверь почту, если включено подтверждение.")}
@@ -190,7 +210,7 @@ async function loadCommunity(){
     return `${botMark}<span class="today-name-effect ${cls}"><span aria-hidden="true">${esc(r.bonus_icon||"✦")}</span>${esc(label||"ЭФФЕКТ")}</span>`;
   };
 
-  feed.innerHTML=rows.map(r=>{const like=lm.get(r.like_key)||{likes:0,user_liked:false};const gold=r.is_demo&&(String(r.bonus_item_id)==="coin-glow"||String(r.bonus_title||"").toLowerCase().includes("золот"));const textColor=r.is_demo&&(String(r.bonus_item_id)==="text-color"||String(r.bonus_title||"").toLowerCase().includes("цвет текста"));const avatar=r.avatar_url?`<img class="today-post-avatar-img" src="${esc(r.avatar_url)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('has-avatar-fallback')">`:'';const media=r.image_url?`<div class="today-post-media-wrap"><img class="today-post-media" src="${esc(r.image_url)}" data-fallback="${esc(r.image_fallback||"")}" alt="Фото TODAY" loading="eager" decoding="async" fetchpriority="${rows.indexOf(r)<3?"high":"auto"}" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}else{this.parentElement.classList.add('media-failed');this.remove()}"><div class="today-media-fallback">Фото не загрузилось</div></div>`:"";const songUrl=r.kind==="song"?safeHttpUrl(r.body):"";const body=songUrl?`<a href="${esc(songUrl)}" target="_blank" rel="noopener noreferrer">Открыть песню ↗</a>`:esc(r.body||"");return `<article class="community-card today-post-card ${r.is_demo?"is-demo":"is-human"} ${gold?"today-bot-gold":""} ${textColor?"today-bot-color":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}"><div class="today-post-head"><div class="today-post-avatar ${r.avatar_url?"has-avatar":""}">${avatar}<span class="today-avatar-fallback">${esc(r.avatar_emoji||"✦")}</span></div><div class="today-post-identity"><div class="today-post-name-row"><span class="today-post-name">${esc(r.display_name||"Человек")}</span>${badges(r)}</div><div class="today-post-meta">${relativeTime(r.created_at)}</div></div></div><div class="community-copy"><div class="community-kind">${esc(META[r.kind]?.[0]||r.kind)}</div><p class="today-post-text">${body||"Фото без подписи"}</p>${media}<div class="today-post-actions"><button type="button" class="today-like-btn ${like.user_liked?"is-liked":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}" aria-pressed="${like.user_liked?"true":"false"}"><span aria-hidden="true">${like.user_liked?"♥":"♡"}</span><b>${Number(like.likes||0)}</b><span>Лайк</span></button></div></div></article>`}).join("");attachTodayLikeHandlers();}
+  feed.innerHTML=rows.map(r=>{const like=lm.get(r.like_key)||{likes:0,user_liked:false};const ownPost=!r.is_demo&&!!state.session?.user?.id&&String(state.session.user.id)===String(r.user_id);const gold=r.is_demo&&(String(r.bonus_item_id)==="coin-glow"||String(r.bonus_title||"").toLowerCase().includes("золот"));const textColor=r.is_demo&&(String(r.bonus_item_id)==="text-color"||String(r.bonus_title||"").toLowerCase().includes("цвет текста"));const avatar=r.avatar_url?`<img class="today-post-avatar-img" src="${esc(r.avatar_url)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('has-avatar-fallback')">`:'';const media=r.image_url?`<div class="today-post-media-wrap"><img class="today-post-media" src="${esc(r.image_url)}" data-fallback="${esc(r.image_fallback||"")}" alt="Фото TODAY" loading="eager" decoding="async" fetchpriority="${rows.indexOf(r)<3?"high":"auto"}" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}else{this.parentElement.classList.add('media-failed');this.remove()}"><div class="today-media-fallback">Фото не загрузилось</div></div>`:"";const songUrl=r.kind==="song"?safeHttpUrl(r.body):"";const body=songUrl?`<a href="${esc(songUrl)}" target="_blank" rel="noopener noreferrer">Открыть песню ↗</a>`:esc(r.body||"");return `<article class="community-card today-post-card ${r.is_demo?"is-demo":"is-human"} ${ownPost?"today-post-mine":""} ${gold?"today-bot-gold":""} ${textColor?"today-bot-color":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}"><div class="today-post-head"><div class="today-post-avatar ${r.avatar_url?"has-avatar":""}">${avatar}<span class="today-avatar-fallback">${esc(r.avatar_emoji||"✦")}</span></div><div class="today-post-identity"><div class="today-post-name-row"><span class="today-post-name">${esc(r.display_name||"Человек")}</span>${badges(r)}</div><div class="today-post-meta">${relativeTime(r.created_at)}</div></div></div><div class="community-copy"><div class="community-kind">${esc(META[r.kind]?.[0]||r.kind)}</div><p class="today-post-text">${body||"Фото без подписи"}</p>${media}<div class="today-post-actions"><button type="button" class="today-like-btn ${like.user_liked?"is-liked":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}" aria-pressed="${like.user_liked?"true":"false"}"><span aria-hidden="true">${like.user_liked?"♥":"♡"}</span><b>${Number(like.likes||0)}</b><span>Лайк</span></button></div></div></article>`}).join("");attachTodayLikeHandlers();decorateTodayAvatarEffects();applyTodayPostTextColor();}
 async function loadLeaderboard(){const {data,error}=await sb.rpc("today_leaderboard",{p_day:state.day,p_limit:10});const el=$("leaderboard");if(error||!Array.isArray(data)||!data.length){el.innerHTML='<div class="notice">Рейтинг появится после первых действий.</div>';return}el.innerHTML=data.map((r,i)=>`<div class="rank-row"><div class="rank-number">${i+1}</div><div class="rank-avatar">${r.avatar_url?`<img src="${esc(r.avatar_url)}" alt="">`:esc(r.avatar_emoji||"✦")}</div><div class="rank-name">${esc(r.display_name||r.username||"Человек")}</div><div class="rank-score">${Number(r.daily_score??r.score_total??0)} XP</div></div>`).join("")}
 function voteOpen(id){if(!requireAuth())return;const x=state.items.find(z=>z.id===id);const options=Array.isArray(x?.payload?.options)?x.payload.options:[];openModal(`<div class="eyebrow">${esc(META[x.kind]?.[0]||"ВОПРОС")}</div><h2 id="modalTitle">${esc(x.title)}</h2><p>${esc(x.body||"")}</p><div class="options">${options.map((o,i)=>`<button class="option-btn" onclick="vote('${id}',${i})">${esc(o)}</button>`).join("")}</div>`)}
 async function vote(id,i){if(!requireAuth())return;const {error}=await sb.from("daily_votes").insert({day_date:state.day,user_id:state.session.user.id,content_id:id,option_index:i});if(error)return toast(error.code==="23505"?"Сегодня ты уже отвечал.":"Не удалось сохранить ответ");closeModal();toast("Ответ принят · +5 XP");await Promise.all([loadStats(),loadLeaderboard(),touchUserDay()])}
@@ -225,26 +245,69 @@ async function loadShop(){
   return {shop:state.shop,owned:state.owned};
 }
 function applyOwned(){
-  const effects=["effect-neon","effect-orbit","effect-aurora","effect-text-color","today-gold-nick"];
+  const effects=["effect-neon","effect-orbit","effect-aurora","effect-text-color","effect-rainbow","today-gold-nick","today-comet-equipped","today-spark-equipped","today-pet-equipped"];
   document.body.classList.remove(...effects);document.documentElement.classList.remove(...effects);
-  const pet=$("pet");if(pet){pet.classList.add("hidden");pet.textContent=""}
-  const activeOwned=(state.owned||[]).filter(x=>!!x.equipped);
-  if(activeOwned.some(x=>x.item_id==="coin-glow")){
-    document.body.classList.add("today-gold-nick");document.documentElement.classList.add("today-gold-nick");
-  }
+  const pet=$("pet");if(pet){pet.classList.add("hidden");pet.classList.remove("today-pixel-pet-active");pet.innerHTML=""}
+  const activeOwned=(state.owned||[]).filter(x=>!!x.equipped&&String(x.item_id)!=="rainbow-trace");
+  const activeIds=new Set(activeOwned.map(x=>String(x.item_id)));
+  if(activeIds.has("coin-glow")){document.body.classList.add("today-gold-nick");document.documentElement.classList.add("today-gold-nick");}
+  if(activeIds.has("comet-avatar")){document.body.classList.add("today-comet-equipped");document.documentElement.classList.add("today-comet-equipped");}
+  if(activeIds.has("spark-frame")){document.body.classList.add("today-spark-equipped");document.documentElement.classList.add("today-spark-equipped");}
+  if(activeIds.has("neon-aura")){document.body.classList.add("effect-neon");document.documentElement.classList.add("effect-neon");}
+  if(activeIds.has("orbit-ring")){document.body.classList.add("effect-orbit");document.documentElement.classList.add("effect-orbit");}
+  if(activeIds.has("aurora-night")){document.body.classList.add("effect-aurora");document.documentElement.classList.add("effect-aurora");}
+  if(activeIds.has("text-color")){document.body.classList.add("effect-text-color");document.documentElement.classList.add("effect-text-color");}
+  const pixelPetSvg='<svg viewBox="0 0 32 32" aria-label="Пиксельный питомец TODAY" role="img" shape-rendering="crispEdges"><rect x="6" y="5" width="5" height="5" fill="#79f4df"/><rect x="21" y="5" width="5" height="5" fill="#79f4df"/><rect x="5" y="9" width="22" height="13" fill="#55cbbd"/><rect x="9" y="7" width="14" height="15" fill="#9ffff0"/><rect x="9" y="22" width="4" height="5" fill="#79f4df"/><rect x="19" y="22" width="4" height="5" fill="#79f4df"/><rect x="10" y="12" width="3" height="3" fill="#12263d"/><rect x="19" y="12" width="3" height="3" fill="#12263d"/><rect x="14" y="16" width="4" height="2" fill="#22576a"/><rect x="2" y="13" width="3" height="3" fill="#ffcc79"/><rect x="27" y="13" width="3" height="3" fill="#b9a6ff"/></svg>';
   for(const own of activeOwned){
-    const item=state.shop.find(x=>x.id===own.item_id);if(!item)continue;
-    if(item.css_class&&item.id!=="coin-glow"){
+    const id=String(own.item_id);
+    const item=state.shop.find(x=>String(x.id)===id);if(!item)continue;
+    if(item.css_class&&id!=="coin-glow"&&id!=="rainbow-trace"){
       document.body.classList.add(item.css_class);document.documentElement.classList.add(item.css_class);
     }
-    if(item.type==="pet"&&pet){pet.textContent=item.icon||"🐈";pet.classList.remove("hidden")}
+    if(id==="pixel-cat"||item.type==="pet"){
+      if(pet){pet.innerHTML=pixelPetSvg;pet.classList.remove("hidden");pet.classList.add("today-pixel-pet-active");document.body.classList.add("today-pet-equipped");document.documentElement.classList.add("today-pet-equipped");}
+    }
   }
-  decorateOwnedIdentity();
+  decorateOwnedIdentity();decorateTodayAvatarEffects();applyTodayPostTextColor();
+}
+const TODAY_POST_TEXT_COLORS={red:{label:"Красный",hex:"#ff657b"},yellow:{label:"Жёлтый",hex:"#ffd66f"},blue:{label:"Синий",hex:"#83b8ff"},turquoise:{label:"Бирюзовый",hex:"#73ead8"},orange:{label:"Оранжевый",hex:"#ffad73"}};
+function todayPostTextColorKey(){return String(state.session?.user?.user_metadata?.today_post_text_color||"")}
+function getTodayPostTextColor(){
+  const userColor=todayPostTextColorKey();if(TODAY_POST_TEXT_COLORS[userColor])return userColor;
+  const uid=String(state.session?.user?.id||"guest");try{const local=localStorage.getItem("today-post-text-color:"+uid);if(TODAY_POST_TEXT_COLORS[local])return local}catch(_){}
+  return "turquoise";
+}
+function applyTodayPostTextColor(){
+  if(!document.body)return;const color=getTodayPostTextColor();
+  document.body.dataset.todayPostTextColor=color;document.documentElement.dataset.todayPostTextColor=color;
+  document.querySelectorAll("[data-today-post-color]").forEach(btn=>{const active=btn.dataset.todayPostColor===color;btn.classList.toggle("is-selected",active);btn.setAttribute("aria-pressed",active?"true":"false")});
+}
+async function setTodayPostTextColor(color){
+  color=String(color||"");if(!TODAY_POST_TEXT_COLORS[color])return;
+  const uid=String(state.session?.user?.id||"guest");try{localStorage.setItem("today-post-text-color:"+uid,color)}catch(_){}
+  if(state.session){try{const {data,error}=await sb.auth.updateUser({data:{today_post_text_color:color}});if(error)console.warn("TODAY text color metadata save",error);else if(data?.user&&state.session?.user)state.session.user={...state.session.user,user_metadata:data.user.user_metadata||{...(state.session.user.user_metadata||{}),today_post_text_color:color}}}catch(e){console.warn("TODAY text color save",e)}}
+  applyTodayPostTextColor();toast("Цвет текста: "+TODAY_POST_TEXT_COLORS[color].label);
+}
+function renderTodayPostTextColorSettings(){
+  const unlocked=(state.owned||[]).some(o=>String(o.item_id)==="text-color");
+  const color=getTodayPostTextColor();
+  const choices=Object.entries(TODAY_POST_TEXT_COLORS).map(([id,item])=>`<button type="button" class="today-post-color-choice ${id===color?"is-selected":""}" data-today-post-color="${id}" aria-pressed="${id===color?"true":"false"}" onclick="setTodayPostTextColor('${id}')"><i style="--today-choice:${item.hex}"></i><span>${item.label}</span>${id===color?'<b aria-hidden="true">✓</b>':''}</button>`).join("");
+  return `<section class="today-post-color-settings"><div class="eyebrow">ТВОЙ СТИЛЬ</div><h3>Цвет текста публикаций</h3><p>Выбери оттенок для текста своих постов — настройка сохранится в аккаунте и на этом устройстве.</p>${unlocked?`<div class="today-post-color-options">${choices}</div>`:`<div class="today-post-color-locked"><span>◈</span><div><b>Нужен предмет «Цвет текста»</b><small>Открой магазин и купи эффект, чтобы выбирать один из пяти цветов.</small></div><button class="secondary-button" type="button" onclick="shopOpen()">МАГАЗИН</button></div>`}</section>`;
+}
+function decorateTodayAvatarEffects(){
+  const active=new Set((state.owned||[]).filter(o=>!!o.equipped).map(o=>String(o.item_id)).filter(id=>id!=="rainbow-trace"));
+  const comet=active.has("comet-avatar"),spark=active.has("spark-frame");
+  const selectors="#profileAvatar,.profile-big,.today-post-avatar,.ts-avatar,.rank-avatar,.profile-avatar,.avatar";
+  document.querySelectorAll(selectors).forEach(node=>{
+    node.classList.toggle("today-avatar-comet",comet);
+    node.classList.toggle("today-avatar-spark",spark);
+    node.classList.toggle("today-avatar-neon",active.has("neon-aura"));
+  });
 }
 function ownedBadgeData(){
   const ids=new Set((state.owned||[]).filter(x=>!!x.equipped).map(x=>x.item_id));
   const out=[];const add=(id,label,icon,cls)=>{if(ids.has(id))out.push({id,label,icon,cls})};
-  add("coin-glow","ЗОЛОТОЙ","●","gold");add("comet-avatar","КОМЕТА","☄","comet");add("rainbow-trace","РАДУГА","◌","rainbow");
+  add("coin-glow","ЗОЛОТОЙ","●","gold");add("comet-avatar","КОМЕТА","☄","comet");
   add("neon-aura","АУРА","✧","aura");add("orbit-ring","ОРБИТА","◎","orbit");add("aurora-night","СИЯНИЕ","☾","aurora");
   add("spark-frame","ИСКРЫ","✦","spark");add("pixel-stickers","СТИКЕРЫ","☺","sticker");add("pixel-cat","КОТ","🐈","pet");add("text-color","ЦВЕТ","◈","text-color");
   return out;
@@ -355,7 +418,10 @@ async function buyItem(itemId){
     const {data,error}=await sb.rpc("buy_shop_item_v2",{p_item_id:String(itemId)});
     const payload=unwrapShopRpc(data);const message=shopRpcError(payload,error,"Не удалось купить предмет.");
     if(message)return toast(message);
+    const autoEquipIds=new Set(["comet-avatar","spark-frame","pixel-cat","neon-aura","coin-glow","aurora-night","text-color"]);
+    if(autoEquipIds.has(String(itemId))){try{const equipped=await sb.rpc("set_shop_item_equipped",{p_item_id:String(itemId),p_equipped:true});if(equipped.error)console.warn("TODAY cosmetic auto-equip",equipped.error)}catch(e){console.warn("TODAY cosmetic auto-equip",e)}}
     await Promise.all([ensureProfile(),loadShop()]);
+    applyOwned();
     window.__todayModalView="shop";await shopOpen();
     toast(`Куплено: ${payload.title||item.title}. Баланс: ${Number(payload.coins??state.profile?.coins??0)} монет.`);
   }catch(e){console.warn("TODAY shop purchase failed",e);toast("Не удалось подтвердить покупку. Проверь баланс и коллекцию.");}
@@ -377,7 +443,7 @@ async function createCoinPayment(bundleId){if(!requireAuth())return;try{const to
 async function verifyReturnedPayment(){const q=new URLSearchParams(location.search);const order=q.get("order_id");if(!order)return;try{const token=(await sb.auth.getSession()).data.session?.access_token;if(!token)return;const r=await fetch(`${C.supabaseUrl}/functions/v1/verify-coin-payment`,{method:"POST",headers:{apikey:C.supabaseKey,Authorization:`Bearer ${token}`,"Content-Type":"application/json"},body:JSON.stringify({order_id:order})});const data=await r.json();if(data.ok&&Number(data.coins)>0){toast(`Оплата подтверждена · +${data.coins} монет`);await ensureProfile()}history.replaceState({},"",location.pathname)}catch{}}
 /* TODAY_SHOP_COLLECTION_FIX_START */
 function renderOwnedCollection(){
-  const owned=state.owned||[];
+  const owned=(state.owned||[]).filter(o=>String(o.item_id)!=="rainbow-trace");
   if(!owned.length)return `<div class="collection-empty"><div class="collection-empty-icon">✦</div><b>Коллекция пока пуста</b><p>Купленные эффекты останутся в аккаунте. Открой магазин, выбери предмет и включай его здесь.</p><button class="secondary-button" type="button" onclick="shopOpen()">ОТКРЫТЬ МАГАЗИН</button></div>`;
   return `<div class="collection-grid">${owned.map(o=>{
     const item=state.shop.find(x=>String(x.id)===String(o.item_id));
@@ -390,7 +456,7 @@ async function shopOpen(){
   if(!requireAuth())return;window.__todayModalView="shop";
   try{await Promise.all([ensureProfile(),loadShop()])}catch(e){console.warn("TODAY shop load failed",e);return toast("Не удалось загрузить магазин или коллекцию.")}
   const p=state.profile||{};const balance=Number(p.coins||0);
-  const items=state.shop.filter(i=>i.active).map(i=>{
+  const items=state.shop.filter(i=>i.active&&String(i.id)!=="rainbow-trace").map(i=>{
     const own=state.owned.find(x=>String(x.item_id)===String(i.id));const owned=!!own;const equipped=!!own?.equipped;const price=Number(i.price_coins);
     const validPrice=Number.isInteger(price)&&price>0;const canAfford=validPrice&&balance>=price;
     const priceLine=validPrice?`<span class="shop-price">● ${price} монет</span>`:`<span class="shop-price shop-price-invalid">ЦЕНА НЕ НАСТРОЕНА</span>`;
@@ -407,7 +473,7 @@ async function meOpen(){
   if(!requireAuth())return;window.__todayModalView="profile";
   try{await Promise.all([ensureProfile(),loadShop()])}catch(e){console.warn("TODAY profile/collection load failed",e);return toast("Не удалось загрузить кабинет и коллекцию.")}
   const p=state.profile||{};const streak=Number(p.streak||0);const rate=rewardRate(streak);const target=rewardNext(streak);const pct=Math.min(100,streak/Math.max(1,target)*100);
-  openModal(`<div class="profile-page"><div class="eyebrow">МОЙ TODAY</div><div class="profile-card"><div class="profile-row"><div class="profile-big">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(p.avatar_emoji||"✦")}</div><div class="profile-ident"><h2 id="modalTitle">${esc(p.display_name||"Ты")}</h2><div class="small-note">@${esc(p.username||"today")}</div></div></div><div class="profile-stats"><div class="profile-stat"><b>${Number(p.score_total||0)}</b><span>общий XP</span></div><div class="profile-stat"><b>${Number(p.level||1)}</b><span>уровень</span></div><div class="profile-stat"><b>${streak}</b><span>серия дней</span></div><div class="profile-stat"><b>${Number(p.coins||0)}</b><span>монет</span></div></div><div class="reward-bar"><strong>${rate?`Серия ${streak} дней · сегодня +${rate} мон.`:"Дойди до 5 дней без пропусков — начнутся монеты."}</strong><div class="reward-track"><i style="width:${pct}%"></i></div><div class="small-note" style="margin-top:6px">Следующий рубеж: ${target} дней</div></div><div class="composer"><input id="profileNick" maxlength="32" value="${esc(p.display_name||"")}" placeholder="Твой ник"><label class="file-label"><span>ВЫБРАТЬ ФОТО АВАТАРА</span><input id="profileFile" type="file" accept="image/jpeg,image/png,image/webp" hidden></label><div class="composer-row"><button class="primary-button" onclick="saveProfile()">СОХРАНИТЬ</button><button class="secondary-button" onclick="shopOpen()">МАГАЗИН</button></div><div class="small-note">Ник и аватар проходят серверную модерацию.</div></div><section class="collection-section"><div class="collection-heading"><div><div class="eyebrow">ТВОИ ПОКУПКИ</div><h3>Моя коллекция</h3></div><span class="collection-count">${state.owned.length} предметов</span></div><p class="collection-intro">Купленные предметы сохраняются здесь. Включай и выключай золотой ник, питомца и другие эффекты в любое время.</p>${renderOwnedCollection()}</section><div class="card-actions"><button class="secondary-button" onclick="signOut()">ВЫЙТИ</button></div></div></div>`);
+  openModal(`<div class="profile-page"><div class="eyebrow">МОЙ TODAY</div><div class="profile-card"><div class="profile-row"><div class="profile-big">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(p.avatar_emoji||"✦")}</div><div class="profile-ident"><h2 id="modalTitle">${esc(p.display_name||"Ты")}</h2><div class="small-note">@${esc(p.username||"today")}</div></div></div><div class="profile-stats"><div class="profile-stat"><b>${Number(p.score_total||0)}</b><span>общий XP</span></div><div class="profile-stat"><b>${Number(p.level||1)}</b><span>уровень</span></div><div class="profile-stat"><b>${streak}</b><span>серия дней</span></div><div class="profile-stat"><b>${Number(p.coins||0)}</b><span>монет</span></div></div><div class="reward-bar"><strong>${rate?`Серия ${streak} дней · сегодня +${rate} мон.`:"Дойди до 5 дней без пропусков — начнутся монеты."}</strong><div class="reward-track"><i style="width:${pct}%"></i></div><div class="small-note" style="margin-top:6px">Следующий рубеж: ${target} дней</div></div><div class="composer"><input id="profileNick" maxlength="32" value="${esc(p.display_name||"")}" placeholder="Твой ник"><label class="file-label"><span>ВЫБРАТЬ ФОТО АВАТАРА</span><input id="profileFile" type="file" accept="image/jpeg,image/png,image/webp" hidden></label><div class="composer-row"><button class="primary-button" onclick="saveProfile()">СОХРАНИТЬ</button><button class="secondary-button" onclick="shopOpen()">МАГАЗИН</button></div><div class="small-note">Ник и аватар проходят серверную модерацию.</div></div><section class="collection-section"><div class="collection-heading"><div><div class="eyebrow">ТВОИ ПОКУПКИ</div><h3>Моя коллекция</h3></div><span class="collection-count">${state.owned.filter(o=>String(o.item_id)!=="rainbow-trace").length} предметов</span></div><p class="collection-intro">Купленные предметы сохраняются здесь. Включай и выключай золотой ник, питомца и другие эффекты в любое время.</p>${renderOwnedCollection()}</section>${renderTodayPostTextColorSettings()}<div class="card-actions"><button class="secondary-button" onclick="signOut()">ВЫЙТИ</button></div></div></div>`);
   wireProfileAvatarPreview();
 }
 async function signOut(){await sb.auth.signOut();closeModal();state.session=null;state.profile=null;state.owned=[];applyOwned();updateAccountUI();toast("Ты вышел из аккаунта")}
@@ -456,5 +522,5 @@ function wireProfileAvatarPreview(){
   });
 }
 
-async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;const supportAuthorButton=$("supportAuthorBtn");if(supportAuthorButton)supportAuthorButton.onclick=openAuthorSupport;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261012144500").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
-window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.openAuthorSupport=openAuthorSupport;window.copyAuthorCardNumber=copyAuthorCardNumber;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
+async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=()=>state.session?meOpen():requireAuth();$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;const supportAuthorButton=$("supportAuthorBtn");if(supportAuthorButton)supportAuthorButton.onclick=openAuthorSupport;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();decorateTodayAvatarEffects();applyTodayPostTextColor();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261012144500").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
+window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.openAuthorSupport=openAuthorSupport;window.copyAuthorCardNumber=copyAuthorCardNumber;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.setTodayPostTextColor=setTodayPostTextColor;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
