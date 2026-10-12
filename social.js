@@ -9,16 +9,25 @@
   const dateLabel=v=>{try{return new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Moscow'}).format(new Date(v))}catch{return ''}};
   const shortText=(v,n=110)=>{const s=String(v??'');return s.length>n?s.slice(0,n-1)+'…':s};
   const notify=msg=>{if(typeof toast==='function')toast(msg);else console.log(msg)};
-  async function currentUser(){try{const r=await sb.auth.getSession();viewerId=r?.data?.session?.user?.id||null;return viewerId}catch{return null}}
+  async function currentUser(){let timer;try{const r=await Promise.race([sb.auth.getSession(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Проверка аккаунта заняла слишком много времени.')),8000)})]);viewerId=r?.data?.session?.user?.id||null;return viewerId}catch(e){console.warn('TODAY currentUser timeout/error',e);return null}finally{clearTimeout(timer)}}
   async function needUser(){const id=await currentUser();if(id)return id;try{if(typeof requireAuth==='function')requireAuth()}catch{}notify('Войди в аккаунт, чтобы пользоваться социальной частью TODAY.');return null}
   async function rpc(name,args={}){
-    const {data,error}=await sb.rpc(name,args);
+    let timer;
+    let result;
+    try {
+      result = await Promise.race([
+        Promise.resolve().then(()=>sb.rpc(name,args)),
+        new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Запрос к серверу ('+String(name)+') не ответил за 15 секунд. Проверь соединение и повтори попытку.')),15000)})
+      ]);
+    } finally { clearTimeout(timer); }
+    const {data,error}=result||{};
     if(error)throw new Error(String(error.message||error).slice(0,260));
     let v=Array.isArray(data)&&data.length===1?data[0]:data;
     if(typeof v==='string'){try{v=JSON.parse(v)}catch{}}
     if(v&&typeof v==='object'&&v.ok===false)throw new Error(v.message||'Операция не выполнена.');
     return v||{};
   }
+
   /* TODAY_SOCIAL_CLOSE_HOTFIX_V14 — reliable click-based close handling */
   /* TODAY_SOCIAL_MODAL_CLOSE_V15 — hard close path + scroll unlock */
 
@@ -295,50 +304,42 @@
 
   installModalSafety();
 
+  /* TODAY_SOCIAL_DIRECT_MODAL_V21_BEGIN — no full-screen route / no pushState. */
   function modal(html) {
     const root = byId('modal');
     const host = byId('modalContent');
     if (!root || !host) return;
-    const title = socialPageTitle(html);
-
-    if (!socialRouteActive) {
-      if (typeof openModal !== 'function') return;
-      openModal(html); // Reuse the existing container, then release the old dialog body lock.
-      socialRouteOriginScrollY = Number(window.__todayModalScrollY || 0);
-      socialRouteOriginBodyStyle = { ...(window.__todayModalBodyStyle || {}) };
-      socialRouteSession = `today-social-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-      socialRoutePages = [{ html: String(html), title, scrollTop: 0, chatId: null }];
-      socialRouteDepth = 1;
-      socialRouteActive = true;
-      socialRouteBodyRestored = false;
-      history.pushState(socialRouteState(1), '', location.href);
-      try { stopPoll(); } catch (_) {}
-      renderSocialPage(socialRoutePages[0], false);
-      return;
-    }
+    try { if (typeof stopPoll === 'function') stopPoll(); } catch (_) {}
+    document.documentElement.classList.remove('today-social-page-mode');
+    document.body.classList.remove('today-social-page-mode');
+    root.classList.remove('today-social-page');
+    root.classList.add('today-social-modal');
 
     const card = root.querySelector('.modal-card');
-    const current = socialRoutePages[socialRouteDepth - 1];
-    if (current) {
-      current.scrollTop = card ? card.scrollTop : 0;
-      current.chatId = host.dataset.chatId || current.chatId || null;
-    }
-    try { stopPoll(); } catch (_) {}
+    const clearStyle = (node, keys) => keys.forEach(key => node && node.style && node.style.removeProperty(key));
+    // Strip inline styles written by the previous V19 full-page renderer.
+    clearStyle(root, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
+    clearStyle(card, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
+    clearStyle(host, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
 
-    if (current && current.title === title) {
-      // Same page refreshed after an action: update in place instead of adding a duplicate history stop.
-      socialRoutePages[socialRouteDepth - 1] = { html: String(html), title, scrollTop: current.scrollTop, chatId: current.chatId };
-      history.replaceState(socialRouteState(socialRouteDepth), '', location.href);
-      renderSocialPage(socialRoutePages[socialRouteDepth - 1], true);
-      return;
-    }
+    // Keep the navigation bar inside the actual modal card. It doubles as a safe close control.
+    const bar = ensureSocialPageBar();
+    const title = socialPageTitle(html);
+    const titleNode = bar && bar.querySelector('#todaySocialPageTitle');
+    if (titleNode) titleNode.textContent = title;
 
-    socialRoutePages = socialRoutePages.slice(0, socialRouteDepth);
-    socialRouteDepth += 1;
-    socialRoutePages[socialRouteDepth - 1] = { html: String(html), title, scrollTop: 0, chatId: null };
-    history.pushState(socialRouteState(socialRouteDepth), '', location.href);
-    renderSocialPage(socialRoutePages[socialRouteDepth - 1], false);
+    // The legacy route stack must not control the active view anymore.
+    socialRouteActive = false;
+    socialRoutePages = [];
+    socialRouteDepth = 0;
+    socialRouteBodyRestored = false;
+
+    if (typeof openModal === 'function') openModal(String(html || ''));
+    else { host.innerHTML = String(html || ''); root.classList.remove('hidden'); }
+    root.classList.remove('today-social-page');
+    root.classList.add('today-social-modal');
   }
+  /* TODAY_SOCIAL_DIRECT_MODAL_V21_END */
   /* TODAY_SOCIAL_PAGES_V16_JS_END */
   function stopPoll(){if(chatPoll){clearInterval(chatPoll);chatPoll=null}activeChatId=null;}
   function panelShell(title,sub,content){return `<section class="ts-panel"><div class="ts-panel-head"><div><div class="ts-kicker">TODAY SOCIAL / ${VERSION}</div><h2>${h(title)}</h2>${sub?`<p>${h(sub)}</p>`:''}</div><span class="ts-orbit" aria-hidden="true">✦</span></div>${content}</section>`}
@@ -411,7 +412,7 @@
   }
   async function openChats(){
     if(!await needUser())return;
-    let d;try{d=await rpc('today_social_list_chats')}catch(e){notify(e.message);return}
+    let d;try{d=await rpc('today_social_list_chats')}catch(e){modal(panelShell('Сообщения','Не удалось загрузить диалоги.',`<div class="ts-error-panel"><strong>Соединение не ответило.</strong><p>${h(e.message||e)}</p><button class="ts-primary" data-social-act="chats">Повторить ↻</button></div>`));return}
     const chats=Array.isArray(d.chats)?d.chats:[];
     const content=`<div class="ts-chat-create-grid"><form class="ts-form-card" data-social-form="start-direct"><h3>Личный диалог</h3><p>Напиши любому участнику, если он разрешил входящие сообщения.</p><label>Никнейм пользователя<input name="username" placeholder="@nickname" required></label><button class="ts-primary" type="submit">Открыть диалог ↗</button></form><form class="ts-form-card" data-social-form="create-group"><h3>Новая группа</h3><p>Добавь любое количество участников — у группы нет встроенного лимита.</p><label>Название<input name="title" maxlength="100" placeholder="Например, Ночной клуб" required></label><label>Никнеймы через запятую<textarea name="usernames" rows="2" placeholder="@alex, @maria, @max" required></textarea></label><button class="ts-primary" type="submit">Создать группу +</button></form></div><div class="ts-list-head"><h3>Твои диалоги</h3><button class="ts-mini" data-social-act="refresh-chats">Обновить</button></div><div class="ts-chat-list">${chats.length?chats.map(c=>`<button class="ts-chat-row" data-social-act="open-chat" data-id="${h(c.id)}" data-title="${h(c.title)}" data-type="${h(c.type)}"><span class="ts-chat-icon">${c.type==='global'?'◎':c.type==='group'?'♧':'↗'}</span><span class="ts-chat-row-copy"><b>${h(c.title||'Диалог')}</b><small>${h(shortText(c.last_body|| (c.type==='global'?'Общение со всем сообществом':c.type==='group'?'Групповая переписка':'Начни разговор'),95))}</small></span><span class="ts-chat-row-meta">${c.unread_count?`<i>${h(c.unread_count)}</i>`:''}<small>${c.last_at?h(dateLabel(c.last_at)):c.type==='global'?'ВСЕ':'НОВЫЙ'}</small></span><span class="ts-arrow">↗</span></button>`).join(''):`<div class="ts-empty">Пока нет диалогов. Общий чат уже ждёт тебя.</div>`}</div><div class="ts-moderation-note"><b>Правила общего чата</b><span>Мат, оскорбления и политические высказывания запрещены. Первое нарушение — 30 минут, второе — 24 часа, далее — 7 суток без сообщений и публикаций во всей TODAY.</span></div>`;
     modal(panelShell('Сообщения','Три пространства общения — каждый выбирает свой формат.',content));
@@ -436,14 +437,14 @@
     try{
       const d=await rpc('today_social_list_friend_requests');const incoming=d.incoming||[],outgoing=d.outgoing||[],friends=d.friends||[];
       modal(panelShell('Друзья','Люди, с которыми твой TODAY продолжается и после полуночи.',`<form class="ts-search-form" data-social-form="search-users"><label>Найти человека<input name="query" placeholder="Никнейм или имя · минимум 2 символа" required></label><button class="ts-primary" type="submit">Найти людей ↗</button></form><div id="todaySocialSearchResults"></div><div class="ts-columns"><div><div class="ts-list-head"><h3>Входящие <span class="ts-count">${incoming.length}</span></h3></div>${incoming.length?incoming.map(u=>`<article class="ts-user-card">${avatar(u)}<div class="ts-user-copy"><b>${h(u.name)}</b><span>@${h(u.username)}</span></div><div class="ts-user-actions"><button class="ts-mini ts-mini-accent" data-social-act="accept-friend" data-id="${h(u.id)}">Принять</button><button class="ts-mini" data-social-act="reject-friend" data-id="${h(u.id)}">Отклонить</button></div></article>`).join(''):`<p class="ts-muted">Новых заявок нет.</p>`}</div><div><div class="ts-list-head"><h3>Твои друзья <span class="ts-count">${friends.length}</span></h3></div>${friends.length?friends.map(u=>userCard(u)).join(''):`<p class="ts-muted">Здесь появятся принятые друзья.</p>`}</div></div><div class="ts-list-head"><h3>Отправленные заявки</h3></div>${outgoing.length?outgoing.map(u=>`<div class="ts-outgoing">${avatar(u,'small')}<span>@${h(u.username)}</span><i>Ожидает ответа</i></div>`).join(''):`<p class="ts-muted">Нет ожидающих заявок.</p>`}`));
-    }catch(e){notify(e.message)}
+    }catch(e){modal(panelShell('Друзья','Не удалось загрузить список друзей.',`<div class="ts-error-panel"><strong>Соединение не ответило.</strong><p>${h(e.message||e)}</p><button class="ts-primary" data-social-act="friends">Повторить ↻</button></div>`))}
   }
   async function openProfile(id){
     const uid=await currentUser();
     if(!id){if(!uid&&!await needUser())return;id=uid}
     let d;try{d=await rpc('today_social_profile_page',{p_user_id:id})}catch(e){modal(panelShell('Страница недоступна','',`<div class="ts-empty">${h(e.message)}</div>`));return}
     if(!d.ok||!d.profile){modal(panelShell('Страница недоступна','',`<div class="ts-empty">${h(d.message||'Эту страницу нельзя посмотреть.')}</div>`));return}
-    const p=d.profile,own=!!d.is_self,rawPosts=Array.isArray(d.posts)?d.posts:[],friends=Array.isArray(d.friends)?d.friends:[];const posts=await signProfilePostPhotos(rawPosts);const stories=await loadProfileStories(p.id);
+    const p=d.profile,own=!!d.is_self,rawPosts=Array.isArray(d.posts)?d.posts:[],friends=Array.isArray(d.friends)?d.friends:[];let posts=[];try{posts=await todayWithTimeout(signProfilePostPhotos(rawPosts),8000,'Загрузка фотографий заняла слишком много времени.')}catch(photoError){console.warn('TODAY profile photos timeout',photoError);posts=rawPosts.map(post=>({...post,image_url:''}))}const stories=await loadProfileStories(p.id);
     const friendshipAction=own?'':d.friend_status==='friends'?`<span class="ts-status-chip">✓ Вы друзья</span>`:d.friend_status==='outgoing'?`<span class="ts-status-chip">Заявка отправлена</span>`:d.friend_status==='incoming'?`<button class="ts-primary" data-social-act="accept-friend" data-id="${h(p.id)}">Принять заявку</button>`:`<button class="ts-primary" data-social-act="request-friend" data-username="${h(p.username)}">＋ Добавить в друзья</button>`;
     const mainAction=own?`<button class="ts-primary" data-social-act="settings">Настроить приватность</button>`:`<button class="ts-mini" data-social-act="direct" data-username="${h(p.username)}">Написать</button>${friendshipAction}`;
     const createPost=own?`<form class="ts-form-card ts-create-post" data-social-form="create-profile-post"><h3>Оставить запись на своей странице</h3><label>Заголовок <small>необязательно</small><input name="title" maxlength="140" placeholder="Коротко и по делу"></label><label>Текст публикации<textarea name="body" rows="4" maxlength="5000" placeholder="Это останется здесь и завтра…" required></textarea></label><label class="ts-photo-field"><span>Фотография <small>необязательно</small></span><input name="photo" type="file" accept="image/jpeg,image/png,image/webp" data-social-photo><small>JPG, PNG или WebP · до 15 МБ. Изображение будет автоматически сжато.</small></label><div class="ts-photo-preview" data-social-photo-preview hidden></div><label>Кто увидит<select name="visibility"><option value="public">Все пользователи</option><option value="friends">Только друзья</option><option value="private">Только я</option></select></label><button class="ts-primary" type="submit">Опубликовать на странице ↗</button><span class="ts-helper">Публикации профиля постоянные и не удаляются в полночь. Фото защищено настройками доступа.</span></form>`:'';
@@ -799,6 +800,11 @@
   async function blockUser(id){if(!window.confirm('Заблокировать пользователя? Он не сможет начать или продолжить личный диалог с тобой.'))return;try{const d=await rpc('today_social_block_user',{p_user_id:id});notify(d.message||'Пользователь заблокирован.');if(typeof closeModal==='function')closeModal()}catch(e){notify(e.message)}}
   async function handleClick(btn){
     const a=btn.dataset.socialAct,id=btn.dataset.id,username=btn.dataset.username,title=btn.dataset.title,type=btn.dataset.type;
+    const loadingTitles={chats:'Сообщения',friends:'Друзья','my-profile':'Моя страница',settings:'Приватность и безопасность',channels:'Каналы','open-profile':'Страница участника'};
+    if(loadingTitles[a]){
+      const label=loadingTitles[a];
+      modal(panelShell(label,'Подключаемся к TODAY. Если сервер не ответит, здесь появится понятная ошибка.',`<div class="ts-loading-panel"><span class="ts-loading-spinner"></span><span>Загружаем раздел «${h(label)}»…</span></div>`));
+    }
     if(a==='chats')return openChats();if(a==='friends')return openFriends();if(a==='my-profile')return openProfile();if(a==='settings')return openSettings();if(a==='channels')return openChannels();
     if(a==='mini-games'){const current=socialRoutePages[socialRouteDepth-1];if(socialRouteActive&&socialRouteDepth>1&&Object.values(TODAY_GAMES).some(g=>g.title===current?.title)){history.back();return;}return openMiniGames();}if(a==='play-game')return openMiniGame(btn.dataset.game);
     if(a==='retry-channels')return openChannels();if(a==='retry-settings')return openSettings();if(a==='retry-channel')return openChannel(id,true);
