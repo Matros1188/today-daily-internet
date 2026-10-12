@@ -626,3 +626,23 @@ body.today-social-page-mode #todaySocialNav{
 .ts-profile-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.ts-profile-stats>div{display:grid;gap:5px;min-width:0;padding:13px 15px;border:1px solid rgba(151,185,242,.14);border-radius:15px;background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.014))}.ts-profile-stats b{color:#f4f8ff;font-size:22px;font-weight:850;letter-spacing:-.05em;font-variant-numeric:tabular-nums}.ts-profile-stats span{color:#90a6cc;font-size:8px;font-weight:800;letter-spacing:.1em}
 @media(max-width:640px){.ts-profile-cover{min-height:138px;padding:17px;border-radius:18px}.ts-profile-cover-mark{right:15px;bottom:15px;font-size:22px}.ts-profile-stats{gap:7px}.ts-profile-stats>div{padding:11px 10px;border-radius:12px}.ts-profile-stats b{font-size:19px}.ts-profile-stats span{font-size:7px;letter-spacing:.055em}}
 /* TODAY SOCIAL STORIES + MINI GAMES V17 CSS END */
+
+
+/* TODAY_SOCIAL_MODAL_RENDER_V20_CSS_BEGIN — keep navigation and content in the same visible dialog. */
+#modal.today-social-modal:not(.today-social-page) > .modal-card > #todaySocialPageBar{
+  position:sticky!important;top:0!important;left:auto!important;right:auto!important;inset:auto!important;
+  width:100%!important;max-width:100%!important;min-height:66px!important;margin:0 0 18px!important;
+  padding:10px 12px!important;display:grid!important;grid-template-columns:80px minmax(0,1fr) 42px!important;gap:10px!important;
+  z-index:500!important;border:1px solid rgba(164,190,235,.20)!important;border-radius:17px!important;
+  background:linear-gradient(135deg,rgba(20,30,51,.96),rgba(9,16,31,.94))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.075),0 8px 28px rgba(0,0,0,.18)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(150%)!important;backdrop-filter:blur(24px) saturate(150%)!important;
+}
+#modal.today-social-modal:not(.today-social-page) > .modal-card > #todaySocialPageBar button{min-height:42px!important;border-radius:11px!important}
+#modal.today-social-modal:not(.today-social-page) > .modal-card > #todaySocialPageBar .today-social-route-title{min-width:0!important}
+#modal.today-social-modal:not(.today-social-page) > .modal-card > #todaySocialPageBar .today-social-route-title>strong{max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+@media(max-width:640px){
+ #modal.today-social-modal:not(.today-social-page) > .modal-card > #todaySocialPageBar{grid-template-columns:65px minmax(0,1fr) 40px!important;gap:6px!important;min-height:60px!important;padding:8px!important;margin-bottom:15px!important}
+ #modal.today-social-modal:not(.today-social-page) > .modal-card{width:calc(100vw - 14px)!important;max-height:calc(100dvh - 14px)!important;padding:14px!important;border-radius:20px!important}
+}
+/* TODAY_SOCIAL_MODAL_RENDER_V20_CSS_END */
