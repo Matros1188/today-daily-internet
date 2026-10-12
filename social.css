@@ -262,3 +262,38 @@ body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;bac
 }
 @media(prefers-reduced-motion:reduce){.modal.today-social-modal .modal-card{animation:none!important}}
 
+/* TODAY_HEADLINE_AND_PILL_FIX_V12 — clear manifesto and category-label contrast. */
+#homeSection h1{
+  font-size:clamp(40px,5.25vw,76px)!important;
+  line-height:.94!important;
+  letter-spacing:-.065em!important;
+  max-width:100%!important;
+  text-wrap:balance!important;
+}
+#homeSection h1 span{
+  background:linear-gradient(100deg,#82a4ff 0%,#b99aff 44%,#75e1e8 82%,#95efcc 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+}
+/* The base stylesheet uses var(--ink) for the pill background. The social theme
+   changes --ink to a near-white text color, creating the old white-on-white bug.
+   Use explicit, theme-independent colors so the label remains readable. */
+.daily-card .card-head .kind-pill{
+  background:linear-gradient(135deg,#31496d 0%,#1b2d49 100%)!important;
+  color:#f7fbff!important;
+  border:1px solid rgba(128,190,219,.48)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 4px 12px rgba(0,0,0,.16)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.28)!important;
+  font-size:9px!important;
+  font-weight:850!important;
+  letter-spacing:.075em!important;
+  line-height:1.15!important;
+  padding:7px 11px!important;
+}
+.daily-card .card-head .count-pill{color:#b8c5df!important;font-weight:750!important}
+@media(max-width:640px){
+  #homeSection h1{font-size:clamp(32px,8vw,46px)!important;line-height:1.02!important;letter-spacing:-.06em!important}
+  .daily-card .card-head .kind-pill{font-size:8px!important;padding:7px 9px!important;letter-spacing:.045em!important}
+}
+
