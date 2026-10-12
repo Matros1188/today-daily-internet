@@ -1,7 +1,8 @@
+/* TODAY_PROFILE_POST_PHOTOS_V1 — private, visibility-aware profile images */
 /* TODAY SOCIAL LAYER V1 · persistent profiles, friends, 3 chat types and channels */
 (function(){
   'use strict';
-  const VERSION='TODAY-SOCIAL-V1.1';
+  const VERSION='TODAY-SOCIAL-V1.2';
   let activeChatId=null,activeChatTitle='',chatPoll=null,viewerId=null;
   const byId=id=>document.getElementById(id);
   const h=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -90,14 +91,35 @@
   }
   function profilePostCard(p,own){
     const vis=p.visibility==='private'?'Только ты':p.visibility==='friends'?'Друзья':'Публично';
-    return `<article class="ts-post-card"><div class="ts-post-meta"><span class="ts-post-tag">ЛИЧНАЯ СТРАНИЦА</span><time>${h(dateLabel(p.created_at))}</time><span>${h(vis)}</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}<p>${h(p.body).replace(/\n/g,'<br>')}</p>${own&&p.visibility==='public'?`<button class="ts-promo-button" data-social-act="promote-post" data-id="${h(p.id)}">✦ В «Что оставили сегодня» · 250 монет</button>`:''}<button class="ts-text-button" data-social-act="report" data-kind="profile_post" data-id="${h(p.id)}">Пожаловаться</button></article>`;
+    const photo=p.image_url?`<a class="ts-post-image-link" href="${h(p.image_url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть фотографию в полном размере"><img class="ts-post-image" src="${h(p.image_url)}" alt="Фото в публикации" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>`:'';
+    return `<article class="ts-post-card"><div class="ts-post-meta"><span class="ts-post-tag">ЛИЧНАЯ СТРАНИЦА</span><time>${h(dateLabel(p.created_at))}</time><span>${h(vis)}</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}${photo}<p>${h(p.body).replace(/\n/g,'<br>')}</p>${own&&p.visibility==='public'?`<button class="ts-promo-button" data-social-act="promote-post" data-id="${h(p.id)}">✦ В «Что оставили сегодня» · 250 монет</button>`:''}<button class="ts-text-button" data-social-act="report" data-kind="profile_post" data-id="${h(p.id)}">Пожаловаться</button></article>`;
+  }
+  async function signProfilePostPhotos(posts){
+    return Promise.all((posts||[]).map(async p=>{
+      if(!p.image_path)return {...p,image_url:''};
+      try{const {data,error}=await sb.storage.from('today-profile-media').createSignedUrl(p.image_path,3600);return {...p,image_url:error?'':(data?.signedUrl||'')}}
+      catch(e){console.warn('TODAY profile photo URL',e);return {...p,image_url:''}}
+    }));
+  }
+  async function uploadProfilePostPhoto(file){
+    if(!file) return '';
+    const uid=await currentUser();if(!uid)throw new Error('Войди в аккаунт, чтобы добавлять фотографии.');
+    if(!/^image\/(jpeg|png|webp)$/i.test(String(file.type||'')))throw new Error('Поддерживаются JPG, PNG и WebP.');
+    if(file.size>15*1024*1024)throw new Error('Фото слишком большое: максимум 15 МБ.');
+    if(typeof imageBlob!=='function')throw new Error('Не удалось запустить обработку фото. Обнови страницу.');
+    const blob=await imageBlob(file,1800,.84);
+    const token=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
+    const path=`profile-posts/${uid}/${token}.jpg`;
+    const {error}=await sb.storage.from('today-profile-media').upload(path,blob,{contentType:'image/jpeg',cacheControl:'31536000',upsert:false});
+    if(error)throw new Error('Не удалось загрузить фото: '+String(error.message||error).slice(0,180));
+    return path;
   }
   async function loadPromos(){
     const host=byId('todayPromotedList');if(!host)return;
     try{
-      const d=await rpc('today_social_get_promoted_posts');const posts=Array.isArray(d.posts)?d.posts:[];
+      const d=await rpc('today_social_get_promoted_posts');const rawPosts=Array.isArray(d.posts)?d.posts:[];const posts=await signProfilePostPhotos(rawPosts);
       if(!posts.length){host.innerHTML=`<div class="ts-empty"><b>Место для следа дня свободно.</b><span>Создай пост на своей странице и выведи его в общую дневную ленту за 250 золотых монет. Доступно один раз в день.</span><button class="ts-mini ts-mini-accent" data-social-act="my-profile">Создать пост</button></div>`;return;}
-      host.innerHTML=posts.map(p=>`<article class="ts-promoted-card"><div class="ts-promoted-top">${avatar({name:p.author_name,avatar_url:p.avatar_url})}<div class="ts-user-copy"><b>${h(p.author_name||p.username)}</b><span>@${h(String(p.username||'').replace(/^@/,''))} · след дня</span></div><span class="ts-promo-badge">FEATURED</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}<p>${h(p.body).replace(/\n/g,'<br>')}</p><div class="ts-promoted-foot"><span>В общей ленте до 00:00 МСК</span><button class="ts-text-button" data-social-act="open-profile" data-id="${h(p.author_id)}">Открыть страницу ↗</button></div></article>`).join('');
+      host.innerHTML=posts.map(p=>`<article class="ts-promoted-card"><div class="ts-promoted-top">${avatar({name:p.author_name,avatar_url:p.avatar_url})}<div class="ts-user-copy"><b>${h(p.author_name||p.username)}</b><span>@${h(String(p.username||'').replace(/^@/,''))} · след дня</span></div><span class="ts-promo-badge">FEATURED</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}${p.image_url?`<a class="ts-post-image-link" href="${h(p.image_url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть фотографию"><img class="ts-post-image" src="${h(p.image_url)}" alt="Фото публикации" loading="lazy" decoding="async"></a>`:''}<p>${h(p.body).replace(/\n/g,'<br>')}</p><div class="ts-promoted-foot"><span>В общей ленте до 00:00 МСК</span><button class="ts-text-button" data-social-act="open-profile" data-id="${h(p.author_id)}">Открыть страницу ↗</button></div></article>`).join('');
     }catch(e){host.innerHTML=`<div class="ts-empty">Блок продвижения временно недоступен. ${h(shortText(e.message,100))}</div>`;}
   }
   async function openChats(){
@@ -134,10 +156,10 @@
     if(!id){if(!uid&&!await needUser())return;id=uid}
     let d;try{d=await rpc('today_social_profile_page',{p_user_id:id})}catch(e){modal(panelShell('Страница недоступна','',`<div class="ts-empty">${h(e.message)}</div>`));return}
     if(!d.ok||!d.profile){modal(panelShell('Страница недоступна','',`<div class="ts-empty">${h(d.message||'Эту страницу нельзя посмотреть.')}</div>`));return}
-    const p=d.profile,own=!!d.is_self,posts=Array.isArray(d.posts)?d.posts:[],friends=Array.isArray(d.friends)?d.friends:[];
+    const p=d.profile,own=!!d.is_self,rawPosts=Array.isArray(d.posts)?d.posts:[],friends=Array.isArray(d.friends)?d.friends:[];const posts=await signProfilePostPhotos(rawPosts);
     const friendshipAction=own?'':d.friend_status==='friends'?`<span class="ts-status-chip">✓ Вы друзья</span>`:d.friend_status==='outgoing'?`<span class="ts-status-chip">Заявка отправлена</span>`:d.friend_status==='incoming'?`<button class="ts-primary" data-social-act="accept-friend" data-id="${h(p.id)}">Принять заявку</button>`:`<button class="ts-primary" data-social-act="request-friend" data-username="${h(p.username)}">＋ Добавить в друзья</button>`;
     const mainAction=own?`<button class="ts-primary" data-social-act="settings">Настроить приватность</button>`:`<button class="ts-mini" data-social-act="direct" data-username="${h(p.username)}">Написать</button>${friendshipAction}`;
-    const createPost=own?`<form class="ts-form-card ts-create-post" data-social-form="create-profile-post"><h3>Оставить запись на своей странице</h3><label>Заголовок <small>необязательно</small><input name="title" maxlength="140" placeholder="Коротко и по делу"></label><label>Текст публикации<textarea name="body" rows="4" maxlength="5000" placeholder="Это останется здесь и завтра…" required></textarea></label><label>Кто увидит<select name="visibility"><option value="public">Все пользователи</option><option value="friends">Только друзья</option><option value="private">Только я</option></select></label><button class="ts-primary" type="submit">Опубликовать на странице ↗</button><span class="ts-helper">Публикации профиля постоянные и не удаляются в полночь.</span></form>`:'';
+    const createPost=own?`<form class="ts-form-card ts-create-post" data-social-form="create-profile-post"><h3>Оставить запись на своей странице</h3><label>Заголовок <small>необязательно</small><input name="title" maxlength="140" placeholder="Коротко и по делу"></label><label>Текст публикации<textarea name="body" rows="4" maxlength="5000" placeholder="Это останется здесь и завтра…" required></textarea></label><label class="ts-photo-field"><span>Фотография <small>необязательно</small></span><input name="photo" type="file" accept="image/jpeg,image/png,image/webp" data-social-photo><small>JPG, PNG или WebP · до 15 МБ. Изображение будет автоматически сжато.</small></label><div class="ts-photo-preview" data-social-photo-preview hidden></div><label>Кто увидит<select name="visibility"><option value="public">Все пользователи</option><option value="friends">Только друзья</option><option value="private">Только я</option></select></label><button class="ts-primary" type="submit">Опубликовать на странице ↗</button><span class="ts-helper">Публикации профиля постоянные и не удаляются в полночь. Фото защищено настройками доступа.</span></form>`:'';
     const friendBlock=`<div class="ts-profile-friends"><div class="ts-list-head"><h3>Друзья</h3><span class="ts-count">${friends.length}</span></div>${friends.length?friends.slice(0,12).map(u=>`<button class="ts-friend-chip" data-social-act="open-profile" data-id="${h(u.id)}">${avatar(u,'small')}<span>${h(u.name||u.username)}</span></button>`).join(''):`<p class="ts-muted">${own?'Добавляй участников в друзья — они появятся здесь.':'Список друзей недоступен или пока пуст.'}</p>`}</div>`;
     const reportUser=!own?`<div class="ts-profile-tools"><button class="ts-text-button" data-social-act="block-user" data-id="${h(p.id)}">Заблокировать</button><button class="ts-text-button" data-social-act="report" data-kind="user" data-id="${h(p.id)}">Пожаловаться на профиль</button></div>`:'';
     modal(panelShell(own?'Моя страница':p.name||p.username,own?'Твоя постоянная история в TODAY.':`Профиль @${String(p.username||'').replace(/^@/,'')}`,`<div class="ts-profile-hero">${avatar(p,'large')}<div><h3>${h(p.name||p.username||'Участник')}</h3><span>@${h(String(p.username||'').replace(/^@/,''))}</span><p>${h(p.bio||'Пока без описания.')}</p><div class="ts-profile-actions">${mainAction}</div></div></div>${reportUser}${createPost}<div class="ts-profile-content"><div class="ts-profile-wall"><div class="ts-list-head"><h3>Публикации</h3><span class="ts-count">${posts.length}</span></div>${posts.length?posts.map(q=>profilePostCard(q,own)).join(''):`<div class="ts-empty">${own?'Твоя страница готова к первой записи.':'Пока нет публикаций, доступных для просмотра.'}</div>`}</div>${friendBlock}</div>`));
@@ -186,7 +208,13 @@
       }else if(action==='search-users'){
         await handleSearch(form);
       }else if(action==='create-profile-post'){
-        const d=await rpc('today_social_create_profile_post',{p_title:String(fd.get('title')||''),p_body:String(fd.get('body')||''),p_visibility:String(fd.get('visibility')||'public')});notify(d.message||'Публикация добавлена.');await openProfile(await currentUser());
+        const imageFile=form.querySelector('input[name="photo"]')?.files?.[0]||null;let imagePath='';let postCreated=false;
+        try{
+          if(imageFile){if(btn){btn.disabled=true;btn.textContent='ЗАГРУЖАЮ ФОТО…'}imagePath=await uploadProfilePostPhoto(imageFile);}
+          if(btn)btn.textContent='СОХРАНЯЮ ПУБЛИКАЦИЮ…';
+          const d=await rpc('today_social_create_profile_post',{p_title:String(fd.get('title')||''),p_body:String(fd.get('body')||''),p_visibility:String(fd.get('visibility')||'public'),p_image_path:imagePath||null});
+          postCreated=true;notify(d.message||'Публикация добавлена.');await openProfile(await currentUser());
+        }catch(e){if(imagePath&&!postCreated)try{await sb.storage.from('today-profile-media').remove([imagePath])}catch{}if(btn)btn.textContent='Опубликовать на странице ↗';throw e;}
       }else if(action==='save-settings'){
         const uid=await currentUser();const payload={user_id:uid,allow_direct_messages:!!form.elements.allow_direct_messages.checked,allow_group_invites:!!form.elements.allow_group_invites.checked,allow_friend_requests:!!form.elements.allow_friend_requests.checked,allow_profile_visits:!!form.elements.allow_profile_visits.checked,profile_visibility:String(fd.get('profile_visibility')||'public'),friend_list_visibility:String(fd.get('friend_list_visibility')||'public'),updated_at:new Date().toISOString()};
         const r=await sb.from('today_social_settings').upsert(payload,{onConflict:'user_id'});if(r.error)throw r.error;notify('Настройки приватности сохранены.');
@@ -217,8 +245,9 @@
   function setup(){
     installModalSafety();
     injectNav();injectPromo();document.addEventListener('click',e=>{const b=e.target.closest('[data-social-act]');if(!b)return;e.preventDefault();handleClick(b)});document.addEventListener('submit',onSubmit);
+    document.addEventListener('change',e=>{const input=e.target;if(!(input instanceof HTMLInputElement)||input.name!=='photo'||!input.matches('[data-social-photo]'))return;const form=input.closest('form');const preview=form?.querySelector('[data-social-photo-preview]');if(!preview)return;const oldUrl=preview.dataset.objectUrl;if(oldUrl)try{URL.revokeObjectURL(oldUrl)}catch{};preview.replaceChildren();const file=input.files?.[0];if(!file){preview.hidden=true;delete preview.dataset.objectUrl;return;}if(file.size>15*1024*1024){input.value='';preview.hidden=true;notify('Фото слишком большое: максимум 15 МБ.');return;}if(!/^image\/(jpeg|png|webp)$/i.test(file.type)){input.value='';preview.hidden=true;notify('Выбери фото JPG, PNG или WebP.');return;}const url=URL.createObjectURL(file);preview.dataset.objectUrl=url;const img=document.createElement('img');img.src=url;img.alt='Предпросмотр выбранной фотографии';img.className='ts-post-image-preview';preview.append(img);const info=document.createElement('span');info.textContent=file.name;preview.append(info);preview.hidden=false;});
     const close=byId('modalClose');if(close)close.addEventListener('click',()=>{stopPoll();const m=byId('modal');if(m)m.classList.remove('today-social-modal')});
-    const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();modalRoot.classList.remove('today-social-modal')}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
+    const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();modalRoot.classList.remove('today-social-modal');for(const preview of modalRoot.querySelectorAll('.ts-photo-preview[data-object-url]')){try{URL.revokeObjectURL(preview.dataset.objectUrl)}catch{}delete preview.dataset.objectUrl;preview.replaceChildren();preview.hidden=true;}}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
     loadPromos();
   }
   window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,loadPromos};
