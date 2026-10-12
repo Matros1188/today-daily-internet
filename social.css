@@ -674,3 +674,67 @@ body.today-social-page-mode #todaySocialNav{
 @media(max-width:380px){.ts-m3-hero{grid-template-columns:minmax(0,1fr) 70px}.ts-m3-hero-art svg{width:112px;transform:translateX(11px)}.ts-m3-hero-stats{gap:9px}.ts-m3-hero-stats small{font-size:8px}.ts-match-board.ts-m3-board{gap:2px;padding:4px}.ts-m3-gem{border-radius:5px}.ts-m3-game-hud small{font-size:7px}.ts-m3-game-hud b{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.ts-m3-hero-art svg,.ts-m3-gem.is-matching,.ts-m3-board.is-shuffling,.ts-m3-result,.ts-m3-result-stars span.earned{animation:none!important;transition:none!important}}
 /* TODAY CRYSTAL CHRONICLES V25 CSS END */
+
+/* TODAY CRYSTAL CHRONICLES V26 — prism lighting, layered glass, high-clarity board */
+.ts-m3-campaign,.ts-m3-game{position:relative;isolation:isolate;gap:clamp(15px,2.2vw,24px);}
+.ts-m3-campaign:before,.ts-m3-game:before{content:"";position:absolute;z-index:-1;inset:-22px -14px;pointer-events:none;background:radial-gradient(ellipse at 4% 7%,rgba(111,125,255,.16),transparent 36%),radial-gradient(ellipse at 98% 35%,rgba(56,229,207,.10),transparent 34%),radial-gradient(ellipse at 46% 100%,rgba(183,102,255,.09),transparent 42%);filter:blur(16px);}
+.ts-m3-hero{border-color:rgba(191,179,255,.43);box-shadow:inset 0 1px rgba(255,255,255,.16),inset 0 -22px 54px rgba(92,78,226,.09),0 26px 76px rgba(0,0,0,.28),0 0 36px rgba(127,106,255,.10);}
+.ts-m3-hero:after{content:"";position:absolute;inset:1px;border-radius:26px;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.10),transparent 25%,transparent 67%,rgba(137,249,231,.06));}
+.ts-m3-hero-art svg{filter:drop-shadow(0 10px 18px rgba(107,94,255,.26)) drop-shadow(0 0 30px rgba(105,229,237,.14)) saturate(1.12);animation:tsM3ArtifactHoverV26 5.8s ease-in-out infinite;}
+.ts-m3-story,.ts-m3-chapter,.ts-m3-booster-card,.ts-m3-inventory,.ts-m3-result{backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:inset 0 1px rgba(255,255,255,.075),0 12px 32px rgba(0,0,0,.12);}
+.ts-match-board.ts-m3-board{isolation:isolate;overflow:hidden;padding:clamp(5px,1vw,9px);gap:clamp(2px,.48vw,5px);border:1px solid rgba(188,199,255,.30);border-radius:clamp(14px,2vw,23px);background:radial-gradient(ellipse at 50% -12%,rgba(124,129,255,.27),transparent 58%),radial-gradient(ellipse at 7% 100%,rgba(67,233,209,.10),transparent 36%),linear-gradient(150deg,rgba(12,21,49,.985),rgba(4,9,24,.995) 65%,rgba(13,17,43,.99));box-shadow:inset 0 1px rgba(255,255,255,.13),inset 0 0 0 4px rgba(255,255,255,.018),inset 0 -18px 45px rgba(0,0,0,.27),0 22px 55px rgba(0,0,0,.30),0 0 0 1px rgba(144,151,255,.08),0 0 42px rgba(116,105,255,.10);}
+.ts-match-board.ts-m3-board:before{content:"";position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;opacity:.50;background-image:radial-gradient(circle at 50% 10%,rgba(255,255,255,.09) 0 1px,transparent 1.5px),linear-gradient(120deg,transparent 20%,rgba(255,255,255,.035) 47%,transparent 70%);background-size:31px 31px,100% 100%;mask-image:linear-gradient(to bottom,black,transparent 92%);}
+.ts-m3-gem{z-index:1;border:1px solid rgba(184,206,255,.12);border-radius:clamp(5px,1vw,11px);background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.025) 48%,rgba(0,0,0,.13));box-shadow:inset 0 1px rgba(255,255,255,.085),inset 0 -2px 5px rgba(0,0,0,.13);transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .22s ease,border-color .22s ease,box-shadow .22s ease;}
+.ts-m3-gem:after{content:"";position:absolute;inset:7% 10%;border-radius:inherit;pointer-events:none;opacity:0;background:linear-gradient(118deg,transparent 5%,rgba(255,255,255,.56) 24%,rgba(255,255,255,.08) 30%,transparent 43%);transform:translateX(-125%) skewX(-14deg);}
+.ts-m3-gem:hover{z-index:2;transform:translateY(-2px) scale(1.04);box-shadow:inset 0 1px rgba(255,255,255,.20),0 5px 12px rgba(0,0,0,.18);}
+.ts-m3-gem:hover:after{opacity:.75;animation:tsM3PrismSweepV26 .7s ease-out both;}
+.ts-m3-gem-svg{filter:drop-shadow(0 3px 2px rgba(0,0,0,.31)) drop-shadow(0 0 7px rgba(153,157,255,.12));transform:translateZ(0);}
+.ts-m3-gem.gem-0 .ts-m3-gem-svg{filter:drop-shadow(0 0 7px rgba(174,125,255,.46)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.gem-1 .ts-m3-gem-svg{filter:drop-shadow(0 0 7px rgba(93,187,255,.44)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.gem-2 .ts-m3-gem-svg{filter:drop-shadow(0 0 7px rgba(64,230,179,.40)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.gem-3 .ts-m3-gem-svg{filter:drop-shadow(0 0 7px rgba(255,184,92,.43)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.gem-4 .ts-m3-gem-svg{filter:drop-shadow(0 0 7px rgba(255,93,151,.43)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.gem-5 .ts-m3-gem-svg{filter:drop-shadow(0 0 7px rgba(174,199,255,.45)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.gem-6 .ts-m3-gem-svg{filter:drop-shadow(0 0 8px rgba(255,224,99,.47)) drop-shadow(0 3px 3px rgba(0,0,0,.26));}
+.ts-m3-gem.is-selected{border-color:rgba(218,255,250,.98);background:radial-gradient(circle,rgba(117,255,230,.20),rgba(117,239,219,.07) 60%,rgba(255,255,255,.03));box-shadow:0 0 0 2px rgba(116,239,219,.27),0 0 23px rgba(109,244,222,.35),inset 0 0 16px rgba(157,255,239,.14);animation:tsM3ChosenPulseV26 1.15s ease-in-out infinite;}
+.ts-m3-gem.is-selected:after{opacity:.65;animation:tsM3PrismSweepV26 1.3s ease-in-out infinite;}
+.ts-m3-gem.is-matching{animation:tsM3GemMatchV26 .34s cubic-bezier(.2,.75,.2,1) forwards;}
+.ts-m3-gem.is-matching:after{inset:-3px;opacity:1;background:radial-gradient(circle,rgba(255,255,255,.95) 0 1px,transparent 2px),radial-gradient(circle,rgba(158,255,238,.9) 0 1px,transparent 2px),radial-gradient(circle,rgba(203,164,255,.95) 0 1px,transparent 2px);background-size:9px 9px,13px 13px,17px 17px;animation:tsM3PrismBurstV26 .34s ease-out forwards;}
+.ts-m3-score-track{height:8px;border:1px solid rgba(160,183,233,.13);background:rgba(139,157,207,.13);box-shadow:inset 0 1px 2px rgba(0,0,0,.18);}
+.ts-m3-score-track i{position:relative;overflow:hidden;background:linear-gradient(90deg,#a57aff 0%,#76b1ff 44%,#70f3d6 100%);box-shadow:0 0 13px rgba(131,214,223,.53);}
+.ts-m3-score-track i:after{content:"";position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);animation:tsM3ProgressSheenV26 2.5s linear infinite;}
+.ts-m3-game-hud>div{position:relative;overflow:hidden;border-color:rgba(169,187,255,.21);background:linear-gradient(145deg,rgba(34,47,82,.86),rgba(9,16,33,.93));box-shadow:inset 0 1px rgba(255,255,255,.09),0 8px 20px rgba(0,0,0,.12);}
+.ts-m3-game-hud>div:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(116deg,rgba(255,255,255,.07),transparent 43%);}
+.ts-m3-booster-use,.ts-m3-buy,.ts-m3-level,.ts-m3-result-actions button{transition:transform .18s ease,filter .18s ease,box-shadow .18s ease,border-color .18s ease;}
+.ts-m3-booster-use:not(:disabled):hover,.ts-m3-buy:not(:disabled):hover,.ts-m3-level:not(:disabled):hover,.ts-m3-result-actions button:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 9px 20px rgba(0,0,0,.20);}
+.ts-m3-level.is-current{box-shadow:0 0 0 1px rgba(137,245,222,.30),0 0 24px rgba(104,228,207,.12),inset 0 1px rgba(255,255,255,.12);}
+.ts-m3-result{border-color:rgba(133,255,220,.42);box-shadow:inset 0 1px rgba(255,255,255,.14),0 20px 56px rgba(0,0,0,.25),0 0 35px rgba(94,235,207,.10);}
+.ts-m3-result-symbol{animation:tsM3SealOrbitV26 6s linear infinite;box-shadow:0 0 0 6px rgba(104,236,207,.035),0 0 34px rgba(104,236,207,.22),inset 0 1px rgba(255,255,255,.16);}
+@keyframes tsM3ArtifactHoverV26{0%,100%{transform:translateY(0) rotate(-1.2deg) scale(1)}50%{transform:translateY(-9px) rotate(1deg) scale(1.025)}}
+@keyframes tsM3PrismSweepV26{0%{transform:translateX(-125%) skewX(-14deg)}100%{transform:translateX(125%) skewX(-14deg)}}
+@keyframes tsM3ChosenPulseV26{0%,100%{filter:brightness(1);transform:translateY(-1px) scale(1.045)}50%{filter:brightness(1.18);transform:translateY(-2px) scale(1.075)}}
+@keyframes tsM3PrismBurstV26{0%{transform:scale(.25) rotate(0);opacity:0}25%{opacity:1}100%{transform:scale(1.5) rotate(25deg);opacity:0}}
+@keyframes tsM3ProgressSheenV26{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
+@keyframes tsM3GemMatchV26{0%{transform:scale(1);opacity:1;filter:brightness(1)}35%{transform:scale(1.28) rotate(8deg);opacity:1;filter:brightness(2.2)}70%{transform:scale(.72) rotate(-9deg);opacity:.95;filter:brightness(2.8)}100%{transform:scale(.1) rotate(25deg);opacity:0;filter:brightness(3.4)}}
+@keyframes tsM3SealOrbitV26{0%,100%{transform:rotate(-3deg) scale(1)}50%{transform:rotate(3deg) scale(1.045)}}
+/* V26 adapts the crystalline interface to the selected TODAY palette. */
+html.today-theme-light .ts-m3-campaign,html.today-theme-light .ts-m3-game{color:#1b2740!important;}
+html.today-theme-light .ts-m3-hero{border-color:rgba(135,132,220,.32);background:radial-gradient(ellipse at 15% 100%,rgba(53,193,174,.12),transparent 40%),radial-gradient(ellipse at 83% 10%,rgba(131,107,239,.18),transparent 45%),linear-gradient(135deg,#ffffff,#eef2ff 62%,#e6f8f5);box-shadow:inset 0 1px #fff,0 22px 48px rgba(76,88,148,.14);}
+html.today-theme-light .ts-m3-hero-copy h2,html.today-theme-light .ts-m3-map-title h3,html.today-theme-light .ts-m3-result h3{color:#18233c!important;}
+html.today-theme-light .ts-m3-hero-copy>p,html.today-theme-light .ts-m3-story>p,html.today-theme-light .ts-m3-level-intro>p,html.today-theme-light .ts-m3-result p{color:#586784!important;}
+html.today-theme-light .ts-m3-story,html.today-theme-light .ts-m3-chapter,html.today-theme-light .ts-m3-inventory{border-color:rgba(126,143,188,.25);background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(240,244,255,.90));box-shadow:inset 0 1px #fff,0 12px 27px rgba(78,91,141,.08);}
+html.today-theme-light .ts-m3-story h3,html.today-theme-light .ts-m3-artifact b,html.today-theme-light .ts-m3-chapter h4{color:#233050!important;}
+html.today-theme-light .ts-m3-artifact,html.today-theme-light .ts-m3-artifact small{color:#61708f!important;}
+html.today-theme-light .ts-match-board.ts-m3-board{border-color:rgba(132,145,201,.34);background:radial-gradient(ellipse at 50% 0%,rgba(163,164,255,.35),transparent 61%),linear-gradient(145deg,#e4e9ff,#d6e0f7 58%,#e7f7f4);box-shadow:inset 0 1px #fff,inset 0 0 0 4px rgba(255,255,255,.22),0 22px 50px rgba(78,89,151,.20),0 0 0 1px rgba(255,255,255,.65);}
+html.today-theme-light .ts-m3-gem{border-color:rgba(91,112,169,.13);background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(238,242,255,.42));box-shadow:inset 0 1px rgba(255,255,255,.9),0 2px 5px rgba(69,85,134,.12);}
+html.today-theme-light .ts-m3-game-hud>div{border-color:rgba(131,148,195,.27);background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(237,242,255,.98));box-shadow:inset 0 1px #fff,0 7px 17px rgba(64,78,129,.08);}
+html.today-theme-light .ts-m3-game-hud b{color:#1d2a48!important;}
+html.today-theme-light .ts-m3-game-hud small,html.today-theme-light .ts-m3-objective-copy,html.today-theme-light .ts-m3-status{color:#60708c!important;}
+html.today-theme-light .ts-m3-status{border-color:rgba(131,148,195,.25);background:rgba(255,255,255,.68);}
+html.today-theme-light .ts-m3-booster-use,html.today-theme-light .ts-m3-booster-card{border-color:rgba(132,148,192,.28);background:linear-gradient(140deg,#ffffff,#f0f4ff);color:#243252;}
+html.today-theme-light .ts-m3-booster-use small,html.today-theme-light .ts-m3-booster-card p,html.today-theme-light .ts-m3-booster-card small{color:#667593!important;}
+html.today-theme-light .ts-m3-result{border-color:rgba(89,188,162,.30);background:radial-gradient(ellipse at 50% 0%,rgba(112,241,216,.2),transparent 55%),linear-gradient(145deg,#ffffff,#eaf8f4);}
+html.today-theme-light .ts-m3-result-symbol{color:#268d7e;background:rgba(104,236,207,.19);}
+@media(max-width:700px){.ts-match-board.ts-m3-board{gap:3px;padding:5px}.ts-m3-gem:after{inset:9% 10%}}
+@media(prefers-reduced-motion:reduce){.ts-m3-hero-art svg,.ts-m3-gem.is-selected,.ts-m3-result-symbol,.ts-m3-score-track i:after{animation:none!important}.ts-m3-gem,.ts-m3-booster-use,.ts-m3-buy,.ts-m3-level,.ts-m3-result-actions button{transition:none!important}}
+/* END TODAY CRYSTAL CHRONICLES V26 */

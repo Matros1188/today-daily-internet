@@ -718,6 +718,10 @@
     modal(panelShell('Мини-игры','Короткие игры TODAY — для дороги, очереди и свободной минуты.',html));
   }
 
+  /* TODAY V26 CLEANUP BRIDGES BEGIN */
+  window.__TODAY_STOP_ACTIVE_GAME_V26 = () => { try { if (typeof stopTodayMiniGame === 'function') stopTodayMiniGame(); } catch (_) {} };
+  window.__TODAY_STOP_ACTIVE_POLL_V26 = () => { try { if (typeof stopPoll === 'function') stopPoll(); } catch (_) {} };
+  /* TODAY V26 CLEANUP BRIDGES END */
   function openMiniGame(gameId) {
     stopTodayMiniGame();
     if (gameId === 'match3') return openMatch3Campaign();
