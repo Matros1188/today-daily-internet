@@ -1,4 +1,5 @@
 /* TODAY THEME + UNIVERSAL NON-BLOCKING BACK V26 */
+/* TODAY UNIVERSAL HARD CLOSE V39 */
 (() => {
   'use strict';
   const THEME_KEY = 'today-theme-preference-v26';
@@ -91,6 +92,58 @@
     try { window.scrollTo(0, Math.max(0, savedScroll)); } catch (_) {}
     backStack = []; lastHtml = ''; restoreTarget = null;
   };
+  /* TODAY UNIVERSAL HARD CLOSE V39 BEGIN — run before competing document/root handlers. */
+  const hardCloseModalV39 = (event) => {
+    const element = event && event.target instanceof Element ? event.target : null;
+    if (!element || !modalRoot.contains(element) || !openNow()) return false;
+    const button = element.closest('button,a,[role="button"]');
+    const isBackdrop = element === modalRoot.querySelector('.modal-backdrop');
+    if (!button && !isBackdrop) return false;
+    const text = button ? (button.getAttribute('aria-label') || button.getAttribute('title') || button.innerText || button.textContent || '').trim().replace(/\s+/g,' ').toLowerCase() : '';
+    const isSocial = modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page');
+    const closeSelector = '#modalClose,#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop,.ts-panel-close,[data-modal-close],[aria-label*="закрыть" i],[title*="закрыть" i]';
+    const explicitClose = !!button && (button.matches(closeSelector) || /^(закрыть|close|close modal|закрыть окно|выход|×|✕|x)$/.test(text));
+    // In V24, the two top social navigation controls already mean immediate exit from the overlay.
+    const socialTopExit = !!button && isSocial && button.matches('#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop');
+    if (!isBackdrop && !explicitClose && !socialTopExit) return false;
+
+    try { event.preventDefault(); } catch (_) {}
+    try { event.stopPropagation(); } catch (_) {}
+    try { event.stopImmediatePropagation(); } catch (_) {}
+
+    // Stop any active game frame/timers and chat poll before hiding the overlay.
+    try { if (typeof window.__TODAY_STOP_ACTIVE_GAME_V26 === 'function') window.__TODAY_STOP_ACTIVE_GAME_V26(); } catch (_) {}
+    try { if (typeof window.__TODAY_STOP_ACTIVE_POLL_V26 === 'function') window.__TODAY_STOP_ACTIVE_POLL_V26(); } catch (_) {}
+
+    const savedBody = window.__todayModalBodyStyle && typeof window.__todayModalBodyStyle === 'object' ? window.__todayModalBodyStyle : {};
+    const savedScroll = Number.isFinite(Number(window.__todayModalScrollY)) ? Number(window.__todayModalScrollY) : (window.scrollY || 0);
+    const clearInline = (node, names) => { if (!node || !node.style) return; for (const name of names) { try { node.style.removeProperty(name); } catch (_) {} } };
+    const card = modalRoot.querySelector('.modal-card');
+    const host = content;
+
+    // Hide first; never assign innerHTML on close (large games/chats can contain thousands of nodes).
+    clearInline(modalRoot, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
+    clearInline(card, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
+    clearInline(host, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
+    modalRoot.classList.add('hidden');
+    modalRoot.classList.remove('today-social-page','today-social-modal');
+    document.documentElement.classList.remove('today-modal-open','today-social-page-mode');
+    document.body.classList.remove('today-social-page-mode');
+    document.body.style.position = savedBody.position || '';
+    document.body.style.top = savedBody.top || '';
+    document.body.style.left = savedBody.left || '';
+    document.body.style.right = savedBody.right || '';
+    document.body.style.width = savedBody.width || '';
+    document.body.style.overflow = savedBody.overflow || '';
+    window.__todayModalBodyStyle = null;
+    window.__todayModalScrollY = null;
+    backStack = []; lastHtml = ''; lastScroll = 0; restoreTarget = null; wasOpen = false;
+    try { window.scrollTo(0, Math.max(0, savedScroll)); } catch (_) {}
+    return true;
+  };
+  window.addEventListener('click', event => { try { hardCloseModalV39(event); } catch (error) { console.error('[TODAY V39 hard close]', error); } }, true);
+  /* TODAY UNIVERSAL HARD CLOSE V39 END */
+
   const selector = '#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop,#modalClose,.ts-panel-close,[data-back],[data-nav-back],[data-social-act="back"],[data-game-act$="-back"],[aria-label*="назад" i],[title*="назад" i]';
   document.addEventListener('click', event => {
     const element = event.target instanceof Element ? event.target : null;
