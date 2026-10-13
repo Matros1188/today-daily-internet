@@ -7629,3 +7629,84 @@ html.today-theme-light .ts-story-viewer>p{color:#65728b!important}
 }
 @media(prefers-reduced-motion:reduce){html.today-theme-light *,html.today-theme-light *:before,html.today-theme-light *:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 /* TODAY LIGHT STUDIO V29 END */
+
+/* TODAY CRYSTAL CHRONICLES V30 — SPECIAL GEMS / MISSION SPLASH / COMBAT FEEDBACK */
+.ts-m3-royal-game .ts-m3-board-wrap{isolation:isolate;overflow:visible;perspective:900px;border-radius:26px;background:radial-gradient(ellipse at 50% 0%,rgba(117,124,255,.22),transparent 52%),radial-gradient(ellipse at 0% 100%,rgba(51,223,203,.09),transparent 40%),linear-gradient(140deg,rgba(32,42,80,.98),rgba(4,11,27,.99));padding:clamp(7px,1.5vw,12px);border:1px solid rgba(170,186,255,.36);box-shadow:inset 0 1px rgba(255,255,255,.18),inset 0 0 0 3px rgba(255,255,255,.025),0 26px 60px rgba(0,0,0,.25),0 0 35px rgba(115,110,255,.09)}
+.ts-m3-royal-game .ts-m3-board-wrap:before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:conic-gradient(from 40deg at 50% 50%,transparent,rgba(111,136,255,.11),transparent,rgba(102,243,221,.09),transparent);filter:blur(14px)}
+.ts-m3-royal-game .ts-match-board.ts-m3-board{gap:clamp(3px,.8vw,6px);padding:clamp(5px,1vw,9px);border-radius:19px;border-color:rgba(185,202,255,.24);background:linear-gradient(150deg,rgba(6,13,31,.94),rgba(12,20,47,.96));box-shadow:inset 0 1px rgba(255,255,255,.09),inset 0 0 30px rgba(90,105,237,.07),0 6px 18px rgba(0,0,0,.14)}
+.ts-m3-royal-game .ts-m3-gem{border-radius:12px;border-color:rgba(188,209,255,.11);background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(133,157,228,.025));box-shadow:inset 0 1px rgba(255,255,255,.1),0 1px 2px rgba(0,0,0,.08);transition:transform .18s cubic-bezier(.2,.8,.2,1),border-color .18s ease,background .18s ease,box-shadow .18s ease;will-change:transform}
+.ts-m3-royal-game .ts-m3-gem:hover{z-index:3;filter:brightness(1.15);transform:translateY(-1px) scale(1.035);border-color:rgba(205,223,255,.42);box-shadow:0 0 14px rgba(135,158,255,.16),inset 0 1px rgba(255,255,255,.18)}
+.ts-m3-royal-game .ts-m3-gem-svg{filter:drop-shadow(0 3px 3px rgba(0,0,0,.28)) saturate(1.12);transform:translateZ(0)}
+.ts-m3-royal-game .ts-m3-gem.is-selected{z-index:5;border-color:#c8fff5;box-shadow:0 0 0 2px rgba(111,245,224,.25),0 0 24px rgba(85,241,220,.38),inset 0 1px #fff;transform:translateY(-2px) scale(1.09)}
+.ts-m3-gem.has-special{z-index:2;overflow:visible;border-color:rgba(255,255,255,.8)!important;background:radial-gradient(circle,rgba(255,255,255,.29),rgba(131,138,255,.15) 60%,transparent 100%)!important;box-shadow:inset 0 1px rgba(255,255,255,.95),0 0 0 1px rgba(255,255,255,.26),0 0 15px rgba(137,158,255,.47),0 0 28px rgba(126,134,255,.16)!important;animation:tsM3V30SpecialIdle 2s ease-in-out infinite}
+.ts-m3-gem.has-special .ts-m3-gem-svg{filter:drop-shadow(0 0 8px rgba(255,255,255,.55)) drop-shadow(0 0 14px rgba(133,146,255,.58)) saturate(1.28)!important}
+.ts-m3-special-badge{position:absolute;right:-3px;top:-4px;z-index:8;display:grid;place-items:center;min-width:23px;height:23px;padding:0 4px;border:1px solid rgba(255,255,255,.9);border-radius:8px;background:linear-gradient(145deg,#ffffff,#c9d4ff 53%,#938aff);box-shadow:0 2px 9px rgba(7,14,35,.36),inset 0 1px #fff;color:#3b328e;font:950 14px/1 Manrope,system-ui,sans-serif;text-shadow:0 1px rgba(255,255,255,.7);pointer-events:none}
+.ts-m3-special-badge.special-rocket-h,.ts-m3-special-badge.special-rocket-v{background:linear-gradient(145deg,#fff9cf,#ffce7b 48%,#ff8c95);color:#873459;box-shadow:0 0 13px rgba(255,198,112,.65),inset 0 1px #fff}
+.ts-m3-special-badge.special-bomb{background:linear-gradient(145deg,#fff,#ff9cc7 48%,#b15cff);color:#632b91;box-shadow:0 0 14px rgba(244,123,255,.72),inset 0 1px #fff}
+.ts-m3-special-badge.special-rainbow{background:conic-gradient(from 10deg,#fff4a8,#ff9db9,#c1a3ff,#91e8ff,#a1f9d8,#fff4a8);color:#433b8d;box-shadow:0 0 15px rgba(181,162,255,.82),inset 0 1px #fff}
+.ts-m3-special-badge:after{content:"";position:absolute;inset:-5px;border:1px solid currentColor;border-radius:11px;opacity:.34;animation:tsM3V30BadgePulse 1.5s ease-out infinite;pointer-events:none}
+.ts-m3-gem.is-special-rocket-h:before{opacity:1;background:linear-gradient(90deg,transparent,rgba(255,220,142,.4),transparent);transform:rotate(0deg);animation:tsM3V30RocketH 1.6s ease-in-out infinite}
+.ts-m3-gem.is-special-rocket-v:before{opacity:1;background:linear-gradient(0deg,transparent,rgba(255,220,142,.4),transparent);animation:tsM3V30RocketV 1.6s ease-in-out infinite}
+.ts-m3-gem.is-special-bomb:before{opacity:.9;background:radial-gradient(circle,rgba(255,183,250,.55),rgba(161,118,255,.17) 45%,transparent 72%);animation:tsM3V30BombPulse 1.25s ease-in-out infinite}
+.ts-m3-gem.is-special-rainbow:before{inset:1px;opacity:.95;background:conic-gradient(from 0deg,rgba(255,120,166,.3),rgba(255,228,128,.3),rgba(115,243,225,.3),rgba(130,150,255,.3),rgba(255,120,166,.3));animation:tsM3V30RainbowSpin 3s linear infinite}
+.ts-m3-gem.is-special-trigger{z-index:9!important;animation:tsM3V30SpecialBurst .32s ease-in forwards!important;filter:brightness(1.8) saturate(1.5)!important}
+.ts-m3-gem.is-hint{z-index:6!important;animation:tsM3V30Hint 1.08s ease-in-out infinite!important;border-color:#fff6b3!important;box-shadow:0 0 0 2px rgba(255,233,142,.48),0 0 28px rgba(255,211,97,.78)!important}
+.ts-m3-game-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0 2px}
+.ts-m3-hint-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:9px 15px;border:1px solid rgba(161,151,255,.4);border-radius:12px;background:linear-gradient(120deg,rgba(141,119,255,.16),rgba(104,225,213,.09));color:#e9e7ff;font:850 11px/1 Manrope,system-ui,sans-serif;box-shadow:inset 0 1px rgba(255,255,255,.09),0 5px 14px rgba(0,0,0,.09);transition:transform .18s ease,filter .18s ease,border-color .18s ease}
+.ts-m3-hint-button:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.12);border-color:rgba(185,178,255,.8)}
+.ts-m3-hint-button:disabled{opacity:.52;cursor:wait}
+.ts-m3-game-tools>span{color:#8292b6;font-size:9px;letter-spacing:.015em}
+.ts-m3-score-track.is-near-goal i{background:linear-gradient(90deg,#6ee6c6,#ffe08a,#fff1a8)!important;box-shadow:0 0 15px rgba(255,222,125,.5)!important}
+.ts-m3-game.is-near-goal .ts-m3-game-hud>div:nth-child(2){border-color:rgba(255,215,123,.65)!important;box-shadow:0 0 20px rgba(255,201,95,.13),inset 0 1px rgba(255,255,255,.1)!important}
+.ts-m3-mission-splash{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(9px,2vw,15px);padding:clamp(18px,4vw,38px);overflow:hidden;border:1px solid rgba(201,213,255,.7);border-radius:21px;background:radial-gradient(ellipse at 50% 18%,rgba(132,132,255,.35),transparent 48%),radial-gradient(ellipse at 50% 100%,rgba(61,224,201,.2),transparent 43%),linear-gradient(145deg,rgba(16,23,52,.98),rgba(5,11,29,.985));color:#f7f7ff;text-align:center;box-shadow:inset 0 1px rgba(255,255,255,.24),inset 0 0 0 4px rgba(255,255,255,.035),0 15px 50px rgba(0,0,0,.35);backdrop-filter:blur(12px) saturate(145%);-webkit-backdrop-filter:blur(12px) saturate(145%);animation:tsM3V30MissionEnter .42s cubic-bezier(.15,.85,.18,1) both}
+.ts-m3-mission-splash:before{content:"";position:absolute;inset:-40%;pointer-events:none;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.035) 0deg 1deg,transparent 1deg 15deg);animation:tsM3V30MissionSpin 36s linear infinite}
+.ts-m3-mission-orbit{position:relative;display:grid;place-items:center;width:clamp(54px,10vw,76px);height:clamp(54px,10vw,76px);border:1px solid rgba(220,218,255,.56);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(133,116,255,.15) 55%,rgba(82,235,218,.13));color:#fff5bd;font:950 clamp(27px,6vw,38px)/1 Manrope,system-ui,sans-serif;text-shadow:0 0 22px rgba(255,228,153,.7);box-shadow:inset 0 1px rgba(255,255,255,.48),0 0 35px rgba(129,133,255,.28);animation:tsM3V30MissionGem 1.9s ease-in-out infinite}
+.ts-m3-mission-kicker{position:relative;color:#b8bcff;font:900 9px/1.4 Manrope,system-ui,sans-serif;letter-spacing:.2em}
+.ts-m3-mission-splash h2{position:relative;max-width:18ch;margin:0;color:#fff!important;font:950 clamp(19px,4.5vw,34px)/1.12 Manrope,system-ui,sans-serif;letter-spacing:-.045em;text-wrap:balance;text-shadow:0 4px 28px rgba(135,128,255,.22)}
+.ts-m3-mission-splash p{position:relative;max-width:42ch;margin:0;color:#bfcbed;font-size:clamp(10px,2vw,13px);line-height:1.6}
+.ts-m3-mission-count{position:relative;display:flex;align-items:center;gap:8px;color:#a7b8dc;font-size:8px;font-weight:900;letter-spacing:.18em}
+.ts-m3-mission-count b{display:grid;place-items:center;width:35px;height:35px;border:1px solid rgba(255,255,255,.46);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font:900 17px/1 Manrope,system-ui,sans-serif;box-shadow:0 0 19px rgba(148,147,255,.25)}
+.ts-m3-mission-timer{position:relative;overflow:hidden;width:min(76%,250px);height:3px;border-radius:10px;background:rgba(255,255,255,.13)}
+.ts-m3-mission-timer i{display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9b8cff,#8edfff,#84f2d2);transform-origin:left;animation:tsM3V30MissionTime 3s linear forwards;box-shadow:0 0 13px rgba(123,224,240,.5)}
+.ts-m3-mission-splash.is-leaving{pointer-events:none;animation:tsM3V30MissionExit .28s ease-in forwards}
+.ts-m3-burst-particle{position:absolute;left:50%;top:50%;z-index:6;width:5px;height:5px;border-radius:2px;background:linear-gradient(145deg,#fff,#9bffea);box-shadow:0 0 13px rgba(174,255,242,.8);filter:hue-rotate(var(--burst-hue,0deg));animation:tsM3V30Particle .7s cubic-bezier(.14,.8,.2,1) var(--burst-delay,0s) both;pointer-events:none}
+.ts-m3-combo-pop{position:relative;z-index:8;align-self:center;margin-top:0!important;color:#fcffff!important;font-size:clamp(19px,4vw,31px)!important;font-weight:1000!important;letter-spacing:.085em!important;text-shadow:0 0 20px rgba(123,239,234,.9),0 0 45px rgba(150,126,255,.65),0 8px 24px rgba(0,0,0,.7)!important}
+.ts-m3-combo-pop.is-special-callout{color:#fff4bc!important;text-shadow:0 0 20px rgba(255,190,120,.95),0 0 48px rgba(174,129,255,.8),0 8px 24px rgba(0,0,0,.7)!important}
+.ts-m3-board-wrap.is-shaking{animation:tsM3V30BoardShake .36s cubic-bezier(.3,.05,.6,.95)}
+.ts-m3-royal-game .ts-m3-status{transition:background .25s ease,border-color .25s ease,color .25s ease}
+/* Light-theme game art stays porcelain and high-contrast; no filters or sepia conversion. */
+html.today-theme-light .ts-m3-royal-game .ts-m3-board-wrap{border-color:#c3cce6;background:radial-gradient(ellipse at 50% 0%,rgba(156,157,255,.34),transparent 51%),radial-gradient(ellipse at 100% 100%,rgba(125,231,213,.25),transparent 39%),linear-gradient(145deg,#edf1ff,#e5ecff 54%,#e4f8f2);box-shadow:inset 0 1px #fff,inset 0 0 0 3px rgba(255,255,255,.36),0 24px 52px rgba(75,91,151,.16)}
+html.today-theme-light .ts-m3-royal-game .ts-match-board.ts-m3-board{border-color:rgba(111,129,183,.26);background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(231,237,251,.77));box-shadow:inset 0 1px #fff,0 6px 18px rgba(75,91,151,.09)}
+html.today-theme-light .ts-m3-royal-game .ts-m3-gem{border-color:rgba(112,132,187,.17);background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(229,236,252,.65));box-shadow:inset 0 1px #fff,0 2px 6px rgba(64,80,138,.09)}
+html.today-theme-light .ts-m3-royal-game .ts-m3-gem.has-special{border-color:#fff!important;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(213,215,255,.75) 60%,rgba(157,233,223,.32))!important;box-shadow:inset 0 1px #fff,0 0 0 1px rgba(112,104,225,.23),0 0 17px rgba(116,111,234,.3)!important}
+html.today-theme-light .ts-m3-royal-game .ts-m3-special-badge{border-color:#fff;background:linear-gradient(145deg,#fff,#d9e1ff 54%,#a99fff);box-shadow:0 3px 9px rgba(54,64,120,.2),inset 0 1px #fff}
+html.today-theme-light .ts-m3-hint-button{border-color:rgba(105,92,214,.3);background:linear-gradient(120deg,#efedff,#e6f9f5);color:#49449f;box-shadow:inset 0 1px #fff,0 5px 13px rgba(71,83,139,.09)}
+html.today-theme-light .ts-m3-game-tools>span{color:#697894}
+html.today-theme-light .ts-m3-mission-splash{border-color:rgba(122,137,195,.65);background:radial-gradient(ellipse at 50% 10%,rgba(186,177,255,.56),transparent 50%),radial-gradient(ellipse at 50% 100%,rgba(136,235,216,.37),transparent 43%),linear-gradient(145deg,rgba(255,255,255,.98),rgba(241,245,255,.985) 56%,rgba(232,250,245,.98));color:#202b47;box-shadow:inset 0 1px #fff,0 15px 42px rgba(71,83,139,.18)}
+html.today-theme-light .ts-m3-mission-splash:before{opacity:.27;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(105,110,185,.05) 0deg 1deg,transparent 1deg 15deg)}
+html.today-theme-light .ts-m3-mission-orbit{border-color:rgba(123,110,220,.36);background:linear-gradient(145deg,#fff,#eeebff 55%,#e5fbf5);color:#7d5dca;text-shadow:0 0 16px rgba(255,205,122,.4);box-shadow:inset 0 1px #fff,0 0 29px rgba(128,119,221,.14)}
+html.today-theme-light .ts-m3-mission-kicker{color:#665dc0}
+html.today-theme-light .ts-m3-mission-splash h2{color:#25314e!important;text-shadow:0 2px 12px rgba(104,104,180,.1)}
+html.today-theme-light .ts-m3-mission-splash p{color:#606e8b}
+html.today-theme-light .ts-m3-mission-count{color:#687696}
+html.today-theme-light .ts-m3-mission-count b{border-color:#d6d8f2;background:rgba(255,255,255,.78);color:#5047ad;box-shadow:0 0 17px rgba(131,123,226,.16)}
+html.today-theme-light .ts-m3-mission-timer{background:rgba(99,113,156,.14)}
+html.today-theme-light .ts-m3-combo-pop{color:#fff!important;text-shadow:0 2px 12px rgba(44,55,107,.5),0 0 23px rgba(92,103,211,.48)!important}
+@keyframes tsM3V30SpecialIdle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1.5px) scale(1.035)}}
+@keyframes tsM3V30BadgePulse{0%{transform:scale(.74);opacity:.55}100%{transform:scale(1.28);opacity:0}}
+@keyframes tsM3V30RocketH{0%,100%{transform:scaleX(.6);opacity:.35}50%{transform:scaleX(1.2);opacity:1}}
+@keyframes tsM3V30RocketV{0%,100%{transform:scaleY(.6);opacity:.35}50%{transform:scaleY(1.2);opacity:1}}
+@keyframes tsM3V30BombPulse{0%,100%{transform:scale(.86);opacity:.55}50%{transform:scale(1.12);opacity:1}}
+@keyframes tsM3V30RainbowSpin{to{transform:rotate(360deg)}}
+@keyframes tsM3V30SpecialBurst{0%{transform:scale(1);opacity:1}60%{transform:scale(1.45) rotate(11deg);opacity:1}100%{transform:scale(.45) rotate(-12deg);opacity:0;filter:brightness(2.5)}}
+@keyframes tsM3V30Hint{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.08);filter:brightness(1.48)}}
+@keyframes tsM3V30MissionEnter{0%{opacity:0;transform:scale(.94) translateY(8px);filter:blur(8px)}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}}
+@keyframes tsM3V30MissionExit{to{opacity:0;transform:scale(1.035);filter:blur(8px)}}
+@keyframes tsM3V30MissionSpin{to{transform:rotate(360deg)}}
+@keyframes tsM3V30MissionGem{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+@keyframes tsM3V30MissionTime{to{transform:scaleX(0)}}
+@keyframes tsM3V30Particle{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}10%{opacity:1}100%{opacity:0;transform:translate(var(--burst-x),var(--burst-y)) rotate(190deg) scale(.12)}}
+@keyframes tsM3V30BoardShake{0%,100%{transform:translateX(0)}18%{transform:translateX(-3px) rotate(-.15deg)}36%{transform:translateX(3px) rotate(.15deg)}54%{transform:translateX(-2px)}72%{transform:translateX(2px)}}
+@media(max-width:480px){.ts-m3-royal-game .ts-m3-board-wrap{padding:5px;border-radius:19px}.ts-m3-royal-game .ts-match-board.ts-m3-board{gap:3px;padding:5px;border-radius:15px}.ts-m3-royal-game .ts-m3-gem{border-radius:8px}.ts-m3-special-badge{right:-4px;top:-4px;min-width:19px;height:19px;font-size:12px;border-radius:7px}.ts-m3-mission-splash{gap:10px;padding:17px}.ts-m3-mission-orbit{width:50px;height:50px;border-radius:17px}}
+@media(prefers-reduced-motion:reduce){.ts-m3-royal-game .ts-m3-gem,.ts-m3-special-badge,.ts-m3-special-badge:after,.ts-m3-mission-splash,.ts-m3-mission-orbit,.ts-m3-mission-splash:before,.ts-m3-mission-timer i,.ts-m3-burst-particle,.ts-m3-board-wrap.is-shaking{animation:none!important;transition:none!important}.ts-m3-gem.is-hint,.ts-m3-gem.has-special{animation:none!important}}
+/* END TODAY CRYSTAL CHRONICLES V30 */
