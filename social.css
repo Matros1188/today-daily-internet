@@ -1072,3 +1072,53 @@ html.today-theme-light .ts-m3-result-symbol{color:#268d7e;background:rgba(104,23
 @media(max-width:380px){#modal.today-match3-fullscreen .ts-m3-board-wrap{width:min(100%,calc(100dvh - 345px),650px)!important;}#modal.today-match3-fullscreen .ts-m3-v42-quick-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important;}#modal.today-match3-fullscreen .ts-m3-level-badge{font-size:8px!important;}}
 @media(prefers-reduced-motion:reduce){#modal.today-match3-fullscreen *,#modal.today-match3-fullscreen *:before,#modal.today-match3-fullscreen *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
 /* TODAY CRYSTAL CHRONICLES V43 MOBILE-FIRST END */
+
+/* TODAY CRYSTAL CHRONICLES V44 VICTORY OVERLAY BEGIN */
+#todayMatch3Result[data-v44-force-visible="1"]{
+  display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+  position:fixed!important;inset:max(9px,env(safe-area-inset-top)) 9px max(9px,env(safe-area-inset-bottom))!important;
+  z-index:2147483647!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:clamp(8px,1.6vh,14px)!important;max-height:none!important;overflow:auto!important;margin:0!important;
+  padding:clamp(16px,4vw,25px)!important;border:1px solid rgba(255,221,135,.68)!important;border-radius:24px!important;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,219,121,.25),transparent 46%),
+    radial-gradient(ellipse at 0% 85%,rgba(78,219,255,.20),transparent 38%),
+    radial-gradient(ellipse at 100% 70%,rgba(202,91,255,.22),transparent 42%),
+    linear-gradient(155deg,rgba(18,20,62,.985),rgba(7,10,31,.995))!important;
+  color:#fff6d8!important;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(117,100,255,.32),0 30px 90px rgba(0,0,0,.58)!important;
+  text-align:center!important;backdrop-filter:blur(22px) saturate(135%)!important;-webkit-backdrop-filter:blur(22px) saturate(135%)!important;
+}
+#todayMatch3Result[data-v44-force-visible="1"] h3{margin:0!important;color:#fff6d8!important;font-size:clamp(27px,8vw,38px)!important;letter-spacing:-.055em!important;}
+#todayMatch3Result[data-v44-force-visible="1"] .ts-m3-result-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;max-width:420px!important;margin-top:4px!important;}
+#todayMatch3Result[data-v44-force-visible="1"] .ts-m3-result-actions .ts-m3-next{grid-column:1/-1!important;order:-1!important;min-height:54px!important;border:1px solid rgba(255,232,166,.62)!important;border-radius:15px!important;background:linear-gradient(110deg,#ffe7a0,#ffb85c 45%,#ff8cb6)!important;color:#28153f!important;font-size:13px!important;font-weight:1000!important;}
+@media(max-height:620px){#todayMatch3Result[data-v44-force-visible="1"]{justify-content:flex-start!important;padding-top:max(12px,env(safe-area-inset-top))!important;}}
+/* TODAY CRYSTAL CHRONICLES V44 VICTORY OVERLAY END */
+
+/* TODAY CRYSTAL CHRONICLES V45 BODY-LEVEL VICTORY BEGIN */
+body > #todayMatch3Result[data-v45-body-overlay="1"]{
+  display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+  position:fixed!important;inset:max(8px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom))!important;
+  z-index:2147483647!important;isolation:isolate!important;transform:none!important;contain:none!important;
+  flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  width:auto!important;max-width:none!important;height:auto!important;max-height:none!important;min-height:0!important;
+  overflow:auto!important;margin:0!important;padding:clamp(16px,4vw,26px)!important;
+  border:1px solid rgba(255,224,147,.72)!important;border-radius:24px!important;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,218,117,.28),transparent 46%),
+    radial-gradient(ellipse at 0% 85%,rgba(63,219,255,.22),transparent 38%),
+    radial-gradient(ellipse at 100% 70%,rgba(192,91,255,.23),transparent 42%),
+    linear-gradient(155deg,rgba(18,20,62,.992),rgba(7,10,31,.997))!important;
+  color:#fff6d8!important;box-shadow:0 0 0 1px rgba(255,255,255,.09),0 0 80px rgba(117,100,255,.34),0 30px 90px rgba(0,0,0,.62)!important;
+  text-align:center!important;backdrop-filter:blur(22px) saturate(140%)!important;-webkit-backdrop-filter:blur(22px) saturate(140%)!important;
+}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-symbol{margin:0!important;flex:0 0 auto!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] h3{margin:0!important;color:#fff6d8!important;font-size:clamp(27px,8vw,38px)!important;letter-spacing:-.055em!important;line-height:1.05!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-stars{display:flex!important;justify-content:center!important;gap:13px!important;margin:4px 0!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-stars span{font-size:clamp(38px,11vw,54px)!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;max-width:420px!important;margin-top:8px!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-actions .ts-m3-next{grid-column:1/-1!important;order:-1!important;min-height:54px!important;border:1px solid rgba(255,232,166,.7)!important;border-radius:15px!important;background:linear-gradient(110deg,#ffe7a0,#ffb85c 45%,#ff8cb6)!important;color:#28153f!important;font-size:13px!important;font-weight:1000!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-actions .ts-primary,
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-result-actions .ts-mini{cursor:pointer!important;pointer-events:auto!important;position:relative!important;z-index:1!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-eyebrow{color:#ffe9ad!important;font-size:10px!important;letter-spacing:.2em!important;font-weight:900!important;}
+body > #todayMatch3Result[data-v45-body-overlay="1"] p{color:#d5ddff!important;font-size:12px!important;line-height:1.55!important;}
+@media(max-height:620px){body > #todayMatch3Result[data-v45-body-overlay="1"]{justify-content:flex-start!important;padding-top:max(12px,env(safe-area-inset-top))!important;}}
+@media(prefers-reduced-motion:reduce){body > #todayMatch3Result[data-v45-body-overlay="1"] *{animation:none!important;transition:none!important;}}
+/* TODAY CRYSTAL CHRONICLES V45 BODY-LEVEL VICTORY END */
