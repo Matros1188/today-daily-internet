@@ -1,5 +1,4 @@
-/* TODAY THEME + UNIVERSAL NON-BLOCKING BACK V26 */
-/* TODAY UNIVERSAL HARD CLOSE V39 */
+/* TODAY MODAL BACK ROUTING FIX V40 — native navigation, immediate close, no DOM snapshots */
 (() => {
   'use strict';
   const THEME_KEY = 'today-theme-preference-v26';
@@ -33,54 +32,28 @@
     applyTheme(theme === 'light' ? 'dark' : 'light', true);
   }, true);
 
-  // Modal route snapshots make Back instant. It restores the previous rendered page instead of
-  // waiting for history.back(), another network request, or a hung async screen loader.
   const modalRoot = document.getElementById('modal');
-  const content = document.getElementById('modalContent');
-  if (!modalRoot || !content) return;
-  let wasOpen = !modalRoot.classList.contains('hidden');
-  let lastHtml = '';
-  let lastScroll = 0;
-  let backStack = [];
-  let restoreTarget = null;
-  const openNow = () => !modalRoot.classList.contains('hidden');
-  const isLoading = html => /ts-loading-spinner|Загружаем раздел|Подключаемся к TODAY|Загрузка\.\.\./i.test(html || '');
-  const meaningful = html => typeof html === 'string' && html.replace(/\s/g, '').length > 80 && !isLoading(html);
-  const isGameView = html => /class="[^"]*ts-m3-game/.test(html || '');
-  const isCampaignView = html => /class="[^"]*ts-m3-campaign/.test(html || '');
-  const currentScroll = () => { const card = modalRoot.querySelector('.modal-card'); return card ? card.scrollTop : 0; };
-  const restore = snapshot => {
-    if (!snapshot || !openNow()) return false;
-    try { if (typeof window.__TODAY_STOP_ACTIVE_GAME_V26 === 'function') window.__TODAY_STOP_ACTIVE_GAME_V26(); } catch (_) {}
-    try { if (typeof window.__TODAY_STOP_ACTIVE_POLL_V26 === 'function') window.__TODAY_STOP_ACTIVE_POLL_V26(); } catch (_) {}
-    restoreTarget = snapshot.html;
-    content.innerHTML = snapshot.html;
-    if (content.dataset) delete content.dataset.chatId;
+  if (!modalRoot) return;
+  const isOpen = () => !modalRoot.classList.contains('hidden');
+  let cleanupPending = false;
+
+  function restorePageAndHide() {
+    if (!isOpen()) return;
+    // Hide first. Never serialize or replace modalContent as part of a close operation.
+    const savedBody = window.__todayModalBodyStyle && typeof window.__todayModalBodyStyle === 'object'
+      ? window.__todayModalBodyStyle : {};
+    const savedScroll = Number.isFinite(Number(window.__todayModalScrollY))
+      ? Number(window.__todayModalScrollY) : (window.scrollY || 0);
     const card = modalRoot.querySelector('.modal-card');
-    if (card) card.scrollTop = Math.max(0, snapshot.scroll || 0);
-    const title = modalRoot.querySelector('#todaySocialPageTitle');
-    const heading = content.querySelector('h1,h2,h3,[data-page-title]');
-    if (title && heading && heading.textContent.trim()) title.textContent = heading.textContent.trim().slice(0, 64);
-    return true;
-  };
-  const back = () => {
-    if (!openNow()) return;
-    try { if (typeof window.__TODAY_STOP_ACTIVE_GAME_V26 === 'function') window.__TODAY_STOP_ACTIVE_GAME_V26(); } catch (_) {}
-    const previous = backStack.pop();
-    if (previous && restore(previous)) return;
-    // Always use our own direct cleanup. Do not delegate to legacy close handlers or history.back().
-    try { if (typeof window.__TODAY_STOP_ACTIVE_POLL_V26 === 'function') window.__TODAY_STOP_ACTIVE_POLL_V26(); } catch (_) {}
-    const savedScroll = Number.isFinite(Number(window.__todayModalScrollY)) ? Number(window.__todayModalScrollY) : window.scrollY;
-    const savedBody = window.__todayModalBodyStyle && typeof window.__todayModalBodyStyle === 'object' ? window.__todayModalBodyStyle : {};
-    const clearInline = (node, names) => { if (!node || !node.style) return; names.forEach(name => { try { node.style.removeProperty(name); } catch (_) {} }); };
-    clearInline(modalRoot, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
-    clearInline(modalRoot.querySelector('.modal-card'), ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
-    clearInline(content, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
-    modalRoot.querySelectorAll('[data-object-url]').forEach(node => { try { URL.revokeObjectURL(node.dataset.objectUrl); } catch (_) {} delete node.dataset.objectUrl; });
+    const content = document.getElementById('modalContent');
+    const clearInline = (node, names) => {
+      if (!node || !node.style) return;
+      for (const name of names) { try { node.style.removeProperty(name); } catch (_) {} }
+    };
+
     modalRoot.classList.add('hidden');
-    modalRoot.classList.remove('today-social-page','today-social-modal');
-    content.innerHTML = '';
-    document.documentElement.classList.remove('today-modal-open','today-social-page-mode');
+    modalRoot.classList.remove('today-social-page', 'today-social-modal');
+    root.classList.remove('today-modal-open', 'today-social-page-mode');
     document.body.classList.remove('today-social-page-mode');
     document.body.style.position = savedBody.position || '';
     document.body.style.top = savedBody.top || '';
@@ -88,134 +61,58 @@
     document.body.style.right = savedBody.right || '';
     document.body.style.width = savedBody.width || '';
     document.body.style.overflow = savedBody.overflow || '';
-    window.__todayModalBodyStyle = null; window.__todayModalScrollY = null;
+    clearInline(modalRoot, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
+    clearInline(card, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
+    clearInline(content, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
+    window.__todayModalBodyStyle = null;
+    window.__todayModalScrollY = null;
     try { window.scrollTo(0, Math.max(0, savedScroll)); } catch (_) {}
-    backStack = []; lastHtml = ''; restoreTarget = null;
-  };
-  /* TODAY UNIVERSAL HARD CLOSE V39 BEGIN — run before competing document/root handlers. */
-  const hardCloseModalV39 = (event) => {
-    const element = event && event.target instanceof Element ? event.target : null;
-    if (!element || !modalRoot.contains(element) || !openNow()) return false;
-    const button = element.closest('button,a,[role="button"]');
-    const isBackdrop = element === modalRoot.querySelector('.modal-backdrop');
-    if (!button && !isBackdrop) return false;
-    const text = button ? (button.getAttribute('aria-label') || button.getAttribute('title') || button.innerText || button.textContent || '').trim().replace(/\s+/g,' ').toLowerCase() : '';
-    const isSocial = modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page');
-    const closeSelector = '#modalClose,#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop,.ts-panel-close,[data-modal-close],[aria-label*="закрыть" i],[title*="закрыть" i]';
-    const explicitClose = !!button && (button.matches(closeSelector) || /^(закрыть|close|close modal|закрыть окно|выход|×|✕|x)$/.test(text));
-    // In V24, the two top social navigation controls already mean immediate exit from the overlay.
-    const socialTopExit = !!button && isSocial && button.matches('#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop');
-    if (!isBackdrop && !explicitClose && !socialTopExit) return false;
 
+    // Cleanup is deferred until after the browser gets a chance to paint the closed state.
+    // No game callback or chat timer is allowed to delay making the modal disappear.
+    if (!cleanupPending) {
+      cleanupPending = true;
+      const cleanup = () => setTimeout(() => {
+        try { if (typeof window.__TODAY_STOP_ACTIVE_GAME_V26 === 'function') window.__TODAY_STOP_ACTIVE_GAME_V26(); } catch (error) { console.warn('[TODAY V40 game cleanup]', error); }
+        try { if (typeof window.__TODAY_STOP_ACTIVE_POLL_V26 === 'function') window.__TODAY_STOP_ACTIVE_POLL_V26(); } catch (error) { console.warn('[TODAY V40 poll cleanup]', error); }
+        cleanupPending = false;
+      }, 0);
+      if (typeof requestAnimationFrame === 'function') requestAnimationFrame(cleanup); else cleanup();
+    }
+  }
+
+  function isExplicitClose(event) {
+    const element = event && event.target instanceof Element ? event.target : null;
+    if (!element || !modalRoot.contains(element) || !isOpen()) return false;
+    const button = element.closest('button,a,[role="button"]');
+    const backdrop = modalRoot.querySelector('.modal-backdrop');
+    const isBackdrop = !!backdrop && element === backdrop;
+    if (!button && !isBackdrop) return false;
+    const isSocial = modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page');
+    if (isBackdrop) return true;
+    if (isSocial && button.matches('#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop')) return true;
+    if (button.matches('#modalClose,#todaySocialCloseTop,.ts-panel-close,[data-modal-close],[aria-label*="закрыть" i],[title*="закрыть" i]')) return true;
+    const label = String(button.getAttribute('aria-label') || button.getAttribute('title') || button.textContent || '')
+      .trim().replace(/\s+/g, ' ').toLowerCase();
+    return /^(закрыть|close|close modal|закрыть окно|×|✕|x)$/.test(label);
+  }
+
+  // Capture at window level, but intercept only actual Close / overlay-exit actions.
+  // Do not catch [data-game-act$="-back"] or generic Back buttons: social.js owns those routes.
+  function interceptClose(event) {
+    if (!isExplicitClose(event)) return;
     try { event.preventDefault(); } catch (_) {}
     try { event.stopPropagation(); } catch (_) {}
     try { event.stopImmediatePropagation(); } catch (_) {}
-
-    // Stop any active game frame/timers and chat poll before hiding the overlay.
-    try { if (typeof window.__TODAY_STOP_ACTIVE_GAME_V26 === 'function') window.__TODAY_STOP_ACTIVE_GAME_V26(); } catch (_) {}
-    try { if (typeof window.__TODAY_STOP_ACTIVE_POLL_V26 === 'function') window.__TODAY_STOP_ACTIVE_POLL_V26(); } catch (_) {}
-
-    const savedBody = window.__todayModalBodyStyle && typeof window.__todayModalBodyStyle === 'object' ? window.__todayModalBodyStyle : {};
-    const savedScroll = Number.isFinite(Number(window.__todayModalScrollY)) ? Number(window.__todayModalScrollY) : (window.scrollY || 0);
-    const clearInline = (node, names) => { if (!node || !node.style) return; for (const name of names) { try { node.style.removeProperty(name); } catch (_) {} } };
-    const card = modalRoot.querySelector('.modal-card');
-    const host = content;
-
-    // Hide first; never assign innerHTML on close (large games/chats can contain thousands of nodes).
-    clearInline(modalRoot, ['display','visibility','opacity','position','inset','z-index','width','height','max-height','overflow','place-items','padding']);
-    clearInline(card, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','overflow','overflow-x','overflow-y','margin']);
-    clearInline(host, ['display','visibility','opacity','position','inset','z-index','width','min-width','max-width','height','max-height','min-height','overflow','overflow-x','overflow-y','margin','padding','color']);
-    modalRoot.classList.add('hidden');
-    modalRoot.classList.remove('today-social-page','today-social-modal');
-    document.documentElement.classList.remove('today-modal-open','today-social-page-mode');
-    document.body.classList.remove('today-social-page-mode');
-    document.body.style.position = savedBody.position || '';
-    document.body.style.top = savedBody.top || '';
-    document.body.style.left = savedBody.left || '';
-    document.body.style.right = savedBody.right || '';
-    document.body.style.width = savedBody.width || '';
-    document.body.style.overflow = savedBody.overflow || '';
-    window.__todayModalBodyStyle = null;
-    window.__todayModalScrollY = null;
-    backStack = []; lastHtml = ''; lastScroll = 0; restoreTarget = null; wasOpen = false;
-    try { window.scrollTo(0, Math.max(0, savedScroll)); } catch (_) {}
-    return true;
-  };
-  window.addEventListener('click', event => { try { hardCloseModalV39(event); } catch (error) { console.error('[TODAY V39 hard close]', error); } }, true);
-  /* TODAY UNIVERSAL HARD CLOSE V39 END */
-
-  const selector = '#todaySocialBackTop,#todaySocialExitTop,#todaySocialCloseTop,#modalClose,.ts-panel-close,[data-back],[data-nav-back],[data-social-act="back"],[data-game-act$="-back"],[aria-label*="назад" i],[title*="назад" i]';
-  document.addEventListener('click', event => {
-    const element = event.target instanceof Element ? event.target : null;
-    const button = element && element.closest('button,a,[role="button"]');
-    if (!button || !modalRoot.contains(button) || !openNow()) return;
-
-    const isSocialModal = modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page');
-    // Keep snapshot navigation for the explicit social Back arrow. Social X/Close and
-    // game-specific back controls stay with social.js, avoiding duplicate handlers.
-    if (isSocialModal && !button.matches('#todaySocialBackTop')) return;
-    if (isSocialModal && button.matches('#todaySocialBackTop')) {
-      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
-      back();
-      return;
-    }
-
-    const id = button.id || '';
-    const text = (button.getAttribute('aria-label') || button.getAttribute('title') || button.innerText || button.textContent || '').trim().replace(/\s+/g,' ').toLowerCase();
-    const matches = button.matches(selector) || /^(назад|←|‹|к карте кампании|к играм|к друзьям|вернуться)$/.test(text) || /^(←|‹)\s*(назад|к играм|к друзьям|к списку)/.test(text);
-    if (!matches) return;
-
-    const explicitClose = id === 'modalClose' || /закрыть|close modal|выход/.test(text) || text === '×' || text === '✕';
-    if (explicitClose) {
-      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
-      backStack = []; lastHtml = ''; restoreTarget = null;
-      if (typeof window.closeModal === 'function') { window.closeModal(); return; }
-      back();
-      return;
-    }
-    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
-    back();
+    restorePageAndHide();
+  }
+  window.addEventListener('click', interceptClose, true);
+  window.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || !isOpen()) return;
+    try { event.preventDefault(); } catch (_) {}
+    try { event.stopPropagation(); } catch (_) {}
+    try { event.stopImmediatePropagation(); } catch (_) {}
+    restorePageAndHide();
   }, true);
-  document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape' || !openNow()) return;
-    if (modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page')) return;
-    event.preventDefault();
-    backStack = []; lastHtml = ''; restoreTarget = null;
-    if (typeof window.closeModal === 'function') window.closeModal();
-    else back();
-  }, true);
-
-  /* TODAY MODAL ROUTING FIX V38 BEGIN — watch screen swaps, not every game-tile mutation. */
-  const rememberCurrentScreen = () => {
-    if (!openNow()) return;
-    const html = content.innerHTML;
-    if (restoreTarget !== null && html === restoreTarget) {
-      lastHtml = html; lastScroll = currentScroll(); restoreTarget = null; return;
-    }
-    if (isLoading(html) || html === lastHtml) return;
-    if (meaningful(lastHtml)) {
-      // Do not grow history from repainting a game or campaign view.
-      if ((isGameView(lastHtml) && isGameView(html)) || (isCampaignView(lastHtml) && isCampaignView(html))) {
-        lastHtml = html; lastScroll = currentScroll(); return;
-      }
-      const previous = { html: lastHtml, scroll: lastScroll };
-      if (!backStack.length || backStack[backStack.length - 1].html !== previous.html) backStack.push(previous);
-      if (backStack.length > 18) backStack.shift();
-    }
-    lastHtml = html; lastScroll = currentScroll();
-  };
-  const stateObserver = new MutationObserver(() => {
-    const opened = openNow();
-    if (opened !== wasOpen) {
-      wasOpen = opened; backStack = []; lastHtml = ''; lastScroll = 0; restoreTarget = null;
-    }
-  });
-  stateObserver.observe(modalRoot, {attributes:true, attributeFilter:['class']});
-
-  // Only direct replacement of modalContent is a route change. Changes inside a game
-  // board, countdown, chat list or animated control must not serialize the whole modal.
-  const contentObserver = new MutationObserver(() => rememberCurrentScreen());
-  contentObserver.observe(content, {childList:true});
-  /* TODAY MODAL ROUTING FIX V38 END */
 })();
-/* END TODAY THEME + UNIVERSAL NON-BLOCKING BACK V26 */
+/* END TODAY MODAL BACK ROUTING FIX V40 */
