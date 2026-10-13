@@ -96,44 +96,73 @@
     const element = event.target instanceof Element ? event.target : null;
     const button = element && element.closest('button,a,[role="button"]');
     if (!button || !modalRoot.contains(button) || !openNow()) return;
+
+    const isSocialModal = modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page');
+    // Keep snapshot navigation for the explicit social Back arrow. Social X/Close and
+    // game-specific back controls stay with social.js, avoiding duplicate handlers.
+    if (isSocialModal && !button.matches('#todaySocialBackTop')) return;
+    if (isSocialModal && button.matches('#todaySocialBackTop')) {
+      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+      back();
+      return;
+    }
+
     const id = button.id || '';
     const text = (button.getAttribute('aria-label') || button.getAttribute('title') || button.innerText || button.textContent || '').trim().replace(/\s+/g,' ').toLowerCase();
     const matches = button.matches(selector) || /^(назад|←|‹|к карте кампании|к играм|к друзьям|вернуться)$/.test(text) || /^(←|‹)\s*(назад|к играм|к друзьям|к списку)/.test(text);
     if (!matches) return;
-    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
-    // Explicit X/close exits the modal. Back-arrow controls restore a prior screen when possible.
-    if (id === 'modalClose' || /закрыть|close modal|выход/.test(text) || text === '×' || text === '✕') {
-      backStack = []; back(); return;
+
+    const explicitClose = id === 'modalClose' || /закрыть|close modal|выход/.test(text) || text === '×' || text === '✕';
+    if (explicitClose) {
+      event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+      backStack = []; lastHtml = ''; restoreTarget = null;
+      if (typeof window.closeModal === 'function') { window.closeModal(); return; }
+      back();
+      return;
     }
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
     back();
   }, true);
   document.addEventListener('keydown', event => {
     if (event.key !== 'Escape' || !openNow()) return;
+    if (modalRoot.classList.contains('today-social-modal') || modalRoot.classList.contains('today-social-page')) return;
     event.preventDefault();
-    backStack = [];
-    back();
+    backStack = []; lastHtml = ''; restoreTarget = null;
+    if (typeof window.closeModal === 'function') window.closeModal();
+    else back();
   }, true);
 
-  const observer = new MutationObserver(() => {
-    const opened = openNow();
-    if (opened && !wasOpen) { backStack = []; lastHtml = ''; lastScroll = 0; restoreTarget = null; }
-    if (!opened && wasOpen) { backStack = []; lastHtml = ''; lastScroll = 0; restoreTarget = null; }
-    wasOpen = opened;
-    if (!opened) return;
+  /* TODAY MODAL ROUTING FIX V38 BEGIN — watch screen swaps, not every game-tile mutation. */
+  const rememberCurrentScreen = () => {
+    if (!openNow()) return;
     const html = content.innerHTML;
-    if (restoreTarget !== null && html === restoreTarget) { lastHtml = html; lastScroll = currentScroll(); restoreTarget = null; return; }
-    if (isLoading(html)) return;
-    if (html === lastHtml) return;
+    if (restoreTarget !== null && html === restoreTarget) {
+      lastHtml = html; lastScroll = currentScroll(); restoreTarget = null; return;
+    }
+    if (isLoading(html) || html === lastHtml) return;
     if (meaningful(lastHtml)) {
-      // A changing game HUD/result is one screen, not a new navigation level.
-      if ((isGameView(lastHtml) && isGameView(html)) || (isCampaignView(lastHtml) && isCampaignView(html))) { lastHtml = html; lastScroll = currentScroll(); return; }
-      const prev = { html: lastHtml, scroll: lastScroll };
-      if (!backStack.length || backStack[backStack.length - 1].html !== prev.html) backStack.push(prev);
+      // Do not grow history from repainting a game or campaign view.
+      if ((isGameView(lastHtml) && isGameView(html)) || (isCampaignView(lastHtml) && isCampaignView(html))) {
+        lastHtml = html; lastScroll = currentScroll(); return;
+      }
+      const previous = { html: lastHtml, scroll: lastScroll };
+      if (!backStack.length || backStack[backStack.length - 1].html !== previous.html) backStack.push(previous);
       if (backStack.length > 18) backStack.shift();
     }
-    lastHtml = html;
-    lastScroll = currentScroll();
+    lastHtml = html; lastScroll = currentScroll();
+  };
+  const stateObserver = new MutationObserver(() => {
+    const opened = openNow();
+    if (opened !== wasOpen) {
+      wasOpen = opened; backStack = []; lastHtml = ''; lastScroll = 0; restoreTarget = null;
+    }
   });
-  observer.observe(modalRoot, {subtree:true,childList:true,attributes:true,attributeFilter:['class']});
+  stateObserver.observe(modalRoot, {attributes:true, attributeFilter:['class']});
+
+  // Only direct replacement of modalContent is a route change. Changes inside a game
+  // board, countdown, chat list or animated control must not serialize the whole modal.
+  const contentObserver = new MutationObserver(() => rememberCurrentScreen());
+  contentObserver.observe(content, {childList:true});
+  /* TODAY MODAL ROUTING FIX V38 END */
 })();
 /* END TODAY THEME + UNIVERSAL NON-BLOCKING BACK V26 */
