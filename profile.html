@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b14">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Личная страница участника TODAY — профиль, публикации дня, коллекция и достижения.">
+<script>(()=>{try{const q=new URLSearchParams(location.search);if(q.get("reset")==="268"){Promise.all([navigator.serviceWorker?.getRegistrations?.().then(rs=>Promise.all(rs.map(r=>r.unregister()))),window.caches?.keys?.().then(keys=>Promise.all(keys.filter(k=>k.startsWith("today-")).map(k=>caches.delete(k))))].filter(Boolean)).catch(()=>{})}}catch(_){}})();</script>
+<title>TODAY — Моя страница</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css?v=20261015190002">
+<link rel="stylesheet" href="./social.css?v=20261015190002">
+<link rel="stylesheet" href="./today-social-v51.css?v=20261015190002">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js?v=20261015190002"></script>
+</head>
+<body class="today-profile-route" data-today-profile-version="V51">
+<header class="today-profile-topbar">
+  <a class="today-profile-brand" href="./index.html" aria-label="Вернуться в TODAY">
+    <span class="today-profile-brand-mark" aria-hidden="true">✦</span>
+    <span><b>TODAY</b><small>МОЯ СТРАНИЦА</small></span>
+  </a>
+  <div class="today-profile-top-actions">
+    <a href="./index.html">← Главная</a>
+    <a class="today-profile-top-main" href="./index.html?open=shop">Магазин</a>
+  </div>
+</header>
+<main id="todayProfilePage" aria-live="polite">
+  <div class="today-profile-loading"><div class="today-profile-spinner"></div><b>Открываем твою страницу…</b><p>Загружаем профиль TODAY.</p></div>
+</main>
+<div id="todayProfileToast" class="today-profile-toast" role="status" aria-live="polite" hidden></div>
+<footer class="today-profile-site-footer"><span>© TODAY · ОДИН ИНТЕРНЕТ · ОДИН ДЕНЬ</span><a href="./index.html">Вернуться к сегодняшней ленте</a></footer>
+<script src="./today-social-v51.js?v=20261015190002"></script>
+<script src="./theme.js?v=20261015190002"></script>
+<!-- TODAY PROFILE PAGE V51 END -->
+</body>
+</html>

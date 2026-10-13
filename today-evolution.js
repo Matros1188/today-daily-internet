@@ -5,7 +5,7 @@
    secured server-side features and are intentionally not faked by this client package. */
 (()=>{
   'use strict';
-  const VERSION='20261015190001';
+  const VERSION='20261015190002';
   const STATE_KEY='today-social-evolution-v50';
   const DAY_KEY='today-social-evolution-v50-day';
   const $=(s,r=document)=>r.querySelector(s);
