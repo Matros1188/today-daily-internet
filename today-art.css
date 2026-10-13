@@ -7260,3 +7260,372 @@ html.today-theme-light .ts-m3-earned-trophy p{color:#677590!important}
 @media(max-width:430px){.ts-m3-level-grid,.ts-m3-trophy-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.ts-m3-level{min-height:80px!important}.ts-m3-level>b{font-size:9px!important}.ts-m3-hero-stats>span{min-width:0!important;flex:1!important;padding:9px!important}.ts-m3-hero-stats b{font-size:17px!important}.ts-m3-hero-stats small{font-size:8px!important}.ts-m3-album>summary{padding:15px!important}}
 @media(prefers-reduced-motion:reduce){.ts-m3-royal-hero .ts-m3-hero-art svg,.ts-m3-relic-mark,.ts-m3-trophy.is-earned>span,.ts-m3-earned-trophy{animation:none!important}.ts-m3-chapter,.ts-m3-level,.ts-m3-trophy{transition:none!important}}
 /* END TODAY CRYSTAL RESCUE V28 */
+
+/* TODAY LIGHT STUDIO V29 BEGIN — independent porcelain/pearl design system; scoped to light mode only. */
+html.today-theme-light{
+  color-scheme:light!important;
+  --bg:#f5f7fc!important;
+  --paper:#ffffff!important;
+  --white:#ffffff!important;
+  --ink:#1b2742!important;
+  --muted:#66738d!important;
+  --line:#e0e6f1!important;
+  --soft:#edf1f8!important;
+  --hot:#c94f87!important;
+  --violet:#625be8!important;
+  --lime:#149b8b!important;
+  --cyan:#347fce!important;
+  --yellow:#b9852d!important;
+  --shadow:0 18px 48px rgba(43,61,105,.085)!important;
+  --shadow2:0 7px 22px rgba(43,61,105,.065)!important;
+  --ts-border:rgba(104,124,170,.19)!important;
+  --ts-surface:#fff!important;
+  --ts-muted:#697791!important;
+  --today-pearl:#f5f7fc!important;
+  --today-lavender:#eeefff!important;
+  --today-mint:#e8f8f4!important;
+  --today-indigo:#625be8!important;
+  --today-teal:#138f87!important;
+  --today-ink:#1b2742!important;
+  --today-copy:#64718b!important;
+  --today-line:#e0e6f1!important;
+  --today-elevated:#fff!important;
+  --light-studio-canvas:#f5f7fc;
+  --light-studio-surface:#fff;
+  --light-studio-ink:#1b2742;
+  --light-studio-muted:#697791;
+  --light-studio-line:#e0e6f1;
+  --light-studio-indigo:#625be8;
+  --light-studio-mint:#168f85;
+  --light-studio-shadow:0 10px 32px rgba(43,61,105,.065);
+}
+html.today-theme-light,html.today-theme-light body{
+  background-color:#f5f7fc!important;color:#1b2742!important;color-scheme:light!important;
+}
+html.today-theme-light body{
+  background-image:radial-gradient(ellipse at 4% 0%,rgba(132,136,244,.11),transparent 30%),radial-gradient(ellipse at 98% 6%,rgba(57,183,173,.085),transparent 27%),linear-gradient(145deg,#f8faff 0%,#f3f6fb 55%,#f6fafb 100%)!important;
+  background-attachment:fixed!important;
+}
+html.today-theme-light body:before{
+  background-image:linear-gradient(rgba(87,108,159,.026) 1px,transparent 1px),linear-gradient(90deg,rgba(87,108,159,.026) 1px,transparent 1px)!important;
+  background-size:42px 42px!important;opacity:.55!important;mask-image:linear-gradient(to bottom,rgba(0,0,0,.35),transparent 78%)!important;
+}
+html.today-theme-light .noise{opacity:.012!important;mix-blend-mode:normal!important}
+html.today-theme-light #dailyBackdrop{opacity:1!important;filter:none!important;background:radial-gradient(ellipse at 10% 4%,rgba(153,158,255,.12),transparent 35%),radial-gradient(ellipse at 93% 12%,rgba(83,202,190,.08),transparent 31%),linear-gradient(145deg,#f7f9ff,#f0f5fb 65%,#f5faf9)!important}
+html.today-theme-light #dailyBackdrop .daily-scene{opacity:.055!important;filter:saturate(.45) contrast(.92)!important}
+html.today-theme-light #dailyBackdrop:after{background:linear-gradient(180deg,rgba(247,249,255,.08),rgba(245,248,252,.62))!important;opacity:1!important}
+html.today-theme-light #app{color:#1b2742!important}
+html.today-theme-light ::selection{background:#dedfff!important;color:#20284c!important}
+
+/* Navigation: a translucent porcelain bar, never a dark slab. */
+html.today-theme-light .topbar{
+  background:rgba(250,252,255,.84)!important;border-bottom:1px solid rgba(132,148,184,.18)!important;
+  box-shadow:0 8px 28px rgba(50,66,109,.055)!important;backdrop-filter:blur(24px) saturate(145%)!important;-webkit-backdrop-filter:blur(24px) saturate(145%)!important;
+}
+html.today-theme-light .topbar-inner{color:#1b2742!important}
+html.today-theme-light .brand,html.today-theme-light .today-brand-word,html.today-theme-light .today-brand-copy{color:#1b2742!important}
+html.today-theme-light .today-brand-copy small{color:#7a86a0!important}
+html.today-theme-light .top-btn,html.today-theme-light .account-btn,html.today-theme-light button.account-btn,html.today-theme-light #todayThemeToggle{
+  color:#384563!important;background:rgba(255,255,255,.86)!important;border:1px solid #dce3f0!important;
+  box-shadow:inset 0 1px #fff,0 2px 7px rgba(49,66,111,.035)!important;backdrop-filter:blur(12px)!important;
+}
+html.today-theme-light .top-btn:hover,html.today-theme-light .account-btn:hover,html.today-theme-light #todayThemeToggle:hover{background:#fff!important;border-color:#c8d0e5!important;box-shadow:0 5px 16px rgba(53,68,114,.08)!important;transform:translateY(-1px)}
+html.today-theme-light #todayThemeToggle{color:#625be8!important}
+html.today-theme-light #todayThemeToggle .today-theme-label{color:#625be8!important}
+html.today-theme-light .account-btn #profileAvatar,html.today-theme-light #profileAvatar{box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 0 3px rgba(105,111,224,.23)!important}
+
+/* Typography is cool ink, never warm sepia or washed-out grey. */
+html.today-theme-light h1,html.today-theme-light h2,html.today-theme-light h3,html.today-theme-light h4,html.today-theme-light h5,
+html.today-theme-light .section-head,html.today-theme-light .section-head h2,html.today-theme-light .hero h1,
+html.today-theme-light .daily-card h2,html.today-theme-light .daily-card h3,html.today-theme-light .daily-card h4,
+html.today-theme-light .ts-panel-head h2,html.today-theme-light .ts-panel h3,html.today-theme-light .ts-panel h4,
+html.today-theme-light .shop-title-row h2,html.today-theme-light .profile-ident h2{color:#1b2742!important}
+html.today-theme-light p,html.today-theme-light li,html.today-theme-light .hero p,html.today-theme-light .section-note,
+html.today-theme-light .community-intro,html.today-theme-light .daily-card p,html.today-theme-light .daily-card small,
+html.today-theme-light .ts-panel p,html.today-theme-light .ts-form-card>p,html.today-theme-light .ts-helper,
+html.today-theme-light .ts-muted,html.today-theme-light .shop-title-row p,html.today-theme-light .shop-footnote,
+html.today-theme-light .profile-ident p{color:#66738d!important}
+html.today-theme-light .eyebrow,html.today-theme-light .hero .eyebrow,html.today-theme-light .card-kicker,
+html.today-theme-light .ts-eyebrow,html.today-theme-light .ts-panel-head>span{color:#625be8!important}
+html.today-theme-light a:not(.ts-primary):not(.ts-promo-button):not(.primary-button){color:#4e59bf}
+html.today-theme-light hr,html.today-theme-light .divider,html.today-theme-light .section-divider{border-color:#e1e7f2!important}
+
+/* Homepage: editorial light hero, not a reversed dark hero. */
+html.today-theme-light .hero{
+  border:1px solid rgba(128,145,190,.23)!important;border-radius:30px!important;
+  background:radial-gradient(ellipse at 91% 12%,rgba(183,179,255,.29),transparent 39%),radial-gradient(ellipse at 79% 100%,rgba(148,230,218,.22),transparent 40%),linear-gradient(126deg,#fff 0%,#f5f6ff 53%,#effaf8 100%)!important;
+  box-shadow:inset 0 1px #fff,0 24px 62px rgba(52,68,119,.09)!important;color:#1b2742!important;
+}
+html.today-theme-light .hero:before,html.today-theme-light .hero:after{opacity:.26!important}
+html.today-theme-light .hero h1{color:#1b2742!important;text-shadow:none!important}
+html.today-theme-light .hero h1 span,html.today-theme-light #homeSection h1 span{background:linear-gradient(100deg,#665bdc 0%,#377fce 53%,#159c8e 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+html.today-theme-light .hero-copy>p,html.today-theme-light .hero p{color:#626f89!important}
+html.today-theme-light .hero-rail{border-color:rgba(126,143,188,.22)!important;background:rgba(255,255,255,.67)!important;color:#687692!important;box-shadow:inset 0 1px #fff!important}
+html.today-theme-light .hero-rail strong{color:#34425f!important}
+html.today-theme-light .clock-card,html.today-theme-light .scene-card,html.today-theme-light .activity-strip,
+html.today-theme-light .ranking-card,html.today-theme-light .today-section,html.today-theme-light .community-section{
+  border-color:#e0e6f1!important;background:rgba(255,255,255,.88)!important;color:#1b2742!important;box-shadow:0 8px 24px rgba(42,61,104,.045)!important;
+}
+html.today-theme-light .clock-card strong,html.today-theme-light .clock-row b,html.today-theme-light .scene-card strong,
+html.today-theme-light .ranking-card strong,html.today-theme-light .activity-strip strong{color:#293653!important}
+html.today-theme-light .clock-row small,html.today-theme-light .scene-card small,html.today-theme-light .ranking-card small{color:#74819a!important}
+html.today-theme-light .live-pill{border-color:#d8e8e9!important;background:#effaf7!important;color:#247b76!important}
+html.today-theme-light .live-pill b{color:#16887f!important}
+html.today-theme-light .today-section,html.today-theme-light .community-section{border-radius:22px!important}
+html.today-theme-light .section-head p,html.today-theme-light .today-section>p{color:#697791!important}
+
+/* Daily content: white cards with subtle category tint, crisp typography and quiet elevation. */
+html.today-theme-light .daily-grid{gap:15px!important}
+html.today-theme-light .daily-card,html.today-theme-light .daily-card.featured,html.today-theme-light .daily-card.secondary,
+html.today-theme-light .daily-card.kind-challenge,html.today-theme-light .daily-card.kind-debate,html.today-theme-light .daily-card.kind-moment,
+html.today-theme-light .daily-card.kind-song,html.today-theme-light .daily-card.kind-mystery{
+  color:#1b2742!important;border:1px solid #e0e6f1!important;border-radius:22px!important;
+  background:linear-gradient(145deg,#fff 0%,#fbfcff 72%,#f7f9ff 100%)!important;
+  box-shadow:inset 0 1px #fff,0 8px 24px rgba(45,63,106,.055)!important;
+}
+html.today-theme-light .daily-card.featured{background:radial-gradient(ellipse at 100% 0%,rgba(195,190,255,.22),transparent 45%),linear-gradient(145deg,#fff,#f8f8ff 75%,#f0fbf8)!important;border-color:#d9def3!important}
+html.today-theme-light .daily-card.secondary{background:linear-gradient(145deg,#fff,#f7faff)!important}
+html.today-theme-light .daily-card.kind-challenge{background:linear-gradient(145deg,#fff,#f4fbf8)!important}
+html.today-theme-light .daily-card.kind-debate{background:linear-gradient(145deg,#fff,#f6f5ff)!important}
+html.today-theme-light .daily-card.kind-moment{background:linear-gradient(145deg,#fff,#fff7fb)!important}
+html.today-theme-light .daily-card.kind-song{background:linear-gradient(145deg,#fff,#f4f9ff)!important}
+html.today-theme-light .daily-card.kind-mystery{background:linear-gradient(145deg,#fff,#f7f5ff)!important}
+html.today-theme-light .daily-card:before,html.today-theme-light .daily-card:after{opacity:.12!important}
+html.today-theme-light .daily-card h2,html.today-theme-light .daily-card h3,html.today-theme-light .daily-card h4,
+html.today-theme-light .daily-card strong,html.today-theme-light .daily-card .daily-title{color:#202c47!important}
+html.today-theme-light .daily-card p,html.today-theme-light .daily-card .small-note,html.today-theme-light .daily-card small{color:#6a7790!important}
+html.today-theme-light .daily-card .eyebrow,html.today-theme-light .daily-card .community-kind,html.today-theme-light .card-kicker{color:#665fcb!important}
+html.today-theme-light .daily-card .card-head .kind-pill,html.today-theme-light .kind-pill{background:#eeefff!important;border:1px solid #e0dfff!important;color:#5c57ba!important}
+html.today-theme-light .daily-card .card-head .count-pill,html.today-theme-light .count-pill{background:#f0f5fa!important;border:1px solid #e0e7f1!important;color:#66748f!important}
+html.today-theme-light .card-body .notice{border-color:#d7e7e4!important;background:#effaf7!important;color:#3c716c!important}
+html.today-theme-light .strip-actions button,html.today-theme-light .strip-actions .quiet-btn{border-color:#dce3ef!important;background:#fff!important;color:#4a5875!important;box-shadow:0 3px 10px rgba(44,62,105,.035)!important}
+html.today-theme-light .strip-actions button:hover{background:#f6f7ff!important;border-color:#c9cff1!important}
+
+/* Shared social cards / community feed. */
+html.today-theme-light .community-card,html.today-theme-light .today-post-card,html.today-theme-light .post-card,
+html.today-theme-light .ts-user-card,html.today-theme-light .ts-chat-row,html.today-theme-light .ts-channel-card,
+html.today-theme-light .ts-profile-friends,html.today-theme-light .ts-settings-group,html.today-theme-light .ts-form-card,
+html.today-theme-light .ts-panel,html.today-theme-light .ts-loading-panel,html.today-theme-light .ts-error-panel,
+html.today-theme-light .ts-game-card,html.today-theme-light .ts-story-composer,html.today-theme-light .ts-story-empty,
+html.today-theme-light .ts-photo-field,html.today-theme-light .ts-photo-preview{
+  color:#1b2742!important;border-color:#e0e6f1!important;background:linear-gradient(145deg,#fff,#fafbff)!important;
+  box-shadow:inset 0 1px #fff,0 7px 22px rgba(43,61,105,.045)!important;
+}
+html.today-theme-light .community-card:hover,html.today-theme-light .today-post-card:hover,html.today-theme-light .post-card:hover,
+html.today-theme-light .ts-user-card:hover,html.today-theme-light .ts-chat-row:hover,html.today-theme-light .ts-channel-card:hover,
+html.today-theme-light .ts-game-card:hover{border-color:#cfd5f0!important;box-shadow:0 12px 28px rgba(47,64,112,.075)!important;transform:translateY(-1px)}
+html.today-theme-light .today-post-name,html.today-theme-light .today-post-identity,html.today-theme-light .today-post-identity b,
+html.today-theme-light .today-post-card strong,html.today-theme-light .community-card strong,html.today-theme-light .ts-user-copy b,
+html.today-theme-light .ts-chat-row-copy b,html.today-theme-light .ts-list-head h3,html.today-theme-light .ts-panel-head h2,
+html.today-theme-light .ts-profile-hero h2,html.today-theme-light .ts-profile-hero strong{color:#25314d!important}
+html.today-theme-light .today-post-meta,html.today-theme-light .today-post-meta small,html.today-theme-light .ts-user-copy span,
+html.today-theme-light .ts-chat-row-copy small,html.today-theme-light .ts-chat-row-meta small,
+html.today-theme-light .ts-brand-chip small,html.today-theme-light .today-post-card time{color:#78849c!important}
+html.today-theme-light .today-post-text,html.today-theme-light .community-copy p,html.today-theme-light .ts-post-card>p,
+html.today-theme-light .ts-message p,html.today-theme-light .today-post-card p{color:#45536f!important}
+html.today-theme-light .today-post-actions{border-top-color:#e6eaf3!important}
+html.today-theme-light .today-like-btn,html.today-theme-light .like-btn{border-color:#dfe5f0!important;background:#f5f7fc!important;color:#677590!important}
+html.today-theme-light .today-like-btn.is-liked{border-color:#f1cada!important;background:#fff0f6!important;color:#c4497f!important}
+html.today-theme-light .today-like-btn.is-liked b{color:#c4497f!important}
+html.today-theme-light .ts-post-tag,html.today-theme-light .ts-promo-badge{background:#f0efff!important;border-color:#dfddff!important;color:#6259c6!important}
+html.today-theme-light .ts-brand-chip{border-color:#dfe5f0!important;background:#f7f9fd!important;color:#53617d!important}
+
+/* Friends, messages, profile and channel pages stay white and coherent. */
+html.today-theme-light .today-social-nav,html.today-theme-light #todaySocialNav,html.today-theme-light #todaySocialPageBar,
+html.today-theme-light .ts-chat-toolbar,html.today-theme-light .ts-channel-toolbar,html.today-theme-light .ts-profile-tools,
+html.today-theme-light .ts-profile-actions,html.today-theme-light .ts-user-actions,html.today-theme-light .ts-nav-actions{
+  border-color:#e0e6f1!important;background:rgba(255,255,255,.9)!important;color:#33415e!important;
+}
+html.today-theme-light .ts-nav-actions button,html.today-theme-light #todaySocialPageBar button,
+html.today-theme-light .ts-chat-toolbar button,html.today-theme-light .ts-channel-toolbar button{
+  border-color:#dfe5f0!important;background:#f8faff!important;color:#53617e!important;box-shadow:inset 0 1px #fff!important;
+}
+html.today-theme-light .ts-nav-actions button:hover,html.today-theme-light #todaySocialPageBar button:hover,
+html.today-theme-light .ts-chat-toolbar button:hover,html.today-theme-light .ts-channel-toolbar button:hover{
+  border-color:#cacff0!important;background:#f0f1ff!important;color:#5752bd!important;
+}
+html.today-theme-light .ts-panel-head{border-bottom-color:#e5e9f2!important}
+html.today-theme-light .ts-panel-head h2{color:#25314d!important}
+html.today-theme-light .ts-panel-head p{color:#78849c!important}
+html.today-theme-light .ts-profile-hero{border-color:#dfe4f1!important;background:radial-gradient(ellipse at 90% 0%,rgba(185,181,255,.28),transparent 45%),linear-gradient(135deg,#fff,#f4f6ff 62%,#eef9f7)!important;box-shadow:inset 0 1px #fff,0 10px 28px rgba(48,65,113,.06)!important}
+html.today-theme-light .ts-profile-hero>div:nth-child(2)>span{color:#6f7c96!important}
+html.today-theme-light .ts-profile-stats>div{border-color:#e0e6f1!important;background:#fff!important;box-shadow:0 4px 12px rgba(46,64,110,.035)!important}
+html.today-theme-light .ts-profile-stats b{color:#263451!important}
+html.today-theme-light .ts-profile-stats span{color:#77839b!important}
+html.today-theme-light .ts-chat-messages{background:linear-gradient(180deg,#f6f8fd,#eff3f9)!important;border-color:#e1e7f1!important}
+html.today-theme-light .ts-message{background:#fff!important;border:1px solid #e2e7f1!important;color:#263451!important;box-shadow:0 3px 10px rgba(45,61,102,.035)!important}
+html.today-theme-light .ts-message.is-own{background:linear-gradient(145deg,#eaeaff,#e5f6f4)!important;border-color:#dadcf5!important;color:#283352!important}
+html.today-theme-light .ts-chat-compose,html.today-theme-light .ts-message-compose{border-color:#e0e6f1!important;background:#fff!important}
+html.today-theme-light .ts-profile-cover{background:radial-gradient(ellipse at 15% 10%,rgba(255,255,255,.75),transparent 30%),linear-gradient(125deg,#dcdfff,#dff4f0 52%,#edf0ff)!important}
+html.today-theme-light .ts-profile-cover-copy,html.today-theme-light .ts-profile-cover-copy>strong{color:#25314d!important;text-shadow:none!important}
+html.today-theme-light .ts-profile-cover-copy>small,html.today-theme-light .ts-profile-cover-copy>span{color:#596987!important}
+html.today-theme-light .ts-form-card label,html.today-theme-light .ts-settings-form>label,html.today-theme-light .ts-search-form label{color:#52607c!important}
+html.today-theme-light .ts-toggle-row{border-color:#e0e6f1!important;background:#f9faff!important;color:#3c4a67!important}
+html.today-theme-light .ts-toggle-row input:checked+i{background:#dcdcff!important;border-color:#c2c2ff!important}
+
+/* Shop, collection, wallet and the everyday app surfaces. */
+html.today-theme-light .shop-page,html.today-theme-light .profile-page,html.today-theme-light .shop-title-row,
+html.today-theme-light .shop-money-head,html.today-theme-light .today-post-color-settings,
+html.today-theme-light .today-post-color-options,html.today-theme-light .shop-item,html.today-theme-light .shop-balance,
+html.today-theme-light .today-support-bank-card,html.today-theme-light .today-post-color-choice,
+html.today-theme-light .today-post-color-locked{
+  color:#24314e!important;border-color:#e0e6f1!important;background:linear-gradient(145deg,#fff,#f8faff)!important;
+  box-shadow:inset 0 1px #fff,0 6px 20px rgba(44,62,106,.04)!important;
+}
+html.today-theme-light .shop-title-row h2,html.today-theme-light .shop-money-head h3,html.today-theme-light .shop-item-copy h3,
+html.today-theme-light .shop-balance b,html.today-theme-light .profile-ident h2,html.today-theme-light .today-post-color-settings h3{color:#23314d!important}
+html.today-theme-light .shop-title-row p,html.today-theme-light .shop-item-copy p,html.today-theme-light .shop-footnote,
+html.today-theme-light .shop-owned-label,html.today-theme-light .today-post-color-settings>p{color:#6a7790!important}
+html.today-theme-light .shop-balance{background:linear-gradient(135deg,#f0efff,#ecfaf7)!important;border-color:#deddf6!important}
+html.today-theme-light .shop-price-invalid{background:#fff0f2!important;color:#ba3e5d!important;border-color:#f4d4dd!important}
+html.today-theme-light .shop-owned-label{background:#eaf8f2!important;border-color:#cfeee1!important;color:#21836d!important}
+html.today-theme-light .shop-buy-row button,html.today-theme-light .today-support-copy-btn{background:linear-gradient(135deg,#655be3,#4d71d5)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 6px 15px rgba(91,88,210,.17)!important}
+html.today-theme-light .today-support-btn{border-color:#dddff5!important;background:linear-gradient(110deg,#fff,#f2f1ff 58%,#ecfaf7)!important;color:#394664!important;box-shadow:0 8px 22px rgba(55,72,122,.06)!important}
+html.today-theme-light .today-support-btn-copy strong{color:#293654!important}
+html.today-theme-light .today-support-btn-copy small{color:#77839b!important}
+html.today-theme-light .today-support-bank-card:after{opacity:.16!important}
+html.today-theme-light .today-post-color-choice.is-selected{border-color:#918af0!important;background:#f0efff!important;box-shadow:0 0 0 2px rgba(101,91,226,.12)!important}
+
+/* Forms: real white fields and strong focus rings. */
+html.today-theme-light input,html.today-theme-light textarea,html.today-theme-light select,
+html.today-theme-light .composer input,html.today-theme-light .composer textarea,
+html.today-theme-light .ts-form-card input,html.today-theme-light .ts-form-card textarea,
+html.today-theme-light .ts-settings-form input,html.today-theme-light .ts-settings-form textarea,
+html.today-theme-light .ts-search-form input,html.today-theme-light .ts-photo-field input{
+  color:#25314d!important;background:#fff!important;border:1px solid #dbe2ef!important;
+  box-shadow:inset 0 1px 2px rgba(44,62,105,.025)!important;caret-color:#5f5be0!important;
+}
+html.today-theme-light input::placeholder,html.today-theme-light textarea::placeholder{color:#9aa5b8!important;opacity:1!important}
+html.today-theme-light input:focus,html.today-theme-light textarea:focus,html.today-theme-light select:focus,
+html.today-theme-light .ts-form-card input:focus,html.today-theme-light .ts-form-card textarea:focus{
+  border-color:#9691ee!important;box-shadow:0 0 0 3px rgba(101,91,226,.11)!important;outline:none!important;
+}
+html.today-theme-light input[type=checkbox],html.today-theme-light input[type=radio]{accent-color:#625be8!important}
+html.today-theme-light label{color:#4b5976!important}
+
+/* Buttons: indigo primary, neutral white secondary, explicit danger/warning states. */
+html.today-theme-light .primary-button,html.today-theme-light .ts-primary,html.today-theme-light .ts-mini-accent,
+html.today-theme-light .ts-promo-button,html.today-theme-light .primary-button[type=submit]{
+  color:#fff!important;border:1px solid rgba(78,72,194,.28)!important;background:linear-gradient(125deg,#7164eb,#5868d8 57%,#477fca)!important;
+  box-shadow:0 7px 17px rgba(89,87,206,.17),inset 0 1px rgba(255,255,255,.27)!important;
+}
+html.today-theme-light .primary-button:hover,html.today-theme-light .ts-primary:hover,html.today-theme-light .ts-mini-accent:hover,
+html.today-theme-light .ts-promo-button:hover{filter:brightness(1.035)!important;box-shadow:0 10px 21px rgba(89,87,206,.21)!important}
+html.today-theme-light .secondary-button,html.today-theme-light .ts-mini,html.today-theme-light .ts-text-button,
+html.today-theme-light .quiet-btn,html.today-theme-light .option-btn,html.today-theme-light .ts-save,
+html.today-theme-light .ts-user-actions .ts-mini,html.today-theme-light .ts-result-actions button:not(.ts-primary){
+  color:#465472!important;border:1px solid #dce3f0!important;background:linear-gradient(180deg,#fff,#f7f9fd)!important;
+  box-shadow:inset 0 1px #fff,0 2px 7px rgba(48,65,108,.035)!important;
+}
+html.today-theme-light .secondary-button:hover,html.today-theme-light .ts-mini:hover,html.today-theme-light .ts-text-button:hover,
+html.today-theme-light .quiet-btn:hover,html.today-theme-light .option-btn:hover{color:#5954bf!important;background:#f0f1ff!important;border-color:#cecef4!important}
+html.today-theme-light .danger-button,html.today-theme-light .ts-danger{color:#b63856!important;background:#fff0f3!important;border-color:#f2d3dc!important}
+html.today-theme-light button:disabled,html.today-theme-light .button:disabled{filter:saturate(.65)!important}
+html.today-theme-light button:focus-visible,html.today-theme-light a:focus-visible{outline:3px solid rgba(96,91,224,.27)!important;outline-offset:3px!important}
+
+/* Dialogs: paper surfaces over a neutral ink veil. */
+html.today-theme-light .modal,html.today-theme-light #modal{color:#1b2742!important}
+html.today-theme-light .modal-backdrop,html.today-theme-light #modal .modal-backdrop,
+html.today-theme-light .modal.today-social-modal .modal-backdrop{background:rgba(29,39,66,.26)!important;backdrop-filter:blur(9px) saturate(110%)!important;-webkit-backdrop-filter:blur(9px) saturate(110%)!important}
+html.today-theme-light .modal-card,html.today-theme-light #modal .modal-card,
+html.today-theme-light #modal.modal.today-social-modal .modal-card,
+html.today-theme-light .modal.today-social-modal .modal-card{
+  color:#1b2742!important;border:1px solid rgba(140,153,190,.32)!important;border-radius:25px!important;
+  background:linear-gradient(148deg,#fff 0%,#fbfcff 75%,#f2f8fa 100%)!important;
+  box-shadow:0 30px 95px rgba(26,38,69,.22),inset 0 1px #fff!important;
+}
+html.today-theme-light #modalContent,html.today-theme-light #modal .ts-panel,html.today-theme-light #modal .ts-form-card,
+html.today-theme-light #modal .ts-settings-group,html.today-theme-light #modal .ts-profile-friends,
+html.today-theme-light #modal .ts-channel-card{color:#1b2742!important;background:transparent!important}
+html.today-theme-light .modal-card h1,html.today-theme-light .modal-card h2,html.today-theme-light .modal-card h3,
+html.today-theme-light .modal-card h4,html.today-theme-light .modal-card strong,html.today-theme-light #modal .modal-card h1,
+html.today-theme-light #modal .modal-card h2,html.today-theme-light #modal .modal-card h3{color:#202c47!important}
+html.today-theme-light .modal-card p,html.today-theme-light .modal-card .small-note,
+html.today-theme-light .modal-card .collection-intro{color:#687590!important}
+html.today-theme-light .modal-close,html.today-theme-light #modal .modal-close,
+html.today-theme-light #modal #todaySocialCloseTop{color:#566480!important;background:#f7f9fd!important;border:1px solid #dfe5f0!important;box-shadow:0 3px 10px rgba(40,56,96,.05)!important}
+html.today-theme-light #modal .ts-panel-head{background:transparent!important;border-bottom:1px solid #e4e9f2!important}
+html.today-theme-light #modal .ts-panel-head h2{color:#1f2b47!important}
+html.today-theme-light #modal .ts-panel-head p{color:#737f98!important}
+
+/* Bottom navigation: lifted porcelain dock, highly legible active state. */
+html.today-theme-light .bottom-nav,html.today-theme-light #todaySocialNav{
+  border:1px solid rgba(153,166,196,.27)!important;background:rgba(252,253,255,.9)!important;
+  box-shadow:0 12px 36px rgba(37,52,92,.13),inset 0 1px #fff!important;backdrop-filter:blur(23px) saturate(145%)!important;-webkit-backdrop-filter:blur(23px) saturate(145%)!important;
+}
+html.today-theme-light .bottom-nav button{color:#74809a!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+html.today-theme-light .bottom-nav button span,html.today-theme-light .bottom-nav button small{color:inherit!important}
+html.today-theme-light .bottom-nav button.active{color:#5d57d1!important;background:linear-gradient(145deg,#eeedff,#e8f7f4)!important;border-color:#dfdef6!important;box-shadow:inset 0 1px #fff,0 3px 10px rgba(79,79,173,.07)!important}
+html.today-theme-light .bottom-nav button.active span{color:#5d57d1!important}
+html.today-theme-light .bottom-nav button.active small{color:#5559ba!important;font-weight:800!important}
+html.today-theme-light .bottom-nav button:not(.active):hover{color:#394864!important;background:#f3f5fb!important}
+html.today-theme-light .toast,html.today-theme-light .notice,html.today-theme-light .success-message{background:#f0faf6!important;color:#287765!important;border-color:#d2eee3!important;box-shadow:0 8px 24px rgba(41,82,74,.08)!important}
+html.today-theme-light .error,html.today-theme-light .error-message{background:#fff0f3!important;color:#ad3d59!important;border-color:#f2d4dd!important}
+
+/* Crystal Chronicles: match the rest of the new light system without muting gem artwork. */
+html.today-theme-light .ts-m3-royal-hero,html.today-theme-light .ts-m3-hero{
+  border-color:rgba(129,145,190,.25)!important;background:radial-gradient(ellipse at 82% 8%,rgba(183,178,255,.32),transparent 39%),radial-gradient(ellipse at 98% 100%,rgba(126,221,210,.22),transparent 37%),linear-gradient(130deg,#fff,#f4f5ff 53%,#eefaF7)!important;
+  box-shadow:inset 0 1px #fff,0 18px 45px rgba(57,72,125,.09)!important;
+}
+html.today-theme-light .ts-m3-royal-hero .ts-m3-hero-copy h2,html.today-theme-light .ts-m3-hero-copy h2{color:#1d2945!important;text-shadow:none!important}
+html.today-theme-light .ts-m3-royal-hero .ts-m3-hero-copy>p,html.today-theme-light .ts-m3-hero-copy>p{color:#5f6d87!important}
+html.today-theme-light .ts-m3-royal-hero .ts-m3-eyebrow,html.today-theme-light .ts-m3-eyebrow{color:#665bd0!important}
+html.today-theme-light .ts-m3-hero-stats>span{background:rgba(255,255,255,.82)!important;border-color:#dfe3f0!important;box-shadow:inset 0 1px #fff,0 3px 10px rgba(53,68,113,.035)!important}
+html.today-theme-light .ts-m3-hero-stats b{color:#283451!important}
+html.today-theme-light .ts-m3-hero-stats small{color:#74819a!important}
+html.today-theme-light .ts-m3-royal-intro,html.today-theme-light .ts-m3-story,html.today-theme-light .ts-m3-inventory,
+html.today-theme-light .ts-m3-store,html.today-theme-light .ts-m3-chapter,html.today-theme-light .ts-m3-album,
+html.today-theme-light .ts-m3-booster-card,html.today-theme-light .ts-m3-result{
+  color:#1b2742!important;border-color:#e0e5f1!important;background:linear-gradient(145deg,#fff,#f8f9ff)!important;
+  box-shadow:inset 0 1px #fff,0 7px 20px rgba(44,61,104,.045)!important;
+}
+html.today-theme-light .ts-m3-royal-intro h3,html.today-theme-light .ts-m3-story h3,
+html.today-theme-light .ts-m3-map-title h3,html.today-theme-light .ts-m3-chapter-head h3,
+html.today-theme-light .ts-m3-level-intro h3,html.today-theme-light .ts-m3-result h3{color:#222f4b!important}
+html.today-theme-light .ts-m3-royal-intro>p,html.today-theme-light .ts-m3-story>p,
+html.today-theme-light .ts-m3-chapter-summary,html.today-theme-light .ts-m3-result p{color:#687690!important}
+html.today-theme-light .ts-m3-chapter-head p,html.today-theme-light .ts-m3-chapter-head>div>small{color:#7985a0!important}
+html.today-theme-light .ts-m3-chapter-head>b{color:#655bd0!important}
+html.today-theme-light .ts-m3-chapter-mark{color:#645bc5!important;border-color:#e0def7!important;background:linear-gradient(145deg,#f0efff,#eaf8f5)!important;box-shadow:inset 0 1px #fff!important}
+html.today-theme-light .ts-m3-level{color:#293652!important;border-color:#e0e6f1!important;background:linear-gradient(145deg,#fff,#f5f7ff)!important;box-shadow:inset 0 1px #fff,0 3px 8px rgba(45,62,106,.025)!important}
+html.today-theme-light .ts-m3-level>b{color:#354361!important}
+html.today-theme-light .ts-m3-level>small{color:#78849e!important}
+html.today-theme-light .ts-m3-level-number{color:#6c7893!important;border-color:#e2e7f1!important;background:#f2f5fb!important}
+html.today-theme-light .ts-m3-level.is-current{border-color:#7fd3c5!important;background:linear-gradient(145deg,#e8faf5,#eef0ff)!important;box-shadow:0 0 0 1px rgba(30,155,137,.08),0 5px 14px rgba(35,150,133,.08),inset 0 1px #fff!important}
+html.today-theme-light .ts-m3-level.is-complete{border-color:#ebd9a9!important;background:linear-gradient(145deg,#fffdf5,#fff7e4)!important}
+html.today-theme-light .ts-m3-level.is-locked{opacity:.56!important}
+html.today-theme-light .ts-m3-board-wrap{border-color:#dfe4f2!important;background:radial-gradient(ellipse at 50% 0%,rgba(173,174,255,.26),transparent 56%),linear-gradient(145deg,#e8ecff,#e0eafb 55%,#e1f7f2)!important;box-shadow:inset 0 1px #fff,inset 0 0 0 4px rgba(255,255,255,.32),0 14px 36px rgba(73,88,143,.12)!important}
+html.today-theme-light .ts-m3-board,html.today-theme-light .ts-match-board{border-color:#d6def0!important;background:rgba(255,255,255,.38)!important;box-shadow:inset 0 1px #fff!important}
+html.today-theme-light .ts-m3-gem{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(238,243,255,.7))!important;border-color:rgba(125,141,188,.16)!important;box-shadow:inset 0 1px #fff,0 2px 6px rgba(52,68,113,.07)!important}
+html.today-theme-light .ts-m3-game-hud>div{border-color:#dfe5f0!important;background:linear-gradient(145deg,#fff,#f5f7fd)!important;box-shadow:inset 0 1px #fff,0 3px 10px rgba(45,63,107,.035)!important}
+html.today-theme-light .ts-m3-game-hud b{color:#283450!important}
+html.today-theme-light .ts-m3-game-hud small{color:#7a86a0!important}
+html.today-theme-light .ts-m3-objectives{border-color:#e0e6f1!important;background:rgba(255,255,255,.75)!important}
+html.today-theme-light .ts-m3-objective-copy>span{color:#566482!important;background:#f1f4fb!important;border-color:#e1e6f1!important}
+html.today-theme-light .ts-m3-objective-copy>span b{color:#2a3754!important}
+html.today-theme-light .ts-m3-chronicle{border-color:#e2ddfa!important;background:linear-gradient(115deg,#f1efff,#edf9f7)!important;box-shadow:inset 0 1px #fff!important}
+html.today-theme-light .ts-m3-chronicle small{color:#6960c2!important}
+html.today-theme-light .ts-m3-chronicle p{color:#4c5b78!important}
+html.today-theme-light .ts-m3-status{color:#4a6d78!important;border-color:#d5eae5!important;background:#effaf7!important}
+html.today-theme-light .ts-m3-booster-use,html.today-theme-light .ts-m3-buy{color:#4e5a78!important;border-color:#dfe5f0!important;background:#fff!important}
+html.today-theme-light .ts-m3-booster-card p,html.today-theme-light .ts-m3-booster-card small{color:#75819b!important}
+html.today-theme-light .ts-m3-coin-pill{color:#655ac9!important;border-color:#deddf7!important;background:#f0efff!important}
+html.today-theme-light .ts-m3-earned-trophy{background:linear-gradient(120deg,#f0efff,#eaf9f5)!important;border-color:#deddf5!important}
+html.today-theme-light .ts-m3-earned-trophy b{color:#273450!important}
+html.today-theme-light .ts-m3-earned-trophy p{color:#68758e!important}
+
+/* Image assets, code snippets and user-selected decoration retain their own color meaning. */
+html.today-theme-light pre,html.today-theme-light code:not(.ts-inline-code){color:#394663!important}
+html.today-theme-light .ts-error-panel{background:#fff6f7!important;border-color:#f2d9df!important}
+html.today-theme-light .ts-error-panel strong{color:#ac3d58!important}
+html.today-theme-light .ts-story-viewer{background:linear-gradient(145deg,#fff,#f6f7ff)!important;color:#23314e!important}
+html.today-theme-light .ts-story-viewer>p{color:#65728b!important}
+
+@media(max-width:700px){
+ html.today-theme-light .hero{border-radius:23px!important;box-shadow:inset 0 1px #fff,0 14px 34px rgba(52,68,119,.075)!important}
+ html.today-theme-light .topbar{backdrop-filter:blur(19px) saturate(140%)!important}
+ html.today-theme-light .daily-card,html.today-theme-light .community-card,html.today-theme-light .today-post-card{border-radius:18px!important}
+ html.today-theme-light .bottom-nav{box-shadow:0 8px 25px rgba(37,52,92,.11),inset 0 1px #fff!important}
+}
+@media(prefers-reduced-motion:reduce){html.today-theme-light *,html.today-theme-light *:before,html.today-theme-light *:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* TODAY LIGHT STUDIO V29 END */
