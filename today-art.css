@@ -7711,247 +7711,290 @@ html.today-theme-light .ts-m3-combo-pop{color:#fff!important;text-shadow:0 2px 1
 @media(prefers-reduced-motion:reduce){.ts-m3-royal-game .ts-m3-gem,.ts-m3-special-badge,.ts-m3-special-badge:after,.ts-m3-mission-splash,.ts-m3-mission-orbit,.ts-m3-mission-splash:before,.ts-m3-mission-timer i,.ts-m3-burst-particle,.ts-m3-board-wrap.is-shaking{animation:none!important;transition:none!important}.ts-m3-gem.is-hint,.ts-m3-gem.has-special{animation:none!important}}
 /* END TODAY CRYSTAL CHRONICLES V30 */
 
-/* TODAY SOFT ATELIER V34 BEGIN — deliberate premium light mode, with explicit readable text and solid surfaces. */
-html.today-theme-light{
+/* TODAY SOFT ATELIER V35 BEGIN — calm light palette + hard readable ink, scoped to light mode only. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light{
   color-scheme:light!important;
-  --bg:#f0eee7!important;--paper:#f8f5ed!important;--white:#fffdf7!important;
-  --ink:#26373d!important;--muted:#596970!important;--line:#c8d1cc!important;--soft:#e3e8e1!important;
-  --hot:#af5738!important;--violet:#7771a8!important;--lime:#547b62!important;--cyan:#487d91!important;--yellow:#b18638!important;
-  --shadow:0 15px 36px rgba(37,53,56,.09)!important;--shadow2:0 5px 16px rgba(37,53,56,.055)!important;
-  --glass-bg:rgba(248,245,237,.97)!important;--glass-bg-strong:#f8f5ed!important;
-  --glass-border:rgba(93,116,111,.24)!important;--glass-shadow:0 8px 23px rgba(37,53,56,.07)!important;
-  --ink-strong:#20343b!important;--today-theme-bg:#f0eee7!important;--today-theme-surface:#f8f5ed!important;
-  --today-theme-text:#26373d!important;--today-theme-muted:#596970!important;--today-theme-border:#c8d1cc!important;
-  --td-bg:#f0eee7!important;--td-surface:#f8f5ed!important;--td-surface-2:#e3e9e3!important;
-  --td-glass:rgba(248,245,237,.97)!important;--td-line:rgba(70,91,87,.19)!important;--td-line-strong:rgba(70,91,87,.31)!important;
-  --td-ink:#26373d!important;--td-muted:#596970!important;--td-soft:#718087!important;
-  --td-lilac:#7771a8!important;--td-mint:#4d806a!important;--td-cyan:#487d91!important;--td-gold:#b18638!important;
-  --td-radius:23px!important;--td-shadow:0 18px 48px rgba(37,53,56,.10)!important;--td-shadow-card:0 8px 22px rgba(37,53,56,.065)!important;
-  --atelier-canvas:#f0eee7!important;--atelier-paper:#f8f5ed!important;--atelier-blue:#dce7e8!important;
-  --atelier-sage:#dfe9df!important;--atelier-sand:#eee0cf!important;--atelier-saffron:#d7b96e!important;
-  --atelier-orange:#af5738!important;--atelier-ink:#26373d!important;--atelier-muted:#596970!important;
-  --atelier-line:#c8d1cc!important;--atelier-shadow:0 12px 30px rgba(37,53,56,.075)!important;
+  --bg:#e9ebe5!important;--paper:#f2f1ea!important;--white:#f7f5ee!important;
+  --ink:#263238!important;--muted:#526166!important;--line:#c6ceca!important;--soft:#e1e6df!important;
+  --hot:#a9573b!important;--violet:#686b8b!important;--lime:#4f795f!important;--cyan:#416f7a!important;--yellow:#9b762f!important;
+  --shadow:0 12px 30px rgba(37,49,49,.075)!important;--shadow2:0 4px 13px rgba(37,49,49,.045)!important;
+  --glass-bg:rgba(242,241,234,.97)!important;--glass-bg-strong:#f2f1ea!important;
+  --glass-border:#c6ceca!important;--glass-shadow:0 6px 18px rgba(37,49,49,.055)!important;
+  --ink-strong:#202d31!important;--today-theme-bg:#e9ebe5!important;--today-theme-surface:#f2f1ea!important;
+  --today-theme-text:#263238!important;--today-theme-muted:#526166!important;--today-theme-border:#c6ceca!important;
+  --td-bg:#e9ebe5!important;--td-surface:#f2f1ea!important;--td-surface-2:#e1e6df!important;
+  --td-glass:#f2f1ea!important;--td-line:rgba(58,75,72,.2)!important;--td-line-strong:rgba(58,75,72,.34)!important;
+  --td-ink:#263238!important;--td-muted:#526166!important;--td-soft:#647176!important;
+  --td-lilac:#686b8b!important;--td-mint:#4f795f!important;--td-cyan:#416f7a!important;--td-gold:#9b762f!important;
+  --td-shadow:0 13px 32px rgba(37,49,49,.08)!important;--td-shadow-card:0 5px 15px rgba(37,49,49,.05)!important;
+  --atelier-canvas:#e9ebe5!important;--atelier-paper:#f2f1ea!important;--atelier-blue:#dce5e6!important;
+  --atelier-sage:#dce5db!important;--atelier-sand:#ebdfd0!important;--atelier-saffron:#c9ad69!important;
+  --atelier-orange:#a9573b!important;--atelier-ink:#263238!important;--atelier-muted:#526166!important;
+  --atelier-line:#c6ceca!important;--atelier-shadow:0 10px 26px rgba(37,49,49,.06)!important;
+  background:#e9ebe5!important;
 }
-html.today-theme-light,html.today-theme-light body,html.today-theme-light #app{
-  color-scheme:light!important;background:#f0eee7!important;color:#26373d!important;
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light #app{
+  color-scheme:light!important;background:#e9ebe5!important;color:#263238!important;
 }
-html.today-theme-light body{
-  background-image:radial-gradient(ellipse at 8% 0%,rgba(181,207,210,.34),transparent 34%),radial-gradient(ellipse at 96% 7%,rgba(231,201,168,.24),transparent 28%),linear-gradient(135deg,#f2f0e9 0%,#ecefe9 58%,#e9eee8 100%)!important;
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body{
+  background-image:linear-gradient(135deg,#eceee8 0%,#e7ebe7 52%,#e9e7df 100%)!important;
   background-attachment:fixed!important;font-family:Manrope,Onest,"Avenir Next",system-ui,-apple-system,"Segoe UI",sans-serif!important;
   -webkit-font-smoothing:antialiased!important;text-rendering:optimizeLegibility!important;
 }
-/* Remove the dark-theme veil / haze instead of tinting it pale. */
-html.today-theme-light body:after{display:none!important;opacity:0!important;background:none!important;content:none!important}
-html.today-theme-light body:before{opacity:.17!important;mix-blend-mode:normal!important;background-image:linear-gradient(rgba(42,66,68,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(42,66,68,.035) 1px,transparent 1px)!important;background-size:52px 52px!important;mask-image:linear-gradient(to bottom,rgba(0,0,0,.32),transparent 78%)!important}
-html.today-theme-light .noise{opacity:.012!important;mix-blend-mode:multiply!important}
-html.today-theme-light #dailyBackdrop{opacity:1!important;filter:none!important;background:radial-gradient(ellipse at 10% 0%,rgba(183,211,213,.24),transparent 34%),radial-gradient(ellipse at 93% 10%,rgba(236,208,179,.17),transparent 29%),#f0eee7!important}
-html.today-theme-light #dailyBackdrop .daily-scene{opacity:.025!important;filter:none!important;mix-blend-mode:normal!important}
-html.today-theme-light ::selection{color:#fffaf0!important;background:#386b72!important}
-
-/* Global text contract: default ink for text, a quieter but still readable tone for supporting copy. */
-html.today-theme-light body :is(h1,h2,h3,h4,h5,h6,strong,b,summary,legend,dt,dd,li,label, time){text-shadow:none!important}
-html.today-theme-light body :is(h1,h2,h3,h4,h5,h6){color:#26373d!important}
-html.today-theme-light body :is(p,li,label,small,time,.section-note,.community-intro,.section-head p,.shop-footnote,.ts-muted,.ts-helper,.ts-user-copy span,.ts-chat-row-copy small,.ts-channel-meta,.profile-ident p){color:#596970!important}
-html.today-theme-light .eyebrow,html.today-theme-light .card-kicker,html.today-theme-light .ts-eyebrow,html.today-theme-light .ts-panel-head>span{color:#9a5437!important;letter-spacing:.11em!important}
-html.today-theme-light a:not(.ts-primary):not(.ts-promo-button):not(.primary-button){color:#356b7c}
-html.today-theme-light hr,html.today-theme-light .divider,html.today-theme-light .section-divider{border-color:#c8d1cc!important}
-
-/* Header: warm mineral glass, but nearly opaque so it never looks fogged. */
-html.today-theme-light .topbar{color:#26373d!important;background:rgba(243,241,233,.97)!important;border-bottom:1px solid #cbd4ce!important;box-shadow:0 5px 18px rgba(37,53,56,.045)!important;backdrop-filter:blur(14px) saturate(108%)!important;-webkit-backdrop-filter:blur(14px) saturate(108%)!important}
-html.today-theme-light .topbar-inner,html.today-theme-light .top-actions{color:#26373d!important}
-html.today-theme-light .brand,html.today-theme-light .today-brand-word,html.today-theme-light .today-brand-copy,html.today-theme-light .topbar .account-btn{color:#26373d!important}
-html.today-theme-light .today-brand-copy small,html.today-theme-light .today-brand-tag{color:#68777a!important}
-html.today-theme-light .today-brand-dot{color:#af5738!important}
-html.today-theme-light .coin-badge{background:#f5e9c9!important;border:1px solid #deca91!important;color:#785b21!important;box-shadow:inset 0 1px rgba(255,255,255,.7),0 3px 8px rgba(75,61,31,.05)!important}
-html.today-theme-light .coin-badge b{color:#684d1a!important}
-html.today-theme-light .top-btn,html.today-theme-light .account-btn,html.today-theme-light button.account-btn,html.today-theme-light #todayThemeToggle,html.today-theme-light button.quiet-btn{
-  color:#344c52!important;background:#e8ece5!important;border:1px solid #c7d2cb!important;box-shadow:inset 0 1px rgba(255,255,255,.8),0 2px 5px rgba(38,55,61,.035)!important;backdrop-filter:none!important;
+/* Remove the dark overlay, photo haze and glow that made the old light theme look overexposed. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body:after{display:none!important;content:none!important;opacity:0!important;background:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body:before{
+  opacity:.10!important;mix-blend-mode:normal!important;
+  background-image:linear-gradient(rgba(39,57,57,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(39,57,57,.035) 1px,transparent 1px)!important;
+  background-size:56px 56px!important;mask-image:linear-gradient(to bottom,rgba(0,0,0,.26),transparent 72%)!important;
 }
-html.today-theme-light .top-btn:hover,html.today-theme-light .account-btn:hover,html.today-theme-light #todayThemeToggle:hover{background:#dce7e2!important;border-color:#a9beb6!important;color:#244e59!important;transform:translateY(-1px)!important}
-html.today-theme-light #todayThemeToggle,html.today-theme-light #todayThemeToggle .today-theme-label{color:#315f6b!important}
-html.today-theme-light #todayThemeToggle .today-theme-icon{background:#d9e6e7!important;color:#315f6b!important}
-html.today-theme-light #profileAvatar{box-shadow:0 0 0 2px #f8f5ed,0 0 0 3px rgba(61,111,125,.42)!important}
-
-/* Homepage hero is the anchor: one clear panel with ink-first typography and restrained accents. */
-html.today-theme-light .hero,html.today-theme-light #homeSection.hero{
-  border:1px solid #bdccc8!important;border-radius:27px!important;
-  background:linear-gradient(112deg,#f8f4e9 0%,#e2ebeb 55%,#e2eadf 100%)!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.9),0 16px 36px rgba(37,53,56,.075)!important;color:#26373d!important;
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light .noise{display:none!important;opacity:0!important;mix-blend-mode:normal!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light #dailyBackdrop{
+  opacity:1!important;filter:none!important;
+  background:linear-gradient(135deg,#e9ebe5 0%,#e6ebe7 54%,#e9e6dd 100%)!important;
 }
-html.today-theme-light .hero:before,html.today-theme-light .hero:after{opacity:.06!important;filter:none!important}
-html.today-theme-light .hero h1,html.today-theme-light #homeSection .hero h1{color:#26373d!important;text-shadow:none!important;font-size:clamp(3rem,5vw,4.7rem)!important;line-height:.99!important;letter-spacing:-.055em!important;font-weight:850!important}
-html.today-theme-light .hero h1 span,html.today-theme-light #homeSection .hero h1 span{background:linear-gradient(100deg,#315f72 0%,#ad5638 58%,#9a762d 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
-html.today-theme-light .hero-copy>p,html.today-theme-light .hero p{color:#4f6267!important}
-html.today-theme-light .hero-rail{border:1px solid #c6d2c9!important;background:#f8f5ed!important;color:#586a6d!important;box-shadow:inset 0 1px #fff!important}
-html.today-theme-light .hero-rail strong{color:#2d484f!important}
-html.today-theme-light .hero .quiet-btn,html.today-theme-light .hero button.quiet-btn,html.today-theme-light .hero .support-btn,html.today-theme-light .today-support-btn{border:1px solid #b4c9c8!important;background:linear-gradient(135deg,#e0e9e7,#f4eee2)!important;color:#304e55!important;box-shadow:0 4px 12px rgba(37,53,56,.055)!important}
-html.today-theme-light .today-support-btn-copy strong{color:#26373d!important}
-html.today-theme-light .today-support-btn-copy small{color:#68777a!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light #dailyBackdrop .daily-scene{opacity:0!important;filter:none!important;display:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light ::selection{background:#c9d9d5!important;color:#263238!important}
 
-/* Timer: dark petrol numerals are intentionally high contrast. */
-html.today-theme-light .clock-card,html.today-theme-light .scene-card,html.today-theme-light .activity-strip,html.today-theme-light .ranking-card,html.today-theme-light .today-section,html.today-theme-light .community-section{
- border:1px solid #c7d1ca!important;background:#f8f5ed!important;color:#26373d!important;box-shadow:0 7px 20px rgba(37,53,56,.045)!important;
+/* Non-negotiable contrast rule: every text node in the live app uses dark ink in light mode.
+   Repeated theme scope intentionally outranks the old dark-mode color selectors with !important.
+   The dark theme never matches these selectors. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body *{
+  color:#263238!important;text-shadow:none!important;
 }
-html.today-theme-light .clock-card strong,html.today-theme-light .clock-card b,html.today-theme-light .clock-card time,html.today-theme-light .clock-card [class*="time"],html.today-theme-light .clock-card [class*="clock"],html.today-theme-light .clock-row b,html.today-theme-light .scene-card strong,html.today-theme-light .ranking-card strong,html.today-theme-light .activity-strip strong{color:#234751!important;text-shadow:none!important}
-html.today-theme-light .clock-card>span,html.today-theme-light .clock-card small,html.today-theme-light .clock-row small,html.today-theme-light .scene-card small,html.today-theme-light .ranking-card small,html.today-theme-light .activity-strip small{color:#596970!important}
-html.today-theme-light .clock-card .progress,html.today-theme-light .clock-card progress,html.today-theme-light .clock-card [role="progressbar"]{accent-color:#356e7a!important}
-html.today-theme-light .clock-card .progress-bar,html.today-theme-light .clock-card .progress-fill,html.today-theme-light .clock-card .clock-progress,html.today-theme-light .clock-card [class*="progress"] i{background:#4a8177!important}
-html.today-theme-light .live-pill{border:1px solid #b4d0bc!important;background:#e0eddf!important;color:#31684d!important}
-html.today-theme-light .live-pill b{color:#286244!important}
-html.today-theme-light .today-section,html.today-theme-light .community-section{border-radius:22px!important}
-html.today-theme-light .section-head p,html.today-theme-light .today-section>p{color:#596970!important}
-
-/* Daily cards: deliberately differentiated colour families, clear text and solid surfaces. */
-html.today-theme-light .daily-card,html.today-theme-light .daily-card.featured,html.today-theme-light .daily-card.secondary,html.today-theme-light .daily-card.kind-challenge,html.today-theme-light .daily-card.kind-debate,html.today-theme-light .daily-card.kind-moment,html.today-theme-light .daily-card.kind-song,html.today-theme-light .daily-card.kind-mystery{
- color:#26373d!important;border:1px solid #c6d0ca!important;border-radius:21px!important;background:#f8f5ed!important;box-shadow:inset 0 1px rgba(255,255,255,.82),0 6px 16px rgba(37,53,56,.05)!important;
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app *,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal *,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .bottom-nav *,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #toast *{
+  color:#263238!important;text-shadow:none!important;
 }
-html.today-theme-light .daily-card.featured{background:linear-gradient(135deg,#f8f4e9 0%,#dce9e9 100%)!important;border-color:#b7cbcb!important}
-html.today-theme-light .daily-card.secondary{background:linear-gradient(135deg,#e9eee6,#f6f1e6)!important}
-html.today-theme-light .daily-card.kind-challenge{background:linear-gradient(135deg,#f6ebdb,#efddc9)!important;border-color:#d8bca2!important}
-html.today-theme-light .daily-card.kind-debate{background:linear-gradient(135deg,#e8edf3,#dbe5ed)!important;border-color:#bdccd9!important}
-html.today-theme-light .daily-card.kind-moment{background:linear-gradient(135deg,#f8f1e5,#e4ebdf)!important}
-html.today-theme-light .daily-card.kind-song{background:linear-gradient(135deg,#e3eef0,#d2e5e8)!important;border-color:#b8d0d2!important}
-html.today-theme-light .daily-card.kind-mystery{background:linear-gradient(135deg,#ece8f2,#e1e2ee)!important;border-color:#ccc7df!important}
-html.today-theme-light .daily-card:before,html.today-theme-light .daily-card:after{opacity:.035!important}
-html.today-theme-light .daily-card :is(h2,h3,h4,strong,b,.daily-title){color:#26373d!important;text-shadow:none!important}
-html.today-theme-light .daily-card :is(p,small,.small-note){color:#4f6268!important}
-html.today-theme-light .daily-card .eyebrow,html.today-theme-light .daily-card .community-kind,html.today-theme-light .daily-card .card-kicker{color:#924b31!important}
-html.today-theme-light .daily-card .kind-pill,html.today-theme-light .kind-pill{background:#e1e9e5!important;border:1px solid #c1d0c9!important;color:#355862!important}
-html.today-theme-light .daily-card .count-pill,html.today-theme-light .count-pill{background:#eee9dc!important;border:1px solid #d9d0bd!important;color:#625a48!important}
-html.today-theme-light .card-body .notice{border:1px solid #b4d1bd!important;background:#e2efdf!important;color:#2d6849!important}
-html.today-theme-light .strip-actions button,html.today-theme-light .strip-actions .quiet-btn{border-color:#c8d2cb!important;background:#e9eee7!important;color:#41595e!important;box-shadow:none!important}
-html.today-theme-light .strip-actions button:hover{background:#dce8e3!important;border-color:#afc7c1!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(h1,h2,h3,h4,h5,h6){color:#202d31!important;font-weight:760!important;letter-spacing:-.025em}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(p,li,label,small,time,summary,dd,dt,legend,.section-note,.community-intro,.section-head p,.shop-footnote,.ts-muted,.ts-helper){color:#526166!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(.eyebrow,.card-kicker,.ts-eyebrow,.ts-panel-head>span){color:#8b4d35!important;letter-spacing:.11em!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body a:not(.primary-button):not(.ts-primary):not(.ts-promo-button){color:#315f6a!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(hr,.divider,.section-divider){border-color:#c6ceca!important}
 
-/* Social posts, profile, friends, messaging, channels and settings. */
-html.today-theme-light .community-card,html.today-theme-light .today-post-card,html.today-theme-light .post-card,html.today-theme-light .ts-user-card,html.today-theme-light .ts-chat-row,html.today-theme-light .ts-channel-card,html.today-theme-light .ts-profile-friends,html.today-theme-light .ts-settings-group,html.today-theme-light .ts-form-card,html.today-theme-light .ts-panel,html.today-theme-light .ts-loading-panel,html.today-theme-light .ts-game-card,html.today-theme-light .ts-story-composer,html.today-theme-light .ts-story-empty,html.today-theme-light .ts-photo-field,html.today-theme-light .ts-photo-preview,html.today-theme-light .ts-post-card,html.today-theme-light .ts-stat-card,html.today-theme-light .ts-list-card,html.today-theme-light .ts-promo-card,html.today-theme-light .ts-friend-card,html.today-theme-light .ts-chat-card{
- color:#26373d!important;border:1px solid #c7d1ca!important;background:#f8f5ed!important;box-shadow:0 6px 17px rgba(37,53,56,.045)!important;
+/* Opaque header and controls; no translucent white veil. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .topbar{
+  color:#263238!important;background:#eeefe9!important;border-bottom:1px solid #c6ceca!important;
+  box-shadow:0 3px 12px rgba(37,49,49,.045)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
 }
-html.today-theme-light .community-card:hover,html.today-theme-light .today-post-card:hover,html.today-theme-light .post-card:hover,html.today-theme-light .ts-user-card:hover,html.today-theme-light .ts-chat-row:hover,html.today-theme-light .ts-channel-card:hover,html.today-theme-light .ts-game-card:hover{border-color:#9dbcb9!important;box-shadow:0 9px 22px rgba(37,53,56,.075)!important;transform:translateY(-1px)!important}
-html.today-theme-light .today-post-name,html.today-theme-light .today-post-identity,html.today-theme-light .today-post-identity b,html.today-theme-light .today-post-card strong,html.today-theme-light .community-card strong,html.today-theme-light .ts-user-copy b,html.today-theme-light .ts-chat-row-copy b,html.today-theme-light .ts-list-head h3,html.today-theme-light .ts-panel-head h2,html.today-theme-light .ts-profile-hero h2,html.today-theme-light .ts-profile-hero h3,html.today-theme-light .ts-profile-hero strong{color:#26373d!important}
-html.today-theme-light .today-post-meta,html.today-theme-light .today-post-meta small,html.today-theme-light .ts-user-copy span,html.today-theme-light .ts-chat-row-copy small,html.today-theme-light .ts-chat-row-meta small,html.today-theme-light .ts-brand-chip small,html.today-theme-light .today-post-card time,html.today-theme-light .ts-channel-meta{color:#596970!important}
-html.today-theme-light .today-post-text,html.today-theme-light .community-copy p,html.today-theme-light .ts-post-card>p,html.today-theme-light .ts-message p,html.today-theme-light .today-post-card p{color:#394f55!important}
-html.today-theme-light .today-post-actions{border-top-color:#d0d8d1!important}
-html.today-theme-light .today-like-btn,html.today-theme-light .like-btn{border:1px solid #c7d2cb!important;background:#e8eee7!important;color:#4d6467!important}
-html.today-theme-light .today-like-btn.is-liked{border-color:#d8b19c!important;background:#f3dfd2!important;color:#98492f!important}
-html.today-theme-light .today-like-btn.is-liked b{color:#98492f!important}
-html.today-theme-light .ts-post-tag,html.today-theme-light .ts-promo-badge{background:#dce9e9!important;border-color:#bdd2d1!important;color:#315f70!important}
-html.today-theme-light .ts-brand-chip{border-color:#c9d4cb!important;background:#e8ede5!important;color:#41595d!important}
-html.today-theme-light .today-social-nav,html.today-theme-light #todaySocialNav,html.today-theme-light #todaySocialPageBar,html.today-theme-light .ts-chat-toolbar,html.today-theme-light .ts-channel-toolbar,html.today-theme-light .ts-profile-tools,html.today-theme-light .ts-profile-actions,html.today-theme-light .ts-user-actions,html.today-theme-light .ts-nav-actions{color:#26373d!important;background:#e8ede6!important;border-color:#c4d0c8!important;box-shadow:0 4px 12px rgba(37,53,56,.035)!important}
-html.today-theme-light .today-social-nav button,html.today-theme-light #todaySocialNav button,html.today-theme-light #todaySocialPageBar button,html.today-theme-light .ts-nav-actions button,html.today-theme-light .ts-chat-toolbar button,html.today-theme-light .ts-channel-toolbar button{color:#40575d!important;background:#f5f2e9!important;border:1px solid #c7d3cc!important;box-shadow:none!important}
-html.today-theme-light .today-social-nav button.active,html.today-theme-light #todaySocialNav button.active,html.today-theme-light #todaySocialPageBar button.active,html.today-theme-light .ts-nav-actions button.active{background:#d4e5e2!important;border-color:#9dbeb8!important;color:#244f56!important;font-weight:800!important}
-html.today-theme-light .ts-panel-head{border-bottom:1px solid #d3dbd3!important;background:transparent!important}
-html.today-theme-light .ts-panel-head h2{color:#26373d!important}html.today-theme-light .ts-panel-head p{color:#596970!important}
-html.today-theme-light .ts-orbit,html.today-theme-light .ts-channel-symbol,html.today-theme-light .ts-chat-icon,html.today-theme-light .ts-avatar,html.today-theme-light .ts-promo-mark{background:#e0e9e5!important;border:1px solid #c2d1ca!important;color:#376574!important;box-shadow:none!important}
-html.today-theme-light .ts-profile-hero{border-color:#bacdc8!important;background:linear-gradient(125deg,#f7f1e5,#dce9e9 62%,#dfe9dc)!important;box-shadow:0 9px 22px rgba(37,53,56,.055)!important}
-html.today-theme-light .ts-profile-stats>div{border-color:#c8d3cb!important;background:#e9eee6!important;box-shadow:none!important}
-html.today-theme-light .ts-profile-stats b{color:#263d45!important}html.today-theme-light .ts-profile-stats span{color:#596970!important}
-html.today-theme-light .ts-chat-messages{background:#e6ece7!important;border-color:#c6d2cb!important}
-html.today-theme-light .ts-message{background:#fbf8f0!important;border:1px solid #ced8d0!important;color:#26373d!important;box-shadow:0 2px 5px rgba(37,53,56,.035)!important}
-html.today-theme-light .ts-message.is-own{background:#d9e9e5!important;border-color:#b7d0c8!important;color:#26474c!important}
-html.today-theme-light .ts-message-meta b{color:#96553b!important}html.today-theme-light .ts-message-meta time{color:#68777a!important}
-html.today-theme-light .ts-chat-compose,html.today-theme-light .ts-message-compose{border-color:#c7d2ca!important;background:#eeeDE5!important}
-html.today-theme-light .ts-profile-cover{background:linear-gradient(125deg,#dbe9e8,#e2eadc 52%,#f0dfca)!important}
-html.today-theme-light .ts-profile-cover-copy,html.today-theme-light .ts-profile-cover-copy>strong{color:#26373d!important;text-shadow:none!important}
-html.today-theme-light .ts-profile-cover-copy>small,html.today-theme-light .ts-profile-cover-copy>span{color:#4f6568!important}
-html.today-theme-light .ts-toggle-row{border-color:#c8d3ca!important;background:#e9eee6!important;color:#354f54!important}
-html.today-theme-light .ts-toggle-row input:checked+i{background:#cfe3d4!important;border-color:#a9cbb2!important}
-
-/* Inputs must have dark ink and visible borders, including in popups and dynamically rendered forms. */
-html.today-theme-light input:not([type="checkbox"]):not([type="radio"]),html.today-theme-light textarea,html.today-theme-light select,html.today-theme-light .ts-input,html.today-theme-light .ts-search-input,html.today-theme-light .composer input,html.today-theme-light .composer textarea,html.today-theme-light .ts-form-card input,html.today-theme-light .ts-form-card textarea,html.today-theme-light .ts-settings-form input,html.today-theme-light .ts-settings-form textarea,html.today-theme-light .ts-search-form input,html.today-theme-light .ts-photo-field input,html.today-theme-light .ts-message-compose textarea,html.today-theme-light .ts-inline-invite input{
- color:#26373d!important;background:#fbf8f0!important;border:1px solid #bfcfc9!important;box-shadow:inset 0 1px 2px rgba(37,53,56,.035)!important;caret-color:#af5738!important;
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .topbar-inner,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .top-actions,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .brand,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-brand-word,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-brand-copy,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .topbar .account-btn{color:#263238!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-brand-copy small,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-brand-tag{color:#5d696a!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-brand-dot{color:#a9573b!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .top-btn,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .account-btn,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app #todayThemeToggle,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app button.quiet-btn{
+  color:#34464b!important;background:#f4f3ed!important;border:1px solid #c6ceca!important;
+  box-shadow:0 2px 6px rgba(37,49,49,.035)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
 }
-html.today-theme-light input::placeholder,html.today-theme-light textarea::placeholder{color:#6a797a!important;opacity:1!important}
-html.today-theme-light input:focus,html.today-theme-light textarea:focus,html.today-theme-light select:focus{border-color:#518693!important;outline:2px solid rgba(61,123,137,.15)!important;outline-offset:1px!important}
-html.today-theme-light input[type=checkbox],html.today-theme-light input[type=radio]{accent-color:#356d77!important}
-html.today-theme-light label{color:#3f575c!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app #todayThemeToggle *{color:#34464b!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .top-btn:hover,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .account-btn:hover,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app #todayThemeToggle:hover{background:#e4e9e4!important;border-color:#aebdb8!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .coin-badge{background:#e7dfc6!important;border:1px solid #d4c69f!important;color:#5c4b26!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .coin-badge *{color:#5c4b26!important}
 
-/* Shop and coins: warm cream goods cards, dark ink, clay purchase action. */
-html.today-theme-light .shop-page,html.today-theme-light .profile-page,html.today-theme-light .shop-title-row,html.today-theme-light .shop-money-head,html.today-theme-light .today-post-color-settings,html.today-theme-light .today-post-color-options,html.today-theme-light .shop-item,html.today-theme-light .shop-balance,html.today-theme-light .today-support-bank-card,html.today-theme-light .today-post-color-choice,html.today-theme-light .today-post-color-locked{color:#26373d!important;border-color:#c8d2ca!important;background:#f8f5ed!important;box-shadow:0 5px 15px rgba(37,53,56,.04)!important}
-html.today-theme-light .shop-title-row h2,html.today-theme-light .shop-money-head h3,html.today-theme-light .shop-item-copy h3,html.today-theme-light .shop-balance b,html.today-theme-light .profile-ident h2,html.today-theme-light .today-post-color-settings h3{color:#26373d!important}
-html.today-theme-light .shop-title-row p,html.today-theme-light .shop-item-copy p,html.today-theme-light .shop-footnote,html.today-theme-light .shop-owned-label,html.today-theme-light .today-post-color-settings>p{color:#596970!important}
-html.today-theme-light .shop-balance{background:#e5eee7!important;border-color:#c2d4c7!important}
-html.today-theme-light .shop-owned-label{background:#e0eddf!important;border-color:#bdd4bd!important;color:#326b4f!important}
-html.today-theme-light .shop-price-invalid{background:#f5ded7!important;color:#8d3f31!important;border-color:#dfb7aa!important}
-html.today-theme-light .shop-buy-row button,html.today-theme-light .today-support-copy-btn{background:#ad5738!important;color:#fff8ed!important;border:1px solid #9c492e!important;box-shadow:0 5px 12px rgba(128,67,43,.15)!important}
-html.today-theme-light .today-support-btn{border:1px solid #c5d1c9!important;background:#f7f2e7!important;color:#314c52!important;box-shadow:0 4px 12px rgba(37,53,56,.045)!important}
-html.today-theme-light .today-post-color-choice.is-selected{border-color:#6b9a9b!important;background:#dceae5!important;box-shadow:0 0 0 2px rgba(67,126,128,.12)!important}
+/* Main hero: soft sage-blue surface, crisp dark type, no white glow or gradient lettering. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero{
+  color:#263238!important;background:linear-gradient(125deg,#e0e8e5 0%,#dce6e8 56%,#e5e7dc 100%)!important;
+  border:1px solid #becbc7!important;border-radius:25px!important;box-shadow:0 10px 24px rgba(37,49,49,.065)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero:before,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero:after{opacity:0!important;display:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero h1,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app #homeSection h1,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero h1 span{
+  color:#24343a!important;-webkit-text-fill-color:#24343a!important;background:none!important;
+  -webkit-background-clip:border-box!important;background-clip:border-box!important;text-shadow:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero-copy>p{color:#465a60!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero-rail{
+  background:#eaf0e9!important;border:1px solid #c3d0c8!important;color:#465a60!important;box-shadow:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero-rail strong{color:#263e43!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero-rail span{color:#526166!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-support-btn{
+  background:#f1eee4!important;color:#35494c!important;border:1px solid #c7c9b9!important;box-shadow:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-support-btn *{color:#35494c!important}
 
-/* Button hierarchy: dark petrol primary, terracotta for purchase/support, calm stone secondary. */
-html.today-theme-light .primary-button,html.today-theme-light .ts-primary,html.today-theme-light .ts-mini-accent,html.today-theme-light .ts-promo-button,html.today-theme-light .primary-button[type=submit]{color:#fffaf0!important;border:1px solid #285563!important;background:#315f6d!important;box-shadow:0 5px 12px rgba(37,77,87,.14)!important}
-html.today-theme-light .primary-button:hover,html.today-theme-light .ts-primary:hover,html.today-theme-light .ts-mini-accent:hover,html.today-theme-light .ts-promo-button:hover{background:#274f5b!important;box-shadow:0 7px 16px rgba(37,77,87,.18)!important}
-html.today-theme-light .secondary-button,html.today-theme-light .ts-mini,html.today-theme-light .ts-text-button,html.today-theme-light .quiet-btn,html.today-theme-light .option-btn,html.today-theme-light .ts-save,html.today-theme-light .ts-user-actions .ts-mini,html.today-theme-light .ts-result-actions button:not(.ts-primary),html.today-theme-light .ts-m3-level,html.today-theme-light .ts-m3-booster-use,html.today-theme-light .ts-m3-buy{color:#3c555b!important;border:1px solid #c4d0c9!important;background:#e9eee6!important;box-shadow:none!important}
-html.today-theme-light .secondary-button:hover,html.today-theme-light .ts-mini:hover,html.today-theme-light .ts-text-button:hover,html.today-theme-light .quiet-btn:hover,html.today-theme-light .option-btn:hover{color:#244e59!important;background:#dbe8e4!important;border-color:#9fbbb4!important}
-html.today-theme-light .danger-button,html.today-theme-light .ts-danger{color:#883d31!important;background:#f4ded7!important;border-color:#ddb5a9!important}
-html.today-theme-light button:disabled,html.today-theme-light .button:disabled{opacity:.62!important;filter:none!important}
-html.today-theme-light button:focus-visible,html.today-theme-light a:focus-visible{outline:3px solid rgba(54,112,128,.48)!important;outline-offset:3px!important}
+/* Timer and day details: visible numbers on a muted, fully opaque card. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .scene-card,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .activity-strip,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ranking-card{
+  color:#263238!important;background:#f2f1ea!important;border:1px solid #c6ceca!important;
+  box-shadow:0 4px 12px rgba(37,49,49,.045)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card * ,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .scene-card * ,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .activity-strip * ,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ranking-card *{color:#263238!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app #countdown,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app #dayProgress{color:#263c40!important;font-variant-numeric:tabular-nums!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card small,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .scene-card small,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ranking-card small{color:#526166!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card .progress,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card progress{background:#d9e0da!important;accent-color:#416f66!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card .progress i,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card .progress-bar,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .clock-card .progress-fill{background:#557e70!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .live-pill{background:#dce9dc!important;border:1px solid #bfd3bf!important;color:#335c45!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .live-pill *{color:#335c45!important}
 
-/* Modals: opaque cream surfaces; dark veil only behind the dialog. */
-html.today-theme-light .modal,html.today-theme-light #modal{color:#26373d!important}
-html.today-theme-light .modal-backdrop,html.today-theme-light #modal .modal-backdrop,html.today-theme-light .modal.today-social-modal .modal-backdrop{background:rgba(31,47,51,.48)!important;backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important}
-html.today-theme-light .modal-card,html.today-theme-light #modal .modal-card,html.today-theme-light #modal.modal.today-social-modal .modal-card,html.today-theme-light .modal.today-social-modal .modal-card{color:#26373d!important;border:1px solid #bdcdc8!important;border-radius:23px!important;background:#f8f5ed!important;box-shadow:0 24px 60px rgba(24,39,43,.22)!important}
-html.today-theme-light #modalContent,html.today-theme-light #modal .ts-panel,html.today-theme-light #modal .ts-form-card,html.today-theme-light #modal .ts-settings-group,html.today-theme-light #modal .ts-profile-friends,html.today-theme-light #modal .ts-channel-card{color:#26373d!important}
-html.today-theme-light .modal-card strong,html.today-theme-light #modal .modal-card strong{color:#26373d!important}
-html.today-theme-light .modal-close,html.today-theme-light #modal .modal-close,html.today-theme-light #modal #todaySocialCloseTop{color:#3b555c!important;background:#e5ece5!important;border:1px solid #c4d1c9!important;box-shadow:none!important}
-html.today-theme-light #modal .ts-panel-head{background:transparent!important;border-bottom:1px solid #d0d9d1!important}
-html.today-theme-light #modal .ts-panel-head h2{color:#26373d!important}html.today-theme-light #modal .ts-panel-head p{color:#596970!important}
-html.today-theme-light .toast{color:#fff8ed!important;background:#254b48!important;border:1px solid #5d9584!important;box-shadow:0 10px 25px rgba(24,51,47,.2)!important}
-html.today-theme-light .footer{color:#596970!important;background:transparent!important;border-color:#c8d1cc!important;box-shadow:none!important}
+/* Category cards: deliberately separate paper palettes with dark ink. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-section,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .community-section{
+  background:rgba(242,241,234,.72)!important;border:1px solid #c7d0ca!important;border-radius:22px!important;
+  box-shadow:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card{
+  color:#263238!important;background:#f2f1ea!important;border:1px solid #c6ceca!important;
+  border-radius:19px!important;box-shadow:0 4px 12px rgba(37,49,49,.04)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card *{color:#263238!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.featured{background:#dfe9e9!important;border-color:#bfcecd!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.secondary{background:#e2e9df!important;border-color:#c6d1c4!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.kind-challenge{background:#eee1d3!important;border-color:#d9c4ad!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.kind-debate{background:#e4e5ed!important;border-color:#c7c9d8!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.kind-moment{background:#e0e8dd!important;border-color:#c5d2c1!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.kind-song{background:#dce8eb!important;border-color:#bdd0d4!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card.kind-mystery{background:#e8e2eb!important;border-color:#d0c6d6!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card .eyebrow,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card .card-kicker{color:#8b4d35!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card .kind-pill,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card .count-pill{background:#e0e6df!important;border:1px solid #c5d0c8!important;color:#3c5053!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .daily-card .notice{background:#dbe9dc!important;border:1px solid #bfd4c1!important;color:#2f5941!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .strip-actions button{background:#e5e9e2!important;border:1px solid #c7d0c9!important;color:#364a4e!important}
 
-/* Bottom navigation: distinct tactile dock; selected destination gets a strong green tint. */
-html.today-theme-light .bottom-nav{background:rgba(241,240,232,.98)!important;border:1px solid #c4d0c9!important;box-shadow:0 8px 22px rgba(37,53,56,.13),inset 0 1px rgba(255,255,255,.9)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
-html.today-theme-light .bottom-nav button{background:transparent!important;color:#566a6d!important}
-html.today-theme-light .bottom-nav button small{color:inherit!important}
-html.today-theme-light .bottom-nav button.active{background:#dce9e2!important;color:#244f51!important;box-shadow:inset 0 1px rgba(255,255,255,.8),0 2px 7px rgba(36,76,66,.08)!important}
-html.today-theme-light .bottom-nav button.active span{color:#a65335!important}
-html.today-theme-light .bottom-nav button:not(.active):hover{background:#e2ebe5!important;color:#315c61!important}
+/* Posts, profiles, people, channels and message surfaces: no translucent milk glass. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.community-card,.today-post-card,.post-card,.ts-user-card,.ts-chat-row,.ts-channel-card,.ts-profile-friends,.ts-settings-group,.ts-form-card,.ts-panel,.ts-loading-panel,.ts-error-panel,.ts-game-card,.ts-story-composer,.ts-story-empty,.ts-photo-field,.ts-photo-preview,.ts-post-card,.ts-stat-card,.ts-list-card,.ts-promo-card,.ts-friend-card,.ts-chat-card,.shop-item,.shop-balance,.today-post-color-settings,.today-post-color-choice,.today-post-color-locked){
+  color:#263238!important;background:#f2f1ea!important;border:1px solid #c6ceca!important;
+  box-shadow:0 4px 12px rgba(37,49,49,.04)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.community-card,.today-post-card,.post-card,.ts-user-card,.ts-chat-row,.ts-channel-card,.ts-profile-friends,.ts-settings-group,.ts-form-card,.ts-panel,.ts-loading-panel,.ts-error-panel,.ts-game-card,.ts-story-composer,.ts-story-empty,.ts-photo-field,.ts-photo-preview,.ts-post-card,.ts-stat-card,.ts-list-card,.ts-promo-card,.ts-friend-card,.ts-chat-card,.shop-item,.shop-balance,.today-post-color-settings,.today-post-color-choice,.today-post-color-locked) *{color:#263238!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.today-post-meta,.today-post-meta small,.ts-user-copy span,.ts-chat-row-copy small,.ts-chat-row-meta small,.ts-brand-chip small,.today-post-card time,.ts-channel-meta,.shop-footnote,.shop-item-copy p,.ts-helper){color:#526166!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-post-actions{border-top:1px solid #cbd3cd!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.today-like-btn,.like-btn){background:#e4e9e2!important;border:1px solid #c6d0c8!important;color:#344b4e!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-like-btn.is-liked{background:#f0ddd2!important;border-color:#d8b8a5!important;color:#8f4b35!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-post-tag,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-promo-badge{background:#dce7e7!important;border:1px solid #c1d1cf!important;color:#315c61!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-brand-chip{background:#e7e9e1!important;border:1px solid #ccd2c7!important;color:#46585a!important}
 
-/* Games: separate lobby surfaces; preserve original artwork, board pieces and gem colours. */
-html.today-theme-light .ts-games-home,html.today-theme-light .ts-active-game{color:#26373d!important;background:transparent!important}
-html.today-theme-light .ts-games-hero,html.today-theme-light .ts-m3-royal-hero,html.today-theme-light .ts-m3-hero{border:1px solid #bdceca!important;background:linear-gradient(125deg,#f6efe0,#dce9e8 58%,#e1ebdf)!important;box-shadow:0 12px 26px rgba(37,53,56,.075)!important}
-html.today-theme-light .ts-games-hero h3,html.today-theme-light .ts-m3-hero-copy h2,html.today-theme-light .ts-m3-royal-hero .ts-m3-hero-copy h2{color:#26373d!important;text-shadow:none!important}
-html.today-theme-light .ts-games-hero p,html.today-theme-light .ts-m3-hero-copy>p,html.today-theme-light .ts-m3-story>p,html.today-theme-light .ts-m3-level-intro>p,html.today-theme-light .ts-m3-result p{color:#50646a!important}
-html.today-theme-light .ts-game-stage,html.today-theme-light .ts-m3-board-wrap,html.today-theme-light .ts-m3-royal-game .ts-m3-board-wrap{border:1px solid #bacdc9!important;background:#dfe9e7!important;box-shadow:0 8px 20px rgba(37,53,56,.085)!important}
-html.today-theme-light .ts-game-hud,html.today-theme-light .ts-game-status,html.today-theme-light .ts-m3-artifact,html.today-theme-light .ts-m3-artifact small,html.today-theme-light .ts-m3-booster-card p,html.today-theme-light .ts-m3-booster-card small,html.today-theme-light .ts-m3-chapter-summary,html.today-theme-light .ts-m3-album p{color:#52686c!important}
-html.today-theme-light .ts-game-hud b,html.today-theme-light .ts-m3-story h3,html.today-theme-light .ts-m3-artifact b,html.today-theme-light .ts-m3-chapter h3,html.today-theme-light .ts-m3-chapter h4,html.today-theme-light .ts-m3-booster-card b,html.today-theme-light .ts-m3-map-title h3,html.today-theme-light .ts-m3-album b,html.today-theme-light .ts-m3-royal-intro h3{color:#26373d!important}
-html.today-theme-light .ts-m3-story,html.today-theme-light .ts-m3-chapter,html.today-theme-light .ts-m3-inventory,html.today-theme-light .ts-m3-booster-card,html.today-theme-light .ts-m3-result,html.today-theme-light .ts-m3-royal-intro,html.today-theme-light .ts-m3-album{border:1px solid #c8d4cc!important;background:#f8f5ed!important;color:#26373d!important;box-shadow:0 5px 15px rgba(37,53,56,.045)!important}
-html.today-theme-light .ts-m3-level{background:#e9eee6!important;color:#3c555b!important;border-color:#c4d0c9!important}
-html.today-theme-light .ts-m3-level.is-current{background:#d5e7e5!important;border-color:#7eaaa9!important;color:#214c55!important;box-shadow:0 0 0 2px rgba(64,122,128,.1)!important}
-html.today-theme-light .ts-m3-level.is-complete{background:#efe2c9!important;border-color:#d8bd88!important;color:#6e5728!important}
-html.today-theme-light .ts-m3-royal-game .ts-match-board.ts-m3-board{background:rgba(239,243,234,.7)!important;border-color:#c4d2cc!important}
-html.today-theme-light .ts-m3-gem{box-shadow:inset 0 1px rgba(255,255,255,.65),0 2px 5px rgba(43,59,64,.09)!important}
-html.today-theme-light .ts-m3-status{background:#e0ece3!important;border-color:#bfd2c3!important;color:#3c5e53!important}
-html.today-theme-light .ts-m3-earned-trophy{border-color:#c8d4cc!important;background:#efe7d4!important;box-shadow:0 5px 15px rgba(37,53,56,.045)!important}
-html.today-theme-light .ts-m3-earned-trophy small{color:#965d31!important}html.today-theme-light .ts-m3-earned-trophy b{color:#26373d!important}html.today-theme-light .ts-m3-earned-trophy p{color:#596970!important}
-html.today-theme-light .ts-m3-royal-game .ts-m3-game-hud>div{border-color:#c7d3cb!important;background:#f8f5ed!important;box-shadow:0 3px 9px rgba(37,53,56,.04)!important}
-html.today-theme-light .ts-m3-royal-game .ts-m3-game-hud b{color:#26373d!important}html.today-theme-light .ts-m3-royal-game .ts-m3-game-hud small{color:#65777a!important}
-html.today-theme-light .ts-m3-mission-splash{border:1px solid #b5cbc7!important;background:#f8f5ed!important;color:#26373d!important;box-shadow:0 15px 36px rgba(30,50,52,.18)!important}
-html.today-theme-light .ts-m3-mission-splash h2,html.today-theme-light .ts-m3-mission-splash strong{color:#26373d!important}html.today-theme-light .ts-m3-mission-splash p{color:#596970!important}
-html.today-theme-light .ts-m3-mission-timer{background:#dbe6df!important}html.today-theme-light .ts-m3-mission-timer i{background:#4d806a!important}
-html.today-theme-light .ts-game-leaderboard{border-color:#c7d3cb!important;background:#f8f5ed!important;color:#26373d!important}
-html.today-theme-light .ts-game-leaderboard-tabs button{border-color:#c7d3cb!important;background:#e9eee6!important;color:#40575d!important}
-html.today-theme-light .ts-game-rank{border-bottom-color:#d1d9d1!important;color:#344e54!important}html.today-theme-light .ts-game-rank>b{color:#68787a!important}html.today-theme-light .ts-game-rank strong{color:#3b795d!important}
-html.today-theme-light .ts-merge-board{background:#dfe9e6!important;border:1px solid #c0d0c9!important;box-shadow:none!important}
-html.today-theme-light .ts-merge-tile{box-shadow:inset 0 1px rgba(255,255,255,.6),0 2px 4px rgba(44,59,63,.04)!important}
-html.today-theme-light .ts-story-empty,html.today-theme-light .ts-story-composer{border-color:#c7d3cb!important;background:#f8f5ed!important;color:#40575d!important;box-shadow:0 5px 14px rgba(37,53,56,.04)!important}
-html.today-theme-light .ts-story-composer>summary{color:#354f55!important}
-html.today-theme-light .ts-story-viewer{border-color:#c7d3cb!important;background:#f5f1e7!important;color:#26373d!important;box-shadow:0 9px 22px rgba(37,53,56,.075)!important}
-html.today-theme-light .ts-story-viewer>p,html.today-theme-light .ts-story-view-footer{color:#596970!important}
-html.today-theme-light .ts-extra-word-card,html.today-theme-light .ts-extra-quiz-card,html.today-theme-light .ts-extra-color-prompt{border-color:#c7d3cb!important;background:#f8f5ed!important;color:#26373d!important;box-shadow:0 6px 16px rgba(37,53,56,.045)!important}
-html.today-theme-light .ts-extra-word-card>strong{color:#315f6d!important;text-shadow:none!important}
-html.today-theme-light .ts-extra-word-card label,html.today-theme-light .ts-extra-quiz-card h3,html.today-theme-light .ts-extra-color-prompt>small{color:#4b6267!important}
-html.today-theme-light .ts-extra-color-choice,html.today-theme-light .ts-extra-quiz-choice{border-color:#c7d3cb!important;background:#e9eee6!important;color:#354f55!important;box-shadow:none!important}
-html.today-theme-light .ts-extra-color-choice.is-correct,html.today-theme-light .ts-extra-quiz-choice.is-correct{background:#dcecdf!important;border-color:#adcfb5!important;color:#2f6b4b!important}
-html.today-theme-light .ts-extra-color-choice.is-wrong,html.today-theme-light .ts-extra-quiz-choice.is-wrong{background:#f3dfd7!important;border-color:#ddb8ab!important;color:#8b4235!important}
+/* Social navigation and routes. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(.today-social-nav,#todaySocialNav,#todaySocialPageBar,.ts-chat-toolbar,.ts-channel-toolbar,.ts-profile-tools,.ts-profile-actions,.ts-user-actions,.ts-nav-actions){
+  color:#263238!important;background:#e9ebe5!important;border:1px solid #c6ceca!important;box-shadow:none!important;backdrop-filter:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(.today-social-nav,#todaySocialNav,#todaySocialPageBar,.ts-chat-toolbar,.ts-channel-toolbar,.ts-profile-tools,.ts-profile-actions,.ts-user-actions,.ts-nav-actions) button{
+  color:#34484c!important;background:#f2f1ea!important;border:1px solid #c6ceca!important;box-shadow:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body :is(.today-social-nav,#todaySocialNav,#todaySocialPageBar,.ts-chat-toolbar,.ts-channel-toolbar,.ts-profile-tools,.ts-profile-actions,.ts-user-actions,.ts-nav-actions) button.active{
+  color:#213f3e!important;background:#d7e5dc!important;border-color:#aac1b2!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-profile-hero{background:#e0e9e6!important;border:1px solid #bfceca!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-profile-stats>div{background:#e8ebe4!important;border:1px solid #c9d1c9!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-chat-messages{background:#e5e9e5!important;border:1px solid #c6cfca!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-message{background:#f4f2eb!important;border:1px solid #cbd3cc!important;color:#263238!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-message.is-own{background:#dce8e4!important;border-color:#b9d0c7!important;color:#263238!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .ts-profile-cover{background:linear-gradient(120deg,#dce6e4,#e6e8dc 55%,#eee0d1)!important}
 
-/* Keep application artwork, avatars, uploaded photos and colourful board pieces intact. */
-html.today-theme-light img,html.today-theme-light canvas,html.today-theme-light video{filter:none!important;opacity:1}
-html.today-theme-light button,html.today-theme-light a,html.today-theme-light input,html.today-theme-light select,html.today-theme-light textarea{-webkit-tap-highlight-color:rgba(49,95,109,.12)}
-html.today-theme-light .success,html.today-theme-light .is-success,html.today-theme-light .status-success{color:#286747!important}
-html.today-theme-light .warning,html.today-theme-light .is-warning,html.today-theme-light .status-warning{color:#79571c!important}
-html.today-theme-light .error,html.today-theme-light .is-error,html.today-theme-light .status-error{color:#913d32!important}
-html.today-theme-light .ts-error-panel,html.today-theme-light .error-panel{background:#f4dfd8!important;border-color:#ddb9ae!important}
-html.today-theme-light .ts-error-panel strong{color:#89392e!important}
-@media(max-width:900px){html.today-theme-light .hero{border-radius:23px!important}html.today-theme-light .hero h1,html.today-theme-light #homeSection .hero h1{font-size:clamp(2.8rem,7vw,4.2rem)!important}}
-@media(max-width:760px){html.today-theme-light .hero{border-radius:20px!important;padding:23px!important}html.today-theme-light .hero h1,html.today-theme-light #homeSection .hero h1{font-size:clamp(2.45rem,9.5vw,3.5rem)!important;line-height:1!important}html.today-theme-light .daily-card{border-radius:18px!important}html.today-theme-light .topbar{backdrop-filter:blur(10px)!important}html.today-theme-light .bottom-nav{box-shadow:0 7px 18px rgba(30,50,52,.12),inset 0 1px rgba(255,255,255,.85)!important}}
-@media(prefers-reduced-motion:reduce){html.today-theme-light *,html.today-theme-light *:before,html.today-theme-light *:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
-/* TODAY SOFT ATELIER V34 END */
+/* Inputs and form controls: readable typed text and placeholders. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body input:not([type="checkbox"]):not([type="radio"]),
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body textarea,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body select{
+  color:#263238!important;background:#f7f5ee!important;border:1px solid #bac7c2!important;
+  box-shadow:inset 0 1px 2px rgba(37,49,49,.035)!important;caret-color:#a9573b!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body input::placeholder,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body textarea::placeholder{color:#59676a!important;opacity:1!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body input:focus,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body textarea:focus,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body select:focus{border-color:#638d8d!important;outline:2px solid rgba(75,118,119,.14)!important;outline-offset:1px!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body input[type="checkbox"],
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body input[type="radio"]{accent-color:#426e65!important}
+
+/* Shop, wallet, purchases and support author. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.shop-page,.profile-page,.shop-title-row,.shop-money-head,.today-support-bank-card,.today-post-color-options){color:#263238!important;background:#f2f1ea!important;border-color:#c6ceca!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .shop-balance{background:#e0e9e1!important;border-color:#bfd0c0!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .shop-owned-label{background:#dce9dc!important;border-color:#bfd2bf!important;color:#315d40!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .shop-price-invalid{background:#f0ddd5!important;border-color:#dcb9ab!important;color:#8a4030!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .shop-buy-row button,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-support-copy-btn{
+  color:#fff9ef!important;background:#a9573b!important;border:1px solid #91462f!important;box-shadow:0 3px 9px rgba(112,58,39,.12)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .shop-buy-row button *,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .today-support-copy-btn *{color:#fff9ef!important}
+
+/* Buttons: dark text on pale buttons, light text only on deliberately dark actions. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.secondary-button,.ts-mini,.ts-text-button,.quiet-btn,.option-btn,.ts-save,.ts-result-actions button:not(.ts-primary),.ts-m3-level,.ts-m3-booster-use,.ts-m3-buy){
+  color:#34494e!important;background:#e7ebe4!important;border:1px solid #c6d0c8!important;box-shadow:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.primary-button,.ts-primary,.ts-mini-accent,.ts-promo-button,.primary-button[type="submit"]){
+  color:#fff9ef!important;background:#315f66!important;border:1px solid #285057!important;box-shadow:0 4px 11px rgba(37,75,80,.14)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.primary-button,.ts-primary,.ts-mini-accent,.ts-promo-button,.primary-button[type="submit"]) *{color:#fff9ef!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app :is(.danger-button,.ts-danger){color:#813d32!important;background:#f1dcd5!important;border-color:#ddb8ad!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body button:disabled{opacity:.58!important;filter:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body button:focus-visible,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body a:focus-visible{outline:3px solid rgba(67,112,111,.42)!important;outline-offset:2px!important}
+
+/* Dialogs stay paper-coloured, while the scrim only darkens the space behind the dialog. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal{color:#263238!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .modal-backdrop{background:rgba(37,49,49,.38)!important;backdrop-filter:blur(3px)!important;-webkit-backdrop-filter:blur(3px)!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .modal-card{
+  color:#263238!important;background:#f2f1ea!important;border:1px solid #c2ccc6!important;border-radius:22px!important;box-shadow:0 18px 50px rgba(30,43,43,.19)!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .modal-card *{color:#263238!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .modal-card :is(p,small,label,time,.ts-muted,.ts-helper){color:#526166!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .modal-close,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal #todaySocialCloseTop{background:#e3e8e1!important;color:#34494e!important;border:1px solid #c6ceca!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #toast,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #toast *{color:#f8f5ec!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #toast{background:#31504e!important;border:1px solid #71918a!important;box-shadow:0 8px 20px rgba(37,49,49,.16)!important}
+
+/* Bottom dock: opaque enough to separate from the page. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .bottom-nav{
+  color:#263238!important;background:#e6e9e2!important;border:1px solid #bec8c2!important;
+  box-shadow:0 6px 18px rgba(37,49,49,.13)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .bottom-nav button{color:#4e6062!important;background:transparent!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .bottom-nav button.active{color:#203d3d!important;background:#d1e0d6!important;border:1px solid #b6cbbb!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .bottom-nav button.active *{color:#203d3d!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .footer{color:#526166!important;border-color:#c6ceca!important;background:transparent!important;box-shadow:none!important}
+
+/* Mini-games use calm surfaces; board art and crystal fills themselves are not recoloured. */
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal :is(.ts-games-home,.ts-active-game){color:#263238!important;background:transparent!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal :is(.ts-games-hero,.ts-m3-royal-hero,.ts-m3-hero){color:#263238!important;background:linear-gradient(125deg,#e4e8dc,#dce7e8 58%,#e7e2d7)!important;border:1px solid #c1ccc6!important;box-shadow:0 8px 20px rgba(37,49,49,.06)!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal :is(.ts-games-hero,.ts-m3-royal-hero,.ts-m3-hero) *{color:#263238!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal :is(.ts-game-stage,.ts-m3-board-wrap,.ts-merge-board,.ts-extra-snake-board,.ts-extra-ttt-board){background:#dce5e2!important;border:1px solid #bdcbc5!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal :is(.ts-m3-story,.ts-m3-chapter,.ts-m3-inventory,.ts-m3-booster-card,.ts-m3-result,.ts-m3-royal-intro,.ts-m3-album,.ts-game-leaderboard,.ts-story-viewer){background:#f2f1ea!important;border:1px solid #c6ceca!important;color:#263238!important;box-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal :is(.ts-m3-story,.ts-m3-chapter,.ts-m3-inventory,.ts-m3-booster-card,.ts-m3-result,.ts-m3-royal-intro,.ts-m3-album,.ts-game-leaderboard,.ts-story-viewer) *{color:#263238!important;text-shadow:none!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-m3-status{background:#e0e8df!important;border:1px solid #c5d2c5!important;color:#35594c!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-m3-merge-tile.v32,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-m3-merge-tile.v64,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-merge-tile.v32,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-merge-tile.v64,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-merge-tile.v1024,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-merge-tile.v2048{color:#fff9ef!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-m3-mission-splash{background:#f2f1ea!important;border:1px solid #c1ccc6!important;color:#263238!important;box-shadow:0 12px 30px rgba(37,49,49,.15)!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #modal .ts-m3-mission-splash *{color:#263238!important}
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .ts-error-panel,
+html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .error-panel{background:#f1ded7!important;border:1px solid #ddb9ac!important;color:#833e31!important}
+@media(max-width:760px){
+ html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero{border-radius:19px!important}
+ html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body #app .hero h1{font-size:clamp(2.45rem,9.5vw,3.6rem)!important;line-height:1!important;letter-spacing:-.04em!important}
+ html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body .bottom-nav{box-shadow:0 5px 16px rgba(37,49,49,.12)!important}
+}
+@media(prefers-reduced-motion:reduce){html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body *,html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body *:before,html.today-theme-light.today-theme-light.today-theme-light.today-theme-light body *:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* TODAY SOFT ATELIER V35 END */
