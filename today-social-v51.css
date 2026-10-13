@@ -34,3 +34,54 @@ body.today-profile-route{margin:0!important;min-height:100vh;background:radial-g
 @media(max-width:560px){.today-profile-post-composer{padding:13px;border-radius:18px}.today-profile-wall-post{border-radius:17px}.today-profile-post-compose-bottom{align-items:flex-start}.today-profile-post-composer textarea{font-size:16px}}
 @media(prefers-reduced-motion:reduce){.today-profile-post-composer *,.today-profile-wall-post *{animation:none!important;transition:none!important}}
 /* TODAY PROFILE WALL V62 CSS END */
+
+
+/* TODAY PROFILE LAYOUT V63 CSS BEGIN — centered identity, section switcher and personal wall. */
+.today-profile-layout-v63{width:min(100%,980px);margin-inline:auto;padding:clamp(12px,3.3vw,30px);gap:18px}
+.today-profile-v63-identity{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(20px,5vw,36px) 14px 12px;min-width:0}
+.today-profile-v63-avatar{position:relative;display:grid;place-items:center;width:clamp(104px,21vw,144px);height:clamp(104px,21vw,144px);flex:0 0 auto;padding:0;border:3px solid rgba(148,170,255,.68);border-radius:50%;overflow:hidden;cursor:pointer;color:#f4f5ff;font-size:clamp(38px,8vw,56px);font-weight:900;background:radial-gradient(circle at 30% 20%,rgba(143,165,255,.35),rgba(27,34,62,.95) 68%);box-shadow:0 0 0 7px rgba(122,143,255,.08),0 18px 52px rgba(0,0,0,.28),inset 0 0 22px rgba(255,255,255,.05);transition:transform .18s ease,border-color .18s ease}
+.today-profile-v63-avatar:hover{transform:translateY(-2px);border-color:rgba(193,207,255,.95)}
+.today-profile-v63-avatar>img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%}
+.today-profile-v63-avatar-edit{position:absolute;right:2px;bottom:3px;display:grid;place-items:center;width:31px;height:31px;border:2px solid #11172b;border-radius:50%;background:linear-gradient(135deg,#91a6ff,#9f7bff);color:#10142a;font:900 17px/1 Inter,system-ui,sans-serif;box-shadow:0 5px 16px rgba(0,0,0,.28)}
+.today-profile-v63-eyebrow{margin-top:20px;color:#93a5e9;font-size:10px;font-weight:900;letter-spacing:.19em;text-transform:uppercase}
+.today-profile-v63-identity h1{max-width:100%;margin:8px 0 0;color:#f6f7ff;font-size:clamp(26px,5.2vw,39px);line-height:1.12;font-weight:900;letter-spacing:-.045em;overflow-wrap:anywhere}
+.today-profile-v63-username{margin:8px 0 0;color:#96a2c4;font-size:14px;font-weight:650;overflow-wrap:anywhere}
+.today-profile-v63-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:2px 0 0;padding:7px;border:1px solid rgba(147,164,225,.17);border-radius:20px;background:rgba(16,22,42,.68);box-shadow:0 12px 32px rgba(0,0,0,.12);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.today-profile-v63-tabs button{display:flex;min-width:0;min-height:66px;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px 5px;border:1px solid transparent;border-radius:14px;background:transparent;color:#aeb9d8;cursor:pointer;font:inherit;transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease}
+.today-profile-v63-tabs button>span{font-size:21px;line-height:1;color:#a4b4ff}
+.today-profile-v63-tabs button>b{font-size:clamp(11px,1.7vw,13px);font-weight:850;line-height:1.2;text-align:center;white-space:normal}
+.today-profile-v63-tabs button:hover{transform:translateY(-1px);color:#fff;background:rgba(118,137,227,.1)}
+.today-profile-v63-tabs button.active{color:#f8f8ff;border-color:rgba(160,177,255,.32);background:linear-gradient(145deg,rgba(107,129,236,.28),rgba(112,82,190,.19));box-shadow:inset 0 1px rgba(255,255,255,.07),0 7px 18px rgba(0,0,0,.13)}
+.today-profile-v63-tabs button.active>span{color:#dbe2ff}
+.today-profile-v63-content{min-width:0;margin-top:1px}
+.today-profile-wall-v63{padding:clamp(14px,3vw,24px);border-radius:24px}
+.today-profile-v63-create-head{display:flex;flex-direction:column;gap:5px;margin:0 0 16px}
+.today-profile-v63-create-head>small,.today-profile-v63-section-head small,.today-profile-v63-empty>small{color:#94a5e8;font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+.today-profile-v63-create-head h2,.today-profile-v63-wall-title h2,.today-profile-v63-section-head h2,.today-profile-v63-empty h2,.today-profile-v63-empty h3{margin:0;color:#f4f6ff;font-size:clamp(21px,4vw,27px);line-height:1.2;font-weight:900;letter-spacing:-.025em}
+.today-profile-v63-create-head p,.today-profile-v63-section-head p{margin:4px 0 0;color:#9eabc9;font-size:13px;line-height:1.55}
+.today-profile-v63-wall-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:26px 0 13px;padding-top:20px;border-top:1px solid rgba(145,164,220,.14)}
+.today-profile-v63-wall-title>span{display:grid;place-items:center;min-width:30px;height:30px;padding:0 8px;border-radius:999px;border:1px solid rgba(155,174,245,.24);background:rgba(111,132,225,.12);color:#d5ddff;font-size:12px;font-weight:850}
+.today-profile-v63-panel{overflow:hidden}
+.today-profile-v63-back{display:inline-flex;align-items:center;justify-content:center;margin:0 0 18px;padding:9px 13px;border:1px solid rgba(145,164,220,.2);border-radius:12px;background:rgba(114,133,213,.08);color:#d6def8;font:700 13px Inter,system-ui,sans-serif;cursor:pointer}
+.today-profile-v63-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:240px;padding:clamp(22px,5vw,40px) 18px;text-align:center;border:1px dashed rgba(146,164,224,.23);border-radius:20px;background:radial-gradient(ellipse at 50% 0%,rgba(114,131,229,.12),transparent 72%),rgba(9,14,28,.24)}
+.today-profile-v63-empty-icon{display:grid;place-items:center;width:58px;height:58px;margin-bottom:16px;border:1px solid rgba(147,166,250,.22);border-radius:18px;background:rgba(116,136,227,.12);color:#d2dcff;font-size:25px;font-weight:900}
+.today-profile-v63-empty h2,.today-profile-v63-empty h3{margin:5px 0 0}
+.today-profile-v63-empty p{max-width:480px;margin:10px auto 0;color:#9ba8c7;font-size:14px;line-height:1.7}
+.today-profile-v63-empty .today-profile-primary{margin-top:18px}
+.today-profile-v63-section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:19px}
+.today-profile-v63-section-head>span{display:grid;place-items:center;width:52px;height:52px;flex:0 0 auto;border-radius:17px;border:1px solid rgba(150,169,245,.22);background:rgba(112,135,224,.12);color:#d5deff;font-size:25px}
+.today-profile-v63-music-list{display:grid;gap:10px}
+.today-profile-v63-music-list article{display:flex;align-items:center;gap:12px;min-width:0;padding:13px;border:1px solid rgba(145,164,220,.16);border-radius:16px;background:rgba(13,19,37,.55)}
+.today-profile-v63-music-list article>span{display:grid;place-items:center;width:40px;height:40px;flex:0 0 auto;border-radius:12px;background:rgba(121,141,230,.13);color:#d4ddff;font-size:21px}
+.today-profile-v63-music-list article>div{display:grid;gap:4px;min-width:0;flex:1}
+.today-profile-v63-music-list article b{color:#f1f4ff;font-size:13px}
+.today-profile-v63-music-list article small{color:#98a5c4;font-size:11px;line-height:1.4}
+.today-profile-v63-music-list article a{flex:0 0 auto;color:#cbd5ff;font-size:12px;font-weight:850;text-decoration:none}
+.today-profile-v63-more{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:13px 2px 2px;border-top:1px solid rgba(145,164,220,.1)}
+.today-profile-v63-more>span{margin-right:3px;color:#8391b2;font-size:11px;font-weight:800}
+.today-profile-v63-more button{padding:7px 10px;border:1px solid rgba(145,164,220,.16);border-radius:10px;background:rgba(100,117,182,.06);color:#9eabcb;font:650 11px Inter,system-ui,sans-serif;cursor:pointer}
+.today-profile-v63-more button:hover,.today-profile-v63-more button.active{color:#e5eaff;border-color:rgba(149,168,255,.35);background:rgba(114,133,226,.12)}
+.today-profile-layout-v63 .today-profile-footer{margin-top:4px}
+@media(max-width:560px){.today-profile-layout-v63{padding:12px;gap:14px}.today-profile-v63-identity{padding:18px 8px 8px}.today-profile-v63-tabs{gap:5px;padding:5px;border-radius:16px}.today-profile-v63-tabs button{min-height:61px;padding:8px 3px;border-radius:12px}.today-profile-v63-tabs button>span{font-size:19px}.today-profile-wall-v63{padding:13px;border-radius:19px}.today-profile-v63-music-list article{align-items:flex-start;flex-wrap:wrap}.today-profile-v63-music-list article a{margin-left:52px}.today-profile-v63-more>span{width:100%}}
+@media(prefers-reduced-motion:reduce){.today-profile-v63-avatar,.today-profile-v63-tabs button{transition:none}}
+/* TODAY PROFILE LAYOUT V63 CSS END */
