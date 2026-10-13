@@ -7710,3 +7710,376 @@ html.today-theme-light .ts-m3-combo-pop{color:#fff!important;text-shadow:0 2px 1
 @media(max-width:480px){.ts-m3-royal-game .ts-m3-board-wrap{padding:5px;border-radius:19px}.ts-m3-royal-game .ts-match-board.ts-m3-board{gap:3px;padding:5px;border-radius:15px}.ts-m3-royal-game .ts-m3-gem{border-radius:8px}.ts-m3-special-badge{right:-4px;top:-4px;min-width:19px;height:19px;font-size:12px;border-radius:7px}.ts-m3-mission-splash{gap:10px;padding:17px}.ts-m3-mission-orbit{width:50px;height:50px;border-radius:17px}}
 @media(prefers-reduced-motion:reduce){.ts-m3-royal-game .ts-m3-gem,.ts-m3-special-badge,.ts-m3-special-badge:after,.ts-m3-mission-splash,.ts-m3-mission-orbit,.ts-m3-mission-splash:before,.ts-m3-mission-timer i,.ts-m3-burst-particle,.ts-m3-board-wrap.is-shaking{animation:none!important;transition:none!important}.ts-m3-gem.is-hint,.ts-m3-gem.has-special{animation:none!important}}
 /* END TODAY CRYSTAL CHRONICLES V30 */
+
+/* TODAY SOFT ATELIER V31 BEGIN — a genuinely separate light design system, scoped to light mode only. */
+html.today-theme-light{
+  color-scheme:light!important;
+  --bg:#e9e9e2!important;
+  --paper:#f2f0e8!important;
+  --white:#f7f5ee!important;
+  --ink:#2b3540!important;
+  --muted:#68747d!important;
+  --line:#cfd6d5!important;
+  --soft:#e3e7e5!important;
+  --hot:#b96e4a!important;
+  --violet:#657f98!important;
+  --lime:#729a86!important;
+  --cyan:#6e9eb8!important;
+  --yellow:#c39a48!important;
+  --shadow:0 16px 42px rgba(52,65,72,.105)!important;
+  --shadow2:0 6px 19px rgba(52,65,72,.07)!important;
+  --glass-bg:rgba(244,242,234,.88)!important;
+  --glass-bg-strong:rgba(239,237,228,.97)!important;
+  --glass-border:rgba(124,139,142,.25)!important;
+  --glass-shadow:0 9px 28px rgba(43,55,61,.08)!important;
+  --ink-strong:#26333e!important;
+  --today-theme-bg:#e9e9e2!important;
+  --today-theme-surface:#f1efe7!important;
+  --today-theme-text:#2b3540!important;
+  --today-theme-muted:#68747d!important;
+  --today-theme-border:#cfd6d5!important;
+  --atelier-canvas:#e9e9e2;
+  --atelier-paper:#f2f0e8;
+  --atelier-blue:#dce7ec;
+  --atelier-sage:#e0e9e1;
+  --atelier-sand:#eee2d3;
+  --atelier-saffron:#dbc17d;
+  --atelier-orange:#b96e4a;
+  --atelier-ink:#2b3540;
+  --atelier-muted:#68747d;
+  --atelier-line:#cfd6d5;
+  --atelier-shadow:0 12px 32px rgba(48,61,68,.075);
+}
+html.today-theme-light,html.today-theme-light body{
+  background:#e9e9e2!important;color:#2b3540!important;color-scheme:light!important;
+}
+html.today-theme-light body{
+  background-image:radial-gradient(ellipse at 0% 0%,rgba(202,218,222,.78),transparent 34%),radial-gradient(ellipse at 100% 7%,rgba(235,220,197,.65),transparent 29%),radial-gradient(ellipse at 64% 100%,rgba(210,225,216,.72),transparent 38%),linear-gradient(133deg,#eeece4 0%,#e7ebec 48%,#e6e9e0 100%)!important;
+  background-attachment:fixed!important;
+}
+html.today-theme-light body:before{
+  background-image:linear-gradient(rgba(76,94,101,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(76,94,101,.028) 1px,transparent 1px)!important;
+  background-size:48px 48px!important;opacity:.42!important;mix-blend-mode:normal!important;mask-image:linear-gradient(to bottom,rgba(0,0,0,.35),transparent 80%)!important;
+}
+html.today-theme-light #app,html.today-theme-light main,html.today-theme-light .shell,html.today-theme-light .main-content{color:#2b3540!important}
+html.today-theme-light #dailyBackdrop{opacity:1!important;filter:none!important;background:radial-gradient(ellipse at 12% 4%,rgba(186,211,221,.36),transparent 34%),radial-gradient(ellipse at 93% 16%,rgba(232,201,166,.24),transparent 31%),linear-gradient(140deg,#ecebe4,#e4e9e9 56%,#e6e9e1)!important}
+html.today-theme-light #dailyBackdrop .daily-scene{opacity:.035!important;filter:saturate(.3) contrast(.9)!important;mix-blend-mode:normal!important}
+html.today-theme-light .noise{opacity:.018!important;mix-blend-mode:normal!important;background-image:radial-gradient(rgba(69,84,91,.22) .55px,transparent .8px)!important}
+html.today-theme-light ::selection{background:#d5e1e7!important;color:#263640!important}
+
+/* Navigation and account chrome: muted blue-grey glass, not a white strip. */
+html.today-theme-light .topbar{color:#2b3540!important;background:rgba(232,234,229,.86)!important;border-bottom:1px solid rgba(117,133,137,.22)!important;box-shadow:0 7px 25px rgba(52,64,69,.065)!important;backdrop-filter:blur(24px) saturate(118%)!important;-webkit-backdrop-filter:blur(24px) saturate(118%)!important}
+html.today-theme-light .topbar-inner,html.today-theme-light .top-actions{color:#2b3540!important}
+html.today-theme-light .brand,html.today-theme-light .today-brand-word,html.today-theme-light .today-brand-copy,html.today-theme-light .topbar .account-btn{color:#2b3540!important}
+html.today-theme-light .today-brand-copy small,html.today-theme-light .today-brand-tag{color:#758087!important}
+html.today-theme-light .today-brand-dot{color:#b96e4a!important}
+html.today-theme-light .top-btn,html.today-theme-light .account-btn,html.today-theme-light button.account-btn,html.today-theme-light #todayThemeToggle,html.today-theme-light button.quiet-btn{
+ color:#465761!important;background:rgba(244,242,234,.84)!important;border:1px solid #cbd3d3!important;box-shadow:inset 0 1px rgba(255,255,255,.65),0 3px 9px rgba(47,60,66,.045)!important;backdrop-filter:blur(12px)!important
+}
+html.today-theme-light .top-btn:hover,html.today-theme-light .account-btn:hover,html.today-theme-light #todayThemeToggle:hover{background:#e3e9e8!important;border-color:#b9c7cb!important;transform:translateY(-1px)!important}
+html.today-theme-light #todayThemeToggle,html.today-theme-light #todayThemeToggle .today-theme-label{color:#536f84!important}
+html.today-theme-light #profileAvatar{box-shadow:0 0 0 2px #efede5,0 0 0 3px rgba(100,131,150,.35)!important}
+
+/* Typography: ink and graphite, with restrained blue/orange overlines. */
+html.today-theme-light h1,html.today-theme-light h2,html.today-theme-light h3,html.today-theme-light h4,html.today-theme-light h5,
+html.today-theme-light .section-head,html.today-theme-light .section-head h2,html.today-theme-light .hero h1,
+html.today-theme-light .daily-card h2,html.today-theme-light .daily-card h3,html.today-theme-light .daily-card h4,
+html.today-theme-light .ts-panel-head h2,html.today-theme-light .ts-panel h3,html.today-theme-light .ts-panel h4,
+html.today-theme-light .shop-title-row h2,html.today-theme-light .profile-ident h2,html.today-theme-light .modal-card h1,
+html.today-theme-light .modal-card h2,html.today-theme-light .modal-card h3,html.today-theme-light .modal-card h4{color:#2b3540!important;text-shadow:none!important}
+html.today-theme-light p,html.today-theme-light li,html.today-theme-light .hero p,html.today-theme-light .section-note,
+html.today-theme-light .community-intro,html.today-theme-light .daily-card p,html.today-theme-light .daily-card small,
+html.today-theme-light .ts-panel p,html.today-theme-light .ts-form-card>p,html.today-theme-light .ts-helper,
+html.today-theme-light .ts-muted,html.today-theme-light .shop-title-row p,html.today-theme-light .shop-footnote,
+html.today-theme-light .profile-ident p,html.today-theme-light .modal-card p{color:#68747d!important}
+html.today-theme-light .eyebrow,html.today-theme-light .hero .eyebrow,html.today-theme-light .card-kicker,
+html.today-theme-light .ts-eyebrow,html.today-theme-light .ts-panel-head>span{color:#9e6947!important}
+html.today-theme-light a:not(.ts-primary):not(.ts-promo-button):not(.primary-button){color:#577a93}
+html.today-theme-light hr,html.today-theme-light .divider,html.today-theme-light .section-divider{border-color:#cfd6d5!important}
+
+/* Homepage: warm linen canvas crossed with a quiet blue haze. */
+html.today-theme-light .hero{border:1px solid rgba(129,148,153,.28)!important;border-radius:29px!important;background:radial-gradient(ellipse at 86% 8%,rgba(201,218,226,.84),transparent 42%),radial-gradient(ellipse at 77% 102%,rgba(218,230,218,.77),transparent 43%),linear-gradient(127deg,#f0eee5 0%,#e4ecef 57%,#e4eae2 100%)!important;box-shadow:inset 0 1px rgba(255,255,255,.55),0 22px 55px rgba(52,66,72,.08)!important;color:#2b3540!important}
+html.today-theme-light .hero:before,html.today-theme-light .hero:after{opacity:.17!important}
+html.today-theme-light .hero h1,html.today-theme-light #homeSection h1{color:#2b3540!important;text-shadow:none!important}
+html.today-theme-light .hero h1 span,html.today-theme-light #homeSection h1 span{background:linear-gradient(100deg,#65859a 0%,#b16f4c 58%,#b49a55 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+html.today-theme-light .hero-copy>p,html.today-theme-light .hero p{color:#5e6c73!important}
+html.today-theme-light .hero-rail{border-color:rgba(122,143,147,.24)!important;background:rgba(242,240,232,.72)!important;color:#697780!important;box-shadow:inset 0 1px rgba(255,255,255,.55)!important}
+html.today-theme-light .hero-rail strong{color:#35464f!important}
+html.today-theme-light .clock-card,html.today-theme-light .scene-card,html.today-theme-light .activity-strip,
+html.today-theme-light .ranking-card,html.today-theme-light .today-section,html.today-theme-light .community-section{
+ border-color:#cfd7d6!important;background:linear-gradient(145deg,rgba(244,242,234,.96),rgba(229,236,237,.92))!important;color:#2b3540!important;box-shadow:0 8px 23px rgba(47,60,65,.055)!important
+}
+html.today-theme-light .clock-card strong,html.today-theme-light .clock-row b,html.today-theme-light .scene-card strong,html.today-theme-light .ranking-card strong,html.today-theme-light .activity-strip strong{color:#34434c!important}
+html.today-theme-light .clock-row small,html.today-theme-light .scene-card small,html.today-theme-light .ranking-card small{color:#748087!important}
+html.today-theme-light .live-pill{border-color:#c5d9cf!important;background:#dfece3!important;color:#497b66!important}
+html.today-theme-light .live-pill b{color:#477e68!important}
+html.today-theme-light .today-section,html.today-theme-light .community-section{border-radius:23px!important}
+html.today-theme-light .section-head p,html.today-theme-light .today-section>p{color:#68747d!important}
+
+/* Daily prompts: distinct low-saturation paper colours by category, no blank white slabs. */
+html.today-theme-light .daily-grid{gap:15px!important}
+html.today-theme-light .daily-card,html.today-theme-light .daily-card.featured,html.today-theme-light .daily-card.secondary,
+html.today-theme-light .daily-card.kind-challenge,html.today-theme-light .daily-card.kind-debate,html.today-theme-light .daily-card.kind-moment,
+html.today-theme-light .daily-card.kind-song,html.today-theme-light .daily-card.kind-mystery{
+ color:#2b3540!important;border:1px solid #cfd6d5!important;border-radius:22px!important;background:linear-gradient(145deg,#f3f0e7 0%,#ecebe3 100%)!important;box-shadow:inset 0 1px rgba(255,255,255,.5),0 7px 21px rgba(43,55,61,.065)!important
+}
+html.today-theme-light .daily-card.featured{background:radial-gradient(ellipse at 100% 0%,rgba(204,218,225,.65),transparent 49%),linear-gradient(145deg,#f2f0e7,#e4ebed 75%,#e3e9e1)!important;border-color:#c6d3d5!important}
+html.today-theme-light .daily-card.secondary{background:linear-gradient(145deg,#e7edf0,#e3e9e1)!important}
+html.today-theme-light .daily-card.kind-challenge{background:linear-gradient(145deg,#f2ede1,#efe2d5)!important}
+html.today-theme-light .daily-card.kind-debate{background:linear-gradient(145deg,#e8edf0,#e0e7ed)!important}
+html.today-theme-light .daily-card.kind-moment{background:linear-gradient(145deg,#f2eee6,#e6ebe4)!important}
+html.today-theme-light .daily-card.kind-song{background:linear-gradient(145deg,#e8eef0,#dce7ec)!important}
+html.today-theme-light .daily-card.kind-mystery{background:linear-gradient(145deg,#ece8df,#e7e6eb)!important}
+html.today-theme-light .daily-card:before,html.today-theme-light .daily-card:after{opacity:.08!important}
+html.today-theme-light .daily-card h2,html.today-theme-light .daily-card h3,html.today-theme-light .daily-card h4,html.today-theme-light .daily-card strong,html.today-theme-light .daily-card .daily-title{color:#2b3540!important}
+html.today-theme-light .daily-card p,html.today-theme-light .daily-card .small-note,html.today-theme-light .daily-card small{color:#68747d!important}
+html.today-theme-light .daily-card .eyebrow,html.today-theme-light .daily-card .community-kind,html.today-theme-light .card-kicker{color:#a16746!important}
+html.today-theme-light .daily-card .card-head .kind-pill,html.today-theme-light .kind-pill{background:#e3e8e6!important;border:1px solid #cbd5d4!important;color:#506774!important}
+html.today-theme-light .daily-card .card-head .count-pill,html.today-theme-light .count-pill{background:#e4e8e4!important;border:1px solid #d0d8d4!important;color:#647179!important}
+html.today-theme-light .card-body .notice{border-color:#cbded5!important;background:#e2ede5!important;color:#4c7163!important}
+html.today-theme-light .strip-actions button,html.today-theme-light .strip-actions .quiet-btn{border-color:#ccd5d5!important;background:#e8ece9!important;color:#4a5c65!important;box-shadow:0 3px 9px rgba(44,58,65,.035)!important}
+html.today-theme-light .strip-actions button:hover{background:#dde8eb!important;border-color:#bbcdd2!important}
+
+/* All social cards and cards generated after page navigation. */
+html.today-theme-light .community-card,html.today-theme-light .today-post-card,html.today-theme-light .post-card,
+html.today-theme-light .ts-user-card,html.today-theme-light .ts-chat-row,html.today-theme-light .ts-channel-card,
+html.today-theme-light .ts-profile-friends,html.today-theme-light .ts-settings-group,html.today-theme-light .ts-form-card,
+html.today-theme-light .ts-panel,html.today-theme-light .ts-loading-panel,html.today-theme-light .ts-error-panel,
+html.today-theme-light .ts-game-card,html.today-theme-light .ts-story-composer,html.today-theme-light .ts-story-empty,
+html.today-theme-light .ts-photo-field,html.today-theme-light .ts-photo-preview,html.today-theme-light .ts-post-card,
+html.today-theme-light .ts-stat-card,html.today-theme-light .ts-list-card,html.today-theme-light .ts-promo-card,
+html.today-theme-light .ts-friend-card,html.today-theme-light .ts-chat-card,html.today-theme-light .ts-channel-card{
+ color:#2b3540!important;border-color:#cfd6d5!important;background:linear-gradient(145deg,#f3f0e7,#e9ece8)!important;box-shadow:inset 0 1px rgba(255,255,255,.42),0 7px 20px rgba(43,55,61,.055)!important
+}
+html.today-theme-light .community-card:hover,html.today-theme-light .today-post-card:hover,html.today-theme-light .post-card:hover,html.today-theme-light .ts-user-card:hover,html.today-theme-light .ts-chat-row:hover,html.today-theme-light .ts-channel-card:hover,html.today-theme-light .ts-game-card:hover{border-color:#b9cbd0!important;box-shadow:0 12px 27px rgba(42,56,63,.085)!important;transform:translateY(-1px)}
+html.today-theme-light .today-post-name,html.today-theme-light .today-post-identity,html.today-theme-light .today-post-identity b,
+html.today-theme-light .today-post-card strong,html.today-theme-light .community-card strong,html.today-theme-light .ts-user-copy b,
+html.today-theme-light .ts-chat-row-copy b,html.today-theme-light .ts-list-head h3,html.today-theme-light .ts-panel-head h2,
+html.today-theme-light .ts-profile-hero h2,html.today-theme-light .ts-profile-hero h3,html.today-theme-light .ts-profile-hero strong{color:#2b3540!important}
+html.today-theme-light .today-post-meta,html.today-theme-light .today-post-meta small,html.today-theme-light .ts-user-copy span,
+html.today-theme-light .ts-chat-row-copy small,html.today-theme-light .ts-chat-row-meta small,html.today-theme-light .ts-brand-chip small,
+html.today-theme-light .today-post-card time,html.today-theme-light .ts-channel-meta{color:#778087!important}
+html.today-theme-light .today-post-text,html.today-theme-light .community-copy p,html.today-theme-light .ts-post-card>p,
+html.today-theme-light .ts-message p,html.today-theme-light .today-post-card p{color:#46545c!important}
+html.today-theme-light .today-post-actions{border-top-color:#d4dbd9!important}
+html.today-theme-light .today-like-btn,html.today-theme-light .like-btn{border-color:#cfd8d7!important;background:#e6eae6!important;color:#647079!important}
+html.today-theme-light .today-like-btn.is-liked{border-color:#e7c7b3!important;background:#f2e0d4!important;color:#a8543b!important}
+html.today-theme-light .today-like-btn.is-liked b{color:#a8543b!important}
+html.today-theme-light .ts-post-tag,html.today-theme-light .ts-promo-badge{background:#e2e9eb!important;border-color:#c9d5d8!important;color:#54788b!important}
+html.today-theme-light .ts-brand-chip{border-color:#ccd6d6!important;background:#e9ece6!important;color:#53626a!important}
+
+/* Friends, messages, channels, settings, personal page, and auxiliary route bars. */
+html.today-theme-light .today-social-nav,html.today-theme-light #todaySocialNav,html.today-theme-light #todaySocialPageBar,
+html.today-theme-light .ts-chat-toolbar,html.today-theme-light .ts-channel-toolbar,html.today-theme-light .ts-profile-tools,
+html.today-theme-light .ts-profile-actions,html.today-theme-light .ts-user-actions,html.today-theme-light .ts-nav-actions{
+ border-color:#cdd6d6!important;background:rgba(231,234,228,.92)!important;color:#35434c!important;box-shadow:0 4px 14px rgba(43,57,63,.035)!important
+}
+html.today-theme-light .ts-nav-actions button,html.today-theme-light #todaySocialPageBar button,html.today-theme-light .ts-chat-toolbar button,
+html.today-theme-light .ts-channel-toolbar button{border-color:#cbd5d6!important;background:#e9ece6!important;color:#52636d!important;box-shadow:inset 0 1px rgba(255,255,255,.55)!important}
+html.today-theme-light .ts-nav-actions button:hover,html.today-theme-light #todaySocialPageBar button:hover,
+html.today-theme-light .ts-chat-toolbar button:hover,html.today-theme-light .ts-channel-toolbar button:hover{border-color:#b3c8ce!important;background:#dce8eb!important;color:#385d71!important}
+html.today-theme-light .ts-panel-head{border-bottom-color:#d3dad8!important;background:transparent!important}
+html.today-theme-light .ts-panel-head h2{color:#2b3540!important}
+html.today-theme-light .ts-panel-head p{color:#717d83!important}
+html.today-theme-light .ts-orbit,html.today-theme-light .ts-channel-symbol,html.today-theme-light .ts-chat-icon,html.today-theme-light .ts-avatar,html.today-theme-light .ts-promo-mark{background:linear-gradient(145deg,#dce7e8,#e7e3d8)!important;border-color:#c8d4d4!important;color:#58798b!important;box-shadow:inset 0 1px rgba(255,255,255,.55)!important}
+html.today-theme-light .ts-profile-hero{border-color:#c8d3d4!important;background:radial-gradient(ellipse at 90% 0%,rgba(194,215,222,.72),transparent 44%),linear-gradient(135deg,#f0eee4,#e1eaeb 62%,#e3e9df)!important;box-shadow:inset 0 1px rgba(255,255,255,.6),0 10px 26px rgba(47,61,67,.06)!important}
+html.today-theme-light .ts-profile-hero>div:nth-child(2)>span{color:#71828a!important}
+html.today-theme-light .ts-profile-stats>div{border-color:#cfd7d6!important;background:#e8ece6!important;box-shadow:0 4px 12px rgba(46,60,66,.035)!important}
+html.today-theme-light .ts-profile-stats b{color:#2b3942!important}
+html.today-theme-light .ts-profile-stats span{color:#748087!important}
+html.today-theme-light .ts-chat-messages{background:linear-gradient(180deg,#e7ebea,#e1e7e7)!important;border-color:#ccd7d7!important}
+html.today-theme-light .ts-message{background:#f2f0e8!important;border:1px solid #cfd8d8!important;color:#2b3540!important;box-shadow:0 3px 9px rgba(45,61,66,.035)!important}
+html.today-theme-light .ts-message.is-own{background:linear-gradient(145deg,#dce7eb,#e2e9e1)!important;border-color:#bdcfd1!important;color:#2d3b43!important}
+html.today-theme-light .ts-message-meta b{color:#8b654c!important}
+html.today-theme-light .ts-message-meta time{color:#818989!important}
+html.today-theme-light .ts-chat-compose,html.today-theme-light .ts-message-compose{border-color:#cfd6d5!important;background:#ecebe4!important}
+html.today-theme-light .ts-profile-cover{background:radial-gradient(ellipse at 15% 10%,rgba(248,241,221,.8),transparent 31%),linear-gradient(125deg,#d9e5e7,#dfe7dc 52%,#eee0cf)!important}
+html.today-theme-light .ts-profile-cover-copy,html.today-theme-light .ts-profile-cover-copy>strong{color:#2b3540!important;text-shadow:none!important}
+html.today-theme-light .ts-profile-cover-copy>small,html.today-theme-light .ts-profile-cover-copy>span{color:#586b74!important}
+html.today-theme-light .ts-form-card label,html.today-theme-light .ts-settings-form>label,html.today-theme-light .ts-search-form label{color:#53616a!important}
+html.today-theme-light .ts-toggle-row{border-color:#ced7d5!important;background:#e9ece5!important;color:#3f5057!important}
+html.today-theme-light .ts-toggle-row input:checked+i{background:#d3e4d8!important;border-color:#abcbb9!important}
+
+/* Chat / channel / search and account fields are soft stone, never near-black. */
+html.today-theme-light input,html.today-theme-light textarea,html.today-theme-light select,
+html.today-theme-light .composer input,html.today-theme-light .composer textarea,html.today-theme-light .ts-form-card input,
+html.today-theme-light .ts-form-card textarea,html.today-theme-light .ts-settings-form input,html.today-theme-light .ts-settings-form textarea,
+html.today-theme-light .ts-search-form input,html.today-theme-light .ts-photo-field input,html.today-theme-light .ts-message-compose textarea,
+html.today-theme-light .ts-inline-invite input{
+ color:#2b3540!important;background:#e9e9e1!important;border:1px solid #c6d0d1!important;box-shadow:inset 0 1px rgba(255,255,255,.45)!important;caret-color:#ad6b48!important
+}
+html.today-theme-light input::placeholder,html.today-theme-light textarea::placeholder{color:#89918f!important;opacity:1!important}
+html.today-theme-light input:focus,html.today-theme-light textarea:focus,html.today-theme-light select:focus,
+html.today-theme-light .ts-form-card input:focus,html.today-theme-light .ts-form-card textarea:focus{border-color:#88aab8!important;box-shadow:0 0 0 3px rgba(109,151,172,.17)!important;outline:none!important}
+html.today-theme-light input[type=checkbox],html.today-theme-light input[type=radio]{accent-color:#668a9f!important}
+html.today-theme-light label{color:#53616a!important}
+
+/* Shop, coin wallet, cosmetic inventory and author support. */
+html.today-theme-light .shop-page,html.today-theme-light .profile-page,html.today-theme-light .shop-title-row,
+html.today-theme-light .shop-money-head,html.today-theme-light .today-post-color-settings,html.today-theme-light .today-post-color-options,
+html.today-theme-light .shop-item,html.today-theme-light .shop-balance,html.today-theme-light .today-support-bank-card,
+html.today-theme-light .today-post-color-choice,html.today-theme-light .today-post-color-locked{
+ color:#2b3540!important;border-color:#cfd6d5!important;background:linear-gradient(145deg,#f2efe6,#e7ebe6)!important;box-shadow:inset 0 1px rgba(255,255,255,.45),0 6px 18px rgba(44,59,64,.045)!important
+}
+html.today-theme-light .shop-title-row h2,html.today-theme-light .shop-money-head h3,html.today-theme-light .shop-item-copy h3,
+html.today-theme-light .shop-balance b,html.today-theme-light .profile-ident h2,html.today-theme-light .today-post-color-settings h3{color:#2b3540!important}
+html.today-theme-light .shop-title-row p,html.today-theme-light .shop-item-copy p,html.today-theme-light .shop-footnote,
+html.today-theme-light .shop-owned-label,html.today-theme-light .today-post-color-settings>p{color:#68747d!important}
+html.today-theme-light .shop-balance{background:linear-gradient(135deg,#e0e9eb,#e7eadf)!important;border-color:#c7d3d4!important}
+html.today-theme-light .shop-price-invalid{background:#f1ded8!important;color:#a04435!important;border-color:#dfc2b7!important}
+html.today-theme-light .shop-owned-label{background:#dde9df!important;border-color:#bfd6c6!important;color:#46785c!important}
+html.today-theme-light .shop-buy-row button,html.today-theme-light .today-support-copy-btn{background:linear-gradient(135deg,#b96e4a,#cb8d55)!important;color:#fff9ed!important;border-color:transparent!important;box-shadow:0 6px 15px rgba(154,99,65,.16)!important}
+html.today-theme-light .today-support-btn{border-color:#cdd6d4!important;background:linear-gradient(110deg,#f2efe5,#e4ebeb 58%,#e5eadf)!important;color:#3c4d54!important;box-shadow:0 8px 21px rgba(55,72,76,.055)!important}
+html.today-theme-light .today-support-btn-copy strong{color:#2b3a43!important}
+html.today-theme-light .today-support-btn-copy small{color:#78837f!important}
+html.today-theme-light .today-support-bank-card:after{opacity:.1!important}
+html.today-theme-light .today-post-color-choice.is-selected{border-color:#91adba!important;background:#dce8eb!important;box-shadow:0 0 0 2px rgba(103,145,164,.14)!important}
+
+/* Buttons are muted slate-blue / clay-orange; secondary actions are stone-grey. */
+html.today-theme-light .primary-button,html.today-theme-light .ts-primary,html.today-theme-light .ts-mini-accent,
+html.today-theme-light .ts-promo-button,html.today-theme-light .primary-button[type=submit]{
+ color:#f8f5ee!important;border:1px solid rgba(69,96,113,.22)!important;background:linear-gradient(125deg,#617f94,#526f83 58%,#667f8d)!important;box-shadow:0 7px 17px rgba(56,82,96,.17),inset 0 1px rgba(255,255,255,.22)!important
+}
+html.today-theme-light .primary-button:hover,html.today-theme-light .ts-primary:hover,html.today-theme-light .ts-mini-accent:hover,html.today-theme-light .ts-promo-button:hover{filter:brightness(1.045)!important;box-shadow:0 10px 21px rgba(56,82,96,.21)!important}
+html.today-theme-light .secondary-button,html.today-theme-light .ts-mini,html.today-theme-light .ts-text-button,
+html.today-theme-light .quiet-btn,html.today-theme-light .option-btn,html.today-theme-light .ts-save,
+html.today-theme-light .ts-user-actions .ts-mini,html.today-theme-light .ts-result-actions button:not(.ts-primary),
+html.today-theme-light .ts-m3-level,html.today-theme-light .ts-m3-booster-use,html.today-theme-light .ts-m3-buy{
+ color:#4a5960!important;border:1px solid #c9d4d4!important;background:linear-gradient(180deg,#efeee7,#e5e9e5)!important;box-shadow:inset 0 1px rgba(255,255,255,.48),0 2px 7px rgba(48,62,68,.035)!important
+}
+html.today-theme-light .secondary-button:hover,html.today-theme-light .ts-mini:hover,html.today-theme-light .ts-text-button:hover,html.today-theme-light .quiet-btn:hover,html.today-theme-light .option-btn:hover{color:#3b667d!important;background:#dce8eb!important;border-color:#b7cbd1!important}
+html.today-theme-light .danger-button,html.today-theme-light .ts-danger{color:#963f36!important;background:#f0dfd8!important;border-color:#dcbdb2!important}
+html.today-theme-light button:disabled,html.today-theme-light .button:disabled{filter:saturate(.55)!important;opacity:.55!important}
+html.today-theme-light button:focus-visible,html.today-theme-light a:focus-visible{outline:3px solid rgba(96,139,160,.32)!important;outline-offset:3px!important}
+
+/* Dialogs: dim slate veil + warm mineral paper surface. */
+html.today-theme-light .modal,html.today-theme-light #modal{color:#2b3540!important}
+html.today-theme-light .modal-backdrop,html.today-theme-light #modal .modal-backdrop,html.today-theme-light .modal.today-social-modal .modal-backdrop{background:rgba(39,51,57,.31)!important;backdrop-filter:blur(10px) saturate(95%)!important;-webkit-backdrop-filter:blur(10px) saturate(95%)!important}
+html.today-theme-light .modal-card,html.today-theme-light #modal .modal-card,html.today-theme-light #modal.modal.today-social-modal .modal-card,html.today-theme-light .modal.today-social-modal .modal-card{
+ color:#2b3540!important;border:1px solid rgba(133,148,148,.46)!important;border-radius:25px!important;background:linear-gradient(148deg,#f3f0e7 0%,#eeece3 76%,#e5ebea 100%)!important;box-shadow:0 30px 85px rgba(31,43,48,.23),inset 0 1px rgba(255,255,255,.55)!important
+}
+html.today-theme-light #modalContent,html.today-theme-light #modal .ts-panel,html.today-theme-light #modal .ts-form-card,html.today-theme-light #modal .ts-settings-group,html.today-theme-light #modal .ts-profile-friends,html.today-theme-light #modal .ts-channel-card{color:#2b3540!important;background:transparent!important}
+html.today-theme-light .modal-card strong,html.today-theme-light #modal .modal-card strong{color:#2b3540!important}
+html.today-theme-light .modal-close,html.today-theme-light #modal .modal-close,html.today-theme-light #modal #todaySocialCloseTop{color:#52626a!important;background:#e2e6e2!important;border:1px solid #c7d0cf!important;box-shadow:0 3px 10px rgba(40,56,60,.05)!important}
+html.today-theme-light #modal .ts-panel-head{background:transparent!important;border-bottom:1px solid #d1d9d7!important}
+html.today-theme-light #modal .ts-panel-head h2{color:#2b3540!important}
+html.today-theme-light #modal .ts-panel-head p{color:#6f7b7d!important}
+html.today-theme-light .toast{color:#f4f0e7!important;background:#36464e!important;border:1px solid #61747b!important;box-shadow:0 12px 30px rgba(34,49,56,.18)!important}
+html.today-theme-light .footer{color:#748087!important;background:transparent!important;border-color:#cfd6d5!important;box-shadow:none!important}
+
+/* Bottom navigation is a softly tinted dock, not a dark capsule. */
+html.today-theme-light .bottom-nav{background:rgba(229,232,226,.96)!important;border:1px solid rgba(128,144,145,.4)!important;box-shadow:0 10px 29px rgba(44,57,63,.16),inset 0 1px rgba(255,255,255,.55)!important;backdrop-filter:blur(24px) saturate(115%)!important;-webkit-backdrop-filter:blur(24px) saturate(115%)!important}
+html.today-theme-light .bottom-nav button{background:transparent!important;color:#69767a!important}
+html.today-theme-light .bottom-nav button small{color:inherit!important}
+html.today-theme-light .bottom-nav button.active{background:linear-gradient(135deg,#d3e1e5,#dfe7dc)!important;color:#354e5a!important;box-shadow:inset 0 1px rgba(255,255,255,.55),0 3px 10px rgba(60,81,88,.07)!important}
+html.today-theme-light .bottom-nav button.active span{color:#a96543!important}
+html.today-theme-light .bottom-nav button:not(.active):hover{background:rgba(211,223,224,.8)!important;color:#3e5e6d!important}
+
+/* Mini games gallery keeps the same warm/cool design language. Crystal colours remain vivid. */
+html.today-theme-light .ts-games-hero{border-color:#bdced1!important;background:radial-gradient(ellipse at 92% 0%,rgba(219,196,153,.44),transparent 46%),linear-gradient(130deg,#e0e9ec,#e7e8e0 78%)!important;box-shadow:inset 0 1px rgba(255,255,255,.45)!important}
+html.today-theme-light .ts-games-hero h3{color:#2b3540!important}
+html.today-theme-light .ts-games-hero p{color:#65747a!important}
+html.today-theme-light .ts-game-card{border-color:#cbd5d5!important;background:linear-gradient(145deg,#f0eee5,#e5eae7)!important;box-shadow:0 12px 28px rgba(44,59,64,.07),inset 0 1px rgba(255,255,255,.45)!important}
+html.today-theme-light .ts-game-card-copy h3,html.today-theme-light .ts-game-card-copy p,html.today-theme-light .ts-game-card-bottom{color:#2b3540!important}
+html.today-theme-light .ts-game-art{background:radial-gradient(ellipse at 50% 110%,rgba(214,189,137,.24),transparent 56%),linear-gradient(135deg,#d4e3e8,#dfe5dd)!important}
+html.today-theme-light .ts-m3-royal-hero,html.today-theme-light .ts-m3-hero{border-color:#c7d1d0!important;background:radial-gradient(ellipse at 76% 0%,rgba(218,198,159,.46),transparent 43%),radial-gradient(ellipse at 100% 100%,rgba(178,207,200,.45),transparent 39%),linear-gradient(135deg,#e9e5d9,#dce7eb 56%,#e0e8de)!important;box-shadow:inset 0 1px rgba(255,255,255,.52),0 20px 45px rgba(47,61,66,.11)!important}
+html.today-theme-light .ts-m3-hero-copy h2,html.today-theme-light .ts-m3-royal-hero .ts-m3-hero-copy h2{color:#2b3540!important;text-shadow:none!important}
+html.today-theme-light .ts-m3-hero-copy h2 span,html.today-theme-light .ts-m3-royal-hero .ts-m3-hero-copy h2 span{background:linear-gradient(100deg,#68889d,#b66f49 64%,#c09c4a)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+html.today-theme-light .ts-m3-hero-copy>p,html.today-theme-light .ts-m3-story>p,html.today-theme-light .ts-m3-level-intro>p,html.today-theme-light .ts-m3-result p,html.today-theme-light .ts-m3-royal-hero .ts-m3-hero-copy>p{color:#596970!important}
+html.today-theme-light .ts-m3-story,html.today-theme-light .ts-m3-chapter,html.today-theme-light .ts-m3-inventory,html.today-theme-light .ts-m3-booster-card,html.today-theme-light .ts-m3-result,html.today-theme-light .ts-m3-royal-intro,html.today-theme-light .ts-m3-album{border-color:#cbd4d3!important;background:linear-gradient(140deg,#f1efe6,#e5eae6)!important;color:#2b3540!important;box-shadow:inset 0 1px rgba(255,255,255,.48),0 8px 22px rgba(43,57,62,.06)!important}
+html.today-theme-light .ts-m3-story h3,html.today-theme-light .ts-m3-artifact b,html.today-theme-light .ts-m3-chapter h3,html.today-theme-light .ts-m3-chapter h4,html.today-theme-light .ts-m3-booster-card b,html.today-theme-light .ts-m3-map-title h3,html.today-theme-light .ts-m3-album b,html.today-theme-light .ts-m3-royal-intro h3{color:#2b3540!important}
+html.today-theme-light .ts-m3-artifact,html.today-theme-light .ts-m3-artifact small,html.today-theme-light .ts-m3-booster-card p,html.today-theme-light .ts-m3-booster-card small,html.today-theme-light .ts-m3-chapter-summary,html.today-theme-light .ts-m3-album p{color:#69767a!important}
+html.today-theme-light .ts-m3-chapter-head,html.today-theme-light .ts-m3-album>summary{background:transparent!important}
+html.today-theme-light .ts-m3-chapter-head p,html.today-theme-light .ts-m3-chapter-head>div>small{color:#798488!important}
+html.today-theme-light .ts-m3-level{background:linear-gradient(145deg,#f1efe6,#e4e9e5)!important;color:#3e5058!important;border-color:#c9d4d3!important}
+html.today-theme-light .ts-m3-level>b{color:#3d4d54!important}
+html.today-theme-light .ts-m3-level.is-current{background:linear-gradient(145deg,#dce8eb,#e1e9df)!important;border-color:#8cabb7!important;box-shadow:0 0 0 1px rgba(100,138,155,.12),0 5px 15px rgba(47,77,88,.08)!important}
+html.today-theme-light .ts-m3-level.is-complete{background:linear-gradient(145deg,#eee2cd,#e9e5d7)!important;border-color:#d3be92!important}
+html.today-theme-light .ts-m3-board-wrap,html.today-theme-light .ts-m3-royal-game .ts-m3-board-wrap{border-color:#b9cbd0!important;background:radial-gradient(ellipse at 50% 0%,rgba(231,211,171,.52),transparent 55%),linear-gradient(145deg,#d4e2e7,#d9e4e1 54%,#e7e3d7)!important;box-shadow:inset 0 1px rgba(255,255,255,.5),0 18px 37px rgba(50,66,71,.13)!important}
+html.today-theme-light .ts-m3-royal-game .ts-match-board.ts-m3-board{border-color:#c0d0d0!important;background:rgba(226,233,231,.55)!important;box-shadow:inset 0 1px rgba(255,255,255,.6),0 2px 8px rgba(55,70,73,.06)!important}
+html.today-theme-light .ts-m3-royal-game .ts-m3-gem,html.today-theme-light .ts-m3-gem{border-color:rgba(101,126,138,.2)!important;background:linear-gradient(145deg,rgba(241,241,231,.86),rgba(221,231,230,.66))!important;box-shadow:inset 0 1px rgba(255,255,255,.66),0 2px 5px rgba(43,59,64,.09)!important}
+html.today-theme-light .ts-m3-royal-game .ts-m3-status,html.today-theme-light .ts-m3-status{border-color:#c5d6d2!important;background:linear-gradient(115deg,#e2ece3,#dce8ec)!important;color:#52666e!important}
+html.today-theme-light .ts-m3-earned-trophy{border-color:#c7d1ce!important;background:linear-gradient(120deg,#e8e1d1,#dfe9e5)!important;box-shadow:inset 0 1px rgba(255,255,255,.55),0 7px 20px rgba(44,58,63,.06)!important}
+html.today-theme-light .ts-m3-earned-trophy small{color:#9b6847!important}
+html.today-theme-light .ts-m3-earned-trophy b{color:#2b3540!important}
+html.today-theme-light .ts-m3-earned-trophy p{color:#69767a!important}
+html.today-theme-light .ts-m3-royal-game .ts-m3-game-hud>div{border-color:#c7d2d2!important;background:linear-gradient(145deg,#f2f0e7,#e6eae5)!important;box-shadow:inset 0 1px rgba(255,255,255,.45),0 5px 12px rgba(49,62,67,.055)!important}
+html.today-theme-light .ts-m3-royal-game .ts-m3-game-hud b{color:#2c3a42!important}
+html.today-theme-light .ts-m3-royal-game .ts-m3-game-hud small{color:#788488!important}
+html.today-theme-light .ts-m3-mission-splash{border-color:rgba(128,150,153,.62)!important;background:linear-gradient(140deg,rgba(242,239,229,.98),rgba(218,231,234,.98))!important;color:#293943!important;box-shadow:0 18px 44px rgba(37,54,61,.22),inset 0 1px rgba(255,255,255,.55)!important}
+html.today-theme-light .ts-m3-mission-splash h2,html.today-theme-light .ts-m3-mission-splash strong{color:#293943!important}
+html.today-theme-light .ts-m3-mission-splash p{color:#66757a!important}
+html.today-theme-light .ts-m3-mission-timer{background:#cddbdc!important}
+html.today-theme-light .ts-m3-mission-timer i{background:linear-gradient(90deg,#67899e,#bf8056)!important}
+html.today-theme-light .ts-m3-combo-pop{color:#526f7c!important;text-shadow:0 0 13px rgba(250,242,216,.85),0 3px 14px rgba(235,230,215,.8)!important}
+
+/* Status semantic colors are softer; decorative user-supplied artwork and gem colors remain untouched. */
+html.today-theme-light .success,html.today-theme-light .is-success,html.today-theme-light .status-success{color:#49765d!important}
+html.today-theme-light .warning,html.today-theme-light .is-warning,html.today-theme-light .status-warning{color:#9c7135!important}
+html.today-theme-light .error,html.today-theme-light .is-error,html.today-theme-light .status-error{color:#a24e43!important}
+html.today-theme-light .ts-error-panel,html.today-theme-light .error-panel{background:#f0dfd9!important;border-color:#dfc0b7!important}
+html.today-theme-light .ts-error-panel strong{color:#8f443b!important}
+@media(max-width:760px){html.today-theme-light .hero{border-radius:22px!important}html.today-theme-light .daily-card{border-radius:19px!important}html.today-theme-light .topbar{backdrop-filter:blur(18px) saturate(115%)!important}html.today-theme-light .bottom-nav{box-shadow:0 8px 22px rgba(37,52,58,.15),inset 0 1px rgba(255,255,255,.45)!important}}
+@media(prefers-reduced-motion:reduce){html.today-theme-light *,html.today-theme-light *:before,html.today-theme-light *:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+
+/* V31 final pass: remaining routes, stories, leaderboards and every non-canvas mini-game. */
+html.today-theme-light .ts-games-home,html.today-theme-light .ts-active-game{color:#2b3540!important;background:transparent!important}
+html.today-theme-light .ts-game-toolbar{color:#52636a!important}
+html.today-theme-light .ts-game-record{color:#728087!important}
+html.today-theme-light .ts-game-record b{color:#527e71!important}
+html.today-theme-light .ts-game-stage{border-color:#c7d2d2!important;background:radial-gradient(ellipse at 50% 0%,rgba(207,222,226,.72),transparent 53%),linear-gradient(145deg,#e1e9e9,#e7e5da)!important;box-shadow:inset 0 1px rgba(255,255,255,.55),0 8px 22px rgba(43,57,62,.055)!important}
+html.today-theme-light .ts-game-hud{color:#758187!important}
+html.today-theme-light .ts-game-hud b{color:#2b3942!important}
+html.today-theme-light .ts-game-status{color:#66767b!important}
+html.today-theme-light .ts-game-leaderboard{border-color:#cbd5d4!important;background:linear-gradient(145deg,#f0eee5,#e6ebe7)!important;color:#2b3540!important}
+html.today-theme-light .ts-game-leaderboard-tabs button{border-color:#cbd5d4!important;background:#e4e9e5!important;color:#596970!important}
+html.today-theme-light .ts-game-rank{border-bottom-color:#d2d9d7!important;color:#35464e!important}
+html.today-theme-light .ts-game-rank>b{color:#778388!important}
+html.today-theme-light .ts-game-rank strong{color:#527e71!important}
+html.today-theme-light .ts-game-rank-avatar{background:#dfe7e5!important}
+html.today-theme-light .ts-story-strip{color:#2b3540!important}
+html.today-theme-light .ts-story-bubble>b{color:#4d606a!important}
+html.today-theme-light .ts-story-bubble>small{color:#798489!important}
+html.today-theme-light .ts-story-empty,html.today-theme-light .ts-story-composer{border-color:#cbd5d4!important;background:linear-gradient(145deg,#f0eee5,#e5ebe7)!important;color:#45565e!important;box-shadow:0 5px 16px rgba(42,56,62,.05)!important}
+html.today-theme-light .ts-story-composer>summary{color:#42545d!important}
+html.today-theme-light .ts-story-viewer{border-color:#cbd5d4!important;background:linear-gradient(145deg,#e9e7de,#dfe8e9)!important;color:#2b3540!important;box-shadow:0 12px 28px rgba(43,57,62,.09)!important}
+html.today-theme-light .ts-story-viewer>p,html.today-theme-light .ts-story-view-footer{color:#66767b!important}
+html.today-theme-light .ts-story-view-media{background:#d5e1e3!important}
+html.today-theme-light .ts-merge-board{background:linear-gradient(145deg,#d5e1e2,#dfe4db)!important;border:1px solid #c0d0d1!important;box-shadow:inset 0 1px rgba(255,255,255,.6),0 6px 15px rgba(43,58,64,.06)!important}
+html.today-theme-light .ts-merge-tile{background:#e9e9df!important;color:#53636a!important;box-shadow:inset 0 1px rgba(255,255,255,.65),0 2px 4px rgba(44,59,63,.04)!important}
+html.today-theme-light .ts-merge-tile.v2{background:#dce7e3!important;color:#4d655f!important}
+html.today-theme-light .ts-merge-tile.v4{background:#cedfe2!important;color:#3e626f!important}
+html.today-theme-light .ts-merge-tile.v8{background:#b9d1d8!important;color:#365b6b!important}
+html.today-theme-light .ts-merge-tile.v16{background:#9cbec7!important;color:#2f505d!important}
+html.today-theme-light .ts-merge-tile.v32{background:#88aebc!important;color:#f5f1e8!important}
+html.today-theme-light .ts-merge-tile.v64{background:#8198a7!important;color:#fbf6e9!important}
+html.today-theme-light .ts-merge-tile.v128{background:#d9c89e!important;color:#5c5038!important}
+html.today-theme-light .ts-merge-tile.v256{background:#d3b87f!important;color:#51452e!important}
+html.today-theme-light .ts-merge-tile.v512{background:#cda36c!important;color:#4f3c29!important}
+html.today-theme-light .ts-merge-tile.v1024{background:#c48b62!important;color:#fff8ed!important}
+html.today-theme-light .ts-merge-tile.v2048{background:linear-gradient(135deg,#c7d9cd,#d7c28b)!important;color:#2f4845!important;box-shadow:0 0 12px rgba(144,168,147,.16)!important}
+html.today-theme-light .ts-memory-card{border-color:#c2d0d0!important;background:linear-gradient(145deg,#d3e1e3,#dce4dc)!important;color:#557b89!important;box-shadow:inset 0 1px rgba(255,255,255,.6),0 4px 10px rgba(43,57,62,.05)!important}
+html.today-theme-light .ts-memory-card.revealed{background:linear-gradient(145deg,#eee7d5,#e2e4db)!important;color:#4d6876!important;border-color:#d0c8b1!important}
+html.today-theme-light .ts-memory-card.matched{background:linear-gradient(145deg,#d7e8d9,#d9e7e5)!important;border-color:#b8d2c4!important;color:#52846d!important}
+html.today-theme-light .ts-extra-canvas-wrap,html.today-theme-light .ts-flappy-wrap{border-color:#bfcfd1!important;background:#d7e3e4!important;box-shadow:0 9px 24px rgba(43,58,63,.09)!important}
+html.today-theme-light .ts-extra-snake-board{border-color:#c4d2d1!important;background:#d8e3df!important;box-shadow:inset 0 0 22px rgba(77,119,113,.07)!important}
+html.today-theme-light .ts-extra-snake-cell{background:#e4e9de!important;color:#667b7c!important}
+html.today-theme-light .ts-extra-snake-cell.body{background:linear-gradient(135deg,#7eae9b,#6e9bb1)!important;box-shadow:inset 0 1px rgba(255,255,255,.22)!important}
+html.today-theme-light .ts-extra-snake-cell.head{background:linear-gradient(135deg,#c5a56e,#d9b98c)!important;color:#493e31!important}
+html.today-theme-light .ts-extra-ttt-board{border-color:#c6d2d2!important;background:#dce5e4!important;box-shadow:0 7px 17px rgba(43,57,62,.05)!important}
+html.today-theme-light .ts-extra-ttt-board button{border-color:#c5d2d2!important;background:linear-gradient(145deg,#eae9df,#dce6e5)!important;color:#526c78!important}
+html.today-theme-light .ts-extra-ttt-board button.x{color:#5e9587!important;text-shadow:0 0 14px rgba(111,165,148,.17)!important}
+html.today-theme-light .ts-extra-ttt-board button.o{color:#ba7b54!important;text-shadow:0 0 14px rgba(186,123,84,.13)!important}
+html.today-theme-light .ts-extra-word-card,html.today-theme-light .ts-extra-quiz-card,html.today-theme-light .ts-extra-color-prompt{border-color:#c5d1d1!important;background:radial-gradient(ellipse at 50% 0%,rgba(210,224,226,.62),transparent 56%),linear-gradient(145deg,#f0eee5,#e3e9e6)!important;color:#2b3540!important;box-shadow:inset 0 1px rgba(255,255,255,.48),0 8px 20px rgba(44,58,64,.055)!important}
+html.today-theme-light .ts-extra-word-card>strong{color:#395966!important;text-shadow:none!important}
+html.today-theme-light .ts-extra-word-card label,html.today-theme-light .ts-extra-quiz-card h3,html.today-theme-light .ts-extra-color-prompt>small{color:#52636a!important}
+html.today-theme-light .ts-extra-color-choice,html.today-theme-light .ts-extra-quiz-choice{border-color:#c9d4d4!important;background:linear-gradient(145deg,#efeee6,#e2e9e6)!important;color:#354850!important;box-shadow:inset 0 1px rgba(255,255,255,.48),0 3px 8px rgba(42,57,62,.04)!important}
+html.today-theme-light .ts-extra-color-choice:hover,html.today-theme-light .ts-extra-quiz-choice:hover{border-color:#a9c2cb!important;background:#dce8e9!important}
+html.today-theme-light .ts-extra-quiz-choice.is-correct,html.today-theme-light .ts-extra-color-choice.is-correct{background:#d9e9dd!important;border-color:#b8d4c1!important;color:#46785c!important}
+html.today-theme-light .ts-extra-quiz-choice.is-wrong,html.today-theme-light .ts-extra-color-choice.is-wrong{background:#efdfd7!important;border-color:#ddc0b3!important;color:#985544!important}
+html.today-theme-light .ts-game-svg{color:#526e7b!important}
+html.today-theme-light .ts-games-home .ts-muted,html.today-theme-light .ts-active-game .ts-muted{color:#708087!important}
+html.today-theme-light .toast{color:#35464e!important;background:rgba(230,234,228,.97)!important;border:1px solid #bdcccb!important;box-shadow:0 12px 30px rgba(34,49,56,.14)!important}
+
+/* TODAY SOFT ATELIER V31 END */
