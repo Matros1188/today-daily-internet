@@ -1306,6 +1306,25 @@
     const host=byId('todaySocialSearchResults');if(!host)return;const users=Array.isArray(d.users)?d.users:[];
     host.innerHTML=`<div class="ts-list-head"><h3>Результаты поиска</h3><span class="ts-count">${users.length}</span></div>${users.length?users.map(u=>userCard(u)).join(''):`<p class="ts-muted">Никого не нашли. Проверь написание никнейма.</p>`}`;
   }
+  async function openSearchUsers(initialQuery=''){
+    if(!await needUser())return;
+    const query=String(initialQuery||'').trim();
+    const content=`<form class="ts-search-form" data-social-form="search-users"><label>Имя или никнейм<input name="query" minlength="2" maxlength="80" value="${h(query)}" placeholder="Имя или @nickname" required></label><button class="ts-primary" type="submit">Найти людей ↗</button></form><div id="todaySocialSearchResults">${query.length>=2?'<div class="ts-loading-panel">Ищем участников…</div>':'<p class="ts-muted">Введи имя или никнейм минимум из двух символов.</p>'}</div>`;
+    modal(panelShell('Поиск людей','Найди участников TODAY по имени или никнейму.',content));
+    if(query.length>=2){
+      try{const d=await rpc('today_social_search_users',{p_query:query});const host=byId('todaySocialSearchResults');if(host){const users=Array.isArray(d.users)?d.users:[];host.innerHTML=`<div class="ts-list-head"><h3>Результаты поиска</h3><span class="ts-count">${users.length}</span></div>${users.length?users.map(u=>userCard(u)).join(''):`<p class="ts-muted">Никого не нашли. Проверь написание никнейма.</p>`}`;}}
+      catch(e){const host=byId('todaySocialSearchResults');if(host)host.innerHTML=`<div class="ts-error-panel">Поиск временно недоступен. ${h(e.message||e)}</div>`;}
+    }
+  }
+  async function openOwnStoryComposer(){
+    await openProfile();
+    const host=byId('modalContent');
+    const composer=host?.querySelector('.ts-story-composer');
+    if(!composer){notify('Чтобы добавить историю, войди в аккаунт и повтори попытку.');return;}
+    composer.open=true;
+    composer.scrollIntoView({behavior:'smooth',block:'center'});
+    composer.querySelector('summary')?.focus({preventScroll:true});
+  }
   function parseHandles(raw){return [...new Set(String(raw||'').split(/[\n,;\s]+/).map(s=>s.trim().replace(/^@/,'' )).filter(Boolean))]}
   async function onSubmit(e){
     const form=e.target.closest('form[data-social-form]');if(!form)return;
@@ -1393,7 +1412,7 @@
     const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();/* TODAY_SOCIAL_MODAL_OBSERVER_GUARD_V41 */if(modalRoot.classList.contains('today-social-modal'))modalRoot.classList.remove('today-social-modal');for(const preview of modalRoot.querySelectorAll('.ts-photo-preview[data-object-url]')){try{URL.revokeObjectURL(preview.dataset.objectUrl)}catch{}delete preview.dataset.objectUrl;preview.replaceChildren();preview.hidden=true;}}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
     loadPromos();
   }
-  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openMiniGames,loadPromos,close:()=>forceCloseSocialModal()};
+  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openMiniGames,openSearchUsers,openOwnStoryComposer,loadPromos,close:()=>forceCloseSocialModal()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();
 
