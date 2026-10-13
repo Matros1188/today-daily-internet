@@ -10,3 +10,27 @@ body.today-profile-route{margin:0!important;min-height:100vh;background:radial-g
 @media(max-width:390px){#todayProfilePage{width:calc(100% - 20px);margin-top:12px}.today-profile-cover-copy h1{font-size:26px}.today-profile-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.today-profile-identity-copy h2{font-size:20px}.today-profile-actions{display:grid}.today-v51-quick-actions button{font-size:10px}.today-v51-analytics-grid{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){.today-v51-tools *,.today-profile-route *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .today-profile-toast{position:fixed;z-index:99999;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100% - 28px);padding:12px 16px;border:1px solid rgba(119,226,194,.32);border-radius:13px;background:rgba(10,22,34,.96);color:#eafff7;font-size:12px;line-height:1.45;box-shadow:0 12px 35px rgba(0,0,0,.35)}.today-profile-toast[hidden]{display:none!important}.today-profile-site-footer{width:min(1020px,calc(100% - 28px));margin:0 auto 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#7182a8;font-size:9px;letter-spacing:.08em}.today-profile-site-footer a{color:#9eb3e2;text-decoration:none;letter-spacing:normal}
+
+
+/* TODAY PROFILE WALL V62 CSS BEGIN — personal posts stay on the user's page. */
+.today-profile-wall-v62{min-width:0}
+.today-profile-post-composer{display:grid;gap:12px;margin:18px 0 24px;padding:clamp(14px,3vw,22px);border:1px solid rgba(145,164,220,.2);border-radius:22px;background:linear-gradient(145deg,rgba(24,31,56,.88),rgba(13,18,34,.92));box-shadow:0 16px 42px rgba(0,0,0,.18)}
+.today-profile-post-composer>label:first-child{font-size:14px;font-weight:800;color:#eef2ff;letter-spacing:.02em}
+.today-profile-post-composer textarea{width:100%;min-height:108px;resize:vertical;border:1px solid rgba(150,170,230,.23);border-radius:15px;background:rgba(5,9,21,.7);color:#f6f7ff;padding:14px 15px;font:inherit;line-height:1.55;outline:none}
+.today-profile-post-composer textarea:focus{border-color:rgba(132,154,255,.7);box-shadow:0 0 0 3px rgba(115,130,255,.12)}
+.today-profile-post-compose-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#99a7c8;font-size:12px}
+.today-profile-post-file{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:12px;border:1px solid rgba(155,177,233,.23);background:rgba(108,130,195,.1);color:#e0e8ff;cursor:pointer;font-weight:700}
+.today-profile-post-file input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+.today-profile-publish{width:100%;min-height:46px;display:flex;justify-content:center;align-items:center;gap:8px;border:0;cursor:pointer}
+.today-profile-publish:disabled{opacity:.58;cursor:wait}
+.today-profile-wall-posts{display:grid;gap:14px;margin-top:16px}
+.today-profile-wall-post{background:linear-gradient(145deg,rgba(23,30,52,.84),rgba(13,18,32,.9));border:1px solid rgba(150,170,230,.17);border-radius:20px;padding:clamp(14px,3vw,20px);overflow-wrap:anywhere}
+.today-profile-wall-post>p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;color:#e6ebfb;font-size:15px;margin:13px 0}
+.today-profile-wall-post>img{display:block;width:100%;max-height:520px;object-fit:contain;border-radius:15px;background:rgba(0,0,0,.22);margin-top:12px}
+.today-profile-wall-post-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;padding-top:12px;border-top:1px solid rgba(145,164,220,.13);color:#91a0c1;font-size:12px}
+.today-profile-post-delete{background:transparent;border:1px solid rgba(255,123,146,.25);border-radius:10px;padding:7px 10px;color:#ff9eaf;cursor:pointer;font-weight:700}
+.today-profile-post-delete:hover{background:rgba(255,123,146,.09)}
+.today-profile-wall-empty{margin-top:18px}
+@media(max-width:560px){.today-profile-post-composer{padding:13px;border-radius:18px}.today-profile-wall-post{border-radius:17px}.today-profile-post-compose-bottom{align-items:flex-start}.today-profile-post-composer textarea{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.today-profile-post-composer *,.today-profile-wall-post *{animation:none!important;transition:none!important}}
+/* TODAY PROFILE WALL V62 CSS END */
