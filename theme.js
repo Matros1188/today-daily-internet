@@ -21,7 +21,7 @@
       button.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
     }
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === 'light' ? '#e9ebe5' : '#090f20';
+    if (meta) meta.content = theme === 'light' ? '#e7d9c5' : '#090f20';
     if (persist) { try { localStorage.setItem(THEME_KEY, theme); } catch (_) {} }
   }
   applyTheme(theme, false);
