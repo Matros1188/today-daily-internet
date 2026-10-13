@@ -1,0 +1,195 @@
+/* TODAY UX V68 — responsive, accessible, cross-browser-safe layer */
+:root{
+  --today-v68-ring:#82aaff;
+  --today-v68-panel:rgba(10,17,34,.96);
+  --today-v68-line:rgba(255,255,255,.14)
+}
+html{
+  scroll-padding-top:84px;
+  scroll-padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))
+}
+body{
+  min-width:0;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%
+}
+*,*::before,*::after{box-sizing:border-box}
+img,video,canvas,svg{max-width:100%}
+button,a,input,textarea,select{font:inherit}
+button,a,[role=button]{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation
+}
+:focus-visible{
+  outline:3px solid var(--today-v68-ring)!important;
+  outline-offset:3px!important
+}
+.today-v68-skip-link{
+  position:fixed;z-index:100000;top:8px;left:8px;
+  transform:translateY(-160%);padding:12px 16px;
+  border-radius:12px;background:#f6f8ff;color:#111827;
+  font-weight:800;box-shadow:0 8px 28px #0005
+}
+.today-v68-skip-link:focus{transform:translateY(0)}
+.topbar,.topbar-inner,.top-actions,.brand{min-width:0}
+.topbar-inner{gap:12px}
+.top-actions{gap:8px;flex-wrap:nowrap}
+#todayV67NotificationBell{
+  position:relative;display:inline-grid;place-items:center;
+  flex:0 0 42px;width:42px;height:42px;min-width:42px;min-height:42px;
+  border:1px solid var(--today-v68-line);border-radius:14px;
+  background:rgba(255,255,255,.075);color:inherit;cursor:pointer
+}
+#todayV67NotificationBell svg{
+  width:20px;height:20px;fill:none;stroke:currentColor;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
+}
+.today-v68-audit-badge{
+  position:absolute;right:-5px;top:-5px;min-width:18px;height:18px;
+  padding:0 4px;border-radius:99px;background:#ff5470;color:#fff;
+  font-size:10px;font-weight:900;display:grid;place-items:center
+}
+.bottom-nav{
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  min-height:calc(66px + env(safe-area-inset-bottom,0px));
+  z-index:4000
+}
+.bottom-nav button,.bottom-nav a{
+  min-width:0;min-height:48px;touch-action:manipulation
+}
+.bottom-nav [aria-current=page]{color:var(--accent,#8bb4ff)}
+.modal-card,
+.today-v67-dialog,
+.today-v66-media-dialog,
+.today-v65-dialog{
+  max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+  overflow:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch
+}
+.today-v67-overlay,.today-v66-media-modal,.today-v65-overlay{
+  padding-top:max(10px,env(safe-area-inset-top,0px));
+  padding-bottom:max(10px,env(safe-area-inset-bottom,0px));
+  overscroll-behavior:contain
+}
+.daily-card,.community-card,.today-post-card,.ranking-card,.ts-panel{
+  min-width:0;overflow-wrap:anywhere
+}
+.community-feed,.daily-grid,.shop-grid,
+.today-v67-rec-list,.today-v66-media-grid{min-width:0}
+.today-v67-recommendations{contain:layout style;min-width:0}
+.today-v67-rec-card{min-width:0;overflow-wrap:anywhere}
+.today-v68-audit-overlay{
+  position:fixed;inset:0;z-index:120000;display:grid;place-items:center;
+  padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px));
+  background:rgba(2,5,13,.76);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)
+}
+.today-v68-audit-dialog{
+  width:min(760px,100%);
+  max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+  overflow:auto;overscroll-behavior:contain;
+  border:1px solid rgba(255,255,255,.2);border-radius:22px;
+  padding:clamp(16px,4vw,26px);
+  background:var(--today-v68-panel);color:#f1f5ff;
+  box-shadow:0 25px 100px #0008
+}
+.today-v68-audit-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px
+}
+.today-v68-audit-head h2{
+  font-size:clamp(22px,5vw,32px);line-height:1.15;margin:0 0 8px
+}
+.today-v68-audit-head p{color:#b8c5dc;line-height:1.5;margin:0}
+.today-v68-audit-actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.today-v68-audit-actions button,.today-v68-audit-close{
+  min-height:44px;padding:10px 14px;
+  border:1px solid rgba(255,255,255,.2);border-radius:12px;
+  background:rgba(255,255,255,.09);color:inherit;
+  font-weight:750;cursor:pointer
+}
+.today-v68-audit-actions button.primary{
+  background:#315be8;border-color:#5579fa
+}
+.today-v68-audit-report{
+  margin:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;
+  font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;
+  color:#dce7fa;background:rgba(0,0,0,.25);
+  border-radius:12px;padding:12px
+}
+.today-v68-audit-status{margin:10px 0;font-weight:800}
+.today-v68-audit-hint{color:#b8c5dc;font-size:12px;line-height:1.5;margin-top:12px}
+
+@media(max-width:760px){
+  .topbar-inner{
+    width:calc(100% - 20px);min-height:60px;gap:8px;
+    flex-wrap:wrap;padding-top:5px;padding-bottom:5px
+  }
+  .brand{max-width:100%;flex:1 1 130px}
+  .top-actions{
+    flex:0 1 auto;max-width:100%;
+    justify-content:flex-end;gap:6px
+  }
+  .coin-badge{min-width:38px}
+  #todayV67NotificationBell{
+    width:38px;height:38px;min-width:38px;min-height:38px;
+    flex-basis:38px;border-radius:12px
+  }
+  #todayThemeToggle{min-width:38px;min-height:38px}
+  .today-v67-dialog,.today-v66-media-dialog,
+  .today-v65-dialog,.modal-card{
+    width:100%;max-width:100%;border-radius:20px
+  }
+  .today-v68-audit-dialog{border-radius:18px}
+  .today-v67-recommendations{margin-bottom:14px}
+  .today-v67-rec-head{gap:10px;align-items:flex-start}
+  .today-v67-rec-head-actions{flex-wrap:wrap;max-width:100%}
+  .today-v67-rec-head-actions select{max-width:100%;min-width:0}
+  .today-v67-rec-list{grid-template-columns:minmax(0,1fr)!important}
+  .today-v67-rec-card{width:100%}
+  .today-v66-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:390px){
+  .topbar-inner{width:calc(100% - 16px);column-gap:6px}
+  .today-brand-word{font-size:1.05rem!important;letter-spacing:-.04em}
+  .today-brand-tag{font-size:.36rem!important;letter-spacing:.06em!important}
+  .top-actions{gap:4px}
+  .coin-badge{padding-inline:7px}
+  .account-btn{
+    max-width:44px;overflow:hidden;
+    justify-content:center;padding:0!important
+  }
+  .account-btn b{display:none!important}
+  #todayThemeToggle{width:36px;min-width:36px;padding:0}
+  #todayV67NotificationBell{
+    width:36px;height:36px;min-width:36px;min-height:36px;
+    flex-basis:36px
+  }
+  .section-head{gap:8px;align-items:flex-start}
+  .section-head h2{overflow-wrap:anywhere}
+  .today-post-text{overflow-wrap:anywhere}
+  .today-v68-audit-actions button{flex:1 1 125px}
+}
+@supports not (height:100dvh){
+  .modal-card,.today-v67-dialog,.today-v66-media-dialog,
+  .today-v65-dialog,.today-v68-audit-dialog{max-height:calc(100vh - 28px)}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .today-v68-audit-overlay{background:rgba(2,5,13,.94)}
+}
+@media(hover:none){
+  .daily-card:hover,.community-card:hover,.today-post-card:hover,
+  .today-v67-rec-card:hover{transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important
+  }
+}
+@media(prefers-contrast:more){
+  :focus-visible{outline-width:4px!important}
+  .today-v68-audit-dialog{border:2px solid currentColor}
+  .today-v68-audit-actions button{border:2px solid currentColor}
+}
