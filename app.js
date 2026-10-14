@@ -182,20 +182,46 @@ function dedupeDailyBotPosts(sortedRows){
 async function loadCommunity(){
   const feed=$("communityFeed");
   if(!feed||!state.day)return;
-  const [real,demo,profiles,bots,likeSummary]=await Promise.all([
+  /* TODAY_V75_QUERY_OPT — запросы только по нужным ID */
+  const [real,demo,likeSummary]=await Promise.all([
     sb.from("today_publications").select("id,user_id,kind,body,image_url,image_path,created_at").eq("day_date",state.day).order("created_at",{ascending:false}).limit(48),
     sb.from("demo_contributions").select("id,bot_id,kind,body,image_url,created_at,display_name,avatar_emoji,avatar_url,bonus_title,bonus_icon,bonus_item_id").eq("day_date",state.day).order("created_at",{ascending:false}).limit(60),
-    sb.from("profiles").select("id,display_name,avatar_emoji,avatar_url").limit(500),
-    sb.from("demo_bots").select("id,bot_no,display_name,avatar_emoji,avatar_url").eq("active",true).limit(100),
     sb.rpc("today_like_summary",{p_day:state.day})
   ]);
   if(real.error&&demo.error){feed.innerHTML='<div class="notice">Лента людей временно недоступна.</div>';return}
+
+  const realRows=real.data||[];
+  const demoRows=demo.data||[];
+
+  const userIds=[...new Set(
+    realRows.map(r=>r.user_id).filter(Boolean)
+  )];
+
+  const botIds=[...new Set(
+    demoRows.map(r=>r.bot_id).filter(Boolean)
+  )];
+
+  const [profiles,bots]=await Promise.all([
+    userIds.length
+      ? sb.from("profiles")
+          .select("id,display_name,avatar_emoji,avatar_url")
+          .in("id",userIds)
+      : Promise.resolve({data:[],error:null}),
+
+    botIds.length
+      ? sb.from("demo_bots")
+          .select("id,bot_no,display_name,avatar_emoji,avatar_url")
+          .eq("active",true)
+          .in("id",botIds)
+      : Promise.resolve({data:[],error:null})
+  ]);
+
   const pm=new Map((profiles.data||[]).map(p=>[p.id,p]));
   const bm=new Map((bots.data||[]).map(b=>[b.id,b]));
   const lm=new Map((likeSummary.data||[]).map(x=>[`${x.post_source}:${x.post_id}`,x]));
   const fallbackMedia=(r)=>{const p=String(r.image_path||"").trim();if(!p)return "";if(/^https?:\/\//i.test(p))return p;const base=String(C.supabaseUrl||"").replace(/\/$/,"");return `${base}/storage/v1/object/public/today-media-safe/${p.split("/").map(encodeURIComponent).join("/")}`};
   const normalize=(r,isDemo)=>{const prof=isDemo?null:pm.get(r.user_id);const bot=isDemo?bm.get(r.bot_id):null;const media=r.image_url||r.image_path||"";const fallback=fallbackMedia(r);return {...r,is_demo:isDemo,display_name:isDemo?(r.display_name||bot?.display_name||"TODAY"):(prof?.display_name||"Человек"),avatar_emoji:isDemo?(r.avatar_emoji||bot?.avatar_emoji||"✦"):(prof?.avatar_emoji||"✦"),avatar_url:isDemo?(r.avatar_url||bot?.avatar_url||""):(prof?.avatar_url||""),image_url:media,image_fallback:fallback,like_key:`${isDemo?"bot":"user"}:${r.id}`}};
-  const mergedRows=[...(real.data||[]).map(r=>normalize(r,false)),...(demo.data||[]).map(r=>normalize(r,true))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));const rows=dedupeDailyBotPosts(mergedRows).slice(0,48);
+  const mergedRows=[...realRows.map(r=>normalize(r,false)),...demoRows.map(r=>normalize(r,true))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));const rows=dedupeDailyBotPosts(mergedRows).slice(0,48);
   if(!rows.length){feed.innerHTML='<div class="notice">Сегодня здесь появится то, что оставят люди.</div>';return}
   if($("activityTicker"))$("activityTicker").textContent=`${rows[0].display_name} ${rows[0].kind==="song"?"поделился песней":"оставил публикацию"} · ${relativeTime(rows[0].created_at)}`;
   /* TODAY_AAA_BOT_ICON_V1 — compact bot marker */
