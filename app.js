@@ -184,7 +184,7 @@ async function loadCommunity(){
   if(!feed||!state.day)return;
   const [real,demo,profiles,bots,likeSummary]=await Promise.all([
     sb.from("today_publications").select("id,user_id,kind,body,image_url,image_path,created_at").eq("day_date",state.day).order("created_at",{ascending:false}).limit(48),
-    sb.from("demo_contributions").select("id,bot_id,kind,body,image_url,created_at,display_name,avatar_emoji,avatar_url,bonus_title,bonus_icon,bonus_item_id").eq("day_date",state.day).order("created_at",{ascending:false}).limit(250),
+    sb.from("demo_contributions").select("id,bot_id,kind,body,image_url,created_at,display_name,avatar_emoji,avatar_url,bonus_title,bonus_icon,bonus_item_id").eq("day_date",state.day).order("created_at",{ascending:false}).limit(60),
     sb.from("profiles").select("id,display_name,avatar_emoji,avatar_url").limit(500),
     sb.from("demo_bots").select("id,bot_no,display_name,avatar_emoji,avatar_url").eq("active",true).limit(100),
     sb.rpc("today_like_summary",{p_day:state.day})
@@ -210,7 +210,120 @@ async function loadCommunity(){
     return `${botMark}<span class="today-name-effect ${cls}"><span aria-hidden="true">${esc(r.bonus_icon||"✦")}</span>${esc(label||"ЭФФЕКТ")}</span>`;
   };
 
-  feed.innerHTML=rows.map(r=>{const like=lm.get(r.like_key)||{likes:0,user_liked:false};const ownPost=!r.is_demo&&!!state.session?.user?.id&&String(state.session.user.id)===String(r.user_id);const gold=r.is_demo&&(String(r.bonus_item_id)==="coin-glow"||String(r.bonus_title||"").toLowerCase().includes("золот"));const textColor=r.is_demo&&(String(r.bonus_item_id)==="text-color"||String(r.bonus_title||"").toLowerCase().includes("цвет текста"));const avatar=r.avatar_url?`<img class="today-post-avatar-img" src="${esc(r.avatar_url)}" alt="" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('has-avatar-fallback')">`:'';const media=r.image_url?`<div class="today-post-media-wrap"><img class="today-post-media" src="${esc(r.image_url)}" data-fallback="${esc(r.image_fallback||"")}" alt="Фото TODAY" loading="${rows.indexOf(r)<2?"eager":"lazy"}" decoding="async" fetchpriority="${rows.indexOf(r)<2?"high":"auto"}" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}else{this.parentElement.classList.add('media-failed');this.remove()}"><div class="today-media-fallback">Фото не загрузилось</div></div>`:"";const songUrl=r.kind==="song"?safeHttpUrl(r.body):"";const body=songUrl?`<a href="${esc(songUrl)}" target="_blank" rel="noopener noreferrer">Открыть песню ↗</a>`:esc(r.body||"");return `<article class="community-card today-post-card ${r.is_demo?"is-demo":"is-human"} ${ownPost?"today-post-mine":""} ${gold?"today-bot-gold":""} ${textColor?"today-bot-color":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}"><div class="today-post-head"><div class="today-post-avatar ${r.avatar_url?"has-avatar":""}">${avatar}<span class="today-avatar-fallback">${esc(r.avatar_emoji||"✦")}</span></div><div class="today-post-identity"><div class="today-post-name-row"><span class="today-post-name">${esc(r.display_name||"Человек")}</span>${badges(r)}</div><div class="today-post-meta">${relativeTime(r.created_at)}</div></div></div><div class="community-copy"><div class="community-kind">${esc(META[r.kind]?.[0]||r.kind)}</div><p class="today-post-text">${body||"Фото без подписи"}</p>${media}<div class="today-post-actions"><button type="button" class="today-like-btn ${like.user_liked?"is-liked":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}" aria-pressed="${like.user_liked?"true":"false"}"><span aria-hidden="true">${like.user_liked?"♥":"♡"}</span><b>${Number(like.likes||0)}</b><span>Лайк</span></button></div></div></article>`}).join("");attachTodayLikeHandlers();decorateTodayAvatarEffects();applyTodayPostTextColor();}
+  const postMarkup=rows.map(r=>{const like=lm.get(r.like_key)||{likes:0,user_liked:false};const ownPost=!r.is_demo&&!!state.session?.user?.id&&String(state.session.user.id)===String(r.user_id);const gold=r.is_demo&&(String(r.bonus_item_id)==="coin-glow"||String(r.bonus_title||"").toLowerCase().includes("золот"));const textColor=r.is_demo&&(String(r.bonus_item_id)==="text-color"||String(r.bonus_title||"").toLowerCase().includes("цвет текста"));const avatar=r.avatar_url?`<img class="today-post-avatar-img" src="${esc(r.avatar_url)}" alt="" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('has-avatar-fallback')">`:'';const media=r.image_url?`<div class="today-post-media-wrap"><img class="today-post-media" src="${esc(r.image_url)}" data-fallback="${esc(r.image_fallback||"")}" alt="Фото TODAY" loading="${rows.indexOf(r)<2?"eager":"lazy"}" decoding="async" fetchpriority="${rows.indexOf(r)<2?"high":"auto"}" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}else{this.parentElement.classList.add('media-failed');this.remove()}"><div class="today-media-fallback">Фото не загрузилось</div></div>`:"";const songUrl=r.kind==="song"?safeHttpUrl(r.body):"";const body=songUrl?`<a href="${esc(songUrl)}" target="_blank" rel="noopener noreferrer">Открыть песню ↗</a>`:esc(r.body||"");return `<article class="community-card today-post-card ${r.is_demo?"is-demo":"is-human"} ${ownPost?"today-post-mine":""} ${gold?"today-bot-gold":""} ${textColor?"today-bot-color":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}"><div class="today-post-head"><div class="today-post-avatar ${r.avatar_url?"has-avatar":""}">${avatar}<span class="today-avatar-fallback">${esc(r.avatar_emoji||"✦")}</span></div><div class="today-post-identity"><div class="today-post-name-row"><span class="today-post-name">${esc(r.display_name||"Человек")}</span>${badges(r)}</div><div class="today-post-meta">${relativeTime(r.created_at)}</div></div></div><div class="community-copy"><div class="community-kind">${esc(META[r.kind]?.[0]||r.kind)}</div><p class="today-post-text">${body||"Фото без подписи"}</p>${media}<div class="today-post-actions"><button type="button" class="today-like-btn ${like.user_liked?"is-liked":""}" data-like-source="${r.is_demo?"bot":"user"}" data-like-id="${esc(String(r.id))}" aria-pressed="${like.user_liked?"true":"false"}"><span aria-hidden="true">${like.user_liked?"♥":"♡"}</span><b>${Number(like.likes||0)}</b><span>Лайк</span></button></div></div></article>`}).map(markup => markup);
+  const batchSize = 12;
+
+  feed.innerHTML = postMarkup.slice(0, batchSize).join("");
+
+  if (postMarkup.length > batchSize) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "today-v74-feed-more-wrap";
+    wrapper.innerHTML = `
+      <button
+        type="button"
+        class="today-v74-feed-more"
+        data-today-v74-more
+        data-next="${batchSize}"
+        aria-label="Загрузить следующие публикации">
+        <span class="today-v74-feed-more-copy">
+          <b>Загрузить ещё</b>
+          <small data-v74-remaining-text>
+            Ещё ${postMarkup.length - batchSize} публикаций в ленте
+          </small>
+        </span>
+        <strong data-v74-remaining-count>
+          ${postMarkup.length - batchSize}
+        </strong>
+      </button>`;
+
+    feed.append(wrapper);
+
+    const moreButton = wrapper.querySelector("[data-today-v74-more]");
+    let autoObserver = null;
+
+    const appendNextBatch = () => {
+      if (!moreButton.isConnected || moreButton.dataset.loading === "1") {
+        return;
+      }
+
+      moreButton.dataset.loading = "1";
+
+      try {
+        const start = Number(moreButton.dataset.next || batchSize);
+        const batch = postMarkup.slice(start, start + batchSize);
+
+        if (!batch.length) {
+          wrapper.remove();
+          autoObserver?.disconnect();
+          return;
+        }
+
+        wrapper.insertAdjacentHTML("beforebegin", batch.join(""));
+
+        const next = start + batch.length;
+        const remaining = postMarkup.length - next;
+        moreButton.dataset.next = String(next);
+
+        if (remaining <= 0) {
+          wrapper.remove();
+          autoObserver?.disconnect();
+          return;
+        }
+
+        const hint = moreButton.querySelector("[data-v74-remaining-text]");
+        const count = moreButton.querySelector("[data-v74-remaining-count]");
+
+        if (hint) {
+          hint.textContent = `Ещё ${remaining} публикаций в ленте`;
+        }
+
+        if (count) {
+          count.textContent = String(remaining);
+        }
+      } finally {
+        delete moreButton.dataset.loading;
+      }
+
+      // The social-action handler is delegated from the feed and won't
+      // be bound twice. Reapply cosmetic effects to the newly added cards.
+      attachTodayLikeHandlers();
+      decorateTodayAvatarEffects();
+      applyTodayPostTextColor();
+    };
+
+    moreButton.addEventListener("click", appendNextBatch);
+
+    // Automatic incremental rendering near the bottom, like a social feed.
+    // The button remains functional as an accessible manual fallback.
+    if ("IntersectionObserver" in window) {
+      autoObserver = new IntersectionObserver(entries => {
+        const entry = entries[0];
+        if (!entry?.isIntersecting || !moreButton.isConnected) return;
+
+        autoObserver.unobserve(moreButton);
+        appendNextBatch();
+
+        window.requestAnimationFrame(() => {
+          if (moreButton.isConnected) {
+            autoObserver.observe(moreButton);
+          } else {
+            autoObserver.disconnect();
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: "320px 0px",
+        threshold: 0
+      });
+
+      autoObserver.observe(moreButton);
+    }
+  }
+
+  attachTodayLikeHandlers();
+  decorateTodayAvatarEffects();
+  applyTodayPostTextColor();
+}
 async function loadLeaderboard(){const {data,error}=await sb.rpc("today_leaderboard",{p_day:state.day,p_limit:10});const el=$("leaderboard");if(error||!Array.isArray(data)||!data.length){el.innerHTML='<div class="notice">Рейтинг появится после первых действий.</div>';return}el.innerHTML=data.map((r,i)=>`<div class="rank-row"><div class="rank-number">${i+1}</div><div class="rank-avatar">${r.avatar_url?`<img src="${esc(r.avatar_url)}" alt="">`:esc(r.avatar_emoji||"✦")}</div><div class="rank-name">${esc(r.display_name||r.username||"Человек")}</div><div class="rank-score">${Number(r.daily_score??r.score_total??0)} XP</div></div>`).join("")}
 function voteOpen(id){if(!requireAuth())return;const x=state.items.find(z=>z.id===id);const options=Array.isArray(x?.payload?.options)?x.payload.options:[];openModal(`<div class="eyebrow">${esc(META[x.kind]?.[0]||"ВОПРОС")}</div><h2 id="modalTitle">${esc(x.title)}</h2><p>${esc(x.body||"")}</p><div class="options">${options.map((o,i)=>`<button class="option-btn" onclick="vote('${id}',${i})">${esc(o)}</button>`).join("")}</div>`)}
 async function vote(id,i){if(!requireAuth())return;const {error}=await sb.from("daily_votes").insert({day_date:state.day,user_id:state.session.user.id,content_id:id,option_index:i});if(error)return toast(error.code==="23505"?"Сегодня ты уже отвечал.":"Не удалось сохранить ответ");closeModal();toast("Ответ принят · +5 XP");await Promise.all([loadStats(),loadLeaderboard(),touchUserDay()])}
@@ -522,5 +635,5 @@ function wireProfileAvatarPreview(){
   });
 }
 
-async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=e=>{if(e?.preventDefault)e.preventDefault();location.href=new URL("./profile.html",location.href).href;};$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;const supportAuthorButton=$("supportAuthorBtn");if(supportAuthorButton)supportAuthorButton.onclick=openAuthorSupport;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();decorateTodayAvatarEffects();applyTodayPostTextColor();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261015190011").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
+async function boot(){if(state.booted)return;state.booted=true;try{$("brandBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});$("profileBtn").onclick=e=>{if(e?.preventDefault)e.preventDefault();location.href=new URL("./profile.html",location.href).href;};$("peopleRefresh").onclick=()=>loadCommunity();$("notifyBtn").onclick=notify;const supportAuthorButton=$("supportAuthorBtn");if(supportAuthorButton)supportAuthorButton.onclick=openAuthorSupport;setupNavigation();setupInstall();setupModal();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();decorateOwnedIdentity();attachTodayLikeHandlers();decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();const headlineObserver=new MutationObserver(()=>{decorateTodayHeadline();wireProfileAvatarPreview();decorateOwnedIdentity();decorateTodayAvatarEffects();applyTodayPostTextColor();});headlineObserver.observe(document.body,{subtree:true,childList:true});purgeCache().catch(()=>{});const s=await sb.auth.getSession();state.session=s.data.session||null;updateAccountUI();if(state.session)ensureProfile().catch(()=>{});loadDay(true).catch(e=>{console.warn("TODAY loadDay",e);const g=$("dailyGrid");if(g&&!state.items.length)g.innerHTML='<div class="notice">Не удалось загрузить сегодняшний день. Обнови страницу.</div>'});verifyReturnedPayment().catch(()=>{});setInterval(tick,1000);setInterval(()=>touchPresence(),60000);tick();sb.auth.onAuthStateChange(async(_e,session)=>{state.session=session;state.profile=null;updateAccountUI();ensureProfile().catch(()=>{});loadDay(true).catch(()=>{});loadShop().catch(()=>{})});navigator.serviceWorker?.register("./sw.js?v=20261015190012").catch(()=>{})}catch(e){console.error(e);toast("TODAY не удалось запустить. Обнови страницу")}}
 window.voteOpen=voteOpen;window.vote=vote;window.gameOpen=gameOpen;window.gameAnswer=gameAnswer;window.mysteryOpen=mysteryOpen;window.revealMystery=revealMystery;window.mysteryGuess=mysteryGuess;window.challengeOpen=challengeOpen;window.challengeDo=challengeDo;window.debateOpen=debateOpen;window.addComment=addComment;window.contribOpen=contribOpen;window.sendContribution=sendContribution;window.authSignIn=authSignIn;window.authSignUp=authSignUp;window.openAuthorSupport=openAuthorSupport;window.copyAuthorCardNumber=copyAuthorCardNumber;window.signOut=signOut;window.meOpen=meOpen;window.shopOpen=shopOpen;window.saveProfile=saveProfile;window.buyItem=buyItem;window.equipItem=equipItem;window.setShopItemEquipped=setShopItemEquipped;window.setTodayPostTextColor=setTodayPostTextColor;window.createCoinPayment=createCoinPayment;window.revealMystery=revealMystery;boot();
