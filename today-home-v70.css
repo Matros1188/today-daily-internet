@@ -1,0 +1,853 @@
+/* TODAY HOME V70 — CLEAN PREMIUM MOBILE EXPERIENCE */
+
+:root {
+  --v70-card-border: rgba(255,255,255,.105);
+  --v70-card: rgba(23,31,55,.72);
+  --v70-card-soft: rgba(255,255,255,.045);
+  --v70-blue: #80aaff;
+  --v70-cyan: #63d4e9;
+  --v70-mint: #72e0c0;
+  --v70-purple: #b5a0ff;
+  --v70-pink: #ff91b4;
+  --v70-orange: #ffbd83;
+  --v70-text: var(--text, #edf2ff);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 78px; scroll-behavior: smooth; }
+body { min-width: 0; max-width: 100%; overflow-x: clip; }
+button, input, textarea, select { font: inherit; }
+img, video, svg { max-width: 100%; }
+
+/* Старый шумный блок удаляется из DOM скриптом V70.
+   Эти правила — страховка на случай, если он создастся позднее. */
+#todayV51Tools,
+#todayV51QuestionTrack,
+.today-v51-question-track,
+#todayOmniverseV60Open,
+#todayV66MediaRail,
+#todayHomeSearch,
+#todayHomeActivity,
+#todayMediaV66Button,
+#todayV64CreateMain {
+  display: none !important;
+}
+
+/* Шапка: меньше кнопок, больше воздуха */
+.topbar-inner { gap: 10px !important; }
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px !important;
+  min-width: 0;
+}
+#todayThemeToggle {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center;
+  border-radius: 14px !important;
+}
+#todayThemeToggle .today-theme-label { display: none !important; }
+#todayThemeToggle .today-theme-icon { font-size: 20px; }
+#todayV67NotificationBell {
+  position: relative;
+  flex: 0 0 auto;
+}
+.coin-badge { flex: 0 0 auto; }
+.account-btn { flex: 0 0 auto; }
+
+/* Убираем лишнюю полосу активности визуально,
+   сохраняя служебные элементы, на которые ссылается app.js. */
+.activity-strip {
+  display: none !important;
+}
+
+/* Hero — один короткий вход в TODAY вместо множества панелей */
+#homeSection.hero {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 190px;
+  align-items: center;
+  gap: 18px;
+  min-height: 0 !important;
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+  padding: clamp(18px,2.6vw,27px) !important;
+  border-radius: 25px !important;
+  overflow: hidden;
+}
+#homeSection .hero-copy { min-width: 0; }
+#homeSection .hero-copy h1 {
+  margin: 8px 0 10px !important;
+  font-size: clamp(28px,3.9vw,45px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.048em !important;
+}
+#homeSection .hero-copy > p {
+  max-width: 460px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: .74;
+}
+#homeSection .hero-rail { display: none !important; }
+#homeSection .scene-card { display: none !important; }
+#homeSection .hero-side {
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  min-width: 0;
+}
+#homeSection .clock-card {
+  min-width: 0;
+  padding: 14px !important;
+  border-radius: 18px !important;
+}
+#homeSection .today-support-btn {
+  display: inline-flex !important;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 40px;
+  margin-top: 13px !important;
+  padding: 8px 11px !important;
+  border-radius: 13px !important;
+}
+#homeSection .today-support-btn small {
+  font-size: 10px !important;
+}
+.footer { margin-top: 24px; }
+
+/* Быстрые действия — одна компактная прокручиваемая полоса */
+#todayV69QuickBar {
+  display: block !important;
+  min-width: 0;
+  width: 100%;
+  margin-top: 10px !important;
+  margin-bottom: 22px !important;
+  padding: 0 !important;
+}
+.today-v70-quickbar {
+  position: relative;
+  min-width: 0;
+}
+.today-v70-quickbar-inner {
+  display: flex;
+  min-width: 0;
+  gap: 9px;
+  align-items: stretch;
+  padding: 2px 1px 8px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.today-v70-quickbar-inner::-webkit-scrollbar { display: none; }
+.today-v70-action {
+  flex: 0 0 82px;
+  min-width: 0;
+  min-height: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 7px;
+  border: 1px solid var(--v70-card-border);
+  border-radius: 18px;
+  color: var(--v70-text);
+  background: linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.022));
+  scroll-snap-align: start;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s ease,border-color .16s ease,background .16s ease;
+}
+.today-v70-action svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.today-v70-action b {
+  font: 750 10.5px/1.1 Manrope,system-ui,sans-serif;
+  white-space: nowrap;
+}
+.today-v70-action[data-v70-action="post"] { color: var(--v70-mint); }
+.today-v70-action[data-v70-action="story"] { color: var(--v70-pink); }
+.today-v70-action[data-v70-action="photo"] { color: var(--v70-blue); }
+.today-v70-action[data-v70-action="clips"] { color: var(--v70-purple); }
+.today-v70-action[data-v70-action="music"] { color: var(--v70-cyan); }
+.today-v70-action[data-v70-action="live"] { color: #ff718d; }
+.today-v70-action b { color: var(--v70-text); }
+.today-v70-action[aria-pressed="true"] {
+  background: rgba(106,151,255,.19);
+  border-color: rgba(128,170,255,.58);
+}
+.today-v70-action:active { transform: scale(.97); }
+
+/* Истории — аккуратная горизонтальная лента */
+#todayHomePeopleRail {
+  margin-top: 8px !important;
+  margin-bottom: 20px !important;
+  padding: 15px !important;
+  border-radius: 21px !important;
+}
+#todayHomePeopleRail h2,
+#todayHomePeopleRail h3 {
+  font-size: 17px !important;
+}
+#todayHomePeopleRail .today-v64-stories-list {
+  gap: 12px !important;
+}
+#todayHomePeopleRail .today-v64-story {
+  flex-basis: 65px !important;
+}
+#todayHomePeopleRail .today-v64-story-ring {
+  width: 55px !important;
+  height: 55px !important;
+}
+
+/* Секции — одна иерархия заголовков */
+.today-section,
+.community-section,
+.ranking-section { margin-top: 20px !important; }
+.today-section .section-head,
+.community-section .section-head,
+.ranking-section .section-head {
+  margin-bottom: 12px !important;
+  align-items: center;
+  gap: 10px;
+}
+.today-section .section-note,
+.community-section .section-note,
+.ranking-section .section-note { display: none !important; }
+.today-section h2,
+.community-section h2,
+.ranking-section h2 {
+  margin: 0 !important;
+  font-size: clamp(20px,2.5vw,27px) !important;
+  line-height: 1.18 !important;
+  letter-spacing: -.035em;
+}
+#peopleSection .community-intro {
+  margin: 0 0 12px !important;
+  font-size: 12px !important;
+  line-height: 1.45;
+  opacity: .7;
+}
+#peopleRefresh {
+  min-height: 36px;
+  border-radius: 12px;
+  font-size: 10px;
+}
+
+/* 12 рубрик — компактные, одинаково понятные карточки */
+#dailyGrid.daily-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 11px !important;
+  align-items: stretch;
+}
+#dailyGrid .daily-card,
+#dailyGrid .daily-card.featured,
+#dailyGrid .daily-card.secondary,
+#dailyGrid .daily-card.standard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0 !important;
+  padding: 14px !important;
+  overflow: hidden;
+  border-radius: 19px !important;
+  border: 1px solid var(--v70-card-border) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),
+    var(--v70-card) !important;
+  box-shadow: 0 7px 22px rgba(0,0,0,.065) !important;
+  animation: none !important;
+  transition: border-color .16s ease,transform .16s ease;
+}
+#dailyGrid .daily-card:hover {
+  border-color: rgba(128,170,255,.42) !important;
+  transform: translateY(-2px);
+}
+#dailyGrid .card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  margin-bottom: 12px;
+}
+#dailyGrid .kind-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 75%;
+  padding: 6px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 1px solid rgba(128,170,255,.17);
+  border-radius: 9px;
+  background: rgba(128,170,255,.075);
+  font: 750 9px/1.15 Manrope,system-ui,sans-serif;
+  color: var(--v70-blue);
+}
+#dailyGrid .count-pill {
+  flex: 0 0 auto;
+  padding: 4px 5px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.045);
+  font: 650 9px/1.1 Manrope,system-ui,sans-serif;
+  opacity: .62;
+  white-space: nowrap;
+}
+#dailyGrid .daily-card h3 {
+  min-width: 0;
+  margin: 0 0 7px !important;
+  font-size: clamp(13px,1.2vw,16px) !important;
+  line-height: 1.28 !important;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+}
+#dailyGrid .card-body {
+  min-width: 0;
+  flex: 1 1 auto;
+  margin-bottom: 13px;
+}
+#dailyGrid .card-body p {
+  margin: 0;
+  font-size: 11.5px !important;
+  line-height: 1.5 !important;
+  opacity: .72;
+  overflow-wrap: anywhere;
+}
+#dailyGrid .card-body .card-kicker {
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.45;
+  opacity: .6;
+}
+#dailyGrid .card-body .notice {
+  padding: 9px;
+  border-radius: 12px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+#dailyGrid .card-actions {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin-top: auto;
+}
+#dailyGrid .primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  padding: 9px 10px !important;
+  border-radius: 12px !important;
+  font: 800 10px/1.15 Manrope,system-ui,sans-serif !important;
+  letter-spacing: .01em;
+  text-transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Лёгкие различия тем — без разноцветной перегрузки */
+#dailyGrid .kind-question .kind-pill,
+#dailyGrid .kind-duel .kind-pill { color: var(--v70-blue); }
+#dailyGrid .kind-game .kind-pill,
+#dailyGrid .kind-mystery .kind-pill { color: var(--v70-purple); }
+#dailyGrid .kind-challenge .kind-pill,
+#dailyGrid .kind-trend .kind-pill { color: var(--v70-orange); }
+#dailyGrid .kind-debate .kind-pill,
+#dailyGrid .kind-fact .kind-pill { color: var(--v70-cyan); }
+#dailyGrid .kind-song .kind-pill,
+#dailyGrid .kind-footprint .kind-pill { color: var(--v70-mint); }
+#dailyGrid .kind-story .kind-pill,
+#dailyGrid .kind-moment .kind-pill { color: var(--v70-pink); }
+
+html.today-theme-light #dailyGrid .daily-card,
+html.today-theme-light #dailyGrid .daily-card.featured,
+html.today-theme-light #dailyGrid .daily-card.secondary,
+html.today-theme-light #dailyGrid .daily-card.standard {
+  background: linear-gradient(145deg,#f6f8ff,#edf2fc) !important;
+  border-color: rgba(64,87,132,.12) !important;
+  box-shadow: 0 6px 20px rgba(48,67,108,.06) !important;
+  color: #26334c;
+}
+html.today-theme-light #dailyGrid .count-pill {
+  background: rgba(54,76,119,.06);
+}
+html.today-theme-light #dailyGrid .kind-pill {
+  background: rgba(97,128,197,.07);
+  border-color: rgba(79,105,162,.12);
+}
+html.today-theme-light .today-v70-action {
+  background: linear-gradient(145deg,#fbfcff,#f0f4fb);
+  border-color: rgba(64,87,132,.12);
+  color: #566f9e;
+}
+html.today-theme-light .today-v70-action b { color: #283650; }
+
+/* Лента сообщества — ровные размеры и меньше визуальных эффектов */
+#communityFeed.community-feed {
+  min-width: 0;
+  gap: 12px !important;
+}
+#communityFeed .community-card,
+#communityFeed .today-post-card,
+#communityFeed article {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  border-radius: 18px !important;
+}
+#communityFeed img,
+#communityFeed video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Компактное меню создания публикации */
+#todayV70Composer {
+  position: fixed;
+  inset: 0;
+  z-index: 180000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px 12px max(12px,env(safe-area-inset-bottom,0px));
+  background: rgba(3,7,18,.63);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+#todayV70Composer[hidden] { display: none !important; }
+.today-v70-composer-sheet {
+  width: min(100%,540px);
+  max-height: min(82dvh,720px);
+  overflow: auto;
+  padding: 19px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 26px;
+  background: linear-gradient(145deg,rgba(24,33,60,.99),rgba(9,14,30,.99));
+  box-shadow: 0 24px 90px rgba(0,0,0,.40);
+  color: #f1f5ff;
+  animation: todayV70SheetIn .18s ease-out;
+}
+@keyframes todayV70SheetIn {
+  from { transform: translateY(12px); opacity: .6; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.today-v70-composer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+.today-v70-composer-head h2 {
+  margin: 0 0 5px;
+  font: 850 23px/1.12 Manrope,system-ui,sans-serif;
+  letter-spacing: -.04em;
+}
+.today-v70-composer-head p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(240,244,255,.66);
+}
+.today-v70-composer-close {
+  display: grid;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(255,255,255,.06);
+  font-size: 23px;
+  cursor: pointer;
+}
+.today-v70-composer-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 9px;
+}
+.today-v70-compose-option {
+  display: grid;
+  grid-template-columns: 43px minmax(0,1fr);
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  min-height: 70px;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,.105);
+  border-radius: 17px;
+  text-align: left;
+  color: #f1f5ff;
+  background: rgba(255,255,255,.045);
+  cursor: pointer;
+}
+.today-v70-compose-option > span:first-child {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: rgba(128,170,255,.11);
+  color: var(--v70-blue);
+}
+.today-v70-compose-option svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.today-v70-compose-option b {
+  display: block;
+  font: 800 12px/1.25 Manrope,system-ui,sans-serif;
+}
+.today-v70-compose-option small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 1.35;
+  color: rgba(240,244,255,.6);
+}
+.today-v70-compose-option:active { transform: scale(.985); }
+
+/* Окно камеры для историй */
+#todayV70Camera {
+  position: fixed;
+  inset: 0;
+  z-index: 210000;
+  display: grid;
+  place-items: center;
+  padding: max(10px,env(safe-area-inset-top,0px)) 10px
+           max(10px,env(safe-area-inset-bottom,0px));
+  color: #f4f7ff;
+  background: rgba(2,5,15,.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+#todayV70Camera[hidden] { display: none !important; }
+.today-v70-camera-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(100%,520px);
+  max-height: 94dvh;
+  overflow: auto;
+  padding: 13px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 24px;
+  background: #0c1225;
+  box-shadow: 0 24px 100px rgba(0,0,0,.48);
+}
+.today-v70-camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 1px 2px 12px;
+}
+.today-v70-camera-header b {
+  font: 850 19px/1.2 Manrope,system-ui,sans-serif;
+}
+.today-v70-camera-header small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: rgba(240,244,255,.60);
+}
+.today-v70-camera-stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #02040a;
+  aspect-ratio: 9/13;
+  max-height: 63dvh;
+}
+.today-v70-camera-stage video,
+.today-v70-camera-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #02040a;
+}
+.today-v70-camera-stage video#todayV70CameraCaptured {
+  position: absolute;
+  inset: 0;
+}
+.today-v70-camera-status {
+  min-height: 30px;
+  padding: 10px 2px 4px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(236,243,255,.76);
+}
+.today-v70-camera-controls {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+.today-v70-camera-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 45px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  color: #fff;
+  background: rgba(255,255,255,.07);
+  font: 800 11px/1.2 Manrope,system-ui,sans-serif;
+  cursor: pointer;
+}
+.today-v70-camera-btn.is-primary {
+  border-color: rgba(114,224,192,.26);
+  background: linear-gradient(135deg,rgba(60,167,148,.40),rgba(77,111,215,.34));
+}
+.today-v70-camera-btn.is-record {
+  border-color: rgba(255,113,141,.3);
+  background: rgba(198,61,91,.22);
+}
+.today-v70-camera-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.today-v70-camera-note {
+  margin: 9px 2px 0;
+  font-size: 10px;
+  line-height: 1.4;
+  color: rgba(236,243,255,.48);
+}
+
+/* Короткие видео — вертикальный свайп как лента Shorts */
+.today-v66-media-dialog {
+  width: min(100%,900px) !important;
+}
+.today-v66-media-grid.is-clips {
+  display: flex !important;
+  flex-direction: column;
+  gap: 15px !important;
+  max-height: min(77dvh,920px);
+  min-height: 0;
+  overflow-y: auto !important;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.today-v66-media-grid.is-clips .today-v66-media-card {
+  flex: 0 0 auto;
+  width: min(100%,610px);
+  margin-inline: auto;
+  padding: 11px;
+  overflow: hidden;
+  border-radius: 21px;
+  scroll-snap-align: start;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.09);
+}
+.today-v66-media-grid.is-clips .today-v66-media-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9/16;
+  max-height: min(66dvh,740px);
+  object-fit: contain;
+  background: #02040a;
+  border-radius: 15px;
+}
+.today-v66-media-grid.is-clips .today-v66-media-copy h3 {
+  font-size: 15px !important;
+}
+.today-v66-media-grid.is-clips .today-v66-media-meta {
+  flex-wrap: wrap;
+}
+.today-v66-media-card,
+.today-v66-media-copy,
+.today-v66-media-author { min-width: 0; overflow-wrap: anywhere; }
+
+/* Телефон */
+@media (max-width: 900px) {
+  #dailyGrid.daily-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 640px) {
+  .topbar-inner { gap: 6px !important; }
+  .today-brand-tag { display: none !important; }
+  .today-brand-line { display: none !important; }
+  .today-brand-copy { min-width: 0; }
+  .today-brand-word { font-size: 18px !important; }
+  .top-actions { gap: 6px !important; }
+  #coinBadge {
+    padding: 6px 8px !important;
+    gap: 4px !important;
+    font-size: 11px !important;
+  }
+  #profileBtn {
+    max-width: 100px;
+    min-height: 40px;
+    padding: 5px 8px !important;
+  }
+  #profileLabel { display: none !important; }
+  #homeSection.hero {
+    display: block !important;
+    padding: 16px !important;
+    margin-top: 9px !important;
+    border-radius: 21px !important;
+  }
+  #homeSection .hero-copy h1 {
+    margin-top: 7px !important;
+    font-size: clamp(27px,7.6vw,36px) !important;
+  }
+  #homeSection .hero-copy > p { font-size: 12px; }
+  #homeSection .hero-side { display: none !important; }
+  #homeSection .today-support-btn {
+    min-height: 35px;
+    margin-top: 10px !important;
+    padding: 7px 9px !important;
+  }
+
+  #todayV69QuickBar {
+    margin-top: 8px !important;
+    margin-bottom: 18px !important;
+  }
+  .today-v70-quickbar-inner { gap: 8px; }
+  .today-v70-action {
+    flex-basis: 73px;
+    min-height: 68px;
+    border-radius: 16px;
+    gap: 6px;
+    padding: 8px 5px;
+  }
+  .today-v70-action svg { width: 22px; height: 22px; }
+  .today-v70-action b { font-size: 10px; }
+
+  #todayHomePeopleRail {
+    padding: 12px !important;
+    border-radius: 18px !important;
+  }
+  #todayHomePeopleRail .today-v64-story-ring {
+    width: 49px !important;
+    height: 49px !important;
+  }
+  #dailyGrid.daily-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    gap: 8px !important;
+  }
+  #dailyGrid .daily-card,
+  #dailyGrid .daily-card.featured,
+  #dailyGrid .daily-card.secondary,
+  #dailyGrid .daily-card.standard {
+    padding: 11px !important;
+    border-radius: 16px !important;
+  }
+  #dailyGrid .card-head {
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 9px;
+  }
+  #dailyGrid .kind-pill {
+    padding: 5px 6px;
+    max-width: 78%;
+    font-size: 8px;
+  }
+  #dailyGrid .count-pill {
+    padding: 4px;
+    font-size: 8px;
+  }
+  #dailyGrid .daily-card h3 {
+    font-size: 13px !important;
+    line-height: 1.28 !important;
+    margin-bottom: 6px !important;
+  }
+  #dailyGrid .card-body { margin-bottom: 10px; }
+  #dailyGrid .card-body p {
+    font-size: 10.5px !important;
+    line-height: 1.42 !important;
+  }
+  #dailyGrid .primary-button {
+    min-height: 36px;
+    padding: 8px 5px !important;
+    font-size: 9.5px !important;
+  }
+
+  .today-v70-composer-sheet {
+    padding: 15px;
+    border-radius: 23px;
+    max-height: min(86dvh,760px);
+  }
+  .today-v70-composer-head h2 { font-size: 21px; }
+  .today-v70-composer-grid { gap: 8px; }
+  .today-v70-compose-option {
+    grid-template-columns: 35px minmax(0,1fr);
+    gap: 8px;
+    min-height: 68px;
+    padding: 9px;
+    border-radius: 15px;
+  }
+  .today-v70-compose-option > span:first-child {
+    width: 35px;
+    height: 35px;
+    border-radius: 11px;
+  }
+  .today-v70-compose-option svg { width: 19px; height: 19px; }
+  .today-v70-compose-option b { font-size: 11px; }
+  .today-v70-compose-option small { font-size: 9px; }
+
+  #todayV70Camera { padding: 5px; }
+  .today-v70-camera-card {
+    padding: 10px;
+    border-radius: 19px;
+    max-height: 96dvh;
+  }
+  .today-v70-camera-stage {
+    max-height: 57dvh;
+    border-radius: 15px;
+  }
+  .today-v70-camera-controls { gap: 7px; }
+  .today-v70-camera-btn {
+    min-height: 43px;
+    padding: 8px 6px;
+    font-size: 10px;
+  }
+
+  .today-v66-media-grid.is-clips {
+    max-height: 78dvh;
+    gap: 12px !important;
+  }
+  .today-v66-media-grid.is-clips .today-v66-media-card {
+    width: 100%;
+    padding: 8px;
+    border-radius: 18px;
+  }
+  .today-v66-media-grid.is-clips .today-v66-media-video {
+    max-height: 66dvh;
+    border-radius: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .today-v70-action,
+  #dailyGrid .daily-card { transition: none !important; }
+}
