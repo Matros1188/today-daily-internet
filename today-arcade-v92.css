@@ -1,0 +1,1178 @@
+
+/* ================================================================
+   TODAY ARCADE V92 — 100 IMPROVEMENTS
+   Premium menu + mobile game polish.
+   ================================================================ */
+
+:root {
+  --today-v92-cyan: #83f5df;
+  --today-v92-blue: #85bdff;
+  --today-v92-violet: #b6a2ff;
+  --today-v92-pink: #ff9fca;
+  --today-v92-gold: #ffda9b;
+  --today-v92-line: rgba(156, 186, 255, .18);
+  --today-v92-soft: rgba(255, 255, 255, .035);
+}
+
+/* -------------------- 01–10: каталог -------------------- */
+
+.ts-games-home {
+  isolation: isolate;
+  display: grid;
+  gap: clamp(15px, 2vw, 24px);
+}
+
+.ts-games-home .ts-games-hero {
+  border-color: rgba(165, 157, 255, .32) !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(143, 110, 255, .24), transparent 42%),
+    radial-gradient(ellipse at 0% 100%, rgba(67, 226, 214, .14), transparent 44%),
+    linear-gradient(135deg, #1a2547, #0a1329 73%, #131a35) !important;
+  box-shadow:
+    0 24px 62px rgba(0, 0, 0, .21),
+    inset 0 1px rgba(255, 255, 255, .10) !important;
+}
+
+.ts-games-home .ts-games-hero h3 {
+  max-width: 760px;
+  font-size: clamp(26px, 4.6vw, 44px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.065em !important;
+  text-wrap: balance;
+}
+
+.ts-games-home .ts-games-hero p {
+  max-width: 660px;
+  font-size: clamp(12px, 1.2vw, 14px) !important;
+  line-height: 1.8 !important;
+}
+
+.today-v92-discovery {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: clamp(13px, 2vw, 21px);
+  border: 1px solid var(--today-v92-line);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(105, 143, 255, .08), transparent 45%),
+    linear-gradient(145deg, rgba(16, 26, 49, .87), rgba(8, 15, 30, .91));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .055);
+}
+
+.today-v92-discovery-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.today-v92-section-title {
+  margin: 0;
+  color: #f5f7ff;
+  font: 900 clamp(17px, 2.1vw, 22px)/1.15 Manrope, system-ui, sans-serif;
+  letter-spacing: -.045em;
+}
+
+.today-v92-section-subtitle {
+  margin: 5px 0 0;
+  color: #8fa5cb;
+  font: 500 10px/1.5 Manrope, system-ui, sans-serif;
+}
+
+.today-v92-micro-label {
+  color: #89a3d3;
+  font: 800 8px/1.4 "IBM Plex Mono", monospace;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.today-v92-topgrid {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.5fr);
+  gap: 12px;
+}
+
+.today-v92-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.today-v92-stat {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  min-height: 76px;
+  padding: 12px;
+  border: 1px solid rgba(154, 183, 242, .14);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.today-v92-stat b {
+  display: block;
+  color: #f5f8ff;
+  font: 900 clamp(19px, 2.3vw, 25px)/1.05 "IBM Plex Mono", monospace;
+  letter-spacing: -.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.today-v92-stat span {
+  display: block;
+  margin-top: 7px;
+  color: #8fa4c9;
+  font: 800 8px/1.4 Manrope, system-ui, sans-serif;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+}
+
+.today-v92-mission {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 160px;
+  overflow: hidden;
+  padding: clamp(15px, 2vw, 23px);
+  border: 1px solid rgba(158, 143, 255, .34);
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 93% 0%, rgba(170, 132, 255, .22), transparent 43%),
+    linear-gradient(135deg, rgba(38, 39, 79, .9), rgba(14, 23, 46, .96));
+}
+
+.today-v92-mission::after {
+  content: "✦";
+  position: absolute;
+  z-index: -1;
+  right: 16px;
+  bottom: -22px;
+  color: rgba(202, 190, 255, .11);
+  font-size: 105px;
+  line-height: 1;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.today-v92-mission > * {
+  min-width: 0;
+}
+
+.today-v92-mission h3 {
+  margin: 0;
+  color: #f7f5ff;
+  font: 900 clamp(16px, 2vw, 23px)/1.14 Manrope, system-ui, sans-serif;
+  letter-spacing: -.045em;
+}
+
+.today-v92-mission p {
+  max-width: 480px;
+  margin: 0;
+  color: #b1bfe1;
+  font: 500 11px/1.7 Manrope, system-ui, sans-serif;
+}
+
+.today-v92-mission .today-v92-mission-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  margin-top: 3px;
+  padding: 10px 16px;
+  border: 1px solid rgba(194, 178, 255, .38);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #c5b4ff, #8adbdc);
+  color: #161d38;
+  font: 900 10px/1.2 Manrope, system-ui, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.today-v92-toolsline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  align-items: end;
+  gap: 9px;
+}
+
+.today-v92-search {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.today-v92-search > span {
+  color: #829bca;
+  font: 800 8px/1.4 "IBM Plex Mono", monospace;
+  letter-spacing: .14em;
+}
+
+.today-v92-search input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 45px;
+  padding: 12px 14px;
+  border: 1px solid rgba(151, 181, 245, .19);
+  border-radius: 13px;
+  outline: none;
+  background: rgba(4, 9, 22, .62);
+  color: #f5f7ff;
+  font: 650 14px/1.3 Manrope, system-ui, sans-serif;
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+
+.today-v92-search input::placeholder {
+  color: #66799e;
+  font-weight: 500;
+}
+
+.today-v92-search input:focus {
+  border-color: rgba(131, 245, 223, .6);
+  box-shadow: 0 0 0 3px rgba(131, 245, 223, .075);
+}
+
+.today-v92-ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 45px;
+  padding: 10px 13px;
+  border: 1px solid rgba(151, 181, 245, .18);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .045);
+  color: #dce7ff;
+  font: 850 9px/1.25 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background .15s ease;
+}
+
+.today-v92-ui-button:hover {
+  border-color: rgba(131, 245, 223, .36);
+  background: rgba(131, 245, 223, .07);
+}
+
+.today-v92-ui-button:active {
+  transform: scale(.975);
+}
+
+.today-v92-ui-button.primary {
+  border-color: rgba(130, 243, 222, .32);
+  background: linear-gradient(135deg, #8df5df, #83c6ff);
+  color: #10213a;
+}
+
+.today-v92-ui-button[aria-pressed="true"] {
+  border-color: rgba(131, 245, 223, .45);
+  background: rgba(87, 223, 203, .10);
+  color: #9ff8e8;
+}
+
+.today-v92-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.today-v92-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 37px;
+  padding: 9px 12px;
+  border: 1px solid rgba(145, 174, 234, .14);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .022);
+  color: #93a7cb;
+  font: 800 9px/1.2 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color .15s ease,
+    background .15s ease,
+    border-color .15s ease,
+    transform .15s ease;
+}
+
+.today-v92-filter:hover {
+  color: #e7f7ff;
+  border-color: rgba(131, 245, 223, .28);
+}
+
+.today-v92-filter[aria-pressed="true"] {
+  border-color: rgba(131, 245, 223, .38);
+  background: linear-gradient(135deg, rgba(91, 219, 201, .14), rgba(133, 189, 255, .10));
+  color: #aaf7e7;
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+
+.today-v92-filter:active {
+  transform: scale(.97);
+}
+
+.today-v92-achievements {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.today-v92-achievement {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255, 218, 155, .15);
+  border-radius: 9px;
+  background: rgba(255, 218, 155, .04);
+  color: #b3bfda;
+  font: 750 8px/1.3 Manrope, system-ui, sans-serif;
+}
+
+.today-v92-achievement b {
+  color: #ffdcaa;
+}
+
+.today-v92-achievement.is-locked {
+  border-color: rgba(144, 164, 207, .09);
+  background: rgba(255, 255, 255, .015);
+  color: #6e7d9f;
+}
+
+.today-v92-empty {
+  padding: 18px;
+  border: 1px dashed rgba(147, 174, 233, .24);
+  border-radius: 15px;
+  color: #8fa4c9;
+  font: 600 12px/1.7 Manrope, system-ui, sans-serif;
+  text-align: center;
+}
+
+.today-v92-empty[hidden] {
+  display: none !important;
+}
+
+/* -------------------- 11–20: игровые карточки -------------------- */
+
+.ts-games-home .ts-game-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(153, 183, 255, .22) !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(121, 145, 255, .10), transparent 54%),
+    linear-gradient(145deg, rgba(22, 32, 59, .98), rgba(7, 13, 29, .98)) !important;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, .19),
+    inset 0 1px 0 rgba(255, 255, 255, .07) !important;
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease !important;
+}
+
+.ts-games-home .ts-game-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(131, 245, 223, .4) !important;
+  box-shadow:
+    0 21px 43px rgba(0, 0, 0, .26),
+    0 0 26px rgba(95, 153, 255, .08),
+    inset 0 1px 0 rgba(255, 255, 255, .09) !important;
+}
+
+.ts-games-home .ts-game-card[hidden] {
+  display: none !important;
+}
+
+.ts-games-home .ts-game-card .ts-game-art {
+  position: relative;
+  overflow: hidden;
+  min-height: 148px !important;
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(121, 243, 225, .18), transparent 60%),
+    linear-gradient(135deg, #202a4b, #111830 80%) !important;
+}
+
+.ts-games-home .ts-game-card .ts-game-svg {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .24));
+  transition: transform .3s ease, filter .3s ease;
+}
+
+.ts-games-home .ts-game-card:hover .ts-game-svg {
+  transform: scale(1.035) translateY(-2px);
+  filter: drop-shadow(0 14px 25px rgba(0, 0, 0, .32));
+}
+
+.today-v92-card-badge {
+  position: absolute;
+  z-index: 5;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 8px;
+  border: 1px solid rgba(163, 194, 255, .17);
+  border-radius: 8px;
+  background: rgba(7, 14, 30, .74);
+  color: #baccef;
+  font: 850 7px/1.2 Manrope, system-ui, sans-serif;
+  letter-spacing: .08em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.today-v92-card-badge.featured {
+  border-color: rgba(187, 164, 255, .34);
+  color: #d9caff;
+}
+
+.today-v92-card-badge.recent {
+  border-color: rgba(131, 245, 223, .31);
+  color: #9ff8e8;
+}
+
+.today-v92-card-badge.record {
+  border-color: rgba(255, 218, 155, .30);
+  color: #ffda9b;
+}
+
+.today-v92-fav {
+  position: absolute;
+  z-index: 8;
+  top: 9px;
+  right: 9px;
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  border: 1px solid rgba(186, 205, 255, .25);
+  border-radius: 12px;
+  background: rgba(6, 12, 28, .76);
+  color: #bbc9e7;
+  font: 900 19px/1 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  transition:
+    color .16s ease,
+    border-color .16s ease,
+    transform .16s ease,
+    background .16s ease;
+  touch-action: manipulation;
+}
+
+.today-v92-fav:hover {
+  border-color: rgba(255, 159, 202, .45);
+  transform: scale(1.05);
+}
+
+.today-v92-fav[aria-pressed="true"] {
+  border-color: rgba(255, 159, 202, .40);
+  background: rgba(255, 112, 171, .13);
+  color: #ff9fc8;
+}
+
+.today-v92-fav:active {
+  transform: scale(.92);
+}
+
+.ts-games-home .ts-game-card-copy {
+  gap: 10px !important;
+  padding: clamp(13px, 1.8vw, 19px) !important;
+}
+
+.ts-games-home .ts-game-card-copy h3 {
+  font-size: clamp(15px, 1.55vw, 20px) !important;
+  letter-spacing: -.045em !important;
+}
+
+.ts-games-home .ts-game-card-copy p {
+  font-size: 11px !important;
+  line-height: 1.75 !important;
+}
+
+.ts-games-home .ts-game-card-bottom {
+  align-items: center;
+  margin-top: 5px;
+}
+
+.ts-games-home .ts-game-card .ts-primary,
+.ts-games-home .ts-game-card a.ts-primary {
+  min-height: 42px;
+  padding: 11px 15px !important;
+  border: 1px solid rgba(130, 243, 222, .32) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(135deg, #8df5df, #83c6ff) !important;
+  color: #10213a !important;
+  font-weight: 900 !important;
+  box-shadow: 0 7px 20px rgba(80, 207, 199, .12);
+  text-decoration: none !important;
+  touch-action: manipulation;
+  transition: transform .16s ease, filter .16s ease;
+}
+
+.ts-games-home .ts-game-card .ts-primary:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.ts-games-home .ts-game-card a:focus-visible,
+.ts-games-home .ts-game-card button:focus-visible,
+.today-v92-discovery button:focus-visible,
+.today-v92-discovery input:focus-visible,
+.today-v92-discovery select:focus-visible {
+  outline: 2px solid rgba(131, 245, 223, .7);
+  outline-offset: 3px;
+}
+
+/* -------------------- 21–40: игровые страницы и прогресс -------------------- */
+
+#modal.today-arcade-route .ts-panel.today-arcade-panel {
+  background: transparent !important;
+}
+
+.today-v92-guide {
+  width: min(100% - 24px, 920px);
+  margin: 0 auto 12px;
+  border: 1px solid rgba(145, 178, 241, .13);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .025);
+  color: #95a9ce;
+}
+
+.today-v92-guide summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 39px;
+  padding: 10px 12px;
+  color: #a8bce2;
+  font: 850 8px/1.4 Manrope, system-ui, sans-serif;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+  touch-action: manipulation;
+}
+
+.today-v92-guide summary::-webkit-details-marker {
+  display: none;
+}
+
+.today-v92-guide summary::after {
+  content: "＋";
+  color: var(--today-v92-cyan);
+  font-size: 14px;
+}
+
+.today-v92-guide[open] summary::after {
+  content: "−";
+}
+
+.today-v92-guide p {
+  margin: 0;
+  padding: 0 12px 12px;
+  color: #a9bad9;
+  font: 500 11px/1.7 Manrope, system-ui, sans-serif;
+}
+
+.today-v92-session-clock {
+  display: block;
+  margin-top: 5px;
+  color: #7f9bc9;
+  font: 750 8px/1.4 "IBM Plex Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+}
+
+.today-v92-tools-button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 39px;
+  width: 39px;
+  min-width: 39px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(151, 181, 245, .20);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .045);
+  color: #d4e1ff;
+  font: 850 18px/1 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color .16s ease, background .16s ease;
+}
+
+.today-v92-tools-button:hover,
+.today-v92-tools-button[aria-expanded="true"] {
+  border-color: rgba(131, 245, 223, .40);
+  background: rgba(131, 245, 223, .075);
+  color: var(--today-v92-cyan);
+}
+
+.today-v92-popover {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 7px);
+  right: clamp(8px, 2vw, 22px);
+  display: grid;
+  gap: 8px;
+  width: min(300px, calc(100vw - 24px));
+  padding: 14px;
+  border: 1px solid rgba(159, 187, 247, .23);
+  border-radius: 17px;
+  background: rgba(10, 17, 35, .97);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, .40);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+}
+
+.today-v92-popover[hidden] {
+  display: none !important;
+}
+
+.today-v92-popover h3 {
+  margin: 0 0 3px;
+  color: #f1f5ff;
+  font: 900 14px/1.3 Manrope, system-ui, sans-serif;
+}
+
+.today-v92-popover p {
+  margin: 0 0 5px;
+  color: #8fa4c9;
+  font: 500 10px/1.6 Manrope, system-ui, sans-serif;
+}
+
+.today-v92-popover button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 41px;
+  padding: 10px 11px;
+  border: 1px solid rgba(146, 174, 236, .12);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .025);
+  color: #d7e2fb;
+  font: 800 10px/1.4 Manrope, system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.today-v92-popover button:hover {
+  border-color: rgba(131, 245, 223, .3);
+  background: rgba(131, 245, 223, .055);
+}
+
+.today-v92-popover button[aria-pressed="true"] {
+  border-color: rgba(131, 245, 223, .32);
+  color: #a7f7e7;
+}
+
+.today-v92-popover button span {
+  color: #87e8d8;
+  font: 850 9px/1.4 "IBM Plex Mono", monospace;
+}
+
+/* -------------------- 41–60: мобильные игровые поля -------------------- */
+
+#modal.today-arcade-route .ts-game-stage {
+  position: relative;
+  isolation: isolate;
+  border-color: rgba(155, 187, 255, .20);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(123, 153, 246, .12), transparent 60%),
+    linear-gradient(150deg, rgba(16, 25, 49, .86), rgba(7, 13, 28, .92));
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, .18),
+    inset 0 1px 0 rgba(255, 255, 255, .045);
+}
+
+#modal.today-arcade-route .ts-game-hud > span {
+  border: 1px solid rgba(158, 186, 246, .12);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .025);
+}
+
+#modal.today-arcade-route .ts-game-hud b {
+  font-size: clamp(16px, 2.6vw, 23px);
+  font-variant-numeric: tabular-nums;
+  transition: color .18s ease, transform .18s ease;
+}
+
+#modal.today-arcade-route .ts-game-status {
+  max-width: 610px;
+  font-size: clamp(12px, 1.4vw, 14px);
+  line-height: 1.65;
+}
+
+#modal.today-arcade-route .ts-merge-board,
+#modal.today-arcade-route .ts-memory-board,
+#modal.today-arcade-route .ts-match-board,
+#modal.today-arcade-route .ts-extra-snake-board,
+#modal.today-arcade-route .ts-extra-ttt-board,
+#modal.today-arcade-route .ts-extra-color-choices {
+  max-width: 100%;
+  touch-action: manipulation;
+}
+
+#modal.today-arcade-route .ts-merge-tile {
+  overflow: hidden;
+  border: 1px solid rgba(170, 197, 255, .12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+  transition: transform .13s ease, filter .14s ease;
+}
+
+#modal.today-arcade-route .ts-memory-card,
+#modal.today-arcade-route .ts-match-cell,
+#modal.today-arcade-route .ts-extra-ttt-board button {
+  min-width: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#modal.today-arcade-route .ts-memory-card {
+  border: 1px solid rgba(156, 181, 255, .19);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .08),
+    0 6px 14px rgba(0, 0, 0, .12);
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+
+#modal.today-arcade-route .ts-memory-card:active,
+#modal.today-arcade-route .ts-match-cell:active,
+#modal.today-arcade-route .ts-merge-tile:active {
+  transform: scale(.96);
+}
+
+#modal.today-arcade-route .ts-memory-card.revealed,
+#modal.today-arcade-route .ts-memory-card.matched {
+  border-color: rgba(131, 245, 223, .45);
+  box-shadow: 0 0 18px rgba(86, 230, 205, .09);
+}
+
+#modal.today-arcade-route .ts-flappy-wrap,
+#modal.today-arcade-route .ts-extra-canvas-wrap {
+  width: min(100%, 440px);
+  max-width: 100%;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgba(155, 188, 255, .19);
+  border-radius: 18px;
+  background: #090f23;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .19);
+}
+
+#modal.today-arcade-route .ts-flappy-wrap canvas,
+#modal.today-arcade-route .ts-extra-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 62dvh;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#modal.today-arcade-route .ts-extra-snake-board {
+  gap: clamp(1px, .32vw, 3px);
+  padding: clamp(5px, 1vw, 9px);
+  border: 1px solid rgba(131, 245, 223, .22);
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(54, 175, 164, .07), transparent 70%),
+    rgba(5, 15, 29, .95);
+  box-shadow: inset 0 0 35px rgba(75, 225, 201, .07);
+  touch-action: none;
+}
+
+#modal.today-arcade-route .ts-extra-snake-cell {
+  border-radius: clamp(2px, .5vw, 5px);
+  transition: background .10s linear, transform .10s linear;
+}
+
+#modal.today-arcade-route .ts-extra-snake-cell.head {
+  background: linear-gradient(135deg, #d1fff6, #54e4d0) !important;
+  box-shadow:
+    0 0 12px rgba(121, 243, 225, .36),
+    inset 0 1px 1px rgba(255, 255, 255, .65);
+}
+
+#modal.today-arcade-route .ts-extra-snake-cell.food {
+  background: linear-gradient(135deg, #ffd7f0, #ff7fae) !important;
+  box-shadow: 0 0 13px rgba(255, 117, 181, .34);
+  animation: today-v92-food-pulse 1s ease-in-out infinite alternate;
+}
+
+#modal.today-arcade-route .ts-extra-controls button {
+  min-width: 49px;
+  min-height: 47px;
+  border: 1px solid rgba(149, 186, 255, .20);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(39, 57, 93, .88), rgba(17, 27, 51, .96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+  touch-action: manipulation;
+}
+
+#modal.today-arcade-route .ts-extra-pulse {
+  min-height: 180px;
+  border: 1px solid rgba(153, 177, 255, .25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+  transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+#modal.today-arcade-route .ts-extra-pulse.ready {
+  border-color: rgba(129, 255, 181, .65);
+  box-shadow: 0 0 35px rgba(98, 255, 174, .17), 0 15px 35px rgba(0, 0, 0, .15);
+  animation: today-v92-ready-pulse .44s ease-in-out infinite alternate;
+}
+
+#modal.today-arcade-route .ts-extra-word-card,
+#modal.today-arcade-route .ts-extra-quiz-card {
+  width: min(100%, 540px);
+  border: 1px solid rgba(155, 183, 255, .17);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .025);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055);
+}
+
+#modal.today-arcade-route .ts-extra-word-card input {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 15px;
+  border: 1px solid rgba(152, 184, 255, .25);
+  border-radius: 13px;
+  background: rgba(4, 10, 23, .75);
+  color: #f5f7ff;
+  font: 700 16px/1.3 Manrope, system-ui, sans-serif;
+}
+
+#modal.today-arcade-route .ts-extra-word-card input:focus {
+  outline: 2px solid rgba(121, 243, 225, .40);
+  border-color: rgba(121, 243, 225, .60);
+}
+
+/* -------------------- 61–80: анимации и обратная связь -------------------- */
+
+#modal.today-arcade-route .ts-game-stage.today-v92-score-flash {
+  animation: today-v92-stage-flash .42s ease-out;
+}
+
+#modal.today-arcade-route .today-v92-number-pop {
+  animation: today-v92-number-pop .24s ease-out;
+}
+
+#modal.today-arcade-route .today-v92-text-pop {
+  animation: today-v92-text-pop .28s ease-out;
+}
+
+.today-v92-toast {
+  position: fixed;
+  z-index: 2147483647;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  width: max-content;
+  max-width: min(440px, calc(100vw - 24px));
+  padding: 12px 16px;
+  border: 1px solid rgba(131, 245, 223, .28);
+  border-radius: 13px;
+  background: rgba(9, 17, 35, .96);
+  color: #e8f7ff;
+  font: 800 11px/1.5 Manrope, system-ui, sans-serif;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .36);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.today-v92-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.today-arcade-calm *,
+.today-arcade-calm *::before,
+.today-arcade-calm *::after {
+  animation-duration: .001ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: .001ms !important;
+}
+
+@keyframes today-v92-stage-flash {
+  0% {
+    border-color: rgba(131, 245, 223, .75);
+    box-shadow: 0 0 0 1px rgba(131, 245, 223, .13), 0 0 33px rgba(84, 227, 204, .14);
+  }
+  100% {
+    border-color: rgba(155, 187, 255, .20);
+    box-shadow: 0 24px 65px rgba(0, 0, 0, .18);
+  }
+}
+
+@keyframes today-v92-number-pop {
+  0% { opacity: .7; transform: scale(.94); }
+  55% { color: #fff; transform: scale(1.12); }
+  100% { opacity: 1; color: #aaf7e7; transform: scale(1); }
+}
+
+@keyframes today-v92-text-pop {
+  0% { opacity: .65; transform: translateY(3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes today-v92-food-pulse {
+  from { filter: brightness(.94); transform: scale(.94); }
+  to { filter: brightness(1.28); transform: scale(1.02); }
+}
+
+@keyframes today-v92-ready-pulse {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.13); }
+}
+
+/* -------------------- 81–100: адаптивность и доступность -------------------- */
+
+@media (min-width: 1100px) {
+  .ts-games-home .ts-game-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .today-v92-topgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .today-v92-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .today-v92-stat {
+    min-height: 66px;
+    padding: 9px;
+  }
+
+  .today-v92-stat b {
+    font-size: clamp(15px, 4.2vw, 21px);
+  }
+
+  .today-v92-stat span {
+    font-size: 7px;
+    letter-spacing: .04em;
+  }
+
+  .today-v92-mission {
+    min-height: 150px;
+  }
+
+  .today-v92-toolsline {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .today-v92-search {
+    grid-column: 1 / -1;
+  }
+
+  .today-v92-toolsline select {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .ts-games-home .ts-game-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ts-games-home .ts-game-card {
+    display: grid !important;
+    grid-template-columns: minmax(90px, 30%) minmax(0, 1fr) !important;
+    align-items: stretch;
+  }
+
+  .ts-games-home .ts-game-art {
+    min-width: 0;
+    min-height: 100% !important;
+    align-self: stretch;
+  }
+
+  .ts-games-home .ts-game-art .ts-game-svg {
+    width: 100%;
+    height: auto;
+    min-height: 95px;
+    max-height: 150px;
+  }
+
+  .ts-games-home .ts-game-card-copy {
+    min-width: 0;
+    padding: 12px !important;
+    gap: 7px !important;
+  }
+
+  .ts-games-home .ts-game-card-copy h3 {
+    font-size: 14px !important;
+    line-height: 1.2;
+  }
+
+  .ts-games-home .ts-game-card-copy p {
+    font-size: 10px !important;
+    line-height: 1.55 !important;
+  }
+
+  .ts-games-home .ts-game-card-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ts-games-home .ts-game-card .ts-primary {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px !important;
+  }
+
+  .today-arcade-topbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 7px;
+    padding-right: max(10px, env(safe-area-inset-right));
+    padding-left: max(10px, env(safe-area-inset-left));
+  }
+
+  .today-v92-tools-button {
+    flex-basis: 36px;
+    width: 36px;
+    min-width: 36px;
+    height: 40px;
+  }
+
+  .today-v92-popover {
+    right: 8px;
+  }
+
+  #modal.today-arcade-route .ts-active-game {
+    width: calc(100% - 16px);
+    gap: 12px;
+  }
+
+  #modal.today-arcade-route .ts-game-stage {
+    padding: 10px;
+    border-radius: 17px;
+  }
+
+  #modal.today-arcade-route .ts-game-hud > span {
+    padding: 9px 10px;
+  }
+
+  #modal.today-arcade-route .ts-extra-controls button {
+    min-width: 46px;
+    min-height: 45px;
+  }
+
+  .today-v92-guide {
+    width: calc(100% - 16px);
+  }
+}
+
+@media (max-width: 390px) {
+  .today-v92-discovery {
+    padding: 11px;
+  }
+
+  .today-v92-topgrid {
+    gap: 9px;
+  }
+
+  .today-v92-stats {
+    gap: 6px;
+  }
+
+  .today-v92-stat {
+    padding: 7px;
+  }
+
+  .today-v92-stat span {
+    font-size: 6px;
+  }
+
+  .today-v92-filter {
+    padding: 8px 9px;
+    font-size: 8px;
+  }
+
+  .today-v92-ui-button {
+    padding: 9px;
+    font-size: 8px;
+  }
+
+  .today-arcade-back {
+    min-height: 42px;
+  }
+
+  .today-arcade-title-stack h1 {
+    font-size: 13px;
+  }
+
+  .today-v92-tools-button {
+    flex-basis: 34px;
+    width: 34px;
+    min-width: 34px;
+  }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .today-v92-guide {
+    margin-bottom: 6px;
+  }
+
+  .today-arcade-topbar {
+    margin-bottom: 8px;
+    padding-top: max(5px, env(safe-area-inset-top));
+    padding-bottom: 7px;
+  }
+
+  #modal.today-arcade-route .ts-game-stage {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  #modal.today-arcade-route .ts-flappy-wrap canvas,
+  #modal.today-arcade-route .ts-extra-canvas-wrap canvas {
+    max-height: 56dvh;
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-v92-mission::after,
+  .ts-games-home .ts-game-card,
+  .ts-games-home .ts-game-svg,
+  #modal.today-arcade-route .ts-extra-snake-cell.food,
+  #modal.today-arcade-route .ts-extra-pulse.ready,
+  #modal.today-arcade-route .ts-game-stage.today-v92-score-flash {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* TODAY ARCADE V92 — END */
