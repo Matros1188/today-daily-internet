@@ -1,0 +1,310 @@
+/* TODAY V79 — SMART COMPOSER */
+
+.today-v79-composer-tools {
+  display: grid;
+  gap: 9px;
+  margin: 12px 0;
+  padding: 13px;
+  border: 1px solid rgba(139,164,218,.17);
+  border-radius: 16px;
+  color: #e9efff;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,124,214,.09), transparent 58%),
+    linear-gradient(145deg, rgba(28,37,61,.65), rgba(12,17,32,.55));
+}
+
+.today-v79-counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.today-v79-field-label {
+  color: rgba(233,239,255,.78);
+  font: 800 10px/1.4 Manrope, system-ui, sans-serif;
+}
+
+.today-v79-counter {
+  color: #a9c1ff;
+  font: 800 10px/1.4 "IBM Plex Mono", monospace;
+  white-space: nowrap;
+}
+
+.today-v79-counter[data-state="warning"] {
+  color: #f1c781;
+}
+
+.today-v79-remaining {
+  color: rgba(191,205,231,.56);
+  font: 600 9px/1.5 Manrope, system-ui, sans-serif;
+}
+
+.today-v79-url-hint {
+  color: rgba(196,211,239,.67);
+  font: 650 10px/1.5 Manrope, system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.today-v79-url-hint[hidden] {
+  display: none !important;
+}
+
+.today-v79-url-hint[data-state="valid"] {
+  color: #86dec0;
+}
+
+.today-v79-url-hint[data-state="warning"] {
+  color: #f1c781;
+}
+
+.today-v79-tools-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.today-v79-status {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: rgba(191,205,231,.64);
+  font: 650 9px/1.5 Manrope, system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.today-v79-status[data-state="saved"] {
+  color: #87d7bc;
+}
+
+.today-v79-status[data-state="warning"] {
+  color: #edc27d;
+}
+
+.today-v79-clear-draft {
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 6px 9px;
+  border: 1px solid rgba(139,164,218,.17);
+  border-radius: 9px;
+  color: rgba(208,219,244,.82);
+  background: rgba(139,164,218,.06);
+  font: 750 9px/1.25 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.today-v79-clear-draft:hover {
+  border-color: rgba(139,164,218,.35);
+}
+
+.today-v79-shortcut {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(139,164,218,.10);
+  color: rgba(191,205,231,.48);
+  font: 600 9px/1.5 Manrope, system-ui, sans-serif;
+}
+
+.today-v79-shortcut > span:first-child {
+  margin-right: 4px;
+}
+
+.today-v79-shortcut kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  min-height: 22px;
+  padding: 2px 6px;
+  border: 1px solid rgba(139,164,218,.18);
+  border-radius: 6px;
+  color: rgba(222,231,250,.78);
+  background: rgba(139,164,218,.06);
+  font: 700 9px/1 "IBM Plex Mono", monospace;
+}
+
+.today-v79-shortcut-alt {
+  margin-inline: 2px;
+}
+
+.today-v79-file-preview {
+  display: grid;
+  gap: 9px;
+  padding: 9px;
+  border: 1px solid rgba(139,164,218,.14);
+  border-radius: 12px;
+  background: rgba(6,10,23,.26);
+}
+
+.today-v79-file-preview[hidden] {
+  display: none !important;
+}
+
+.today-v79-file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.today-v79-file-thumb {
+  display: block;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 64px;
+  border-radius: 9px;
+  object-fit: cover;
+  background: rgba(120,140,186,.12);
+}
+
+.today-v79-file-details {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.today-v79-file-details strong {
+  color: rgba(232,239,255,.90);
+  font: 750 10px/1.4 Manrope, system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.today-v79-file-details small {
+  color: rgba(191,205,231,.55);
+  font: 600 9px/1.4 "IBM Plex Mono", monospace;
+}
+
+.today-v79-file-remove {
+  justify-self: start;
+  min-height: 31px;
+  padding: 6px 10px;
+  border: 1px solid rgba(236,148,148,.20);
+  border-radius: 9px;
+  color: #edb6b6;
+  background: rgba(205,91,91,.065);
+  font: 750 9px/1.3 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.today-v79-submitting {
+  opacity: .78;
+  cursor: progress !important;
+  filter: saturate(.72);
+}
+
+.today-v79-composer-tools button:focus-visible {
+  outline: 3px solid rgba(130,170,255,.75);
+  outline-offset: 3px;
+}
+
+/* Light mode gets its own calm palette. */
+html.today-theme-light .today-v79-composer-tools {
+  color: #394b66;
+  border-color: rgba(88,111,153,.17);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(130,163,221,.10), transparent 58%),
+    linear-gradient(145deg, rgba(248,250,255,.95), rgba(235,241,251,.91));
+}
+
+html.today-theme-light .today-v79-field-label {
+  color: #566983;
+}
+
+html.today-theme-light .today-v79-counter {
+  color: #5576b8;
+}
+
+html.today-theme-light .today-v79-counter[data-state="warning"],
+html.today-theme-light .today-v79-url-hint[data-state="warning"],
+html.today-theme-light .today-v79-status[data-state="warning"] {
+  color: #a16f2e;
+}
+
+html.today-theme-light .today-v79-remaining,
+html.today-theme-light .today-v79-url-hint,
+html.today-theme-light .today-v79-status {
+  color: #7a8ba3;
+}
+
+html.today-theme-light .today-v79-url-hint[data-state="valid"],
+html.today-theme-light .today-v79-status[data-state="saved"] {
+  color: #368b72;
+}
+
+html.today-theme-light .today-v79-clear-draft {
+  color: #556982;
+  border-color: rgba(83,108,153,.16);
+  background: rgba(255,255,255,.53);
+}
+
+html.today-theme-light .today-v79-shortcut {
+  border-top-color: rgba(83,108,153,.12);
+  color: #7e8da5;
+}
+
+html.today-theme-light .today-v79-shortcut kbd {
+  color: #5e7192;
+  border-color: rgba(83,108,153,.14);
+  background: rgba(255,255,255,.50);
+}
+
+html.today-theme-light .today-v79-file-preview {
+  border-color: rgba(83,108,153,.14);
+  background: rgba(255,255,255,.46);
+}
+
+html.today-theme-light .today-v79-file-details strong {
+  color: #435670;
+}
+
+html.today-theme-light .today-v79-file-details small {
+  color: #7b8ca5;
+}
+
+html.today-theme-light .today-v79-file-remove {
+  color: #9a5252;
+  border-color: rgba(180,99,99,.20);
+  background: rgba(230,153,153,.08);
+}
+
+@media (max-width: 640px) {
+  .today-v79-composer-tools {
+    gap: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 13px;
+  }
+
+  .today-v79-tools-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .today-v79-clear-draft {
+    min-height: 35px;
+  }
+
+  .today-v79-shortcut {
+    font-size: 8px;
+  }
+
+  .today-v79-file-thumb {
+    flex-basis: 70px;
+    width: 70px;
+    height: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-v79-composer-tools * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
