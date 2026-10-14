@@ -12,13 +12,26 @@
   const notify=msg=>{if(typeof toast==='function')toast(msg);else console.log(msg)};
   async function currentUser(){let timer;try{const r=await Promise.race([sb.auth.getSession(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Проверка аккаунта заняла слишком много времени.')),8000)})]);viewerId=r?.data?.session?.user?.id||null;return viewerId}catch(e){console.warn('TODAY currentUser timeout/error',e);return null}finally{clearTimeout(timer)}}
   async function needUser(){const id=await currentUser();if(id)return id;try{if(typeof requireAuth==='function')requireAuth()}catch{}notify('Войди в аккаунт, чтобы пользоваться социальной частью TODAY.');return null}
-  async function rpc(name,args={}){
+  async function rpc(name,args={},timeoutMs=15000){
     let timer;
     let result;
+    const requestedTimeout=Number(timeoutMs);
+    const safeTimeout=Number.isFinite(requestedTimeout)
+      ?Math.max(1000,Math.min(60000,requestedTimeout))
+      :15000;
     try {
       result = await Promise.race([
         Promise.resolve().then(()=>sb.rpc(name,args)),
-        new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Запрос к серверу ('+String(name)+') не ответил за 15 секунд. Проверь соединение и повтори попытку.')),15000)})
+        new Promise((_,reject)=>{
+          timer=setTimeout(
+            ()=>reject(new Error(
+              'Запрос к серверу ('+String(name)+') не ответил за '+
+              Math.ceil(safeTimeout/1000)+
+              ' секунд. Проверь соединение и повтори попытку.'
+            )),
+            safeTimeout
+          );
+        })
       ]);
     } finally { clearTimeout(timer); }
     const {data,error}=result||{};
@@ -28,7 +41,6 @@
     if(v&&typeof v==='object'&&v.ok===false)throw new Error(v.message||'Операция не выполнена.');
     return v||{};
   }
-
   /* TODAY_SOCIAL_CLOSE_HOTFIX_V14 — reliable click-based close handling */
   /* TODAY_SOCIAL_MODAL_CLOSE_V15 — hard close path + scroll unlock */
 
@@ -403,13 +415,184 @@
     if(error)throw new Error('Не удалось загрузить фото: '+String(error.message||error).slice(0,180));
     return path;
   }
-  async function loadPromos(){
-    const host=byId('todayPromotedList');if(!host)return;
+  async function loadPromos(options={}){
+    const host=byId('todayPromotedList');
+    if(!host)return;
+    if(host.dataset.todayPromoLoading==='1')return;
+
+    host.dataset.todayPromoLoading='1';
+
+    const cacheKey='today-promoted-posts-cache-v97';
+
+    const moscowDate=()=>{
+      try{
+        const parts=new Intl.DateTimeFormat('en-GB',{
+          timeZone:'Europe/Moscow',
+          year:'numeric',
+          month:'2-digit',
+          day:'2-digit'
+        }).formatToParts(new Date());
+        const get=t=>parts.find(p=>p.type===t)?.value||'';
+        return get('year')+'-'+get('month')+'-'+get('day');
+      }catch(_){
+        return new Date().toISOString().slice(0,10);
+      }
+    };
+
+    const readCache=()=>{
+      try{
+        const value=JSON.parse(localStorage.getItem(cacheKey)||'null');
+        if(!value||value.day_date!==moscowDate()||!Array.isArray(value.posts))return null;
+        return {day_date:value.day_date,posts:value.posts.slice(0,24)};
+      }catch(_){
+        return null;
+      }
+    };
+
+    const saveCache=(day,posts)=>{
+      try{
+        localStorage.setItem(cacheKey,JSON.stringify({
+          day_date:day,
+          posts:(Array.isArray(posts)?posts:[]).slice(0,24)
+        }));
+      }catch(_){}
+    };
+
+    const cached=readCache();
+    let cachedShown=false;
+
+    const statusMarkup=(message,allowRetry=false)=>
+      `<div class="ts-promo-v97-status" role="status" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:10px;padding:10px 12px;">
+        <span>${h(shortText(message,220))}</span>
+        ${allowRetry?'<button type="button" class="ts-mini" data-social-act="retry-promos">Повторить ↻</button>':''}
+      </div>`;
+
+    const renderPosts=async rawPosts=>{
+      const source=Array.isArray(rawPosts)?rawPosts.slice(0,24):[];
+
+      if(!source.length){
+        host.innerHTML=`<div class="ts-empty">
+          <b>Место для следа дня свободно.</b>
+          <span>Создай пост на своей странице и выведи его в общую дневную ленту за 250 золотых монет. Доступно один раз в день.</span>
+          <button class="ts-mini ts-mini-accent" data-social-act="my-profile">Создать пост</button>
+        </div>`;
+        return;
+      }
+
+      let signingTimer;
+      let posts;
+
+      try{
+        posts=await Promise.race([
+          signProfilePostPhotos(source),
+          new Promise(resolve=>{
+            signingTimer=setTimeout(
+              ()=>resolve(source.map(p=>({...p,image_url:''}))),
+              8000
+            );
+          })
+        ]);
+      }catch(photoError){
+        console.warn('TODAY promoted photo signing',photoError);
+        posts=source.map(p=>({...p,image_url:''}));
+      }finally{
+        clearTimeout(signingTimer);
+      }
+
+      host.innerHTML=posts.map(p=>`<article class="ts-promoted-card">
+        <div class="ts-promoted-top">
+          ${avatar({name:p.author_name,avatar_url:p.avatar_url})}
+          <div class="ts-user-copy">
+            <b>${h(p.author_name||p.username||'Участник')}</b>
+            <span>@${h(String(p.username||'').replace(/^@/,''))} · след дня</span>
+          </div>
+          <span class="ts-promo-badge">FEATURED</span>
+        </div>
+        ${p.title?`<h4>${h(p.title)}</h4>`:''}
+        ${p.image_url?`<a class="ts-post-image-link" href="${h(p.image_url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть фотографию"><img class="ts-post-image" src="${h(p.image_url)}" alt="Фото публикации" loading="lazy" decoding="async"></a>`:''}
+        <p>${h(p.body||'').replace(/\n/g,'<br>')}</p>
+        <div class="ts-promoted-foot">
+          <span>В общей ленте до 00:00 МСК</span>
+          <button class="ts-text-button" data-social-act="open-profile" data-id="${h(p.author_id||'')}">Открыть страницу ↗</button>
+        </div>
+      </article>`).join('');
+    };
+
+    const isRetryable=error=>{
+      const message=String(error?.message||error||'');
+      return /не ответил за|timeout|timed out|network|fetch|load failed|failed to fetch|502|503|504|temporarily unavailable/i.test(message);
+    };
+
     try{
-      const d=await rpc('today_social_get_promoted_posts');const rawPosts=Array.isArray(d.posts)?d.posts:[];const posts=await signProfilePostPhotos(rawPosts);
-      if(!posts.length){host.innerHTML=`<div class="ts-empty"><b>Место для следа дня свободно.</b><span>Создай пост на своей странице и выведи его в общую дневную ленту за 250 золотых монет. Доступно один раз в день.</span><button class="ts-mini ts-mini-accent" data-social-act="my-profile">Создать пост</button></div>`;return;}
-      host.innerHTML=posts.map(p=>`<article class="ts-promoted-card"><div class="ts-promoted-top">${avatar({name:p.author_name,avatar_url:p.avatar_url})}<div class="ts-user-copy"><b>${h(p.author_name||p.username)}</b><span>@${h(String(p.username||'').replace(/^@/,''))} · след дня</span></div><span class="ts-promo-badge">FEATURED</span></div>${p.title?`<h4>${h(p.title)}</h4>`:''}${p.image_url?`<a class="ts-post-image-link" href="${h(p.image_url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть фотографию"><img class="ts-post-image" src="${h(p.image_url)}" alt="Фото публикации" loading="lazy" decoding="async"></a>`:''}<p>${h(p.body).replace(/\n/g,'<br>')}</p><div class="ts-promoted-foot"><span>В общей ленте до 00:00 МСК</span><button class="ts-text-button" data-social-act="open-profile" data-id="${h(p.author_id)}">Открыть страницу ↗</button></div></article>`).join('');
-    }catch(e){host.innerHTML=`<div class="ts-empty">Блок продвижения временно недоступен. ${h(shortText(e.message,100))}</div>`;}
+      // Show same-day cached posts immediately while the server refreshes.
+      if(cached){
+        await renderPosts(cached.posts);
+        cachedShown=true;
+        host.insertAdjacentHTML(
+          'beforeend',
+          statusMarkup('Показываем сохранённую витрину и проверяем свежие публикации…',false)
+        );
+      }else{
+        host.innerHTML=`<div class="ts-empty">
+          <b>Обновляем дневную витрину…</b>
+          <span>Проверяем актуальные публикации TODAY. Это не блокирует остальные разделы.</span>
+        </div>`;
+      }
+
+      let response;
+
+      try{
+        response=await rpc('today_social_get_promoted_posts',{},24000);
+      }catch(firstError){
+        if(!isRetryable(firstError))throw firstError;
+
+        if(!cachedShown){
+          host.innerHTML=`<div class="ts-empty">
+            <b>Сервер отвечает дольше обычного.</b>
+            <span>Повторяем подключение к дневной витрине. Остальные разделы сайта продолжают работать.</span>
+          </div>`;
+        }
+
+        // One retry only. The SQL function is bounded to the latest
+        // 24 public entries to prevent an unbounded JSON aggregation.
+        response=await rpc('today_social_get_promoted_posts',{},24000);
+      }
+
+      if(!response||!Array.isArray(response.posts)){
+        throw new Error('Сервер вернул неполный ответ дневной витрины.');
+      }
+
+      const posts=response.posts.slice(0,24);
+      const day=String(response.day_date||moscowDate());
+
+      saveCache(day,posts);
+
+      await renderPosts(posts);
+      cachedShown=false;
+
+    }catch(error){
+      console.warn('TODAY promoted posts feed',error);
+
+      if(cached&&cachedShown){
+        host.insertAdjacentHTML(
+          'beforeend',
+          statusMarkup(
+            'Не удалось обновить витрину с сервера. Пока показываем сохранённые публикации за сегодняшний день.',
+            true
+          )
+        );
+      }else{
+        host.innerHTML=`<div class="ts-empty">
+          <b>Не удалось обновить блок продвижения.</b>
+          <span>${h(shortText(error?.message||'Временная ошибка соединения.',180))}</span>
+          <span>Публикации и игровой прогресс не затронуты. Можно повторить загрузку.</span>
+          <button class="ts-mini ts-mini-accent" type="button" data-social-act="retry-promos">Повторить загрузку ↻</button>
+        </div>`;
+      }
+
+    }finally{
+      delete host.dataset.todayPromoLoading;
+    }
   }
   async function openChats(){
     if(!await needUser())return;
@@ -1402,7 +1585,7 @@
       const label=loadingTitles[a];
       modal(panelShell(label,'Подключаемся к TODAY. Если сервер не ответит, здесь появится понятная ошибка.',`<div class="ts-loading-panel"><span class="ts-loading-spinner"></span><span>Загружаем раздел «${h(label)}»…</span></div>`));
     }
-    if(a==='chats')return openChats();if(a==='friends')return openFriends();if(a==='my-profile')return openProfile();if(a==='settings')return openSettings();if(a==='channels')return openChannels();
+    if(a==='retry-promos')return loadPromos({retry:true});if(a==='chats')return openChats();if(a==='friends')return openFriends();if(a==='my-profile')return openProfile();if(a==='settings')return openSettings();if(a==='channels')return openChannels();
     if(a==='mini-games'){const current=socialRoutePages[socialRouteDepth-1];if(socialRouteActive&&socialRouteDepth>1&&Object.values(TODAY_GAMES).some(g=>g.title===current?.title)){history.back();return;}return openMiniGames();}if(a==='play-game')return openMiniGame(btn.dataset.game);
     if(a==='retry-channels')return openChannels();if(a==='retry-settings')return openSettings();if(a==='retry-channel')return openChannel(id,true);
     if(a==='view-story')return viewStory(id);if(a==='delete-story')return deleteStory(id);
