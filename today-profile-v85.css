@@ -1,0 +1,1419 @@
+/* ============================================================
+   TODAY V85 — AURORA STUDIO
+   Premium liquid glass, deliberate spacing, mobile-first finish
+   ============================================================ */
+
+/* 01. Aurora canvas */
+
+body.today-profile-route {
+  color: #edf4ff !important;
+  background:
+    radial-gradient(ellipse at 7% -8%, rgba(79,153,223,.20), transparent 34%),
+    radial-gradient(ellipse at 100% 9%, rgba(146,116,220,.16), transparent 34%),
+    radial-gradient(ellipse at 50% 90%, rgba(56,151,180,.075), transparent 44%),
+    linear-gradient(155deg,#080e1b 0%,#0b1221 50%,#0d1322 100%) !important;
+  font-family: Manrope,Onest,system-ui,sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.today-profile-route::before {
+  background-image:
+    linear-gradient(rgba(185,211,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(185,211,255,.024) 1px,transparent 1px) !important;
+  background-size: 42px 42px !important;
+  opacity: .7;
+  mask-image: linear-gradient(to bottom,black,transparent 80%) !important;
+}
+
+body.today-profile-route::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(120,177,241,.05),transparent 58%),
+    linear-gradient(180deg,transparent 65%,rgba(3,8,17,.2));
+}
+
+/* 02. Header — glass toolbar */
+
+body.today-profile-route .today-profile-topbar {
+  min-height:74px !important;
+  padding-top:max(11px,env(safe-area-inset-top,0px)) !important;
+  border-bottom:1px solid rgba(164,195,247,.14) !important;
+  background:rgba(7,12,24,.76) !important;
+  box-shadow:
+    0 10px 32px rgba(0,0,0,.13),
+    inset 0 -1px 0 rgba(255,255,255,.025) !important;
+  -webkit-backdrop-filter:blur(27px) saturate(155%) !important;
+  backdrop-filter:blur(27px) saturate(155%) !important;
+}
+
+body.today-profile-route .today-profile-brand-mark {
+  border:1px solid rgba(160,202,250,.34) !important;
+  border-radius:16px !important;
+  color:#d9ecff !important;
+  background:
+    radial-gradient(circle at 25% 10%,rgba(255,255,255,.26),transparent 55%),
+    linear-gradient(145deg,rgba(86,158,221,.39),rgba(137,111,212,.29)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.21),
+    0 8px 24px rgba(50,101,164,.17) !important;
+}
+
+body.today-profile-route .today-profile-brand b {
+  letter-spacing:.16em !important;
+}
+
+body.today-profile-route .today-profile-brand small {
+  color:#8faedc !important;
+  letter-spacing:.19em !important;
+}
+
+body.today-profile-route .today-profile-top-actions > a,
+body.today-profile-route .today-profile-theme-toggle {
+  min-height:41px !important;
+  padding-inline:14px !important;
+  border:1px solid rgba(157,190,242,.17) !important;
+  border-radius:13px !important;
+  color:#c2d5f2 !important;
+  background:rgba(121,160,222,.06) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  transition:transform .18s ease,border-color .18s ease,background .18s ease !important;
+}
+
+body.today-profile-route .today-profile-top-actions > a:hover,
+body.today-profile-route .today-profile-theme-toggle:hover {
+  transform:translateY(-1px);
+  border-color:rgba(161,207,255,.38) !important;
+  background:rgba(107,165,226,.13) !important;
+}
+
+body.today-profile-route .today-profile-top-actions .today-profile-top-main {
+  border-color:rgba(136,192,250,.33) !important;
+  color:#f1f7ff !important;
+  background:linear-gradient(125deg,rgba(68,146,213,.29),rgba(129,109,208,.22)) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* 03. Page rhythm */
+
+body.today-profile-route #todayProfilePage {
+  width:min(1160px,calc(100% - 46px)) !important;
+  max-width:1160px !important;
+  margin:29px auto 48px !important;
+}
+
+body.today-profile-route .today-profile-layout-v63 {
+  display:grid !important;
+  gap:17px !important;
+  width:100% !important;
+  max-width:100% !important;
+  padding:0 !important;
+}
+
+/* 04. Identity — cinematic liquid-glass hero */
+
+body.today-profile-route .today-profile-v63-identity {
+  position:relative !important;
+  isolation:isolate;
+  min-height:282px !important;
+  padding:34px 36px 30px !important;
+  border:1px solid rgba(156,199,247,.26) !important;
+  border-radius:31px !important;
+  background:
+    radial-gradient(ellipse at 86% 0%,rgba(130,166,246,.23),transparent 38%),
+    radial-gradient(ellipse at 0% 100%,rgba(72,177,208,.16),transparent 45%),
+    linear-gradient(128deg,rgba(25,42,68,.98),rgba(13,23,41,.97) 58%,rgba(27,24,51,.97)) !important;
+  box-shadow:
+    0 27px 72px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.085),
+    inset 0 -1px 0 rgba(255,255,255,.02) !important;
+}
+
+body.today-profile-route .today-profile-v63-identity::before {
+  top:-210px !important;
+  right:-83px !important;
+  width:450px !important;
+  height:450px !important;
+  border-color:rgba(176,205,255,.24) !important;
+  box-shadow:
+    0 0 0 22px rgba(164,198,255,.027),
+    0 0 0 50px rgba(164,198,255,.021),
+    0 0 0 82px rgba(164,198,255,.017),
+    0 0 100px rgba(94,156,238,.13) !important;
+}
+
+body.today-profile-route .today-profile-v63-identity::after {
+  right:27px !important;
+  bottom:8px !important;
+  color:rgba(190,218,255,.045) !important;
+  font-size:clamp(53px,9vw,112px) !important;
+  letter-spacing:.22em !important;
+}
+
+body.today-profile-route .today-profile-v63-avatar {
+  border:1px solid rgba(194,220,255,.54) !important;
+  border-radius:36px !important;
+  background:
+    radial-gradient(circle at 25% 10%,rgba(255,255,255,.27),transparent 56%),
+    linear-gradient(145deg,rgba(91,164,226,.48),rgba(133,108,205,.41)) !important;
+  box-shadow:
+    0 20px 46px rgba(0,0,0,.26),
+    inset 0 1px 0 rgba(255,255,255,.23),
+    0 0 0 7px rgba(163,204,252,.055) !important;
+}
+
+body.today-profile-route .today-profile-v63-avatar-edit {
+  border:1px solid rgba(255,255,255,.23) !important;
+  border-radius:11px !important;
+  color:#f6f9ff !important;
+  background:rgba(7,14,26,.82) !important;
+  box-shadow:0 5px 19px rgba(0,0,0,.19) !important;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+body.today-profile-route .today-profile-v63-eyebrow {
+  color:#b0cdf8 !important;
+  font-size:9px !important;
+  font-weight:900 !important;
+  letter-spacing:.22em !important;
+}
+
+body.today-profile-route .today-profile-v63-identity h1 {
+  color:#f8fbff !important;
+  font-size:clamp(32px,4.8vw,53px) !important;
+  font-weight:900 !important;
+  line-height:1.01 !important;
+  letter-spacing:-.066em !important;
+  text-wrap:balance;
+}
+
+body.today-profile-route .today-profile-v63-username {
+  color:#9fbae8 !important;
+  font-size:12px !important;
+  letter-spacing:.035em !important;
+}
+
+body.today-profile-route .today-profile-v81-intro {
+  gap:11px !important;
+  max-width:730px;
+}
+
+body.today-profile-route .today-profile-v81-intro > p {
+  color:rgba(222,235,255,.78) !important;
+  font-size:12px !important;
+  line-height:1.72 !important;
+}
+
+body.today-profile-route .today-profile-v81-interest-tags {
+  gap:7px !important;
+}
+
+body.today-profile-route .today-profile-v81-interest-tags > span {
+  min-height:27px !important;
+  padding:6px 10px !important;
+  border:1px solid rgba(162,197,246,.18) !important;
+  border-radius:9px !important;
+  color:#c1d7f6 !important;
+  background:rgba(130,177,234,.075) !important;
+  font-size:9px !important;
+}
+
+body.today-profile-route .today-profile-v81-hero-actions {
+  gap:8px !important;
+  margin-top:3px !important;
+}
+
+body.today-profile-route .today-profile-v81-hero-actions button {
+  min-height:37px !important;
+  padding:8px 13px !important;
+  border:1px solid rgba(163,196,245,.20) !important;
+  border-radius:11px !important;
+  color:#d5e5fb !important;
+  background:rgba(125,171,230,.075) !important;
+  font-size:10px !important;
+  font-weight:800 !important;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease !important;
+}
+
+body.today-profile-route .today-profile-v81-hero-actions button:hover {
+  transform:translateY(-1px);
+  border-color:rgba(165,209,255,.42) !important;
+  background:rgba(117,177,231,.14) !important;
+}
+
+body.today-profile-route .today-profile-v81-hero-actions button:first-child {
+  border-color:rgba(143,194,251,.36) !important;
+  color:#f6faff !important;
+  background:linear-gradient(125deg,rgba(79,157,225,.30),rgba(135,112,212,.24)) !important;
+  box-shadow:0 8px 20px rgba(30,87,146,.14),inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+/* 05. Stats — glass tiles with color accents */
+
+body.today-profile-route .today-profile-v81-stats {
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:11px !important;
+}
+
+body.today-profile-route .today-profile-v81-stats > article {
+  position:relative !important;
+  min-height:114px !important;
+  gap:10px !important;
+  padding:18px 17px 15px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(154,190,239,.17) !important;
+  border-radius:19px !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(133,182,239,.11),transparent 53%),
+    linear-gradient(145deg,rgba(25,40,64,.91),rgba(12,21,36,.89)) !important;
+  box-shadow:
+    0 12px 29px rgba(0,0,0,.075),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+  transition:transform .19s ease,border-color .19s ease,box-shadow .19s ease;
+}
+
+body.today-profile-route .today-profile-v81-stats > article::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:15px;
+  right:15px;
+  height:2px;
+  border-radius:0 0 99px 99px;
+  background:linear-gradient(90deg,rgba(98,187,231,.78),rgba(163,145,239,.66));
+  opacity:.76;
+}
+
+body.today-profile-route .today-profile-v81-stats > article:hover {
+  transform:translateY(-2px);
+  border-color:rgba(163,202,250,.31) !important;
+  box-shadow:0 17px 35px rgba(0,0,0,.11),inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+body.today-profile-route .today-profile-v81-stats > article > small {
+  color:#91b0d9 !important;
+  font-size:9px !important;
+  font-weight:900 !important;
+  letter-spacing:.14em !important;
+}
+
+body.today-profile-route .today-profile-v81-stats > article > b {
+  color:#f3f8ff !important;
+  font-size:clamp(23px,2.45vw,32px) !important;
+  font-weight:900 !important;
+  line-height:1.08 !important;
+  letter-spacing:-.045em !important;
+  font-variant-numeric:tabular-nums;
+  overflow-wrap:anywhere;
+}
+
+body.today-profile-route .today-profile-v81-stats > article > span {
+  color:#91a8cc !important;
+  font-size:10px !important;
+  line-height:1.45 !important;
+}
+
+/* 06. Navigation — refined glass segmented bar */
+
+body.today-profile-route .today-profile-v63-tabs {
+  top:81px !important;
+  z-index:35 !important;
+  gap:6px !important;
+  padding:7px !important;
+  border:1px solid rgba(155,188,239,.18) !important;
+  border-radius:18px !important;
+  background:rgba(10,17,30,.84) !important;
+  box-shadow:
+    0 15px 34px rgba(0,0,0,.14),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+  backdrop-filter:blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter:blur(25px) saturate(150%) !important;
+}
+
+body.today-profile-route .today-profile-v63-tabs button {
+  min-height:45px !important;
+  border-radius:12px !important;
+  color:#9db2d3 !important;
+  font-size:10px !important;
+  transition:transform .16s ease,color .16s ease,background .16s ease,border-color .16s ease !important;
+}
+
+body.today-profile-route .today-profile-v63-tabs button > span {
+  color:#9fc5f0 !important;
+  font-size:17px !important;
+}
+
+body.today-profile-route .today-profile-v63-tabs button:hover {
+  transform:translateY(-1px);
+  color:#f3f8ff !important;
+  background:rgba(117,169,226,.105) !important;
+}
+
+body.today-profile-route .today-profile-v63-tabs button.active {
+  border-color:rgba(149,195,248,.29) !important;
+  color:#f5f9ff !important;
+  background:linear-gradient(125deg,rgba(76,153,222,.24),rgba(131,109,209,.20)) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 17px rgba(0,0,0,.08) !important;
+}
+
+body.today-profile-route .today-profile-v63-tabs button.active > span {
+  color:#d1eaff !important;
+}
+
+/* 07. Content surfaces */
+
+body.today-profile-route .today-profile-tab-content {
+  min-width:0 !important;
+  animation:todayV85Appear .22s ease-out both;
+}
+
+body.today-profile-route .today-profile-panel,
+body.today-profile-route .today-profile-wall-v62,
+body.today-profile-route .today-profile-v63-panel,
+body.today-profile-route .today-profile-edit {
+  min-width:0 !important;
+  padding:clamp(19px,3vw,30px) !important;
+  border:1px solid rgba(151,185,239,.16) !important;
+  border-radius:24px !important;
+  color:#eaf3ff !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(115,161,225,.095),transparent 43%),
+    linear-gradient(150deg,rgba(19,32,52,.94),rgba(10,18,32,.92)) !important;
+  box-shadow:
+    0 18px 46px rgba(0,0,0,.09),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+body.today-profile-route .today-profile-panel-head,
+body.today-profile-route .today-profile-v63-section-head {
+  gap:15px !important;
+  margin-bottom:19px !important;
+}
+
+body.today-profile-route .today-profile-panel-head small,
+body.today-profile-route .today-profile-v63-section-head small,
+body.today-profile-route .today-profile-v63-create-head small {
+  color:#a7c7f4 !important;
+  font-size:9px !important;
+  font-weight:900 !important;
+  letter-spacing:.17em !important;
+}
+
+body.today-profile-route .today-profile-panel-head h3,
+body.today-profile-route .today-profile-v63-section-head h2,
+body.today-profile-route .today-profile-v63-create-head h2,
+body.today-profile-route .today-profile-v63-wall-title h2 {
+  color:#f5f9ff !important;
+  font-size:clamp(22px,3vw,29px) !important;
+  font-weight:900 !important;
+  line-height:1.12 !important;
+  letter-spacing:-.045em !important;
+}
+
+body.today-profile-route .today-profile-panel-head p,
+body.today-profile-route .today-profile-v63-section-head p,
+body.today-profile-route .today-profile-v63-create-head p {
+  color:#a3b7d6 !important;
+  font-size:12px !important;
+  line-height:1.7 !important;
+}
+
+body.today-profile-route .today-profile-v63-wall-title {
+  margin-top:27px !important;
+  padding-top:21px !important;
+  border-top-color:rgba(151,185,237,.16) !important;
+}
+
+body.today-profile-route .today-profile-v63-wall-title > span {
+  min-width:34px !important;
+  height:34px !important;
+  border-color:rgba(146,190,245,.26) !important;
+  border-radius:12px !important;
+  color:#d4e7ff !important;
+  background:rgba(103,159,223,.13) !important;
+  font-size:12px !important;
+}
+
+/* 08. Composer and editing forms */
+
+body.today-profile-route .today-profile-post-composer {
+  gap:13px !important;
+  padding:clamp(14px,2.4vw,20px) !important;
+  border:1px solid rgba(151,188,243,.17) !important;
+  border-radius:19px !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(104,159,222,.08),transparent 45%),
+    rgba(5,11,22,.36) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+body.today-profile-route .today-profile-post-composer > label:first-child,
+body.today-profile-route .today-profile-edit label,
+body.today-profile-route .today-profile-login label {
+  gap:8px !important;
+  color:#c7daf5 !important;
+  font-size:11px !important;
+  font-weight:800 !important;
+}
+
+body.today-profile-route .today-profile-post-composer textarea,
+body.today-profile-route .today-profile-edit input:not([type="file"]),
+body.today-profile-route .today-profile-edit textarea,
+body.today-profile-route .today-profile-login input,
+body.today-profile-route .today-profile-v81-list-tools input {
+  min-height:45px !important;
+  padding:12px 14px !important;
+  border:1px solid rgba(151,188,241,.20) !important;
+  border-radius:13px !important;
+  color:#edf5ff !important;
+  background:rgba(3,9,20,.42) !important;
+  font-size:12px !important;
+  line-height:1.65 !important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.09);
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease !important;
+}
+
+body.today-profile-route .today-profile-post-composer textarea {
+  min-height:124px !important;
+  resize:vertical;
+}
+
+body.today-profile-route .today-profile-post-composer textarea:focus,
+body.today-profile-route .today-profile-edit input:focus,
+body.today-profile-route .today-profile-edit textarea:focus,
+body.today-profile-route .today-profile-login input:focus,
+body.today-profile-route .today-profile-v81-list-tools input:focus {
+  border-color:rgba(111,187,247,.58) !important;
+  background:rgba(8,20,37,.77) !important;
+  box-shadow:0 0 0 3px rgba(88,160,226,.11) !important;
+}
+
+body.today-profile-route .today-profile-post-composer textarea::placeholder,
+body.today-profile-route .today-profile-edit textarea::placeholder,
+body.today-profile-route .today-profile-login input::placeholder {
+  color:#7e96ba !important;
+}
+
+body.today-profile-route .today-profile-post-file {
+  min-height:39px !important;
+  padding:8px 12px !important;
+  border:1px solid rgba(154,193,246,.20) !important;
+  border-radius:12px !important;
+  color:#c6ddfb !important;
+  background:rgba(116,168,229,.08) !important;
+  transition:border-color .18s ease,background .18s ease;
+}
+
+body.today-profile-route .today-profile-post-file:hover {
+  border-color:rgba(157,205,255,.40) !important;
+  background:rgba(117,174,233,.14) !important;
+}
+
+/* 09. Buttons have one consistent language */
+
+body.today-profile-route .today-profile-primary,
+body.today-profile-route .today-profile-secondary,
+body.today-profile-route .today-profile-danger,
+body.today-profile-route .today-profile-post-delete {
+  min-height:42px !important;
+  padding:10px 15px !important;
+  border-radius:13px !important;
+  font-size:11px !important;
+  font-weight:850 !important;
+  line-height:1.25 !important;
+  transition:transform .17s ease,filter .17s ease,box-shadow .17s ease !important;
+}
+
+body.today-profile-route .today-profile-primary {
+  border:1px solid rgba(150,204,255,.33) !important;
+  color:#fbfdff !important;
+  background:linear-gradient(125deg,#377eb8 0%,#527ec0 53%,#796bbd 100%) !important;
+  box-shadow:0 10px 24px rgba(43,91,151,.20),inset 0 1px 0 rgba(255,255,255,.20) !important;
+}
+
+body.today-profile-route .today-profile-primary:hover,
+body.today-profile-route .today-profile-secondary:hover,
+body.today-profile-route .today-profile-danger:hover,
+body.today-profile-route .today-profile-post-delete:hover {
+  transform:translateY(-1px);
+  filter:brightness(1.06);
+}
+
+body.today-profile-route .today-profile-secondary {
+  border:1px solid rgba(152,188,240,.22) !important;
+  color:#d1e2fb !important;
+  background:rgba(123,163,221,.09) !important;
+}
+
+body.today-profile-route .today-profile-danger,
+body.today-profile-route .today-profile-post-delete {
+  border:1px solid rgba(239,132,155,.27) !important;
+  color:#ffcbd4 !important;
+  background:rgba(218,92,117,.11) !important;
+}
+
+/* 10. Personal wall */
+
+body.today-profile-route .today-profile-wall-posts {
+  gap:14px !important;
+}
+
+body.today-profile-route .today-profile-post,
+body.today-profile-route .today-profile-wall-post {
+  min-width:0 !important;
+  padding:17px !important;
+  border:1px solid rgba(150,183,234,.15) !important;
+  border-radius:19px !important;
+  color:#eaf2ff !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(112,155,216,.08),transparent 48%),
+    linear-gradient(145deg,rgba(21,34,55,.90),rgba(11,19,32,.91)) !important;
+  box-shadow:0 12px 29px rgba(0,0,0,.065),inset 0 1px 0 rgba(255,255,255,.03) !important;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease !important;
+}
+
+body.today-profile-route .today-profile-wall-post:hover {
+  transform:translateY(-1px);
+  border-color:rgba(157,198,248,.28) !important;
+}
+
+body.today-profile-route .today-profile-post-head {
+  gap:11px !important;
+  margin-bottom:10px !important;
+}
+
+body.today-profile-route .today-profile-post-head > span {
+  color:#b1cdf3 !important;
+  font-size:9px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+}
+
+body.today-profile-route .today-profile-post-head > small {
+  color:#91a8ca !important;
+  font-size:10px !important;
+}
+
+body.today-profile-route .today-profile-post p,
+body.today-profile-route .today-profile-wall-post p {
+  color:#e2ecfc !important;
+  font-size:13px !important;
+  line-height:1.8 !important;
+  overflow-wrap:anywhere;
+}
+
+body.today-profile-route .today-profile-post img,
+body.today-profile-route .today-profile-wall-post img {
+  border:1px solid rgba(158,191,240,.18);
+  border-radius:15px !important;
+  box-shadow:0 11px 28px rgba(0,0,0,.14);
+}
+
+body.today-profile-route .today-profile-wall-post-footer {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:14px !important;
+  padding-top:13px;
+  border-top:1px solid rgba(150,181,229,.12);
+}
+
+body.today-profile-route .today-profile-wall-post-footer > small {
+  color:#8ca3c6 !important;
+  font-size:10px !important;
+}
+
+/* 11. V81 publication search */
+
+body.today-profile-route .today-profile-v81-list-tools {
+  display:flex !important;
+  align-items:center !important;
+  flex-wrap:wrap !important;
+  gap:9px !important;
+  padding:12px !important;
+  margin:12px 0 !important;
+  border:1px solid rgba(148,184,239,.17) !important;
+  border-radius:15px !important;
+  background:rgba(11,21,37,.72) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+body.today-profile-route .today-profile-v81-list-search {
+  flex:1 1 200px !important;
+}
+
+body.today-profile-route .today-profile-v81-list-count {
+  color:#a0c2ed !important;
+  font-size:10px !important;
+  font-weight:800 !important;
+}
+
+/* 12. Journey card should look part of the same product */
+
+body.today-profile-route .today-profile-v83-journey {
+  margin:1px 0 0 !important;
+  padding:clamp(18px,3vw,29px) !important;
+  border:1px solid rgba(153,190,242,.20) !important;
+  border-radius:27px !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(111,173,234,.12),transparent 39%),
+    radial-gradient(ellipse at 0% 100%,rgba(128,113,221,.075),transparent 43%),
+    linear-gradient(145deg,rgba(17,31,51,.86),rgba(10,18,31,.87)) !important;
+  box-shadow:0 20px 47px rgba(0,0,0,.11),inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+body.today-profile-route .today-profile-v83-heading {
+  margin-bottom:21px !important;
+}
+
+body.today-profile-route .today-profile-v83-heading h2 {
+  color:#f6f9ff !important;
+  letter-spacing:-.05em !important;
+}
+
+body.today-profile-route .today-profile-v83-heading p {
+  color:#a0b6d7 !important;
+}
+
+body.today-profile-route .today-profile-v83-card-preview {
+  border:1px solid rgba(184,215,253,.25) !important;
+  border-radius:23px !important;
+  box-shadow:0 20px 43px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+body.today-profile-route .today-profile-v83-actions button {
+  min-height:42px !important;
+  padding:10px 15px !important;
+  border-radius:13px !important;
+  font-size:11px !important;
+}
+
+body.today-profile-route .today-profile-v83-progress {
+  padding:18px !important;
+  border-radius:18px !important;
+  background:rgba(124,163,219,.055) !important;
+}
+
+body.today-profile-route .today-profile-v83-progress-track {
+  height:8px !important;
+  background:rgba(131,165,216,.19) !important;
+}
+
+body.today-profile-route .today-profile-v83-progress-track span {
+  background:linear-gradient(90deg,#63c5e3,#7fa7ef,#b3a0f2) !important;
+  box-shadow:0 0 18px rgba(111,191,235,.34) !important;
+}
+
+body.today-profile-route .today-profile-v83-milestone {
+  padding:14px !important;
+  border-radius:16px !important;
+  background:rgba(124,158,213,.05) !important;
+  transition:transform .18s ease,border-color .18s ease !important;
+}
+
+body.today-profile-route .today-profile-v83-milestone:hover {
+  transform:translateY(-1px);
+  border-color:rgba(157,198,248,.30) !important;
+}
+
+body.today-profile-route .today-profile-v83-milestone-symbol {
+  border:1px solid rgba(143,189,242,.16);
+  border-radius:11px !important;
+  color:#a7dcf5 !important;
+  background:rgba(101,166,223,.14) !important;
+}
+
+/* 13. Auth, error and empty states */
+
+body.today-profile-route .today-profile-login,
+body.today-profile-route .today-profile-error,
+body.today-profile-route .today-profile-empty,
+body.today-profile-route .today-profile-v63-empty {
+  border:1px solid rgba(153,186,236,.19) !important;
+  border-radius:24px !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(110,169,231,.11),transparent 46%),
+    linear-gradient(145deg,rgba(19,32,52,.94),rgba(10,18,31,.92)) !important;
+  box-shadow:0 21px 55px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+body.today-profile-route .today-profile-login {
+  max-width:650px !important;
+  margin:28px auto !important;
+  padding:clamp(22px,4vw,39px) !important;
+}
+
+body.today-profile-route .today-profile-login-mark {
+  display:grid !important;
+  place-items:center !important;
+  width:57px !important;
+  height:57px !important;
+  margin-bottom:21px !important;
+  border:1px solid rgba(153,199,248,.30) !important;
+  border-radius:18px !important;
+  color:#d8edff !important;
+  background:linear-gradient(145deg,rgba(89,167,229,.27),rgba(137,112,211,.2)) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13);
+}
+
+body.today-profile-route .today-profile-empty,
+body.today-profile-route .today-profile-v63-empty {
+  padding:30px 21px !important;
+}
+
+body.today-profile-route .today-profile-empty b,
+body.today-profile-route .today-profile-v63-empty h2,
+body.today-profile-route .today-profile-v63-empty h3 {
+  color:#f4f8ff !important;
+}
+
+body.today-profile-route .today-profile-empty p,
+body.today-profile-route .today-profile-v63-empty p {
+  color:#a2b5d4 !important;
+  font-size:12px !important;
+  line-height:1.75 !important;
+}
+
+/* 14. Footer and toast */
+
+body.today-profile-route .today-profile-site-footer {
+  border-top:1px solid rgba(148,181,233,.13) !important;
+  color:#879ec1 !important;
+  background:rgba(8,14,25,.25) !important;
+}
+
+body.today-profile-route .today-profile-site-footer a {
+  color:#b5d0f5 !important;
+  text-decoration-color:rgba(181,208,245,.29) !important;
+  text-underline-offset:4px;
+}
+
+body.today-profile-route .today-profile-toast {
+  border:1px solid rgba(158,199,249,.27) !important;
+  border-radius:15px !important;
+  color:#eff6ff !important;
+  background:rgba(13,28,46,.95) !important;
+  box-shadow:0 18px 44px rgba(0,0,0,.25) !important;
+  -webkit-backdrop-filter:blur(24px);
+  backdrop-filter:blur(24px);
+}
+
+/* 15. Truly independent light theme */
+
+html.today-theme-light body.today-profile-route {
+  color:#263b54 !important;
+  background:
+    radial-gradient(ellipse at 0% 0%,rgba(150,202,237,.29),transparent 37%),
+    radial-gradient(ellipse at 100% 6%,rgba(196,185,233,.23),transparent 35%),
+    radial-gradient(ellipse at 40% 100%,rgba(188,220,229,.20),transparent 42%),
+    linear-gradient(155deg,#edf4fb 0%,#e7eff8 48%,#f0eff8 100%) !important;
+}
+
+html.today-theme-light body.today-profile-route::before {
+  background-image:
+    linear-gradient(rgba(83,117,161,.038) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(83,117,161,.038) 1px,transparent 1px) !important;
+  opacity:.55;
+}
+
+html.today-theme-light body.today-profile-route::after {
+  background:linear-gradient(180deg,transparent 70%,rgba(119,149,188,.07));
+}
+
+html.today-theme-light body.today-profile-route .today-profile-topbar {
+  border-bottom-color:rgba(98,130,174,.18) !important;
+  background:rgba(239,246,253,.87) !important;
+  box-shadow:0 10px 28px rgba(69,103,143,.08) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-brand b,
+html.today-theme-light body.today-profile-route .today-profile-top-actions > a,
+html.today-theme-light body.today-profile-route .today-profile-theme-toggle {
+  color:#314c6b !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-brand small {
+  color:#6b86a9 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-brand-mark {
+  border-color:rgba(91,139,192,.31) !important;
+  color:#416e9b !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(191,219,245,.6)) !important;
+  box-shadow:0 7px 20px rgba(78,118,161,.10) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-top-actions > a,
+html.today-theme-light body.today-profile-route .today-profile-theme-toggle {
+  border-color:rgba(95,131,175,.23) !important;
+  background:rgba(255,255,255,.51) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-top-actions .today-profile-top-main {
+  color:#294b70 !important;
+  border-color:rgba(88,145,203,.30) !important;
+  background:linear-gradient(125deg,rgba(164,213,244,.69),rgba(201,197,239,.60)) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity {
+  border-color:rgba(139,180,222,.46) !important;
+  background:
+    radial-gradient(ellipse at 85% 0%,rgba(200,194,239,.53),transparent 39%),
+    radial-gradient(ellipse at 0% 100%,rgba(157,218,235,.46),transparent 46%),
+    linear-gradient(125deg,#e4eef9 0%,#d9e9f7 55%,#e7e4f4 100%) !important;
+  box-shadow:0 23px 56px rgba(83,117,156,.13),inset 0 1px 0 rgba(255,255,255,.83) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity::before {
+  border-color:rgba(108,150,193,.23) !important;
+  box-shadow:
+    0 0 0 22px rgba(109,151,194,.025),
+    0 0 0 51px rgba(109,151,194,.021),
+    0 0 0 83px rgba(109,151,194,.017) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity::after {
+  color:rgba(65,103,147,.06) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity h1 {
+  color:#263f5d !important;
+  text-shadow:none !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-eyebrow {
+  color:#5e80aa !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-username {
+  color:#627fa3 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-intro > p {
+  color:#4d6785 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-interest-tags > span {
+  border-color:rgba(102,142,186,.23) !important;
+  color:#456789 !important;
+  background:rgba(255,255,255,.48) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-hero-actions button {
+  border-color:rgba(98,139,190,.26) !important;
+  color:#3b5f82 !important;
+  background:rgba(255,255,255,.49) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-hero-actions button:first-child {
+  color:#294e73 !important;
+  border-color:rgba(91,146,204,.38) !important;
+  background:linear-gradient(125deg,rgba(164,211,244,.72),rgba(198,192,238,.61)) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article {
+  border-color:rgba(102,140,184,.23) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(145,196,232,.22),transparent 55%),
+    linear-gradient(145deg,rgba(255,255,255,.87),rgba(232,241,250,.82)) !important;
+  box-shadow:0 10px 25px rgba(72,107,148,.065),inset 0 1px 0 rgba(255,255,255,.88) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article::before {
+  background:linear-gradient(90deg,#75bddd,#9b9de0) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article > small {
+  color:#6c86a8 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article > b {
+  color:#273f5a !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article > span {
+  color:#758ba7 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs {
+  border-color:rgba(101,139,183,.23) !important;
+  background:rgba(237,244,252,.87) !important;
+  box-shadow:0 11px 29px rgba(74,106,144,.08) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button {
+  color:#607a9a !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button > span {
+  color:#6797c7 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button.active {
+  border-color:rgba(101,154,204,.31) !important;
+  color:#294a6a !important;
+  background:linear-gradient(125deg,rgba(177,219,246,.81),rgba(208,205,241,.67)) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-panel,
+html.today-theme-light body.today-profile-route .today-profile-wall-v62,
+html.today-theme-light body.today-profile-route .today-profile-v63-panel,
+html.today-theme-light body.today-profile-route .today-profile-edit {
+  border-color:rgba(105,142,187,.22) !important;
+  color:#2c425c !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(174,206,237,.20),transparent 45%),
+    linear-gradient(150deg,rgba(252,254,255,.89),rgba(235,242,250,.85)) !important;
+  box-shadow:0 15px 38px rgba(72,103,143,.07),inset 0 1px 0 rgba(255,255,255,.87) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-panel-head h3,
+html.today-theme-light body.today-profile-route .today-profile-v63-section-head h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-create-head h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-wall-title h2 {
+  color:#2a4360 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-panel-head small,
+html.today-theme-light body.today-profile-route .today-profile-v63-section-head small,
+html.today-theme-light body.today-profile-route .today-profile-v63-create-head small {
+  color:#6288b5 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-panel-head p,
+html.today-theme-light body.today-profile-route .today-profile-v63-section-head p,
+html.today-theme-light body.today-profile-route .today-profile-v63-create-head p {
+  color:#687f9b !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-composer {
+  border-color:rgba(104,143,188,.23) !important;
+  background:rgba(223,236,248,.44) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-composer > label:first-child,
+html.today-theme-light body.today-profile-route .today-profile-edit label,
+html.today-theme-light body.today-profile-route .today-profile-login label {
+  color:#405f80 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-composer textarea,
+html.today-theme-light body.today-profile-route .today-profile-edit input:not([type="file"]),
+html.today-theme-light body.today-profile-route .today-profile-edit textarea,
+html.today-theme-light body.today-profile-route .today-profile-login input,
+html.today-theme-light body.today-profile-route .today-profile-v81-list-tools input {
+  border-color:rgba(102,141,187,.26) !important;
+  color:#304964 !important;
+  background:rgba(255,255,255,.76) !important;
+  box-shadow:inset 0 1px 2px rgba(84,115,151,.04) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-composer textarea:focus,
+html.today-theme-light body.today-profile-route .today-profile-edit input:focus,
+html.today-theme-light body.today-profile-route .today-profile-edit textarea:focus,
+html.today-theme-light body.today-profile-route .today-profile-login input:focus {
+  border-color:rgba(73,143,207,.50) !important;
+  box-shadow:0 0 0 3px rgba(92,157,211,.11) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-composer textarea::placeholder,
+html.today-theme-light body.today-profile-route .today-profile-login input::placeholder {
+  color:#879db5 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-file {
+  border-color:rgba(100,142,190,.25) !important;
+  color:#466d96 !important;
+  background:rgba(211,231,248,.59) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-secondary {
+  border-color:rgba(104,140,183,.26) !important;
+  color:#3d5e7f !important;
+  background:rgba(215,233,249,.70) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-danger,
+html.today-theme-light body.today-profile-route .today-profile-post-delete {
+  color:#a54d65 !important;
+  border-color:rgba(198,104,128,.27) !important;
+  background:rgba(236,186,198,.26) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-wall-post,
+html.today-theme-light body.today-profile-route .today-profile-post {
+  border-color:rgba(107,145,188,.23) !important;
+  color:#2b415a !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(175,207,237,.19),transparent 48%),
+    linear-gradient(145deg,rgba(255,255,255,.85),rgba(235,243,251,.86)) !important;
+  box-shadow:0 10px 29px rgba(69,101,140,.065),inset 0 1px 0 rgba(255,255,255,.88) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-head > span {
+  color:#587ea9 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-head > small,
+html.today-theme-light body.today-profile-route .today-profile-wall-post-footer > small {
+  color:#7b90aa !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post p,
+html.today-theme-light body.today-profile-route .today-profile-wall-post p {
+  color:#334e69 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-wall-post-footer {
+  border-top-color:rgba(105,146,190,.18) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-list-tools {
+  border-color:rgba(105,143,187,.23) !important;
+  background:rgba(239,246,253,.87) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-list-count {
+  color:#537ea8 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-journey {
+  border-color:rgba(103,147,197,.24) !important;
+  color:#304660 !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(158,202,239,.22),transparent 41%),
+    linear-gradient(145deg,rgba(250,253,255,.90),rgba(231,240,250,.85)) !important;
+  box-shadow:0 18px 40px rgba(72,103,142,.08),inset 0 1px 0 rgba(255,255,255,.87) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-heading h2 {
+  color:#2b4561 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-heading p,
+html.today-theme-light body.today-profile-route .today-profile-v83-progress p {
+  color:#6a819c !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress,
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone {
+  border-color:rgba(104,144,190,.21) !important;
+  background:rgba(255,255,255,.53) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress-top b,
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone b {
+  color:#344c67 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone-symbol {
+  color:#567faa !important;
+  border-color:rgba(104,147,193,.19) !important;
+  background:rgba(168,207,240,.32) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-login,
+html.today-theme-light body.today-profile-route .today-profile-error,
+html.today-theme-light body.today-profile-route .today-profile-empty,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty {
+  border-color:rgba(106,143,187,.24) !important;
+  color:#314964 !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(175,210,240,.24),transparent 46%),
+    linear-gradient(145deg,rgba(252,254,255,.91),rgba(232,241,250,.86)) !important;
+  box-shadow:0 16px 40px rgba(72,103,142,.08),inset 0 1px 0 rgba(255,255,255,.88) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-login-mark {
+  border-color:rgba(100,151,204,.29) !important;
+  color:#4b79a5 !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(200,224,245,.63)) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-empty b,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty h3 {
+  color:#314862 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-empty p,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty p {
+  color:#6b829d !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-site-footer {
+  border-top-color:rgba(98,133,176,.19) !important;
+  color:#748ba7 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-site-footer a {
+  color:#5279a2 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-toast {
+  border-color:rgba(101,143,190,.25) !important;
+  color:#2e4964 !important;
+  background:rgba(244,249,254,.96) !important;
+  box-shadow:0 16px 40px rgba(68,99,136,.16) !important;
+}
+
+/* 16. Responsive refinement */
+
+@media (max-width: 900px) {
+  body.today-profile-route #todayProfilePage {
+    width:calc(100% - 32px) !important;
+    margin-top:20px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-stats {
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+
+  body.today-profile-route .today-profile-v63-identity {
+    border-radius:25px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body.today-profile-route .today-profile-topbar {
+    min-height:63px !important;
+    gap:9px !important;
+    padding-inline:13px !important;
+  }
+
+  body.today-profile-route .today-profile-brand {
+    gap:8px !important;
+  }
+
+  body.today-profile-route .today-profile-brand-mark {
+    width:36px !important;
+    height:36px !important;
+    flex-basis:36px !important;
+    border-radius:13px !important;
+  }
+
+  body.today-profile-route .today-profile-brand b {
+    font-size:14px !important;
+  }
+
+  body.today-profile-route .today-profile-brand small {
+    font-size:6px !important;
+    letter-spacing:.14em !important;
+  }
+
+  body.today-profile-route .today-profile-top-actions {
+    gap:5px !important;
+  }
+
+  body.today-profile-route .today-profile-top-actions > a,
+  body.today-profile-route .today-profile-theme-toggle {
+    min-height:35px !important;
+    padding-inline:9px !important;
+    border-radius:10px !important;
+    font-size:8px !important;
+  }
+
+  body.today-profile-route .today-profile-theme-toggle .today-theme-label {
+    display:none !important;
+  }
+
+  body.today-profile-route #todayProfilePage {
+    width:calc(100% - 24px) !important;
+    margin:14px auto 28px !important;
+  }
+
+  body.today-profile-route .today-profile-layout-v63 {
+    gap:12px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-identity {
+    grid-template-columns:64px minmax(0,1fr) !important;
+    grid-template-rows:auto auto auto auto !important;
+    column-gap:12px !important;
+    row-gap:6px !important;
+    min-height:0 !important;
+    padding:18px 14px !important;
+    border-radius:22px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-avatar {
+    width:61px !important;
+    height:61px !important;
+    min-width:61px !important;
+    min-height:61px !important;
+    border-radius:19px !important;
+    font-size:23px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-avatar-edit {
+    right:4px !important;
+    bottom:4px !important;
+    width:22px !important;
+    height:22px !important;
+    border-radius:8px !important;
+    font-size:11px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-identity h1 {
+    font-size:clamp(25px,7.4vw,35px) !important;
+    line-height:1.04 !important;
+  }
+
+  body.today-profile-route .today-profile-v63-eyebrow {
+    font-size:7px !important;
+    letter-spacing:.13em !important;
+  }
+
+  body.today-profile-route .today-profile-v63-username {
+    margin-top:2px !important;
+    font-size:11px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-intro {
+    gap:9px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-intro > p {
+    font-size:11px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-interest-tags {
+    gap:5px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-interest-tags > span {
+    min-height:23px !important;
+    padding:5px 8px !important;
+    font-size:8px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-hero-actions button {
+    min-height:33px !important;
+    padding:7px 9px !important;
+    font-size:9px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-stats {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-stats > article {
+    min-height:88px !important;
+    gap:7px !important;
+    padding:12px !important;
+    border-radius:15px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-stats > article > small {
+    font-size:8px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-stats > article > b {
+    font-size:24px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-stats > article > span {
+    font-size:9px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-tabs {
+    top:65px !important;
+    gap:3px !important;
+    padding:5px !important;
+    border-radius:14px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-tabs button {
+    min-height:42px !important;
+    padding:7px 3px !important;
+    border-radius:10px !important;
+    font-size:8px !important;
+  }
+
+  body.today-profile-route .today-profile-v63-tabs button > span {
+    font-size:15px !important;
+  }
+
+  body.today-profile-route .today-profile-panel,
+  body.today-profile-route .today-profile-wall-v62,
+  body.today-profile-route .today-profile-v63-panel,
+  body.today-profile-route .today-profile-edit {
+    padding:14px !important;
+    border-radius:19px !important;
+  }
+
+  body.today-profile-route .today-profile-v83-journey {
+    padding:14px !important;
+    border-radius:20px !important;
+  }
+
+  body.today-profile-route .today-profile-v83-heading h2 {
+    font-size:21px !important;
+  }
+
+  body.today-profile-route .today-profile-v83-heading p {
+    font-size:11px !important;
+  }
+
+  body.today-profile-route .today-profile-v83-card-preview {
+    border-radius:17px !important;
+  }
+
+  body.today-profile-route .today-profile-post-composer {
+    padding:12px !important;
+    border-radius:15px !important;
+  }
+
+  body.today-profile-route .today-profile-post-composer textarea {
+    min-height:108px !important;
+  }
+
+  body.today-profile-route .today-profile-post,
+  body.today-profile-route .today-profile-wall-post {
+    padding:13px !important;
+    border-radius:15px !important;
+  }
+
+  body.today-profile-route .today-profile-post p,
+  body.today-profile-route .today-profile-wall-post p {
+    font-size:12px !important;
+  }
+
+  body.today-profile-route .today-profile-v81-list-tools {
+    border-radius:13px !important;
+    padding:9px !important;
+  }
+
+  body.today-profile-route .today-profile-site-footer {
+    display:grid !important;
+    gap:8px !important;
+    justify-items:center !important;
+    padding:19px 12px !important;
+    text-align:center !important;
+  }
+}
+
+@keyframes todayV85Appear {
+  from { opacity:0; transform:translateY(4px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.today-profile-route *,
+  body.today-profile-route *::before,
+  body.today-profile-route *::after {
+    scroll-behavior:auto !important;
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
