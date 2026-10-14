@@ -286,7 +286,10 @@
       const saved = bookmarks.has(id);
 
       button.setAttribute('aria-pressed', String(saved));
-      button.textContent = saved ? '♥ В избранном' : '♡ В избранное';
+      const label = saved ? '♥ В избранном' : '♡ В избранное';
+      if (button.textContent !== label) {
+        button.textContent = label;
+      }
       button.title = saved
         ? 'Убрать из избранного'
         : 'Сохранить в избранное';
