@@ -1,6 +1,6 @@
 /* TODAY SOCIAL EVOLUTION V51 — profile route + selected community tools. */
 (()=>{'use strict';
-const VERSION='20261015190003';
+const VERSION='20261015190023';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dateMoscow=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -179,15 +179,125 @@ if(activeTab==='collection')return `<div class="today-profile-panel"><div class=
  }
  async function saveProfile(e){e.preventDefault();const msg=$('#todayProfileSaveMessage');const nickname=$('#todayProfileNickname')?.value.trim();if(!nickname){msg.textContent='Ник не может быть пустым.';return}const file=$('#todayProfileAvatarFile')?.files?.[0];try{msg.textContent='Сохраняю…';const fd=new FormData();fd.append('kind','profile');fd.append('nickname',nickname);if(file)fd.append('image',file,file.name);const session=(await sb.auth.getSession()).data.session;if(!session?.access_token){msg.textContent='Войди в аккаунт заново.';return}const response=await fetch(`${String(C.supabaseUrl).replace(/\/$/,'')}/functions/v1/user-write`,{method:'POST',headers:{apikey:C.supabaseKey,Authorization:`Bearer ${session.access_token}`},body:fd,cache:'no-store'});let data={};try{data=await response.json()}catch{}if(!response.ok||data.ok===false)throw new Error(data.message||data.detail||`HTTP ${response.status}`);currentProfile=data.profile||{...currentProfile,display_name:nickname};const local={bio:$('#todayProfileBio').value.trim(),interests:$('#todayProfileInterests').value.split(',').map(x=>x.trim()).filter(Boolean).slice(0,8)};localSet(profileKey(currentSession.user.id),local);await loadPage();showToast('Профиль сохранён.');}catch(err){msg.textContent='Не удалось сохранить: '+String(err.message||err)}}
  async function checkStatus(){const msg=$('#todayProfileSecurityMessage');if(msg)msg.textContent='Проверяю страницу, интерфейс и соединение…';const items=[['index.html','Основная страница'],['app.js','Основной интерфейс'],['social.js','Социальный слой'],['today-profile-page.js','Страница профиля']];const results=[];for(const [path,label] of items){try{const r=await fetch('./'+path+'?v='+VERSION,{cache:'no-store'});results.push([label,r.ok?'OK':'HTTP '+r.status,r.ok])}catch{results.push([label,'Недоступен',false])}}if(msg)msg.innerHTML=results.map(([n,v,ok])=>`<div>${esc2(n)}: <b class="${ok?'ok':'bad'}">${esc2(v)}</b></div>`).join('')+`<div>Соединение: <b>${navigator.onLine?'в сети':'нет сети'}</b></div>`;}
- async function loadPage(){const sess=await sb.auth.getSession();currentSession=sess.data.session;if(!currentSession){signedOut();return}root.innerHTML='<div class="today-profile-loading"><div class="today-profile-spinner"></div><b>Собираем твою страницу…</b><p>Загружаем профиль, сегодняшние публикации и коллекцию.</p></div>';
- const day=moscowToday();const [profile,posts,profilePosts,owned,items]=await Promise.all([
- sb.from('profiles').select('id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level').eq('id',currentSession.user.id).maybeSingle(),
- sb.from('today_publications').select('id,user_id,kind,body,image_url,created_at,day_date').eq('user_id',currentSession.user.id).eq('day_date',day).order('created_at',{ascending:false}).limit(40),
- sb.from('profile_posts').select('id,user_id,body,image_url,image_path,created_at,updated_at').eq('user_id',currentSession.user.id).order('created_at',{ascending:false}).limit(100),
- sb.from('user_shop_items').select('item_id,equipped').eq('user_id',currentSession.user.id),
- sb.from('shop_items').select('id,title,description,price_coins,icon,type,css_class,active').order('price_coins',{ascending:true})
- ]);
- currentProfile=profile.data||{display_name:currentSession.user.email?.split('@')[0]||'Участник TODAY',username:'today',level:1,score_total:0,streak:0,coins:0,avatar_emoji:'✦'};currentPosts=posts.error?[]:(posts.data||[]);currentProfilePosts=profilePosts.error?[]:(profilePosts.data||[]);currentOwned=owned.error?[]:(owned.data||[]).filter(x=>String(x.item_id)!=='rainbow-trace');currentItems=items.error?[]:(items.data||[]);renderShell();if(posts.error)showToast('Не удалось загрузить дневные публикации.');if(profilePosts.error)showToast('Личная стена не загрузилась. Выполни миграцию profile_posts и обнови страницу.');}
+
+ async function loadPage(){
+  const timed = (promise, milliseconds, label) => {
+   let timer;
+   const timeout = new Promise((_, reject) => {
+    timer = setTimeout(
+     () => reject(new Error(label + ': превышено время ожидания (' + Math.round(milliseconds/1000) + ' сек.)')),
+     milliseconds
+    );
+   });
+
+   return Promise.race([
+    Promise.resolve(promise),
+    timeout
+   ]).finally(() => clearTimeout(timer));
+  };
+
+  const sessionResult = await timed(
+   sb.auth.getSession(),
+   10000,
+   'Не удалось восстановить сессию Supabase'
+  );
+
+  currentSession = sessionResult?.data?.session || null;
+
+  if(!currentSession){
+   signedOut();
+   return;
+  }
+
+  root.innerHTML='<div class="today-profile-loading"><div class="today-profile-spinner"></div><b>Собираем твою страницу…</b><p>Загружаем доступные данные TODAY.</p></div>';
+
+  const day = moscowToday();
+
+  const safeQuery = async (query, label) => {
+   try {
+    return await timed(query, 8000, label);
+   } catch(error) {
+    console.warn('[TODAY profile] Query timeout/error:', label, error);
+    return {data: null, error};
+   }
+  };
+
+  const [profile, posts, profilePosts, owned, items] = await Promise.all([
+   safeQuery(
+    sb.from('profiles')
+     .select('id,display_name,username,avatar_emoji,avatar_url,streak,last_seen_date,coins,last_reward_date,score_total,level')
+     .eq('id',currentSession.user.id)
+     .maybeSingle(),
+    'Профиль аккаунта'
+   ),
+
+   safeQuery(
+    sb.from('today_publications')
+     .select('id,user_id,kind,body,image_url,created_at,day_date')
+     .eq('user_id',currentSession.user.id)
+     .eq('day_date',day)
+     .order('created_at',{ascending:false})
+     .limit(40),
+    'Публикации дня'
+   ),
+
+   safeQuery(
+    sb.from('profile_posts')
+     .select('id,user_id,body,image_url,image_path,created_at,updated_at')
+     .eq('user_id',currentSession.user.id)
+     .order('created_at',{ascending:false})
+     .limit(100),
+    'Личная стена'
+   ),
+
+   safeQuery(
+    sb.from('user_shop_items')
+     .select('item_id,equipped')
+     .eq('user_id',currentSession.user.id),
+    'Предметы аккаунта'
+   ),
+
+   safeQuery(
+    sb.from('shop_items')
+     .select('id,title,description,price_coins,icon,type,css_class,active')
+     .order('price_coins',{ascending:true}),
+    'Магазин'
+   )
+  ]);
+
+  currentProfile = profile.data || {
+   display_name: currentSession.user.email?.split('@')[0] || 'Участник TODAY',
+   username: 'today',
+   level: 1,
+   score_total: 0,
+   streak: 0,
+   coins: 0,
+   avatar_emoji: '✦'
+  };
+
+  currentPosts = posts.error ? [] : (posts.data || []);
+  currentProfilePosts = profilePosts.error ? [] : (profilePosts.data || []);
+  currentOwned = owned.error
+   ? []
+   : (owned.data || []).filter(x => String(x.item_id) !== 'rainbow-trace');
+  currentItems = items.error ? [] : (items.data || []);
+
+  // Главная цель — показать интерфейс даже при частичных проблемах БД.
+  renderShell();
+
+  const failed = [
+   profile.error && 'профиль аккаунта',
+   posts.error && 'публикации дня',
+   profilePosts.error && 'личная стена',
+   owned.error && 'коллекция',
+   items.error && 'магазин'
+  ].filter(Boolean);
+
+  if(failed.length){
+   showToast('Профиль открыт частично. Не загрузились: ' + failed.join(', ') + '.');
+  }
+ }
+
  loadPage().catch(err=>{root.innerHTML=`<div class="today-profile-error"><h2>Не удалось открыть профиль</h2><p>${esc2(err.message||String(err))}</p><button type="button" class="today-profile-primary" id="todayProfileRetry">Повторить</button></div>`;$('#todayProfileRetry')?.addEventListener('click',()=>loadPage().catch(()=>{}))});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{installProfileNavigation();makeTools()},{once:true});else{installProfileNavigation();makeTools()}
