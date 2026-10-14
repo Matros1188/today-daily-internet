@@ -1,3 +1,4 @@
+/* TODAY_SOCIAL_STORY_MOV_V69 */
 /* TODAY_PROFILE_POST_PHOTOS_V1 — private, visibility-aware profile images */
 /* TODAY SOCIAL LAYER V1 · persistent profiles, friends, 3 chat types and channels */
 (function(){
@@ -1252,7 +1253,7 @@
   }
 
   function profileStoriesMarkup(stories, own, profileId) {
-    const creator=own?`<details class="ts-story-composer"><summary>＋ Добавить историю <span>на 24 часа</span></summary><form class="ts-form-card" data-social-form="create-story"><label>Текст истории <small>необязательно, максимум 600 символов</small><textarea name="body" maxlength="600" rows="3" placeholder="Что происходит у тебя сегодня?"></textarea></label><label class="ts-photo-field"><span>Фото или короткое видео</span><input name="story_media" type="file" accept="image/jpeg,image/png,image/webp,video/mp4"><small>JPG, PNG, WebP или MP4 · до 25 МБ · исчезает через 24 часа.</small></label><label>Кто увидит историю<select name="visibility"><option value="public">Все пользователи</option><option value="friends">Только друзья</option></select></label><button class="ts-primary" type="submit">Опубликовать историю ↗</button></form></details>`:'';
+    const creator=own?`<details class="ts-story-composer"><summary>＋ Добавить историю <span>на 24 часа</span></summary><form class="ts-form-card" data-social-form="create-story"><label>Текст истории <small>необязательно, максимум 600 символов</small><textarea name="body" maxlength="600" rows="3" placeholder="Что происходит у тебя сегодня?"></textarea></label><label class="ts-photo-field"><span>Фото или короткое видео</span><input name="story_media" type="file" accept="image/*,video/*" capture="environment"><small>Фото/видео · JPG, PNG, WebP, MP4 или MOV · до 25 МБ · исчезает через 24 часа.</small></label><label>Кто увидит историю<select name="visibility"><option value="public">Все пользователи</option><option value="friends">Только друзья</option></select></label><button class="ts-primary" type="submit">Опубликовать историю ↗</button></form></details>`:'';
     const bubbles=stories.length?stories.map((story,i)=>{
       const thumb=story.media_url&&story.media_type==='image'?`<img src="${h(story.media_url)}" alt="" loading="lazy">`:story.media_type==='video'?'<span class="ts-story-play">▶</span>':`<span>${h((story.body||'✦').trim().slice(0,1).toUpperCase())}</span>`;
       return `<button class="ts-story-bubble" data-social-act="view-story" data-id="${h(story.id)}"><span class="ts-story-ring">${thumb}</span><b>${h(story.body||`История ${i+1}`.slice(0,22))}</b><small>${story.visibility==='friends'?'ДРУЗЬЯ':'24 ЧАСА'}</small></button>`;
@@ -1358,13 +1359,17 @@
         let path='';let storyCreated=false;
         try{
           if(file){
-            const type=file.type==='video/mp4'?'video':(['image/jpeg','image/png','image/webp'].includes(file.type)?'image':'');
-            if(!type)throw new Error('Поддерживаются JPG, PNG, WebP и MP4.');
+            const fileName=String(file.name||'');
+            const isVideo=/^video\/(mp4|quicktime|webm)$/i.test(file.type)||/\.(mp4|mov|webm)$/i.test(fileName);
+            const type=isVideo?'video':(/^image\/(jpeg|png|webp)$/i.test(file.type)?'image':'');
+            const videoExt=/^video\/quicktime$/i.test(file.type)||/\.mov$/i.test(fileName)?'mov':(/^video\/webm$/i.test(file.type)||/\.webm$/i.test(fileName)?'webm':'mp4');
+            const normalizedMime=type==='video'?(videoExt==='mov'?'video/quicktime':videoExt==='webm'?'video/webm':'video/mp4'):file.type;
+            if(!type)throw new Error('Поддерживаются JPG, PNG, WebP, MP4, MOV и WebM.');
             if(file.size>25*1024*1024)throw new Error('Файл истории должен быть не больше 25 МБ.');
-            const ext=type==='video'?'mp4':({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[file.type]);
+            const ext=type==='video'?videoExt:({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[file.type]);
             path=`stories/${uid}/${Date.now()}-${Math.random().toString(36).slice(2,10)}.${ext}`;
             if(btn){btn.disabled=true;btn.textContent='ЗАГРУЖАЮ МЕДИА…';}
-            const up=await sb.storage.from('today-social-stories').upload(path,file,{contentType:file.type,upsert:false,cacheControl:'3600'});
+            const up=await sb.storage.from('today-social-stories').upload(path,file,{contentType:normalizedMime,upsert:false,cacheControl:'3600'});
             if(up.error)throw up.error;
             if(btn)btn.textContent='ПУБЛИКУЮ ИСТОРИЮ…';
             await rpc('today_social_create_story',{p_body:body,p_media_path:path,p_media_type:type,p_visibility:String(fd.get('visibility')||'public')});
