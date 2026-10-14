@@ -1,0 +1,467 @@
+/* TODAY V83 — PROFILE JOURNEY */
+
+body.today-profile-route #todayProfilePage .today-profile-v83-journey {
+  position: relative;
+  margin: 20px 0;
+  padding: clamp(16px, 2.5vw, 26px);
+  overflow: hidden;
+  color: var(--text, inherit);
+  border: 1px solid var(--line, rgba(140,160,190,.22));
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(131,187,232,.12), transparent 34%),
+    linear-gradient(145deg, rgba(130,157,190,.105), rgba(255,255,255,.025));
+  box-shadow:
+    0 20px 48px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--muted, rgba(140,160,190,.85));
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .18em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-heading h2 {
+  margin: 0;
+  font-size: clamp(19px, 2.4vw, 25px);
+  font-weight: 850;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-heading p {
+  margin: 7px 0 0;
+  max-width: 520px;
+  color: var(--muted, rgba(140,160,190,.8));
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(140,190,230,.24);
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(130,190,235,.2), rgba(165,145,220,.1));
+  color: #94c9ed;
+  font-size: 22px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-card-preview {
+  position: relative;
+  padding: clamp(16px, 2.4vw, 24px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 22px;
+  color: #f3f7ff;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(123,199,232,.29), transparent 37%),
+    radial-gradient(circle at 0% 100%, rgba(163,144,232,.24), transparent 43%),
+    linear-gradient(130deg, #10192b 0%, #1c314c 58%, #293b56 100%);
+  box-shadow:
+    0 15px 32px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-card-top,
+body.today-profile-route #todayProfilePage .today-profile-v83-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-wordmark i {
+  color: #9adbf1;
+  font-style: normal;
+  font-size: 19px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-card-label {
+  color: rgba(217,234,250,.63);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-person {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 21px 0 22px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 17px;
+  color: #102039;
+  background: linear-gradient(140deg, #a5dff1, #c2b8f3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.58);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-person-details {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-person-details b {
+  overflow: hidden;
+  color: #fff;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-person-details span {
+  overflow: hidden;
+  color: rgba(216,233,250,.7);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-level {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 13px;
+  background: rgba(255,255,255,.075);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-level small {
+  color: rgba(216,233,250,.65);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-level b {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 8px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-mini-stats > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 13px;
+  background: rgba(255,255,255,.055);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-mini-stats small {
+  color: rgba(216,233,250,.61);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .13em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-mini-stats b {
+  overflow-wrap: anywhere;
+  color: #fff;
+  font-size: clamp(12px, 1.6vw, 17px);
+  font-weight: 850;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-card-bottom {
+  margin-top: 16px;
+  color: rgba(216,233,250,.58);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 13px 0 20px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 39px;
+  padding: 10px 13px;
+  border: 1px solid var(--line, rgba(140,160,190,.22));
+  border-radius: 12px;
+  color: inherit;
+  background: var(--glass, rgba(130,150,180,.08));
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-actions button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(125,190,230,.56);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-actions button:first-child {
+  border-color: rgba(124,184,225,.35);
+  background: rgba(111,174,220,.13);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress {
+  padding: 16px;
+  border: 1px solid var(--line, rgba(140,160,190,.18));
+  border-radius: 17px;
+  background: rgba(130,150,180,.045);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-top > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-top small {
+  color: var(--muted, rgba(140,160,190,.75));
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .13em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-top b {
+  font-size: 14px;
+  font-weight: 850;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-top strong {
+  color: #82c9ed;
+  font-size: 19px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-track {
+  height: 7px;
+  margin: 13px 0 8px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(130,150,180,.2);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6abbdc, #a9a0f0);
+  box-shadow: 0 0 16px rgba(115,191,232,.3);
+  transition: width .3s ease;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-progress p {
+  margin: 0;
+  color: var(--muted, rgba(140,160,190,.75));
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 9px;
+  margin-top: 13px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestone {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 11px;
+  border: 1px solid var(--line, rgba(140,160,190,.18));
+  border-radius: 15px;
+  background: rgba(130,150,180,.045);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestone-symbol {
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  color: #92d4ef;
+  background: rgba(113,181,225,.12);
+  font-size: 15px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestone > div:last-child {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestone small {
+  color: var(--muted, rgba(140,160,190,.7));
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .09em;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestone b {
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-milestone span {
+  color: var(--muted, rgba(140,160,190,.7));
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage .today-profile-v83-journey {
+  color: #26354a;
+  border-color: rgba(98,120,156,.20);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(112,173,219,.12), transparent 35%),
+    linear-gradient(145deg, rgba(255,255,255,.74), rgba(221,234,247,.49));
+  box-shadow: 0 16px 38px rgba(80,103,135,.09), inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage .today-profile-v83-progress,
+html.today-theme-light body.today-profile-route #todayProfilePage .today-profile-v83-milestone {
+  border-color: rgba(98,120,156,.17);
+  background: rgba(255,255,255,.38);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v83-actions button:focus-visible {
+  outline: 2px solid #80c5e9;
+  outline-offset: 3px;
+}
+
+@media (max-width: 680px) {
+  body.today-profile-route #todayProfilePage .today-profile-v83-journey {
+    padding: 14px;
+    border-radius: 21px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-card-preview {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-person {
+    gap: 9px;
+    margin: 17px 0;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-avatar {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-level {
+    min-width: 52px;
+    padding: 7px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-level b {
+    font-size: 21px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-mini-stats {
+    gap: 6px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-mini-stats > div {
+    padding: 9px 7px;
+    border-radius: 11px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-card-bottom {
+    align-items: flex-start;
+    font-size: 7px;
+    letter-spacing: .05em;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-milestones {
+    grid-template-columns: minmax(0,1fr);
+    gap: 8px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-milestone {
+    align-items: center;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v83-actions button {
+    flex: 1 1 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.today-profile-route #todayProfilePage .today-profile-v83-actions button,
+  body.today-profile-route #todayProfilePage .today-profile-v83-progress-track span {
+    transition: none !important;
+  }
+}
