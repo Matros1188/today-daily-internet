@@ -1,0 +1,284 @@
+/* TODAY HOME V72 — compact mobile UX and live-stage polish */
+
+html {
+  scroll-padding-top: 78px;
+}
+
+body {
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.today-section,
+.community-section,
+.ranking-section {
+  scroll-margin-top: 76px;
+}
+
+.today-v72-rubric-control {
+  width: min(100%, 460px);
+  margin: 13px auto 2px;
+}
+
+.today-v72-rubric-control[hidden] {
+  display: none !important;
+}
+
+.today-v72-rubric-control > button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 9px 12px;
+  border: 1px solid rgba(130,170,255,.23);
+  border-radius: 16px;
+  text-align: left;
+  color: var(--text, #edf2ff);
+  background:
+    linear-gradient(135deg,
+      rgba(130,170,255,.105),
+      rgba(114,224,192,.055));
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: border-color .16s ease, transform .16s ease;
+}
+
+.today-v72-rubric-control > button:active {
+  transform: scale(.99);
+}
+
+.today-v72-rubric-toggle-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(130,170,255,.20);
+  border-radius: 11px;
+  color: #94b7ff;
+  background: rgba(130,170,255,.09);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.today-v72-rubric-toggle-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.today-v72-rubric-toggle-copy b {
+  font: 800 12px/1.3 Manrope, system-ui, sans-serif;
+  letter-spacing: -.015em;
+}
+
+.today-v72-rubric-toggle-copy small {
+  font: 500 10px/1.35 Manrope, system-ui, sans-serif;
+  opacity: .64;
+}
+
+.today-v72-rubric-toggle-count {
+  display: grid;
+  place-items: center;
+  min-width: 27px;
+  min-height: 27px;
+  padding: 2px;
+  border-radius: 9px;
+  background: rgba(130,170,255,.10);
+  font: 800 11px/1 Manrope, system-ui, sans-serif;
+}
+
+html.today-v72-mobile:not(.today-v72-rubrics-expanded)
+  #dailyGrid .daily-card:nth-child(n+7) {
+  display: none !important;
+}
+
+html.today-v72-mobile.today-v72-rubrics-expanded
+  #dailyGrid .daily-card:nth-child(n+7) {
+  display: flex !important;
+}
+
+#dailyGrid .daily-card {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#dailyGrid .daily-card .card-actions button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  .bottom-nav {
+    padding-bottom:
+      max(6px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  #dailyGrid .daily-card .card-body p {
+    -webkit-line-clamp: 2 !important;
+  }
+
+  #dailyGrid .daily-card .card-actions {
+    gap: 5px;
+  }
+
+  #dailyGrid .daily-card .primary-button,
+  #dailyGrid .daily-card .secondary-button {
+    min-height: 40px !important;
+    overflow-wrap: anywhere;
+  }
+
+  .today-v72-rubric-control {
+    margin-top: 10px;
+  }
+
+  .today-v72-rubric-control > button {
+    min-height: 54px;
+    border-radius: 15px;
+  }
+
+  #todayV69LiveOverlay {
+    display: grid !important;
+    place-items: stretch !important;
+    padding: 0 !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .today-v69-live-card {
+    width: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding:
+      max(16px, env(safe-area-inset-top, 0px))
+      13px
+      max(20px, env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .today-v69-live-head {
+    align-items: flex-start;
+    gap: 9px;
+    margin-bottom: 12px !important;
+  }
+
+  .today-v69-live-head > div {
+    min-width: 0;
+  }
+
+  .today-v69-live-head h2 {
+    font-size: clamp(23px, 6vw, 30px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .today-v69-live-head p,
+  .today-v69-live-note {
+    font-size: 11px !important;
+    line-height: 1.48 !important;
+  }
+
+  .today-v69-live-close {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 !important;
+    border-radius: 13px !important;
+    font-size: 25px !important;
+  }
+
+  .today-v69-live-btn {
+    min-height: 46px !important;
+    padding: 11px 12px !important;
+    border-radius: 13px !important;
+    font-size: 12px !important;
+    touch-action: manipulation;
+  }
+
+  .today-v69-live-field {
+    font-size: 12px !important;
+  }
+
+  .today-v69-live-field input {
+    min-height: 48px !important;
+    font-size: 16px !important;
+  }
+
+  .today-v69-live-video-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 9px !important;
+  }
+
+  .today-v69-live-video-wrap {
+    padding: 8px !important;
+    border-radius: 16px !important;
+  }
+
+  .today-v69-live-video-wrap video {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 46dvh !important;
+    aspect-ratio: 9 / 16 !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+  }
+
+  .today-v69-live-video-grid
+    .today-v69-live-video-wrap:last-child:not(:has(video)) {
+    min-height: 72px;
+  }
+
+  .today-v69-live-code {
+    margin: 8px 0 !important;
+    padding: 12px !important;
+    font-size: clamp(18px, 5vw, 22px) !important;
+    letter-spacing: .10em !important;
+    text-align: center;
+  }
+
+  .today-v69-live-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 8px !important;
+    margin: 10px 0 !important;
+  }
+
+  .today-v69-live-status {
+    margin: 10px 0 !important;
+    font-size: 12px !important;
+    overflow-wrap: anywhere;
+  }
+}
+
+html.today-theme-light .today-v72-rubric-control > button {
+  color: #283650;
+  border-color: rgba(64,87,132,.17);
+  background: linear-gradient(135deg, #f7f9ff, #edf4fb);
+  box-shadow: 0 5px 16px rgba(48,67,108,.045);
+}
+
+html.today-theme-light .today-v72-rubric-toggle-icon {
+  color: #4e6fc0;
+  border-color: rgba(64,87,132,.15);
+  background: rgba(80,112,185,.075);
+}
+
+html.today-theme-light .today-v72-rubric-toggle-count {
+  color: #405780;
+  background: rgba(80,112,185,.075);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-v72-rubric-control > button {
+    transition: none !important;
+  }
+}
