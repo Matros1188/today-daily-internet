@@ -1,0 +1,102 @@
+/* TODAY HOME V73 — compact mobile quick actions */
+
+html {
+  scroll-padding-top: 76px;
+}
+
+@media (max-width: 640px) {
+  html.today-v73-mobile-actions #todayV69QuickBar {
+    width: 100%;
+    min-width: 0;
+    margin: 7px auto 15px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  html.today-v73-mobile-actions .today-v70-quickbar-inner {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: stretch;
+    gap: 6px !important;
+    width: 100%;
+    min-width: 0;
+    padding: 1px 0 3px !important;
+    overflow: visible !important;
+    overscroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+
+  html.today-v73-mobile-actions .today-v70-action {
+    display: flex !important;
+    flex: none !important;
+    align-self: stretch;
+    justify-self: stretch;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 63px !important;
+    gap: 5px !important;
+    padding: 7px 2px !important;
+    border-radius: 14px !important;
+    scroll-snap-align: none !important;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  html.today-v73-mobile-actions .today-v70-action .today-v70-action-icon {
+    display: grid;
+    place-items: center;
+    width: 25px !important;
+    height: 25px !important;
+    min-height: 25px !important;
+    flex: 0 0 25px;
+  }
+
+  html.today-v73-mobile-actions .today-v70-action svg {
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+  html.today-v73-mobile-actions .today-v70-action b {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(8px, 2.45vw, 10px) !important;
+    line-height: 1.12 !important;
+    white-space: normal !important;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  html.today-v73-mobile-actions .today-v70-action:active {
+    transform: scale(.97);
+  }
+
+  html.today-v73-mobile-actions .today-v70-action:focus-visible {
+    outline: 2px solid var(--v71-blue, #82aaff) !important;
+    outline-offset: 2px;
+  }
+
+  html.today-v73-mobile-actions #dailyGrid {
+    min-width: 0;
+  }
+}
+
+@media (min-width: 641px) {
+  html.today-v73-mobile-actions .today-v70-quickbar-inner {
+    display: flex;
+  }
+}
+
+html.today-theme-light.today-v73-mobile-actions .today-v70-action {
+  border-color: rgba(64,87,132,.15) !important;
+  background: linear-gradient(145deg,#fbfcff,#f0f4fb) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.today-v73-mobile-actions .today-v70-action {
+    transition: none !important;
+  }
+  html.today-v73-mobile-actions .today-v70-action:active {
+    transform: none !important;
+  }
+}

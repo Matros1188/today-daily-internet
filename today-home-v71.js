@@ -196,7 +196,7 @@
         }
       });
     }, {
-      root: grid,
+      root: $('.today-v66-media-content', modal) || null,
       threshold: [0, 0.35, 0.65, 0.9]
     });
 
