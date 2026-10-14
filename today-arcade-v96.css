@@ -1,0 +1,843 @@
+
+/* ================================================================
+   TODAY ARCADE V96 — PREMIUM VISUAL PASS
+   ================================================================ */
+
+:root {
+  --v96-mint: #91fff0;
+  --v96-blue: #91b8ff;
+  --v96-purple: #c1a0ff;
+  --v96-gold: #ffe0a0;
+  --v96-pink: #ffa4d0;
+  --v96-line: rgba(172, 199, 255, .18);
+  --v96-panel: rgba(9, 16, 32, .96);
+}
+
+/* ================================================================
+   STICKY FLOATING BOTTOM NAVIGATION
+   Higher specificity intentionally overrides older glass rules
+   which set .bottom-nav to position:relative!important.
+   ================================================================ */
+
+html body:not(.today-social-page-mode) nav.bottom-nav {
+  position: fixed !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
+
+  width: min(590px, calc(100vw - 24px)) !important;
+  height: 72px !important;
+  min-height: 72px !important;
+  padding: 7px !important;
+  gap: 5px !important;
+
+  transform: translateX(-50%) !important;
+  transform-origin: center bottom !important;
+  z-index: 2147480000 !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+
+  border: 1px solid rgba(163, 194, 255, .25) !important;
+  border-radius: 25px !important;
+
+  background:
+    radial-gradient(
+      ellipse at 16% 0,
+      rgba(142, 167, 255, .13),
+      transparent 48%
+    ),
+    linear-gradient(
+      140deg,
+      rgba(15, 23, 44, .94),
+      rgba(6, 12, 26, .94)
+    ) !important;
+
+  box-shadow:
+    0 22px 65px rgba(0, 0, 0, .32),
+    0 0 32px rgba(98, 137, 255, .07),
+    inset 0 1px 0 rgba(255, 255, 255, .15) !important;
+
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav::before {
+  z-index: -1 !important;
+  opacity: .60 !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav::after {
+  pointer-events: none !important;
+  border-radius: inherit !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link {
+  position: relative !important;
+  isolation: isolate !important;
+  display: flex !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  flex: initial !important;
+
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+
+  margin: 0 !important;
+  padding: 7px 2px !important;
+  overflow: hidden !important;
+
+  border: 1px solid transparent !important;
+  border-radius: 17px !important;
+
+  color: #98accf !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  font: inherit !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+
+  transition:
+    color .20s ease,
+    background .20s ease,
+    border-color .20s ease,
+    transform .20s ease !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button:hover,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link:hover {
+  color: #f3f8ff !important;
+  background: rgba(255, 255, 255, .055) !important;
+  border-color: rgba(177, 201, 255, .12) !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button.active,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link.active {
+  color: #0b2035 !important;
+  border-color: rgba(255, 255, 255, .45) !important;
+  background:
+    linear-gradient(135deg, #b7fff0, #a4dcff 55%, #d0b6ff) !important;
+
+  box-shadow:
+    0 5px 18px rgba(113, 203, 255, .18),
+    inset 0 1px 0 rgba(255, 255, 255, .7) !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button > span,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link > span {
+  position: relative !important;
+  z-index: 2 !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 27px !important;
+  height: 27px !important;
+  min-width: 27px !important;
+  margin: 0 !important;
+
+  color: inherit !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+
+  filter: none !important;
+  transition: transform .20s ease, filter .20s ease !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button.active > span,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link.active > span {
+  transform: translateY(-1px) scale(1.035) !important;
+  filter: drop-shadow(0 3px 6px rgba(61, 89, 148, .17)) !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button > small,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link > small {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: 8px !important;
+  font-weight: 950 !important;
+  line-height: 1.05 !important;
+  letter-spacing: .06em !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav > button.active > small,
+html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link.active > small {
+  color: #102a40 !important;
+}
+
+/* Beautiful double-message icon */
+.today-v96-chat-icon {
+  color: inherit !important;
+}
+
+.today-v96-chat-icon svg {
+  display: block !important;
+  width: 25px !important;
+  height: 25px !important;
+  overflow: visible !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 1.8 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav
+> button[data-nav="chats"] .today-v96-chat-icon svg {
+  filter: drop-shadow(0 0 8px rgba(132, 208, 255, .18));
+}
+
+html body:not(.today-social-page-mode) nav.bottom-nav
+> button[data-nav="chats"].active .today-v96-chat-icon svg {
+  filter: drop-shadow(0 0 7px rgba(23, 76, 126, .18));
+}
+
+html body:not(.today-social-page-mode) {
+  padding-bottom: calc(97px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+@media (max-width: 520px) {
+  html body:not(.today-social-page-mode) nav.bottom-nav {
+    width: calc(100vw - 20px) !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 7px) !important;
+    padding: 6px !important;
+    gap: 3px !important;
+    border-radius: 22px !important;
+  }
+
+  html body:not(.today-social-page-mode) nav.bottom-nav > button,
+  html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link {
+    gap: 4px !important;
+    padding: 6px 1px !important;
+    border-radius: 15px !important;
+  }
+
+  html body:not(.today-social-page-mode) nav.bottom-nav > button > span,
+  html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link > span {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    font-size: 18px !important;
+  }
+
+  .today-v96-chat-icon svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  html body:not(.today-social-page-mode) nav.bottom-nav > button > small,
+  html body:not(.today-social-page-mode) nav.bottom-nav > a.today-profile-nav-link > small {
+    font-size: 7px !important;
+    letter-spacing: .035em !important;
+  }
+}
+
+/* When dedicated social page mode is active, preserve its original
+   behavior: the application hides the bottom navigation intentionally. */
+
+
+/* ================================================================
+   GAME-SPECIFIC LIGHTING + RENDER FINISH
+   ================================================================ */
+
+#modal.today-v96-playing {
+  --v96-game-glow: rgba(130, 165, 255, .13);
+  border-color: rgba(159, 190, 255, .20);
+}
+
+#modal.today-v96-playing .modal-card {
+  background:
+    radial-gradient(ellipse at 50% 0, var(--v96-game-glow), transparent 58%),
+    linear-gradient(155deg, rgba(11, 18, 35, .985), rgba(5, 10, 22, .995)) !important;
+
+  border-color: rgba(161, 192, 255, .21) !important;
+  box-shadow:
+    0 34px 105px rgba(0, 0, 0, .40),
+    inset 0 1px 0 rgba(255, 255, 255, .055) !important;
+}
+
+#modal.today-v96-playing .ts-panel-head h2 {
+  color: #f5f8ff !important;
+  font-weight: 1000 !important;
+  letter-spacing: -.055em !important;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, .24);
+}
+
+#modal.today-v96-playing .ts-game-stage {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+
+  border: 1px solid rgba(162, 190, 249, .18) !important;
+  border-radius: 23px !important;
+
+  background:
+    radial-gradient(ellipse at 50% 0, var(--v96-game-glow), transparent 63%),
+    linear-gradient(145deg, rgba(17, 27, 49, .97), rgba(6, 12, 25, .98)) !important;
+
+  box-shadow:
+    0 23px 65px rgba(0, 0, 0, .22),
+    inset 0 1px 0 rgba(255, 255, 255, .055) !important;
+}
+
+#modal.today-v96-playing .ts-game-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(118deg, rgba(255,255,255,.035), transparent 24%, transparent 75%, rgba(255,255,255,.025)),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.018), transparent 60%);
+}
+
+#modal.today-v96-playing .ts-game-stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+#modal.today-v96-playing .ts-game-hud {
+  gap: 8px !important;
+  color: #94acd5 !important;
+}
+
+#modal.today-v96-playing .ts-game-hud > span {
+  border: 1px solid rgba(158, 190, 250, .15) !important;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(140deg, rgba(255,255,255,.052), rgba(255,255,255,.013)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .045) !important;
+}
+
+#modal.today-v96-playing .ts-game-hud b {
+  color: #f4f8ff !important;
+  font-size: clamp(19px, 2.8vw, 26px) !important;
+  font-weight: 1000 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.045em !important;
+  text-shadow: 0 0 20px rgba(169, 197, 255, .10);
+}
+
+#modal.today-v96-playing .ts-game-status {
+  color: #b2c4e4 !important;
+  border: 1px solid rgba(157, 189, 247, .12) !important;
+  border-radius: 13px !important;
+  padding: 10px 13px !important;
+  background: rgba(255, 255, 255, .026) !important;
+  line-height: 1.7 !important;
+}
+
+#modal.today-v96-playing .ts-game-stage canvas {
+  display: block;
+  max-width: 100%;
+  border-radius: 15px;
+  filter: saturate(1.16) contrast(1.045);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, .22),
+    0 0 26px var(--v96-game-glow);
+}
+
+#modal.today-v96-playing .ts-flappy-wrap,
+#modal.today-v96-playing .ts-extra-canvas-wrap {
+  border: 1px solid rgba(170, 200, 255, .23) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, .23),
+    0 0 29px var(--v96-game-glow),
+    inset 0 1px 0 rgba(255, 255, 255, .06) !important;
+}
+
+#modal.today-v96-playing .ts-merge-board,
+#modal.today-v96-playing .ts-memory-board,
+#modal.today-v96-playing .ts-match-board,
+#modal.today-v96-playing .ts-extra-snake-board,
+#modal.today-v96-playing .ts-extra-ttt-board,
+#modal.today-v96-playing .ts-extra-color-choices {
+  border: 1px solid rgba(167, 197, 255, .18) !important;
+  border-radius: 17px !important;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, .17),
+    inset 0 1px 0 rgba(255, 255, 255, .04) !important;
+}
+
+#modal.today-v96-playing .ts-merge-tile,
+#modal.today-v96-playing .ts-memory-card,
+#modal.today-v96-playing .ts-match-cell {
+  transition:
+    transform .16s cubic-bezier(.2, .8, .2, 1),
+    filter .16s ease,
+    border-color .16s ease,
+    box-shadow .16s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#modal.today-v96-playing .ts-merge-tile:active,
+#modal.today-v96-playing .ts-memory-card:active,
+#modal.today-v96-playing .ts-match-cell:active {
+  transform: scale(.95);
+  filter: brightness(1.14);
+}
+
+#modal.today-v96-playing .ts-extra-ttt-board button {
+  border: 1px solid rgba(160, 194, 255, .22) !important;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(145deg, rgba(105, 151, 235, .14), rgba(255,255,255,.025)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.055) !important;
+  transition:
+    transform .16s ease,
+    border-color .16s ease,
+    filter .16s ease !important;
+}
+
+#modal.today-v96-playing .ts-extra-ttt-board button:active {
+  transform: scale(.96);
+}
+
+/* Distinct environment for each game. */
+
+#modal.today-v96-playing[data-v96-game="match3"] {
+  --v96-game-glow: rgba(181, 130, 255, .20);
+}
+
+#modal.today-v96-playing[data-v96-game="flappy"] {
+  --v96-game-glow: rgba(80, 194, 255, .18);
+}
+
+#modal.today-v96-playing[data-v96-game="merge2048"] {
+  --v96-game-glow: rgba(81, 239, 203, .17);
+}
+
+#modal.today-v96-playing[data-v96-game="memory"] {
+  --v96-game-glow: rgba(187, 142, 255, .18);
+}
+
+#modal.today-v96-playing[data-v96-game="snake"] {
+  --v96-game-glow: rgba(63, 255, 178, .19);
+}
+
+#modal.today-v96-playing[data-v96-game="pulse"] {
+  --v96-game-glow: rgba(77, 255, 222, .19);
+}
+
+#modal.today-v96-playing[data-v96-game="breakout"] {
+  --v96-game-glow: rgba(255, 135, 110, .19);
+}
+
+#modal.today-v96-playing[data-v96-game="ttt"] {
+  --v96-game-glow: rgba(110, 161, 255, .18);
+}
+
+#modal.today-v96-playing[data-v96-game="word"] {
+  --v96-game-glow: rgba(255, 199, 112, .17);
+}
+
+#modal.today-v96-playing[data-v96-game="colorsnap"] {
+  --v96-game-glow: rgba(255, 115, 194, .18);
+}
+
+#modal.today-v96-playing[data-v96-game="stacker"] {
+  --v96-game-glow: rgba(127, 191, 255, .19);
+}
+
+#modal.today-v96-playing[data-v96-game="laserdodge"] {
+  --v96-game-glow: rgba(255, 85, 133, .20);
+}
+
+#modal.today-v96-playing[data-v96-game="quiz"] {
+  --v96-game-glow: rgba(255, 211, 132, .17);
+}
+
+#modal.today-v96-playing[data-v96-game="starcatch"] {
+  --v96-game-glow: rgba(170, 153, 255, .19);
+}
+
+/* ================================================================
+   V96 SIDE QUESTS / COLLECTABLE GAME SEALS
+   ================================================================ */
+
+.today-v96-quest {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(154, 188, 252, .18);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 100% 0, rgba(152, 135, 255, .12), transparent 47%),
+    linear-gradient(145deg, rgba(22, 31, 57, .86), rgba(8, 14, 29, .94));
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, .14),
+    inset 0 1px 0 rgba(255, 255, 255, .045);
+}
+
+.today-v96-quest::after {
+  content: "✦";
+  position: absolute;
+  z-index: -1;
+  right: 14px;
+  top: 2px;
+  color: rgba(204, 217, 255, .075);
+  font-size: 82px;
+  line-height: 1;
+  transform: rotate(-13deg);
+  pointer-events: none;
+}
+
+.today-v96-quest-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.today-v96-quest-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #a8b7e7;
+  font-size: 8px;
+  font-weight: 1000;
+  letter-spacing: .15em;
+  line-height: 1.5;
+}
+
+.today-v96-quest-kicker i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9ef7e7;
+  box-shadow: 0 0 11px rgba(158, 247, 231, .45);
+}
+
+.today-v96-quest h3 {
+  margin: 7px 0 5px;
+  color: #f5f8ff;
+  font-size: clamp(14px, 2.5vw, 19px);
+  font-weight: 1000;
+  letter-spacing: -.035em;
+  line-height: 1.18;
+}
+
+.today-v96-quest p {
+  max-width: 650px;
+  margin: 0;
+  color: #97accf;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.today-v96-seal {
+  display: grid;
+  place-items: center;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  border: 1px solid rgba(184, 165, 255, .30);
+  border-radius: 14px;
+  color: #d4c5ff;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.12), transparent 60%),
+    rgba(120, 99, 211, .14);
+  font-size: 19px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.today-v96-quest.is-complete .today-v96-seal {
+  color: #14372e;
+  border-color: rgba(163, 255, 223, .65);
+  background: linear-gradient(140deg, #bbffea, #a4e6ff);
+  box-shadow:
+    0 0 23px rgba(126, 255, 220, .14),
+    inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+.today-v96-quest-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #7f95bb;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .07em;
+}
+
+.today-v96-quest-state {
+  color: #b3c5e8;
+}
+
+.today-v96-quest.is-complete .today-v96-quest-state {
+  color: #9bffdf;
+}
+
+.today-v96-quest-track {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(159, 185, 240, .11);
+  border-radius: 999px;
+  background: rgba(2, 7, 18, .56);
+}
+
+.today-v96-quest-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8d96ff, #b8a5ff 40%, #8effdd);
+  box-shadow: 0 0 15px rgba(146, 180, 255, .22);
+  transition: width .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.today-v96-quest.is-complete .today-v96-quest-fill {
+  background: linear-gradient(90deg, #90ffd9, #b6fff2, #c5e4ff);
+  box-shadow: 0 0 18px rgba(142, 255, 216, .25);
+}
+
+.today-v96-quest-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #788eb5;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.today-v96-quest-bottom b {
+  color: #bdcdec;
+  font-weight: 950;
+}
+
+/* Quest info in the game selector */
+
+.today-v96-seal-shelf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 17px;
+  border: 1px solid rgba(155, 183, 244, .15);
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 0 50%, rgba(149, 136, 255, .10), transparent 50%),
+    linear-gradient(135deg, rgba(20, 28, 52, .86), rgba(8, 14, 28, .91));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.today-v96-seal-shelf-left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 12px;
+}
+
+.today-v96-shelf-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 39px;
+  width: 39px;
+  height: 39px;
+  border: 1px solid rgba(184, 166, 255, .25);
+  border-radius: 13px;
+  color: #cbbaff;
+  background: rgba(137, 110, 232, .10);
+  font-size: 18px;
+}
+
+.today-v96-shelf-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.today-v96-shelf-copy b {
+  color: #e9efff;
+  font-size: 10px;
+  font-weight: 1000;
+  letter-spacing: .035em;
+}
+
+.today-v96-shelf-copy small {
+  color: #8398bd;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.today-v96-shelf-count {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.today-v96-shelf-count strong {
+  color: #c3b4ff;
+  font-size: 23px;
+  font-weight: 1000;
+  line-height: 1;
+  letter-spacing: -.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.today-v96-shelf-count small {
+  color: #768bb0;
+  font-size: 7px;
+  font-weight: 950;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+
+/* Crystal campaign polish */
+
+#modal.today-v96-crystal {
+  --v96-game-glow: rgba(177, 132, 255, .21);
+}
+
+#modal.today-v96-crystal .ts-m3-royal-hero {
+  border-color: rgba(184, 153, 255, .27);
+  box-shadow:
+    0 28px 68px rgba(0,0,0,.23),
+    0 0 35px rgba(142, 111, 255, .06),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+#modal.today-v96-crystal .ts-m3-chapter {
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+
+#modal.today-v96-crystal .ts-m3-chapter[open] {
+  border-color: rgba(189, 161, 255, .34);
+  box-shadow:
+    0 13px 33px rgba(0,0,0,.11),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+#modal.today-v96-crystal .ts-m3-level:not(.is-locked) {
+  transition:
+    transform .15s ease,
+    filter .15s ease,
+    border-color .15s ease;
+}
+
+#modal.today-v96-crystal .ts-m3-level:not(.is-locked):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  border-color: rgba(197, 171, 255, .47);
+}
+
+#modal.today-v96-crystal .ts-m3-board-wrap {
+  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, .16));
+}
+
+/* Light theme support */
+
+html.today-theme-light .today-v96-quest,
+html.today-theme-light .today-v96-seal-shelf {
+  border-color: rgba(99, 125, 178, .20);
+  background:
+    radial-gradient(ellipse at 100% 0, rgba(145, 143, 235, .12), transparent 55%),
+    linear-gradient(140deg, rgba(246,248,255,.98), rgba(231,238,251,.98));
+}
+
+html.today-theme-light .today-v96-quest h3,
+html.today-theme-light .today-v96-shelf-copy b {
+  color: #1b2a49;
+}
+
+html.today-theme-light .today-v96-quest p,
+html.today-theme-light .today-v96-quest-bottom,
+html.today-theme-light .today-v96-shelf-copy small {
+  color: #617493;
+}
+
+html.today-theme-light .today-v96-quest-state {
+  color: #465f86;
+}
+
+html.today-theme-light .today-v96-quest-meta {
+  color: #6c7d9b;
+}
+
+html.today-theme-light .today-v96-seal {
+  color: #6c56b6;
+  background: rgba(155, 133, 230, .10);
+}
+
+html.today-theme-light .today-v96-shelf-icon {
+  color: #6a55bd;
+  background: rgba(155, 133, 230, .10);
+}
+
+/* Mobile and reduced motion */
+
+@media (max-width: 620px) {
+  .today-v96-quest {
+    padding: 13px;
+    border-radius: 15px;
+  }
+
+  .today-v96-seal-shelf {
+    padding: 12px;
+    border-radius: 15px;
+  }
+
+  .today-v96-shelf-copy b {
+    font-size: 9px;
+  }
+
+  .today-v96-shelf-copy small {
+    font-size: 8px;
+  }
+
+  .today-v96-shelf-count strong {
+    font-size: 20px;
+  }
+
+  #modal.today-v96-playing .ts-game-stage {
+    border-radius: 19px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-v96-quest *,
+  .today-v96-seal-shelf *,
+  #modal.today-v96-playing *,
+  html body nav.bottom-nav * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
