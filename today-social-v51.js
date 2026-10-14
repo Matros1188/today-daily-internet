@@ -108,9 +108,24 @@ function renderShell(){
    <small class="today-profile-v63-eyebrow">TODAY · ЛИЧНАЯ СТРАНИЦА</small>
    <h1>${esc2(name)}</h1>
    <p class="today-profile-v63-username">@${esc2(username)}</p>
+   <div class="today-profile-v81-intro">
+    <p>${esc2(String(local.bio||'Собери здесь свою историю. Это пространство остаётся с тобой.'))}</p>
+    <div class="today-profile-v81-interest-tags">${(Array.isArray(local.interests)?local.interests:[]).map(tag=>String(tag||'').trim()).filter(Boolean).slice(0,5).map(tag=>`<span>${esc2(tag)}</span>`).join('')}</div>
+    <div class="today-profile-v81-hero-actions">
+     <button type="button" data-profile-action="edit">Настроить страницу</button>
+     <button type="button" data-v81-copy-username data-v81-username="${esc2(username)}">Копировать ник ↗</button>
+    </div>
+   </div>
   </header>
+  <section class="today-profile-v81-stats" aria-label="Статистика аккаунта">
+   <article><small>УРОВЕНЬ</small><b>${Math.max(1,Number(p.level||1))}</b><span>Твой путь в TODAY</span></article>
+   <article><small>ОПЫТ</small><b>${Math.max(0,Number(p.score_total||0)).toLocaleString('ru-RU')}</b><span>XP накоплено</span></article>
+   <article><small>СЕРИЯ</small><b>${Math.max(0,Number(p.streak||0))}</b><span>дней подряд</span></article>
+   <article><small>МОНЕТЫ</small><b>${Math.max(0,Number(p.coins||0)).toLocaleString('ru-RU')}</b><span>баланс аккаунта</span></article>
+   <article><small>ЗАПИСИ</small><b>${currentProfilePosts.length}</b><span>личная стена</span></article>
+  </section>
   <nav class="today-profile-v63-tabs" aria-label="Разделы личной страницы">
-   ${[['videos','▣','Мои видео'],['music','♫','Моя музыка'],['messages','▤','Мои сообщения']].map(([id,icon,label])=>`<button type="button" data-profile-tab="${id}" class="${activeTab===id?'active':''}" aria-pressed="${activeTab===id?'true':'false'}"><span aria-hidden="true">${icon}</span><b>${label}</b></button>`).join('')}
+   ${[['posts','⌂','Моя стена'],['daily','◷','Сегодня'],['videos','▣','Мои видео'],['music','♫','Моя музыка'],['messages','▤','Мои сообщения']].map(([id,icon,label])=>`<button type="button" data-profile-tab="${id}" class="${activeTab===id?'active':''}" aria-pressed="${activeTab===id?'true':'false'}"><span aria-hidden="true">${icon}</span><b>${label}</b></button>`).join('')}
   </nav>
   <div id="todayProfileEdit" class="today-profile-edit" hidden><div class="today-profile-panel-head"><div><small>НАСТРОЙКИ ПРОФИЛЯ</small><h3>Покажи себя</h3></div><button type="button" data-profile-action="close-edit" aria-label="Закрыть">×</button></div><form id="todayProfileEditForm"><label>Отображаемое имя<input id="todayProfileNickname" required maxlength="32" value="${esc2(name)}" placeholder="Твой ник"></label><label class="today-profile-file">Фото профиля<input id="todayProfileAvatarFile" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG или WebP. Файл отправляется через защищённый user-write endpoint.</small></label><label>Интересы через запятую<input id="todayProfileInterests" maxlength="220" value="${esc2((local.interests||[]).join(', '))}" placeholder="Игры, музыка, кино"></label><label>Короткая подпись<textarea id="todayProfileBio" maxlength="180" placeholder="Что стоит знать о тебе?">${esc2(local.bio||'')}</textarea><small>Подпись хранится локально в этом браузере — это не поле базы аккаунта.</small></label><div class="today-profile-actions"><button type="submit" class="today-profile-primary">Сохранить профиль</button><button type="button" class="today-profile-secondary" data-profile-action="close-edit">Отмена</button></div><p id="todayProfileSaveMessage" class="today-profile-note"></p></form></div>
   <section id="todayProfileTabContent" class="today-profile-tab-content today-profile-v63-content">${renderTab()}</section>
