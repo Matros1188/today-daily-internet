@@ -1,0 +1,936 @@
+
+/* TODAY ARCADE V91 — IMMERSIVE EDITION */
+:root {
+  --today-arcade-v91-cyan: #79f3e1;
+  --today-arcade-v91-blue: #80b7ff;
+  --today-arcade-v91-violet: #b5a0ff;
+  --today-arcade-v91-pink: #ff9fc8;
+  --today-arcade-v91-panel: rgba(13, 20, 42, .94);
+}
+
+.ts-games-home {
+  position: relative;
+  display: grid;
+  gap: clamp(16px, 2.2vw, 26px);
+  isolation: isolate;
+}
+
+.ts-games-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(152, 177, 255, .30) !important;
+  border-radius: 26px !important;
+  padding: clamp(20px, 3vw, 34px) !important;
+  background:
+    radial-gradient(ellipse at 88% 5%, rgba(143, 115, 255, .28), transparent 40%),
+    radial-gradient(ellipse at 0% 100%, rgba(59, 222, 212, .13), transparent 48%),
+    linear-gradient(135deg, #192545, #0b1228 70%, #111630) !important;
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, .25),
+    inset 0 1px 0 rgba(255, 255, 255, .09) !important;
+}
+
+.ts-games-hero::before,
+.ts-games-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.ts-games-hero::before {
+  width: 210px;
+  height: 210px;
+  right: -68px;
+  top: -115px;
+  background: radial-gradient(circle, rgba(120, 154, 255, .30), transparent 70%);
+  animation: today-arcade-orbit 9s ease-in-out infinite alternate;
+}
+
+.ts-games-hero::after {
+  width: 150px;
+  height: 150px;
+  right: 16%;
+  bottom: -105px;
+  background: radial-gradient(circle, rgba(90, 238, 211, .18), transparent 70%);
+  animation: today-arcade-orbit 12s ease-in-out infinite alternate-reverse;
+}
+
+.ts-games-hero h3 {
+  max-width: 720px;
+  font-size: clamp(25px, 4.4vw, 43px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.065em !important;
+  text-wrap: balance;
+}
+
+.ts-games-hero p {
+  max-width: 610px;
+  font-size: clamp(12px, 1.3vw, 14px) !important;
+  line-height: 1.8 !important;
+}
+
+.ts-games-home .ts-game-grid {
+  gap: clamp(10px, 1.5vw, 18px) !important;
+}
+
+.ts-games-home .ts-game-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(153, 183, 255, .22) !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(121, 145, 255, .10), transparent 54%),
+    linear-gradient(145deg, rgba(22, 32, 59, .98), rgba(7, 13, 29, .98)) !important;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, .19),
+    inset 0 1px 0 rgba(255, 255, 255, .07) !important;
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background .22s ease;
+}
+
+.ts-games-home .ts-game-card:focus-within {
+  outline: 2px solid rgba(121, 243, 225, .7);
+  outline-offset: 3px;
+}
+
+.ts-games-home .ts-game-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(121, 243, 225, .44) !important;
+  box-shadow:
+    0 22px 42px rgba(0, 0, 0, .27),
+    0 0 30px rgba(95, 153, 255, .09),
+    inset 0 1px 0 rgba(255, 255, 255, .09) !important;
+}
+
+.ts-games-home .ts-game-art {
+  position: relative;
+  min-height: 148px !important;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(121, 243, 225, .19), transparent 60%),
+    linear-gradient(135deg, #202a4b, #111830 80%) !important;
+}
+
+.ts-games-home .ts-game-art::before {
+  inset: -60% auto auto -18% !important;
+  width: 78% !important;
+  height: 180% !important;
+  background: linear-gradient(110deg, transparent, rgba(255,255,255,.07), transparent) !important;
+  transform: rotate(14deg);
+  animation: today-arcade-shimmer 7.5s ease-in-out infinite;
+}
+
+.ts-games-home .ts-game-svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 142px;
+  max-height: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .23));
+  transform: translateZ(0);
+  transition: transform .3s ease, filter .3s ease;
+}
+
+.ts-games-home .ts-game-card:hover .ts-game-svg {
+  transform: scale(1.035) translateY(-2px);
+  filter: drop-shadow(0 14px 25px rgba(0, 0, 0, .33));
+}
+
+.ts-games-home .ts-game-card-copy {
+  gap: 10px !important;
+  padding: clamp(13px, 1.8vw, 19px) !important;
+}
+
+.ts-games-home .ts-game-card-copy h3 {
+  font-size: clamp(15px, 1.55vw, 20px) !important;
+  letter-spacing: -.045em !important;
+}
+
+.ts-games-home .ts-game-card-copy p {
+  font-size: 11px !important;
+  line-height: 1.75 !important;
+}
+
+.ts-games-home .ts-game-card-bottom {
+  align-items: center;
+  margin-top: 5px;
+}
+
+.ts-games-home .ts-game-card-bottom small {
+  font-size: 10px !important;
+}
+
+.ts-games-home .ts-game-card .ts-primary,
+.ts-games-home .ts-game-card a.ts-primary {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 11px 15px !important;
+  border: 1px solid rgba(130, 243, 222, .32) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(135deg, #8df5df, #83c6ff) !important;
+  color: #10213a !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  box-shadow: 0 7px 20px rgba(80, 207, 199, .12);
+  transition: transform .16s ease, filter .16s ease;
+}
+
+.ts-games-home .ts-game-card .ts-primary:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.ts-games-home .ts-game-card-featured {
+  border-color: rgba(174, 154, 255, .55) !important;
+  box-shadow:
+    0 18px 50px rgba(81, 66, 184, .15),
+    inset 0 1px 0 rgba(255, 255, 255, .1) !important;
+}
+
+.ts-game-leaderboard {
+  border-radius: 22px !important;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(116, 171, 255, .08), transparent 50%),
+    rgba(255, 255, 255, .025) !important;
+}
+
+/* Отдельный полноэкранный маршрут игры */
+html.today-arcade-route,
+body.today-arcade-route {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  background: #070b18 !important;
+}
+
+body.today-arcade-route > #app,
+body.today-arcade-route > #dailyBackdrop,
+body.today-arcade-route > .noise,
+body.today-arcade-route > .bottom-nav,
+body.today-arcade-route > #pet {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#modal.today-arcade-route {
+  position: fixed !important;
+  z-index: 2147482000 !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #070b18 !important;
+  color: #f5f7ff !important;
+  box-shadow: none !important;
+}
+
+#modal.today-arcade-route .modal-backdrop,
+#modal.today-arcade-route #modalClose,
+#modal.today-arcade-route #todaySocialPageBar {
+  display: none !important;
+}
+
+#modal.today-arcade-route .modal-card {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(104, 105, 255, .17), transparent 54%),
+    radial-gradient(ellipse at 0% 80%, rgba(63, 211, 213, .07), transparent 43%),
+    linear-gradient(180deg, #0a1023, #070b18 66%, #080e20) !important;
+  box-shadow: none !important;
+}
+
+#modal.today-arcade-route #modalContent {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(135, 161, 220, .30) transparent;
+  background: transparent !important;
+  color: #f5f7ff !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+#modal.today-arcade-route .ts-panel.today-arcade-panel {
+  position: relative;
+  isolation: isolate;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 0 max(18px, env(safe-area-inset-bottom)) !important;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.today-arcade-topbar {
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  display: grid;
+  grid-template-columns: minmax(84px, auto) minmax(0, 1fr) minmax(92px, auto);
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 20px);
+  width: 100%;
+  margin: 0 0 clamp(15px, 2.5vh, 25px);
+  padding:
+    max(9px, env(safe-area-inset-top))
+    clamp(11px, 2.4vw, 30px)
+    12px;
+  border-bottom: 1px solid rgba(160, 185, 245, .13);
+  background: rgba(8, 13, 29, .88);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .12);
+  backdrop-filter: blur(24px) saturate(155%);
+  -webkit-backdrop-filter: blur(24px) saturate(155%);
+}
+
+.today-arcade-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid rgba(153, 184, 255, .19);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .045);
+  color: #e7edff;
+  font: 800 11px/1.2 Manrope, system-ui, sans-serif;
+  letter-spacing: .025em;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.today-arcade-back > span:first-child {
+  color: var(--today-arcade-v91-cyan);
+  font-size: 19px;
+  line-height: 1;
+}
+
+.today-arcade-title-stack {
+  min-width: 0;
+  text-align: center;
+}
+
+.today-arcade-kicker {
+  display: block;
+  margin-bottom: 4px;
+  color: #90a9dc;
+  font: 800 8px/1.35 "IBM Plex Mono", monospace;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.today-arcade-title-stack h1 {
+  overflow: hidden;
+  margin: 0;
+  color: #f5f7ff;
+  font: 900 clamp(15px, 2.2vw, 23px)/1.12 Manrope, system-ui, sans-serif;
+  letter-spacing: -.055em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.today-arcade-title-stack p {
+  overflow: hidden;
+  max-width: 600px;
+  margin: 5px auto 0;
+  color: #93a5c9;
+  font: 500 10px/1.4 Manrope, system-ui, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.today-arcade-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.today-arcade-record {
+  display: grid;
+  gap: 4px;
+  min-width: 72px;
+  padding: 8px 10px;
+  border: 1px solid rgba(121, 243, 225, .18);
+  border-radius: 12px;
+  background: rgba(91, 231, 208, .055);
+  text-align: right;
+}
+
+.today-arcade-record small {
+  color: #8099c2;
+  font: 800 8px/1 "IBM Plex Mono", monospace;
+  letter-spacing: .10em;
+}
+
+.today-arcade-record b {
+  overflow: hidden;
+  color: #aaf7e7;
+  font: 900 15px/1.1 "IBM Plex Mono", monospace;
+  text-overflow: ellipsis;
+}
+
+.today-arcade-sound {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  min-width: 43px;
+  min-height: 44px;
+  padding: 6px;
+  border: 1px solid rgba(158, 183, 237, .20);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .04);
+  color: #c7d5f1;
+  font: 800 8px/1.2 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.today-arcade-sound > span:first-child {
+  font-size: 18px;
+}
+
+.today-arcade-sound[aria-pressed="true"] {
+  border-color: rgba(121, 243, 225, .43);
+  background: rgba(76, 222, 198, .10);
+  color: #aaf7e7;
+}
+
+#modal.today-arcade-route .ts-panel-head {
+  display: none !important;
+}
+
+#modal.today-arcade-route .ts-active-game {
+  display: grid;
+  width: min(100% - 24px, 920px);
+  margin: 0 auto;
+  gap: 16px;
+}
+
+#modal.today-arcade-route .ts-game-toolbar {
+  display: none !important;
+}
+
+#modal.today-arcade-route .ts-game-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  gap: clamp(11px, 1.8vh, 20px);
+  width: 100%;
+  min-width: 0;
+  padding: clamp(11px, 2.1vw, 24px);
+  overflow: hidden;
+  border: 1px solid rgba(155, 187, 255, .17);
+  border-radius: clamp(16px, 2vw, 25px);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(123, 153, 246, .12), transparent 60%),
+    linear-gradient(150deg, rgba(16, 25, 49, .86), rgba(7, 13, 28, .91));
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, .18),
+    inset 0 1px 0 rgba(255, 255, 255, .045);
+}
+
+#modal.today-arcade-route .ts-game-stage.today-arcade-feedback {
+  border-color: rgba(121, 243, 225, .53);
+  box-shadow:
+    0 0 0 1px rgba(121, 243, 225, .08),
+    0 0 35px rgba(84, 227, 204, .09),
+    0 24px 65px rgba(0, 0, 0, .19),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+#modal.today-arcade-route .ts-game-hud {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: min(100%, 560px);
+  gap: 10px;
+}
+
+#modal.today-arcade-route .ts-game-hud > span {
+  flex: 1 1 0;
+  padding: 10px 13px;
+  border: 1px solid rgba(158, 186, 246, .12);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .025);
+  font-size: 9px;
+}
+
+#modal.today-arcade-route .ts-game-hud b {
+  font-size: clamp(16px, 2.6vw, 23px);
+  transition: color .18s ease, transform .18s ease;
+}
+
+#modal.today-arcade-route .ts-game-status {
+  width: min(100%, 560px);
+  min-height: 24px;
+  font-size: clamp(12px, 1.4vw, 14px);
+  line-height: 1.65;
+}
+
+#modal.today-arcade-route .today-arcade-text-pop {
+  animation: today-arcade-text-pop .30s ease-out;
+}
+
+#modal.today-arcade-route .today-arcade-number-pop {
+  animation: today-arcade-number-pop .24s ease-out;
+}
+
+#modal.today-arcade-route .ts-merge-board,
+#modal.today-arcade-route .ts-memory-board,
+#modal.today-arcade-route .ts-match-board,
+#modal.today-arcade-route .ts-extra-snake-board,
+#modal.today-arcade-route .ts-extra-ttt-board,
+#modal.today-arcade-route .ts-extra-color-choices {
+  width: min(100%, 500px);
+  max-width: 100%;
+}
+
+#modal.today-arcade-route .ts-merge-tile {
+  border: 1px solid rgba(170, 197, 255, .10);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .045);
+  transition: transform .13s ease, filter .14s ease, background .16s ease;
+  animation: today-arcade-tile-in .20s ease-out both;
+}
+
+#modal.today-arcade-route .ts-memory-card,
+#modal.today-arcade-route .ts-match-cell,
+#modal.today-arcade-route .ts-extra-ttt-board button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#modal.today-arcade-route .ts-memory-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(156, 181, 255, .19);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .09),
+    0 6px 14px rgba(0, 0, 0, .12);
+  transition:
+    transform .16s ease,
+    border-color .16s ease,
+    box-shadow .16s ease,
+    background .16s ease;
+}
+
+#modal.today-arcade-route .ts-memory-card:active,
+#modal.today-arcade-route .ts-match-cell:active,
+#modal.today-arcade-route .ts-merge-tile:active {
+  transform: scale(.96);
+}
+
+#modal.today-arcade-route .ts-memory-card.revealed,
+#modal.today-arcade-route .ts-memory-card.matched {
+  border-color: rgba(121, 243, 225, .48);
+  box-shadow:
+    0 0 20px rgba(86, 230, 205, .09),
+    inset 0 1px 0 rgba(255, 255, 255, .10);
+}
+
+#modal.today-arcade-route .ts-flappy-wrap,
+#modal.today-arcade-route .ts-extra-canvas-wrap {
+  width: min(100%, 440px);
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgba(155, 188, 255, .19);
+  border-radius: 18px;
+  background: #090f23;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, .19),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+#modal.today-arcade-route .ts-flappy-wrap canvas,
+#modal.today-arcade-route .ts-extra-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60dvh;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#modal.today-arcade-route .ts-extra-snake-board {
+  gap: clamp(1px, .32vw, 3px);
+  padding: clamp(5px, 1vw, 9px);
+  border: 1px solid rgba(121, 243, 225, .20);
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(54, 175, 164, .07), transparent 70%),
+    rgba(5, 15, 29, .95);
+  box-shadow:
+    inset 0 0 35px rgba(75, 225, 201, .07),
+    0 13px 28px rgba(0, 0, 0, .16);
+  touch-action: none;
+}
+
+#modal.today-arcade-route .ts-extra-snake-cell {
+  border-radius: clamp(2px, .5vw, 5px);
+  transition: background .10s linear, transform .10s linear;
+}
+
+#modal.today-arcade-route .ts-extra-snake-cell.head {
+  background: linear-gradient(135deg, #d1fff6, #54e4d0) !important;
+  box-shadow:
+    0 0 12px rgba(121, 243, 225, .36),
+    inset 0 1px 1px rgba(255, 255, 255, .65);
+}
+
+#modal.today-arcade-route .ts-extra-snake-cell.food {
+  background: linear-gradient(135deg, #ffd7f0, #ff7fae) !important;
+  box-shadow: 0 0 13px rgba(255, 117, 181, .34);
+  animation: today-arcade-food-pulse 1s ease-in-out infinite alternate;
+}
+
+#modal.today-arcade-route .ts-extra-controls button {
+  min-width: 52px;
+  min-height: 48px;
+  border: 1px solid rgba(149, 186, 255, .20);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(39, 57, 93, .88), rgba(17, 27, 51, .96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+  touch-action: manipulation;
+}
+
+#modal.today-arcade-route .ts-extra-pulse {
+  min-height: 190px;
+  border: 1px solid rgba(153, 177, 255, .25);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, .15),
+    inset 0 1px 0 rgba(255, 255, 255, .10);
+  transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+#modal.today-arcade-route .ts-extra-pulse.ready {
+  border-color: rgba(129, 255, 181, .65);
+  box-shadow:
+    0 0 35px rgba(98, 255, 174, .17),
+    0 15px 35px rgba(0, 0, 0, .15);
+  animation: today-arcade-ready-pulse .44s ease-in-out infinite alternate;
+}
+
+#modal.today-arcade-route .ts-extra-word-card,
+#modal.today-arcade-route .ts-extra-quiz-card {
+  width: min(100%, 540px);
+  border: 1px solid rgba(155, 183, 255, .17);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .025);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055);
+}
+
+#modal.today-arcade-route .ts-extra-word-card input {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 15px;
+  border: 1px solid rgba(152, 184, 255, .25);
+  border-radius: 13px;
+  background: rgba(4, 10, 23, .75);
+  color: #f5f7ff;
+  font: 700 16px/1.3 Manrope, system-ui, sans-serif;
+}
+
+#modal.today-arcade-route .ts-extra-word-card input:focus {
+  outline: 2px solid rgba(121, 243, 225, .40);
+  border-color: rgba(121, 243, 225, .60);
+}
+
+#modal.today-arcade-route .ts-extra-color-choices button,
+#modal.today-arcade-route .ts-extra-word-actions button,
+#modal.today-arcade-route .ts-mini {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+#modal.today-arcade-route button,
+#modal.today-arcade-route a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#modal.today-arcade-route button:focus-visible,
+#modal.today-arcade-route a:focus-visible,
+.today-arcade-topbar button:focus-visible {
+  outline: 2px solid rgba(121, 243, 225, .77);
+  outline-offset: 3px;
+}
+
+@keyframes today-arcade-orbit {
+  from { transform: translate3d(0, 0, 0) scale(.95); }
+  to { transform: translate3d(-16px, 13px, 0) scale(1.08); }
+}
+
+@keyframes today-arcade-shimmer {
+  0%, 62% { transform: translateX(-130%) rotate(14deg); opacity: 0; }
+  76% { opacity: .85; }
+  100% { transform: translateX(170%) rotate(14deg); opacity: 0; }
+}
+
+@keyframes today-arcade-tile-in {
+  from { opacity: .65; transform: scale(.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes today-arcade-food-pulse {
+  from { filter: brightness(.94); transform: scale(.94); }
+  to { filter: brightness(1.3); transform: scale(1.02); }
+}
+
+@keyframes today-arcade-ready-pulse {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.12); }
+}
+
+@keyframes today-arcade-text-pop {
+  0% { opacity: .65; transform: translateY(3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes today-arcade-number-pop {
+  0% { color: #fff; transform: scale(1.12); }
+  100% { color: #aaf7e7; transform: scale(1); }
+}
+
+@media (min-width: 1100px) {
+  .ts-games-home .ts-game-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .ts-games-home .ts-game-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ts-games-home .ts-game-card {
+    display: grid !important;
+    grid-template-columns: minmax(92px, 31%) minmax(0, 1fr) !important;
+    align-items: stretch;
+  }
+
+  .ts-games-home .ts-game-art {
+    min-width: 0;
+    min-height: 100% !important;
+    align-self: stretch;
+  }
+
+  .ts-games-home .ts-game-art .ts-game-svg {
+    width: 100%;
+    height: auto;
+    min-height: 95px;
+    max-height: 150px;
+  }
+
+  .ts-games-home .ts-game-card-copy {
+    min-width: 0;
+    padding: 12px !important;
+    gap: 7px !important;
+  }
+
+  .ts-games-home .ts-game-card-copy h3 {
+    font-size: 14px !important;
+    line-height: 1.2;
+  }
+
+  .ts-games-home .ts-game-card-copy p {
+    font-size: 10px !important;
+    line-height: 1.55 !important;
+  }
+
+  .ts-games-home .ts-game-card-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ts-games-home .ts-game-card .ts-primary {
+    width: 100%;
+    min-height: 40px;
+    padding: 10px !important;
+  }
+
+  .today-arcade-topbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 7px;
+    padding-right: max(10px, env(safe-area-inset-right));
+    padding-left: max(10px, env(safe-area-inset-left));
+  }
+
+  .today-arcade-back {
+    min-height: 43px;
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+
+  .today-arcade-back .today-arcade-back-label {
+    display: none;
+  }
+
+  .today-arcade-title-stack h1 {
+    font-size: clamp(13px, 3.5vw, 18px);
+  }
+
+  .today-arcade-title-stack p {
+    display: none;
+  }
+
+  .today-arcade-kicker {
+    font-size: 7px;
+    letter-spacing: .12em;
+  }
+
+  .today-arcade-tools {
+    gap: 5px;
+  }
+
+  .today-arcade-record {
+    min-width: 49px;
+    padding: 7px 6px;
+    border-radius: 10px;
+  }
+
+  .today-arcade-record small {
+    font-size: 7px;
+    letter-spacing: .04em;
+  }
+
+  .today-arcade-record b {
+    font-size: 12px;
+  }
+
+  .today-arcade-sound {
+    min-width: 40px;
+    min-height: 43px;
+    font-size: 7px;
+  }
+
+  #modal.today-arcade-route .ts-active-game {
+    width: calc(100% - 16px);
+    gap: 12px;
+  }
+
+  #modal.today-arcade-route .ts-game-stage {
+    padding: 10px;
+    border-radius: 17px;
+  }
+
+  #modal.today-arcade-route .ts-game-hud > span {
+    padding: 9px 10px;
+  }
+
+  #modal.today-arcade-route .ts-extra-controls button {
+    min-width: 48px;
+    min-height: 46px;
+  }
+}
+
+@media (max-width: 390px) {
+  .today-arcade-topbar {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+  }
+
+  .today-arcade-back {
+    width: 40px;
+    min-width: 40px;
+    padding: 8px;
+  }
+
+  .today-arcade-record {
+    display: none;
+  }
+
+  .ts-games-home .ts-game-card {
+    grid-template-columns: 90px minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .today-arcade-topbar {
+    margin-bottom: 8px;
+    padding-top: max(5px, env(safe-area-inset-top));
+    padding-bottom: 7px;
+  }
+
+  #modal.today-arcade-route .ts-game-stage {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  #modal.today-arcade-route .ts-flappy-wrap canvas,
+  #modal.today-arcade-route .ts-extra-canvas-wrap canvas {
+    max-height: 58dvh;
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-games-hero::before,
+  .ts-games-hero::after,
+  .ts-games-home .ts-game-art::before,
+  #modal.today-arcade-route .ts-extra-snake-cell.food,
+  #modal.today-arcade-route .ts-extra-pulse.ready {
+    animation: none !important;
+  }
+
+  .ts-games-home .ts-game-card,
+  .ts-games-home .ts-game-svg,
+  #modal.today-arcade-route .ts-merge-tile,
+  #modal.today-arcade-route .ts-memory-card {
+    transition: none !important;
+  }
+}
+/* TODAY ARCADE V91 CSS END */
