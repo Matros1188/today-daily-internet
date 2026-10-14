@@ -1,0 +1,484 @@
+/* TODAY V78 — SMART FEED */
+
+.today-v78-feed-tools {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 13px;
+  width: 100%;
+  margin: 15px 0 18px;
+  padding: 16px;
+  border: 1px solid rgba(139,164,218,.17);
+  border-radius: 21px;
+  color: #e9efff;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,124,214,.09), transparent 54%),
+    linear-gradient(145deg, rgba(23,31,52,.78), rgba(12,17,32,.72));
+  box-shadow: 0 12px 32px rgba(0,0,0,.11);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.today-v78-search-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+}
+
+.today-v78-search-box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid rgba(139,164,218,.19);
+  border-radius: 13px;
+  background: rgba(4,8,19,.32);
+}
+
+.today-v78-search-icon {
+  flex: 0 0 auto;
+  color: #9bb8ff;
+  font: 400 26px/1 system-ui, sans-serif;
+}
+
+.today-v78-search-box input {
+  min-width: 0;
+  width: 100%;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
+  font: 600 12px/1.4 Manrope, system-ui, sans-serif;
+}
+
+.today-v78-search-box input::placeholder {
+  color: rgba(205,216,241,.48);
+}
+
+.today-v78-search-box:focus-within {
+  border-color: rgba(132,165,255,.62);
+  box-shadow: 0 0 0 3px rgba(109,144,235,.10);
+}
+
+.today-v78-reset,
+.today-v78-empty-reset {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(139,164,218,.16);
+  border-radius: 12px;
+  color: #b8c9ef;
+  background: rgba(139,164,218,.07);
+  font: 750 10px/1.25 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.today-v78-filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: rgba(231,238,255,.72);
+  font: 800 10px/1.4 Manrope, system-ui, sans-serif;
+  letter-spacing: .035em;
+}
+
+.today-v78-filter-heading [data-v78-count] {
+  color: rgba(165,190,255,.84);
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.today-v78-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.today-v78-fixed-filters,
+.today-v78-kind-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.today-v78-kind-filters {
+  flex: 1 1 220px;
+}
+
+.today-v78-filter-chip,
+.today-v78-density-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  max-width: 100%;
+  padding: 7px 11px;
+  border: 1px solid rgba(143,164,210,.16);
+  border-radius: 11px;
+  color: rgba(220,229,250,.76);
+  background: rgba(145,164,207,.055);
+  font: 750 10px/1.25 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.today-v78-filter-chip:hover,
+.today-v78-density-button:hover {
+  border-color: rgba(143,171,246,.38);
+  color: #f1f5ff;
+}
+
+.today-v78-filter-chip.is-active,
+.today-v78-density-button.is-active {
+  border-color: rgba(123,157,250,.46);
+  color: #edf2ff;
+  background: linear-gradient(
+    135deg,
+    rgba(104,137,222,.23),
+    rgba(87,110,181,.12)
+  );
+  box-shadow: inset 0 0 0 1px rgba(125,157,244,.05);
+}
+
+.today-v78-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(139,164,218,.10);
+}
+
+.today-v78-saved-note {
+  color: rgba(183,198,227,.55);
+  font: 600 9px/1.5 Manrope, system-ui, sans-serif;
+}
+
+.today-v78-density {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.today-v78-density-button {
+  min-height: 30px;
+  padding: 6px 9px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.today-v78-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 21px 14px;
+  border: 1px dashed rgba(139,164,218,.19);
+  border-radius: 16px;
+  text-align: center;
+  color: rgba(218,229,251,.78);
+  font: 650 11px/1.5 Manrope, system-ui, sans-serif;
+}
+
+.today-v78-empty[hidden] {
+  display: none !important;
+}
+
+.today-v78-empty-icon {
+  color: rgba(159,184,255,.72);
+  font: 400 27px/1 system-ui, sans-serif;
+}
+
+.today-v78-empty-reset {
+  min-height: 34px;
+  margin-top: 3px;
+}
+
+.today-v78-status {
+  min-height: 0;
+  color: #9fbdff;
+  font: 700 10px/1.45 Manrope, system-ui, sans-serif;
+}
+
+.today-v78-status:empty {
+  display: none;
+}
+
+.today-v78-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Share and bookmark actions are separate from the existing like action. */
+.today-v78-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.today-v78-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 35px;
+  padding: 7px 11px;
+  border: 1px solid rgba(139,164,218,.15);
+  border-radius: 11px;
+  color: rgba(218,229,251,.78);
+  background: rgba(113,139,197,.055);
+  font: 750 10px/1.2 Manrope, system-ui, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color .16s ease,
+    background .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.today-v78-action > span:first-child {
+  color: #a9bfff;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.today-v78-action:hover {
+  border-color: rgba(135,164,247,.35);
+}
+
+.today-v78-action:active {
+  transform: scale(.98);
+}
+
+.today-v78-action.is-saved {
+  border-color: rgba(244,197,105,.30);
+  color: #f0d49b;
+  background: rgba(226,177,72,.075);
+}
+
+.today-v78-action.is-saved > span:first-child {
+  color: #f4cd76;
+}
+
+.today-v78-action:disabled {
+  opacity: .58;
+  cursor: wait;
+}
+
+.today-v78-filter-hidden {
+  display: none !important;
+}
+
+/* Compact mode reduces vertical scrolling without hiding post content. */
+html.today-v78-compact-feed #communityFeed .today-post-card {
+  margin-block: 8px;
+  padding-block: 11px;
+}
+
+html.today-v78-compact-feed #communityFeed .today-post-head {
+  gap: 9px;
+}
+
+html.today-v78-compact-feed #communityFeed .today-post-avatar {
+  transform: scale(.94);
+  transform-origin: center;
+}
+
+html.today-v78-compact-feed #communityFeed .community-copy {
+  gap: 6px;
+}
+
+html.today-v78-compact-feed #communityFeed .today-post-text {
+  line-height: 1.48;
+}
+
+html.today-v78-compact-feed #communityFeed .today-post-media-wrap {
+  margin-block: 5px;
+}
+
+html.today-theme-light .today-v78-feed-tools {
+  color: #35445e;
+  border-color: rgba(88,111,153,.17);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(130,163,221,.10), transparent 57%),
+    linear-gradient(145deg, rgba(248,250,255,.93), rgba(235,241,251,.90));
+  box-shadow: 0 10px 25px rgba(54,75,111,.075);
+}
+
+html.today-theme-light .today-v78-search-box {
+  border-color: rgba(83,108,153,.20);
+  background: rgba(255,255,255,.60);
+}
+
+html.today-theme-light .today-v78-search-icon {
+  color: #5f7cb8;
+}
+
+html.today-theme-light .today-v78-search-box input::placeholder {
+  color: rgba(66,82,110,.48);
+}
+
+html.today-theme-light .today-v78-reset,
+html.today-theme-light .today-v78-empty-reset {
+  color: #526582;
+  border-color: rgba(83,108,153,.15);
+  background: rgba(255,255,255,.50);
+}
+
+html.today-theme-light .today-v78-filter-heading {
+  color: #5a6a83;
+}
+
+html.today-theme-light .today-v78-filter-heading [data-v78-count] {
+  color: #5774b4;
+}
+
+html.today-theme-light .today-v78-filter-chip,
+html.today-theme-light .today-v78-density-button {
+  color: #596983;
+  border-color: rgba(83,108,153,.13);
+  background: rgba(255,255,255,.48);
+}
+
+html.today-theme-light .today-v78-filter-chip.is-active,
+html.today-theme-light .today-v78-density-button.is-active {
+  color: #3e5c95;
+  border-color: rgba(86,119,190,.30);
+  background: rgba(135,164,222,.16);
+}
+
+html.today-theme-light .today-v78-saved-note {
+  color: #8190a8;
+}
+
+html.today-theme-light .today-v78-empty {
+  color: #5e6e85;
+  border-color: rgba(83,108,153,.20);
+}
+
+html.today-theme-light .today-v78-status {
+  color: #526fac;
+}
+
+html.today-theme-light .today-v78-action {
+  color: #5c6e89;
+  border-color: rgba(83,108,153,.14);
+  background: rgba(255,255,255,.42);
+}
+
+html.today-theme-light .today-v78-action > span:first-child {
+  color: #6d87bc;
+}
+
+html.today-theme-light .today-v78-action.is-saved {
+  color: #916b22;
+  border-color: rgba(195,148,50,.27);
+  background: rgba(242,204,109,.14);
+}
+
+html.today-theme-light .today-v78-action.is-saved > span:first-child {
+  color: #b78222;
+}
+
+@media (max-width: 640px) {
+  .today-v78-feed-tools {
+    gap: 11px;
+    margin: 11px 0 14px;
+    padding: 12px;
+    border-radius: 17px;
+  }
+
+  .today-v78-search-row {
+    gap: 6px;
+  }
+
+  .today-v78-search-box {
+    min-height: 43px;
+    padding-inline: 10px;
+  }
+
+  .today-v78-search-box input {
+    font-size: 11px;
+  }
+
+  .today-v78-reset {
+    min-height: 43px;
+    padding-inline: 9px;
+    font-size: 9px;
+  }
+
+  .today-v78-filter-chip {
+    min-height: 34px;
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+
+  .today-v78-bottom-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .today-v78-density {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .today-v78-density-button {
+    flex: 1 1 0;
+    min-height: 34px;
+  }
+
+  .today-v78-card-actions {
+    gap: 6px;
+  }
+
+  .today-v78-action {
+    min-height: 37px;
+    padding-inline: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-v78-filter-chip,
+  .today-v78-density-button,
+  .today-v78-action {
+    transition: none !important;
+  }
+
+  .today-v78-action:active {
+    transform: none !important;
+  }
+}
