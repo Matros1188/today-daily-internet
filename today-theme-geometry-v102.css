@@ -1,0 +1,5 @@
+/* TODAY V102: layout/type rules mirrored from dark theme. */
+/* Color, background, gradient and shadow values stay theme-specific. */
+html.today-theme-light .topbar{border-bottom-width:1px !important;border-bottom-style:solid !important}
+html.today-theme-light .bottom-nav{border-top-width:1px !important;border-top-style:solid !important}
+html.today-theme-light .modal-card{border-width:1px !important;border-style:solid !important}
