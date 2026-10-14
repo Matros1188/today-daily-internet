@@ -1,0 +1,371 @@
+/* TODAY V82 — PROFILE STUDIO */
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.24) !important;
+  box-shadow:
+    0 22px 64px rgba(10,16,34,.15),
+    inset 0 1px 0 rgba(255,255,255,.32) !important;
+  background-image:
+    radial-gradient(circle at 92% 0%, rgba(255,255,255,.22), transparent 34%),
+    linear-gradient(130deg, var(--today-v82-cover-a), var(--today-v82-cover-b)) !important;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover="amethyst"] {
+  --today-v82-cover-a: rgba(100,72,173,.78);
+  --today-v82-cover-b: rgba(196,139,222,.56);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover="ocean"] {
+  --today-v82-cover-a: rgba(34,100,158,.78);
+  --today-v82-cover-b: rgba(105,193,207,.50);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover="emerald"] {
+  --today-v82-cover-a: rgba(31,117,101,.78);
+  --today-v82-cover-b: rgba(121,191,147,.52);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover="sunset"] {
+  --today-v82-cover-a: rgba(177,90,63,.78);
+  --today-v82-cover-b: rgba(243,176,104,.58);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover] > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover] h1,
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover] .today-profile-v63-username,
+body.today-profile-route #todayProfilePage
+.today-profile-v63-identity[data-v82-cover] .today-profile-v63-eyebrow {
+  text-shadow: 0 1px 14px rgba(12,21,40,.16);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-picker,
+body.today-profile-route #todayProfilePage .today-profile-v82-wall-tools {
+  margin: 14px 0;
+  padding: 15px;
+  border: 1px solid var(--line, rgba(150,165,192,.20));
+  border-radius: 20px;
+  background: var(--glass, rgba(130,145,170,.09));
+  box-shadow:
+    0 10px 28px rgba(3,8,20,.06),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--text, inherit);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-picker-copy,
+body.today-profile-route #todayProfilePage .today-profile-v82-tools-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-picker-copy span,
+body.today-profile-route #todayProfilePage .today-profile-v82-tools-heading small {
+  display: block;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .15em;
+  opacity: .62;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-picker-copy b,
+body.today-profile-route #todayProfilePage .today-profile-v82-tools-heading b {
+  display: block;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-options button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line, rgba(140,155,180,.22));
+  background: rgba(255,255,255,.05);
+  color: inherit;
+  border-radius: 13px;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-options button:hover {
+  transform: translateY(-1px);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v82-cover-options button[aria-pressed="true"] {
+  border-color: var(--accent, #82c8ee);
+  background: rgba(110,175,218,.16);
+  box-shadow: 0 0 0 2px rgba(110,175,218,.12);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-options i {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.45);
+}
+
+body.today-profile-route #todayProfilePage
+[data-v82-cover="amethyst"] i {
+  background: linear-gradient(135deg,#6950a9,#d0a0e7);
+}
+
+body.today-profile-route #todayProfilePage
+[data-v82-cover="ocean"] i {
+  background: linear-gradient(135deg,#287bb5,#8dd8e4);
+}
+
+body.today-profile-route #todayProfilePage
+[data-v82-cover="emerald"] i {
+  background: linear-gradient(135deg,#237c68,#a4d5aa);
+}
+
+body.today-profile-route #todayProfilePage
+[data-v82-cover="sunset"] i {
+  background: linear-gradient(135deg,#bb674c,#f2c078);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-tools-heading {
+  margin-bottom: 12px;
+}
+
+body.today-profile-route #todayProfilePage [data-v82-visible-count] {
+  font-size: 11px;
+  font-weight: 750;
+  opacity: .65;
+  white-space: nowrap;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-tools-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-control-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-tools-controls button {
+  min-height: 34px;
+  padding: 8px 11px;
+  border-radius: 11px;
+  border: 1px solid var(--line, rgba(145,160,185,.23));
+  color: inherit;
+  background: rgba(255,255,255,.045);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background .18s ease,
+    transform .18s ease,
+    border-color .18s ease;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v82-tools-controls button[aria-pressed="true"] {
+  background: rgba(101,167,218,.18);
+  border-color: rgba(112,178,227,.52);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v82-tools-controls button:hover {
+  transform: translateY(-1px);
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-favorites-filter {
+  margin-left: auto;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-wall-posts.today-profile-v82-grid-mode {
+  display: grid !important;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  align-items: stretch;
+  gap: 14px;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-wall-posts.today-profile-v82-list-mode {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-wall-posts > .today-profile-v82-filtered {
+  display: none !important;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-wall-posts.today-profile-v82-grid-mode > .today-profile-wall-post,
+body.today-profile-route #todayProfilePage
+.today-profile-wall-posts.today-profile-v82-grid-mode > .today-profile-post {
+  min-width: 0;
+  margin: 0 !important;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-bookmark,
+body.today-profile-route #todayProfilePage .today-profile-v82-remove-photo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 7px 10px;
+  border-radius: 11px;
+  border: 1px solid var(--line, rgba(140,155,180,.24));
+  background: rgba(110,160,205,.10);
+  color: inherit;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.15;
+  cursor: pointer;
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v82-bookmark[aria-pressed="true"] {
+  background: rgba(227,108,143,.15);
+  border-color: rgba(227,108,143,.38);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-wall-post-footer .today-profile-v82-bookmark {
+  margin-right: 7px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-char-count {
+  margin: 6px 0 9px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: .62;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-photo-preview {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid var(--line, rgba(140,155,180,.2));
+  border-radius: 15px;
+  background: rgba(110,150,190,.07);
+}
+
+body.today-profile-route #todayProfilePage
+.today-profile-v82-photo-preview[hidden],
+body.today-profile-route #todayProfilePage
+.today-profile-v82-remove-photo[hidden] {
+  display: none !important;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-photo-preview img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 240px;
+  margin: 0 auto 8px;
+  border-radius: 11px;
+  object-fit: contain;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-photo-preview span {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  opacity: .68;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-remove-photo {
+  margin: 0 0 10px;
+}
+
+body.today-profile-route #todayProfilePage .today-profile-v82-cover-picker button:focus-visible,
+body.today-profile-route #todayProfilePage .today-profile-v82-wall-tools button:focus-visible,
+body.today-profile-route #todayProfilePage .today-profile-v82-bookmark:focus-visible {
+  outline: 2px solid var(--accent, #78bce4);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  body.today-profile-route #todayProfilePage
+  .today-profile-wall-posts.today-profile-v82-grid-mode {
+    grid-template-columns: minmax(0,1fr);
+    gap: 11px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v82-cover-picker,
+  body.today-profile-route #todayProfilePage .today-profile-v82-wall-tools {
+    border-radius: 16px;
+    padding: 12px;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v82-tools-controls {
+    justify-content: flex-start;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v82-favorites-filter {
+    margin-left: 0;
+  }
+
+  body.today-profile-route #todayProfilePage .today-profile-v82-cover-options button {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: flex-start;
+  }
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v82-cover-picker,
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v82-wall-tools {
+  background: rgba(249,251,255,.64);
+  border-color: rgba(91,115,155,.20);
+  color: #27344a;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v82-cover-options button,
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v82-tools-controls button {
+  background: rgba(255,255,255,.52);
+  color: #27344a;
+}
