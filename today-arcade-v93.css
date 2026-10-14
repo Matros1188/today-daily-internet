@@ -1,0 +1,78 @@
+
+/* ================================================================
+   TODAY ARCADE V93 — ROOT CAUSE FIX
+   V91/V92: #modal lives inside #app.
+   When #app is hidden, restore the route modal explicitly.
+   ================================================================ */
+
+/*
+ * Основной фикс.
+ * Эти селекторы применяются только в игровом режиме.
+ * Обычный интерфейс TODAY не затрагивается.
+ */
+html.today-arcade-route body.today-arcade-route
+#app #modal.today-arcade-route,
+body.today-arcade-route #app #modal.today-arcade-route {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+
+  position: fixed !important;
+  z-index: 2147482000 !important;
+}
+
+/*
+ * Возвращаем видимость содержимому модального окна.
+ * Это нужно даже при visibility:hidden на родителе #app.
+ */
+body.today-arcade-route #app #modal.today-arcade-route .modal-card,
+body.today-arcade-route #app #modal.today-arcade-route #modalContent {
+  visibility: visible !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+}
+
+/*
+ * Движок V91 скрывает затемнение в полноэкранном режиме.
+ * Сохраняем это поведение, чтобы фон сайта не перекрывал игру.
+ */
+body.today-arcade-route #app #modal.today-arcade-route .modal-backdrop {
+  display: none !important;
+}
+
+/*
+ * Игровая поверхность должна оставаться кликабельной.
+ * Правило относится только к игровой модалке.
+ */
+body.today-arcade-route #app #modal.today-arcade-route .ts-active-game,
+body.today-arcade-route #app #modal.today-arcade-route .ts-game-stage,
+body.today-arcade-route #app #modal.today-arcade-route .ts-game-stage canvas,
+body.today-arcade-route #app #modal.today-arcade-route .ts-game-stage button,
+body.today-arcade-route #app #modal.today-arcade-route .ts-game-stage input,
+body.today-arcade-route #app #modal.today-arcade-route .today-arcade-topbar,
+body.today-arcade-route #app #modal.today-arcade-route .today-v92-popover {
+  pointer-events: auto !important;
+}
+
+/*
+ * Сохраняем режим без прокрутки фона на смартфоне.
+ */
+html.today-arcade-route,
+body.today-arcade-route {
+  overscroll-behavior: none !important;
+}
+
+body.today-arcade-route #app #modal.today-arcade-route #modalContent {
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+}
+
+/*
+ * Защита от непредвиденного скрытия панели игрового интерфейса.
+ */
+body.today-arcade-route #app #modal.today-arcade-route .today-arcade-topbar {
+  visibility: visible !important;
+}
+
+/* TODAY ARCADE V93 — END */
