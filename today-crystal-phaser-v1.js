@@ -1,7 +1,7 @@
-/* TODAY CRYSTAL PHASER V1 — CRYSTAL BOARD RENDERER */
+/* TODAY CRYSTAL PHASER V2 — NATIVE INPUT BRIDGE */
 (() => {
   'use strict';
-  if (window.__TODAY_CRYSTAL_PHASER && window.__TODAY_CRYSTAL_PHASER.version === '1.0.0') return;
+  if (window.__TODAY_CRYSTAL_PHASER && window.__TODAY_CRYSTAL_PHASER.version === '2.0.0') return;
 
   const CDN = 'https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js';
   const colors = [
@@ -183,17 +183,36 @@
         scene.selectionG = scene.add.graphics();
         scene.boardLayout = null;
         scene._queuedSnapshot = latest;
+        let pointerStart = null;
         scene.drawBoard = function (s, animate) { drawBoard(scene, s, animate); };
         scene.scale.on('resize', () => {
           if (!scene.snapshotData || active !== target) return;
           try { drawBoard(scene, scene.snapshotData, false); } catch (error) { warnFallback(error); }
         });
         scene.input.on('pointerdown', pointer => {
-          if (!scene.boardLayout || !latest || latest.ended || latest.paused) return;
+          if (!scene.boardLayout || !latest || latest.ended || latest.paused) { pointerStart = null; return; }
           const index = indexAt(scene.boardLayout, pointer.x, pointer.y);
-          if (index < 0) return;
-          activateIndex(index);
+          if (index < 0) { pointerStart = null; return; }
+          pointerStart = {index, x:pointer.x, y:pointer.y, id:pointer.id};
+        });
+        scene.input.on('pointerup', pointer => {
+          const start = pointerStart;
+          pointerStart = null;
+          if (!start || !scene.boardLayout || !latest || latest.ended || latest.paused) return;
+          const end = indexAt(scene.boardLayout, pointer.x, pointer.y);
+          if (end < 0) return;
           try { target.viewport.focus({preventScroll:true}); } catch (_) { try { target.viewport.focus(); } catch (__) {} }
+          if (end === start.index) { activateIndex(end); return; }
+          const dr = Math.abs(Math.floor(end / 8) - Math.floor(start.index / 8));
+          const dc = Math.abs((end % 8) - (start.index % 8));
+          const movement = Math.hypot(pointer.x - start.x, pointer.y - start.y);
+          const isNeighborSwipe = dr + dc === 1 && movement >= Math.max(10, scene.boardLayout.cell * 0.18);
+          if (!isNeighborSwipe) { activateIndex(end); return; }
+          // First select, then swap: the existing rule engine remains the authority.
+          Promise.resolve(activateIndex(start.index))
+            .then(() => new Promise(resolve => requestAnimationFrame(() => resolve())))
+            .then(() => activateIndex(end))
+            .catch(error => console.warn('[TODAY Crystal Phaser V2] Swipe input error:', error));
         });
         if (scene.input.keyboard) {
           scene.focusIndex = Math.max(0, latest && latest.selected >= 0 ? latest.selected : 27);
@@ -269,9 +288,21 @@
   }
 
   function activateIndex(index) {
-    if (!active || !active.board || !active.board.isConnected) return;
+    if (!active || !active.board || !active.board.isConnected) return false;
+    const bridge = window.__TODAY_CRYSTAL_GAMEPLAY_V2;
+    if (bridge && typeof bridge.isActive === 'function' && bridge.isActive(active.board) && typeof bridge.tap === 'function') {
+      try {
+        const result = bridge.tap(index);
+        if (result && typeof result.catch === 'function') result.catch(error => console.warn('[TODAY Crystal Phaser V2] Input bridge error:', error));
+        return result === false ? false : (result || true);
+      } catch (error) {
+        console.warn('[TODAY Crystal Phaser V2] Direct input failed; using accessible fallback.', error);
+      }
+    }
+    // Accessible legacy fallback is deliberately retained if Phaser or the bridge is unavailable.
     const button = active.board.querySelector('[data-i="' + index + '"]');
-    if (button && typeof button.click === 'function') button.click();
+    if (button && typeof button.click === 'function') { button.click(); return true; }
+    return false;
   }
 
   function gemPoints(x, y, radius, colorIndex) {
@@ -426,7 +457,7 @@
   }
 
   window.__TODAY_CRYSTAL_PHASER = {
-    version: '1.0.0',
+    version: '2.0.0',
     renderer: 'phaser-4.2.1',
     update(run, animate=true) {
       latest = snapshot(run);
@@ -436,7 +467,7 @@
       }
     },
     stop: teardown,
-    status: () => ({version:'1.0.0', phaser:phaserState, mounted:!!active, ready:!!(active && active.created)})
+    status: () => ({version:'2.0.0', phaser:phaserState, mounted:!!active, ready:!!(active && active.created), input:'direct-gameplay-bridge', swipe:true})
   };
 
   const observer = new MutationObserver(checkBoard);
