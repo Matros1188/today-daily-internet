@@ -1,0 +1,520 @@
+
+/* TODAY V103 — HARMONIOUS LAVENDER / ROSE / TURQUOISE PALETTE */
+
+html.today-theme-light {
+  color-scheme: light !important;
+
+  --today-theme-bg: #f0edff;
+  --today-theme-surface: rgba(250, 247, 255, .94);
+  --today-theme-text: #35304f;
+  --today-theme-muted: #77718f;
+  --today-theme-border: rgba(143, 122, 197, .27);
+
+  --today-palette-lavender: #c9baff;
+  --today-palette-lavender-deep: #7661bd;
+  --today-palette-rose: #f1c6df;
+  --today-palette-rose-deep: #b85f94;
+  --today-palette-turquoise: #b9eee5;
+  --today-palette-turquoise-deep: #278d85;
+}
+
+html.today-theme-light body {
+  color: #35304f !important;
+  background-color: #f0edff !important;
+}
+
+html.today-theme-light #dailyBackdrop {
+  background:
+    radial-gradient(ellipse at 8% 3%,
+      rgba(188,174,255,.66), transparent 35%),
+    radial-gradient(ellipse at 92% 12%,
+      rgba(248,195,225,.50), transparent 34%),
+    radial-gradient(ellipse at 82% 78%,
+      rgba(157,235,224,.46), transparent 37%),
+    radial-gradient(ellipse at 17% 92%,
+      rgba(213,201,255,.36), transparent 39%),
+    linear-gradient(135deg,#f0efff 0%,#fbf5ff 48%,#e8f9f6 100%)
+    !important;
+}
+
+html.today-theme-light .noise {
+  opacity: .045 !important;
+  mix-blend-mode: multiply !important;
+}
+
+/* Header and bottom navigation */
+
+html.today-theme-light .topbar {
+  color: #383252 !important;
+  background: rgba(247,242,255,.88) !important;
+  border-bottom-color: rgba(143,122,197,.24) !important;
+  box-shadow: 0 8px 28px rgba(106,82,161,.09) !important;
+}
+
+html.today-theme-light .bottom-nav {
+  color: #5e587c !important;
+  background: rgba(248,245,255,.94) !important;
+  border-top-color: rgba(143,122,197,.26) !important;
+  box-shadow: 0 -10px 32px rgba(100,79,148,.10) !important;
+}
+
+html.today-theme-light .bottom-nav button,
+html.today-theme-light .bottom-nav a {
+  color: #77708f !important;
+}
+
+html.today-theme-light .bottom-nav button.active,
+html.today-theme-light .bottom-nav a.active {
+  color: #7863c7 !important;
+  text-shadow: 0 0 16px rgba(174,148,255,.23) !important;
+}
+
+/* Main page cards */
+
+html.today-theme-light .hero,
+html.today-theme-light .clock-card,
+html.today-theme-light .scene-card,
+html.today-theme-light .activity-strip,
+html.today-theme-light .ranking-card,
+html.today-theme-light .daily-card,
+html.today-theme-light .community-card,
+html.today-theme-light .feed-card,
+html.today-theme-light .post-card,
+html.today-theme-light .today-card,
+html.today-theme-light .profile-card,
+html.today-theme-light .settings-card,
+html.today-theme-light .shop-card,
+html.today-theme-light .daily-grid > *,
+html.today-theme-light .community-feed > *,
+html.today-theme-light .leaderboard > *,
+html.today-theme-light #dailyGrid > *,
+html.today-theme-light #communityFeed > *,
+html.today-theme-light #leaderboard > * {
+  color: #393351 !important;
+  border-color: rgba(149,128,203,.28) !important;
+  background:
+    radial-gradient(ellipse at 0% 0%,
+      rgba(218,207,255,.25), transparent 48%),
+    radial-gradient(ellipse at 100% 100%,
+      rgba(185,238,229,.19), transparent 44%),
+    linear-gradient(145deg,
+      rgba(255,252,255,.98),
+      rgba(241,239,255,.96) 56%,
+      rgba(235,250,247,.95)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 14px 34px rgba(104,82,157,.09) !important;
+}
+
+html.today-theme-light h1,
+html.today-theme-light h2,
+html.today-theme-light h3,
+html.today-theme-light h4,
+html.today-theme-light .section-head,
+html.today-theme-light .daily-card h3,
+html.today-theme-light .post-card h3,
+html.today-theme-light .hero h1 {
+  color: #37304f !important;
+}
+
+html.today-theme-light p,
+html.today-theme-light small,
+html.today-theme-light .section-note,
+html.today-theme-light .community-intro,
+html.today-theme-light .hero p,
+html.today-theme-light .daily-card p,
+html.today-theme-light .feed-card p,
+html.today-theme-light .footer,
+html.today-theme-light .footer span {
+  color: #77718f !important;
+}
+
+html.today-theme-light .eyebrow,
+html.today-theme-light .live-pill,
+html.today-theme-light .section-head .eyebrow {
+  color: #8b70bf !important;
+}
+
+html.today-theme-light .ticker {
+  color: #348d88 !important;
+}
+
+/* Buttons, account controls and theme switch */
+
+html.today-theme-light button.account-btn,
+html.today-theme-light button.quiet-btn,
+html.today-theme-light .top-btn,
+html.today-theme-light .coin-badge,
+html.today-theme-light #todayThemeToggle {
+  color: #4d456e !important;
+  border-color: rgba(144,123,198,.30) !important;
+  background: linear-gradient(145deg,
+    rgba(255,253,255,.98),
+    rgba(239,231,255,.92)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 5px 16px rgba(109,83,167,.09) !important;
+}
+
+html.today-theme-light #todayThemeToggle .today-theme-icon {
+  color: #8268c5 !important;
+  background: rgba(201,186,255,.38) !important;
+}
+
+html.today-theme-light .primary-button,
+html.today-theme-light .primary-button *,
+html.today-theme-light .ts-primary,
+html.today-theme-light .ts-mini-accent {
+  color: #3f3b64 !important;
+}
+
+html.today-theme-light .primary-button,
+html.today-theme-light .ts-primary {
+  border-color: rgba(125,180,180,.36) !important;
+  background: linear-gradient(118deg,
+    #c9f1e9 0%,
+    #d9d1ff 56%,
+    #f5cce4 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    0 7px 20px rgba(124,103,181,.13) !important;
+}
+
+html.today-theme-light .ts-mini,
+html.today-theme-light .ts-text-button,
+html.today-theme-light .ts-panel .ts-mini,
+html.today-theme-light .quiet-btn {
+  color: #675b91 !important;
+  border-color: rgba(145,124,195,.28) !important;
+  background: rgba(246,241,255,.90) !important;
+}
+
+html.today-theme-light button:focus-visible,
+html.today-theme-light a:focus-visible {
+  outline-color: rgba(139,111,211,.65) !important;
+}
+
+html.today-theme-light input,
+html.today-theme-light textarea,
+html.today-theme-light select {
+  color: #37324f !important;
+  caret-color: #8068c7 !important;
+  accent-color: #9078db !important;
+  border-color: rgba(146,126,196,.31) !important;
+  background: rgba(255,253,255,.94) !important;
+}
+
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder {
+  color: #928aa8 !important;
+}
+
+html.today-theme-light input:focus,
+html.today-theme-light textarea:focus,
+html.today-theme-light select:focus {
+  border-color: rgba(139,111,211,.60) !important;
+}
+
+/* Modal */
+
+html.today-theme-light .modal-card,
+html.today-theme-light #modal .modal-card {
+  color: #383250 !important;
+  border-color: rgba(145,123,199,.33) !important;
+  background:
+    radial-gradient(ellipse at 90% 0%,
+      rgba(225,211,255,.36), transparent 48%),
+    radial-gradient(ellipse at 0% 100%,
+      rgba(185,238,229,.23), transparent 45%),
+    linear-gradient(145deg,
+      rgba(255,252,255,.99),
+      rgba(242,238,255,.985)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 28px 95px rgba(92,71,144,.21) !important;
+}
+
+html.today-theme-light #modal .modal-backdrop {
+  background: rgba(55,42,86,.34) !important;
+}
+
+html.today-theme-light .modal-close {
+  color: #7662ac !important;
+  border-color: rgba(145,123,199,.28) !important;
+  background: rgba(250,245,255,.92) !important;
+}
+
+/* Social pages, messages and promoted posts */
+
+html.today-theme-light .ts-panel,
+html.today-theme-light .ts-card,
+html.today-theme-light .ts-form-card,
+html.today-theme-light .ts-user-card,
+html.today-theme-light .ts-chat-row,
+html.today-theme-light .ts-empty,
+html.today-theme-light .ts-promo-wrap,
+html.today-theme-light .ts-promoted-card,
+html.today-theme-light .ts-channel-card,
+html.today-theme-light .ts-list-card,
+html.today-theme-light .ts-chat-create-grid > *,
+html.today-theme-light .ts-profile-post,
+html.today-theme-light .ts-post-card {
+  color: #393452 !important;
+  border-color: rgba(147,124,199,.28) !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,
+      rgba(244,199,225,.23), transparent 44%),
+    radial-gradient(ellipse at 0% 100%,
+      rgba(182,236,226,.21), transparent 46%),
+    linear-gradient(145deg,
+      rgba(255,252,255,.98),
+      rgba(241,239,255,.96)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    0 12px 30px rgba(105,81,157,.085) !important;
+}
+
+html.today-theme-light .ts-panel-head {
+  border-bottom-color: rgba(145,123,199,.21) !important;
+}
+
+html.today-theme-light .ts-panel-head h2,
+html.today-theme-light .ts-panel h3,
+html.today-theme-light .ts-form-card h3,
+html.today-theme-light .ts-list-head h3,
+html.today-theme-light .ts-promoted-card h4,
+html.today-theme-light .ts-user-copy b,
+html.today-theme-light .ts-chat-row-copy b {
+  color: #393151 !important;
+}
+
+html.today-theme-light .ts-panel-head p,
+html.today-theme-light .ts-panel p,
+html.today-theme-light .ts-muted,
+html.today-theme-light .ts-helper,
+html.today-theme-light .ts-user-copy span,
+html.today-theme-light .ts-chat-row-copy small,
+html.today-theme-light .ts-promoted-foot,
+html.today-theme-light .ts-moderation-note,
+html.today-theme-light .ts-form-card label,
+html.today-theme-light .ts-form-card p {
+  color: #7b7595 !important;
+}
+
+html.today-theme-light .ts-kicker,
+html.today-theme-light .ts-count,
+html.today-theme-light .ts-game-record {
+  color: #8678b4 !important;
+}
+
+html.today-theme-light .ts-status-chip,
+html.today-theme-light .ts-promo-badge,
+html.today-theme-light .ts-game-rank {
+  color: #69608f !important;
+  border-color: rgba(145,123,199,.25) !important;
+  background: rgba(250,246,255,.86) !important;
+}
+
+html.today-theme-light .ts-orbit,
+html.today-theme-light .ts-avatar,
+html.today-theme-light .ts-chat-icon {
+  border-color: rgba(144,124,198,.26) !important;
+}
+
+html.today-theme-light .ts-error-panel {
+  color: #8c4f74 !important;
+  border-color: rgba(210,139,179,.35) !important;
+  background: rgba(255,233,245,.92) !important;
+}
+
+/* Promoted status and retry buttons */
+
+html.today-theme-light .ts-promo-v97-status {
+  color: #696087 !important;
+  border-color: rgba(145,124,195,.25) !important;
+  background: linear-gradient(120deg,
+    rgba(241,233,255,.86),
+    rgba(224,248,242,.83)) !important;
+}
+
+html.today-theme-light .ts-promo-v97-status button {
+  color: #554d82 !important;
+  border-color: rgba(145,124,195,.28) !important;
+  background: linear-gradient(120deg,
+    #d6caff,
+    #c3eee6 65%,
+    #f5cfe5) !important;
+}
+
+/* Games library */
+
+html.today-theme-light .ts-games-hero,
+html.today-theme-light .ts-game-card,
+html.today-theme-light .today-v95-discovery,
+html.today-theme-light .today-v96-quest,
+html.today-theme-light .today-v96-seal-shelf {
+  color: #393352 !important;
+  border-color: rgba(145,123,199,.29) !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,
+      rgba(204,190,255,.31), transparent 46%),
+    radial-gradient(ellipse at 0% 100%,
+      rgba(183,238,229,.21), transparent 43%),
+    linear-gradient(145deg,
+      rgba(255,252,255,.99),
+      rgba(239,237,255,.96)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 15px 34px rgba(97,75,154,.095) !important;
+}
+
+html.today-theme-light .ts-games-hero h3,
+html.today-theme-light .ts-game-card-copy h3,
+html.today-theme-light .today-v95-title,
+html.today-theme-light .today-v96-quest h3,
+html.today-theme-light .today-v96-shelf-copy b {
+  color: #3b315a !important;
+}
+
+html.today-theme-light .ts-games-hero p,
+html.today-theme-light .ts-game-card-copy p,
+html.today-theme-light .today-v95-subtitle,
+html.today-theme-light .today-v96-quest p,
+html.today-theme-light .today-v96-shelf-copy small {
+  color: #7b7396 !important;
+}
+
+html.today-theme-light .today-v95-stat {
+  color: #635983 !important;
+  border-color: rgba(148,126,199,.24) !important;
+  background: rgba(250,246,255,.86) !important;
+}
+
+html.today-theme-light .today-v95-stat b {
+  color: #41365e !important;
+}
+
+html.today-theme-light .today-v95-stat span,
+html.today-theme-light .today-v95-control-label,
+html.today-theme-light .today-v95-results,
+html.today-theme-light .today-v96-quest-bottom {
+  color: #80779c !important;
+}
+
+html.today-theme-light .today-v95-filter {
+  color: #6a5d99 !important;
+  border-color: rgba(146,124,199,.27) !important;
+  background: rgba(247,242,255,.90) !important;
+}
+
+html.today-theme-light .today-v95-filter[aria-pressed="true"] {
+  color: #403560 !important;
+  border-color: rgba(127,184,178,.45) !important;
+  background: linear-gradient(115deg,
+    #c8f0e8,
+    #d5ccff 62%,
+    #f2cbe1) !important;
+}
+
+html.today-theme-light .today-v95-card-badge {
+  color: #655b91 !important;
+  border-color: rgba(145,123,199,.28) !important;
+  background: rgba(255,251,255,.95) !important;
+}
+
+html.today-theme-light .today-v95-favorite {
+  color: #7a6aaa !important;
+  border-color: rgba(145,123,199,.29) !important;
+  background: rgba(248,243,255,.93) !important;
+}
+
+html.today-theme-light .today-v95-favorite[aria-pressed="true"] {
+  color: #96623c !important;
+  border-color: rgba(225,176,120,.49) !important;
+  background: rgba(255,235,214,.87) !important;
+}
+
+/* Crystal game: color of surrounding panels only */
+
+html.today-theme-light #modal.today-v95-playing .modal-card,
+html.today-theme-light #modal.today-v96-playing .modal-card,
+html.today-theme-light #modal.today-v96-crystal .modal-card {
+  color: #3a3457 !important;
+  border-color: rgba(145,123,199,.35) !important;
+  background:
+    radial-gradient(ellipse at 50% 0%,
+      rgba(215,201,255,.37), transparent 53%),
+    radial-gradient(ellipse at 100% 100%,
+      rgba(183,238,229,.26), transparent 44%),
+    linear-gradient(145deg,
+      rgba(255,252,255,.995),
+      rgba(238,235,255,.99)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.99),
+    0 28px 90px rgba(93,72,151,.19) !important;
+}
+
+html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-inventory,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-story,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-royal-hero {
+  color: #3b3457 !important;
+  border-color: rgba(145,123,199,.28) !important;
+  background: linear-gradient(145deg,
+    rgba(255,252,255,.98),
+    rgba(235,248,246,.96)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.97),
+    0 13px 29px rgba(103,82,154,.09) !important;
+}
+
+html.today-theme-light #modal.today-v96-crystal .ts-m3-hero-copy h2,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-map-title h3,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-result h3,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter h3,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter h4 {
+  color: #3c315b !important;
+}
+
+html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter p,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-result p,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-level-intro p,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-story p {
+  color: #7b7297 !important;
+}
+
+html.today-theme-light #modal.today-v96-crystal .ts-m3-level {
+  color: #574b7c !important;
+  border-color: rgba(145,123,199,.28) !important;
+  background: linear-gradient(140deg,
+    rgba(254,250,255,.96),
+    rgba(230,248,243,.94)) !important;
+}
+
+html.today-theme-light #modal.today-v96-crystal .ts-m3-level.is-current,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-level.is-complete {
+  color: #453761 !important;
+  border-color: rgba(109,179,166,.48) !important;
+  background: linear-gradient(120deg,
+    #c8f1e7,
+    #d8d0ff 64%,
+    #f3cfe3) !important;
+}
+
+/* Selection and notifications */
+
+html.today-theme-light ::selection {
+  color: #39304f !important;
+  background: rgba(199,184,255,.64) !important;
+}
+
+html.today-theme-light .toast {
+  color: #393451 !important;
+  border-color: rgba(145,123,199,.28) !important;
+  background: linear-gradient(125deg,
+    rgba(255,250,255,.99),
+    rgba(236,249,246,.98)) !important;
+  box-shadow: 0 10px 32px rgba(95,74,150,.17) !important;
+}
+
+/* End TODAY V103 palette */
