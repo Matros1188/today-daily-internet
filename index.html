@@ -2516,6 +2516,444 @@ html[data-today-theme="light"] body .today-like-btn > span:first-child {
 /* TODAY V112 LIGHT THEME DETAIL FIX END */
 
 </style>
+<style id="today-light-polish-v113">
+
+/* TODAY V113 — LIGHT THEME DETAIL FIX */
+
+/* ==========================================================
+   A. «ЧТО ОСТАВИЛИ СЕГОДНЯ»
+   Выразительная лилово-мятно-розовая поверхность вместо белой.
+   ========================================================== */
+
+html.today-theme-light body section#todayPromotedBlock.ts-promo-wrap,
+html[data-today-theme="light"] body section#todayPromotedBlock.ts-promo-wrap,
+html.today-theme-light body #todayPromotedBlock,
+html[data-today-theme="light"] body #todayPromotedBlock,
+html.today-theme-light body .ts-promo-wrap,
+html[data-today-theme="light"] body .ts-promo-wrap {
+  color: #172033 !important;
+  background-color: #e8e0f8 !important;
+  background-image:
+    radial-gradient(
+      ellipse at 2% 0%,
+      rgba(186, 164, 255, .48),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(123, 213, 187, .40),
+      transparent 53%
+    ),
+    linear-gradient(
+      125deg,
+      #e6ddfb 0%,
+      #d9efe7 56%,
+      #f6e0ec 100%
+    ) !important;
+  border: 1px solid rgba(119, 96, 170, .30) !important;
+  border-radius: 22px !important;
+  padding: 16px !important;
+  margin-top: 18px !important;
+  margin-bottom: 22px !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.85),
+    0 10px 26px rgba(85,70,132,.10) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  outline: 0 !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 13px !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head h3,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head h3 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head p,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head p {
+  color: #46536b !important;
+  -webkit-text-fill-color: #46536b !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-kicker,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-kicker {
+  color: #66469c !important;
+  -webkit-text-fill-color: #66469c !important;
+  font-weight: 850 !important;
+}
+
+html.today-theme-light body #todayPromotedList,
+html[data-today-theme="light"] body #todayPromotedList,
+html.today-theme-light body .ts-promoted-list,
+html[data-today-theme="light"] body .ts-promoted-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.today-theme-light body #todayPromotedList > *,
+html[data-today-theme="light"] body #todayPromotedList > * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  border: 1px solid rgba(111, 99, 154, .24) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 5px 16px rgba(75,68,119,.06) !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 1),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg,#e5dcff,#f5e5f0) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 2),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg,#d7f0e6,#e5efff) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 3),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg,#fce2d8,#f9e5ee) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n) {
+  background: linear-gradient(135deg,#dceaff,#eae2ff) !important;
+}
+
+html.today-theme-light body #todayPromotedList p,
+html[data-today-theme="light"] body #todayPromotedList p,
+html.today-theme-light body #todayPromotedList h4,
+html[data-today-theme="light"] body #todayPromotedList h4,
+html.today-theme-light body #todayPromotedList small,
+html[data-today-theme="light"] body #todayPromotedList small {
+  color: #28334b !important;
+  -webkit-text-fill-color: #28334b !important;
+}
+
+
+/* ==========================================================
+   B. «В ИЗБРАННОЕ»
+   Усиленная специфичность для переопределения #dailyGrid.
+   ========================================================== */
+
+html.today-theme-light body #dailyGrid .today-v80-favorite,
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 29px !important;
+  padding: 5px 9px !important;
+  gap: 5px !important;
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  background: linear-gradient(
+    125deg,#dfd4ff 0%,#d7f0e7 60%,#f5e0ed 100%
+  ) !important;
+  border: 1px solid rgba(115, 91, 164, .34) !important;
+  border-radius: 10px !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.82) !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  line-height: 1.2 !important;
+  font-size: 9px !important;
+}
+
+html.today-theme-light body #dailyGrid .today-v80-favorite [data-v80-star],
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite [data-v80-star] {
+  color: #6947a8 !important;
+  -webkit-text-fill-color: #6947a8 !important;
+}
+
+html.today-theme-light body #dailyGrid .today-v80-favorite [data-v80-favorite-label],
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite [data-v80-favorite-label] {
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+}
+
+html.today-theme-light body #dailyGrid .today-v80-favorite.is-favorite,
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite.is-favorite {
+  background: linear-gradient(
+    125deg,#fae6b8,#f6e7d4 60%,#f5dfe9
+  ) !important;
+  color: #5a3c18 !important;
+  -webkit-text-fill-color: #5a3c18 !important;
+}
+
+html.today-theme-light body #dailyGrid .card-head,
+html[data-today-theme="light"] body #dailyGrid .card-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+}
+
+html.today-theme-light body #dailyGrid .kind-pill,
+html[data-today-theme="light"] body #dailyGrid .kind-pill,
+html.today-theme-light body #dailyGrid .kind-pill *,
+html[data-today-theme="light"] body #dailyGrid .kind-pill * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+
+/* ==========================================================
+   C. «В АРХИВ» — НИКАКОГО НАЛОЖЕНИЯ НА CTA-КНОПКИ
+   Инструменты становятся отдельной строкой под действиями карточки.
+   ========================================================== */
+
+html.today-theme-light body .daily-card .card-actions,
+html[data-today-theme="light"] body .daily-card .card-actions {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  z-index: 1 !important;
+  overflow: visible !important;
+}
+
+html.today-theme-light body .daily-card .v50-daily-tools,
+html[data-today-theme="light"] body .daily-card .v50-daily-tools {
+  position: static !important;
+  inset: auto !important;
+  float: none !important;
+  clear: both !important;
+  transform: none !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  align-self: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+  gap: 8px !important;
+  margin: 12px 0 0 !important;
+  padding: 9px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(113, 97, 159, .20) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+}
+
+html.today-theme-light body .daily-card .v50-small-action,
+html[data-today-theme="light"] body .daily-card .v50-small-action,
+html.today-theme-light body .v50-card-tools .v50-small-action,
+html[data-today-theme="light"] body .v50-card-tools .v50-small-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 29px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 7px 11px !important;
+  border: 1px solid rgba(114, 92, 167, .30) !important;
+  border-radius: 10px !important;
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  background: linear-gradient(
+    125deg,#e3d9ff,#d9f1e8 62%,#f7e4ee
+  ) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.86) !important;
+  font: 800 9px/1.2 Manrope,system-ui,sans-serif !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body .daily-card .v50-small-action:hover,
+html[data-today-theme="light"] body .daily-card .v50-small-action:hover {
+  border-color: rgba(102, 78, 163, .52) !important;
+  transform: translateY(-1px) !important;
+}
+
+html.today-theme-light body .daily-card > .v50-daily-tools,
+html[data-today-theme="light"] body .daily-card > .v50-daily-tools {
+  order: 30 !important;
+}
+
+
+/* ==========================================================
+   D. ПЛАВАЮЩАЯ НАВИГАЦИЯ — ЧАТЫ ВЫРАВНИВАЕМ
+   Компактный индикатор сообщений без огромного красного нуля.
+   ========================================================== */
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"],
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  line-height: 1 !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon {
+  display: grid !important;
+  place-items: center !important;
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 26px !important;
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  max-height: 26px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  line-height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon svg,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon svg {
+  display: block !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+  transform: none !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  color: #6d55a9 !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] > small,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] > small {
+  display: block !important;
+  position: static !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: .04em !important;
+  color: #59476e !important;
+  -webkit-text-fill-color: #59476e !important;
+  white-space: nowrap !important;
+}
+
+/* The real badge is tagged by the observer in the JS below. */
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] .today-v113-chat-badge,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] .today-v113-chat-badge {
+  position: absolute !important;
+  top: 2px !important;
+  right: calc(50% - 23px) !important;
+  z-index: 20 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 15px !important;
+  max-width: 24px !important;
+  height: 15px !important;
+  min-height: 15px !important;
+  max-height: 15px !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  box-sizing: border-box !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(110, 87, 166, .28) !important;
+  color: #463363 !important;
+  -webkit-text-fill-color: #463363 !important;
+  background: linear-gradient(
+    120deg,#e2d7ff,#d6f0e7 70%,#f3deeb
+  ) !important;
+  box-shadow: 0 2px 6px rgba(68, 55, 105, .11) !important;
+  font: 850 9px/1 Manrope,system-ui,sans-serif !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"].today-v113-has-chat-badge::after,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"].today-v113-has-chat-badge::after {
+  position: absolute !important;
+  top: 2px !important;
+  right: calc(50% - 23px) !important;
+  z-index: 20 !important;
+  min-width: 15px !important;
+  height: 15px !important;
+  padding: 0 4px !important;
+  box-sizing: border-box !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #463363 !important;
+  background: linear-gradient(120deg,#e2d7ff,#d6f0e7 70%,#f3deeb) !important;
+  border: 1px solid rgba(110,87,166,.28) !important;
+  box-shadow: 0 2px 6px rgba(68,55,105,.11) !important;
+  font: 850 9px/1 Manrope,system-ui,sans-serif !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+
+/* END TODAY V113 */
+
+</style>
+
 
 
 
@@ -2856,6 +3294,272 @@ html[data-today-theme="light"] body .today-like-btn > span:first-child {
   }, true);
 
   queueRefresh();
+})();
+
+</script>
+
+<script id="today-light-polish-v113-script">
+
+(function () {
+  "use strict";
+
+  if (window.__TODAY_V113_LIGHT_DETAIL_FIX__) return;
+  window.__TODAY_V113_LIGHT_DETAIL_FIX__ = true;
+
+  var promoGradient =
+    "radial-gradient(ellipse at 2% 0%, rgba(186,164,255,.48), transparent 52%)," +
+    "radial-gradient(ellipse at 100% 100%, rgba(123,213,187,.40), transparent 53%)," +
+    "linear-gradient(125deg,#e6ddfb 0%,#d9efe7 56%,#f6e0ec 100%)";
+
+  var promoItemBackgrounds = [
+    "linear-gradient(135deg,#e5dcff,#f5e5f0)",
+    "linear-gradient(135deg,#d7f0e6,#e5efff)",
+    "linear-gradient(135deg,#fce2d8,#f9e5ee)",
+    "linear-gradient(135deg,#dceaff,#eae2ff)"
+  ];
+
+  function isLightTheme() {
+    var root = document.documentElement;
+    return root.classList.contains("today-theme-light") ||
+      root.dataset.todayTheme === "light";
+  }
+
+  function setImportant(node, property, value) {
+    if (!node) return;
+    if (node.style.getPropertyValue(property) !== value ||
+        node.style.getPropertyPriority(property) !== "important") {
+      node.style.setProperty(property, value, "important");
+    }
+  }
+
+  function clearOwnedStyles(node, properties) {
+    if (!node) return;
+    properties.forEach(function (property) {
+      node.style.removeProperty(property);
+    });
+  }
+
+  function applyPromoTheme() {
+    var block = document.querySelector("#todayPromotedBlock");
+    if (!block) return;
+
+    var list = block.querySelector("#todayPromotedList, .ts-promoted-list");
+    if (!isLightTheme()) {
+      clearOwnedStyles(block, [
+        "background", "background-color", "background-image",
+        "border", "border-radius", "padding", "margin-top",
+        "margin-bottom", "box-shadow", "backdrop-filter",
+        "-webkit-backdrop-filter", "outline", "color"
+      ]);
+
+      if (list) {
+        clearOwnedStyles(list, [
+          "background", "border", "box-shadow", "padding"
+        ]);
+        Array.from(list.children).forEach(function (item) {
+          clearOwnedStyles(item, [
+            "background", "color", "border", "border-radius",
+            "box-shadow", "-webkit-text-fill-color"
+          ]);
+        });
+      }
+      return;
+    }
+
+    // Inline !important wins against later dynamically loaded stylesheets.
+    setImportant(block, "background", promoGradient);
+    setImportant(block, "background-color", "#e8e0f8");
+    setImportant(block, "border", "1px solid rgba(119,96,170,.30)");
+    setImportant(block, "border-radius", "22px");
+    setImportant(block, "padding", "16px");
+    setImportant(block, "margin-top", "18px");
+    setImportant(block, "margin-bottom", "22px");
+    setImportant(block, "box-shadow",
+      "inset 0 1px rgba(255,255,255,.85),0 10px 26px rgba(85,70,132,.10)");
+    setImportant(block, "backdrop-filter", "none");
+    setImportant(block, "-webkit-backdrop-filter", "none");
+    setImportant(block, "outline", "0");
+    setImportant(block, "color", "#172033");
+
+    if (!list) return;
+
+    setImportant(list, "background", "transparent");
+    setImportant(list, "border", "0");
+    setImportant(list, "box-shadow", "none");
+    setImportant(list, "padding", "0");
+
+    Array.from(list.children).forEach(function (item, index) {
+      setImportant(
+        item,
+        "background",
+        promoItemBackgrounds[index % promoItemBackgrounds.length]
+      );
+      setImportant(item, "color", "#172033");
+      setImportant(item, "-webkit-text-fill-color", "#172033");
+      setImportant(item, "border", "1px solid rgba(111,99,154,.24)");
+      setImportant(item, "border-radius", "16px");
+      setImportant(item, "box-shadow", "0 5px 16px rgba(75,68,119,.06)");
+    });
+  }
+
+  function tagChatBadge() {
+    var button = document.querySelector(
+      "nav.bottom-nav button[data-nav='chats']"
+    );
+    if (!button) return;
+
+    // Some builds put the unread total in a data attribute consumed by ::after.
+    Array.from(button.attributes).forEach(function (attribute) {
+      if (/unread|badge|count|notification/i.test(attribute.name) &&
+          /^\s*\d{1,4}\s*$/.test(attribute.value)) {
+        button.classList.add("today-v113-has-chat-badge");
+      }
+    });
+
+    var nodes = button.querySelectorAll(
+      "span,b,i,em,strong,div,output"
+    );
+
+    nodes.forEach(function (node) {
+      if (node.closest(".today-v96-chat-icon")) return;
+      if (node.matches("small")) return;
+
+      // An already tagged outer counter owns its descendants.
+      if (node.parentElement &&
+          node.parentElement.closest(".today-v113-chat-badge")) {
+        return;
+      }
+
+      var text = String(node.textContent || "").trim();
+      var className = typeof node.className === "string"
+        ? node.className
+        : "";
+
+      var isCountText = /^\d{1,3}\+?$/.test(text);
+      var isCountClass =
+        /(unread|badge|count|notification|message-counter|chat-counter)/i
+          .test(className);
+
+      if (!isCountText && !isCountClass) return;
+
+      // Do not tag decorative SVG wrappers, icon containers, or label.
+      if (node.querySelector("svg") ||
+          node.classList.contains("today-v96-chat-icon")) {
+        return;
+      }
+
+      node.classList.add("today-v113-chat-badge");
+      button.classList.add("today-v113-has-chat-badge");
+
+      if (isLightTheme()) {
+        setImportant(node, "position", "absolute");
+        setImportant(node, "top", "2px");
+        setImportant(node, "right", "calc(50% - 23px)");
+        setImportant(node, "z-index", "20");
+        setImportant(node, "display", "inline-flex");
+        setImportant(node, "align-items", "center");
+        setImportant(node, "justify-content", "center");
+        setImportant(node, "width", "auto");
+        setImportant(node, "min-width", "15px");
+        setImportant(node, "max-width", "24px");
+        setImportant(node, "height", "15px");
+        setImportant(node, "min-height", "15px");
+        setImportant(node, "max-height", "15px");
+        setImportant(node, "margin", "0");
+        setImportant(node, "padding", "0 4px");
+        setImportant(node, "box-sizing", "border-box");
+        setImportant(node, "border-radius", "999px");
+        setImportant(node, "border", "1px solid rgba(110,87,166,.28)");
+        setImportant(node, "color", "#463363");
+        setImportant(node, "-webkit-text-fill-color", "#463363");
+        setImportant(node, "background",
+          "linear-gradient(120deg,#e2d7ff,#d6f0e7 70%,#f3deeb)");
+        setImportant(node, "box-shadow", "0 2px 6px rgba(68,55,105,.11)");
+        setImportant(node, "font-size", "9px");
+        setImportant(node, "font-weight", "850");
+        setImportant(node, "line-height", "1");
+        setImportant(node, "text-align", "center");
+        setImportant(node, "white-space", "nowrap");
+        setImportant(node, "text-shadow", "none");
+        setImportant(node, "transform", "none");
+      }
+    });
+  }
+
+  function alignChatIcon() {
+    var button = document.querySelector(
+      "nav.bottom-nav button[data-nav='chats']"
+    );
+    if (!button || !isLightTheme()) return;
+
+    var icon = button.querySelector(".today-v96-chat-icon");
+    if (!icon) return;
+
+    setImportant(icon, "position", "relative");
+    setImportant(icon, "display", "grid");
+    setImportant(icon, "place-items", "center");
+    setImportant(icon, "width", "26px");
+    setImportant(icon, "height", "26px");
+    setImportant(icon, "min-height", "26px");
+    setImportant(icon, "margin", "0");
+    setImportant(icon, "padding", "0");
+    setImportant(icon, "transform", "none");
+    setImportant(icon, "line-height", "0");
+
+    var svg = icon.querySelector("svg");
+    if (svg) {
+      setImportant(svg, "display", "block");
+      setImportant(svg, "width", "24px");
+      setImportant(svg, "height", "24px");
+      setImportant(svg, "margin", "0");
+      setImportant(svg, "transform", "none");
+    }
+
+    setImportant(button, "position", "relative");
+    setImportant(button, "align-items", "center");
+    setImportant(button, "justify-content", "center");
+    setImportant(button, "flex-direction", "column");
+    setImportant(button, "gap", "4px");
+  }
+
+  var queued = false;
+
+  function refresh() {
+    applyPromoTheme();
+    tagChatBadge();
+    alignChatIcon();
+  }
+
+  function queueRefresh() {
+    if (queued) return;
+    queued = true;
+
+    window.requestAnimationFrame(function () {
+      queued = false;
+      refresh();
+    });
+  }
+
+  var domObserver = new MutationObserver(queueRefresh);
+  domObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  var themeObserver = new MutationObserver(queueRefresh);
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "data-today-theme"]
+  });
+
+  document.addEventListener("DOMContentLoaded", queueRefresh, { once: true });
+  window.addEventListener("load", queueRefresh, { once: true });
+
+  // Initial attempt plus retries for dynamically injected social elements.
+  queueRefresh();
+  window.setTimeout(queueRefresh, 350);
+  window.setTimeout(queueRefresh, 1200);
 })();
 
 </script>
