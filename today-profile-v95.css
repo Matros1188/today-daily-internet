@@ -1,0 +1,187 @@
+/* TODAY V116.4 — ВКЛАДКИ СРАЗУ ПОД АВАТАРОМ */
+
+/* Структура: аватар -> вкладки -> путь TODAY -> статистика. */
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-layout-v63 > .today-profile-v63-tabs {
+  order: 2 !important;
+}
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-layout-v63 > .today-profile-v83-journey {
+  order: 3 !important;
+  margin-top: 0 !important;
+}
+
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-layout-v63 > .today-profile-v63-tabs {
+  order: 2 !important;
+}
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-layout-v63 > .today-profile-v83-journey {
+  order: 3 !important;
+  margin-top: 0 !important;
+}
+
+/* Размер и геометрия SVG во всех темах. */
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span,
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span {
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  box-sizing: border-box !important;
+  border: 1px solid transparent !important;
+  border-radius: 13px !important;
+  line-height: 1 !important;
+  transition: transform .18s ease, box-shadow .18s ease !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span svg,
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span svg {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  overflow: visible !important;
+  color: currentColor !important;
+}
+
+/* Светлая тема: пять мягких, различимых цветов. */
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(1) > span {
+  color: #6752b4 !important;
+  border-color: rgba(117,94,187,.22) !important;
+  background: linear-gradient(145deg,#ece5ff,#ddd7ff) !important;
+}
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(2) > span {
+  color: #247c80 !important;
+  border-color: rgba(73,153,149,.22) !important;
+  background: linear-gradient(145deg,#def7ee,#d2eeea) !important;
+}
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(3) > span {
+  color: #a64d8a !important;
+  border-color: rgba(178,111,158,.22) !important;
+  background: linear-gradient(145deg,#fae4f1,#f4d9ea) !important;
+}
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(4) > span {
+  color: #98631b !important;
+  border-color: rgba(193,148,80,.24) !important;
+  background: linear-gradient(145deg,#fff1d2,#f7e3b9) !important;
+}
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(5) > span {
+  color: #376cb2 !important;
+  border-color: rgba(101,140,191,.22) !important;
+  background: linear-gradient(145deg,#e1ecff,#d5e2ff) !important;
+}
+
+/* Тёмная тема: глубокие стеклянные подложки и яркие иконки. */
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span {
+  border-color: rgba(153,180,245,.18) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08),
+              0 5px 13px rgba(0,0,0,.12) !important;
+}
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(1) > span {
+  color: #c5b8ff !important;
+  background: linear-gradient(145deg,rgba(104,83,177,.38),rgba(60,60,113,.32)) !important;
+}
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(2) > span {
+  color: #8ae3d6 !important;
+  background: linear-gradient(145deg,rgba(42,129,124,.38),rgba(35,80,96,.32)) !important;
+}
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(3) > span {
+  color: #f0aee0 !important;
+  background: linear-gradient(145deg,rgba(138,72,127,.4),rgba(82,50,99,.33)) !important;
+}
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(4) > span {
+  color: #ffd38b !important;
+  background: linear-gradient(145deg,rgba(154,111,43,.4),rgba(96,73,45,.32)) !important;
+}
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:nth-child(5) > span {
+  color: #a9ceff !important;
+  background: linear-gradient(145deg,rgba(65,104,167,.4),rgba(43,66,119,.34)) !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:hover > span,
+html.today-theme-dark body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button:hover > span {
+  transform: translateY(-2px) scale(1.035) !important;
+}
+
+/* На телефоне: три вкладки сверху, две в центре снизу. */
+@media (max-width: 760px) {
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs,
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs {
+    grid-template-columns: repeat(6,minmax(0,1fr)) !important;
+    gap: 5px !important;
+    padding: 6px !important;
+  }
+
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button,
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-column-end: span 2 !important;
+    min-height: 76px !important;
+    padding: 8px 3px !important;
+    gap: 6px !important;
+  }
+
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button:nth-child(4),
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button:nth-child(4) {
+    grid-column: 2 / span 2 !important;
+  }
+
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button:nth-child(5),
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button:nth-child(5) {
+    grid-column: 4 / span 2 !important;
+  }
+
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > span,
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > span {
+    width: 34px !important;
+    height: 34px !important;
+    flex-basis: 34px !important;
+    border-radius: 11px !important;
+  }
+
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > span svg,
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > span svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  html.today-theme-light body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > b,
+  html.today-theme-dark body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > b {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+  }
+}
