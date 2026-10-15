@@ -1,4 +1,4 @@
-/* TODAY ARCADE HUB V1 — dedicated catalogue, original game engine retained */
+/* TODAY ARCADE HUB V2.1 — DARK FIX — dedicated catalogue, original game engine retained */
 (() => {
   'use strict';
 
@@ -351,9 +351,28 @@
     }
   }
 
-  if (window.TODAY_SOCIAL?.getGameCatalogue) {
-    render();
-  } else {
-    document.addEventListener('DOMContentLoaded', render, { once: true });
+  // Надёжный запуск каталога, даже если DOMContentLoaded уже прошёл.
+  let bootAttempts = 0;
+
+  function bootCatalogue() {
+    if (window.TODAY_SOCIAL?.getGameCatalogue) {
+      render();
+      return;
+    }
+
+    bootAttempts += 1;
+
+    if (bootAttempts < 35) {
+      window.setTimeout(bootCatalogue, 100);
+      return;
+    }
+
+    renderError(
+      'Игровой модуль не успел запуститься. '
+      + 'Перезагрузи страницу или вернись на главную TODAY '
+      + 'и открой игровой центр ещё раз.'
+    );
   }
+
+  bootCatalogue();
 })();

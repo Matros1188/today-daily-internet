@@ -1146,3 +1146,275 @@ body.today-games-route #modal:not(.hidden) {
 body.today-games-route #todayGamesHub [hidden] {
   display: none !important;
 }
+
+/* ==========================================================================
+   TODAY ARCADE V2.1 — DARK THEME VISIBILITY FIX
+   Добавлено в существующий today-games-hub-v1.css.
+   Не меняет макет светлой темы и не затрагивает игровой движок.
+   ========================================================================== */
+
+/* Основной контейнер игрового мира. */
+html.today-theme-dark body.today-games-route #todayGamesHub,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub {
+  display: block !important;
+  position: relative !important;
+  isolation: isolate !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  margin: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  color: #edf3ff !important;
+  background:
+    radial-gradient(
+      ellipse at 6% 0%,
+      rgba(97,107,214,.23),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 96% 13%,
+      rgba(50,171,179,.15),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 69% 76%,
+      rgba(128,75,193,.12),
+      transparent 39%
+    ),
+    linear-gradient(
+      135deg,
+      #080d19 0%,
+      #10172a 48%,
+      #0b1322 100%
+    ) !important;
+}
+
+/* Панель, меню и содержимое каталога. */
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-topbar,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-topbar {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-shell,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-shell {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: min(1260px, calc(100% - 40px)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Главная игра. Атрибут hidden по-прежнему учитывается фильтрами. */
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-feature:not([hidden]),
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-feature:not([hidden]) {
+  display: grid !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #f1f5ff !important;
+  background:
+    radial-gradient(
+      ellipse at 4% 0%,
+      rgba(115,104,240,.31),
+      transparent 47%
+    ),
+    radial-gradient(
+      ellipse at 95% 12%,
+      rgba(40,193,193,.18),
+      transparent 37%
+    ),
+    linear-gradient(
+      130deg,
+      rgba(20,28,57,.98),
+      rgba(13,25,46,.97) 52%,
+      rgba(27,26,65,.97)
+    ) !important;
+}
+
+/* Заголовки и панель выбора игр. */
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-section-head,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-section-head {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #edf3ff !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-toolbar,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-toolbar {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-filters,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-filters {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-search,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-search {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #d4def6 !important;
+  background: rgba(19,28,47,.9) !important;
+  border-color: rgba(142,170,229,.28) !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-search input,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-search input {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #edf3ff !important;
+  background: transparent !important;
+}
+
+/* Сетка карточек. */
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-game-grid:not([hidden]),
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-game-grid:not([hidden]) {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Отображаем карточки, которые не скрыты активным фильтром. */
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-card:not([hidden]),
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-card:not([hidden]) {
+  display: flex !important;
+  flex-direction: column !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #e9f0ff !important;
+  background: linear-gradient(
+    145deg,
+    rgba(24,34,55,.98),
+    rgba(13,22,38,.98)
+  ) !important;
+  border-color: rgba(143,169,229,.24) !important;
+}
+
+/* Изображения и иллюстрации существующих игр. */
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-card-art,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-card-art {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: #111a30 !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-card-art .ts-game-svg,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-feature-art .ts-game-svg,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-card-art .ts-game-svg,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-feature-art .ts-game-svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 100% !important;
+}
+
+/* Текст карточек сохраняет контраст в тёмной теме. */
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-card h3,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-feature h1,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-feature h1 span,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-section-head h2,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-card h3,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-feature h1,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-section-head h2 {
+  visibility: visible !important;
+  color: #f1f5ff !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-card p,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-feature-copy p,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-card-tag,
+html.today-theme-dark body.today-games-route #todayGamesHub
+.tg-local-best,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-card p,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub
+.tg-feature-copy p {
+  visibility: visible !important;
+  color: #b7c5df !important;
+}
+
+/* Личные рекорды и нижняя панель. */
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-records,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-records {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #eaf1ff !important;
+  background: linear-gradient(
+    145deg,
+    rgba(24,34,55,.96),
+    rgba(13,22,38,.96)
+  ) !important;
+  border-color: rgba(143,169,229,.24) !important;
+}
+
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-footer,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-footer {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #a5b5d2 !important;
+}
+
+/* Не позволяем глобальным стилям делать пустой экран вместо ошибки. */
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-error,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-error {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #edf3ff !important;
+  background: rgba(23,33,54,.97) !important;
+}
+
+/* Служебные элементы, скрытые фильтрами, не показываем насильно. */
+body.today-games-route #todayGamesHub [hidden] {
+  display: none !important;
+}
+
+/* Переключатель темы и ссылки верхнего меню. */
+html.today-theme-dark body.today-games-route #todayGamesHub .tg-nav-link,
+html.today-theme-dark body.today-games-route #todayGamesHub #todayThemeToggle,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub .tg-nav-link,
+html[data-today-theme="dark"] body.today-games-route #todayGamesHub #todayThemeToggle {
+  color: #e3ebff !important;
+  background: rgba(27,38,61,.86) !important;
+  border-color: rgba(142,170,229,.28) !important;
+}
