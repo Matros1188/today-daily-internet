@@ -1,0 +1,1107 @@
+/* TODAY ARCADE V5 — REBUILT CINEMATIC COMPOSITION */
+/* A new layout system, not another decorative layer. Game engine untouched. */
+
+body.today-games-route {
+  --arc5-bg: #080b10;
+  --arc5-panel: rgba(17, 23, 32, .88);
+  --arc5-panel-solid: #111720;
+  --arc5-line: rgba(226, 237, 255, .13);
+  --arc5-ink: #f4f7fb;
+  --arc5-muted: #9aa8b8;
+  --arc5-lime: #d7ff52;
+  --arc5-lime-ink: #101509;
+  --arc5-violet: #a48bff;
+  --arc5-cyan: #76f0df;
+  --arc5-radius: 27px;
+  background: var(--arc5-bg) !important;
+  color: var(--arc5-ink) !important;
+  font-family: Onest, Manrope, system-ui, sans-serif !important;
+  overflow-x: clip !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.today-theme-light body.today-games-route {
+  --arc5-bg: #e8edf0;
+  --arc5-panel: rgba(250, 252, 248, .91);
+  --arc5-panel-solid: #f9fbf7;
+  --arc5-line: rgba(39, 54, 59, .13);
+  --arc5-ink: #172126;
+  --arc5-muted: #5b6b70;
+  --arc5-lime: #b6db35;
+  --arc5-lime-ink: #18210b;
+  --arc5-violet: #755bd4;
+  --arc5-cyan: #258d88;
+  background: var(--arc5-bg) !important;
+}
+
+body.today-games-route #todayGamesHub {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 100vh !important;
+  padding-bottom: max(54px, env(safe-area-inset-bottom)) !important;
+  background:
+    radial-gradient(ellipse at 11% 16%, rgba(164, 139, 255, .16), transparent 29%),
+    radial-gradient(ellipse at 88% 28%, rgba(118, 240, 223, .10), transparent 31%),
+    radial-gradient(ellipse at 48% 74%, rgba(215, 255, 82, .045), transparent 39%),
+    var(--arc5-bg) !important;
+  color: var(--arc5-ink) !important;
+  overflow: clip visible !important;
+}
+
+body.today-games-route #todayGamesHub::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .19;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub {
+  background:
+    radial-gradient(ellipse at 11% 10%, rgba(164, 139, 255, .15), transparent 31%),
+    radial-gradient(ellipse at 91% 24%, rgba(118, 220, 204, .19), transparent 32%),
+    radial-gradient(ellipse at 49% 76%, rgba(215, 255, 82, .10), transparent 40%),
+    var(--arc5-bg) !important;
+}
+
+body.today-games-route #todayGamesHub > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header becomes a restrained product navigation, not a floating pill. */
+body.today-games-route .tg-topbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 150 !important;
+  min-height: 72px !important;
+  padding: 12px max(22px, calc((100vw - 1280px) / 2)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--arc5-line) !important;
+  border-radius: 0 !important;
+  background: color-mix(in srgb, var(--arc5-bg) 81%, transparent) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+}
+
+body.today-games-route .tg-brand { gap: 12px !important; text-decoration: none !important; }
+body.today-games-route .tg-brand-mark {
+  width: 40px !important;
+  height: 40px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background: var(--arc5-lime) !important;
+  color: var(--arc5-lime-ink) !important;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--arc5-lime) 12%, transparent), 0 7px 24px color-mix(in srgb, var(--arc5-lime) 15%, transparent) !important;
+  font-size: 22px !important;
+  transform: rotate(-7deg);
+}
+body.today-games-route .tg-brand-copy b {
+  color: var(--arc5-ink) !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  letter-spacing: .13em !important;
+}
+body.today-games-route .tg-brand-copy small {
+  color: var(--arc5-muted) !important;
+  font-size: 9px !important;
+  letter-spacing: .16em !important;
+}
+body.today-games-route .tg-nav-actions { gap: 9px !important; }
+body.today-games-route .tg-nav-link,
+body.today-games-route #todayThemeToggle {
+  min-height: 39px !important;
+  padding: 9px 13px !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--arc5-panel) 85%, transparent) !important;
+  color: var(--arc5-ink) !important;
+  font-size: 11px !important;
+  font-weight: 750 !important;
+  text-decoration: none !important;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease !important;
+}
+body.today-games-route .tg-nav-link:hover,
+body.today-games-route #todayThemeToggle:hover {
+  transform: translateY(-2px) !important;
+  border-color: color-mix(in srgb, var(--arc5-lime) 55%, transparent) !important;
+}
+body.today-games-route #todayThemeToggle { cursor: pointer !important; }
+
+/* Intro: a compact editorial cover with genuine hierarchy. */
+body.today-games-route #todayGamesHub .tg-v4-opening {
+  width: min(1280px, calc(100% - 48px)) !important;
+  max-width: 1280px !important;
+  margin: 30px auto 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  animation: arc5-rise .65s cubic-bezier(.2,.75,.2,1) both !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-opening::before { content: none !important; }
+body.today-games-route #todayGamesHub .tg-v4-opening-inner {
+  position: relative !important;
+  isolation: isolate !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(245px, 300px) !important;
+  align-items: center !important;
+  gap: clamp(24px, 4vw, 60px) !important;
+  min-height: 258px !important;
+  width: 100% !important;
+  padding: clamp(28px, 4.6vw, 54px) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 31px !important;
+  background:
+    linear-gradient(105deg, rgba(24, 31, 42, .98) 0%, rgba(20, 27, 37, .94) 54%, rgba(26, 31, 42, .83) 100%) !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-v4-opening-inner {
+  background: linear-gradient(112deg, #f9fbf7 0%, #f2f4ee 62%, #e9f2ea 100%) !important;
+  box-shadow: 0 26px 68px rgba(42,64,57,.09), inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-opening-inner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 410px;
+  height: 410px;
+  top: -195px;
+  right: 65px;
+  border: 1px solid rgba(215,255,82,.28);
+  border-radius: 50%;
+  box-shadow: 0 0 0 26px rgba(215,255,82,.035), 0 0 0 58px rgba(164,139,255,.035), inset 0 0 80px rgba(215,255,82,.05);
+  transform: rotate(-18deg);
+}
+body.today-games-route #todayGamesHub .tg-v4-opening-inner::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 270px;
+  height: 270px;
+  top: -118px;
+  right: 135px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(215,255,82,.12), rgba(164,139,255,.05) 50%, transparent 70%);
+  filter: blur(5px);
+}
+body.today-games-route #todayGamesHub .tg-v4-opening-inner > div:first-child { position: relative; z-index: 2; }
+body.today-games-route #todayGamesHub .tg-v4-opening-kicker {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  margin: 0 0 24px !important;
+  padding: 8px 11px !important;
+  border: 1px solid color-mix(in srgb, var(--arc5-lime) 28%, transparent) !important;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--arc5-lime) 8%, transparent) !important;
+  color: var(--arc5-lime) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .11em !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-live-dot {
+  width: 6px !important;
+  height: 6px !important;
+  flex: 0 0 6px !important;
+  border-radius: 50% !important;
+  background: var(--arc5-lime) !important;
+  box-shadow: 0 0 13px var(--arc5-lime) !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-live-dot::after { display: none !important; }
+body.today-games-route #todayGamesHub .tg-v4-opening h2 {
+  max-width: 780px !important;
+  margin: 0 !important;
+  color: var(--arc5-ink) !important;
+  font-size: clamp(40px, 5.2vw, 70px) !important;
+  font-weight: 900 !important;
+  line-height: .98 !important;
+  letter-spacing: -.075em !important;
+  text-wrap: balance !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-opening h2 span {
+  display: block !important;
+  margin-top: 7px !important;
+  background: linear-gradient(95deg, var(--arc5-lime), #efffae 62%, var(--arc5-cyan)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-v4-opening h2 span {
+  background: linear-gradient(95deg, #5c8c18, #258d88) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-opening p {
+  max-width: 560px !important;
+  margin: 19px 0 0 !important;
+  color: var(--arc5-muted) !important;
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-metrics {
+  position: relative !important;
+  z-index: 2 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 9px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-metric {
+  display: grid !important;
+  grid-template-columns: 68px minmax(0,1fr) !important;
+  align-items: center !important;
+  gap: 13px !important;
+  min-height: 58px !important;
+  padding: 10px 13px !important;
+  border: 1px solid rgba(255,255,255,.095) !important;
+  border-radius: 15px !important;
+  background: rgba(4,8,13,.28) !important;
+  text-align: left !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-v4-metric {
+  border-color: rgba(39,54,59,.10) !important;
+  background: rgba(255,255,255,.57) !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-metric b {
+  color: var(--arc5-lime) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 29px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -.08em !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-v4-metric b { color: #608d20 !important; }
+body.today-games-route #todayGamesHub .tg-v4-metric small {
+  max-width: 125px !important;
+  color: var(--arc5-muted) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  line-height: 1.4 !important;
+  letter-spacing: .10em !important;
+}
+
+/* Main quest: the hero is a full-scale game poster, not a regular card. */
+body.today-games-route #todayGamesHub .tg-shell {
+  width: min(1280px, calc(100% - 48px)) !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+body.today-games-route #todayGamesHub .tg-feature:not([hidden]) {
+  position: relative !important;
+  isolation: isolate !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, .91fr) minmax(0, 1.09fr) !important;
+  align-items: center !important;
+  min-height: 485px !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: clamp(30px, 4.5vw, 61px) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(215,255,82,.21) !important;
+  border-radius: 35px !important;
+  background:
+    linear-gradient(112deg, #171a22 0%, #141b22 47%, #101c22 100%) !important;
+  box-shadow: 0 30px 95px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.07) !important;
+  animation: arc5-rise .75s .04s cubic-bezier(.2,.75,.2,1) both !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-feature:not([hidden]) {
+  border-color: rgba(57,112,80,.18) !important;
+  background: linear-gradient(118deg, #fbfcf6 0%, #eff4e9 56%, #e2f1e9 100%) !important;
+  box-shadow: 0 30px 80px rgba(48,76,64,.11), inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+body.today-games-route #todayGamesHub .tg-feature::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  width: min(70%, 690px) !important;
+  aspect-ratio: 1 !important;
+  right: -5% !important;
+  top: -25% !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(118,240,223,.19) 0%, rgba(164,139,255,.12) 39%, rgba(215,255,82,.06) 56%, transparent 72%) !important;
+  filter: blur(4px) !important;
+  pointer-events: none !important;
+}
+body.today-games-route #todayGamesHub .tg-feature::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: 0 !important;
+  opacity: .22 !important;
+  background-image: radial-gradient(rgba(255,255,255,.45) .7px, transparent .7px) !important;
+  background-size: 17px 17px !important;
+  mask-image: linear-gradient(105deg, transparent 23%, black 100%) !important;
+  pointer-events: none !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-copy {
+  position: relative !important;
+  z-index: 4 !important;
+  align-self: center !important;
+  max-width: 620px !important;
+  min-width: 0 !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 0 24px !important;
+  padding: 8px 11px !important;
+  border: 1px solid rgba(215,255,82,.28) !important;
+  border-radius: 999px !important;
+  background: rgba(215,255,82,.075) !important;
+  color: var(--arc5-lime) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .105em !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-feature-badge {
+  border-color: rgba(68,117,43,.18) !important;
+  background: rgba(182,219,53,.13) !important;
+  color: #4e771b !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-copy h1 {
+  max-width: 680px !important;
+  margin: 0 !important;
+  color: var(--arc5-ink) !important;
+  font-size: clamp(44px, 5.6vw, 77px) !important;
+  font-weight: 950 !important;
+  line-height: .91 !important;
+  letter-spacing: -.08em !important;
+  text-wrap: balance !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-copy h1 span {
+  display: block !important;
+  margin-top: 9px !important;
+  background: linear-gradient(95deg, #d7ff52 0%, #9df0bf 53%, #7deadd 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-feature-copy h1 span {
+  background: linear-gradient(95deg, #5d8c1b, #258d88) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-copy > p {
+  max-width: 500px !important;
+  margin: 23px 0 27px !important;
+  color: var(--arc5-muted) !important;
+  font-size: 14px !important;
+  line-height: 1.85 !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-stats { display: none !important; }
+body.today-games-route #todayGamesHub .tg-feature-cta {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 18px !important;
+  min-height: 56px !important;
+  margin-top: 4px !important;
+  padding: 0 23px !important;
+  border: 0 !important;
+  border-radius: 15px !important;
+  background: var(--arc5-lime) !important;
+  color: var(--arc5-lime-ink) !important;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--arc5-lime) 17%, transparent) !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  letter-spacing: -.015em !important;
+  cursor: pointer !important;
+  transition: transform .2s ease, box-shadow .2s ease !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-cta:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 17px 43px color-mix(in srgb, var(--arc5-lime) 25%, transparent) !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-cta span { font-size: 18px !important; }
+body.today-games-route #todayGamesHub .tg-feature-art {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 0 !important;
+  right: -1.5% !important;
+  bottom: 0 !important;
+  width: 57% !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 12px 0 !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  mask-image: linear-gradient(to right, transparent 0%, black 17%, black 100%) !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-art::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 82% !important;
+  aspect-ratio: 1 !important;
+  border: 1px solid rgba(118,240,223,.42) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 19px rgba(118,240,223,.035), 0 0 0 45px rgba(164,139,255,.035), 0 0 70px rgba(118,240,223,.09) !important;
+  transform: rotate(22deg) !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-art::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 62% !important;
+  aspect-ratio: 1 !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(215,255,82,.17), rgba(118,240,223,.08) 43%, transparent 70%) !important;
+  filter: blur(15px) !important;
+}
+body.today-games-route #todayGamesHub .tg-feature-art .ts-game-svg {
+  position: relative !important;
+  z-index: 1 !important;
+  display: block !important;
+  width: min(100%, 590px) !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 490px !important;
+  filter: drop-shadow(0 28px 55px rgba(0,0,0,.32)) saturate(1.12) !important;
+  transform: scale(1.08) rotate(-4deg) !important;
+  animation: arc5-art-drift 7s ease-in-out infinite !important;
+  transition: transform .6s cubic-bezier(.2,.75,.2,1) !important;
+}
+body.today-games-route #todayGamesHub .tg-feature:hover .tg-feature-art .ts-game-svg { transform: scale(1.13) rotate(-1deg) !important; }
+body.today-games-route #todayGamesHub .tg-v4-art-hud { z-index: 4 !important; }
+body.today-games-route #todayGamesHub .tg-v4-art-chip {
+  padding: 11px 13px !important;
+  border: 1px solid rgba(255,255,255,.17) !important;
+  border-radius: 13px !important;
+  background: rgba(11,16,21,.68) !important;
+  box-shadow: 0 10px 26px rgba(0,0,0,.14) !important;
+  backdrop-filter: blur(13px) !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-art-chip small {
+  color: #b5c6c2 !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 8px !important;
+  letter-spacing: .12em !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-art-chip b {
+  color: #efffd0 !important;
+  font-size: 10px !important;
+  font-weight: 850 !important;
+  letter-spacing: .04em !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-art-chip:last-child { display: none !important; }
+body.today-games-route #todayGamesHub .tg-v4-portal-label { display: none !important; }
+
+/* Three quiet product promises: useful information, minimal chrome. */
+body.today-games-route #todayGamesHub .tg-v4-signal-row {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  width: 100% !important;
+  margin: 18px 0 72px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 19px !important;
+  background: color-mix(in srgb, var(--arc5-panel) 76%, transparent) !important;
+  box-shadow: 0 15px 42px rgba(0,0,0,.06) !important;
+  overflow: hidden !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-signal-item {
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 13px !important;
+  padding: 19px 23px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-signal-item + .tg-v4-signal-item {
+  border-left: 1px solid var(--arc5-line) !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-signal-icon {
+  width: 38px !important;
+  height: 38px !important;
+  flex: 0 0 38px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 1px solid color-mix(in srgb, var(--arc5-lime) 23%, transparent) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--arc5-lime) 8%, transparent) !important;
+  color: var(--arc5-lime) !important;
+  font-size: 18px !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-signal-copy { min-width: 0 !important; }
+body.today-games-route #todayGamesHub .tg-v4-signal-copy b {
+  display: block !important;
+  margin-bottom: 4px !important;
+  color: var(--arc5-ink) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: .07em !important;
+}
+body.today-games-route #todayGamesHub .tg-v4-signal-copy small {
+  display: block !important;
+  color: var(--arc5-muted) !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+}
+
+/* Collection: editorial heading, strong filter bar, poster-like game tiles. */
+body.today-games-route #todayGamesHub .tg-section-head {
+  display: flex !important;
+  align-items: end !important;
+  justify-content: space-between !important;
+  gap: 22px !important;
+  margin: 0 0 25px !important;
+  padding: 0 1px !important;
+}
+body.today-games-route #todayGamesHub .tg-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  margin-bottom: 12px !important;
+  color: var(--arc5-lime) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: .14em !important;
+}
+html.today-theme-light body.today-games-route #todayGamesHub .tg-eyebrow { color: #608d20 !important; }
+body.today-games-route #todayGamesHub .tg-eyebrow-dot {
+  width: 7px !important; height: 7px !important; border-radius: 50% !important;
+  background: var(--arc5-lime) !important; box-shadow: 0 0 12px color-mix(in srgb, var(--arc5-lime) 40%, transparent) !important;
+}
+body.today-games-route #todayGamesHub .tg-section-head h2 {
+  margin: 0 !important;
+  color: var(--arc5-ink) !important;
+  font-size: clamp(28px, 3.3vw, 43px) !important;
+  font-weight: 900 !important;
+  line-height: 1.03 !important;
+  letter-spacing: -.06em !important;
+}
+body.today-games-route #todayGamesHub .tg-section-head p {
+  margin: 11px 0 0 !important;
+  color: var(--arc5-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+}
+body.today-games-route #todayGamesHub .tg-count {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 48px !important;
+  height: 43px !important;
+  padding: 0 13px !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 13px !important;
+  background: var(--arc5-panel) !important;
+  color: var(--arc5-muted) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+body.today-games-route #todayGamesHub .tg-toolbar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin: 0 0 22px !important;
+  padding: 9px !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 18px !important;
+  background: color-mix(in srgb, var(--arc5-panel) 86%, transparent) !important;
+  box-shadow: 0 10px 32px rgba(0,0,0,.055) !important;
+}
+body.today-games-route #todayGamesHub .tg-filters {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+  flex-wrap: wrap !important;
+}
+body.today-games-route #todayGamesHub .tg-filter {
+  min-height: 38px !important;
+  padding: 9px 13px !important;
+  border: 1px solid transparent !important;
+  border-radius: 11px !important;
+  background: transparent !important;
+  color: var(--arc5-muted) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: color .2s ease, background .2s ease, border-color .2s ease !important;
+}
+body.today-games-route #todayGamesHub .tg-filter:hover {
+  color: var(--arc5-ink) !important;
+  background: color-mix(in srgb, var(--arc5-line) 55%, transparent) !important;
+}
+body.today-games-route #todayGamesHub .tg-filter.is-active {
+  border-color: color-mix(in srgb, var(--arc5-lime) 35%, transparent) !important;
+  background: var(--arc5-lime) !important;
+  color: var(--arc5-lime-ink) !important;
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--arc5-lime) 12%, transparent) !important;
+}
+body.today-games-route #todayGamesHub .tg-search {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  width: min(260px, 30%) !important;
+  min-width: 180px !important;
+  min-height: 40px !important;
+  padding: 0 12px !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--arc5-bg) 58%, transparent) !important;
+  color: var(--arc5-muted) !important;
+}
+body.today-games-route #todayGamesHub .tg-search > span { color: var(--arc5-lime) !important; font-size: 20px !important; }
+body.today-games-route #todayGamesHub .tg-search input {
+  width: 100% !important; min-width: 0 !important; padding: 0 !important;
+  border: 0 !important; outline: 0 !important; background: transparent !important;
+  color: var(--arc5-ink) !important; font-size: 11px !important; box-shadow: none !important;
+}
+body.today-games-route #todayGamesHub .tg-search input::placeholder { color: var(--arc5-muted) !important; opacity: .82 !important; }
+
+body.today-games-route #todayGamesHub .tg-random-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 40px !important;
+  padding: 0 13px !important;
+  border: 1px solid color-mix(in srgb, var(--arc5-violet) 31%, transparent) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--arc5-violet) 11%, transparent) !important;
+  color: var(--arc5-ink) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+}
+body.today-games-route #todayGamesHub .tg-random-icon { color: var(--arc5-violet) !important; font-size: 16px !important; }
+
+body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: stretch !important;
+  gap: 17px !important;
+  margin: 0 !important;
+}
+body.today-games-route #todayGamesHub .tg-card:not([hidden]) {
+  position: relative !important;
+  isolation: isolate !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 22px !important;
+  background: var(--arc5-panel) !important;
+  box-shadow: 0 13px 38px rgba(0,0,0,.075), inset 0 1px 0 rgba(255,255,255,.035) !important;
+  transform: translateY(0) !important;
+  animation: arc5-rise .48s calc(var(--tg-card-index, 0) * 25ms) cubic-bezier(.2,.75,.2,1) both !important;
+  transition: transform .28s cubic-bezier(.2,.75,.2,1), border-color .28s ease, box-shadow .28s ease !important;
+}
+body.today-games-route #todayGamesHub .tg-card:not([hidden])::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 5 !important;
+  inset: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: inherit !important;
+  background: linear-gradient(135deg, rgba(215,255,82,.19), transparent 35%, rgba(164,139,255,.14)) border-box !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity .28s ease !important;
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0) border-box !important;
+  mask-composite: exclude !important;
+}
+body.today-games-route #todayGamesHub .tg-card:not([hidden]):hover {
+  transform: translateY(-7px) !important;
+  border-color: color-mix(in srgb, var(--arc5-lime) 45%, var(--arc5-line)) !important;
+  box-shadow: 0 23px 55px rgba(0,0,0,.19), 0 0 0 1px color-mix(in srgb, var(--arc5-lime) 10%, transparent) !important;
+}
+body.today-games-route #todayGamesHub .tg-card:not([hidden]):hover::after { opacity: 1 !important; }
+body.today-games-route #todayGamesHub .tg-card-art {
+  position: relative !important;
+  isolation: isolate !important;
+  display: grid !important;
+  place-items: center !important;
+  height: clamp(170px, 17vw, 224px) !important;
+  min-height: 170px !important;
+  padding: 13px !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--arc5-line) !important;
+  border-radius: 0 !important;
+  background:
+    radial-gradient(ellipse at 48% 36%, rgba(215,255,82,.15), transparent 56%),
+    linear-gradient(145deg, #19232a, #151923 70%, #211d32) !important;
+}
+body.today-games-route #todayGamesHub .tg-card-art::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  width: 73% !important;
+  aspect-ratio: 1 !important;
+  border: 1px solid rgba(255,255,255,.11) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 14px rgba(255,255,255,.025), 0 0 40px rgba(118,240,223,.08) !important;
+  transform: rotate(-14deg) !important;
+  transition: transform .6s cubic-bezier(.2,.75,.2,1), box-shadow .4s ease !important;
+}
+body.today-games-route #todayGamesHub .tg-card-art::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  opacity: .32 !important;
+  background: linear-gradient(132deg, rgba(255,255,255,.08), transparent 40%, rgba(0,0,0,.12)) !important;
+}
+body.today-games-route #todayGamesHub .tg-card:hover .tg-card-art::before {
+  transform: rotate(8deg) scale(1.07) !important;
+  box-shadow: 0 0 0 18px rgba(255,255,255,.03), 0 0 48px rgba(118,240,223,.13) !important;
+}
+body.today-games-route #todayGamesHub .tg-card-art .ts-game-svg {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  max-width: 250px !important;
+  max-height: 195px !important;
+  height: auto !important;
+  filter: drop-shadow(0 15px 20px rgba(0,0,0,.25)) saturate(1.13) !important;
+  transition: transform .35s cubic-bezier(.2,.75,.2,1), filter .35s ease !important;
+}
+body.today-games-route #todayGamesHub .tg-card:hover .tg-card-art .ts-game-svg {
+  transform: translateY(-3px) scale(1.055) !important;
+  filter: drop-shadow(0 22px 25px rgba(0,0,0,.27)) saturate(1.25) !important;
+}
+
+/* Game identity comes from the illustration; each poster has its own light. */
+body.today-games-route #todayGamesHub .tg-card[data-game-id="match3"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(163,139,255,.28), transparent 58%), linear-gradient(145deg,#1b2136,#171923 70%,#2a1e3b) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="snake"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(215,255,82,.22), transparent 56%), linear-gradient(145deg,#1c2b26,#151c20 70%,#1e2b25) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="pulse"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(255,112,147,.23), transparent 56%), linear-gradient(145deg,#30202d,#181923 70%,#2b1d33) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="breakout"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(88,151,255,.28), transparent 56%), linear-gradient(145deg,#172a3e,#161b28 70%,#242241) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="memory"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(255,204,102,.23), transparent 56%), linear-gradient(145deg,#33291d,#1c1c22 70%,#2c2230) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="merge2048"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(255,164,98,.24), transparent 56%), linear-gradient(145deg,#35251e,#1d1b22 70%,#30202e) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="flappy"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(118,240,223,.25), transparent 56%), linear-gradient(145deg,#173238,#171d27 70%,#1b2939) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="ttt"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(255,116,172,.23), transparent 56%), linear-gradient(145deg,#322035,#191a25 70%,#30213d) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="word"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(109,224,255,.23), transparent 56%), linear-gradient(145deg,#18313d,#181d27 70%,#1e2940) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="colorsnap"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(253,114,200,.21), transparent 56%), linear-gradient(145deg,#31203b,#171b26 70%,#1a3437) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="stacker"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(164,139,255,.25), transparent 56%), linear-gradient(145deg,#222040,#171b26 70%,#263347) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="laserdodge"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(255,91,115,.23), transparent 56%), linear-gradient(145deg,#341d2a,#181923 70%,#34202e) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="quiz"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(255,212,96,.23), transparent 56%), linear-gradient(145deg,#34301b,#191c22 70%,#26312f) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="starcatch"] .tg-card-art { background: radial-gradient(ellipse at 50% 34%, rgba(104,155,255,.28), transparent 56%), linear-gradient(145deg,#17233f,#151a27 70%,#2c2140) !important; }
+body.today-games-route #todayGamesHub .tg-card[data-game-id="colorsnap"] .tg-card-art::before { border-color: rgba(253,114,200,.3) !important; }
+
+body.today-games-route #todayGamesHub .tg-card-copy {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  flex-direction: column !important;
+  padding: 19px 19px 17px !important;
+  min-width: 0 !important;
+  background: transparent !important;
+}
+body.today-games-route #todayGamesHub .tg-card-meta {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 7px !important;
+  margin: 0 0 15px !important;
+}
+body.today-games-route #todayGamesHub .tg-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  max-width: 70% !important;
+  padding: 6px 9px !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--arc5-panel-solid) 65%, transparent) !important;
+  color: var(--arc5-muted) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: .045em !important;
+}
+body.today-games-route #todayGamesHub .tg-local-best {
+  flex: 0 0 auto !important;
+  color: var(--arc5-muted) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 9px !important;
+  white-space: nowrap !important;
+}
+body.today-games-route #todayGamesHub .tg-local-best b { color: var(--arc5-ink) !important; font-weight: 800 !important; }
+body.today-games-route #todayGamesHub .tg-card h3 {
+  margin: 0 0 9px !important;
+  color: var(--arc5-ink) !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.045em !important;
+}
+body.today-games-route #todayGamesHub .tg-card p {
+  flex: 1 1 auto !important;
+  min-height: 50px !important;
+  margin: 0 0 19px !important;
+  color: var(--arc5-muted) !important;
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+}
+body.today-games-route #todayGamesHub .tg-card-bottom {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+  padding-top: 13px !important;
+  border-top: 1px solid var(--arc5-line) !important;
+}
+body.today-games-route #todayGamesHub .tg-card-tag {
+  color: var(--arc5-muted) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  opacity: .75 !important;
+}
+body.today-games-route #todayGamesHub .tg-play {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 13px !important;
+  min-height: 39px !important;
+  padding: 0 13px !important;
+  border: 1px solid color-mix(in srgb, var(--arc5-lime) 33%, transparent) !important;
+  border-radius: 11px !important;
+  background: color-mix(in srgb, var(--arc5-lime) 8%, transparent) !important;
+  color: var(--arc5-lime) !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  transition: color .2s ease, background .2s ease, transform .2s ease !important;
+  pointer-events: auto !important;
+}
+body.today-games-route #todayGamesHub .tg-play:hover {
+  background: var(--arc5-lime) !important;
+  color: var(--arc5-lime-ink) !important;
+  transform: translateY(-1px) !important;
+}
+body.today-games-route #todayGamesHub .tg-play span { font-size: 15px !important; }
+
+/* Keep filters, empty states and rankings integrated into the new system. */
+body.today-games-route #todayGamesHub [hidden] { display: none !important; }
+body.today-games-route #todayGamesHub .tg-no-games,
+body.today-games-route #todayGamesHub .tg-records {
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 23px !important;
+  background: var(--arc5-panel) !important;
+  color: var(--arc5-ink) !important;
+}
+body.today-games-route #todayGamesHub .tg-records { margin-top: 52px !important; padding: clamp(20px,3vw,35px) !important; }
+body.today-games-route #todayGamesHub .tg-records h2 { color: var(--arc5-ink) !important; font-size: clamp(24px,3vw,34px) !important; letter-spacing: -.05em !important; }
+body.today-games-route #todayGamesHub .tg-footer {
+  margin-top: 57px !important;
+  padding: 24px 0 0 !important;
+  border-top: 1px solid var(--arc5-line) !important;
+  color: var(--arc5-muted) !important;
+  font-size: 10px !important;
+}
+body.today-games-route #todayGamesHub .tg-error {
+  width: min(650px, calc(100% - 32px)) !important;
+  margin: 70px auto !important;
+  padding: 30px !important;
+  border: 1px solid var(--arc5-line) !important;
+  border-radius: 24px !important;
+  background: var(--arc5-panel) !important;
+  color: var(--arc5-ink) !important;
+}
+
+/* Tablet and mobile are intentionally composed differently, not shrunk desktop. */
+@media (max-width: 1120px) {
+  body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) { grid-template-columns: repeat(3, minmax(0,1fr)) !important; }
+  body.today-games-route #todayGamesHub .tg-feature:not([hidden]) { min-height: 430px !important; }
+  body.today-games-route #todayGamesHub .tg-feature-copy h1 { font-size: clamp(42px,5.3vw,66px) !important; }
+  body.today-games-route #todayGamesHub .tg-v4-signal-item { padding: 16px !important; }
+}
+
+@media (max-width: 760px) {
+  body.today-games-route .tg-topbar {
+    min-height: 62px !important;
+    padding: 9px 14px !important;
+    gap: 9px !important;
+  }
+  body.today-games-route .tg-brand { gap: 9px !important; }
+  body.today-games-route .tg-brand-mark { width: 35px !important; height: 35px !important; border-radius: 11px !important; }
+  body.today-games-route .tg-brand-copy b { font-size: 10px !important; letter-spacing: .10em !important; }
+  body.today-games-route .tg-brand-copy small { display: none !important; }
+  body.today-games-route .tg-nav-actions { gap: 6px !important; }
+  body.today-games-route .tg-nav-link,
+  body.today-games-route #todayThemeToggle {
+    min-height: 35px !important;
+    padding: 7px 9px !important;
+    border-radius: 10px !important;
+    font-size: 9px !important;
+  }
+  body.today-games-route .tg-nav-link:first-child { display: none !important; }
+  body.today-games-route #todayThemeToggle .today-theme-label { display: none !important; }
+  body.today-games-route #todayGamesHub .tg-v4-opening {
+    width: calc(100% - 24px) !important;
+    margin: 13px auto 13px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-opening-inner {
+    grid-template-columns: minmax(0,1fr) !important;
+    gap: 23px !important;
+    min-height: 0 !important;
+    padding: 25px 21px 19px !important;
+    border-radius: 23px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-opening-inner::before {
+    width: 280px !important; height: 280px !important; right: -125px !important; top: -125px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-opening-inner::after { right: -70px !important; top: -55px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-opening-kicker { margin-bottom: 18px !important; font-size: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-opening h2 { font-size: clamp(36px, 10vw, 52px) !important; letter-spacing: -.075em !important; }
+  body.today-games-route #todayGamesHub .tg-v4-opening p { margin-top: 13px !important; font-size: 12px !important; line-height: 1.65 !important; }
+  body.today-games-route #todayGamesHub .tg-v4-metrics {
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 6px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-metric {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    min-height: 67px !important;
+    padding: 9px 9px !important;
+    border-radius: 12px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-metric b { font-size: 23px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-metric small { font-size: 7px !important; line-height: 1.35 !important; letter-spacing: .05em !important; }
+  body.today-games-route #todayGamesHub .tg-shell { width: calc(100% - 24px) !important; }
+  body.today-games-route #todayGamesHub .tg-feature:not([hidden]) {
+    grid-template-columns: minmax(0,1fr) !important;
+    min-height: 0 !important;
+    padding: 25px 21px 0 !important;
+    border-radius: 25px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-feature-copy { max-width: none !important; }
+  body.today-games-route #todayGamesHub .tg-feature-badge { margin-bottom: 18px !important; font-size: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-feature-copy h1 { font-size: clamp(42px, 11.6vw, 62px) !important; line-height: .91 !important; }
+  body.today-games-route #todayGamesHub .tg-feature-copy > p { margin: 16px 0 19px !important; font-size: 12px !important; line-height: 1.7 !important; }
+  body.today-games-route #todayGamesHub .tg-feature-cta { width: 100% !important; min-height: 51px !important; font-size: 12px !important; }
+  body.today-games-route #todayGamesHub .tg-feature-art {
+    position: relative !important;
+    top: auto !important; right: auto !important; bottom: auto !important;
+    width: calc(100% + 34px) !important;
+    height: auto !important;
+    min-height: 260px !important;
+    margin: 8px -17px -2px !important;
+    padding: 0 !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 9%, black 88%, transparent 100%) !important;
+  }
+  body.today-games-route #todayGamesHub .tg-feature-art .ts-game-svg { width: 100% !important; max-width: 420px !important; max-height: 305px !important; transform: scale(1.02) !important; }
+  body.today-games-route #todayGamesHub .tg-feature:hover .tg-feature-art .ts-game-svg { transform: scale(1.04) !important; }
+  body.today-games-route #todayGamesHub .tg-v4-art-hud { display: none !important; }
+  body.today-games-route #todayGamesHub .tg-v4-signal-row {
+    grid-template-columns: minmax(0,1fr) !important;
+    margin: 12px 0 44px !important;
+    border-radius: 17px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-signal-item { padding: 12px 14px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-signal-item + .tg-v4-signal-item {
+    border-left: 0 !important; border-top: 1px solid var(--arc5-line) !important;
+  }
+  body.today-games-route #todayGamesHub .tg-v4-signal-icon { width: 33px !important; height: 33px !important; flex-basis: 33px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-signal-copy b { font-size: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-signal-copy small { font-size: 10px !important; }
+  body.today-games-route #todayGamesHub .tg-section-head { align-items: flex-end !important; gap: 10px !important; margin-bottom: 17px !important; }
+  body.today-games-route #todayGamesHub .tg-eyebrow { margin-bottom: 8px !important; font-size: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-section-head h2 { font-size: clamp(26px, 7.2vw, 34px) !important; }
+  body.today-games-route #todayGamesHub .tg-section-head p { max-width: 330px !important; margin-top: 8px !important; font-size: 11px !important; }
+  body.today-games-route #todayGamesHub .tg-count { min-width: 39px !important; height: 36px !important; padding: 0 9px !important; border-radius: 11px !important; font-size: 10px !important; }
+  body.today-games-route #todayGamesHub .tg-toolbar {
+    flex-wrap: wrap !important;
+    gap: 9px !important;
+    padding: 8px !important;
+    margin-bottom: 15px !important;
+    border-radius: 15px !important;
+  }
+  body.today-games-route #todayGamesHub .tg-filters { width: 100% !important; gap: 4px !important; }
+  body.today-games-route #todayGamesHub .tg-filter { min-height: 34px !important; padding: 7px 10px !important; font-size: 9px !important; }
+  body.today-games-route #todayGamesHub .tg-search { flex: 1 1 180px !important; width: auto !important; min-width: 0 !important; min-height: 36px !important; }
+  body.today-games-route #todayGamesHub .tg-random-button { flex: 0 0 auto !important; min-height: 36px !important; padding: 0 10px !important; font-size: 9px !important; }
+  body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+  body.today-games-route #todayGamesHub .tg-card:not([hidden]) { border-radius: 17px !important; }
+  body.today-games-route #todayGamesHub .tg-card-art { height: 155px !important; min-height: 155px !important; padding: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-card-art .ts-game-svg { max-height: 142px !important; }
+  body.today-games-route #todayGamesHub .tg-card-copy { padding: 12px 11px 11px !important; }
+  body.today-games-route #todayGamesHub .tg-card-meta { flex-wrap: wrap !important; gap: 5px !important; margin-bottom: 10px !important; }
+  body.today-games-route #todayGamesHub .tg-pill { max-width: 100% !important; padding: 5px 7px !important; font-size: 7px !important; }
+  body.today-games-route #todayGamesHub .tg-local-best { font-size: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-card h3 { margin-bottom: 7px !important; font-size: clamp(15px, 4.4vw, 19px) !important; }
+  body.today-games-route #todayGamesHub .tg-card p { min-height: 63px !important; margin-bottom: 13px !important; font-size: 10px !important; line-height: 1.6 !important; }
+  body.today-games-route #todayGamesHub .tg-card-bottom { gap: 5px !important; padding-top: 9px !important; }
+  body.today-games-route #todayGamesHub .tg-card-tag { display: none !important; }
+  body.today-games-route #todayGamesHub .tg-play { min-height: 35px !important; gap: 8px !important; padding: 0 9px !important; font-size: 9px !important; }
+  body.today-games-route #todayGamesHub .tg-records { margin-top: 36px !important; }
+  body.today-games-route #todayGamesHub .tg-footer { margin-top: 37px !important; font-size: 9px !important; }
+}
+
+@media (max-width: 390px) {
+  body.today-games-route #todayGamesHub .tg-v4-opening-inner { padding: 21px 15px 15px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-opening h2 { font-size: 34px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-metric { padding: 8px 7px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-metric b { font-size: 20px !important; }
+  body.today-games-route #todayGamesHub .tg-v4-metric small { font-size: 6px !important; }
+  body.today-games-route #todayGamesHub .tg-feature-copy h1 { font-size: 40px !important; }
+  body.today-games-route #todayGamesHub .tg-feature-art { min-height: 225px !important; }
+  body.today-games-route #todayGamesHub .tg-card-art { height: 132px !important; min-height: 132px !important; }
+  body.today-games-route #todayGamesHub .tg-card-art .ts-game-svg { max-height: 122px !important; }
+  body.today-games-route #todayGamesHub .tg-card-copy { padding: 10px 9px 9px !important; }
+  body.today-games-route #todayGamesHub .tg-card h3 { font-size: 14px !important; }
+  body.today-games-route #todayGamesHub .tg-card p { min-height: 66px !important; font-size: 9px !important; }
+  body.today-games-route #todayGamesHub .tg-play { gap: 6px !important; padding: 0 7px !important; font-size: 8px !important; }
+  body.today-games-route #todayGamesHub .tg-random-label { display: none !important; }
+}
+
+@keyframes arc5-rise {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes arc5-art-drift {
+  0%, 100% { transform: scale(1.08) rotate(-4deg) translateY(0); }
+  50% { transform: scale(1.08) rotate(-2deg) translateY(-8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.today-games-route #todayGamesHub *,
+  body.today-games-route #todayGamesHub *::before,
+  body.today-games-route #todayGamesHub *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
