@@ -1,0 +1,546 @@
+/* TODAY PROFILE LIGHT MATCH V115.1
+   Палитра главной TODAY: лаванда, розовый, мята и персик.
+   Никаких правил для тёмной темы в этом файле нет.
+*/
+
+html.today-theme-light body.today-profile-route {
+  color-scheme: light !important;
+  --tp115-ink: #302544;
+  --tp115-heading: #29213f;
+  --tp115-muted: #726683;
+  --tp115-line: rgba(119, 92, 165, .23);
+  --tp115-shadow: 0 17px 42px rgba(83, 60, 125, .11);
+  color: var(--tp115-ink) !important;
+  background-color: #e0d1ed !important;
+  background-image:
+    radial-gradient(ellipse at 5% 5%, rgba(159,125,208,.42), transparent 36%),
+    radial-gradient(ellipse at 96% 13%, rgba(231,150,184,.34), transparent 38%),
+    radial-gradient(ellipse at 80% 83%, rgba(103,186,167,.30), transparent 40%),
+    radial-gradient(ellipse at 11% 91%, rgba(231,179,122,.22), transparent 38%),
+    linear-gradient(132deg,#dfd0ef 0%,#ecd8f0 33%,#f1dce7 61%,#dcece6 100%) !important;
+  background-attachment: fixed !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.today-theme-light body.today-profile-route::before {
+  background-image:
+    linear-gradient(rgba(100,78,146,.026) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(100,78,146,.026) 1px,transparent 1px) !important;
+  background-size: 42px 42px !important;
+  opacity: .24 !important;
+  mask-image: linear-gradient(to bottom,black,transparent 78%) !important;
+}
+
+html.today-theme-light body.today-profile-route::after {
+  background:
+    radial-gradient(ellipse at 48% 0%,rgba(255,255,255,.15),transparent 57%),
+    linear-gradient(180deg,transparent 70%,rgba(91,69,133,.055)) !important;
+  opacity: .9 !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage {
+  color: var(--tp115-ink) !important;
+}
+
+/* Верхняя панель */
+html.today-theme-light body.today-profile-route .today-profile-topbar {
+  border-bottom: 1px solid rgba(119,93,166,.19) !important;
+  background: rgba(247,241,255,.72) !important;
+  box-shadow:
+    0 9px 30px rgba(86,62,130,.085),
+    inset 0 1px rgba(255,255,255,.72) !important;
+  backdrop-filter: blur(24px) saturate(155%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(155%) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-brand b {
+  color: #30264e !important;
+  letter-spacing: .08em !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-brand small {
+  color: #796491 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-brand-mark {
+  border: 1px solid rgba(116,89,181,.27) !important;
+  color: #654bb5 !important;
+  background: linear-gradient(145deg,rgba(255,255,255,.88),rgba(222,208,251,.72)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.92),
+    0 7px 20px rgba(101,75,163,.13) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-top-actions > a,
+html.today-theme-light body.today-profile-route .today-profile-theme-toggle {
+  color: #514266 !important;
+  border-color: rgba(121,96,164,.23) !important;
+  background: rgba(255,255,255,.49) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.8) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-top-actions > a:hover,
+html.today-theme-light body.today-profile-route .today-profile-theme-toggle:hover {
+  color: #48317e !important;
+  border-color: rgba(121,85,201,.40) !important;
+  background: rgba(255,255,255,.75) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-top-actions .today-profile-top-main {
+  color: #38265e !important;
+  border-color: rgba(120,91,194,.32) !important;
+  background: linear-gradient(120deg,rgba(207,191,255,.87),rgba(244,203,225,.83) 56%,rgba(199,235,222,.84)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.78),
+    0 6px 17px rgba(100,77,154,.11) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-theme-toggle .today-theme-icon {
+  color: #6c52c7 !important;
+}
+
+/* Карточка идентичности и обложка профиля */
+html.today-theme-light body.today-profile-route .today-profile-v63-identity {
+  color: var(--tp115-ink) !important;
+  border-color: rgba(120,94,181,.30) !important;
+  background:
+    radial-gradient(ellipse at 91% 2%,rgba(240,183,218,.55),transparent 39%),
+    radial-gradient(ellipse at 0% 96%,rgba(151,224,205,.54),transparent 45%),
+    radial-gradient(ellipse at 53% 0%,rgba(198,178,255,.49),transparent 46%),
+    linear-gradient(125deg,rgba(231,220,255,.95),rgba(249,225,239,.92) 51%,rgba(220,243,231,.92)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.86),
+    0 23px 52px rgba(87,63,134,.13) !important;
+  backdrop-filter: blur(20px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(130%) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity::before {
+  border-color: rgba(117,91,174,.20) !important;
+  box-shadow:
+    0 0 0 22px rgba(132,105,192,.026),
+    0 0 0 52px rgba(132,105,192,.020),
+    0 0 0 84px rgba(132,105,192,.015) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity::after {
+  color: rgba(92,65,143,.065) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-identity h1 {
+  color: #2a2244 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-eyebrow {
+  color: #7659b5 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-username {
+  color: #75658d !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-intro > p {
+  color: #625773 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-interest-tags > span {
+  color: #55436f !important;
+  border-color: rgba(120,93,169,.23) !important;
+  background: linear-gradient(125deg,rgba(255,255,255,.65),rgba(232,222,251,.48)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.7) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-avatar {
+  border-color: rgba(255,255,255,.83) !important;
+  box-shadow:
+    0 0 0 1px rgba(119,90,179,.28),
+    0 13px 32px rgba(77,57,122,.18) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-avatar-edit {
+  color: #47316f !important;
+  border-color: rgba(255,255,255,.83) !important;
+  background: linear-gradient(135deg,#e1d4ff,#f5d5e8) !important;
+  box-shadow: 0 5px 14px rgba(84,57,137,.17) !important;
+}
+
+/* Основные действия */
+html.today-theme-light body.today-profile-route .today-profile-v81-hero-actions button {
+  color: #55436f !important;
+  border-color: rgba(119,91,168,.25) !important;
+  background: rgba(255,255,255,.55) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.82),
+    0 5px 14px rgba(91,67,133,.055) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-hero-actions button:hover {
+  color: #44306f !important;
+  border-color: rgba(118,85,197,.38) !important;
+  background: rgba(255,255,255,.78) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-hero-actions button:first-child {
+  color: #37245f !important;
+  border-color: rgba(118,83,194,.31) !important;
+  background: linear-gradient(120deg,rgba(209,191,255,.94),rgba(246,207,229,.90)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.80),
+    0 7px 19px rgba(108,77,175,.13) !important;
+}
+
+/* Статистические карточки и баланс монет */
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article {
+  color: #342b4d !important;
+  border-color: rgba(124,98,172,.20) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(202,186,255,.30),transparent 58%),
+    linear-gradient(145deg,rgba(255,255,255,.78),rgba(245,236,253,.70)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.90),
+    0 10px 25px rgba(83,62,126,.075) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article::before {
+  background: linear-gradient(90deg,#9a7be6,#e5a4c9,#87cdb9) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article > small {
+  color: #77668f !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article > b {
+  color: #302448 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article > span {
+  color: #796a90 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article:nth-child(4) {
+  border-color: rgba(190,143,80,.30) !important;
+  background:
+    radial-gradient(circle at 94% 6%,rgba(255,220,148,.53),transparent 57%),
+    linear-gradient(135deg,rgba(255,244,218,.94),rgba(249,225,190,.83)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.9),
+    0 9px 24px rgba(142,105,47,.09) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article:nth-child(4) > small {
+  color: #8d713f !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article:nth-child(4) > b {
+  color: #59421f !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v81-stats > article:nth-child(4) > span {
+  color: #907647 !important;
+}
+
+/* Навигационные вкладки */
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs {
+  border-color: rgba(123,96,170,.24) !important;
+  background: linear-gradient(125deg,rgba(250,244,255,.82),rgba(246,237,252,.73)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.85),
+    0 11px 28px rgba(83,61,129,.085) !important;
+  backdrop-filter: blur(18px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button {
+  color: #6f6285 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button > span {
+  border-color: rgba(121,93,173,.17) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.72) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button:nth-child(1) > span {
+  color: #6850b3 !important;
+  background: linear-gradient(145deg,#e5dbff,#efe5fa) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button:nth-child(2) > span {
+  color: #287f72 !important;
+  background: linear-gradient(145deg,#d1f0e5,#e5f4ed) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button:nth-child(3) > span {
+  color: #9c5680 !important;
+  background: linear-gradient(145deg,#f6ddec,#faeaf2) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button:nth-child(4) > span {
+  color: #90662c !important;
+  background: linear-gradient(145deg,#faebc9,#fcf1df) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button:nth-child(5) > span {
+  color: #4b6eab !important;
+  background: linear-gradient(145deg,#dce7ff,#eaf0ff) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button.active,
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button[aria-pressed="true"] {
+  color: #34215d !important;
+  border-color: rgba(125,91,207,.28) !important;
+  background: linear-gradient(125deg,rgba(217,203,255,.96),rgba(247,211,232,.92)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.84),
+    0 5px 13px rgba(103,77,166,.10) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button.active > span,
+html.today-theme-light body.today-profile-route .today-profile-v63-tabs button[aria-pressed="true"] > span {
+  border-color: rgba(125,91,207,.22) !important;
+  background: rgba(255,255,255,.51) !important;
+}
+
+/* Панели, путь участника, стена, редактор */
+html.today-theme-light body.today-profile-route .today-profile-v83-journey,
+html.today-theme-light body.today-profile-route .today-profile-panel,
+html.today-theme-light body.today-profile-route .today-profile-wall-v62,
+html.today-theme-light body.today-profile-route .today-profile-wall-v63,
+html.today-theme-light body.today-profile-route .today-profile-v63-panel,
+html.today-theme-light body.today-profile-route .today-profile-edit,
+html.today-theme-light body.today-profile-route .today-profile-login,
+html.today-theme-light body.today-profile-route .today-profile-post-composer {
+  color: #3a2e51 !important;
+  border-color: rgba(122,96,171,.22) !important;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(222,204,255,.27),transparent 45%),
+    radial-gradient(ellipse at 0% 100%,rgba(203,239,226,.20),transparent 48%),
+    linear-gradient(145deg,rgba(255,255,255,.76),rgba(246,238,252,.67)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.87),
+    var(--tp115-shadow) !important;
+  backdrop-filter: blur(17px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(17px) saturate(130%) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-heading h2,
+html.today-theme-light body.today-profile-route .today-profile-panel-head h3,
+html.today-theme-light body.today-profile-route .today-profile-v63-section-head h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-create-head h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-wall-title h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty h2,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty h3 {
+  color: var(--tp115-heading) !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-heading p,
+html.today-theme-light body.today-profile-route .today-profile-panel-head p,
+html.today-theme-light body.today-profile-route .today-profile-panel-head small,
+html.today-theme-light body.today-profile-route .today-profile-v63-section-head p,
+html.today-theme-light body.today-profile-route .today-profile-v63-section-head small,
+html.today-theme-light body.today-profile-route .today-profile-v63-create-head p,
+html.today-theme-light body.today-profile-route .today-profile-v63-create-head small,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty p {
+  color: var(--tp115-muted) !important;
+}
+
+/* Путь, прогресс, коллекция достижений */
+html.today-theme-light body.today-profile-route .today-profile-v83-mark,
+html.today-theme-light body.today-profile-route .today-profile-v83-actions button > span,
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone-symbol,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty-icon {
+  color: #6b51ba !important;
+  border-color: rgba(121,94,177,.20) !important;
+  background: linear-gradient(145deg,rgba(222,211,255,.86),rgba(247,218,235,.79)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.86) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress {
+  border-color: rgba(120,95,172,.18) !important;
+  background: rgba(228,216,246,.57) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress-track {
+  background: rgba(131,108,172,.16) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress-track span {
+  background: linear-gradient(90deg,#9574e4,#df9ec8,#80cbbb) !important;
+  box-shadow: 0 0 12px rgba(147,111,211,.17) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress-top b,
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone b {
+  color: #43305e !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-progress-top small,
+html.today-theme-light body.today-profile-route .today-profile-v83-progress p,
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone small,
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone span {
+  color: #7b6c91 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-milestone,
+html.today-theme-light body.today-profile-route .today-profile-wall-post,
+html.today-theme-light body.today-profile-route .today-profile-posts > .today-profile-post,
+html.today-theme-light body.today-profile-route .today-profile-v63-wall-post,
+html.today-theme-light body.today-profile-route .today-profile-v63-empty,
+html.today-theme-light body.today-profile-route .today-profile-v83-card-preview {
+  color: #413351 !important;
+  border-color: rgba(122,96,171,.20) !important;
+  background: linear-gradient(145deg,rgba(255,255,255,.70),rgba(239,228,250,.67)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.80),
+    0 8px 21px rgba(84,63,126,.065) !important;
+}
+
+/* Заголовки и текст */
+html.today-theme-light body.today-profile-route #todayProfilePage h1,
+html.today-theme-light body.today-profile-route #todayProfilePage h2,
+html.today-theme-light body.today-profile-route #todayProfilePage h3,
+html.today-theme-light body.today-profile-route #todayProfilePage h4 {
+  text-shadow: none !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-wall-post h3,
+html.today-theme-light body.today-profile-route .today-profile-wall-post h4,
+html.today-theme-light body.today-profile-route .today-profile-posts h3,
+html.today-theme-light body.today-profile-route .today-profile-posts h4 {
+  color: #302544 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-wall-post p,
+html.today-theme-light body.today-profile-route .today-profile-posts p,
+html.today-theme-light body.today-profile-route .today-profile-v83-card-preview p {
+  color: #5f526f !important;
+}
+
+/* Поля и формы */
+html.today-theme-light body.today-profile-route #todayProfilePage input,
+html.today-theme-light body.today-profile-route #todayProfilePage textarea,
+html.today-theme-light body.today-profile-route #todayProfilePage select {
+  color: #352947 !important;
+  border-color: rgba(123,96,169,.25) !important;
+  background: linear-gradient(145deg,rgba(255,255,255,.82),rgba(246,239,253,.77)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.88),
+    0 4px 12px rgba(83,63,124,.035) !important;
+  color-scheme: light !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage input::placeholder,
+html.today-theme-light body.today-profile-route #todayProfilePage textarea::placeholder {
+  color: #9282a4 !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-post-composer > label:first-child,
+html.today-theme-light body.today-profile-route .today-profile-edit label,
+html.today-theme-light body.today-profile-route .today-profile-login label {
+  color: #57446e !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage input:focus,
+html.today-theme-light body.today-profile-route #todayProfilePage textarea:focus,
+html.today-theme-light body.today-profile-route #todayProfilePage select:focus {
+  border-color: rgba(130,94,212,.51) !important;
+  box-shadow:
+    0 0 0 3px rgba(160,130,226,.14),
+    inset 0 1px rgba(255,255,255,.9) !important;
+}
+
+/* Кнопки в содержимом профиля */
+html.today-theme-light body.today-profile-route .today-profile-v83-actions button,
+html.today-theme-light body.today-profile-route .today-profile-panel button,
+html.today-theme-light body.today-profile-route .today-profile-edit button,
+html.today-theme-light body.today-profile-route .today-profile-login button {
+  color: #514065 !important;
+  border-color: rgba(122,95,169,.24) !important;
+  background: linear-gradient(135deg,rgba(255,255,255,.78),rgba(233,221,250,.72)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.82) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-v83-actions button:hover,
+html.today-theme-light body.today-profile-route .today-profile-panel button:hover,
+html.today-theme-light body.today-profile-route .today-profile-edit button:hover,
+html.today-theme-light body.today-profile-route .today-profile-login button:hover {
+  color: #3b285f !important;
+  border-color: rgba(126,91,201,.39) !important;
+  background: linear-gradient(135deg,rgba(229,217,255,.93),rgba(249,217,237,.88)) !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage :is(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid rgba(123,89,209,.72) !important;
+  outline-offset: 3px !important;
+}
+
+/* Экран загрузки, ошибки и уведомления */
+html.today-theme-light body.today-profile-route .today-profile-loading {
+  color: #423354 !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-loading p {
+  color: #79688f !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-spinner {
+  border-color: rgba(127,99,180,.19) !important;
+  border-top-color: #9474df !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-error {
+  color: #403151 !important;
+  border-color: rgba(124,97,173,.24) !important;
+  background: linear-gradient(135deg,rgba(255,255,255,.84),rgba(246,225,239,.81)) !important;
+  box-shadow: var(--tp115-shadow) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-toast {
+  color: #34264c !important;
+  border-color: rgba(122,95,170,.25) !important;
+  background: linear-gradient(135deg,rgba(255,255,255,.94),rgba(237,225,250,.94)) !important;
+  box-shadow: 0 14px 36px rgba(73,52,119,.18) !important;
+}
+
+/* Нижний блок */
+html.today-theme-light body.today-profile-route .today-profile-site-footer {
+  color: #79698f !important;
+  border-color: rgba(122,96,171,.13) !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-site-footer a {
+  color: #6650ab !important;
+}
+
+html.today-theme-light body.today-profile-route .today-profile-site-footer a:hover {
+  color: #493182 !important;
+}
+
+/* Мобильная подстройка */
+@media (max-width: 680px) {
+  html.today-theme-light body.today-profile-route .today-profile-topbar {
+    background: rgba(247,241,255,.82) !important;
+    backdrop-filter: blur(21px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(21px) saturate(145%) !important;
+  }
+
+  html.today-theme-light body.today-profile-route .today-profile-v63-identity {
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.86),
+      0 15px 35px rgba(87,63,134,.11) !important;
+  }
+
+  html.today-theme-light body.today-profile-route .today-profile-v63-tabs {
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.82),
+      0 7px 19px rgba(83,61,129,.07) !important;
+  }
+}
+/* END TODAY PROFILE LIGHT MATCH V115.1 */
