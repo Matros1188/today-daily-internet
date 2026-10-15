@@ -6,9 +6,9 @@
 (() => {
   try {
     const query = new URLSearchParams(location.search);
-    const allowedResetIds = new Set(["220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","264","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319"]);
+    const allowedResetIds = new Set(["220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","264","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320"]);
 
-    if (query.get("reset") === "319") {
+    if (query.get("reset") === "319" || query.get("reset") === "320") {
       try {
         localStorage.setItem("today-theme-preference-v26", "light");
       } catch (_) {}
@@ -101,6 +101,476 @@
 <link rel="stylesheet" href="./today-theme-palette-v103.css?v=20261015091000">
 <link rel="stylesheet" href="./today-theme-palette-v104.css?v=20261015103000">
 <link rel="stylesheet" href="./today-theme-palette-v105.css?v=20261015110000">
+<!-- TODAY V106 FORCE PALETTE -->
+<style id="today-theme-force-v106">
+
+/* TODAY V106 — FORCE VISIBLE PREMIUM PALETTE */
+
+/* Same theme is recognized via either theme class or data attribute. */
+html.today-theme-light,
+html[data-today-theme="light"] {
+  color-scheme: light !important;
+  --today-theme-bg: #eadfff !important;
+  --today-theme-surface: #f3e8ff !important;
+  --today-theme-text: #352046 !important;
+  --today-theme-muted: #745b83 !important;
+  --today-theme-border: rgba(125, 72, 181, .48) !important;
+  --today-palette-lavender: #bd99ff !important;
+  --today-palette-rose: #f5a9d0 !important;
+  --today-palette-turquoise: #8de3d5 !important;
+}
+
+html.today-theme-light body,
+html[data-today-theme="light"] body {
+  color: #352046 !important;
+  background-color: #eadfff !important;
+}
+
+html.today-theme-light #dailyBackdrop,
+html[data-today-theme="light"] #dailyBackdrop {
+  opacity: 1 !important;
+  filter: saturate(1.2) !important;
+  background:
+    radial-gradient(ellipse at 5% 5%,
+      rgba(151, 103, 255, .88), transparent 34%),
+    radial-gradient(ellipse at 94% 11%,
+      rgba(255, 125, 194, .72), transparent 34%),
+    radial-gradient(ellipse at 83% 79%,
+      rgba(55, 207, 184, .60), transparent 36%),
+    radial-gradient(ellipse at 12% 92%,
+      rgba(195, 154, 255, .70), transparent 38%),
+    linear-gradient(132deg,
+      #ded0ff 0%, #f1dcff 33%, #ffe2f1 66%, #cef5e9 100%) !important;
+}
+
+html.today-theme-light .topbar,
+html[data-today-theme="light"] .topbar {
+  color: #39234f !important;
+  background: linear-gradient(
+    105deg, #e8d9ff 0%, #f9dced 55%, #d8f6ec 100%
+  ) !important;
+  border-bottom-color: rgba(127, 75, 181, .50) !important;
+  box-shadow:
+    0 8px 30px rgba(102, 61, 160, .20),
+    inset 0 1px rgba(255,255,255,.95) !important;
+}
+
+html.today-theme-light .today-brand-word,
+html.today-theme-light .today-brand-copy,
+html.today-theme-light .brand,
+html.today-theme-light .topbar .account-btn,
+html[data-today-theme="light"] .today-brand-word,
+html[data-today-theme="light"] .today-brand-copy,
+html[data-today-theme="light"] .brand,
+html[data-today-theme="light"] .topbar .account-btn {
+  color: #39234f !important;
+}
+
+html.today-theme-light .today-brand-tag,
+html[data-today-theme="light"] .today-brand-tag {
+  color: #80509f !important;
+}
+
+/* Prominent hero surface */
+html.today-theme-light .hero,
+html[data-today-theme="light"] .hero {
+  color: #39234f !important;
+  background:
+    radial-gradient(ellipse at 0% 0%,
+      rgba(184, 145, 255, .65), transparent 57%),
+    radial-gradient(ellipse at 100% 100%,
+      rgba(255, 169, 215, .48), transparent 58%),
+    linear-gradient(135deg,
+      #e6d7ff 0%, #f8e4ff 55%, #ffe3f1 100%) !important;
+  border-color: rgba(128, 77, 189, .46) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.97),
+    0 18px 46px rgba(100, 58, 159, .17) !important;
+}
+
+html.today-theme-light h1,
+html.today-theme-light h2,
+html.today-theme-light h3,
+html.today-theme-light h4,
+html[data-today-theme="light"] h1,
+html[data-today-theme="light"] h2,
+html[data-today-theme="light"] h3,
+html[data-today-theme="light"] h4 {
+  color: #392448 !important;
+}
+
+html.today-theme-light .hero h1 span,
+html[data-today-theme="light"] .hero h1 span {
+  background: linear-gradient(
+    100deg, #7540c5 0%, #ce428e 43%, #198e8a 87%, #278d69 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+html.today-theme-light .hero p,
+html.today-theme-light .hero-copy > p,
+html[data-today-theme="light"] .hero p,
+html[data-today-theme="light"] .hero-copy > p {
+  color: #745d84 !important;
+}
+
+html.today-theme-light .eyebrow,
+html.today-theme-light .section-head .eyebrow,
+html[data-today-theme="light"] .eyebrow,
+html[data-today-theme="light"] .section-head .eyebrow {
+  color: #8349b9 !important;
+}
+
+/* Countdown — visibly lavender */
+html.today-theme-light .clock-card,
+html[data-today-theme="light"] .clock-card {
+  color: #482866 !important;
+  background: linear-gradient(
+    145deg, #d8c4ff 0%, #e7d9ff 53%, #f6dff3 100%
+  ) !important;
+  border-color: rgba(120, 70, 189, .55) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.95),
+    0 13px 32px rgba(108, 62, 177, .22) !important;
+}
+
+html.today-theme-light .clock-card strong,
+html.today-theme-light .clock-row b,
+html[data-today-theme="light"] .clock-card strong,
+html[data-today-theme="light"] .clock-row b {
+  color: #6334a4 !important;
+}
+
+html.today-theme-light .clock-card > span,
+html.today-theme-light .clock-card small,
+html[data-today-theme="light"] .clock-card > span,
+html[data-today-theme="light"] .clock-card small {
+  color: #765b98 !important;
+}
+
+html.today-theme-light .clock-card .progress,
+html[data-today-theme="light"] .clock-card .progress {
+  background: rgba(112, 70, 173, .19) !important;
+}
+
+html.today-theme-light .clock-card .progress i,
+html[data-today-theme="light"] .clock-card .progress i {
+  background: linear-gradient(
+    90deg, #8953dd, #d64f9e, #56cbb4
+  ) !important;
+}
+
+/* Scene — visibly turquoise */
+html.today-theme-light .scene-card,
+html[data-today-theme="light"] .scene-card {
+  color: #205d58 !important;
+  background: linear-gradient(
+    140deg, #bdeee2 0%, #d7f5eb 54%, #f4dff3 100%
+  ) !important;
+  border-color: rgba(51, 155, 140, .51) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.95),
+    0 13px 32px rgba(44, 143, 131, .16) !important;
+}
+
+html.today-theme-light .scene-card > span,
+html.today-theme-light .scene-card small,
+html[data-today-theme="light"] .scene-card > span,
+html[data-today-theme="light"] .scene-card small {
+  color: #387e77 !important;
+}
+
+html.today-theme-light .scene-card strong,
+html[data-today-theme="light"] .scene-card strong {
+  color: #245c57 !important;
+}
+
+/* Activity rail */
+html.today-theme-light .activity-strip,
+html[data-today-theme="light"] .activity-strip {
+  color: #2e5a68 !important;
+  background: linear-gradient(
+    105deg, #d4f5ed 0%, #e5f1ff 50%, #ffdfef 100%
+  ) !important;
+  border-color: rgba(70, 164, 154, .42) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.97),
+    0 10px 26px rgba(63, 132, 144, .13) !important;
+}
+
+html.today-theme-light .ticker,
+html[data-today-theme="light"] .ticker {
+  color: #167c73 !important;
+}
+
+html.today-theme-light .live-pill,
+html[data-today-theme="light"] .live-pill {
+  color: #237e73 !important;
+}
+
+html.today-theme-light .strip-actions,
+html.today-theme-light .section-note,
+html[data-today-theme="light"] .strip-actions,
+html[data-today-theme="light"] .section-note {
+  color: #796086 !important;
+}
+
+/* Daily cards have an intentional lavender / turquoise / rose / peach rhythm. */
+html.today-theme-light #dailyGrid > .daily-card,
+html[data-today-theme="light"] #dailyGrid > .daily-card {
+  color: #3b2854 !important;
+  background: linear-gradient(
+    140deg, #e9dcff 0%, #f4e4ff 58%, #fbe2f1 100%
+  ) !important;
+  border-color: rgba(130, 78, 187, .43) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.98),
+    0 13px 31px rgba(101, 60, 158, .14) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 1),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 1) {
+  color: #41285d !important;
+  background: linear-gradient(
+    140deg, #d9c5ff 0%, #eadbff 58%, #f5e3fa 100%
+  ) !important;
+  border-color: rgba(121, 71, 184, .48) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 2),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 2) {
+  color: #24534d !important;
+  background: linear-gradient(
+    140deg, #b9eee0 0%, #d4f5eb 60%, #e1f1ff 100%
+  ) !important;
+  border-color: rgba(46, 151, 136, .46) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 3),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 3) {
+  color: #642e4a !important;
+  background: linear-gradient(
+    140deg, #ffc6e2 0%, #fce0ef 58%, #f0deff 100%
+  ) !important;
+  border-color: rgba(188, 76, 139, .44) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n) {
+  color: #674827 !important;
+  background: linear-gradient(
+    140deg, #ffdfb5 0%, #ffecd4 60%, #f7e2ff 100%
+  ) !important;
+  border-color: rgba(192, 130, 59, .45) !important;
+}
+
+html.today-theme-light .daily-card h3,
+html.today-theme-light .daily-card h4,
+html.today-theme-light .daily-card strong,
+html.today-theme-light .daily-card .card-title,
+html[data-today-theme="light"] .daily-card h3,
+html[data-today-theme="light"] .daily-card h4,
+html[data-today-theme="light"] .daily-card strong,
+html[data-today-theme="light"] .daily-card .card-title {
+  color: #412d58 !important;
+}
+
+html.today-theme-light .daily-card p,
+html.today-theme-light .daily-card small,
+html.today-theme-light .daily-card .muted,
+html[data-today-theme="light"] .daily-card p,
+html[data-today-theme="light"] .daily-card small,
+html[data-today-theme="light"] .daily-card .muted {
+  color: #775f84 !important;
+}
+
+/* Feed and ranking */
+html.today-theme-light .community-feed,
+html[data-today-theme="light"] .community-feed {
+  color: #3a2850 !important;
+  background: linear-gradient(
+    120deg, #e0d2ff, #d8f4eb 52%, #fbddec
+  ) !important;
+  border-color: rgba(128, 78, 184, .33) !important;
+}
+
+html.today-theme-light #communityFeed > *,
+html.today-theme-light .community-feed > article,
+html.today-theme-light .community-feed > .community-card,
+html.today-theme-light .community-feed > .post-card,
+html.today-theme-light #leaderboard > *,
+html[data-today-theme="light"] #communityFeed > *,
+html[data-today-theme="light"] .community-feed > article,
+html[data-today-theme="light"] .community-feed > .community-card,
+html[data-today-theme="light"] .community-feed > .post-card,
+html[data-today-theme="light"] #leaderboard > * {
+  color: #3b2a50 !important;
+  background: linear-gradient(
+    140deg, #f0e4ff 0%, #e0f5ee 60%, #fbe5f2 100%
+  ) !important;
+  border-color: rgba(129, 81, 184, .36) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.98),
+    0 9px 24px rgba(100, 62, 156, .11) !important;
+}
+
+html.today-theme-light .community-feed h3,
+html.today-theme-light .community-feed h4,
+html.today-theme-light .community-feed strong,
+html[data-today-theme="light"] .community-feed h3,
+html[data-today-theme="light"] .community-feed h4,
+html[data-today-theme="light"] .community-feed strong {
+  color: #422e58 !important;
+}
+
+html.today-theme-light .community-feed p,
+html.today-theme-light .community-feed small,
+html.today-theme-light .community-feed time,
+html[data-today-theme="light"] .community-feed p,
+html[data-today-theme="light"] .community-feed small,
+html[data-today-theme="light"] .community-feed time {
+  color: #786586 !important;
+}
+
+html.today-theme-light .ranking-card,
+html[data-today-theme="light"] .ranking-card {
+  color: #3b2b53 !important;
+  background: linear-gradient(
+    135deg, #e3d5ff, #ddf4ed 60%, #fbe2f1
+  ) !important;
+  border-color: rgba(128, 80, 185, .40) !important;
+}
+
+/* Account controls, ordinary buttons and theme toggle */
+html.today-theme-light .top-btn,
+html.today-theme-light .account-btn,
+html.today-theme-light button.account-btn,
+html.today-theme-light button.quiet-btn,
+html.today-theme-light .coin-badge,
+html.today-theme-light #todayThemeToggle,
+html[data-today-theme="light"] .top-btn,
+html[data-today-theme="light"] .account-btn,
+html[data-today-theme="light"] button.account-btn,
+html[data-today-theme="light"] button.quiet-btn,
+html[data-today-theme="light"] .coin-badge,
+html[data-today-theme="light"] #todayThemeToggle {
+  color: #4b3268 !important;
+  background: linear-gradient(
+    135deg, #eee1ff, #f9dfef 58%, #def6ef
+  ) !important;
+  border-color: rgba(128, 79, 184, .43) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.97),
+    0 5px 17px rgba(104, 63, 162, .13) !important;
+}
+
+/* Primary actions stand out with a jewel-like gradient. */
+html.today-theme-light .primary-button,
+html.today-theme-light .ts-primary,
+html.today-theme-light .today-support-btn,
+html[data-today-theme="light"] .primary-button,
+html[data-today-theme="light"] .ts-primary,
+html[data-today-theme="light"] .today-support-btn {
+  color: #ffffff !important;
+  background: linear-gradient(
+    105deg, #7945c3, #b34eaa 53%, #238f89
+  ) !important;
+  border-color: rgba(111, 59, 169, .48) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.30),
+    0 8px 22px rgba(109, 62, 165, .23) !important;
+}
+
+html.today-theme-light .primary-button *,
+html.today-theme-light .ts-primary *,
+html[data-today-theme="light"] .primary-button *,
+html[data-today-theme="light"] .ts-primary * {
+  color: #ffffff !important;
+}
+
+/* Bottom nav */
+html.today-theme-light .bottom-nav,
+html[data-today-theme="light"] .bottom-nav {
+  color: #624677 !important;
+  background: linear-gradient(
+    100deg, #e8dbff, #f9dfef 54%, #d7f5ec
+  ) !important;
+  border-color: rgba(125, 77, 182, .40) !important;
+  box-shadow:
+    0 -9px 30px rgba(99, 60, 157, .16),
+    inset 0 1px rgba(255,255,255,.97) !important;
+  backdrop-filter: blur(25px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(165%) !important;
+}
+
+html.today-theme-light .bottom-nav button,
+html.today-theme-light .bottom-nav a,
+html[data-today-theme="light"] .bottom-nav button,
+html[data-today-theme="light"] .bottom-nav a {
+  color: #785f8d !important;
+}
+
+html.today-theme-light .bottom-nav button.active,
+html.today-theme-light .bottom-nav a.active,
+html[data-today-theme="light"] .bottom-nav button.active,
+html[data-today-theme="light"] .bottom-nav a.active {
+  color: #713cbb !important;
+  text-shadow: 0 0 14px rgba(151, 98, 219, .25) !important;
+}
+
+/* Forms */
+html.today-theme-light input,
+html.today-theme-light textarea,
+html.today-theme-light select,
+html[data-today-theme="light"] input,
+html[data-today-theme="light"] textarea,
+html[data-today-theme="light"] select {
+  color: #39274e !important;
+  background: linear-gradient(
+    135deg, #fff5ff, #eee4ff 55%, #def5ee
+  ) !important;
+  border-color: rgba(126, 77, 184, .44) !important;
+}
+
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder,
+html[data-today-theme="light"] input::placeholder,
+html[data-today-theme="light"] textarea::placeholder {
+  color: #9a83aa !important;
+}
+
+/* Generic dialogs; no dimensions or layout changes. */
+html.today-theme-light .modal-card,
+html[data-today-theme="light"] .modal-card {
+  color: #39264e !important;
+  background: linear-gradient(
+    135deg, #eee1ff 0%, #e1f5ee 54%, #fbe1f1 100%
+  ) !important;
+  border-color: rgba(128, 79, 184, .42) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.97),
+    0 28px 90px rgba(88, 47, 143, .23) !important;
+}
+
+html.today-theme-light .footer,
+html[data-today-theme="light"] .footer {
+  color: #49365c !important;
+  background: linear-gradient(
+    120deg, #e9dcff, #dff5ee, #fbe2f1
+  ) !important;
+  border-color: rgba(128, 80, 184, .35) !important;
+}
+
+html.today-theme-light .footer span,
+html[data-today-theme="light"] .footer span {
+  color: #80678f !important;
+}
+
+/* END TODAY V106 FORCE PALETTE */
+
+</style>
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
