@@ -2953,6 +2953,558 @@ html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"].to
 /* END TODAY V113 */
 
 </style>
+<style id="today-light-polish-v114">
+
+/* ============================================================
+   TODAY V114 — MOBILE DISCOVERY REDESIGN
+   Desktop-дизайн оставляем; меняем мобильную компоновку.
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  /* Главная оболочка */
+  html.today-theme-light body #todayV80DailyTools,
+  html[data-today-theme="light"] body #todayV80DailyTools,
+  html.today-theme-light body .today-v80-daily-tools,
+  html[data-today-theme="light"] body .today-v80-daily-tools {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin: 12px 0 18px !important;
+    padding: 14px 12px 13px !important;
+    border: 1px solid rgba(118, 101, 171, .22) !important;
+    border-radius: 20px !important;
+    color: #1b263c !important;
+    background:
+      radial-gradient(
+        ellipse at 0% 0%,
+        rgba(197, 181, 255, .44),
+        transparent 56%
+      ),
+      radial-gradient(
+        ellipse at 100% 100%,
+        rgba(157, 224, 201, .37),
+        transparent 56%
+      ),
+      linear-gradient(
+        145deg,
+        #f0ebff 0%,
+        #e7f4ee 57%,
+        #f9edf3 100%
+      ) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.88),
+      0 8px 22px rgba(76, 67, 122, .075) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Шапка: заголовок и счётчик в одной строке */
+  html.today-theme-light body .today-v80-topline,
+  html[data-today-theme="light"] body .today-v80-topline {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-heading,
+  html[data-today-theme="light"] body .today-v80-heading {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  html.today-theme-light body .today-v80-heading-mark,
+  html[data-today-theme="light"] body .today-v80-heading-mark {
+    flex: 0 0 34px !important;
+    width: 34px !important;
+    height: 34px !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(118, 93, 177, .28) !important;
+    border-radius: 12px !important;
+    color: #6b4aa8 !important;
+    background: linear-gradient(
+      140deg, #e4d9ff, #d6f1e7
+    ) !important;
+    font-size: 15px !important;
+    box-shadow: 0 4px 9px rgba(101, 77, 159, .07) !important;
+  }
+
+  html.today-theme-light body .today-v80-heading > div,
+  html[data-today-theme="light"] body .today-v80-heading > div {
+    display: grid !important;
+    gap: 3px !important;
+    min-width: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-heading strong,
+  html[data-today-theme="light"] body .today-v80-heading strong {
+    display: block !important;
+    color: #20243b !important;
+    -webkit-text-fill-color: #20243b !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -.035em !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  html.today-theme-light body .today-v80-heading small,
+  html[data-today-theme="light"] body .today-v80-heading small {
+    color: #67728a !important;
+    -webkit-text-fill-color: #67728a !important;
+    font-size: 9px !important;
+    font-weight: 650 !important;
+    line-height: 1.25 !important;
+  }
+
+  html.today-theme-light body .today-v80-result-count,
+  html[data-today-theme="light"] body .today-v80-result-count {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    max-width: 108px !important;
+    padding: 6px 7px !important;
+    border: 1px solid rgba(112, 96, 163, .21) !important;
+    border-radius: 10px !important;
+    color: #574578 !important;
+    -webkit-text-fill-color: #574578 !important;
+    background: rgba(255,255,255,.52) !important;
+    font-size: 8px !important;
+    font-weight: 850 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* Поиск: полноценная строка без сжатого текста */
+  html.today-theme-light body .today-v80-search-row,
+  html[data-today-theme="light"] body .today-v80-search-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: stretch !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box,
+  html[data-today-theme="light"] body .today-v80-search-box {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    min-height: 45px !important;
+    box-sizing: border-box !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(115, 101, 165, .24) !important;
+    border-radius: 14px !important;
+    color: #6b50a3 !important;
+    background: rgba(255,255,255,.63) !important;
+    box-shadow: inset 0 1px rgba(255,255,255,.9) !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box > span:first-child,
+  html[data-today-theme="light"] body .today-v80-search-box > span:first-child {
+    flex: 0 0 auto !important;
+    font-size: 23px !important;
+    line-height: 1 !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box input,
+  html[data-today-theme="light"] body .today-v80-search-box input {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    height: 43px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    outline: 0 !important;
+    color: #202b42 !important;
+    -webkit-text-fill-color: #202b42 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box input::placeholder,
+  html[data-today-theme="light"] body .today-v80-search-box input::placeholder {
+    color: #768098 !important;
+    -webkit-text-fill-color: #768098 !important;
+    opacity: 1 !important;
+  }
+
+  html.today-theme-light body .today-v80-clear,
+  html[data-today-theme="light"] body .today-v80-clear {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    min-height: 45px !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(115, 101, 165, .22) !important;
+    border-radius: 13px !important;
+    color: #594779 !important;
+    -webkit-text-fill-color: #594779 !important;
+    background: linear-gradient(
+      135deg, #e6dcff, #daf0e7
+    ) !important;
+    font-size: 9px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+  }
+
+  html.today-theme-light body .today-v80-clear:disabled,
+  html[data-today-theme="light"] body .today-v80-clear:disabled {
+    opacity: .55 !important;
+  }
+
+  /* Компактная строка фильтров */
+  html.today-theme-light body .today-v80-filter-label,
+  html[data-today-theme="light"] body .today-v80-filter-label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-top: 1px !important;
+    color: #39445d !important;
+    -webkit-text-fill-color: #39445d !important;
+    font-size: 9px !important;
+    font-weight: 900 !important;
+    line-height: 1.3 !important;
+  }
+
+  html.today-theme-light body .today-v80-filter-label > span:last-child,
+  html[data-today-theme="light"] body .today-v80-filter-label > span:last-child {
+    color: #71618f !important;
+    -webkit-text-fill-color: #71618f !important;
+    font-size: 8px !important;
+    font-weight: 750 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Две зоны: закреплённые фильтры, затем горизонтальная лента категорий */
+  html.today-theme-light body .today-v80-chip-row,
+  html[data-today-theme="light"] body .today-v80-chip-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-pinned-filters,
+  html[data-today-theme="light"] body .today-v80-pinned-filters {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-category-filters,
+  html[data-today-theme="light"] body .today-v80-category-filters {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    gap: 7px !important;
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 1px 1px 5px !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-x: contain !important;
+  }
+
+  html.today-theme-light body .today-v80-category-filters::-webkit-scrollbar,
+  html[data-today-theme="light"] body .today-v80-category-filters::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-filter-chip,
+  html[data-today-theme="light"] body .today-v80-filter-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: max-content !important;
+    min-height: 35px !important;
+    padding: 7px 11px !important;
+    border: 1px solid rgba(113, 98, 163, .22) !important;
+    border-radius: 12px !important;
+    color: #4b4669 !important;
+    -webkit-text-fill-color: #4b4669 !important;
+    background: rgba(255,255,255,.62) !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 6px rgba(75,68,117,.035) !important;
+  }
+
+  html.today-theme-light body .today-v80-filter-chip.is-active,
+  html[data-today-theme="light"] body .today-v80-filter-chip.is-active {
+    color: #35264f !important;
+    -webkit-text-fill-color: #35264f !important;
+    background: linear-gradient(
+      125deg, #dcd1ff, #d5efe5 70%, #f1e1f0
+    ) !important;
+    border-color: rgba(104, 81, 168, .43) !important;
+    box-shadow: inset 0 1px rgba(255,255,255,.86) !important;
+  }
+
+  /* Сортировка и плотность: аккуратные блоки без переполнения */
+  html.today-theme-light body .today-v80-controls-row,
+  html[data-today-theme="light"] body .today-v80-controls-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 9px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    padding-top: 10px !important;
+    border-top: 1px solid rgba(113, 98, 163, .17) !important;
+  }
+
+  html.today-theme-light body .today-v80-sort,
+  html[data-today-theme="light"] body .today-v80-sort {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 5px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-sort > span,
+  html[data-today-theme="light"] body .today-v80-sort > span {
+    color: #66728a !important;
+    -webkit-text-fill-color: #66728a !important;
+    font-size: 8px !important;
+    font-weight: 850 !important;
+  }
+
+  html.today-theme-light body .today-v80-sort select,
+  html[data-today-theme="light"] body .today-v80-sort select {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    box-sizing: border-box !important;
+    padding: 7px 30px 7px 11px !important;
+    border: 1px solid rgba(113, 98, 163, .23) !important;
+    border-radius: 12px !important;
+    color: #303c56 !important;
+    -webkit-text-fill-color: #303c56 !important;
+    background: rgba(255,255,255,.65) !important;
+    font-size: 10px !important;
+    font-weight: 750 !important;
+  }
+
+  html.today-theme-light body .today-v80-density-group,
+  html[data-today-theme="light"] body .today-v80-density-group {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-density-button,
+  html[data-today-theme="light"] body .today-v80-density-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 38px !important;
+    padding: 8px 9px !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(113, 98, 163, .22) !important;
+    border-radius: 12px !important;
+    color: #4b4669 !important;
+    -webkit-text-fill-color: #4b4669 !important;
+    background: rgba(255,255,255,.59) !important;
+    font-size: 9px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+  }
+
+  html.today-theme-light body .today-v80-density-button.is-active,
+  html[data-today-theme="light"] body .today-v80-density-button.is-active {
+    color: #35264f !important;
+    -webkit-text-fill-color: #35264f !important;
+    background: linear-gradient(
+      125deg, #ded2ff, #d7f0e7
+    ) !important;
+    border-color: rgba(104,81,168,.42) !important;
+  }
+
+  html.today-theme-light body .today-v80-status,
+  html[data-today-theme="light"] body .today-v80-status {
+    color: #5f6a82 !important;
+    -webkit-text-fill-color: #5f6a82 !important;
+    font-size: 9px !important;
+    line-height: 1.4 !important;
+  }
+
+  html.today-theme-light body .today-v80-empty,
+  html[data-today-theme="light"] body .today-v80-empty {
+    padding: 17px 12px !important;
+    border: 1px dashed rgba(113,98,163,.29) !important;
+    border-radius: 15px !important;
+    color: #3d4961 !important;
+    background: rgba(255,255,255,.44) !important;
+  }
+}
+
+
+/* ============================================================
+   ARCHIVE ACTION — CSS FALLBACK
+   JS ниже применяет те же значения непосредственно к кнопке.
+   ============================================================ */
+
+html.today-theme-light body #dailyGrid .v50-card-tools,
+html[data-today-theme="light"] body #dailyGrid .v50-card-tools,
+html.today-theme-light body #communityFeed .v50-card-tools,
+html[data-today-theme="light"] body #communityFeed .v50-card-tools,
+html.today-theme-light body .today-post-card .v50-card-tools,
+html[data-today-theme="light"] body .today-post-card .v50-card-tools {
+  position: static !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  margin: 11px 0 0 !important;
+  padding: 9px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(112,97,158,.20) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  float: none !important;
+  clear: both !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+}
+
+html.today-theme-light body #dailyGrid .daily-card > .v50-daily-tools,
+html[data-today-theme="light"] body #dailyGrid .daily-card > .v50-daily-tools,
+html.today-theme-light body .daily-card > .v50-daily-tools,
+html[data-today-theme="light"] body .daily-card > .v50-daily-tools {
+  grid-column: 1 / -1 !important;
+  align-self: stretch !important;
+  justify-self: stretch !important;
+  order: 50 !important;
+}
+
+html.today-theme-light body button[data-v50-card-action="archive-card"],
+html[data-today-theme="light"] body button[data-v50-card-action="archive-card"],
+html.today-theme-light body .v50-small-action[data-v50-card-action="archive-card"],
+html[data-today-theme="light"] body .v50-small-action[data-v50-card-action="archive-card"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: static !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 31px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(113,90,165,.34) !important;
+  border-radius: 11px !important;
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  background: linear-gradient(
+    125deg,#e1d7ff 0%,#d7efe7 64%,#f7e3ed 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.87),
+    0 3px 8px rgba(78,65,124,.06) !important;
+  font: 850 9px/1.2 Manrope,system-ui,sans-serif !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html.today-theme-light body button[data-v50-card-action="archive-card"]:hover,
+html[data-today-theme="light"] body button[data-v50-card-action="archive-card"]:hover {
+  background: linear-gradient(
+    125deg,#d9caff 0%,#c9eadd 64%,#f2d6e5 100%
+  ) !important;
+  border-color: rgba(100,76,158,.50) !important;
+}
+
+html.today-theme-light body button[data-v50-card-action="archive-card"]:focus-visible,
+html[data-today-theme="light"] body button[data-v50-card-action="archive-card"]:focus-visible {
+  outline: 2px solid rgba(113,85,174,.50) !important;
+  outline-offset: 2px !important;
+}
+
+@media (max-width: 640px) {
+  html.today-theme-light body #dailyGrid .v50-daily-tools,
+  html[data-today-theme="light"] body #dailyGrid .v50-daily-tools,
+  html.today-theme-light body .v50-card-tools,
+  html[data-today-theme="light"] body .v50-card-tools {
+    gap: 7px !important;
+    margin-top: 10px !important;
+    padding-top: 8px !important;
+  }
+
+  html.today-theme-light body button[data-v50-card-action="archive-card"],
+  html[data-today-theme="light"] body button[data-v50-card-action="archive-card"] {
+    min-height: 32px !important;
+    padding: 8px 11px !important;
+    font-size: 9px !important;
+  }
+}
+
+/* TODAY V114 END */
+
+</style>
+
 
 
 
@@ -3560,6 +4112,265 @@ html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"].to
   queueRefresh();
   window.setTimeout(queueRefresh, 350);
   window.setTimeout(queueRefresh, 1200);
+})();
+
+</script>
+
+<script id="today-light-polish-v114-script">
+
+(function () {
+  "use strict";
+
+  if (window.__TODAY_V114_ARCHIVE_MOBILE_FIX__) return;
+  window.__TODAY_V114_ARCHIVE_MOBILE_FIX__ = true;
+
+  var archiveSelector = [
+    'button[data-v50-card-action="archive-card"]',
+    '.v50-small-action[data-v50-card-action="archive-card"]'
+  ].join(",");
+
+  var archiveButtonProperties = [
+    "display", "align-items", "justify-content", "position", "flex",
+    "width", "min-width", "max-width", "min-height", "height",
+    "margin", "padding", "border", "border-radius", "color",
+    "-webkit-text-fill-color", "background", "background-color",
+    "background-image", "box-shadow", "font", "font-family",
+    "font-size", "font-weight", "line-height", "letter-spacing",
+    "text-align", "white-space", "word-break", "overflow-wrap",
+    "text-shadow", "transform", "opacity", "filter", "outline",
+    "outline-offset"
+  ];
+
+  var barProperties = [
+    "position", "display", "flex-flow", "align-items",
+    "justify-content", "gap", "width", "max-width", "min-width",
+    "height", "margin", "padding", "border", "border-top",
+    "border-radius", "background", "background-color",
+    "background-image", "box-shadow", "transform", "float",
+    "clear", "overflow", "z-index", "box-sizing",
+    "grid-column", "align-self", "justify-self", "order"
+  ];
+
+  function isLightTheme() {
+    var root = document.documentElement;
+    return root.classList.contains("today-theme-light") ||
+      root.dataset.todayTheme === "light";
+  }
+
+  function setImportant(node, property, value) {
+    if (!node) return;
+    if (node.style.getPropertyValue(property) !== value ||
+        node.style.getPropertyPriority(property) !== "important") {
+      node.style.setProperty(property, value, "important");
+    }
+  }
+
+  function clearProperties(node, properties) {
+    if (!node) return;
+    properties.forEach(function (property) {
+      node.style.removeProperty(property);
+    });
+  }
+
+  function styleArchiveBar(bar) {
+    if (!bar) return;
+
+    setImportant(bar, "position", "static");
+    setImportant(bar, "display", "flex");
+    setImportant(bar, "flex-flow", "row wrap");
+    setImportant(bar, "align-items", "center");
+    setImportant(bar, "justify-content", "flex-start");
+    setImportant(bar, "gap", "7px");
+    setImportant(bar, "width", "100%");
+    setImportant(bar, "max-width", "100%");
+    setImportant(bar, "min-width", "0");
+    setImportant(bar, "height", "auto");
+    setImportant(bar, "margin", "11px 0 0");
+    setImportant(bar, "padding", "9px 0 0");
+    setImportant(bar, "border", "0");
+    setImportant(bar, "border-top", "1px solid rgba(112,97,158,.20)");
+    setImportant(bar, "border-radius", "0");
+    setImportant(bar, "background", "transparent");
+    setImportant(bar, "box-shadow", "none");
+    setImportant(bar, "transform", "none");
+    setImportant(bar, "float", "none");
+    setImportant(bar, "clear", "both");
+    setImportant(bar, "overflow", "visible");
+    setImportant(bar, "z-index", "1");
+    setImportant(bar, "box-sizing", "border-box");
+
+    if (bar.classList.contains("v50-daily-tools")) {
+      setImportant(bar, "grid-column", "1 / -1");
+      setImportant(bar, "align-self", "stretch");
+      setImportant(bar, "justify-self", "stretch");
+      setImportant(bar, "order", "50");
+    }
+  }
+
+  function styleArchiveButton(button) {
+    if (!button) return;
+
+    setImportant(button, "display", "inline-flex");
+    setImportant(button, "align-items", "center");
+    setImportant(button, "justify-content", "center");
+    setImportant(button, "position", "static");
+    setImportant(button, "flex", "0 0 auto");
+    setImportant(button, "width", "auto");
+    setImportant(button, "min-width", "0");
+    setImportant(button, "max-width", "100%");
+    setImportant(button, "min-height", "31px");
+    setImportant(button, "height", "auto");
+    setImportant(button, "margin", "0");
+    setImportant(button, "padding", "8px 12px");
+    setImportant(button, "border", "1px solid rgba(113,90,165,.34)");
+    setImportant(button, "border-radius", "11px");
+    setImportant(button, "color", "#493765");
+    setImportant(button, "-webkit-text-fill-color", "#493765");
+    setImportant(button, "background",
+      "linear-gradient(125deg,#e1d7ff 0%,#d7efe7 64%,#f7e3ed 100%)");
+    setImportant(button, "background-color", "#e1d7ff");
+    setImportant(button, "box-shadow",
+      "inset 0 1px rgba(255,255,255,.87),0 3px 8px rgba(78,65,124,.06)");
+    setImportant(button, "font-family", "Manrope,system-ui,sans-serif");
+    setImportant(button, "font-size", "9px");
+    setImportant(button, "font-weight", "850");
+    setImportant(button, "line-height", "1.2");
+    setImportant(button, "letter-spacing", "0");
+    setImportant(button, "text-align", "center");
+    setImportant(button, "white-space", "nowrap");
+    setImportant(button, "word-break", "normal");
+    setImportant(button, "overflow-wrap", "normal");
+    setImportant(button, "text-shadow", "none");
+    setImportant(button, "transform", "none");
+    setImportant(button, "opacity", "1");
+    setImportant(button, "filter", "none");
+    setImportant(button, "outline-offset", "2px");
+  }
+
+  function applyArchiveTheme() {
+    var bars = document.querySelectorAll(
+      ".v50-card-tools, .v50-daily-tools"
+    );
+
+    var buttons = document.querySelectorAll(archiveSelector);
+
+    if (!isLightTheme()) {
+      bars.forEach(function (bar) {
+        clearProperties(bar, barProperties);
+      });
+
+      buttons.forEach(function (button) {
+        clearProperties(button, archiveButtonProperties);
+      });
+
+      return;
+    }
+
+    // Only bars containing the real archive action are changed.
+    buttons.forEach(function (button) {
+      var bar = button.closest(".v50-card-tools");
+      if (bar) styleArchiveBar(bar);
+      styleArchiveButton(button);
+    });
+  }
+
+  /*
+   * Mobile discovery styles are in V114 CSS. Keep this helper as a
+   * safety net if another loaded component changes width/overflow inline.
+   */
+  function refreshMobileDiscovery() {
+    if (!isLightTheme()) return;
+    if (window.matchMedia &&
+        !window.matchMedia("(max-width: 640px)").matches) {
+      return;
+    }
+
+    var toolbar = document.querySelector(
+      "#todayV80DailyTools, .today-v80-daily-tools"
+    );
+
+    if (!toolbar) return;
+
+    setImportant(toolbar, "box-sizing", "border-box");
+    setImportant(toolbar, "min-width", "0");
+    setImportant(toolbar, "max-width", "100%");
+
+    var categoryRow = toolbar.querySelector(
+      ".today-v80-category-filters"
+    );
+
+    if (categoryRow) {
+      setImportant(categoryRow, "max-width", "100%");
+      setImportant(categoryRow, "min-width", "0");
+      setImportant(categoryRow, "overflow-x", "auto");
+      setImportant(categoryRow, "overflow-y", "hidden");
+      setImportant(categoryRow, "flex-wrap", "nowrap");
+      setImportant(categoryRow, "scrollbar-width", "none");
+      setImportant(categoryRow, "-webkit-overflow-scrolling", "touch");
+    }
+
+    var search = toolbar.querySelector("[data-v80-search]");
+    if (search) {
+      setImportant(search, "min-width", "0");
+      setImportant(search, "max-width", "100%");
+      setImportant(search, "box-sizing", "border-box");
+    }
+
+    var sort = toolbar.querySelector("[data-v80-sort]");
+    if (sort) {
+      setImportant(sort, "max-width", "100%");
+      setImportant(sort, "box-sizing", "border-box");
+    }
+  }
+
+  var queued = false;
+
+  function refresh() {
+    applyArchiveTheme();
+    refreshMobileDiscovery();
+  }
+
+  function queueRefresh() {
+    if (queued) return;
+    queued = true;
+
+    window.requestAnimationFrame(function () {
+      queued = false;
+      refresh();
+    });
+  }
+
+  /*
+   * Observe dynamic additions and text changes only.
+   * Style writes do not trigger this observer, avoiding an observer loop.
+   */
+  var observer = new MutationObserver(queueRefresh);
+
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    characterData: true
+  });
+
+  var themeObserver = new MutationObserver(queueRefresh);
+
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "data-today-theme"]
+  });
+
+  window.addEventListener("resize", queueRefresh, { passive: true });
+  window.addEventListener("load", queueRefresh, { once: true });
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    queueRefresh,
+    { once: true }
+  );
+
+  queueRefresh();
+  window.setTimeout(queueRefresh, 250);
+  window.setTimeout(queueRefresh, 900);
 })();
 
 </script>
