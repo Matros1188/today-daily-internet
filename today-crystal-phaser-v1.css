@@ -1,0 +1,47 @@
+/* TODAY CRYSTAL PHASER V1 — BOARD LAYER */
+/* Only active on the campaign board. All other TODAY pages remain untouched. */
+body.today-games-route .ts-m3-board-wrap {
+  position: relative !important;
+  isolation: isolate !important;
+}
+body.today-games-route .ts-m3-board-wrap .today-crystal-phaser-viewport {
+  position: absolute !important;
+  z-index: 3 !important;
+  display: block !important;
+  overflow: hidden !important;
+  border-radius: inherit !important;
+  background: transparent !important;
+  touch-action: none !important;
+  overscroll-behavior: contain !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+body.today-games-route .today-crystal-phaser-viewport canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  outline: none !important;
+  touch-action: none !important;
+  background: transparent !important;
+}
+body.today-games-route .ts-m3-board-wrap.arc5-phaser-ready #todayMatchBoard {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.today-games-route .ts-m3-board-wrap.arc5-phaser-ready .today-crystal-phaser-viewport {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+body.today-games-route .today-crystal-phaser-viewport:focus-visible {
+  outline: 2px solid rgba(215,255,82,.95) !important;
+  outline-offset: 3px !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.today-games-route .today-crystal-phaser-viewport canvas { animation: none !important; }
+}
