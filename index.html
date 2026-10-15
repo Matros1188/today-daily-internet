@@ -1963,6 +1963,560 @@ html[data-today-theme="light"] textarea::placeholder {
 /* TODAY V111 LIGHT POLISH END */
 
 </style>
+<style id="today-light-polish-v112">
+
+/* ============================================================
+   TODAY V112 — LIGHT THEME DETAIL FIX
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. «МОЯ ИСТОРИЯ»: без прямоугольной подложки
+   Круг добавления остаётся круглым.
+   Подпись не обрезается и не ломается на две строки.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-v64-story-add,
+html[data-today-theme="light"] body .today-v64-story-add {
+  display: flex !important;
+  flex: 0 0 84px !important;
+  width: 84px !important;
+  min-width: 84px !important;
+  max-width: 84px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 5px !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+html.today-theme-light body .today-v64-story-add:hover,
+html.today-theme-light body .today-v64-story-add:focus,
+html[data-today-theme="light"] body .today-v64-story-add:hover,
+html[data-today-theme="light"] body .today-v64-story-add:focus {
+  border: 0 !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light body .today-v64-story-add::before,
+html.today-theme-light body .today-v64-story-add::after,
+html[data-today-theme="light"] body .today-v64-story-add::before,
+html[data-today-theme="light"] body .today-v64-story-add::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.today-theme-light body .today-v64-story-add .today-v64-story-ring,
+html[data-today-theme="light"] body .today-v64-story-add .today-v64-story-ring {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 56px !important;
+  width: 56px !important;
+  min-width: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: linear-gradient(
+    145deg, #ddd2ff 0%, #d1f0e5 58%, #f5ddeb 100%
+  ) !important;
+  border: 1px dashed rgba(106, 82, 168, .56) !important;
+  outline: none !important;
+  box-shadow: 0 4px 13px rgba(82, 72, 132, .10) !important;
+}
+
+html.today-theme-light body .today-v64-story-add .today-v64-add-glyph,
+html[data-today-theme="light"] body .today-v64-story-add .today-v64-add-glyph {
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #6243a8 !important;
+  -webkit-text-fill-color: #6243a8 !important;
+  text-shadow: none !important;
+  font-size: 30px !important;
+  line-height: 1 !important;
+}
+
+html.today-theme-light body .today-v64-story-add b,
+html[data-today-theme="light"] body .today-v64-story-add b {
+  display: block !important;
+  width: 84px !important;
+  max-width: 84px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-align: center !important;
+  text-transform: none !important;
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  font-family: Manrope, system-ui, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.025em !important;
+}
+
+html.today-theme-light body .today-v64-story-add small,
+html[data-today-theme="light"] body .today-v64-story-add small {
+  display: block !important;
+  width: 84px !important;
+  max-width: 84px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  color: #59657b !important;
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+}
+
+
+/* ------------------------------------------------------------
+   2. ПОИСК «Найди свой TODAY»
+   Название, тема или описание…
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-v80-search-box,
+html[data-today-theme="light"] body .today-v80-search-box {
+  color: #172033 !important;
+  background: linear-gradient(
+    125deg, #e7eaff 0%, #e1f3eb 58%, #f7e6f0 100%
+  ) !important;
+  border: 1px solid rgba(113, 105, 164, .29) !important;
+  border-radius: 15px !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.88),
+    0 5px 15px rgba(78,82,126,.06) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+html.today-theme-light body .today-v80-search-box input,
+html[data-today-theme="light"] body .today-v80-search-box input,
+html.today-theme-light body input[data-v80-search],
+html[data-today-theme="light"] body input[data-v80-search] {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  color-scheme: light !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline-color: rgba(111, 91, 176, .35) !important;
+  text-shadow: none !important;
+  caret-color: #674bb0 !important;
+}
+
+html.today-theme-light body .today-v80-search-box input::placeholder,
+html[data-today-theme="light"] body .today-v80-search-box input::placeholder,
+html.today-theme-light body input[data-v80-search]::placeholder,
+html[data-today-theme="light"] body input[data-v80-search]::placeholder {
+  color: #677187 !important;
+  -webkit-text-fill-color: #677187 !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body .today-v80-search-box > span,
+html[data-today-theme="light"] body .today-v80-search-box > span {
+  color: #6e56a6 !important;
+}
+
+
+/* ------------------------------------------------------------
+   3. ПОИСК ПО ТЕКСТУ ИЛИ АВТОРУ
+   ------------------------------------------------------------ */
+
+html.today-theme-light body #todayV78FeedTools .today-v78-search-box,
+html[data-today-theme="light"] body #todayV78FeedTools .today-v78-search-box,
+html.today-theme-light body .today-v78-feed-tools .today-v78-search-box,
+html[data-today-theme="light"] body .today-v78-feed-tools .today-v78-search-box {
+  color: #172033 !important;
+  background: linear-gradient(
+    125deg, #e4eaff 0%, #e0f3ed 57%, #f7e5f0 100%
+  ) !important;
+  border: 1px solid rgba(113, 105, 164, .29) !important;
+  border-radius: 15px !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.88),
+    0 5px 15px rgba(78,82,126,.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light body #todayV78FeedTools .today-v78-search-box input,
+html[data-today-theme="light"] body #todayV78FeedTools .today-v78-search-box input,
+html.today-theme-light body input[data-v78-search],
+html[data-today-theme="light"] body input[data-v78-search] {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  color-scheme: light !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline-color: rgba(111, 91, 176, .35) !important;
+  text-shadow: none !important;
+  caret-color: #674bb0 !important;
+}
+
+html.today-theme-light body input[data-v78-search]::placeholder,
+html[data-today-theme="light"] body input[data-v78-search]::placeholder {
+  color: #677187 !important;
+  -webkit-text-fill-color: #677187 !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body .today-v78-search-icon,
+html[data-today-theme="light"] body .today-v78-search-icon {
+  color: #6e56a6 !important;
+}
+
+
+/* ------------------------------------------------------------
+   4. «СПОР ДНЯ», «ВОПРОС ДНЯ», «МОМЕНТ ДНЯ» И ДР.
+   Убираем серо-голубую нечитаемость у названий рубрик.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body #dailyGrid .kind-pill,
+html.today-theme-light body #dailyGrid .kind-pill *,
+html[data-today-theme="light"] body #dailyGrid .kind-pill,
+html[data-today-theme="light"] body #dailyGrid .kind-pill * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  font-weight: 800 !important;
+}
+
+html.today-theme-light body #dailyGrid .kind-pill,
+html[data-today-theme="light"] body #dailyGrid .kind-pill {
+  background: rgba(255,255,255,.52) !important;
+  border: 1px solid rgba(70,78,107,.15) !important;
+}
+
+html.today-theme-light body #dailyGrid .count-pill,
+html[data-today-theme="light"] body #dailyGrid .count-pill {
+  color: #344056 !important;
+  -webkit-text-fill-color: #344056 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body #dailyGrid .daily-card h3,
+html.today-theme-light body #dailyGrid .daily-card h4,
+html[data-today-theme="light"] body #dailyGrid .daily-card h3,
+html[data-today-theme="light"] body #dailyGrid .daily-card h4 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #communityFeed .community-kind,
+html[data-today-theme="light"] body #communityFeed .community-kind {
+  color: #243049 !important;
+  -webkit-text-fill-color: #243049 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  font-weight: 850 !important;
+}
+
+
+/* ------------------------------------------------------------
+   5. «В ИЗБРАННОЕ», «В АРХИВ» И ФИЛЬТРЫ
+   Мягкие акцентные заливки в стиле светлой темы.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-v80-favorite,
+html[data-today-theme="light"] body .today-v80-favorite,
+html.today-theme-light body .today-v80-filter-chip,
+html[data-today-theme="light"] body .today-v80-filter-chip,
+html.today-theme-light body .today-v78-filter-chip,
+html[data-today-theme="light"] body .today-v78-filter-chip,
+html.today-theme-light body .today-v78-action,
+html[data-today-theme="light"] body .today-v78-action,
+html.today-theme-light body .today-v64-filter-row button,
+html[data-today-theme="light"] body .today-v64-filter-row button,
+html.today-theme-light body button[class*="archive" i],
+html[data-today-theme="light"] body button[class*="archive" i],
+html.today-theme-light body button[aria-label*="архив" i],
+html[data-today-theme="light"] body button[aria-label*="архив" i],
+html.today-theme-light body button[title*="архив" i],
+html[data-today-theme="light"] body button[title*="архив" i],
+html.today-theme-light body button[data-action*="archive" i],
+html[data-today-theme="light"] body button[data-action*="archive" i] {
+  color: #20253b !important;
+  -webkit-text-fill-color: #20253b !important;
+  background: linear-gradient(
+    125deg, #e5ddff 0%, #dff1eb 65%, #f6e5ef 100%
+  ) !important;
+  border: 1px solid rgba(112,96,159,.30) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.8) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html.today-theme-light body .today-v80-favorite span,
+html[data-today-theme="light"] body .today-v80-favorite span,
+html.today-theme-light body .today-v78-action span,
+html[data-today-theme="light"] body .today-v78-action span {
+  color: #45406f !important;
+  -webkit-text-fill-color: #45406f !important;
+}
+
+html.today-theme-light body .today-v80-favorite.is-favorite,
+html[data-today-theme="light"] body .today-v80-favorite.is-favorite {
+  background: linear-gradient(
+    125deg, #f9e5b9 0%, #f8e8d3 55%, #f6dfe8 100%
+  ) !important;
+  color: #583c16 !important;
+  -webkit-text-fill-color: #583c16 !important;
+}
+
+html.today-theme-light body .today-v80-filter-chip.is-active,
+html[data-today-theme="light"] body .today-v80-filter-chip.is-active,
+html.today-theme-light body .today-v78-filter-chip.is-active,
+html[data-today-theme="light"] body .today-v78-filter-chip.is-active {
+  background: linear-gradient(
+    125deg, #d9d0ff 0%, #d4eee5 100%
+  ) !important;
+  border-color: rgba(104,83,171,.48) !important;
+  color: #202039 !important;
+  -webkit-text-fill-color: #202039 !important;
+}
+
+html.today-theme-light body .today-v80-heading strong,
+html[data-today-theme="light"] body .today-v80-heading strong {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+html.today-theme-light body .today-v80-heading small,
+html[data-today-theme="light"] body .today-v80-heading small {
+  color: #566179 !important;
+  -webkit-text-fill-color: #566179 !important;
+}
+
+html.today-theme-light body .today-v80-result-count,
+html[data-today-theme="light"] body .today-v80-result-count,
+html.today-theme-light body .today-v80-filter-label,
+html[data-today-theme="light"] body .today-v80-filter-label,
+html.today-theme-light body .today-v80-filter-label *,
+html[data-today-theme="light"] body .today-v80-filter-label * {
+  color: #344056 !important;
+  -webkit-text-fill-color: #344056 !important;
+  opacity: 1 !important;
+}
+
+
+/* ------------------------------------------------------------
+   6. «ЧТО ОСТАВИЛИ СЕГОДНЯ»
+   Убираем белую подложку, задаём лёгкий цветовой фон
+   без тяжёлой рамки и прямоугольной тени.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body #todayPromotedBlock,
+html[data-today-theme="light"] body #todayPromotedBlock,
+html.today-theme-light body .ts-promo-wrap,
+html[data-today-theme="light"] body .ts-promo-wrap {
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(191,173,255,.25),
+      transparent 53%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(135,220,195,.23),
+      transparent 53%
+    ),
+    linear-gradient(
+      125deg,
+      rgba(228,220,255,.40),
+      rgba(216,243,232,.37) 56%,
+      rgba(249,225,238,.37)
+    ) !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 22px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light body #todayPromotedList,
+html[data-today-theme="light"] body #todayPromotedList,
+html.today-theme-light body .ts-promoted-list,
+html[data-today-theme="light"] body .ts-promoted-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head h3,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head h3 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head p,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head p {
+  color: #3d4960 !important;
+  -webkit-text-fill-color: #3d4960 !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-kicker,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-kicker {
+  color: #68499f !important;
+  -webkit-text-fill-color: #68499f !important;
+}
+
+html.today-theme-light body #todayPromotedList > *,
+html[data-today-theme="light"] body #todayPromotedList > * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  border-color: rgba(110,99,151,.25) !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 1),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg,#e5dcff,#f5e5f0) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 2),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg,#d7f0e6,#e5efff) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 3),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg,#fce2d8,#f9e5ee) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n) {
+  background: linear-gradient(135deg,#dceaff,#eae2ff) !important;
+}
+
+
+/* ------------------------------------------------------------
+   7. ИСПРАВЛЯЕМ ПЕРЕНОС СЛОВА «ЛАЙК»
+   Иконка, счётчик и подпись не переносятся друг на друга.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-post-actions,
+html[data-today-theme="light"] body .today-post-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+html.today-theme-light body .today-like-btn,
+html[data-today-theme="light"] body .today-like-btn {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  color: #20253b !important;
+  -webkit-text-fill-color: #20253b !important;
+}
+
+html.today-theme-light body .today-like-btn > span,
+html.today-theme-light body .today-like-btn > b,
+html[data-today-theme="light"] body .today-like-btn > span,
+html[data-today-theme="light"] body .today-like-btn > b {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+html.today-theme-light body .today-like-btn > span:last-child,
+html[data-today-theme="light"] body .today-like-btn > span:last-child {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: max-content !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  text-transform: uppercase !important;
+  letter-spacing: -.015em !important;
+}
+
+html.today-theme-light body .today-like-btn > span:first-child,
+html[data-today-theme="light"] body .today-like-btn > span:first-child {
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+
+/* ------------------------------------------------------------
+   8. МАЛЕНЬКИЕ ЭКРАНЫ: сохраняем ширину и читаемость
+   ------------------------------------------------------------ */
+
+@media (max-width: 480px) {
+  html.today-theme-light body .today-v64-story-add,
+  html[data-today-theme="light"] body .today-v64-story-add {
+    flex-basis: 80px !important;
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+  }
+
+  html.today-theme-light body .today-v64-story-add b,
+  html[data-today-theme="light"] body .today-v64-story-add b,
+  html.today-theme-light body .today-v64-story-add small,
+  html[data-today-theme="light"] body .today-v64-story-add small {
+    width: 80px !important;
+    max-width: 80px !important;
+  }
+
+  html.today-theme-light body .today-like-btn,
+  html[data-today-theme="light"] body .today-like-btn {
+    gap: 5px !important;
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* TODAY V112 LIGHT THEME DETAIL FIX END */
+
+</style>
+
 
 
 </head>
