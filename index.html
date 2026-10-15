@@ -1517,6 +1517,453 @@ html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-generated-sv
 
 /* END TODAY V110 */
 </style>
+<style id="today-light-polish-v111">
+
+/* TODAY V111 LIGHT POLISH BEGIN */
+
+/* ---------- Универсальный чёрный текст ---------- */
+
+html.today-theme-light .today-v111-dark-text,
+html[data-today-theme="light"] .today-v111-dark-text {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+}
+
+/* ---------- Раздел «Что происходит сегодня» ---------- */
+
+html.today-theme-light .today-section,
+html.today-theme-light .community-section,
+html.today-theme-light .ranking-section,
+html[data-today-theme="light"] .today-section,
+html[data-today-theme="light"] .community-section,
+html[data-today-theme="light"] .ranking-section {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+html.today-theme-light .today-section > .section-head,
+html.today-theme-light .community-section > .section-head,
+html.today-theme-light .ranking-section > .section-head,
+html[data-today-theme="light"] .today-section > .section-head,
+html[data-today-theme="light"] .community-section > .section-head,
+html[data-today-theme="light"] .ranking-section > .section-head {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.today-theme-light .today-section h2,
+html.today-theme-light .community-section h2,
+html.today-theme-light .ranking-section h2,
+html[data-today-theme="light"] .today-section h2,
+html[data-today-theme="light"] .community-section h2,
+html[data-today-theme="light"] .ranking-section h2 {
+  color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #dailyGrid,
+html[data-today-theme="light"] #dailyGrid {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Сами 12 карточек остаются раздельными и цветными. */
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 1),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 1) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #dfd1ff, #f4e2f2) !important;
+  border-color: rgba(124, 85, 180, .36) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(70,55,115,.10) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 2),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 2) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #cfeee3, #e2f0ff) !important;
+  border-color: rgba(62, 142, 122, .34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(58,120,115,.09) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 3),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 3) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #f8dce9, #f3e4ff) !important;
+  border-color: rgba(179, 102, 148, .33) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(150,80,120,.085) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #d6e7fb, #ebe2ff) !important;
+  border-color: rgba(85, 123, 177, .34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(73,103,153,.085) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card h3,
+html.today-theme-light #dailyGrid > .daily-card h4,
+html.today-theme-light #dailyGrid > .daily-card strong,
+html.today-theme-light #dailyGrid > .daily-card .card-body,
+html[data-today-theme="light"] #dailyGrid > .daily-card h3,
+html[data-today-theme="light"] #dailyGrid > .daily-card h4,
+html[data-today-theme="light"] #dailyGrid > .daily-card strong,
+html[data-today-theme="light"] #dailyGrid > .daily-card .card-body {
+  color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card p,
+html.today-theme-light #dailyGrid > .daily-card small,
+html[data-today-theme="light"] #dailyGrid > .daily-card p,
+html[data-today-theme="light"] #dailyGrid > .daily-card small {
+  color: #46536b !important;
+}
+
+/* ---------- «Что оставили сегодня»: убрать фон-обёртку ---------- */
+
+html.today-theme-light #todayPromotedBlock,
+html.today-theme-light .ts-promo-wrap,
+html[data-today-theme="light"] #todayPromotedBlock,
+html[data-today-theme="light"] .ts-promo-wrap {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light #todayPromotedList,
+html.today-theme-light .ts-promoted-list,
+html[data-today-theme="light"] #todayPromotedList,
+html[data-today-theme="light"] .ts-promoted-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.today-theme-light #todayPromotedBlock .ts-promo-head h3,
+html[data-today-theme="light"] #todayPromotedBlock .ts-promo-head h3 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedBlock .ts-promo-head p,
+html[data-today-theme="light"] #todayPromotedBlock .ts-promo-head p {
+  color: #46536b !important;
+}
+
+html.today-theme-light #todayPromotedBlock .ts-kicker,
+html[data-today-theme="light"] #todayPromotedBlock .ts-kicker {
+  color: #7049ab !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n + 1),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg, #e6dcff, #f5e4f1) !important;
+  border-color: rgba(126,91,183,.28) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n + 2),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg, #d9f0e8, #e4f0ff) !important;
+  border-color: rgba(70,145,127,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n + 3),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg, #ffe6d9, #fbe8ef) !important;
+  border-color: rgba(181,113,110,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n) {
+  background: linear-gradient(135deg, #deebff, #e9e2ff) !important;
+  border-color: rgba(88,125,177,.27) !important;
+  color: #172033 !important;
+}
+
+/* ---------- «Кто сегодня в игре»: убрать общий прямоугольник ---------- */
+
+html.today-theme-light .ranking-card,
+html.today-theme-light .ranking-section .leaderboard,
+html.today-theme-light .ranking-section #leaderboard,
+html[data-today-theme="light"] .ranking-card,
+html[data-today-theme="light"] .ranking-section .leaderboard,
+html[data-today-theme="light"] .ranking-section #leaderboard {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n + 1),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n + 1) {
+  background: linear-gradient(120deg, #e5dcff, #f4e6f4) !important;
+  border-color: rgba(126,91,183,.28) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n + 2),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n + 2) {
+  background: linear-gradient(120deg, #d8f0e7, #e5f1ff) !important;
+  border-color: rgba(70,145,127,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n + 3),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n + 3) {
+  background: linear-gradient(120deg, #fce4d8, #f8e7f0) !important;
+  border-color: rgba(181,113,110,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n) {
+  background: linear-gradient(120deg, #dce9ff, #ebe3ff) !important;
+  border-color: rgba(88,125,177,.27) !important;
+  color: #172033 !important;
+}
+
+/* ---------- Лента сообщества: фон прозрачный, посты цветные ---------- */
+
+html.today-theme-light .community-feed,
+html.today-theme-light #communityFeed,
+html[data-today-theme="light"] .community-feed,
+html[data-today-theme="light"] #communityFeed {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n + 1),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg, #e5dcff, #f4e5f2) !important;
+  border-color: rgba(126,91,183,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n + 2),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg, #d8f1e8, #e6f0ff) !important;
+  border-color: rgba(70,145,127,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n + 3),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg, #ffe6d9, #fbe7ef) !important;
+  border-color: rgba(181,113,110,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n) {
+  background: linear-gradient(135deg, #dceaff, #eae3ff) !important;
+  border-color: rgba(88,125,177,.27) !important;
+  color: #172033 !important;
+}
+
+/* ---------- Цветные кнопки публикаций ---------- */
+
+html.today-theme-light .today-v111-action,
+html[data-today-theme="light"] .today-v111-action {
+  color: #182033 !important;
+  -webkit-text-fill-color: #182033 !important;
+  border: 1px solid rgba(103,91,151,.30) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    0 7px 18px rgba(60,65,110,.09) !important;
+  text-shadow: none !important;
+  font-weight: 750 !important;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease !important;
+}
+
+html.today-theme-light .today-v111-action:hover,
+html[data-today-theme="light"] .today-v111-action:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.94),
+    0 10px 23px rgba(60,65,110,.14) !important;
+}
+
+html.today-theme-light .today-v111-action--story,
+html[data-today-theme="light"] .today-v111-action--story {
+  background: linear-gradient(130deg, #dfd0ff, #f5dced) !important;
+  border-color: rgba(124,83,177,.40) !important;
+}
+
+html.today-theme-light .today-v111-action--photo,
+html[data-today-theme="light"] .today-v111-action--photo {
+  background: linear-gradient(130deg, #d4e8ff, #d4f4ed) !important;
+  border-color: rgba(66,128,180,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--video,
+html[data-today-theme="light"] .today-v111-action--video {
+  background: linear-gradient(130deg, #e6dcff, #dce5ff) !important;
+  border-color: rgba(118,94,190,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--music,
+html[data-today-theme="light"] .today-v111-action--music {
+  background: linear-gradient(130deg, #d1f0e2, #edf3d5) !important;
+  border-color: rgba(79,145,119,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--create,
+html[data-today-theme="light"] .today-v111-action--create {
+  background: linear-gradient(130deg, #ffe4cb, #ffedc9 58%, #f7dced) !important;
+  border-color: rgba(192,132,89,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--mix,
+html[data-today-theme="light"] .today-v111-action--mix {
+  background: linear-gradient(130deg, #ded5ff, #d2f0e5 56%, #f7dce9) !important;
+  border-color: rgba(124,88,183,.38) !important;
+}
+
+/* Иконки сохраняют самостоятельную окраску. */
+
+html.today-theme-light .today-v111-action--story svg,
+html.today-theme-light .today-v111-action--story [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--story svg,
+html[data-today-theme="light"] .today-v111-action--story [aria-hidden="true"] {
+  color: #7047b3 !important;
+}
+
+html.today-theme-light .today-v111-action--photo svg,
+html.today-theme-light .today-v111-action--photo [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--photo svg,
+html[data-today-theme="light"] .today-v111-action--photo [aria-hidden="true"] {
+  color: #2877a9 !important;
+}
+
+html.today-theme-light .today-v111-action--video svg,
+html.today-theme-light .today-v111-action--video [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--video svg,
+html[data-today-theme="light"] .today-v111-action--video [aria-hidden="true"] {
+  color: #654bb3 !important;
+}
+
+html.today-theme-light .today-v111-action--music svg,
+html.today-theme-light .today-v111-action--music [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--music svg,
+html[data-today-theme="light"] .today-v111-action--music [aria-hidden="true"] {
+  color: #247f6b !important;
+}
+
+/* ---------- Окно «Поддержать автора» ---------- */
+
+html.today-theme-light .today-support-dialog,
+html.today-theme-light .today-support-dialog *,
+html[data-today-theme="light"] .today-support-dialog,
+html[data-today-theme="light"] .today-support-dialog * {
+  color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-bank-card,
+html[data-today-theme="light"] .today-support-dialog .today-support-bank-card {
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(160,133,255,.24),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(92,209,181,.22),
+      transparent 47%
+    ),
+    linear-gradient(
+      130deg,
+      #e3d9ff,
+      #d7f2e9 55%,
+      #f9e0eb
+    ) !important;
+  border: 1px solid rgba(119,95,169,.30) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.92),
+    0 16px 35px rgba(79,65,123,.12) !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-bank-card:after,
+html[data-today-theme="light"] .today-support-dialog .today-support-bank-card:after {
+  background: linear-gradient(
+    130deg,
+    rgba(255,255,255,.38),
+    transparent 48%,
+    rgba(255,255,255,.12)
+  ) !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-number,
+html[data-today-theme="light"] .today-support-dialog .today-support-number {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-pulse,
+html[data-today-theme="light"] .today-support-dialog .today-support-pulse {
+  background: #36a987 !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-copy-btn,
+html[data-today-theme="light"] .today-support-dialog .today-support-copy-btn {
+  color: #172033 !important;
+  background: linear-gradient(115deg, #d4f1e7, #ded7ff 65%, #f6dce9) !important;
+  border: 1px solid rgba(111,92,170,.34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.88) !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-copy-status,
+html[data-today-theme="light"] .today-support-dialog .today-support-copy-status {
+  color: #49556d !important;
+}
+
+/* Поля ввода. */
+
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder,
+html[data-today-theme="light"] input::placeholder,
+html[data-today-theme="light"] textarea::placeholder {
+  color: #737f94 !important;
+  opacity: 1 !important;
+}
+
+/* Таймер #countdown не перекрашивается скриптом. */
+
+/* TODAY V111 LIGHT POLISH END */
+
+</style>
+
 
 </head>
 <body>
@@ -1633,5 +2080,230 @@ html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-generated-sv
 
 <script src="./today-arcade-v95.js?v=20261015190035"></script>
 <script src="./today-arcade-v96.js?v=20261015190036"></script>
+
+<script id="today-light-polish-v111-script">
+
+(function () {
+  "use strict";
+
+  if (window.__TODAY_V111_LIGHT_POLISH__) return;
+  window.__TODAY_V111_LIGHT_POLISH__ = true;
+
+  var actionClassPrefix = "today-v111-action--";
+
+  function isLightTheme() {
+    var root = document.documentElement;
+
+    return root.classList.contains("today-theme-light") ||
+      root.dataset.todayTheme === "light";
+  }
+
+  function getLabel(el) {
+    return [
+      el.innerText || "",
+      el.getAttribute("aria-label") || "",
+      el.getAttribute("title") || ""
+    ].join(" ").replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  function actionKind(label) {
+    if (/истор/.test(label)) return "story";
+    if (/фото|фотогал|изображ|галере|сним/.test(label)) return "photo";
+    if (/видео|клип/.test(label)) return "video";
+    if (/музык|песн|аудио/.test(label)) return "music";
+
+    if (/созда|публикац|добавить|опубликов|сохранить|отправить/.test(label)) {
+      return "create";
+    }
+
+    return "mix";
+  }
+
+  function markCreateButtons() {
+    var buttons = document.querySelectorAll(
+      "button, [role='button']"
+    );
+
+    buttons.forEach(function (el) {
+      var oldClasses = Array.from(el.classList).filter(function (name) {
+        return name === "today-v111-action" ||
+          name.indexOf(actionClassPrefix) === 0;
+      });
+
+      if (oldClasses.length) {
+        el.classList.remove.apply(el.classList, oldClasses);
+      }
+
+      if (el.closest(
+        ".bottom-nav, .today-social-nav, .modal-close"
+      )) {
+        return;
+      }
+
+      var label = getLabel(el);
+
+      if (/удалить|удаление|пожаловаться|отменить|закрыть|назад|выход/.test(label)) {
+        return;
+      }
+
+      var forcedZone =
+        el.matches(
+          ".today-v64-create-btn, " +
+          ".today-v64-create-grid button, " +
+          ".today-v66-media-rail-actions button"
+        ) ||
+        !!el.closest(
+          ".today-v64-create-grid, " +
+          ".today-v66-media-rail-actions"
+        );
+
+      var hasActionLabel =
+        /созда|истор|фото|фотогал|изображ|галере|сним|видео|клип|музык|песн|аудио|публикац|добавить|опубликов/.test(label);
+
+      if (!forcedZone && !hasActionLabel) return;
+
+      el.classList.add("today-v111-action");
+      el.classList.add(
+        actionClassPrefix + actionKind(label)
+      );
+    });
+  }
+
+  function isNearWhite(color) {
+    var match = String(color).match(
+      /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i
+    );
+
+    if (!match) return false;
+
+    var r = Number(match[1]);
+    var g = Number(match[2]);
+    var b = Number(match[3]);
+
+    var min = Math.min(r, g, b);
+    var max = Math.max(r, g, b);
+
+    return min >= 215 && (max - min) <= 55;
+  }
+
+  function hasDirectText(el) {
+    return Array.prototype.some.call(
+      el.childNodes,
+      function (node) {
+        return node.nodeType === 3 &&
+          String(node.nodeValue || "").trim().length > 0;
+      }
+    );
+  }
+
+  function removeDarkTextClasses() {
+    document.querySelectorAll(
+      ".today-v111-dark-text"
+    ).forEach(function (el) {
+      el.classList.remove("today-v111-dark-text");
+    });
+  }
+
+  function paintWhiteTextDark() {
+    var selector = [
+      "header", "header *",
+      "main", "main *",
+      "footer", "footer *",
+      ".bottom-nav", ".bottom-nav *",
+      ".today-support-dialog", ".today-support-dialog *",
+      "#modal:not(.today-social-modal):not(.today-social-page):not(.today-v96-crystal)",
+      "#modal:not(.today-social-modal):not(.today-social-page):not(.today-v96-crystal) *"
+    ].join(",");
+
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (el.closest(
+        "svg, script, style, [aria-hidden='true'], #countdown, " +
+        "#modal.today-social-modal, #modal.today-social-page, " +
+        "#modal.today-v96-crystal"
+      )) {
+        return;
+      }
+
+      if (!hasDirectText(el) &&
+          !el.matches("input, textarea, select")) {
+        return;
+      }
+
+      /* Не удаляем уже добавленный класс при повторной проверке:
+         иначе computed color успел бы стать тёмным из-за самого класса. */
+
+      if (el.classList.contains("today-v111-dark-text")) {
+        return;
+      }
+
+      var color = window.getComputedStyle(el).color;
+
+      if (isNearWhite(color)) {
+        el.classList.add("today-v111-dark-text");
+      }
+    });
+  }
+
+  var queued = false;
+
+  function refresh() {
+    markCreateButtons();
+
+    if (!isLightTheme()) {
+      removeDarkTextClasses();
+      return;
+    }
+
+    paintWhiteTextDark();
+  }
+
+  function queueRefresh() {
+    if (queued) return;
+
+    queued = true;
+
+    window.requestAnimationFrame(function () {
+      queued = false;
+      refresh();
+    });
+  }
+
+  var contentObserver = new MutationObserver(queueRefresh);
+
+  contentObserver.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    characterData: true
+  });
+
+  var themeObserver = new MutationObserver(queueRefresh);
+
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "data-today-theme"]
+  });
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    queueRefresh,
+    { once: true }
+  );
+
+  window.addEventListener("load", queueRefresh, { once: true });
+
+  document.addEventListener("click", function (event) {
+    var target = event.target instanceof Element
+      ? event.target
+      : null;
+
+    if (target && target.closest("#todayThemeToggle")) {
+      queueRefresh();
+    }
+  }, true);
+
+  queueRefresh();
+})();
+
+</script>
 </body>
 </html>
