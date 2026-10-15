@@ -250,7 +250,144 @@
       </div>
     `;
 
+    /* TODAY ARCADE HUB V3 — PREMIUM GAME LOUNGE */
+
     const search = root.querySelector('#tgGameSearch');
+
+    // Уточняем тексты витрины: больше ясности, меньше визуального шума.
+    const collectionTitle = root.querySelector('#tgCollectionTitle');
+    if (collectionTitle) {
+      collectionTitle.textContent = 'Игры под любое настроение';
+    }
+
+    const collectionDescription = root.querySelector('.tg-section-head p');
+    if (collectionDescription) {
+      collectionDescription.textContent =
+        'От большой истории до коротких аркад — выбирай и возвращайся за новым рекордом.';
+    }
+
+    const collectionEyebrow = root.querySelector('.tg-section-head .tg-eyebrow');
+    if (collectionEyebrow) {
+      const dot = collectionEyebrow.querySelector('i');
+      collectionEyebrow.textContent = '';
+      if (dot) collectionEyebrow.appendChild(dot);
+      collectionEyebrow.appendChild(
+        document.createTextNode(' ИГРОВАЯ КОЛЛЕКЦИЯ')
+      );
+    }
+
+    if (search) {
+      search.placeholder = 'Найти игру…';
+      search.setAttribute('aria-label', 'Найти игру в TODAY ARCADE');
+      search.setAttribute('title', 'Быстрый поиск: нажми / или Ctrl+K');
+    }
+
+    // Случайный запуск одной из игр, учитывая активный поиск и жанр.
+    const toolbar = root.querySelector('.tg-toolbar');
+
+    if (toolbar && !root.querySelector('[data-tg-random]')) {
+      const randomButton = document.createElement('button');
+      randomButton.type = 'button';
+      randomButton.className = 'tg-random-button';
+      randomButton.setAttribute('data-tg-random', '1');
+      randomButton.setAttribute('aria-label', 'Запустить случайную игру');
+      randomButton.title = 'Выбрать случайную игру из текущей подборки';
+
+      const randomIcon = document.createElement('span');
+      randomIcon.className = 'tg-random-icon';
+      randomIcon.setAttribute('aria-hidden', 'true');
+      randomIcon.textContent = '✦';
+
+      const randomLabel = document.createElement('span');
+      randomLabel.className = 'tg-random-label';
+      randomLabel.textContent = 'Случайная игра';
+
+      randomButton.appendChild(randomIcon);
+      randomButton.appendChild(randomLabel);
+
+      const filters = toolbar.querySelector('.tg-filters');
+
+      if (filters && filters.parentNode === toolbar) {
+        filters.insertAdjacentElement('afterend', randomButton);
+      } else if (search) {
+        toolbar.insertBefore(randomButton, search);
+      } else {
+        toolbar.appendChild(randomButton);
+      }
+
+      randomButton.addEventListener('click', () => {
+        const candidates = Array.from(
+          root.querySelectorAll(
+            '.tg-feature:not([hidden]) button[data-social-act="play-game"], ' +
+            '.tg-card:not([hidden]) button[data-social-act="play-game"]'
+          )
+        );
+
+        if (!candidates.length) {
+          search?.focus();
+          return;
+        }
+
+        const picked = candidates[
+          Math.floor(Math.random() * candidates.length)
+        ];
+
+        picked.click();
+      });
+    }
+
+    // Чуть более приятная анимация появления карточек.
+    root.querySelectorAll('.tg-card').forEach((card, index) => {
+      card.style.setProperty('--tg-card-index', String(index));
+    });
+
+    // Горячие клавиши: / или Ctrl+K — поиск; Escape очищает запрос.
+    if (!root.dataset.tgKeyboardBound) {
+      root.dataset.tgKeyboardBound = '1';
+
+      document.addEventListener('keydown', event => {
+        const active = document.activeElement;
+        const isEditable = active instanceof HTMLElement && (
+          active.isContentEditable ||
+          ['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName)
+        );
+
+        if (
+          event.key === '/' &&
+          !isEditable &&
+          !event.altKey &&
+          !event.ctrlKey &&
+          !event.metaKey
+        ) {
+          const field = root.querySelector('#tgGameSearch');
+          if (field) {
+            event.preventDefault();
+            field.focus();
+          }
+        }
+
+        if (
+          (event.ctrlKey || event.metaKey) &&
+          event.key.toLowerCase() === 'k'
+        ) {
+          const field = root.querySelector('#tgGameSearch');
+          if (field) {
+            event.preventDefault();
+            field.focus();
+          }
+        }
+
+        if (
+          event.key === 'Escape' &&
+          active === root.querySelector('#tgGameSearch') &&
+          active.value
+        ) {
+          active.value = '';
+          active.dispatchEvent(new Event('input', { bubbles: true }));
+          active.focus();
+        }
+      });
+    }
     const filterButtons = Array.from(root.querySelectorAll('[data-tg-filter]'));
     const cards = Array.from(root.querySelectorAll('[data-tg-card]'));
     const feature = root.querySelector('[data-tg-feature]');
