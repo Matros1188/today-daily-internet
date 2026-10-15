@@ -1208,7 +1208,7 @@
   }
   function match3LevelById(id){return MATCH3_LEVELS[Math.max(0,Math.min(219,Number(id)-1))]||MATCH3_LEVELS[0];}
   function match3NewGem(color){return {uid:'g'+(match3GemUid++),color:Number.isInteger(color)?color:Math.floor(Math.random()*MATCH3_GEMS.length)};}
-  function match3FindMatches(cells){
+  function match3FindMatches(cells){const core=window.TODAY_CRYSTAL_ENGINE_V1;if(core&&typeof core.findMatches==='function'){try{return core.findMatches(cells);}catch(error){console.warn('[TODAY Crystal Engine] match3FindMatches fallback',error);}}
     const found=new Set(),groups=[],n=8;
     const addRun=(indices,axis,color)=>{if(indices.length<3)return;groups.push({indices:indices.slice(),axis,color,length:indices.length});for(const index of indices)found.add(index);};
     for(let r=0;r<n;r++){
@@ -1221,7 +1221,7 @@
     }
     const result=[...found].sort((a,b)=>a-b);result.groups=groups;return result;
   }
-  function match3SpecialPlan(matches,preferred=[]){
+  function match3SpecialPlan(matches,preferred=[]){const core=window.TODAY_CRYSTAL_ENGINE_V1;if(core&&typeof core.specialPlan==='function'){try{return core.specialPlan(matches,preferred);}catch(error){console.warn('[TODAY Crystal Engine] match3SpecialPlan fallback',error);}}
     const groups=Array.isArray(matches?.groups)?matches.groups:[];
     const horizontal=groups.filter(g=>g.axis==='h'),vertical=groups.filter(g=>g.axis==='v');
     for(const hGroup of horizontal){for(const vGroup of vertical){const crossing=hGroup.indices.find(i=>vGroup.indices.includes(i));if(crossing!==undefined){return {type:'bomb',index:crossing,indices:[...new Set([...hGroup.indices,...vGroup.indices])],label:'КРИСТАЛЛЬНАЯ БОМБА',glyph:'✹'};}}}
@@ -1233,7 +1233,7 @@
     const index=preferredIndex!==undefined?preferredIndex:group.indices[Math.floor((group.indices.length-1)/2)];
     return {type,index,indices:group.indices.slice(),label:type==='nova'?'ЗВЁЗДНОЕ ЯДРО':type==='rainbow'?'ПРИЗМЕННОЕ СЕРДЦЕ':type==='rocket-h'?'ГОРИЗОНТАЛЬНАЯ РАКЕТА':'ВЕРТИКАЛЬНАЯ РАКЕТА',glyph:type==='nova'?'✹':type==='rainbow'?'✺':type==='rocket-h'?'➜':'⬆'};
   }
-  function match3ExpandSpecialClear(cells,seeds,targetColor=null,superCombo=false,protectedIndex=-1){
+  function match3ExpandSpecialClear(cells,seeds,targetColor=null,superCombo=false,protectedIndex=-1){const core=window.TODAY_CRYSTAL_ENGINE_V1;if(core&&typeof core.expandSpecialClear==='function'){try{return core.expandSpecialClear(cells,seeds,targetColor,superCombo,protectedIndex);}catch(error){console.warn('[TODAY Crystal Engine] match3ExpandSpecialClear fallback',error);}}
     const clear=new Set(),queue=[];
     const add=(i)=>{if(i<0||i>=cells.length||i===protectedIndex||clear.has(i))return;clear.add(i);queue.push(i);};
     for(const i of seeds)add(i);
@@ -1252,7 +1252,7 @@
   }
   function match3SpecialGlyph(type){return type==='nova'?'✹':type==='rocket-h'?'➜':type==='rocket-v'?'⬆':type==='bomb'?'✹':type==='rainbow'?'✺':'✦';}
 
-  function match3HasValidMove(cells){for(let i=0;i<64;i++){for(const j of [i%8<7?i+1:-1,i<56?i+8:-1]){if(j<0)continue;const first=cells[i],second=cells[j];cells[i]=second;cells[j]=first;const ok=match3FindMatches(cells).length>0;cells[i]=first;cells[j]=second;if(ok)return true;}}return false;}
+  function match3HasValidMove(cells){const core=window.TODAY_CRYSTAL_ENGINE_V1;if(core&&typeof core.hasValidMove==='function'){try{return core.hasValidMove(cells);}catch(error){console.warn('[TODAY Crystal Engine] match3HasValidMove fallback',error);}}for(let i=0;i<64;i++){for(const j of [i%8<7?i+1:-1,i<56?i+8:-1]){if(j<0)continue;const first=cells[i],second=cells[j];cells[i]=second;cells[j]=first;const ok=match3FindMatches(cells).length>0;cells[i]=first;cells[j]=second;if(ok)return true;}}return false;}
   function match3FreshBoard(){let cells=Array.from({length:64},()=>match3NewGem()),tries=0;while((match3FindMatches(cells).length||!match3HasValidMove(cells))&&tries++<100)cells=Array.from({length:64},()=>match3NewGem());return cells;}
   function match3LevelObjective(level){
     if(level.colorGoal)return `Набери ${level.target.toLocaleString('ru-RU')} очков и собери ${level.colorGoal.count} кристаллов «${MATCH3_GEMS[level.colorGoal.color].name}».`;
@@ -1612,3 +1612,6 @@
 /* TODAY CRYSTAL CHRONICLES V44 VICTORY OVERLAY END */
 
 /* TODAY CRYSTAL CHRONICLES V45 BODY-LEVEL VICTORY END */
+
+
+/* TODAY CRYSTAL ENGINE V1 — DELEGATION BRIDGE — pure rules delegate, original fallback retained */
