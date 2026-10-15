@@ -1,0 +1,39 @@
+/* TODAY V116.5 — REMOVE DUPLICATE TAB PSEUDO ICONS */
+
+/* Старые V90 ::before создавались по старым позициям вкладок.
+   После сортировки вкладок сообщения, музыка и картинки получали
+   SVG плюс вторую иконку поверх него. Удаляем старые псевдоэлементы. */
+
+body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span::before,
+body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+}
+
+/* Сохраняем корректное отображение самих SVG-иконок. */
+body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button > span > svg {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Без дублей и на мобильных экранах. */
+@media (max-width: 760px) {
+  body.today-profile-route #todayProfilePage
+  .today-profile-v63-tabs button > span > svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
