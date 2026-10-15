@@ -4609,3 +4609,77 @@ html.today-theme-light body.today-games-route #todayGamesHub .tg-footer a {
 body.today-games-route #todayGamesHub [hidden] {
   display: none !important;
 }
+
+/* ==========================================================================
+   TODAY ARCADE V3.2 — MODAL PARENT VISIBILITY FIX
+   Критическое исправление: игровое окно внутри #app.
+   ========================================================================== */
+
+/*
+ * Нельзя скрывать целиком #app:
+ * в games.html внутри него находятся #modal, #toast и #pet.
+ * display:contents убирает внешний layout-контейнер, но сохраняет
+ * дочерние элементы и их работу в DOM.
+ */
+body.today-games-route #app {
+  display: contents !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/*
+ * Скрываем элементы старого приложения по отдельности,
+ * оставляя модальное окно, toast и питомца доступными.
+ */
+body.today-games-route #app > :not(#modal):not(#toast):not(#pet) {
+  display: none !important;
+}
+
+/*
+ * Открытая игра всегда может отобразить своё модальное окно.
+ * Состояние .hidden сохраняет штатное закрытие.
+ */
+body.today-games-route #app > #modal:not(.hidden) {
+  display: grid !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+body.today-games-route #app > #modal.hidden {
+  display: none !important;
+}
+
+/* Защита внутренней карточки, если глобальные стили её скрывали. */
+body.today-games-route #app > #modal:not(.hidden) > .modal-card {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Игровое поле и его элементы должны получать касания. */
+body.today-games-route #app > #modal:not(.hidden) #modalContent {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.today-games-route #app > #modal:not(.hidden) #modalContent button,
+body.today-games-route #app > #modal:not(.hidden) #modalContent canvas,
+body.today-games-route #app > #modal:not(.hidden) #modalContent input {
+  pointer-events: auto !important;
+}
+
+/* Поддержка затемнения и закрытия окна. */
+body.today-games-route #app > #modal:not(.hidden) > .modal-backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+body.today-games-route #app > #toast:not(.hidden) {
+  display: block !important;
+}
+
+/* Конец критического исправления. */
