@@ -2839,3 +2839,27 @@ html.today-theme-light body.today-games-route .tg-footer a {
 body.today-games-route #todayGamesHub [hidden] {
   display: none !important;
 }
+
+/* TODAY ARCADE V3.1 — CLICK TARGET FIX */
+
+body.today-games-route #todayGamesHub
+button[data-social-act="play-game"],
+body.today-games-route #todayGamesHub
+button[data-tg-random] {
+  position: relative !important;
+  z-index: 4 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-copy,
+body.today-games-route #todayGamesHub .tg-card-copy {
+  pointer-events: auto;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-cta,
+body.today-games-route #todayGamesHub .tg-play {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}

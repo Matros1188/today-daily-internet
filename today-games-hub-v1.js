@@ -388,6 +388,62 @@
         }
       });
     }
+
+    /* TODAY ARCADE V3.1 DIRECT GAME LAUNCH BRIDGE */
+
+    // Надёжный запуск: кнопка игрового каталога вызывает движок напрямую.
+    // Останавливаем всплытие, чтобы общий обработчик social.js
+    // не запустил ту же игру повторно.
+    if (!root.dataset.tgDirectGameLaunchBound) {
+      root.dataset.tgDirectGameLaunchBound = '1';
+
+      root.addEventListener('click', function(event) {
+        const target = event.target;
+
+        const button = target instanceof Element
+          ? target.closest(
+              'button[data-social-act="play-game"][data-game]'
+            )
+          : null;
+
+        if (!button || !root.contains(button)) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const gameId = button.dataset.game;
+        const engine = window.TODAY_SOCIAL;
+
+        if (!gameId) {
+          console.error('[TODAY ARCADE] Не указан ID игры.');
+          return;
+        }
+
+        if (engine && typeof engine.openGame === 'function') {
+          try {
+            engine.openGame(gameId);
+          } catch (error) {
+            console.error(
+              '[TODAY ARCADE] Ошибка запуска игры:',
+              gameId,
+              error
+            );
+          }
+          return;
+        }
+
+        console.error(
+          '[TODAY ARCADE] Игровой движок не готов:',
+          gameId
+        );
+
+        // Не оставляем кнопку без реакции, если движок ещё не доступен.
+        if (typeof engine?.openMiniGames === 'function') {
+          engine.openMiniGames();
+        }
+      });
+    }
+
     const filterButtons = Array.from(root.querySelectorAll('[data-tg-filter]'));
     const cards = Array.from(root.querySelectorAll('[data-tg-card]'));
     const feature = root.querySelector('[data-tg-feature]');

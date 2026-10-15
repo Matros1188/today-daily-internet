@@ -1602,7 +1602,7 @@
     const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();/* TODAY_SOCIAL_MODAL_OBSERVER_GUARD_V41 */if(modalRoot.classList.contains('today-social-modal'))modalRoot.classList.remove('today-social-modal');for(const preview of modalRoot.querySelectorAll('.ts-photo-preview[data-object-url]')){try{URL.revokeObjectURL(preview.dataset.objectUrl)}catch{}delete preview.dataset.objectUrl;preview.replaceChildren();preview.hidden=true;}}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
     loadPromos();
   }
-  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openChannel,openMiniGames,openSearchUsers,openOwnStoryComposer,loadPromos,v65Rpc:rpc,v65CurrentUser:currentUser,getGameCatalogue:()=>Object.entries(TODAY_GAMES).map(([id,g])=>({id,title:g.title,subtitle:g.subtitle,label:g.label,symbol:g.symbol,best:gameBest(id),art:gameArtwork(id)})),close:()=>forceCloseSocialModal()};
+  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openChannel,openMiniGames,openSearchUsers,openOwnStoryComposer,loadPromos,v65Rpc:rpc,v65CurrentUser:currentUser,getGameCatalogue:()=>Object.entries(TODAY_GAMES).map(([id,g])=>({id,title:g.title,subtitle:g.subtitle,label:g.label,symbol:g.symbol,best:gameBest(id),art:gameArtwork(id)})),openGame:(gameId)=>openMiniGame(gameId),close:()=>forceCloseSocialModal()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();
 
