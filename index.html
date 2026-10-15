@@ -6,18 +6,17 @@
 (() => {
   try {
     const query = new URLSearchParams(location.search);
-    const allowedResetIds = new Set(["220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","264","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321"]);
+    const allowedResetIds = new Set(["220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","264","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322"]);
 
-    if (query.get("reset") === "319" || query.get("reset") === "320") {
+    if (["319","320","321","322"].includes(query.get("reset"))) {
       try {
         localStorage.setItem("today-theme-preference-v26", "light");
       } catch (_) {}
-    }
-
-    if (query.get("reset") === "321") {
-      try {
-        localStorage.setItem("today-theme-preference-v26", "light");
-      } catch (_) {}
+      if (query.get("reset") === "322") {
+        document.documentElement.classList.remove("today-theme-dark");
+        document.documentElement.classList.add("today-theme-light");
+        document.documentElement.dataset.todayTheme = "light";
+      }
     }
 
     if (allowedResetIds.has(query.get("reset"))) {
@@ -54,7 +53,7 @@
 </script>
 
 <!-- TODAY V27 THEME PREPAINT -->
-<script>(()=>{try{const t=localStorage.getItem('today-theme-preference-v26')==='light'?'light':'dark';document.documentElement.classList.add(t==='light'?'today-theme-light':'today-theme-dark');document.documentElement.dataset.todayTheme=t;}catch(_){document.documentElement.classList.add('today-theme-dark');}})();</script>
+<script>(()=>{const root=document.documentElement;try{const q=new URLSearchParams(location.search);const forced=q.get('reset')==='322';let t=forced?'light':(localStorage.getItem('today-theme-preference-v26')==='light'?'light':'dark');if(forced){try{localStorage.setItem('today-theme-preference-v26','light')}catch(_){}}root.classList.toggle('today-theme-light',t==='light');root.classList.toggle('today-theme-dark',t==='dark');root.dataset.todayTheme=t;}catch(_){root.classList.remove('today-theme-dark');root.classList.add('today-theme-light');root.dataset.todayTheme='light';}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050711">
@@ -69,7 +68,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Manrope:wght@400..800&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=20261014172500">
+<link rel="stylesheet" href="./style.css?v=20261015140000">
 <link rel="stylesheet" href="./social.css?v=20261015190026">
 <link rel="stylesheet" href="./today-art.css?v=20261014172500">
 
@@ -107,267 +106,292 @@
 <link rel="stylesheet" href="./today-theme-palette-v103.css?v=20261015091000">
 <link rel="stylesheet" href="./today-theme-palette-v104.css?v=20261015103000">
 <link rel="stylesheet" href="./today-theme-palette-v105.css?v=20261015110000">
-<!-- TODAY V107 FULL COLOR SYSTEM -->
-<style id="today-theme-full-v107">
+<!-- TODAY V108 FULL COLOR SYSTEM -->
+<style id="today-theme-full-v108">
 
 /* ================================================================
-   TODAY V107 — FULL PREMIUM COLOR SYSTEM
-   Rich lavender / coral rose / turquoise / sky blue / peach
-   No neon. No layout or typography changes.
+   TODAY V108 — FULL COLOR SYSTEM
+   A rich, calm, colorful light theme.
+   Background, cards and surfaces only; geometry remains unchanged.
    ================================================================ */
 
-/* ---------- A. COLOR TOKENS ---------- */
-
-html.today-theme-light {
-  color-scheme: light !important;
-
-  --today-theme-bg: #e9def7 !important;
-  --today-theme-surface: #f2e8fb !important;
-  --today-theme-text: #332442 !important;
-  --today-theme-muted: #705c80 !important;
-  --today-theme-border: rgba(115, 75, 158, .38) !important;
-
-  --today-palette-lavender: #b79add !important;
-  --today-palette-lavender-deep: #7651b3 !important;
-  --today-palette-rose: #efabc8 !important;
-  --today-palette-rose-deep: #ad4f7c !important;
-  --today-palette-turquoise: #8bd5c6 !important;
-  --today-palette-turquoise-deep: #277f73 !important;
-  --today-palette-blue: #a4c5ed !important;
-  --today-palette-peach: #f0c18e !important;
-
-  /* Existing design tokens used by older CSS components. */
-  --bg: #e9def7 !important;
-  --paper: rgba(244, 234, 252, .95) !important;
-  --white: #332442 !important;
-  --ink: #433151 !important;
-  --ink-strong: #30213f !important;
-  --ink-soft: #655274 !important;
-  --muted: #705c80 !important;
-  --line: rgba(115, 75, 158, .32) !important;
-  --soft: rgba(145, 106, 191, .12) !important;
-  --hot: #c45486 !important;
-  --violet: #7955b6 !important;
-  --cyan: #287f82 !important;
-  --lime: #a57832 !important;
-  --yellow: #c08a36 !important;
-  --glass-bg: linear-gradient(
-    145deg,
-    rgba(239, 226, 251, .96),
-    rgba(247, 225, 240, .93)
-  ) !important;
-  --glass-bg-strong: linear-gradient(
-    145deg,
-    #e8d8fa,
-    #f3ddec 58%,
-    #d9f0e9
-  ) !important;
-  --shadow: 0 24px 65px rgba(92, 57, 129, .14) !important;
-  --shadow2: 0 12px 32px rgba(92, 57, 129, .11) !important;
-}
+/* PALETTE TOKENS */
 
 html.today-theme-light,
-html.today-theme-light body {
-  color: #332442 !important;
+html[data-today-theme="light"] {
+  color-scheme: light !important;
+
+  --today-theme-bg: #dcd0ed !important;
+  --today-theme-surface: #eadcf4 !important;
+  --today-theme-text: #352443 !important;
+  --today-theme-muted: #705a7e !important;
+  --today-theme-border: rgba(111, 70, 151, .39) !important;
+
+  --today-palette-lavender: #b398d8 !important;
+  --today-palette-rose: #e7a3c2 !important;
+  --today-palette-turquoise: #88cdbd !important;
+  --today-palette-blue: #a6c4e7 !important;
+  --today-palette-peach: #e9bd8d !important;
+
+  /* Existing tokens used throughout the app. */
+  --bg: #dcd0ed !important;
+  --paper: rgba(235, 222, 246, .96) !important;
+  --white: #352443 !important;
+  --ink: #443151 !important;
+  --ink-strong: #30203d !important;
+  --ink-soft: #665174 !important;
+  --muted: #705a7e !important;
+  --line: rgba(111, 70, 151, .32) !important;
+  --soft: rgba(136, 97, 178, .13) !important;
+  --hot: #b94f7e !important;
+  --violet: #7954ad !important;
+  --cyan: #287e79 !important;
+  --lime: #a27735 !important;
+  --yellow: #b9893f !important;
+  --glass-bg: linear-gradient(
+    135deg, #e8daf4, #f2dce9 58%, #d9eee5
+  ) !important;
+  --glass-bg-strong: linear-gradient(
+    135deg, #d9c6ed, #edcfe1 53%, #cbe7de
+  ) !important;
+  --shadow: 0 24px 65px rgba(77, 47, 112, .15) !important;
+  --shadow2: 0 12px 32px rgba(77, 47, 112, .12) !important;
 }
 
-html.today-theme-light {
-  background: #e9def7 !important;
-}
+/* ================================================================
+   BACKGROUND — IMPORTANT
+   The actual page background is painted directly on html and body.
+   #dailyBackdrop no longer relies on a background hidden behind a
+   dark pseudo-element or an old scene image.
+   ================================================================ */
 
-html.today-theme-light body {
-  background-color: transparent !important;
-}
-
-/* ---------- B. PAGE BACKGROUND: REMOVE THE OLD DARK VEIL ---------- */
-
-/*
-  This is the most important fix.
-  The old stylesheet placed a dark opaque gradient over #dailyBackdrop.
-  Replacing only the backdrop background could not remove that overlay.
-*/
-
-html.today-theme-light #dailyBackdrop {
-  opacity: 1 !important;
-  filter: saturate(1.08) !important;
-  background:
+html.today-theme-light,
+html[data-today-theme="light"] {
+  background-color: #e0d1ed !important;
+  background-image:
     radial-gradient(
-      ellipse at 7% 6%,
-      rgba(157, 119, 224, .72),
+      ellipse at 8% 8%,
+      rgba(153, 119, 202, .66) 0%,
       transparent 35%
     ),
     radial-gradient(
-      ellipse at 92% 9%,
-      rgba(239, 146, 187, .56),
-      transparent 35%
-    ),
-    radial-gradient(
-      ellipse at 87% 76%,
-      rgba(93, 196, 176, .47),
+      ellipse at 91% 10%,
+      rgba(224, 139, 177, .52) 0%,
       transparent 36%
     ),
     radial-gradient(
-      ellipse at 10% 87%,
-      rgba(241, 188, 133, .40),
+      ellipse at 86% 77%,
+      rgba(89, 180, 160, .42) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 10% 89%,
+      rgba(231, 179, 122, .35) 0%,
       transparent 38%
     ),
     radial-gradient(
-      ellipse at 51% 48%,
-      rgba(163, 190, 238, .30),
-      transparent 48%
+      ellipse at 48% 48%,
+      rgba(145, 171, 218, .28) 0%,
+      transparent 49%
     ),
     linear-gradient(
       132deg,
-      #ded1f3 0%,
-      #eee0f8 30%,
-      #f5dfeb 57%,
-      #e4eee9 79%,
-      #dce9f8 100%
+      #d9c9eb 0%,
+      #ead8f1 30%,
+      #f1d9e7 56%,
+      #dcebe5 79%,
+      #d5e3f4 100%
     ) !important;
+  background-attachment: fixed !important;
 }
 
-/* Override the original almost-black pseudo-element. */
-html.today-theme-light #dailyBackdrop::after {
-  background:
-    linear-gradient(
-      118deg,
-      rgba(245, 235, 255, .12) 0%,
-      rgba(255, 235, 245, .04) 48%,
-      rgba(219, 247, 239, .12) 100%
+html.today-theme-light body,
+html[data-today-theme="light"] body {
+  color: #352443 !important;
+  background-color: #e0d1ed !important;
+  background-image:
+    radial-gradient(
+      ellipse at 5% 5%,
+      rgba(159, 125, 208, .42) 0%,
+      transparent 36%
     ),
     radial-gradient(
-      ellipse at 12% 8%,
-      rgba(124, 81, 190, .055),
+      ellipse at 96% 15%,
+      rgba(231, 150, 184, .34) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 80% 83%,
+      rgba(103, 186, 167, .30) 0%,
+      transparent 40%
+    ),
+    linear-gradient(
+      132deg,
+      #dfd0ef 0%,
+      #ecd8f0 33%,
+      #f1dce7 61%,
+      #dcece6 100%
+    ) !important;
+  background-attachment: fixed !important;
+}
+
+/* Remove the previous photograph and black overlay from the light theme. */
+
+html.today-theme-light #dailyBackdrop,
+html[data-today-theme="light"] #dailyBackdrop {
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light #dailyBackdrop::after,
+html[data-today-theme="light"] #dailyBackdrop::after {
+  background:
+    radial-gradient(
+      ellipse at 8% 8%,
+      rgba(137, 95, 185, .055),
       transparent 42%
     ),
     radial-gradient(
-      ellipse at 88% 78%,
-      rgba(58, 157, 143, .045),
+      ellipse at 91% 72%,
+      rgba(66, 153, 139, .045),
       transparent 43%
     ) !important;
   opacity: 1 !important;
 }
 
-/* Keep any optional scene art subtle so the actual palette remains visible. */
-html.today-theme-light #dailyBackdrop .daily-scene {
-  opacity: .12 !important;
-  filter: saturate(.90) contrast(1.01) !important;
+html.today-theme-light #dailyBackdrop .daily-scene,
+html[data-today-theme="light"] #dailyBackdrop .daily-scene {
+  opacity: 0 !important;
+  filter: none !important;
 }
 
-html.today-theme-light .noise {
-  opacity: .025 !important;
+html.today-theme-light .noise,
+html[data-today-theme="light"] .noise {
+  opacity: .018 !important;
   mix-blend-mode: multiply !important;
 }
 
-/* ---------- C. HEADER AND BRAND ---------- */
+html.today-theme-light #app,
+html[data-today-theme="light"] #app {
+  background: transparent !important;
+}
 
-html.today-theme-light .topbar {
-  color: #38264b !important;
+/* HEADER */
+
+html.today-theme-light .topbar,
+html[data-today-theme="light"] .topbar {
+  color: #38264a !important;
   background: linear-gradient(
-    105deg,
-    rgba(225, 210, 247, .97) 0%,
-    rgba(247, 218, 235, .96) 51%,
-    rgba(210, 240, 231, .97) 100%
+    110deg,
+    rgba(218, 202, 241, .97),
+    rgba(241, 210, 229, .97) 54%,
+    rgba(205, 235, 225, .97)
   ) !important;
-  border-bottom-color: rgba(116, 74, 159, .36) !important;
+  border-bottom-color: rgba(112, 70, 151, .37) !important;
   box-shadow:
-    0 8px 30px rgba(94, 59, 132, .14),
-    inset 0 1px rgba(255, 255, 255, .94) !important;
-  backdrop-filter: blur(25px) saturate(145%) !important;
-  -webkit-backdrop-filter: blur(25px) saturate(145%) !important;
+    0 8px 30px rgba(77, 47, 112, .14),
+    inset 0 1px rgba(255,255,255,.92) !important;
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
 }
 
 html.today-theme-light .today-brand-word,
 html.today-theme-light .today-brand-copy,
 html.today-theme-light .brand,
-html.today-theme-light .topbar .account-btn {
-  color: #38264b !important;
+html.today-theme-light .topbar .account-btn,
+html[data-today-theme="light"] .today-brand-word,
+html[data-today-theme="light"] .today-brand-copy,
+html[data-today-theme="light"] .brand,
+html[data-today-theme="light"] .topbar .account-btn {
+  color: #38264a !important;
 }
 
-html.today-theme-light .today-brand-tag {
-  color: #76528b !important;
+html.today-theme-light .today-brand-tag,
+html[data-today-theme="light"] .today-brand-tag {
+  color: #75528a !important;
 }
 
-html.today-theme-light .today-brand-line {
+html.today-theme-light .today-brand-line,
+html[data-today-theme="light"] .today-brand-line {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(136, 90, 190, .76),
-    rgba(202, 103, 153, .66),
-    rgba(63, 151, 137, .66),
+    #9271bd,
+    #c56b96,
+    #579b8b,
     transparent
   ) !important;
-  opacity: .9 !important;
+  opacity: .85 !important;
 }
 
-/* ---------- D. TOP ACTIONS ---------- */
+/* ACCOUNT, COINS AND THEME SWITCH */
 
-html.today-theme-light .coin-badge {
-  color: #76531f !important;
+html.today-theme-light .coin-badge,
+html[data-today-theme="light"] .coin-badge {
+  color: #795621 !important;
   background: linear-gradient(
-    130deg,
-    #ffe7a8,
-    #f7d5a2 52%,
-    #f5c9d9
+    130deg, #f8dfa1, #efd0a4 54%, #edc6d8
   ) !important;
-  border-color: rgba(183, 125, 50, .43) !important;
+  border-color: rgba(178, 127, 53, .41) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .96),
-    0 6px 17px rgba(165, 112, 50, .13) !important;
+    inset 0 1px rgba(255,255,255,.95),
+    0 6px 17px rgba(151, 105, 45, .12) !important;
 }
 
-html.today-theme-light .coin-badge span {
-  color: #875920 !important;
+html.today-theme-light .coin-badge span,
+html[data-today-theme="light"] .coin-badge span {
+  color: #815b24 !important;
 }
 
 html.today-theme-light .top-btn,
 html.today-theme-light .account-btn,
 html.today-theme-light button.account-btn,
 html.today-theme-light button.quiet-btn,
-html.today-theme-light #todayThemeToggle {
-  color: #4a345e !important;
+html.today-theme-light #todayThemeToggle,
+html[data-today-theme="light"] .top-btn,
+html[data-today-theme="light"] .account-btn,
+html[data-today-theme="light"] button.account-btn,
+html[data-today-theme="light"] button.quiet-btn,
+html[data-today-theme="light"] #todayThemeToggle {
+  color: #4c355f !important;
   background: linear-gradient(
-    130deg,
-    #e5d5f8,
-    #f4d9e9 55%,
-    #d9f0e8
+    130deg, #e4d4f2, #f1d5e5 55%, #d3ebe4
   ) !important;
-  border-color: rgba(121, 79, 165, .38) !important;
+  border-color: rgba(116, 75, 155, .38) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .96),
-    0 5px 16px rgba(98, 62, 138, .12) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 5px 16px rgba(86, 55, 122, .11) !important;
 }
 
-html.today-theme-light #todayThemeToggle .today-theme-icon {
-  color: #7449a9 !important;
-  background: rgba(179, 149, 220, .42) !important;
+html.today-theme-light #todayThemeToggle .today-theme-icon,
+html[data-today-theme="light"] #todayThemeToggle .today-theme-icon {
+  color: #714ba4 !important;
+  background: rgba(174, 145, 213, .37) !important;
 }
 
-/* ---------- E. HERO ---------- */
+/* HERO: visible lavender base and rose accent */
 
-html.today-theme-light .hero {
-  color: #372547 !important;
+html.today-theme-light .hero,
+html[data-today-theme="light"] .hero {
+  color: #372546 !important;
   background:
     radial-gradient(
       ellipse at 0% 0%,
-      rgba(177, 142, 227, .43),
-      transparent 55%
+      rgba(168, 130, 216, .43),
+      transparent 57%
     ),
     radial-gradient(
       ellipse at 100% 100%,
-      rgba(238, 163, 198, .34),
-      transparent 54%
+      rgba(229, 157, 194, .36),
+      transparent 55%
     ),
     linear-gradient(
-      132deg,
-      #e3d4f7 0%,
-      #f1dff6 52%,
-      #f6dfea 100%
+      135deg, #ddcbed 0%, #eed8ef 55%, #f1d8e7 100%
     ) !important;
-  border-color: rgba(120, 79, 163, .36) !important;
+  border-color: rgba(116, 75, 155, .38) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .96),
-    0 18px 44px rgba(95, 58, 133, .13) !important;
+    inset 0 1px rgba(255,255,255,.95),
+    0 18px 44px rgba(82, 51, 117, .13) !important;
 }
 
 html.today-theme-light .hero h1,
@@ -375,17 +399,19 @@ html.today-theme-light h1,
 html.today-theme-light h2,
 html.today-theme-light h3,
 html.today-theme-light h4,
-html.today-theme-light .section-head {
-  color: #352340 !important;
+html[data-today-theme="light"] .hero h1,
+html[data-today-theme="light"] h1,
+html[data-today-theme="light"] h2,
+html[data-today-theme="light"] h3,
+html[data-today-theme="light"] h4 {
+  color: #352341 !important;
+  text-shadow: none !important;
 }
 
-html.today-theme-light .hero h1 span {
+html.today-theme-light .hero h1 span,
+html[data-today-theme="light"] .hero h1 span {
   background: linear-gradient(
-    100deg,
-    #7850bb 0%,
-    #bd5188 41%,
-    #347e91 77%,
-    #317f70 100%
+    100deg, #7952b2, #b34d7f 43%, #397c8e 78%, #337e6d
   ) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -394,359 +420,294 @@ html.today-theme-light .hero h1 span {
 }
 
 html.today-theme-light .hero-copy > p,
-html.today-theme-light .hero p {
-  color: #705b7f !important;
+html.today-theme-light .hero p,
+html[data-today-theme="light"] .hero-copy > p,
+html[data-today-theme="light"] .hero p {
+  color: #705a7d !important;
 }
 
 html.today-theme-light .eyebrow,
-html.today-theme-light .section-head .eyebrow {
-  color: #8053b1 !important;
+html.today-theme-light .section-head .eyebrow,
+html[data-today-theme="light"] .eyebrow,
+html[data-today-theme="light"] .section-head .eyebrow {
+  color: #7950aa !important;
 }
 
-html.today-theme-light .hero-rail strong {
-  color: #57406e !important;
+html.today-theme-light .hero-rail strong,
+html[data-today-theme="light"] .hero-rail strong {
+  color: #59406c !important;
 }
 
-html.today-theme-light .hero-rail span:last-child {
-  color: #806b8d !important;
+html.today-theme-light .hero-rail span:last-child,
+html[data-today-theme="light"] .hero-rail span:last-child {
+  color: #7c6787 !important;
 }
 
-html.today-theme-light .pulse-dot,
-html.today-theme-light .live-dot {
-  background: #459d89 !important;
-  box-shadow: 0 0 0 4px rgba(69, 157, 137, .12) !important;
-}
+/* COUNTDOWN */
 
-/* ---------- F. COUNTDOWN: LAVENDER / BLUE ---------- */
-
-html.today-theme-light .clock-card {
-  color: #43305e !important;
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(175, 145, 227, .42),
-      transparent 63%
-    ),
-    linear-gradient(
-      140deg,
-      #d3c0f1 0%,
-      #e1d5f5 54%,
-      #e7e0f7 100%
-    ) !important;
-  border-color: rgba(118, 79, 169, .43) !important;
+html.today-theme-light .clock-card,
+html[data-today-theme="light"] .clock-card {
+  color: #432f5d !important;
+  background: linear-gradient(
+    140deg, #d3bdea 0%, #dfd0f0 55%, #ead9ef 100%
+  ) !important;
+  border-color: rgba(113, 71, 163, .43) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .96),
-    0 13px 32px rgba(92, 57, 142, .15) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 13px 30px rgba(86, 53, 130, .14) !important;
 }
 
 html.today-theme-light .clock-card > span,
-html.today-theme-light .clock-card small {
-  color: #725c91 !important;
+html.today-theme-light .clock-card small,
+html[data-today-theme="light"] .clock-card > span,
+html[data-today-theme="light"] .clock-card small {
+  color: #70578f !important;
 }
 
 html.today-theme-light .clock-card strong,
-html.today-theme-light .clock-row b {
-  color: #583b8b !important;
+html.today-theme-light .clock-row b,
+html[data-today-theme="light"] .clock-card strong,
+html[data-today-theme="light"] .clock-row b {
+  color: #573889 !important;
   text-shadow: none !important;
 }
 
-html.today-theme-light .clock-row {
-  color: #765f92 !important;
+html.today-theme-light .clock-card .progress,
+html[data-today-theme="light"] .clock-card .progress {
+  background: rgba(99, 71, 137, .17) !important;
 }
 
-html.today-theme-light .clock-card .progress {
-  background: rgba(105, 77, 144, .18) !important;
-}
-
-html.today-theme-light .clock-card .progress i {
+html.today-theme-light .clock-card .progress i,
+html[data-today-theme="light"] .clock-card .progress i {
   background: linear-gradient(
-    90deg,
-    #8a62c5 0%,
-    #bd6999 52%,
-    #63ad9b 100%
+    90deg, #8860b7, #bc6994 52%, #5b9e8d
   ) !important;
-  box-shadow: 0 0 12px rgba(120, 79, 165, .18) !important;
+  box-shadow: none !important;
 }
 
-/* ---------- G. SCENE OF THE DAY: TURQUOISE / SKY ---------- */
+/* SCENE OF THE DAY */
 
-html.today-theme-light .scene-card {
-  color: #285d58 !important;
-  background:
-    radial-gradient(
-      ellipse at 100% 0%,
-      rgba(104, 192, 179, .38),
-      transparent 57%
-    ),
-    linear-gradient(
-      140deg,
-      #b9e5dc 0%,
-      #cdece5 52%,
-      #d8e8f8 100%
-    ) !important;
-  border-color: rgba(55, 139, 127, .41) !important;
+html.today-theme-light .scene-card,
+html[data-today-theme="light"] .scene-card {
+  color: #285951 !important;
+  background: linear-gradient(
+    140deg, #b4e0d5 0%, #c7e9e1 52%, #d4e4f4 100%
+  ) !important;
+  border-color: rgba(53, 132, 119, .39) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .96),
-    0 13px 32px rgba(47, 130, 120, .12) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 13px 30px rgba(45, 122, 113, .12) !important;
 }
 
 html.today-theme-light .scene-card > span,
-html.today-theme-light .scene-card small {
-  color: #477f77 !important;
+html.today-theme-light .scene-card small,
+html[data-today-theme="light"] .scene-card > span,
+html[data-today-theme="light"] .scene-card small {
+  color: #477b73 !important;
 }
 
-html.today-theme-light .scene-card strong {
-  color: #285b57 !important;
+html.today-theme-light .scene-card strong,
+html[data-today-theme="light"] .scene-card strong {
+  color: #285a52 !important;
   text-shadow: none !important;
 }
 
-html.today-theme-light .scene-card::after {
+html.today-theme-light .scene-card::after,
+html[data-today-theme="light"] .scene-card::after {
   background: radial-gradient(
     circle at 35% 35%,
-    rgba(132, 199, 220, .19),
-    rgba(131, 109, 194, .08) 40%,
+    rgba(105, 175, 197, .17),
+    rgba(132, 104, 183, .08) 40%,
     transparent 72%
   ) !important;
 }
 
-/* ---------- H. ACTIVITY STRIP ---------- */
+/* ACTIVITY STRIP */
 
-html.today-theme-light .activity-strip {
-  color: #3b5e69 !important;
+html.today-theme-light .activity-strip,
+html[data-today-theme="light"] .activity-strip {
+  color: #3b5b66 !important;
   background: linear-gradient(
-    105deg,
-    #d1efe7 0%,
-    #d9e9fa 49%,
-    #f4dce9 100%
+    105deg, #cbe9e1 0%, #d4e5f5 50%, #f1d9e6 100%
   ) !important;
-  border-color: rgba(78, 145, 151, .32) !important;
+  border-color: rgba(75, 136, 145, .30) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .96),
-    0 10px 26px rgba(69, 113, 135, .10) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 10px 24px rgba(62, 104, 128, .10) !important;
 }
 
-html.today-theme-light .activity-strip::before {
+html.today-theme-light .activity-strip::before,
+html[data-today-theme="light"] .activity-strip::before {
   background: linear-gradient(
-    180deg,
-    #7e65b6,
-    #c05d8f,
-    #4f9e91
+    180deg, #8160af, #bd608c, #4d9585
   ) !important;
   box-shadow: none !important;
 }
 
 html.today-theme-light .live-pill,
-html.today-theme-light .live-pill b {
-  color: #347d72 !important;
+html.today-theme-light .live-pill b,
+html[data-today-theme="light"] .live-pill,
+html[data-today-theme="light"] .live-pill b {
+  color: #34786d !important;
 }
 
 html.today-theme-light .live-pill span,
-html.today-theme-light .ticker {
-  color: #496b7d !important;
+html.today-theme-light .ticker,
+html[data-today-theme="light"] .live-pill span,
+html[data-today-theme="light"] .ticker {
+  color: #496b7a !important;
 }
 
 html.today-theme-light .strip-actions,
-html.today-theme-light .quiet-btn {
-  color: #77558f !important;
+html.today-theme-light .quiet-btn,
+html[data-today-theme="light"] .strip-actions,
+html[data-today-theme="light"] .quiet-btn {
+  color: #75538b !important;
 }
 
-/* ---------- I. SECTION HEADINGS ---------- */
+/* SECTION HEADINGS */
 
 html.today-theme-light .today-section,
 html.today-theme-light .community-section,
-html.today-theme-light .ranking-section {
-  color: #352442 !important;
+html.today-theme-light .ranking-section,
+html[data-today-theme="light"] .today-section,
+html[data-today-theme="light"] .community-section,
+html[data-today-theme="light"] .ranking-section {
+  color: #382647 !important;
 }
 
-html.today-theme-light .section-head h2 {
-  color: #352442 !important;
-  text-shadow: none !important;
+html.today-theme-light .section-head h2,
+html[data-today-theme="light"] .section-head h2 {
+  color: #382647 !important;
 }
 
 html.today-theme-light .section-note,
-html.today-theme-light .community-intro {
-  color: #725d7f !important;
+html.today-theme-light .community-intro,
+html[data-today-theme="light"] .section-note,
+html[data-today-theme="light"] .community-intro {
+  color: #705a7c !important;
 }
 
-/* ---------- J. ALL 12 DAILY RUBRIC CARDS ---------- */
+/* DAILY GRID — alternating coordinated surface colors */
 
-/* Base color for cards without an nth-child match. */
-html.today-theme-light #dailyGrid > .daily-card,
-html.today-theme-light #dailyGrid > .daily-card.featured,
-html.today-theme-light #dailyGrid > .daily-card.secondary,
-html.today-theme-light #dailyGrid > .daily-card.kind-challenge,
-html.today-theme-light #dailyGrid > .daily-card.kind-debate,
-html.today-theme-light #dailyGrid > .daily-card.kind-moment,
-html.today-theme-light #dailyGrid > .daily-card.kind-song,
-html.today-theme-light #dailyGrid > .daily-card.kind-mystery {
-  color: #3b2a50 !important;
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(191, 164, 229, .26),
-      transparent 56%
-    ),
-    linear-gradient(
-      140deg,
-      #e9ddf5 0%,
-      #f0e1f0 58%,
-      #e0eee8 100%
-    ) !important;
-  border-color: rgba(117, 78, 157, .34) !important;
+/* Default surface: lilac and soft rose. */
+html.today-theme-light #dailyGrid > *,
+html.today-theme-light .daily-grid > *,
+html.today-theme-light .daily-card,
+html.today-theme-light .today-card,
+html[data-today-theme="light"] #dailyGrid > *,
+html[data-today-theme="light"] .daily-grid > *,
+html[data-today-theme="light"] .daily-card,
+html[data-today-theme="light"] .today-card {
+  color: #3d2a50 !important;
+  background: linear-gradient(
+    135deg, #e3d2f1 0%, #efd8e9 58%, #d8eae4 100%
+  ) !important;
+  border-color: rgba(113, 74, 153, .36) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, .97),
-    0 14px 31px rgba(87, 57, 123, .11) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 13px 30px rgba(79, 51, 113, .11) !important;
 }
 
-/* Lilac */
-html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 1) {
-  color: #402951 !important;
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(165, 128, 218, .37),
-      transparent 60%
-    ),
-    linear-gradient(
-      140deg,
-      #d3bcea 0%,
-      #e4d2f3 58%,
-      #f0dfee 100%
-    ) !important;
-  border-color: rgba(120, 79, 165, .40) !important;
+/* Lavender */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 1),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 1) {
+  color: #412d58 !important;
+  background: linear-gradient(
+    135deg, #cfb8e8 0%, #dfcbed 57%, #ead9ee 100%
+  ) !important;
+  border-color: rgba(116, 75, 157, .40) !important;
 }
 
-/* Mint / turquoise */
-html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 2) {
-  color: #28554e !important;
-  background:
-    radial-gradient(
-      ellipse at 100% 0%,
-      rgba(91, 181, 163, .33),
-      transparent 62%
-    ),
-    linear-gradient(
-      140deg,
-      #b4e3d8 0%,
-      #c9ece3 57%,
-      #d8eaf5 100%
-    ) !important;
-  border-color: rgba(55, 135, 121, .38) !important;
+/* Turquoise */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 2),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 2) {
+  color: #28544d !important;
+  background: linear-gradient(
+    135deg, #a9dccc 0%, #c5e9de 60%, #d2e8f1 100%
+  ) !important;
+  border-color: rgba(48, 132, 118, .38) !important;
 }
 
-/* Rose / coral */
-html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 3) {
-  color: #632f49 !important;
-  background:
-    radial-gradient(
-      ellipse at 100% 0%,
-      rgba(222, 118, 160, .29),
-      transparent 61%
-    ),
-    linear-gradient(
-      140deg,
-      #edb6d0 0%,
-      #f4cfe0 57%,
-      #f3dcef 100%
-    ) !important;
-  border-color: rgba(172, 78, 123, .37) !important;
+/* Rose */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 3),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 3) {
+  color: #603047 !important;
+  background: linear-gradient(
+    135deg, #eab0cb 0%, #f0c9dc 59%, #eddaee 100%
+  ) !important;
+  border-color: rgba(171, 77, 123, .37) !important;
 }
 
-/* Peach / honey */
-html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 4) {
-  color: #65472b !important;
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(225, 166, 91, .29),
-      transparent 61%
-    ),
-    linear-gradient(
-      140deg,
-      #f1d0a7 0%,
-      #f5e0c5 60%,
-      #efe1ef 100%
-    ) !important;
-  border-color: rgba(174, 123, 63, .37) !important;
+/* Peach */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 4),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 4) {
+  color: #63482f !important;
+  background: linear-gradient(
+    135deg, #edc79a 0%, #f2dbc0 60%, #eadff0 100%
+  ) !important;
+  border-color: rgba(169, 119, 62, .37) !important;
 }
 
-/* Periwinkle / sky blue */
-html.today-theme-light #dailyGrid > .daily-card:nth-child(5n) {
-  color: #304665 !important;
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(119, 158, 214, .32),
-      transparent 61%
-    ),
-    linear-gradient(
-      140deg,
-      #b9d0ee 0%,
-      #d2e1f5 60%,
-      #e7dff4 100%
-    ) !important;
-  border-color: rgba(87, 120, 173, .37) !important;
+/* Sky / periwinkle */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n) {
+  color: #304767 !important;
+  background: linear-gradient(
+    135deg, #b5cdec 0%, #cbdcf2 59%, #e0dff1 100%
+  ) !important;
+  border-color: rgba(80, 112, 165, .37) !important;
 }
 
-/* Text colors inside rubric cards */
-html.today-theme-light #dailyGrid .daily-card h2,
-html.today-theme-light #dailyGrid .daily-card h3,
-html.today-theme-light #dailyGrid .daily-card h4,
-html.today-theme-light #dailyGrid .daily-card strong,
-html.today-theme-light #dailyGrid .daily-card .daily-title,
-html.today-theme-light #dailyGrid .daily-card .card-title {
-  color: #3b2a4d !important;
+/* Readable type inside the colored cards */
+html.today-theme-light .daily-card h2,
+html.today-theme-light .daily-card h3,
+html.today-theme-light .daily-card h4,
+html.today-theme-light .daily-card strong,
+html.today-theme-light .daily-card .card-title,
+html[data-today-theme="light"] .daily-card h2,
+html[data-today-theme="light"] .daily-card h3,
+html[data-today-theme="light"] .daily-card h4,
+html[data-today-theme="light"] .daily-card strong,
+html[data-today-theme="light"] .daily-card .card-title {
+  color: #3c2a4e !important;
   text-shadow: none !important;
 }
 
-html.today-theme-light #dailyGrid .daily-card p,
-html.today-theme-light #dailyGrid .daily-card small,
-html.today-theme-light #dailyGrid .daily-card .small-note,
-html.today-theme-light #dailyGrid .daily-card .muted {
-  color: #6f597d !important;
+html.today-theme-light .daily-card p,
+html.today-theme-light .daily-card small,
+html.today-theme-light .daily-card .muted,
+html[data-today-theme="light"] .daily-card p,
+html[data-today-theme="light"] .daily-card small,
+html[data-today-theme="light"] .daily-card .muted {
+  color: #705a7b !important;
 }
 
-html.today-theme-light #dailyGrid .daily-card .eyebrow,
-html.today-theme-light #dailyGrid .daily-card .community-kind {
-  color: #8055aa !important;
-}
-
-/* Rubric chips */
-html.today-theme-light #dailyGrid .daily-card .kind-pill {
-  color: #62427f !important;
+html.today-theme-light .daily-card .kind-pill,
+html[data-today-theme="light"] .daily-card .kind-pill {
+  color: #5d4078 !important;
   background: linear-gradient(
-    120deg, #e4d4f5, #f2d9e8
+    120deg, #dfcbed, #efcede
   ) !important;
-  border-color: rgba(119, 79, 159, .34) !important;
+  border-color: rgba(116, 75, 157, .34) !important;
   box-shadow: inset 0 1px rgba(255,255,255,.9) !important;
 }
 
-html.today-theme-light #dailyGrid .daily-card .count-pill {
-  color: #725c83 !important;
+html.today-theme-light .daily-card .count-pill,
+html[data-today-theme="light"] .daily-card .count-pill {
+  color: #755d82 !important;
 }
 
-/* Non-primary actions inside the rubrics */
-html.today-theme-light #dailyGrid .daily-card button:not(.primary-button):not(.secondary-button),
-html.today-theme-light #dailyGrid .daily-card .option-btn {
-  color: #57416b !important;
-  background: linear-gradient(
-    125deg, rgba(245, 234, 252, .93), rgba(220, 240, 234, .95)
-  ) !important;
-  border-color: rgba(121, 82, 160, .31) !important;
-}
-
-/* ---------- K. COMMUNITY FEED ---------- */
-
+/* PEOPLE FEED */
 html.today-theme-light .community-feed,
-html.today-theme-light #communityFeed {
-  color: #392950 !important;
+html.today-theme-light #communityFeed,
+html[data-today-theme="light"] .community-feed,
+html[data-today-theme="light"] #communityFeed {
+  color: #3b2a4f !important;
   background: linear-gradient(
-    120deg,
-    rgba(213, 197, 239, .78),
-    rgba(208, 238, 229, .76) 53%,
-    rgba(243, 213, 231, .78)
+    125deg, #d2c1e8 0%, #d1e9e1 52%, #efd5e3 100%
   ) !important;
-  border-color: rgba(115, 77, 157, .27) !important;
+  border-color: rgba(113, 74, 153, .29) !important;
 }
 
 html.today-theme-light #communityFeed > *,
@@ -754,341 +715,263 @@ html.today-theme-light #communityFeed > article,
 html.today-theme-light #communityFeed > .community-card,
 html.today-theme-light #communityFeed > .post-card,
 html.today-theme-light #communityFeed > .feed-card,
-html.today-theme-light .community-feed > article,
-html.today-theme-light .community-feed > .community-card,
-html.today-theme-light .community-feed > .post-card {
-  color: #3a2a4d !important;
+html[data-today-theme="light"] #communityFeed > *,
+html[data-today-theme="light"] #communityFeed > article,
+html[data-today-theme="light"] #communityFeed > .community-card,
+html[data-today-theme="light"] #communityFeed > .post-card,
+html[data-today-theme="light"] #communityFeed > .feed-card {
+  color: #3c2a4e !important;
   background: linear-gradient(
-    140deg,
-    #e7dbf5 0%,
-    #f2e0ef 56%,
-    #dcefe8 100%
+    135deg, #e3d4f0, #f0d9e8 55%, #d5e9e3
   ) !important;
-  border-color: rgba(116, 79, 155, .31) !important;
+  border-color: rgba(113, 74, 153, .32) !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.94),
-    0 9px 23px rgba(87,57,122,.09) !important;
+    inset 0 1px rgba(255,255,255,.93),
+    0 9px 23px rgba(79, 51, 113, .09) !important;
 }
 
-html.today-theme-light #communityFeed > *:nth-child(3n + 2) {
+html.today-theme-light #communityFeed > *:nth-child(3n + 2),
+html[data-today-theme="light"] #communityFeed > *:nth-child(3n + 2) {
   background: linear-gradient(
-    140deg, #d3e8f7 0%, #d7efec 58%, #e9e0f4 100%
+    135deg, #c9deef, #d4eae5 60%, #e5d9f0
   ) !important;
-  border-color: rgba(75, 121, 164, .32) !important;
 }
 
-html.today-theme-light #communityFeed > *:nth-child(3n) {
+html.today-theme-light #communityFeed > *:nth-child(3n),
+html[data-today-theme="light"] #communityFeed > *:nth-child(3n) {
   background: linear-gradient(
-    140deg, #f0cbdc 0%, #f5dce8 58%, #e8dcf4 100%
+    135deg, #eabfd4, #f0d6e3 60%, #e4d9ef
   ) !important;
-  border-color: rgba(169, 82, 126, .30) !important;
 }
 
 html.today-theme-light #communityFeed h2,
 html.today-theme-light #communityFeed h3,
 html.today-theme-light #communityFeed h4,
 html.today-theme-light #communityFeed strong,
-html.today-theme-light #communityFeed .today-post-name {
-  color: #3b294e !important;
+html[data-today-theme="light"] #communityFeed h2,
+html[data-today-theme="light"] #communityFeed h3,
+html[data-today-theme="light"] #communityFeed h4,
+html[data-today-theme="light"] #communityFeed strong {
+  color: #3b294d !important;
 }
 
 html.today-theme-light #communityFeed p,
 html.today-theme-light #communityFeed small,
 html.today-theme-light #communityFeed time,
-html.today-theme-light #communityFeed .muted {
-  color: #705b7e !important;
+html[data-today-theme="light"] #communityFeed p,
+html[data-today-theme="light"] #communityFeed small,
+html[data-today-theme="light"] #communityFeed time {
+  color: #705b7d !important;
 }
 
-/* ---------- L. TOP-OF-DAY LEADERBOARD ---------- */
-
-html.today-theme-light .ranking-card {
-  color: #354456 !important;
+/* RANKING */
+html.today-theme-light .ranking-card,
+html[data-today-theme="light"] .ranking-card {
+  color: #354454 !important;
   background: linear-gradient(
-    130deg,
-    #d6dff3 0%,
-    #dcece8 53%,
-    #eee0f2 100%
+    130deg, #cbd8eb, #d3e8e1 54%, #e6d8ee
   ) !important;
-  border-color: rgba(92, 115, 155, .33) !important;
+  border-color: rgba(90, 111, 148, .33) !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.96),
-    0 12px 32px rgba(70,87,130,.10) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 12px 30px rgba(67, 82, 120, .10) !important;
 }
 
 html.today-theme-light #leaderboard > *,
 html.today-theme-light .leaderboard > *,
 html.today-theme-light .leaderboard .leader-row,
 html.today-theme-light .leaderboard .rank-row,
-html.today-theme-light .rank-row {
-  color: #354458 !important;
+html.today-theme-light .rank-row,
+html[data-today-theme="light"] #leaderboard > *,
+html[data-today-theme="light"] .leaderboard > *,
+html[data-today-theme="light"] .leaderboard .leader-row,
+html[data-today-theme="light"] .leaderboard .rank-row,
+html[data-today-theme="light"] .rank-row {
+  color: #3d304e !important;
   background: linear-gradient(
-    110deg,
-    #e4e0f5 0%,
-    #dcefeb 62%,
-    #f4e4ed 100%
+    110deg, #e0d8ef, #d5e9e4 60%, #f0dbe7
   ) !important;
-  border-color: rgba(104, 119, 157, .29) !important;
-  box-shadow: inset 0 1px rgba(255,255,255,.92) !important;
+  border-color: rgba(105, 83, 143, .29) !important;
 }
 
 html.today-theme-light #leaderboard > *:nth-child(3n + 2),
-html.today-theme-light .leaderboard .leader-row:nth-child(3n + 2) {
-  background: linear-gradient(
-    110deg, #d2e5f7, #d9efe9
-  ) !important;
+html[data-today-theme="light"] #leaderboard > *:nth-child(3n + 2) {
+  background: linear-gradient(110deg, #cbdff1, #d7eae5) !important;
 }
 
 html.today-theme-light #leaderboard > *:nth-child(3n),
-html.today-theme-light .leaderboard .leader-row:nth-child(3n) {
+html[data-today-theme="light"] #leaderboard > *:nth-child(3n) {
+  background: linear-gradient(110deg, #ebcbdc, #e6dcef) !important;
+}
+
+/* BOTTOM NAVIGATION */
+html.today-theme-light .bottom-nav,
+html[data-today-theme="light"] .bottom-nav {
+  color: #5c466e !important;
   background: linear-gradient(
-    110deg, #f0d2e3, #e9dff5
+    100deg, rgba(218, 204, 240, .98),
+    rgba(242, 214, 230, .98) 53%,
+    rgba(204, 233, 224, .98)
   ) !important;
-}
-
-html.today-theme-light .leaderboard b,
-html.today-theme-light .leaderboard strong,
-html.today-theme-light .rank-row strong {
-  color: #3a2c4d !important;
-}
-
-html.today-theme-light .leaderboard small,
-html.today-theme-light .rank-row small {
-  color: #70617f !important;
-}
-
-/* ---------- M. NAVIGATION AND FOOTER ---------- */
-
-html.today-theme-light .bottom-nav {
-  color: #58486e !important;
-  background: linear-gradient(
-    105deg,
-    rgba(224, 211, 246, .98),
-    rgba(246, 219, 234, .98) 54%,
-    rgba(211, 239, 230, .98)
-  ) !important;
-  border-color: rgba(113, 76, 154, .35) !important;
+  border-color: rgba(112, 74, 151, .35) !important;
   box-shadow:
-    0 -8px 29px rgba(84, 57, 121, .14),
-    inset 0 1px rgba(255,255,255,.95) !important;
-  backdrop-filter: blur(24px) saturate(145%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+    0 -8px 28px rgba(76, 48, 112, .13),
+    inset 0 1px rgba(255,255,255,.94) !important;
+  backdrop-filter: blur(24px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
 }
 
 html.today-theme-light .bottom-nav button,
 html.today-theme-light .bottom-nav a,
-html.today-theme-light .bottom-nav button span,
-html.today-theme-light .bottom-nav a span {
-  color: #745d89 !important;
+html[data-today-theme="light"] .bottom-nav button,
+html[data-today-theme="light"] .bottom-nav a {
+  color: #745c87 !important;
 }
 
 html.today-theme-light .bottom-nav button.active,
-html.today-theme-light .bottom-nav a.active {
-  color: #563888 !important;
+html.today-theme-light .bottom-nav a.active,
+html[data-today-theme="light"] .bottom-nav button.active,
+html[data-today-theme="light"] .bottom-nav a.active {
+  color: #573984 !important;
   background: linear-gradient(
-    115deg, #d0b9ed, #ecc8df 65%, #c4e7df
+    110deg, #d3c0ed, #edcddd 58%, #cce6de
   ) !important;
   text-shadow: none !important;
 }
 
-html.today-theme-light .bottom-nav button.active span,
-html.today-theme-light .bottom-nav a.active span {
-  color: #563888 !important;
-  filter: none !important;
-}
-
-html.today-theme-light .footer {
-  color: #453451 !important;
-  background: linear-gradient(
-    120deg, #e3d5f4, #d8eee7 54%, #f2dce9
-  ) !important;
-  border-color: rgba(116, 78, 157, .30) !important;
-  box-shadow: 0 10px 25px rgba(87, 57, 122, .08) !important;
-}
-
-html.today-theme-light .footer span {
-  color: #735f81 !important;
-}
-
-/* ---------- N. PRIMARY AND SECONDARY BUTTONS ---------- */
-
+/* PRIMARY BUTTONS */
 html.today-theme-light .primary-button,
 html.today-theme-light .ts-primary,
 html.today-theme-light .today-support-btn,
-html.today-theme-light .today-v80-empty button {
+html[data-today-theme="light"] .primary-button,
+html[data-today-theme="light"] .ts-primary,
+html[data-today-theme="light"] .today-support-btn {
   color: #fffafc !important;
   background: linear-gradient(
-    105deg,
-    #7651ad 0%,
-    #b14f83 53%,
-    #347f78 100%
+    105deg, #7652ac, #ae527f 53%, #347f75
   ) !important;
-  border-color: rgba(104, 64, 143, .40) !important;
+  border-color: rgba(102, 65, 141, .38) !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.25),
-    0 8px 21px rgba(91, 56, 130, .18) !important;
+    inset 0 1px rgba(255,255,255,.22),
+    0 8px 20px rgba(85, 52, 120, .17) !important;
 }
 
 html.today-theme-light .primary-button *,
-html.today-theme-light .ts-primary * {
+html.today-theme-light .ts-primary *,
+html[data-today-theme="light"] .primary-button *,
+html[data-today-theme="light"] .ts-primary * {
   color: #fffafc !important;
 }
 
-html.today-theme-light .ts-mini,
-html.today-theme-light .ts-text-button,
-html.today-theme-light .today-v80-filter-chip,
-html.today-theme-light .today-v80-density-button {
-  color: #5b4075 !important;
+/* FORMS */
+html.today-theme-light input,
+html.today-theme-light textarea,
+html.today-theme-light select,
+html[data-today-theme="light"] input,
+html[data-today-theme="light"] textarea,
+html[data-today-theme="light"] select {
+  color: #372642 !important;
   background: linear-gradient(
-    125deg, #e8d9f6, #f3dce9
+    120deg, #f0e3f6, #f3dfe9 55%, #d9eee7
   ) !important;
-  border-color: rgba(120, 79, 161, .31) !important;
+  border-color: rgba(113, 74, 151, .37) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.9) !important;
 }
 
-html.today-theme-light .today-v80-filter-chip.is-active,
-html.today-theme-light .today-v80-density-button.is-active {
-  color: #fffafc !important;
-  background: linear-gradient(
-    110deg, #7955b0, #b75487
-  ) !important;
-  border-color: rgba(110, 69, 154, .43) !important;
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder,
+html[data-today-theme="light"] input::placeholder,
+html[data-today-theme="light"] textarea::placeholder {
+  color: #907b9e !important;
 }
 
-/* ---------- O. PROFILE, MESSAGES, FRIENDS, CHANNELS, SETTINGS ---------- */
+html.today-theme-light input:focus,
+html.today-theme-light textarea:focus,
+html.today-theme-light select:focus,
+html[data-today-theme="light"] input:focus,
+html[data-today-theme="light"] textarea:focus,
+html[data-today-theme="light"] select:focus {
+  border-color: rgba(113, 72, 154, .68) !important;
+  box-shadow: 0 0 0 3px rgba(126, 89, 168, .14) !important;
+}
 
+/* SOCIAL PAGES AND MODALS */
 html.today-theme-light #modal.today-social-modal .modal-card,
 html.today-theme-light #modal.today-social-page .modal-card,
-html.today-theme-light .modal.today-social-modal .modal-card {
-  color: #352442 !important;
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(188, 158, 228, .30),
-      transparent 58%
-    ),
-    linear-gradient(
-      135deg,
-      #e8dbf6 0%,
-      #f2dfed 52%,
-      #d9eee8 100%
-    ) !important;
-  border-color: rgba(116, 77, 158, .39) !important;
+html[data-today-theme="light"] #modal.today-social-modal .modal-card,
+html[data-today-theme="light"] #modal.today-social-page .modal-card {
+  color: #38264a !important;
+  background: linear-gradient(
+    135deg, #e0d0ef, #efd8e8 53%, #d2e9e2
+  ) !important;
+  border-color: rgba(111, 73, 150, .38) !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.96),
-    0 27px 80px rgba(67, 43, 101, .20) !important;
+    inset 0 1px rgba(255,255,255,.94),
+    0 25px 75px rgba(68, 43, 101, .18) !important;
 }
 
 html.today-theme-light #modal.today-social-modal .modal-backdrop,
-html.today-theme-light .modal.today-social-modal .modal-backdrop {
-  background: rgba(70, 46, 94, .30) !important;
-}
-
-html.today-theme-light #modal.today-social-modal .modal-close,
-html.today-theme-light .modal.today-social-modal .modal-close {
-  color: #594070 !important;
-  background: linear-gradient(
-    135deg, #dfcff2, #f2d7e7
-  ) !important;
-  border-color: rgba(116, 77, 158, .34) !important;
+html[data-today-theme="light"] #modal.today-social-modal .modal-backdrop {
+  background: rgba(69, 46, 91, .26) !important;
 }
 
 html.today-theme-light #modal.today-social-modal .ts-panel,
-html.today-theme-light #modal.today-social-page .ts-panel,
 html.today-theme-light #modal.today-social-modal .ts-card,
 html.today-theme-light #modal.today-social-modal .ts-form-card,
 html.today-theme-light #modal.today-social-modal .ts-user-card,
 html.today-theme-light #modal.today-social-modal .ts-chat-row,
-html.today-theme-light #modal.today-social-modal .ts-empty,
-html.today-theme-light #modal.today-social-modal .ts-promo-wrap,
-html.today-theme-light #modal.today-social-modal .ts-promoted-card,
 html.today-theme-light #modal.today-social-modal .ts-channel-card,
 html.today-theme-light #modal.today-social-modal .ts-list-card,
 html.today-theme-light #modal.today-social-modal .ts-profile-post,
 html.today-theme-light #modal.today-social-modal .ts-post-card,
 html.today-theme-light #modal.today-social-modal .ts-settings-group,
-html.today-theme-light #modal.today-social-modal .ts-settings-row,
-html.today-theme-light #modal.today-social-page .ts-card,
-html.today-theme-light #modal.today-social-page .ts-list-card {
-  color: #39294b !important;
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel,
+html[data-today-theme="light"] #modal.today-social-modal .ts-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-form-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-user-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-chat-row,
+html[data-today-theme="light"] #modal.today-social-modal .ts-channel-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-list-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-profile-post,
+html[data-today-theme="light"] #modal.today-social-modal .ts-post-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-settings-group {
+  color: #39284a !important;
   background: linear-gradient(
-    135deg,
-    rgba(228, 214, 246, .98),
-    rgba(242, 221, 237, .98) 52%,
-    rgba(213, 239, 231, .98)
+    135deg, #e4d5f1, #f0d9e8 54%, #d4eae3
   ) !important;
-  border-color: rgba(119, 80, 159, .32) !important;
+  border-color: rgba(111, 74, 150, .31) !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.94),
-    0 8px 22px rgba(88, 57, 124, .09) !important;
+    inset 0 1px rgba(255,255,255,.92),
+    0 8px 21px rgba(76, 49, 111, .09) !important;
 }
 
-html.today-theme-light #modal.today-social-modal .ts-panel-head h2,
+html.today-theme-light #modal.today-social-modal .ts-panel h2,
 html.today-theme-light #modal.today-social-modal .ts-panel h3,
 html.today-theme-light #modal.today-social-modal .ts-form-card h3,
 html.today-theme-light #modal.today-social-modal .ts-list-head h3,
-html.today-theme-light #modal.today-social-modal .ts-promoted-card h4,
 html.today-theme-light #modal.today-social-modal .ts-user-copy b,
-html.today-theme-light #modal.today-social-modal .ts-chat-row-copy b,
-html.today-theme-light #modal.today-social-page .ts-panel-head h2,
-html.today-theme-light #modal.today-social-page .ts-panel h3 {
-  color: #3d2a50 !important;
+html.today-theme-light #modal.today-social-page .ts-panel h2,
+html.today-theme-light #modal.today-social-page .ts-panel h3,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel h2,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel h3,
+html[data-today-theme="light"] #modal.today-social-page .ts-panel h2,
+html[data-today-theme="light"] #modal.today-social-page .ts-panel h3 {
+  color: #3b294b !important;
   text-shadow: none !important;
 }
 
 html.today-theme-light #modal.today-social-modal .ts-panel p,
 html.today-theme-light #modal.today-social-modal .ts-muted,
 html.today-theme-light #modal.today-social-modal .ts-helper,
-html.today-theme-light #modal.today-social-modal .ts-user-copy span,
-html.today-theme-light #modal.today-social-modal .ts-chat-row-copy small,
-html.today-theme-light #modal.today-social-modal .ts-promoted-foot,
-html.today-theme-light #modal.today-social-modal .ts-form-card label,
-html.today-theme-light #modal.today-social-page .ts-panel p {
-  color: #715c7e !important;
+html.today-theme-light #modal.today-social-page .ts-panel p,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel p,
+html[data-today-theme="light"] #modal.today-social-modal .ts-muted,
+html[data-today-theme="light"] #modal.today-social-modal .ts-helper,
+html[data-today-theme="light"] #modal.today-social-page .ts-panel p {
+  color: #705b7c !important;
 }
 
-html.today-theme-light #modal.today-social-modal .ts-kicker,
-html.today-theme-light #modal.today-social-modal .ts-count,
-html.today-theme-light #modal.today-social-modal .ts-game-record {
-  color: #7852a6 !important;
-}
-
-html.today-theme-light #modal.today-social-modal .ts-status-chip,
-html.today-theme-light #modal.today-social-modal .ts-promo-badge,
-html.today-theme-light #modal.today-social-modal .ts-game-rank {
-  color: #286e66 !important;
-  background: rgba(150, 216, 199, .56) !important;
-  border-color: rgba(56, 132, 117, .31) !important;
-}
-
-/* ---------- P. INPUTS AND COMPOSERS ---------- */
-
-html.today-theme-light input,
-html.today-theme-light textarea,
-html.today-theme-light select {
-  color: #362644 !important;
-  background: linear-gradient(
-    120deg,
-    #f5eafa 0%,
-    #f7e4ee 57%,
-    #e0f1ea 100%
-  ) !important;
-  border-color: rgba(119, 77, 158, .36) !important;
-  box-shadow: inset 0 1px rgba(255,255,255,.88) !important;
-}
-
-html.today-theme-light input::placeholder,
-html.today-theme-light textarea::placeholder {
-  color: #917b9f !important;
-}
-
-html.today-theme-light input:focus,
-html.today-theme-light textarea:focus,
-html.today-theme-light select:focus {
-  border-color: rgba(113, 73, 165, .70) !important;
-  box-shadow: 0 0 0 3px rgba(139, 103, 184, .15) !important;
-}
-
-/* ---------- Q. TOASTS, NOTICES, SHOP, REWARDS ---------- */
-
+/* SHOP, NOTICES, REWARDS */
 html.today-theme-light .toast,
 html.today-theme-light .notice,
 html.today-theme-light .reward-bar,
@@ -1098,81 +981,54 @@ html.today-theme-light .profile-stat,
 html.today-theme-light .comment,
 html.today-theme-light .activity-mini,
 html.today-theme-light .composer,
-html.today-theme-light .file-label {
-  color: #3d2b50 !important;
+html.today-theme-light .file-label,
+html[data-today-theme="light"] .toast,
+html[data-today-theme="light"] .notice,
+html[data-today-theme="light"] .reward-bar,
+html[data-today-theme="light"] .shop-item,
+html[data-today-theme="light"] .bundle,
+html[data-today-theme="light"] .profile-stat,
+html[data-today-theme="light"] .comment,
+html[data-today-theme="light"] .activity-mini,
+html[data-today-theme="light"] .composer,
+html[data-today-theme="light"] .file-label {
+  color: #3b294c !important;
   background: linear-gradient(
-    125deg,
-    #e5d8f4,
-    #f3dce9 56%,
-    #d9eee8
+    125deg, #e4d6f1, #f0d9e7 56%, #d4eae3
   ) !important;
-  border-color: rgba(117, 78, 157, .31) !important;
+  border-color: rgba(111, 74, 150, .31) !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.94),
-    0 8px 22px rgba(87, 56, 122, .09) !important;
+    inset 0 1px rgba(255,255,255,.91),
+    0 8px 21px rgba(76, 49, 111, .09) !important;
 }
 
-html.today-theme-light .toast {
-  background: linear-gradient(
-    120deg, #e7daf6, #f4dce9 57%, #d7efe7
-  ) !important;
-}
-
-/* ---------- R. MINI-GAME MENUS AND PANELS ---------- */
-
-/* Colorize game navigation and information panels;
-   the match-3 board and jewel art retain their own game colors. */
-
-html.today-theme-light #modal.today-v95-playing .modal-card,
-html.today-theme-light #modal.today-v96-playing .modal-card,
-html.today-theme-light #modal.today-v96-crystal .ts-games-hero,
-html.today-theme-light #modal.today-v96-crystal .ts-game-card,
-html.today-theme-light #modal.today-v96-crystal .today-v95-discovery,
-html.today-theme-light #modal.today-v96-crystal .today-v96-quest,
-html.today-theme-light #modal.today-v96-crystal .today-v96-seal-shelf {
-  color: #39294b !important;
-  background: linear-gradient(
-    135deg, #e1d4f2, #f1ddec 57%, #d7eee7
-  ) !important;
-  border-color: rgba(119, 80, 159, .34) !important;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.92),
-    0 13px 32px rgba(84, 55, 122, .12) !important;
-}
+/* Preserve the custom colorful art on the match-3 board itself.
+   This changes menus/panels but doesn't repaint individual jewels. */
 
 html.today-theme-light #modal.today-v96-crystal .ts-m3-story,
 html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter,
 html.today-theme-light #modal.today-v96-crystal .ts-m3-inventory,
 html.today-theme-light #modal.today-v96-crystal .ts-m3-booster-card,
-html.today-theme-light #modal.today-v96-crystal .ts-m3-result {
-  color: #3a2a4b !important;
+html.today-theme-light #modal.today-v96-crystal .ts-m3-result,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-story,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-chapter,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-inventory,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-booster-card,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-result {
+  color: #3b294c !important;
   background: linear-gradient(
-    135deg, #e8dcf5, #f3dfea 56%, #d9efe8
+    135deg, #e2d4f0, #efd9e7 55%, #d4e9e3
   ) !important;
-  border-color: rgba(118, 80, 157, .32) !important;
+  border-color: rgba(111, 74, 150, .31) !important;
 }
 
-html.today-theme-light #modal.today-v96-crystal .ts-m3-story h3,
-html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter h3,
-html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter h4,
-html.today-theme-light #modal.today-v96-crystal .ts-m3-result h3 {
-  color: #3d2c50 !important;
+html.today-theme-light ::selection,
+html[data-today-theme="light"] ::selection {
+  color: #352443 !important;
+  background: rgba(168, 133, 209, .42) !important;
 }
 
-html.today-theme-light #modal.today-v96-crystal .ts-m3-story p,
-html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter p,
-html.today-theme-light #modal.today-v96-crystal .ts-m3-result p {
-  color: #715d7e !important;
-}
-
-/* ---------- S. SELECTION AND FINAL COLOR TOKENS ---------- */
-
-html.today-theme-light ::selection {
-  color: #342442 !important;
-  background: rgba(179, 145, 219, .48) !important;
-}
-
-/* END TODAY V107 FULL COLOR SYSTEM */
+/* END TODAY V108 FULL COLOR SYSTEM */
 
 </style>
 </head>

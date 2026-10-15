@@ -378,3 +378,45 @@ html.today-theme-light #todayThemeToggle .today-theme-icon{color:#6f55ce;backgro
 @media(max-width:520px){#todayThemeToggle{gap:0;min-height:35px;width:37px;padding:0;border-radius:12px;}#todayThemeToggle .today-theme-label{display:none;}#todayThemeToggle .today-theme-icon{width:24px;height:24px;font-size:16px;}}
 @media(prefers-reduced-motion:reduce){#todayThemeToggle{transition:none!important;}}
 /* END TODAY LIGHT/DARK THEME V26 */
+
+/* TODAY V108 BASE BACKGROUND GUARD */
+
+html.today-theme-light,
+html[data-today-theme="light"] {
+  background-color: #e0d1ed !important;
+  background-image:
+    radial-gradient(ellipse at 8% 8%, rgba(153,119,202,.66), transparent 35%),
+    radial-gradient(ellipse at 91% 10%, rgba(224,139,177,.52), transparent 36%),
+    radial-gradient(ellipse at 86% 77%, rgba(89,180,160,.42), transparent 36%),
+    radial-gradient(ellipse at 10% 89%, rgba(231,179,122,.35), transparent 38%),
+    linear-gradient(132deg,#d9c9eb 0%,#ead8f1 30%,#f1d9e7 56%,#dcebe5 79%,#d5e3f4 100%) !important;
+  background-attachment: fixed !important;
+}
+
+html.today-theme-light body,
+html[data-today-theme="light"] body {
+  background-color: #e0d1ed !important;
+  background-image:
+    radial-gradient(ellipse at 5% 5%, rgba(159,125,208,.42), transparent 36%),
+    radial-gradient(ellipse at 96% 15%, rgba(231,150,184,.34), transparent 38%),
+    radial-gradient(ellipse at 80% 83%, rgba(103,186,167,.30), transparent 40%),
+    linear-gradient(132deg,#dfd0ef 0%,#ecd8f0 33%,#f1dce7 61%,#dcece6 100%) !important;
+  background-attachment: fixed !important;
+}
+
+html.today-theme-light #dailyBackdrop::after,
+html[data-today-theme="light"] #dailyBackdrop::after {
+  background: linear-gradient(
+    118deg,
+    rgba(245,235,255,.08),
+    rgba(255,235,245,.03) 48%,
+    rgba(219,247,239,.08)
+  ) !important;
+}
+
+html.today-theme-light #dailyBackdrop .daily-scene,
+html[data-today-theme="light"] #dailyBackdrop .daily-scene {
+  opacity: 0 !important;
+}
+
+/* END TODAY V108 BASE BACKGROUND GUARD */
