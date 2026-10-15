@@ -1031,6 +1031,493 @@ html[data-today-theme="light"] ::selection {
 /* END TODAY V108 FULL COLOR SYSTEM */
 
 </style>
+
+<style id="today-light-polish-v110">
+/* TODAY V110 BEGIN */
+
+/*
+  Светлая палитра интерфейса TODAY.
+  Фон становится насыщеннее, а пиктограммы сохраняют
+  самостоятельный цвет и читаемость.
+*/
+
+/* 1. Создание публикаций, истории и медиадействия */
+
+html.today-theme-light .today-v64-create-btn,
+html[data-today-theme="light"] .today-v64-create-btn,
+html.today-theme-light .today-v64-create-grid button,
+html[data-today-theme="light"] .today-v64-create-grid button {
+  color: #493365 !important;
+  background:
+    linear-gradient(
+      125deg,
+      #e4d5ff 0%,
+      #d3f1e8 53%,
+      #f9dfed 100%
+    ) !important;
+  border: 1px solid rgba(124, 88, 183, .39) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .96),
+    0 7px 20px rgba(109, 77, 163, .11) !important;
+}
+
+html.today-theme-light .today-v64-create-btn:hover,
+html[data-today-theme="light"] .today-v64-create-btn:hover,
+html.today-theme-light .today-v64-create-grid button:hover,
+html[data-today-theme="light"] .today-v64-create-grid button:hover {
+  border-color: rgba(112, 78, 183, .64) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .98),
+    0 10px 24px rgba(109, 77, 163, .14) !important;
+}
+
+/* Значки в окнах создания: отдельная светлая подложка,
+   выразительный цвет символа, без цветной заливки поверх него. */
+
+html.today-theme-light .today-v64-create-grid button > span,
+html[data-today-theme="light"] .today-v64-create-grid button > span {
+  color: #6245b0 !important;
+  background:
+    linear-gradient(145deg, #d5c2ff, #c8eee6) !important;
+  border: 1px solid rgba(119, 88, 183, .20) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 3px 9px rgba(105, 75, 160, .08) !important;
+}
+
+/* История — ярче само кольцо, но не аватар или фотография внутри. */
+
+html.today-theme-light .today-v64-story-add .today-v64-story-ring,
+html[data-today-theme="light"] .today-v64-story-add .today-v64-story-ring {
+  background:
+    linear-gradient(145deg, #d6c4ff 0%, #bfece3 55%, #f5d2e5 100%) !important;
+  border: 1px dashed rgba(103, 75, 169, .66) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 5px 15px rgba(105, 75, 160, .12) !important;
+}
+
+html.today-theme-light .today-v64-add-glyph,
+html[data-today-theme="light"] .today-v64-add-glyph {
+  color: #6243b1 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .8) !important;
+}
+
+/* Фото, клипы, музыка и добавление в медиаряду. */
+
+html.today-theme-light .today-v66-media-rail-actions button,
+html[data-today-theme="light"] .today-v66-media-rail-actions button {
+  color: #49345f !important;
+  background:
+    linear-gradient(135deg, #e7dcff, #d9f1eb 65%, #f8e2ee) !important;
+  border-color: rgba(123, 88, 181, .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .96),
+    0 4px 12px rgba(91, 72, 145, .08) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button[data-v66-open="photo"],
+html[data-today-theme="light"] .today-v66-media-rail-actions button[data-v66-open="photo"] {
+  background: linear-gradient(135deg, #d8eaff, #e6f4ff) !important;
+  color: #365d9b !important;
+  border-color: rgba(77, 125, 194, .34) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button[data-v66-open="video"],
+html[data-today-theme="light"] .today-v66-media-rail-actions button[data-v66-open="video"] {
+  background: linear-gradient(135deg, #e5dcff, #f2e7ff) !important;
+  color: #694bb0 !important;
+  border-color: rgba(123, 89, 190, .34) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button[data-v66-open="music"],
+html[data-today-theme="light"] .today-v66-media-rail-actions button[data-v66-open="music"] {
+  background: linear-gradient(135deg, #d2f2e7, #e8f8f0) !important;
+  color: #287d70 !important;
+  border-color: rgba(57, 148, 128, .32) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button.is-primary,
+html[data-today-theme="light"] .today-v66-media-rail-actions button.is-primary {
+  color: #493365 !important;
+  background:
+    linear-gradient(125deg, #dac9ff, #c4eee2 58%, #f4d7e8) !important;
+  border-color: rgba(120, 83, 181, .43) !important;
+}
+
+
+/* 2. «Прямо сейчас — Что происходит сегодня» */
+
+/* Более выразительная, но лёгкая подложка под заголовком раздела. */
+
+html.today-theme-light #app .today-section > .section-head,
+html[data-today-theme="light"] #app .today-section > .section-head {
+  padding: 15px 17px !important;
+  border: 1px solid rgba(126, 96, 174, .23) !important;
+  border-radius: 20px !important;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(226, 215, 255, .86),
+      rgba(215, 242, 234, .86) 55%,
+      rgba(250, 226, 239, .86)
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 7px 21px rgba(103, 75, 154, .075) !important;
+}
+
+html.today-theme-light #app .today-section > .section-head h2,
+html[data-today-theme="light"] #app .today-section > .section-head h2 {
+  color: #38264f !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #app .today-section > .section-head .eyebrow,
+html[data-today-theme="light"] #app .today-section > .section-head .eyebrow {
+  color: #7551b0 !important;
+}
+
+html.today-theme-light #app .today-section > .section-head .section-note,
+html[data-today-theme="light"] #app .today-section > .section-head .section-note {
+  color: #6f6287 !important;
+}
+
+/* Основные карточки дня: отдельные мягкие цвета вместо тусклой серой массы. */
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n + 1),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n + 1) {
+  color: #3e2d5a !important;
+  background:
+    linear-gradient(135deg, #e3d5ff 0%, #f0e8ff 61%, #f8e9f5 100%) !important;
+  border-color: rgba(128, 92, 186, .37) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 11px 27px rgba(99, 72, 151, .10) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n + 2),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n + 2) {
+  color: #2e574f !important;
+  background:
+    linear-gradient(135deg, #ccefe4 0%, #e2f7ef 59%, #e5f0ff 100%) !important;
+  border-color: rgba(65, 151, 133, .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 11px 27px rgba(58, 137, 121, .09) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n + 3),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n + 3) {
+  color: #643550 !important;
+  background:
+    linear-gradient(135deg, #f8d9e9 0%, #fff0f6 59%, #f0e5ff 100%) !important;
+  border-color: rgba(181, 96, 147, .33) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 11px 27px rgba(158, 83, 129, .085) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n) {
+  color: #304866 !important;
+  background:
+    linear-gradient(135deg, #d8e8fb 0%, #e8f2ff 59%, #eee7fc 100%) !important;
+  border-color: rgba(88, 125, 177, .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 11px 27px rgba(73, 103, 153, .085) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card h3,
+html.today-theme-light #app #dailyGrid > .daily-card h4,
+html.today-theme-light #app #dailyGrid > .daily-card strong,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card h3,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card h4,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card strong {
+  color: #3c2b52 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card p,
+html.today-theme-light #app #dailyGrid > .daily-card small,
+html.today-theme-light #app #dailyGrid > .daily-card .muted,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card p,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card small,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .muted {
+  color: #6d5d80 !important;
+}
+
+
+/* 3. Светлее «Сегодня вместе — Люди дня» */
+
+html.today-theme-light #app #todayHomePeopleRail,
+html[data-today-theme="light"] #app #todayHomePeopleRail,
+html.today-theme-light #app .today-v64-people-rail,
+html[data-today-theme="light"] #app .today-v64-people-rail {
+  color: #3d2b55 !important;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(194, 166, 255, .30),
+      transparent 53%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(117, 218, 199, .23),
+      transparent 52%
+    ),
+    linear-gradient(
+      125deg,
+      #e8dcff 0%,
+      #e0f4ed 54%,
+      #f8e2ef 100%
+    ) !important;
+  border-color: rgba(127, 91, 180, .27) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 10px 25px rgba(96, 70, 148, .085) !important;
+  backdrop-filter: blur(14px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(120%) !important;
+}
+
+html.today-theme-light .today-v64-rail-head h2,
+html[data-today-theme="light"] .today-v64-rail-head h2 {
+  color: #3b2953 !important;
+}
+
+html.today-theme-light .today-v64-rail-head p,
+html[data-today-theme="light"] .today-v64-rail-head p {
+  color: #6e5c82 !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-eyebrow,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-eyebrow {
+  color: #7650b1 !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-text-btn,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-text-btn {
+  color: #6146b0 !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-story b,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-story b {
+  color: #4a365f !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-story small,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-story small {
+  color: #756589 !important;
+}
+
+
+/* 4. Иллюстрации карточек: светлый фон, цветные иконки остаются чёткими */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-panel {
+  border: 1px solid rgba(116, 93, 168, .23) !important;
+  border-radius: 20px !important;
+  background:
+    radial-gradient(
+      ellipse at 50% 80%,
+      color-mix(in srgb, var(--atelier-accent, #b7a3f0) 27%, transparent),
+      transparent 65%
+    ),
+    linear-gradient(
+      135deg,
+      #f5efff 0%,
+      #e6f6f2 58%,
+      #fbecf5 100%
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 7px 18px rgba(94, 76, 144, .08) !important;
+}
+
+/* Своя пастельная подложка у каждого типа иллюстрации. */
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-question .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-question .today-art-panel {
+  background: linear-gradient(135deg, #dfeaff, #eee8ff 58%, #e7f8f3) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-game .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-game .today-art-panel {
+  background: linear-gradient(135deg, #e4dcff, #e6f5ef 68%, #f6e8fa) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-song .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-song .today-art-panel {
+  background: linear-gradient(135deg, #d9f2f8, #e5edff 60%, #f1e6ff) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-mystery .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-mystery .today-art-panel {
+  background: linear-gradient(135deg, #e1dcff, #f0e7ff 59%, #f8e8f2) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-challenge .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-challenge .today-art-panel {
+  background: linear-gradient(135deg, #d8f2e5, #e8f7ec 60%, #f0f5df) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-debate .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-debate .today-art-panel {
+  background: linear-gradient(135deg, #e0e8ff, #eee8ff 57%, #fae7f2) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-duel .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-duel .today-art-panel {
+  background: linear-gradient(135deg, #f7dff0, #eee4ff 62%, #e6f4f5) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-story .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-story .today-art-panel {
+  background: linear-gradient(135deg, #e9ddff, #f5e9f4 58%, #e3f4ed) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-fact .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-fact .today-art-panel {
+  background: linear-gradient(135deg, #d8f1e6, #e7f8f0 60%, #e4effd) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-trend .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-trend .today-art-panel {
+  background: linear-gradient(135deg, #dcecff, #e8edff 59%, #f3e7fb) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-moment .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-moment .today-art-panel {
+  background: linear-gradient(135deg, #d8f1ff, #e4edff 58%, #f1e6ff) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-footprint .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-footprint .today-art-panel {
+  background: linear-gradient(135deg, #f8e9cc, #e8f3df 58%, #e1f4ed) !important;
+}
+
+/* Обновлённая графическая сетка на светлом фоне. */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-panel::before,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-panel::before {
+  background-image:
+    linear-gradient(rgba(101, 87, 151, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 87, 151, .055) 1px, transparent 1px) !important;
+  opacity: .72 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-panel::after,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-panel::after {
+  border-color: color-mix(
+    in srgb,
+    var(--atelier-accent, #a694e7) 40%,
+    rgba(255, 255, 255, .55)
+  ) !important;
+  box-shadow:
+    0 0 0 14px color-mix(in srgb, var(--atelier-accent, #a694e7) 5%, transparent),
+    0 0 0 31px color-mix(in srgb, var(--atelier-accent, #a694e7) 3%, transparent) !important;
+}
+
+/* Светлая подпись иллюстрации. */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-topline,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-topline {
+  color: #6e638a !important;
+}
+
+/* Иконки сохраняют свой собственный оттенок и контур. */
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-question .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-question .today-art-visual svg {
+  color: #596bc1 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-game .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-game .today-art-visual svg {
+  color: #7151bc !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-song .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-song .today-art-visual svg {
+  color: #218795 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-mystery .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-mystery .today-art-visual svg {
+  color: #7254bd !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-challenge .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-challenge .today-art-visual svg {
+  color: #268876 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-debate .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-debate .today-art-visual svg {
+  color: #5369bb !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-duel .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-duel .today-art-visual svg {
+  color: #a04f91 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-story .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-story .today-art-visual svg {
+  color: #7853ad !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-fact .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-fact .today-art-visual svg {
+  color: #287f73 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-trend .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-trend .today-art-visual svg {
+  color: #4778bd !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-moment .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-moment .today-art-visual svg {
+  color: #21849a !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-footprint .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-footprint .today-art-visual svg {
+  color: #8c6d36 !important;
+}
+
+/* Старые тёмные заливки внутри SVG заменяются пастельными.
+   Цветные акцентные элементы и внешние контуры не перекрашиваются. */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#050A17" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#091024" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#101729" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#10172B" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#11182D" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#11172D" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#151D34" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#151D36" i] {
+  fill: #dbe4fb !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#101729" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#10172B" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#11182D" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#151D34" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#151D36" i] {
+  stroke: #8d80b4 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-generated-svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-generated-svg {
+  filter: drop-shadow(0 7px 14px rgba(79, 68, 130, .14)) saturate(1.04) !important;
+}
+
+/* END TODAY V110 */
+</style>
+
 </head>
 <body>
 <div id="dailyBackdrop" aria-hidden="true"></div>
