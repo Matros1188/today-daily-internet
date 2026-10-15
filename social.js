@@ -1586,7 +1586,7 @@
       modal(panelShell(label,'Подключаемся к TODAY. Если сервер не ответит, здесь появится понятная ошибка.',`<div class="ts-loading-panel"><span class="ts-loading-spinner"></span><span>Загружаем раздел «${h(label)}»…</span></div>`));
     }
     if(a==='retry-promos')return loadPromos({retry:true});if(a==='chats')return openChats();if(a==='friends')return openFriends();if(a==='my-profile')return openProfile();if(a==='settings')return openSettings();if(a==='channels')return openChannels();
-    if(a==='mini-games'){const current=socialRoutePages[socialRouteDepth-1];if(socialRouteActive&&socialRouteDepth>1&&Object.values(TODAY_GAMES).some(g=>g.title===current?.title)){history.back();return;}return openMiniGames();}if(a==='play-game')return openMiniGame(btn.dataset.game);
+    if(a==='mini-games'){if(document.body.classList.contains('today-games-route')){stopTodayMiniGame();if(typeof closeModal==='function')closeModal();else{const gameModal=byId('modal');if(gameModal)gameModal.classList.add('hidden');}return;}location.href='./games.html';return;}if(a==='play-game')return openMiniGame(btn.dataset.game);
     if(a==='retry-channels')return openChannels();if(a==='retry-settings')return openSettings();if(a==='retry-channel')return openChannel(id,true);
     if(a==='view-story')return viewStory(id);if(a==='delete-story')return deleteStory(id);
     if(a==='open-chat')return openChat(id,title,type);if(a==='refresh-chats')return openChats();if(a==='open-profile')return openProfile(id);if(a==='request-friend')return requestFriend(username);if(a==='direct'){try{const d=await rpc('today_social_create_direct_chat',{p_username:username});return openChat(d.chat.id,d.chat.title||username,d.chat.type)}catch(e){return notify(e.message)}}
@@ -1602,7 +1602,7 @@
     const modalRoot=byId('modal');if(modalRoot){const mo=new MutationObserver(()=>{if(modalRoot.classList.contains('hidden')){stopPoll();/* TODAY_SOCIAL_MODAL_OBSERVER_GUARD_V41 */if(modalRoot.classList.contains('today-social-modal'))modalRoot.classList.remove('today-social-modal');for(const preview of modalRoot.querySelectorAll('.ts-photo-preview[data-object-url]')){try{URL.revokeObjectURL(preview.dataset.objectUrl)}catch{}delete preview.dataset.objectUrl;preview.replaceChildren();preview.hidden=true;}}});mo.observe(modalRoot,{attributes:true,attributeFilter:['class']})}
     loadPromos();
   }
-  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openChannel,openMiniGames,openSearchUsers,openOwnStoryComposer,loadPromos,v65Rpc:rpc,v65CurrentUser:currentUser,close:()=>forceCloseSocialModal()};
+  window.TODAY_SOCIAL={version:VERSION,openChats,openFriends,openProfile,openSettings,openChannels,openChannel,openMiniGames,openSearchUsers,openOwnStoryComposer,loadPromos,v65Rpc:rpc,v65CurrentUser:currentUser,getGameCatalogue:()=>Object.entries(TODAY_GAMES).map(([id,g])=>({id,title:g.title,subtitle:g.subtitle,label:g.label,symbol:g.symbol,best:gameBest(id),art:gameArtwork(id)})),close:()=>forceCloseSocialModal()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();
 

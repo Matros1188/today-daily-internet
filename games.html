@@ -1,0 +1,4389 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<script>
+/* TODAY_CACHE_RESET_V69 */
+(() => {
+  try {
+    const query = new URLSearchParams(location.search);
+    const allowedResetIds = new Set(["220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","264","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323"]);
+
+    if (["319","320","321","322"].includes(query.get("reset"))) {
+      try {
+        localStorage.setItem("today-theme-preference-v26", "light");
+      } catch (_) {}
+      if (query.get("reset") === "322") {
+        document.documentElement.classList.remove("today-theme-dark");
+        document.documentElement.classList.add("today-theme-light");
+        document.documentElement.dataset.todayTheme = "light";
+      }
+    }
+
+    if (allowedResetIds.has(query.get("reset"))) {
+      const tasks = [];
+
+      if (navigator.serviceWorker?.getRegistrations) {
+        tasks.push(
+          navigator.serviceWorker.getRegistrations().then(registrations =>
+            Promise.all(
+              registrations.map(registration => registration.unregister())
+            )
+          )
+        );
+      }
+
+      if (window.caches?.keys) {
+        tasks.push(
+          window.caches.keys().then(keys =>
+            Promise.all(
+              keys
+                .filter(key => key.startsWith("today-"))
+                .map(key => window.caches.delete(key))
+            )
+          )
+        );
+      }
+
+      Promise.all(tasks).catch(() => {});
+    }
+  } catch (error) {
+    console.warn("TODAY cache reset:", error);
+  }
+})();
+</script>
+
+<!-- TODAY V27 THEME PREPAINT -->
+<script>(()=>{const root=document.documentElement;try{const q=new URLSearchParams(location.search);const forced=q.get('reset')==='322';let t=forced?'light':(localStorage.getItem('today-theme-preference-v26')==='light'?'light':'dark');if(forced){try{localStorage.setItem('today-theme-preference-v26','light')}catch(_){}}root.classList.toggle('today-theme-light',t==='light');root.classList.toggle('today-theme-dark',t==='dark');root.dataset.todayTheme=t;}catch(_){root.classList.remove('today-theme-dark');root.classList.add('today-theme-light');root.dataset.todayTheme='light';}})();</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050711">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="TODAY ARCADE — игровая коллекция TODAY: Crystal Chronicles, аркады, логика и личные рекорды.">
+<link rel="manifest" href="./manifest.webmanifest?v=20261015190026">
+<link rel="icon" href="./icon-192.png">
+<title>TODAY ARCADE — Игровой мир TODAY</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js?v=20261015190026"></script>
+<!-- TODAY PREMIUM TYPOGRAPHY V5 WEBFONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Manrope:wght@400..800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css?v=20261015140000">
+<link rel="stylesheet" href="./social.css?v=20261015190026">
+<link rel="stylesheet" href="./today-art.css?v=20261015194500">
+
+<!-- TODAY PREMIUM FONTS V5 BEGIN -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&family=Onest:wght@400..900&display=swap" rel="stylesheet">
+<!-- TODAY PREMIUM FONTS V5 END -->
+<link rel="stylesheet" href="./today-evolution.css?v=20261015190026">
+<link rel="stylesheet" href="./today-social-v51.css?v=20261015190026">
+<link rel="stylesheet" href="./today-omniverse-v60.css?v=20261015190026">
+<!-- TODAY HOME V64 ASSET -->
+<link rel="stylesheet" href="./today-home-v64.css?v=20261015190026">
+<link rel="stylesheet" href="./today-content-v65.css?v=20261015190026">
+<link rel="stylesheet" href="./today-media-v66.css?v=20261015190026">
+<link rel="stylesheet" href="./today-personalization-v67.css?v=20261015190026">
+<link rel="stylesheet" href="./today-ux-v68.css?v=20261015190026">
+  <link rel="stylesheet" href="./today-home-v69.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v70.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v71.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v72.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v73.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v74.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v77.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v78.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v79.css?v=20261015190026">
+<link rel="stylesheet" href="./today-home-v80.css?v=20261015190026">
+
+
+
+<link rel="stylesheet" href="./today-arcade-v95.css?v=20261015190035">
+<link rel="stylesheet" href="./today-arcade-v96.css?v=20261015190036">
+<link rel="stylesheet" href="./today-theme-v97.css?v=20261014172500">
+<link rel="stylesheet" href="./today-theme-geometry-v102.css?v=20261014172500">
+<link rel="stylesheet" href="./today-theme-palette-v103.css?v=20261015091000">
+<link rel="stylesheet" href="./today-theme-palette-v104.css?v=20261015103000">
+<link rel="stylesheet" href="./today-theme-palette-v105.css?v=20261015110000">
+<!-- TODAY V108 FULL COLOR SYSTEM -->
+<style id="today-theme-full-v108">
+
+/* ================================================================
+   TODAY V108 — FULL COLOR SYSTEM
+   A rich, calm, colorful light theme.
+   Background, cards and surfaces only; geometry remains unchanged.
+   ================================================================ */
+
+/* PALETTE TOKENS */
+
+html.today-theme-light,
+html[data-today-theme="light"] {
+  color-scheme: light !important;
+
+  --today-theme-bg: #dcd0ed !important;
+  --today-theme-surface: #eadcf4 !important;
+  --today-theme-text: #352443 !important;
+  --today-theme-muted: #705a7e !important;
+  --today-theme-border: rgba(111, 70, 151, .39) !important;
+
+  --today-palette-lavender: #b398d8 !important;
+  --today-palette-rose: #e7a3c2 !important;
+  --today-palette-turquoise: #88cdbd !important;
+  --today-palette-blue: #a6c4e7 !important;
+  --today-palette-peach: #e9bd8d !important;
+
+  /* Existing tokens used throughout the app. */
+  --bg: #dcd0ed !important;
+  --paper: rgba(235, 222, 246, .96) !important;
+  --white: #352443 !important;
+  --ink: #443151 !important;
+  --ink-strong: #30203d !important;
+  --ink-soft: #665174 !important;
+  --muted: #705a7e !important;
+  --line: rgba(111, 70, 151, .32) !important;
+  --soft: rgba(136, 97, 178, .13) !important;
+  --hot: #b94f7e !important;
+  --violet: #7954ad !important;
+  --cyan: #287e79 !important;
+  --lime: #a27735 !important;
+  --yellow: #b9893f !important;
+  --glass-bg: linear-gradient(
+    135deg, #e8daf4, #f2dce9 58%, #d9eee5
+  ) !important;
+  --glass-bg-strong: linear-gradient(
+    135deg, #d9c6ed, #edcfe1 53%, #cbe7de
+  ) !important;
+  --shadow: 0 24px 65px rgba(77, 47, 112, .15) !important;
+  --shadow2: 0 12px 32px rgba(77, 47, 112, .12) !important;
+}
+
+/* ================================================================
+   BACKGROUND — IMPORTANT
+   The actual page background is painted directly on html and body.
+   #dailyBackdrop no longer relies on a background hidden behind a
+   dark pseudo-element or an old scene image.
+   ================================================================ */
+
+html.today-theme-light,
+html[data-today-theme="light"] {
+  background-color: #e0d1ed !important;
+  background-image:
+    radial-gradient(
+      ellipse at 8% 8%,
+      rgba(153, 119, 202, .66) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 91% 10%,
+      rgba(224, 139, 177, .52) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 86% 77%,
+      rgba(89, 180, 160, .42) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 10% 89%,
+      rgba(231, 179, 122, .35) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 48% 48%,
+      rgba(145, 171, 218, .28) 0%,
+      transparent 49%
+    ),
+    linear-gradient(
+      132deg,
+      #d9c9eb 0%,
+      #ead8f1 30%,
+      #f1d9e7 56%,
+      #dcebe5 79%,
+      #d5e3f4 100%
+    ) !important;
+  background-attachment: fixed !important;
+}
+
+html.today-theme-light body,
+html[data-today-theme="light"] body {
+  color: #352443 !important;
+  background-color: #e0d1ed !important;
+  background-image:
+    radial-gradient(
+      ellipse at 5% 5%,
+      rgba(159, 125, 208, .42) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 96% 15%,
+      rgba(231, 150, 184, .34) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 80% 83%,
+      rgba(103, 186, 167, .30) 0%,
+      transparent 40%
+    ),
+    linear-gradient(
+      132deg,
+      #dfd0ef 0%,
+      #ecd8f0 33%,
+      #f1dce7 61%,
+      #dcece6 100%
+    ) !important;
+  background-attachment: fixed !important;
+}
+
+/* Remove the previous photograph and black overlay from the light theme. */
+
+html.today-theme-light #dailyBackdrop,
+html[data-today-theme="light"] #dailyBackdrop {
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light #dailyBackdrop::after,
+html[data-today-theme="light"] #dailyBackdrop::after {
+  background:
+    radial-gradient(
+      ellipse at 8% 8%,
+      rgba(137, 95, 185, .055),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 91% 72%,
+      rgba(66, 153, 139, .045),
+      transparent 43%
+    ) !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light #dailyBackdrop .daily-scene,
+html[data-today-theme="light"] #dailyBackdrop .daily-scene {
+  opacity: 0 !important;
+  filter: none !important;
+}
+
+html.today-theme-light .noise,
+html[data-today-theme="light"] .noise {
+  opacity: .018 !important;
+  mix-blend-mode: multiply !important;
+}
+
+html.today-theme-light #app,
+html[data-today-theme="light"] #app {
+  background: transparent !important;
+}
+
+/* HEADER */
+
+html.today-theme-light .topbar,
+html[data-today-theme="light"] .topbar {
+  color: #38264a !important;
+  background: linear-gradient(
+    110deg,
+    rgba(218, 202, 241, .97),
+    rgba(241, 210, 229, .97) 54%,
+    rgba(205, 235, 225, .97)
+  ) !important;
+  border-bottom-color: rgba(112, 70, 151, .37) !important;
+  box-shadow:
+    0 8px 30px rgba(77, 47, 112, .14),
+    inset 0 1px rgba(255,255,255,.92) !important;
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+}
+
+html.today-theme-light .today-brand-word,
+html.today-theme-light .today-brand-copy,
+html.today-theme-light .brand,
+html.today-theme-light .topbar .account-btn,
+html[data-today-theme="light"] .today-brand-word,
+html[data-today-theme="light"] .today-brand-copy,
+html[data-today-theme="light"] .brand,
+html[data-today-theme="light"] .topbar .account-btn {
+  color: #38264a !important;
+}
+
+html.today-theme-light .today-brand-tag,
+html[data-today-theme="light"] .today-brand-tag {
+  color: #75528a !important;
+}
+
+html.today-theme-light .today-brand-line,
+html[data-today-theme="light"] .today-brand-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #9271bd,
+    #c56b96,
+    #579b8b,
+    transparent
+  ) !important;
+  opacity: .85 !important;
+}
+
+/* ACCOUNT, COINS AND THEME SWITCH */
+
+html.today-theme-light .coin-badge,
+html[data-today-theme="light"] .coin-badge {
+  color: #795621 !important;
+  background: linear-gradient(
+    130deg, #f8dfa1, #efd0a4 54%, #edc6d8
+  ) !important;
+  border-color: rgba(178, 127, 53, .41) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.95),
+    0 6px 17px rgba(151, 105, 45, .12) !important;
+}
+
+html.today-theme-light .coin-badge span,
+html[data-today-theme="light"] .coin-badge span {
+  color: #815b24 !important;
+}
+
+html.today-theme-light .top-btn,
+html.today-theme-light .account-btn,
+html.today-theme-light button.account-btn,
+html.today-theme-light button.quiet-btn,
+html.today-theme-light #todayThemeToggle,
+html[data-today-theme="light"] .top-btn,
+html[data-today-theme="light"] .account-btn,
+html[data-today-theme="light"] button.account-btn,
+html[data-today-theme="light"] button.quiet-btn,
+html[data-today-theme="light"] #todayThemeToggle {
+  color: #4c355f !important;
+  background: linear-gradient(
+    130deg, #e4d4f2, #f1d5e5 55%, #d3ebe4
+  ) !important;
+  border-color: rgba(116, 75, 155, .38) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 5px 16px rgba(86, 55, 122, .11) !important;
+}
+
+html.today-theme-light #todayThemeToggle .today-theme-icon,
+html[data-today-theme="light"] #todayThemeToggle .today-theme-icon {
+  color: #714ba4 !important;
+  background: rgba(174, 145, 213, .37) !important;
+}
+
+/* HERO: visible lavender base and rose accent */
+
+html.today-theme-light .hero,
+html[data-today-theme="light"] .hero {
+  color: #372546 !important;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(168, 130, 216, .43),
+      transparent 57%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(229, 157, 194, .36),
+      transparent 55%
+    ),
+    linear-gradient(
+      135deg, #ddcbed 0%, #eed8ef 55%, #f1d8e7 100%
+    ) !important;
+  border-color: rgba(116, 75, 155, .38) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.95),
+    0 18px 44px rgba(82, 51, 117, .13) !important;
+}
+
+html.today-theme-light .hero h1,
+html.today-theme-light h1,
+html.today-theme-light h2,
+html.today-theme-light h3,
+html.today-theme-light h4,
+html[data-today-theme="light"] .hero h1,
+html[data-today-theme="light"] h1,
+html[data-today-theme="light"] h2,
+html[data-today-theme="light"] h3,
+html[data-today-theme="light"] h4 {
+  color: #352341 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light .hero h1 span,
+html[data-today-theme="light"] .hero h1 span {
+  background: linear-gradient(
+    100deg, #7952b2, #b34d7f 43%, #397c8e 78%, #337e6d
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: none !important;
+}
+
+html.today-theme-light .hero-copy > p,
+html.today-theme-light .hero p,
+html[data-today-theme="light"] .hero-copy > p,
+html[data-today-theme="light"] .hero p {
+  color: #705a7d !important;
+}
+
+html.today-theme-light .eyebrow,
+html.today-theme-light .section-head .eyebrow,
+html[data-today-theme="light"] .eyebrow,
+html[data-today-theme="light"] .section-head .eyebrow {
+  color: #7950aa !important;
+}
+
+html.today-theme-light .hero-rail strong,
+html[data-today-theme="light"] .hero-rail strong {
+  color: #59406c !important;
+}
+
+html.today-theme-light .hero-rail span:last-child,
+html[data-today-theme="light"] .hero-rail span:last-child {
+  color: #7c6787 !important;
+}
+
+/* COUNTDOWN */
+
+html.today-theme-light .clock-card,
+html[data-today-theme="light"] .clock-card {
+  color: #432f5d !important;
+  background: linear-gradient(
+    140deg, #d3bdea 0%, #dfd0f0 55%, #ead9ef 100%
+  ) !important;
+  border-color: rgba(113, 71, 163, .43) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 13px 30px rgba(86, 53, 130, .14) !important;
+}
+
+html.today-theme-light .clock-card > span,
+html.today-theme-light .clock-card small,
+html[data-today-theme="light"] .clock-card > span,
+html[data-today-theme="light"] .clock-card small {
+  color: #70578f !important;
+}
+
+html.today-theme-light .clock-card strong,
+html.today-theme-light .clock-row b,
+html[data-today-theme="light"] .clock-card strong,
+html[data-today-theme="light"] .clock-row b {
+  color: #573889 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light .clock-card .progress,
+html[data-today-theme="light"] .clock-card .progress {
+  background: rgba(99, 71, 137, .17) !important;
+}
+
+html.today-theme-light .clock-card .progress i,
+html[data-today-theme="light"] .clock-card .progress i {
+  background: linear-gradient(
+    90deg, #8860b7, #bc6994 52%, #5b9e8d
+  ) !important;
+  box-shadow: none !important;
+}
+
+/* SCENE OF THE DAY */
+
+html.today-theme-light .scene-card,
+html[data-today-theme="light"] .scene-card {
+  color: #285951 !important;
+  background: linear-gradient(
+    140deg, #b4e0d5 0%, #c7e9e1 52%, #d4e4f4 100%
+  ) !important;
+  border-color: rgba(53, 132, 119, .39) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 13px 30px rgba(45, 122, 113, .12) !important;
+}
+
+html.today-theme-light .scene-card > span,
+html.today-theme-light .scene-card small,
+html[data-today-theme="light"] .scene-card > span,
+html[data-today-theme="light"] .scene-card small {
+  color: #477b73 !important;
+}
+
+html.today-theme-light .scene-card strong,
+html[data-today-theme="light"] .scene-card strong {
+  color: #285a52 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light .scene-card::after,
+html[data-today-theme="light"] .scene-card::after {
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(105, 175, 197, .17),
+    rgba(132, 104, 183, .08) 40%,
+    transparent 72%
+  ) !important;
+}
+
+/* ACTIVITY STRIP */
+
+html.today-theme-light .activity-strip,
+html[data-today-theme="light"] .activity-strip {
+  color: #3b5b66 !important;
+  background: linear-gradient(
+    105deg, #cbe9e1 0%, #d4e5f5 50%, #f1d9e6 100%
+  ) !important;
+  border-color: rgba(75, 136, 145, .30) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 10px 24px rgba(62, 104, 128, .10) !important;
+}
+
+html.today-theme-light .activity-strip::before,
+html[data-today-theme="light"] .activity-strip::before {
+  background: linear-gradient(
+    180deg, #8160af, #bd608c, #4d9585
+  ) !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light .live-pill,
+html.today-theme-light .live-pill b,
+html[data-today-theme="light"] .live-pill,
+html[data-today-theme="light"] .live-pill b {
+  color: #34786d !important;
+}
+
+html.today-theme-light .live-pill span,
+html.today-theme-light .ticker,
+html[data-today-theme="light"] .live-pill span,
+html[data-today-theme="light"] .ticker {
+  color: #496b7a !important;
+}
+
+html.today-theme-light .strip-actions,
+html.today-theme-light .quiet-btn,
+html[data-today-theme="light"] .strip-actions,
+html[data-today-theme="light"] .quiet-btn {
+  color: #75538b !important;
+}
+
+/* SECTION HEADINGS */
+
+html.today-theme-light .today-section,
+html.today-theme-light .community-section,
+html.today-theme-light .ranking-section,
+html[data-today-theme="light"] .today-section,
+html[data-today-theme="light"] .community-section,
+html[data-today-theme="light"] .ranking-section {
+  color: #382647 !important;
+}
+
+html.today-theme-light .section-head h2,
+html[data-today-theme="light"] .section-head h2 {
+  color: #382647 !important;
+}
+
+html.today-theme-light .section-note,
+html.today-theme-light .community-intro,
+html[data-today-theme="light"] .section-note,
+html[data-today-theme="light"] .community-intro {
+  color: #705a7c !important;
+}
+
+/* DAILY GRID — alternating coordinated surface colors */
+
+/* Default surface: lilac and soft rose. */
+html.today-theme-light #dailyGrid > *,
+html.today-theme-light .daily-grid > *,
+html.today-theme-light .daily-card,
+html.today-theme-light .today-card,
+html[data-today-theme="light"] #dailyGrid > *,
+html[data-today-theme="light"] .daily-grid > *,
+html[data-today-theme="light"] .daily-card,
+html[data-today-theme="light"] .today-card {
+  color: #3d2a50 !important;
+  background: linear-gradient(
+    135deg, #e3d2f1 0%, #efd8e9 58%, #d8eae4 100%
+  ) !important;
+  border-color: rgba(113, 74, 153, .36) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 13px 30px rgba(79, 51, 113, .11) !important;
+}
+
+/* Lavender */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 1),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 1) {
+  color: #412d58 !important;
+  background: linear-gradient(
+    135deg, #cfb8e8 0%, #dfcbed 57%, #ead9ee 100%
+  ) !important;
+  border-color: rgba(116, 75, 157, .40) !important;
+}
+
+/* Turquoise */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 2),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 2) {
+  color: #28544d !important;
+  background: linear-gradient(
+    135deg, #a9dccc 0%, #c5e9de 60%, #d2e8f1 100%
+  ) !important;
+  border-color: rgba(48, 132, 118, .38) !important;
+}
+
+/* Rose */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 3),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 3) {
+  color: #603047 !important;
+  background: linear-gradient(
+    135deg, #eab0cb 0%, #f0c9dc 59%, #eddaee 100%
+  ) !important;
+  border-color: rgba(171, 77, 123, .37) !important;
+}
+
+/* Peach */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n + 4),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n + 4) {
+  color: #63482f !important;
+  background: linear-gradient(
+    135deg, #edc79a 0%, #f2dbc0 60%, #eadff0 100%
+  ) !important;
+  border-color: rgba(169, 119, 62, .37) !important;
+}
+
+/* Sky / periwinkle */
+html.today-theme-light #dailyGrid > .daily-card:nth-child(5n),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(5n) {
+  color: #304767 !important;
+  background: linear-gradient(
+    135deg, #b5cdec 0%, #cbdcf2 59%, #e0dff1 100%
+  ) !important;
+  border-color: rgba(80, 112, 165, .37) !important;
+}
+
+/* Readable type inside the colored cards */
+html.today-theme-light .daily-card h2,
+html.today-theme-light .daily-card h3,
+html.today-theme-light .daily-card h4,
+html.today-theme-light .daily-card strong,
+html.today-theme-light .daily-card .card-title,
+html[data-today-theme="light"] .daily-card h2,
+html[data-today-theme="light"] .daily-card h3,
+html[data-today-theme="light"] .daily-card h4,
+html[data-today-theme="light"] .daily-card strong,
+html[data-today-theme="light"] .daily-card .card-title {
+  color: #3c2a4e !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light .daily-card p,
+html.today-theme-light .daily-card small,
+html.today-theme-light .daily-card .muted,
+html[data-today-theme="light"] .daily-card p,
+html[data-today-theme="light"] .daily-card small,
+html[data-today-theme="light"] .daily-card .muted {
+  color: #705a7b !important;
+}
+
+html.today-theme-light .daily-card .kind-pill,
+html[data-today-theme="light"] .daily-card .kind-pill {
+  color: #5d4078 !important;
+  background: linear-gradient(
+    120deg, #dfcbed, #efcede
+  ) !important;
+  border-color: rgba(116, 75, 157, .34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.9) !important;
+}
+
+html.today-theme-light .daily-card .count-pill,
+html[data-today-theme="light"] .daily-card .count-pill {
+  color: #755d82 !important;
+}
+
+/* PEOPLE FEED */
+html.today-theme-light .community-feed,
+html.today-theme-light #communityFeed,
+html[data-today-theme="light"] .community-feed,
+html[data-today-theme="light"] #communityFeed {
+  color: #3b2a4f !important;
+  background: linear-gradient(
+    125deg, #d2c1e8 0%, #d1e9e1 52%, #efd5e3 100%
+  ) !important;
+  border-color: rgba(113, 74, 153, .29) !important;
+}
+
+html.today-theme-light #communityFeed > *,
+html.today-theme-light #communityFeed > article,
+html.today-theme-light #communityFeed > .community-card,
+html.today-theme-light #communityFeed > .post-card,
+html.today-theme-light #communityFeed > .feed-card,
+html[data-today-theme="light"] #communityFeed > *,
+html[data-today-theme="light"] #communityFeed > article,
+html[data-today-theme="light"] #communityFeed > .community-card,
+html[data-today-theme="light"] #communityFeed > .post-card,
+html[data-today-theme="light"] #communityFeed > .feed-card {
+  color: #3c2a4e !important;
+  background: linear-gradient(
+    135deg, #e3d4f0, #f0d9e8 55%, #d5e9e3
+  ) !important;
+  border-color: rgba(113, 74, 153, .32) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.93),
+    0 9px 23px rgba(79, 51, 113, .09) !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(3n + 2),
+html[data-today-theme="light"] #communityFeed > *:nth-child(3n + 2) {
+  background: linear-gradient(
+    135deg, #c9deef, #d4eae5 60%, #e5d9f0
+  ) !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(3n),
+html[data-today-theme="light"] #communityFeed > *:nth-child(3n) {
+  background: linear-gradient(
+    135deg, #eabfd4, #f0d6e3 60%, #e4d9ef
+  ) !important;
+}
+
+html.today-theme-light #communityFeed h2,
+html.today-theme-light #communityFeed h3,
+html.today-theme-light #communityFeed h4,
+html.today-theme-light #communityFeed strong,
+html[data-today-theme="light"] #communityFeed h2,
+html[data-today-theme="light"] #communityFeed h3,
+html[data-today-theme="light"] #communityFeed h4,
+html[data-today-theme="light"] #communityFeed strong {
+  color: #3b294d !important;
+}
+
+html.today-theme-light #communityFeed p,
+html.today-theme-light #communityFeed small,
+html.today-theme-light #communityFeed time,
+html[data-today-theme="light"] #communityFeed p,
+html[data-today-theme="light"] #communityFeed small,
+html[data-today-theme="light"] #communityFeed time {
+  color: #705b7d !important;
+}
+
+/* RANKING */
+html.today-theme-light .ranking-card,
+html[data-today-theme="light"] .ranking-card {
+  color: #354454 !important;
+  background: linear-gradient(
+    130deg, #cbd8eb, #d3e8e1 54%, #e6d8ee
+  ) !important;
+  border-color: rgba(90, 111, 148, .33) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 12px 30px rgba(67, 82, 120, .10) !important;
+}
+
+html.today-theme-light #leaderboard > *,
+html.today-theme-light .leaderboard > *,
+html.today-theme-light .leaderboard .leader-row,
+html.today-theme-light .leaderboard .rank-row,
+html.today-theme-light .rank-row,
+html[data-today-theme="light"] #leaderboard > *,
+html[data-today-theme="light"] .leaderboard > *,
+html[data-today-theme="light"] .leaderboard .leader-row,
+html[data-today-theme="light"] .leaderboard .rank-row,
+html[data-today-theme="light"] .rank-row {
+  color: #3d304e !important;
+  background: linear-gradient(
+    110deg, #e0d8ef, #d5e9e4 60%, #f0dbe7
+  ) !important;
+  border-color: rgba(105, 83, 143, .29) !important;
+}
+
+html.today-theme-light #leaderboard > *:nth-child(3n + 2),
+html[data-today-theme="light"] #leaderboard > *:nth-child(3n + 2) {
+  background: linear-gradient(110deg, #cbdff1, #d7eae5) !important;
+}
+
+html.today-theme-light #leaderboard > *:nth-child(3n),
+html[data-today-theme="light"] #leaderboard > *:nth-child(3n) {
+  background: linear-gradient(110deg, #ebcbdc, #e6dcef) !important;
+}
+
+/* BOTTOM NAVIGATION */
+html.today-theme-light .bottom-nav,
+html[data-today-theme="light"] .bottom-nav {
+  color: #5c466e !important;
+  background: linear-gradient(
+    100deg, rgba(218, 204, 240, .98),
+    rgba(242, 214, 230, .98) 53%,
+    rgba(204, 233, 224, .98)
+  ) !important;
+  border-color: rgba(112, 74, 151, .35) !important;
+  box-shadow:
+    0 -8px 28px rgba(76, 48, 112, .13),
+    inset 0 1px rgba(255,255,255,.94) !important;
+  backdrop-filter: blur(24px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+}
+
+html.today-theme-light .bottom-nav button,
+html.today-theme-light .bottom-nav a,
+html[data-today-theme="light"] .bottom-nav button,
+html[data-today-theme="light"] .bottom-nav a {
+  color: #745c87 !important;
+}
+
+html.today-theme-light .bottom-nav button.active,
+html.today-theme-light .bottom-nav a.active,
+html[data-today-theme="light"] .bottom-nav button.active,
+html[data-today-theme="light"] .bottom-nav a.active {
+  color: #573984 !important;
+  background: linear-gradient(
+    110deg, #d3c0ed, #edcddd 58%, #cce6de
+  ) !important;
+  text-shadow: none !important;
+}
+
+/* PRIMARY BUTTONS */
+html.today-theme-light .primary-button,
+html.today-theme-light .ts-primary,
+html.today-theme-light .today-support-btn,
+html[data-today-theme="light"] .primary-button,
+html[data-today-theme="light"] .ts-primary,
+html[data-today-theme="light"] .today-support-btn {
+  color: #fffafc !important;
+  background: linear-gradient(
+    105deg, #7652ac, #ae527f 53%, #347f75
+  ) !important;
+  border-color: rgba(102, 65, 141, .38) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.22),
+    0 8px 20px rgba(85, 52, 120, .17) !important;
+}
+
+html.today-theme-light .primary-button *,
+html.today-theme-light .ts-primary *,
+html[data-today-theme="light"] .primary-button *,
+html[data-today-theme="light"] .ts-primary * {
+  color: #fffafc !important;
+}
+
+/* FORMS */
+html.today-theme-light input,
+html.today-theme-light textarea,
+html.today-theme-light select,
+html[data-today-theme="light"] input,
+html[data-today-theme="light"] textarea,
+html[data-today-theme="light"] select {
+  color: #372642 !important;
+  background: linear-gradient(
+    120deg, #f0e3f6, #f3dfe9 55%, #d9eee7
+  ) !important;
+  border-color: rgba(113, 74, 151, .37) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.9) !important;
+}
+
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder,
+html[data-today-theme="light"] input::placeholder,
+html[data-today-theme="light"] textarea::placeholder {
+  color: #907b9e !important;
+}
+
+html.today-theme-light input:focus,
+html.today-theme-light textarea:focus,
+html.today-theme-light select:focus,
+html[data-today-theme="light"] input:focus,
+html[data-today-theme="light"] textarea:focus,
+html[data-today-theme="light"] select:focus {
+  border-color: rgba(113, 72, 154, .68) !important;
+  box-shadow: 0 0 0 3px rgba(126, 89, 168, .14) !important;
+}
+
+/* SOCIAL PAGES AND MODALS */
+html.today-theme-light #modal.today-social-modal .modal-card,
+html.today-theme-light #modal.today-social-page .modal-card,
+html[data-today-theme="light"] #modal.today-social-modal .modal-card,
+html[data-today-theme="light"] #modal.today-social-page .modal-card {
+  color: #38264a !important;
+  background: linear-gradient(
+    135deg, #e0d0ef, #efd8e8 53%, #d2e9e2
+  ) !important;
+  border-color: rgba(111, 73, 150, .38) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.94),
+    0 25px 75px rgba(68, 43, 101, .18) !important;
+}
+
+html.today-theme-light #modal.today-social-modal .modal-backdrop,
+html[data-today-theme="light"] #modal.today-social-modal .modal-backdrop {
+  background: rgba(69, 46, 91, .26) !important;
+}
+
+html.today-theme-light #modal.today-social-modal .ts-panel,
+html.today-theme-light #modal.today-social-modal .ts-card,
+html.today-theme-light #modal.today-social-modal .ts-form-card,
+html.today-theme-light #modal.today-social-modal .ts-user-card,
+html.today-theme-light #modal.today-social-modal .ts-chat-row,
+html.today-theme-light #modal.today-social-modal .ts-channel-card,
+html.today-theme-light #modal.today-social-modal .ts-list-card,
+html.today-theme-light #modal.today-social-modal .ts-profile-post,
+html.today-theme-light #modal.today-social-modal .ts-post-card,
+html.today-theme-light #modal.today-social-modal .ts-settings-group,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel,
+html[data-today-theme="light"] #modal.today-social-modal .ts-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-form-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-user-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-chat-row,
+html[data-today-theme="light"] #modal.today-social-modal .ts-channel-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-list-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-profile-post,
+html[data-today-theme="light"] #modal.today-social-modal .ts-post-card,
+html[data-today-theme="light"] #modal.today-social-modal .ts-settings-group {
+  color: #39284a !important;
+  background: linear-gradient(
+    135deg, #e4d5f1, #f0d9e8 54%, #d4eae3
+  ) !important;
+  border-color: rgba(111, 74, 150, .31) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.92),
+    0 8px 21px rgba(76, 49, 111, .09) !important;
+}
+
+html.today-theme-light #modal.today-social-modal .ts-panel h2,
+html.today-theme-light #modal.today-social-modal .ts-panel h3,
+html.today-theme-light #modal.today-social-modal .ts-form-card h3,
+html.today-theme-light #modal.today-social-modal .ts-list-head h3,
+html.today-theme-light #modal.today-social-modal .ts-user-copy b,
+html.today-theme-light #modal.today-social-page .ts-panel h2,
+html.today-theme-light #modal.today-social-page .ts-panel h3,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel h2,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel h3,
+html[data-today-theme="light"] #modal.today-social-page .ts-panel h2,
+html[data-today-theme="light"] #modal.today-social-page .ts-panel h3 {
+  color: #3b294b !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #modal.today-social-modal .ts-panel p,
+html.today-theme-light #modal.today-social-modal .ts-muted,
+html.today-theme-light #modal.today-social-modal .ts-helper,
+html.today-theme-light #modal.today-social-page .ts-panel p,
+html[data-today-theme="light"] #modal.today-social-modal .ts-panel p,
+html[data-today-theme="light"] #modal.today-social-modal .ts-muted,
+html[data-today-theme="light"] #modal.today-social-modal .ts-helper,
+html[data-today-theme="light"] #modal.today-social-page .ts-panel p {
+  color: #705b7c !important;
+}
+
+/* SHOP, NOTICES, REWARDS */
+html.today-theme-light .toast,
+html.today-theme-light .notice,
+html.today-theme-light .reward-bar,
+html.today-theme-light .shop-item,
+html.today-theme-light .bundle,
+html.today-theme-light .profile-stat,
+html.today-theme-light .comment,
+html.today-theme-light .activity-mini,
+html.today-theme-light .composer,
+html.today-theme-light .file-label,
+html[data-today-theme="light"] .toast,
+html[data-today-theme="light"] .notice,
+html[data-today-theme="light"] .reward-bar,
+html[data-today-theme="light"] .shop-item,
+html[data-today-theme="light"] .bundle,
+html[data-today-theme="light"] .profile-stat,
+html[data-today-theme="light"] .comment,
+html[data-today-theme="light"] .activity-mini,
+html[data-today-theme="light"] .composer,
+html[data-today-theme="light"] .file-label {
+  color: #3b294c !important;
+  background: linear-gradient(
+    125deg, #e4d6f1, #f0d9e7 56%, #d4eae3
+  ) !important;
+  border-color: rgba(111, 74, 150, .31) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.91),
+    0 8px 21px rgba(76, 49, 111, .09) !important;
+}
+
+/* Preserve the custom colorful art on the match-3 board itself.
+   This changes menus/panels but doesn't repaint individual jewels. */
+
+html.today-theme-light #modal.today-v96-crystal .ts-m3-story,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-chapter,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-inventory,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-booster-card,
+html.today-theme-light #modal.today-v96-crystal .ts-m3-result,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-story,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-chapter,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-inventory,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-booster-card,
+html[data-today-theme="light"] #modal.today-v96-crystal .ts-m3-result {
+  color: #3b294c !important;
+  background: linear-gradient(
+    135deg, #e2d4f0, #efd9e7 55%, #d4e9e3
+  ) !important;
+  border-color: rgba(111, 74, 150, .31) !important;
+}
+
+html.today-theme-light ::selection,
+html[data-today-theme="light"] ::selection {
+  color: #352443 !important;
+  background: rgba(168, 133, 209, .42) !important;
+}
+
+/* END TODAY V108 FULL COLOR SYSTEM */
+
+</style>
+
+<style id="today-light-polish-v110">
+/* TODAY V110 BEGIN */
+
+/*
+  Светлая палитра интерфейса TODAY.
+  Фон становится насыщеннее, а пиктограммы сохраняют
+  самостоятельный цвет и читаемость.
+*/
+
+/* 1. Создание публикаций, истории и медиадействия */
+
+html.today-theme-light .today-v64-create-btn,
+html[data-today-theme="light"] .today-v64-create-btn,
+html.today-theme-light .today-v64-create-grid button,
+html[data-today-theme="light"] .today-v64-create-grid button {
+  color: #493365 !important;
+  background:
+    linear-gradient(
+      125deg,
+      #e4d5ff 0%,
+      #d3f1e8 53%,
+      #f9dfed 100%
+    ) !important;
+  border: 1px solid rgba(124, 88, 183, .39) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .96),
+    0 7px 20px rgba(109, 77, 163, .11) !important;
+}
+
+html.today-theme-light .today-v64-create-btn:hover,
+html[data-today-theme="light"] .today-v64-create-btn:hover,
+html.today-theme-light .today-v64-create-grid button:hover,
+html[data-today-theme="light"] .today-v64-create-grid button:hover {
+  border-color: rgba(112, 78, 183, .64) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .98),
+    0 10px 24px rgba(109, 77, 163, .14) !important;
+}
+
+/* Значки в окнах создания: отдельная светлая подложка,
+   выразительный цвет символа, без цветной заливки поверх него. */
+
+html.today-theme-light .today-v64-create-grid button > span,
+html[data-today-theme="light"] .today-v64-create-grid button > span {
+  color: #6245b0 !important;
+  background:
+    linear-gradient(145deg, #d5c2ff, #c8eee6) !important;
+  border: 1px solid rgba(119, 88, 183, .20) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 3px 9px rgba(105, 75, 160, .08) !important;
+}
+
+/* История — ярче само кольцо, но не аватар или фотография внутри. */
+
+html.today-theme-light .today-v64-story-add .today-v64-story-ring,
+html[data-today-theme="light"] .today-v64-story-add .today-v64-story-ring {
+  background:
+    linear-gradient(145deg, #d6c4ff 0%, #bfece3 55%, #f5d2e5 100%) !important;
+  border: 1px dashed rgba(103, 75, 169, .66) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 5px 15px rgba(105, 75, 160, .12) !important;
+}
+
+html.today-theme-light .today-v64-add-glyph,
+html[data-today-theme="light"] .today-v64-add-glyph {
+  color: #6243b1 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .8) !important;
+}
+
+/* Фото, клипы, музыка и добавление в медиаряду. */
+
+html.today-theme-light .today-v66-media-rail-actions button,
+html[data-today-theme="light"] .today-v66-media-rail-actions button {
+  color: #49345f !important;
+  background:
+    linear-gradient(135deg, #e7dcff, #d9f1eb 65%, #f8e2ee) !important;
+  border-color: rgba(123, 88, 181, .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .96),
+    0 4px 12px rgba(91, 72, 145, .08) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button[data-v66-open="photo"],
+html[data-today-theme="light"] .today-v66-media-rail-actions button[data-v66-open="photo"] {
+  background: linear-gradient(135deg, #d8eaff, #e6f4ff) !important;
+  color: #365d9b !important;
+  border-color: rgba(77, 125, 194, .34) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button[data-v66-open="video"],
+html[data-today-theme="light"] .today-v66-media-rail-actions button[data-v66-open="video"] {
+  background: linear-gradient(135deg, #e5dcff, #f2e7ff) !important;
+  color: #694bb0 !important;
+  border-color: rgba(123, 89, 190, .34) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button[data-v66-open="music"],
+html[data-today-theme="light"] .today-v66-media-rail-actions button[data-v66-open="music"] {
+  background: linear-gradient(135deg, #d2f2e7, #e8f8f0) !important;
+  color: #287d70 !important;
+  border-color: rgba(57, 148, 128, .32) !important;
+}
+
+html.today-theme-light .today-v66-media-rail-actions button.is-primary,
+html[data-today-theme="light"] .today-v66-media-rail-actions button.is-primary {
+  color: #493365 !important;
+  background:
+    linear-gradient(125deg, #dac9ff, #c4eee2 58%, #f4d7e8) !important;
+  border-color: rgba(120, 83, 181, .43) !important;
+}
+
+
+/* 2. «Прямо сейчас — Что происходит сегодня» */
+
+/* Более выразительная, но лёгкая подложка под заголовком раздела. */
+
+html.today-theme-light #app .today-section > .section-head,
+html[data-today-theme="light"] #app .today-section > .section-head {
+  padding: 15px 17px !important;
+  border: 1px solid rgba(126, 96, 174, .23) !important;
+  border-radius: 20px !important;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(226, 215, 255, .86),
+      rgba(215, 242, 234, .86) 55%,
+      rgba(250, 226, 239, .86)
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 7px 21px rgba(103, 75, 154, .075) !important;
+}
+
+html.today-theme-light #app .today-section > .section-head h2,
+html[data-today-theme="light"] #app .today-section > .section-head h2 {
+  color: #38264f !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #app .today-section > .section-head .eyebrow,
+html[data-today-theme="light"] #app .today-section > .section-head .eyebrow {
+  color: #7551b0 !important;
+}
+
+html.today-theme-light #app .today-section > .section-head .section-note,
+html[data-today-theme="light"] #app .today-section > .section-head .section-note {
+  color: #6f6287 !important;
+}
+
+/* Основные карточки дня: отдельные мягкие цвета вместо тусклой серой массы. */
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n + 1),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n + 1) {
+  color: #3e2d5a !important;
+  background:
+    linear-gradient(135deg, #e3d5ff 0%, #f0e8ff 61%, #f8e9f5 100%) !important;
+  border-color: rgba(128, 92, 186, .37) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 11px 27px rgba(99, 72, 151, .10) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n + 2),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n + 2) {
+  color: #2e574f !important;
+  background:
+    linear-gradient(135deg, #ccefe4 0%, #e2f7ef 59%, #e5f0ff 100%) !important;
+  border-color: rgba(65, 151, 133, .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 11px 27px rgba(58, 137, 121, .09) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n + 3),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n + 3) {
+  color: #643550 !important;
+  background:
+    linear-gradient(135deg, #f8d9e9 0%, #fff0f6 59%, #f0e5ff 100%) !important;
+  border-color: rgba(181, 96, 147, .33) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 11px 27px rgba(158, 83, 129, .085) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card:nth-child(4n),
+html[data-today-theme="light"] #app #dailyGrid > .daily-card:nth-child(4n) {
+  color: #304866 !important;
+  background:
+    linear-gradient(135deg, #d8e8fb 0%, #e8f2ff 59%, #eee7fc 100%) !important;
+  border-color: rgba(88, 125, 177, .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 11px 27px rgba(73, 103, 153, .085) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card h3,
+html.today-theme-light #app #dailyGrid > .daily-card h4,
+html.today-theme-light #app #dailyGrid > .daily-card strong,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card h3,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card h4,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card strong {
+  color: #3c2b52 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card p,
+html.today-theme-light #app #dailyGrid > .daily-card small,
+html.today-theme-light #app #dailyGrid > .daily-card .muted,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card p,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card small,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .muted {
+  color: #6d5d80 !important;
+}
+
+
+/* 3. Светлее «Сегодня вместе — Люди дня» */
+
+html.today-theme-light #app #todayHomePeopleRail,
+html[data-today-theme="light"] #app #todayHomePeopleRail,
+html.today-theme-light #app .today-v64-people-rail,
+html[data-today-theme="light"] #app .today-v64-people-rail {
+  color: #3d2b55 !important;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(194, 166, 255, .30),
+      transparent 53%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(117, 218, 199, .23),
+      transparent 52%
+    ),
+    linear-gradient(
+      125deg,
+      #e8dcff 0%,
+      #e0f4ed 54%,
+      #f8e2ef 100%
+    ) !important;
+  border-color: rgba(127, 91, 180, .27) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 10px 25px rgba(96, 70, 148, .085) !important;
+  backdrop-filter: blur(14px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(120%) !important;
+}
+
+html.today-theme-light .today-v64-rail-head h2,
+html[data-today-theme="light"] .today-v64-rail-head h2 {
+  color: #3b2953 !important;
+}
+
+html.today-theme-light .today-v64-rail-head p,
+html[data-today-theme="light"] .today-v64-rail-head p {
+  color: #6e5c82 !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-eyebrow,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-eyebrow {
+  color: #7650b1 !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-text-btn,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-text-btn {
+  color: #6146b0 !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-story b,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-story b {
+  color: #4a365f !important;
+}
+
+html.today-theme-light .today-v64-people-rail .today-v64-story small,
+html[data-today-theme="light"] .today-v64-people-rail .today-v64-story small {
+  color: #756589 !important;
+}
+
+
+/* 4. Иллюстрации карточек: светлый фон, цветные иконки остаются чёткими */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-panel {
+  border: 1px solid rgba(116, 93, 168, .23) !important;
+  border-radius: 20px !important;
+  background:
+    radial-gradient(
+      ellipse at 50% 80%,
+      color-mix(in srgb, var(--atelier-accent, #b7a3f0) 27%, transparent),
+      transparent 65%
+    ),
+    linear-gradient(
+      135deg,
+      #f5efff 0%,
+      #e6f6f2 58%,
+      #fbecf5 100%
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 7px 18px rgba(94, 76, 144, .08) !important;
+}
+
+/* Своя пастельная подложка у каждого типа иллюстрации. */
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-question .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-question .today-art-panel {
+  background: linear-gradient(135deg, #dfeaff, #eee8ff 58%, #e7f8f3) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-game .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-game .today-art-panel {
+  background: linear-gradient(135deg, #e4dcff, #e6f5ef 68%, #f6e8fa) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-song .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-song .today-art-panel {
+  background: linear-gradient(135deg, #d9f2f8, #e5edff 60%, #f1e6ff) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-mystery .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-mystery .today-art-panel {
+  background: linear-gradient(135deg, #e1dcff, #f0e7ff 59%, #f8e8f2) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-challenge .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-challenge .today-art-panel {
+  background: linear-gradient(135deg, #d8f2e5, #e8f7ec 60%, #f0f5df) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-debate .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-debate .today-art-panel {
+  background: linear-gradient(135deg, #e0e8ff, #eee8ff 57%, #fae7f2) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-duel .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-duel .today-art-panel {
+  background: linear-gradient(135deg, #f7dff0, #eee4ff 62%, #e6f4f5) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-story .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-story .today-art-panel {
+  background: linear-gradient(135deg, #e9ddff, #f5e9f4 58%, #e3f4ed) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-fact .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-fact .today-art-panel {
+  background: linear-gradient(135deg, #d8f1e6, #e7f8f0 60%, #e4effd) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-trend .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-trend .today-art-panel {
+  background: linear-gradient(135deg, #dcecff, #e8edff 59%, #f3e7fb) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-moment .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-moment .today-art-panel {
+  background: linear-gradient(135deg, #d8f1ff, #e4edff 58%, #f1e6ff) !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-footprint .today-art-panel,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-footprint .today-art-panel {
+  background: linear-gradient(135deg, #f8e9cc, #e8f3df 58%, #e1f4ed) !important;
+}
+
+/* Обновлённая графическая сетка на светлом фоне. */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-panel::before,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-panel::before {
+  background-image:
+    linear-gradient(rgba(101, 87, 151, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 87, 151, .055) 1px, transparent 1px) !important;
+  opacity: .72 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-panel::after,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-panel::after {
+  border-color: color-mix(
+    in srgb,
+    var(--atelier-accent, #a694e7) 40%,
+    rgba(255, 255, 255, .55)
+  ) !important;
+  box-shadow:
+    0 0 0 14px color-mix(in srgb, var(--atelier-accent, #a694e7) 5%, transparent),
+    0 0 0 31px color-mix(in srgb, var(--atelier-accent, #a694e7) 3%, transparent) !important;
+}
+
+/* Светлая подпись иллюстрации. */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-topline,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-art-topline {
+  color: #6e638a !important;
+}
+
+/* Иконки сохраняют свой собственный оттенок и контур. */
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-question .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-question .today-art-visual svg {
+  color: #596bc1 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-game .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-game .today-art-visual svg {
+  color: #7151bc !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-song .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-song .today-art-visual svg {
+  color: #218795 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-mystery .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-mystery .today-art-visual svg {
+  color: #7254bd !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-challenge .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-challenge .today-art-visual svg {
+  color: #268876 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-debate .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-debate .today-art-visual svg {
+  color: #5369bb !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-duel .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-duel .today-art-visual svg {
+  color: #a04f91 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-story .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-story .today-art-visual svg {
+  color: #7853ad !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-fact .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-fact .today-art-visual svg {
+  color: #287f73 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-trend .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-trend .today-art-visual svg {
+  color: #4778bd !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-moment .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-moment .today-art-visual svg {
+  color: #21849a !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card.kind-footprint .today-art-visual svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card.kind-footprint .today-art-visual svg {
+  color: #8c6d36 !important;
+}
+
+/* Старые тёмные заливки внутри SVG заменяются пастельными.
+   Цветные акцентные элементы и внешние контуры не перекрашиваются. */
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#050A17" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#091024" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#101729" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#10172B" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#11182D" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#11172D" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#151D34" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [fill="#151D36" i] {
+  fill: #dbe4fb !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#101729" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#10172B" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#11182D" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#151D34" i],
+html.today-theme-light #app #dailyGrid > .daily-card .today-art-visual svg [stroke="#151D36" i] {
+  stroke: #8d80b4 !important;
+}
+
+html.today-theme-light #app #dailyGrid > .daily-card .today-generated-svg,
+html[data-today-theme="light"] #app #dailyGrid > .daily-card .today-generated-svg {
+  filter: drop-shadow(0 7px 14px rgba(79, 68, 130, .14)) saturate(1.04) !important;
+}
+
+/* END TODAY V110 */
+</style>
+<style id="today-light-polish-v111">
+
+/* TODAY V111 LIGHT POLISH BEGIN */
+
+/* ---------- Универсальный чёрный текст ---------- */
+
+html.today-theme-light .today-v111-dark-text,
+html[data-today-theme="light"] .today-v111-dark-text {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+}
+
+/* ---------- Раздел «Что происходит сегодня» ---------- */
+
+html.today-theme-light .today-section,
+html.today-theme-light .community-section,
+html.today-theme-light .ranking-section,
+html[data-today-theme="light"] .today-section,
+html[data-today-theme="light"] .community-section,
+html[data-today-theme="light"] .ranking-section {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+html.today-theme-light .today-section > .section-head,
+html.today-theme-light .community-section > .section-head,
+html.today-theme-light .ranking-section > .section-head,
+html[data-today-theme="light"] .today-section > .section-head,
+html[data-today-theme="light"] .community-section > .section-head,
+html[data-today-theme="light"] .ranking-section > .section-head {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.today-theme-light .today-section h2,
+html.today-theme-light .community-section h2,
+html.today-theme-light .ranking-section h2,
+html[data-today-theme="light"] .today-section h2,
+html[data-today-theme="light"] .community-section h2,
+html[data-today-theme="light"] .ranking-section h2 {
+  color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #dailyGrid,
+html[data-today-theme="light"] #dailyGrid {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Сами 12 карточек остаются раздельными и цветными. */
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 1),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 1) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #dfd1ff, #f4e2f2) !important;
+  border-color: rgba(124, 85, 180, .36) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(70,55,115,.10) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 2),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 2) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #cfeee3, #e2f0ff) !important;
+  border-color: rgba(62, 142, 122, .34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(58,120,115,.09) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n + 3),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n + 3) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #f8dce9, #f3e4ff) !important;
+  border-color: rgba(179, 102, 148, .33) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(150,80,120,.085) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card:nth-child(4n),
+html[data-today-theme="light"] #dailyGrid > .daily-card:nth-child(4n) {
+  color: #172033 !important;
+  background: linear-gradient(135deg, #d6e7fb, #ebe2ff) !important;
+  border-color: rgba(85, 123, 177, .34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.92),
+              0 11px 27px rgba(73,103,153,.085) !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card h3,
+html.today-theme-light #dailyGrid > .daily-card h4,
+html.today-theme-light #dailyGrid > .daily-card strong,
+html.today-theme-light #dailyGrid > .daily-card .card-body,
+html[data-today-theme="light"] #dailyGrid > .daily-card h3,
+html[data-today-theme="light"] #dailyGrid > .daily-card h4,
+html[data-today-theme="light"] #dailyGrid > .daily-card strong,
+html[data-today-theme="light"] #dailyGrid > .daily-card .card-body {
+  color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light #dailyGrid > .daily-card p,
+html.today-theme-light #dailyGrid > .daily-card small,
+html[data-today-theme="light"] #dailyGrid > .daily-card p,
+html[data-today-theme="light"] #dailyGrid > .daily-card small {
+  color: #46536b !important;
+}
+
+/* ---------- «Что оставили сегодня»: убрать фон-обёртку ---------- */
+
+html.today-theme-light #todayPromotedBlock,
+html.today-theme-light .ts-promo-wrap,
+html[data-today-theme="light"] #todayPromotedBlock,
+html[data-today-theme="light"] .ts-promo-wrap {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light #todayPromotedList,
+html.today-theme-light .ts-promoted-list,
+html[data-today-theme="light"] #todayPromotedList,
+html[data-today-theme="light"] .ts-promoted-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.today-theme-light #todayPromotedBlock .ts-promo-head h3,
+html[data-today-theme="light"] #todayPromotedBlock .ts-promo-head h3 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedBlock .ts-promo-head p,
+html[data-today-theme="light"] #todayPromotedBlock .ts-promo-head p {
+  color: #46536b !important;
+}
+
+html.today-theme-light #todayPromotedBlock .ts-kicker,
+html[data-today-theme="light"] #todayPromotedBlock .ts-kicker {
+  color: #7049ab !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n + 1),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg, #e6dcff, #f5e4f1) !important;
+  border-color: rgba(126,91,183,.28) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n + 2),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg, #d9f0e8, #e4f0ff) !important;
+  border-color: rgba(70,145,127,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n + 3),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg, #ffe6d9, #fbe8ef) !important;
+  border-color: rgba(181,113,110,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #todayPromotedList > *:nth-child(4n),
+html[data-today-theme="light"] #todayPromotedList > *:nth-child(4n) {
+  background: linear-gradient(135deg, #deebff, #e9e2ff) !important;
+  border-color: rgba(88,125,177,.27) !important;
+  color: #172033 !important;
+}
+
+/* ---------- «Кто сегодня в игре»: убрать общий прямоугольник ---------- */
+
+html.today-theme-light .ranking-card,
+html.today-theme-light .ranking-section .leaderboard,
+html.today-theme-light .ranking-section #leaderboard,
+html[data-today-theme="light"] .ranking-card,
+html[data-today-theme="light"] .ranking-section .leaderboard,
+html[data-today-theme="light"] .ranking-section #leaderboard {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n + 1),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n + 1) {
+  background: linear-gradient(120deg, #e5dcff, #f4e6f4) !important;
+  border-color: rgba(126,91,183,.28) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n + 2),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n + 2) {
+  background: linear-gradient(120deg, #d8f0e7, #e5f1ff) !important;
+  border-color: rgba(70,145,127,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n + 3),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n + 3) {
+  background: linear-gradient(120deg, #fce4d8, #f8e7f0) !important;
+  border-color: rgba(181,113,110,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light .ranking-section .rank-row:nth-child(4n),
+html[data-today-theme="light"] .ranking-section .rank-row:nth-child(4n) {
+  background: linear-gradient(120deg, #dce9ff, #ebe3ff) !important;
+  border-color: rgba(88,125,177,.27) !important;
+  color: #172033 !important;
+}
+
+/* ---------- Лента сообщества: фон прозрачный, посты цветные ---------- */
+
+html.today-theme-light .community-feed,
+html.today-theme-light #communityFeed,
+html[data-today-theme="light"] .community-feed,
+html[data-today-theme="light"] #communityFeed {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n + 1),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg, #e5dcff, #f4e5f2) !important;
+  border-color: rgba(126,91,183,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n + 2),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg, #d8f1e8, #e6f0ff) !important;
+  border-color: rgba(70,145,127,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n + 3),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg, #ffe6d9, #fbe7ef) !important;
+  border-color: rgba(181,113,110,.27) !important;
+  color: #172033 !important;
+}
+
+html.today-theme-light #communityFeed > *:nth-child(4n),
+html[data-today-theme="light"] #communityFeed > *:nth-child(4n) {
+  background: linear-gradient(135deg, #dceaff, #eae3ff) !important;
+  border-color: rgba(88,125,177,.27) !important;
+  color: #172033 !important;
+}
+
+/* ---------- Цветные кнопки публикаций ---------- */
+
+html.today-theme-light .today-v111-action,
+html[data-today-theme="light"] .today-v111-action {
+  color: #182033 !important;
+  -webkit-text-fill-color: #182033 !important;
+  border: 1px solid rgba(103,91,151,.30) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    0 7px 18px rgba(60,65,110,.09) !important;
+  text-shadow: none !important;
+  font-weight: 750 !important;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease !important;
+}
+
+html.today-theme-light .today-v111-action:hover,
+html[data-today-theme="light"] .today-v111-action:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.94),
+    0 10px 23px rgba(60,65,110,.14) !important;
+}
+
+html.today-theme-light .today-v111-action--story,
+html[data-today-theme="light"] .today-v111-action--story {
+  background: linear-gradient(130deg, #dfd0ff, #f5dced) !important;
+  border-color: rgba(124,83,177,.40) !important;
+}
+
+html.today-theme-light .today-v111-action--photo,
+html[data-today-theme="light"] .today-v111-action--photo {
+  background: linear-gradient(130deg, #d4e8ff, #d4f4ed) !important;
+  border-color: rgba(66,128,180,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--video,
+html[data-today-theme="light"] .today-v111-action--video {
+  background: linear-gradient(130deg, #e6dcff, #dce5ff) !important;
+  border-color: rgba(118,94,190,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--music,
+html[data-today-theme="light"] .today-v111-action--music {
+  background: linear-gradient(130deg, #d1f0e2, #edf3d5) !important;
+  border-color: rgba(79,145,119,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--create,
+html[data-today-theme="light"] .today-v111-action--create {
+  background: linear-gradient(130deg, #ffe4cb, #ffedc9 58%, #f7dced) !important;
+  border-color: rgba(192,132,89,.38) !important;
+}
+
+html.today-theme-light .today-v111-action--mix,
+html[data-today-theme="light"] .today-v111-action--mix {
+  background: linear-gradient(130deg, #ded5ff, #d2f0e5 56%, #f7dce9) !important;
+  border-color: rgba(124,88,183,.38) !important;
+}
+
+/* Иконки сохраняют самостоятельную окраску. */
+
+html.today-theme-light .today-v111-action--story svg,
+html.today-theme-light .today-v111-action--story [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--story svg,
+html[data-today-theme="light"] .today-v111-action--story [aria-hidden="true"] {
+  color: #7047b3 !important;
+}
+
+html.today-theme-light .today-v111-action--photo svg,
+html.today-theme-light .today-v111-action--photo [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--photo svg,
+html[data-today-theme="light"] .today-v111-action--photo [aria-hidden="true"] {
+  color: #2877a9 !important;
+}
+
+html.today-theme-light .today-v111-action--video svg,
+html.today-theme-light .today-v111-action--video [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--video svg,
+html[data-today-theme="light"] .today-v111-action--video [aria-hidden="true"] {
+  color: #654bb3 !important;
+}
+
+html.today-theme-light .today-v111-action--music svg,
+html.today-theme-light .today-v111-action--music [aria-hidden="true"],
+html[data-today-theme="light"] .today-v111-action--music svg,
+html[data-today-theme="light"] .today-v111-action--music [aria-hidden="true"] {
+  color: #247f6b !important;
+}
+
+/* ---------- Окно «Поддержать автора» ---------- */
+
+html.today-theme-light .today-support-dialog,
+html.today-theme-light .today-support-dialog *,
+html[data-today-theme="light"] .today-support-dialog,
+html[data-today-theme="light"] .today-support-dialog * {
+  color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-bank-card,
+html[data-today-theme="light"] .today-support-dialog .today-support-bank-card {
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(160,133,255,.24),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(92,209,181,.22),
+      transparent 47%
+    ),
+    linear-gradient(
+      130deg,
+      #e3d9ff,
+      #d7f2e9 55%,
+      #f9e0eb
+    ) !important;
+  border: 1px solid rgba(119,95,169,.30) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.92),
+    0 16px 35px rgba(79,65,123,.12) !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-bank-card:after,
+html[data-today-theme="light"] .today-support-dialog .today-support-bank-card:after {
+  background: linear-gradient(
+    130deg,
+    rgba(255,255,255,.38),
+    transparent 48%,
+    rgba(255,255,255,.12)
+  ) !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-number,
+html[data-today-theme="light"] .today-support-dialog .today-support-number {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-pulse,
+html[data-today-theme="light"] .today-support-dialog .today-support-pulse {
+  background: #36a987 !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-copy-btn,
+html[data-today-theme="light"] .today-support-dialog .today-support-copy-btn {
+  color: #172033 !important;
+  background: linear-gradient(115deg, #d4f1e7, #ded7ff 65%, #f6dce9) !important;
+  border: 1px solid rgba(111,92,170,.34) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.88) !important;
+}
+
+html.today-theme-light .today-support-dialog .today-support-copy-status,
+html[data-today-theme="light"] .today-support-dialog .today-support-copy-status {
+  color: #49556d !important;
+}
+
+/* Поля ввода. */
+
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder,
+html[data-today-theme="light"] input::placeholder,
+html[data-today-theme="light"] textarea::placeholder {
+  color: #737f94 !important;
+  opacity: 1 !important;
+}
+
+/* Таймер #countdown не перекрашивается скриптом. */
+
+/* TODAY V111 LIGHT POLISH END */
+
+</style>
+<style id="today-light-polish-v112">
+
+/* ============================================================
+   TODAY V112 — LIGHT THEME DETAIL FIX
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. «МОЯ ИСТОРИЯ»: без прямоугольной подложки
+   Круг добавления остаётся круглым.
+   Подпись не обрезается и не ломается на две строки.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-v64-story-add,
+html[data-today-theme="light"] body .today-v64-story-add {
+  display: flex !important;
+  flex: 0 0 84px !important;
+  width: 84px !important;
+  min-width: 84px !important;
+  max-width: 84px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 5px !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+html.today-theme-light body .today-v64-story-add:hover,
+html.today-theme-light body .today-v64-story-add:focus,
+html[data-today-theme="light"] body .today-v64-story-add:hover,
+html[data-today-theme="light"] body .today-v64-story-add:focus {
+  border: 0 !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light body .today-v64-story-add::before,
+html.today-theme-light body .today-v64-story-add::after,
+html[data-today-theme="light"] body .today-v64-story-add::before,
+html[data-today-theme="light"] body .today-v64-story-add::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.today-theme-light body .today-v64-story-add .today-v64-story-ring,
+html[data-today-theme="light"] body .today-v64-story-add .today-v64-story-ring {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 56px !important;
+  width: 56px !important;
+  min-width: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: linear-gradient(
+    145deg, #ddd2ff 0%, #d1f0e5 58%, #f5ddeb 100%
+  ) !important;
+  border: 1px dashed rgba(106, 82, 168, .56) !important;
+  outline: none !important;
+  box-shadow: 0 4px 13px rgba(82, 72, 132, .10) !important;
+}
+
+html.today-theme-light body .today-v64-story-add .today-v64-add-glyph,
+html[data-today-theme="light"] body .today-v64-story-add .today-v64-add-glyph {
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #6243a8 !important;
+  -webkit-text-fill-color: #6243a8 !important;
+  text-shadow: none !important;
+  font-size: 30px !important;
+  line-height: 1 !important;
+}
+
+html.today-theme-light body .today-v64-story-add b,
+html[data-today-theme="light"] body .today-v64-story-add b {
+  display: block !important;
+  width: 84px !important;
+  max-width: 84px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-align: center !important;
+  text-transform: none !important;
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  font-family: Manrope, system-ui, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.025em !important;
+}
+
+html.today-theme-light body .today-v64-story-add small,
+html[data-today-theme="light"] body .today-v64-story-add small {
+  display: block !important;
+  width: 84px !important;
+  max-width: 84px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  color: #59657b !important;
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+}
+
+
+/* ------------------------------------------------------------
+   2. ПОИСК «Найди свой TODAY»
+   Название, тема или описание…
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-v80-search-box,
+html[data-today-theme="light"] body .today-v80-search-box {
+  color: #172033 !important;
+  background: linear-gradient(
+    125deg, #e7eaff 0%, #e1f3eb 58%, #f7e6f0 100%
+  ) !important;
+  border: 1px solid rgba(113, 105, 164, .29) !important;
+  border-radius: 15px !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.88),
+    0 5px 15px rgba(78,82,126,.06) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+html.today-theme-light body .today-v80-search-box input,
+html[data-today-theme="light"] body .today-v80-search-box input,
+html.today-theme-light body input[data-v80-search],
+html[data-today-theme="light"] body input[data-v80-search] {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  color-scheme: light !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline-color: rgba(111, 91, 176, .35) !important;
+  text-shadow: none !important;
+  caret-color: #674bb0 !important;
+}
+
+html.today-theme-light body .today-v80-search-box input::placeholder,
+html[data-today-theme="light"] body .today-v80-search-box input::placeholder,
+html.today-theme-light body input[data-v80-search]::placeholder,
+html[data-today-theme="light"] body input[data-v80-search]::placeholder {
+  color: #677187 !important;
+  -webkit-text-fill-color: #677187 !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body .today-v80-search-box > span,
+html[data-today-theme="light"] body .today-v80-search-box > span {
+  color: #6e56a6 !important;
+}
+
+
+/* ------------------------------------------------------------
+   3. ПОИСК ПО ТЕКСТУ ИЛИ АВТОРУ
+   ------------------------------------------------------------ */
+
+html.today-theme-light body #todayV78FeedTools .today-v78-search-box,
+html[data-today-theme="light"] body #todayV78FeedTools .today-v78-search-box,
+html.today-theme-light body .today-v78-feed-tools .today-v78-search-box,
+html[data-today-theme="light"] body .today-v78-feed-tools .today-v78-search-box {
+  color: #172033 !important;
+  background: linear-gradient(
+    125deg, #e4eaff 0%, #e0f3ed 57%, #f7e5f0 100%
+  ) !important;
+  border: 1px solid rgba(113, 105, 164, .29) !important;
+  border-radius: 15px !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.88),
+    0 5px 15px rgba(78,82,126,.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light body #todayV78FeedTools .today-v78-search-box input,
+html[data-today-theme="light"] body #todayV78FeedTools .today-v78-search-box input,
+html.today-theme-light body input[data-v78-search],
+html[data-today-theme="light"] body input[data-v78-search] {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  color-scheme: light !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline-color: rgba(111, 91, 176, .35) !important;
+  text-shadow: none !important;
+  caret-color: #674bb0 !important;
+}
+
+html.today-theme-light body input[data-v78-search]::placeholder,
+html[data-today-theme="light"] body input[data-v78-search]::placeholder {
+  color: #677187 !important;
+  -webkit-text-fill-color: #677187 !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body .today-v78-search-icon,
+html[data-today-theme="light"] body .today-v78-search-icon {
+  color: #6e56a6 !important;
+}
+
+
+/* ------------------------------------------------------------
+   4. «СПОР ДНЯ», «ВОПРОС ДНЯ», «МОМЕНТ ДНЯ» И ДР.
+   Убираем серо-голубую нечитаемость у названий рубрик.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body #dailyGrid .kind-pill,
+html.today-theme-light body #dailyGrid .kind-pill *,
+html[data-today-theme="light"] body #dailyGrid .kind-pill,
+html[data-today-theme="light"] body #dailyGrid .kind-pill * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  font-weight: 800 !important;
+}
+
+html.today-theme-light body #dailyGrid .kind-pill,
+html[data-today-theme="light"] body #dailyGrid .kind-pill {
+  background: rgba(255,255,255,.52) !important;
+  border: 1px solid rgba(70,78,107,.15) !important;
+}
+
+html.today-theme-light body #dailyGrid .count-pill,
+html[data-today-theme="light"] body #dailyGrid .count-pill {
+  color: #344056 !important;
+  -webkit-text-fill-color: #344056 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.today-theme-light body #dailyGrid .daily-card h3,
+html.today-theme-light body #dailyGrid .daily-card h4,
+html[data-today-theme="light"] body #dailyGrid .daily-card h3,
+html[data-today-theme="light"] body #dailyGrid .daily-card h4 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #communityFeed .community-kind,
+html[data-today-theme="light"] body #communityFeed .community-kind {
+  color: #243049 !important;
+  -webkit-text-fill-color: #243049 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  font-weight: 850 !important;
+}
+
+
+/* ------------------------------------------------------------
+   5. «В ИЗБРАННОЕ», «В АРХИВ» И ФИЛЬТРЫ
+   Мягкие акцентные заливки в стиле светлой темы.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-v80-favorite,
+html[data-today-theme="light"] body .today-v80-favorite,
+html.today-theme-light body .today-v80-filter-chip,
+html[data-today-theme="light"] body .today-v80-filter-chip,
+html.today-theme-light body .today-v78-filter-chip,
+html[data-today-theme="light"] body .today-v78-filter-chip,
+html.today-theme-light body .today-v78-action,
+html[data-today-theme="light"] body .today-v78-action,
+html.today-theme-light body .today-v64-filter-row button,
+html[data-today-theme="light"] body .today-v64-filter-row button,
+html.today-theme-light body button[class*="archive" i],
+html[data-today-theme="light"] body button[class*="archive" i],
+html.today-theme-light body button[aria-label*="архив" i],
+html[data-today-theme="light"] body button[aria-label*="архив" i],
+html.today-theme-light body button[title*="архив" i],
+html[data-today-theme="light"] body button[title*="архив" i],
+html.today-theme-light body button[data-action*="archive" i],
+html[data-today-theme="light"] body button[data-action*="archive" i] {
+  color: #20253b !important;
+  -webkit-text-fill-color: #20253b !important;
+  background: linear-gradient(
+    125deg, #e5ddff 0%, #dff1eb 65%, #f6e5ef 100%
+  ) !important;
+  border: 1px solid rgba(112,96,159,.30) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.8) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html.today-theme-light body .today-v80-favorite span,
+html[data-today-theme="light"] body .today-v80-favorite span,
+html.today-theme-light body .today-v78-action span,
+html[data-today-theme="light"] body .today-v78-action span {
+  color: #45406f !important;
+  -webkit-text-fill-color: #45406f !important;
+}
+
+html.today-theme-light body .today-v80-favorite.is-favorite,
+html[data-today-theme="light"] body .today-v80-favorite.is-favorite {
+  background: linear-gradient(
+    125deg, #f9e5b9 0%, #f8e8d3 55%, #f6dfe8 100%
+  ) !important;
+  color: #583c16 !important;
+  -webkit-text-fill-color: #583c16 !important;
+}
+
+html.today-theme-light body .today-v80-filter-chip.is-active,
+html[data-today-theme="light"] body .today-v80-filter-chip.is-active,
+html.today-theme-light body .today-v78-filter-chip.is-active,
+html[data-today-theme="light"] body .today-v78-filter-chip.is-active {
+  background: linear-gradient(
+    125deg, #d9d0ff 0%, #d4eee5 100%
+  ) !important;
+  border-color: rgba(104,83,171,.48) !important;
+  color: #202039 !important;
+  -webkit-text-fill-color: #202039 !important;
+}
+
+html.today-theme-light body .today-v80-heading strong,
+html[data-today-theme="light"] body .today-v80-heading strong {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+html.today-theme-light body .today-v80-heading small,
+html[data-today-theme="light"] body .today-v80-heading small {
+  color: #566179 !important;
+  -webkit-text-fill-color: #566179 !important;
+}
+
+html.today-theme-light body .today-v80-result-count,
+html[data-today-theme="light"] body .today-v80-result-count,
+html.today-theme-light body .today-v80-filter-label,
+html[data-today-theme="light"] body .today-v80-filter-label,
+html.today-theme-light body .today-v80-filter-label *,
+html[data-today-theme="light"] body .today-v80-filter-label * {
+  color: #344056 !important;
+  -webkit-text-fill-color: #344056 !important;
+  opacity: 1 !important;
+}
+
+
+/* ------------------------------------------------------------
+   6. «ЧТО ОСТАВИЛИ СЕГОДНЯ»
+   Убираем белую подложку, задаём лёгкий цветовой фон
+   без тяжёлой рамки и прямоугольной тени.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body #todayPromotedBlock,
+html[data-today-theme="light"] body #todayPromotedBlock,
+html.today-theme-light body .ts-promo-wrap,
+html[data-today-theme="light"] body .ts-promo-wrap {
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(191,173,255,.25),
+      transparent 53%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(135,220,195,.23),
+      transparent 53%
+    ),
+    linear-gradient(
+      125deg,
+      rgba(228,220,255,.40),
+      rgba(216,243,232,.37) 56%,
+      rgba(249,225,238,.37)
+    ) !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 22px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.today-theme-light body #todayPromotedList,
+html[data-today-theme="light"] body #todayPromotedList,
+html.today-theme-light body .ts-promoted-list,
+html[data-today-theme="light"] body .ts-promoted-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head h3,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head h3 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head p,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head p {
+  color: #3d4960 !important;
+  -webkit-text-fill-color: #3d4960 !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-kicker,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-kicker {
+  color: #68499f !important;
+  -webkit-text-fill-color: #68499f !important;
+}
+
+html.today-theme-light body #todayPromotedList > *,
+html[data-today-theme="light"] body #todayPromotedList > * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  border-color: rgba(110,99,151,.25) !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 1),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg,#e5dcff,#f5e5f0) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 2),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg,#d7f0e6,#e5efff) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 3),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg,#fce2d8,#f9e5ee) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n) {
+  background: linear-gradient(135deg,#dceaff,#eae2ff) !important;
+}
+
+
+/* ------------------------------------------------------------
+   7. ИСПРАВЛЯЕМ ПЕРЕНОС СЛОВА «ЛАЙК»
+   Иконка, счётчик и подпись не переносятся друг на друга.
+   ------------------------------------------------------------ */
+
+html.today-theme-light body .today-post-actions,
+html[data-today-theme="light"] body .today-post-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+html.today-theme-light body .today-like-btn,
+html[data-today-theme="light"] body .today-like-btn {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  color: #20253b !important;
+  -webkit-text-fill-color: #20253b !important;
+}
+
+html.today-theme-light body .today-like-btn > span,
+html.today-theme-light body .today-like-btn > b,
+html[data-today-theme="light"] body .today-like-btn > span,
+html[data-today-theme="light"] body .today-like-btn > b {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+html.today-theme-light body .today-like-btn > span:last-child,
+html[data-today-theme="light"] body .today-like-btn > span:last-child {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: max-content !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  text-transform: uppercase !important;
+  letter-spacing: -.015em !important;
+}
+
+html.today-theme-light body .today-like-btn > span:first-child,
+html[data-today-theme="light"] body .today-like-btn > span:first-child {
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+
+/* ------------------------------------------------------------
+   8. МАЛЕНЬКИЕ ЭКРАНЫ: сохраняем ширину и читаемость
+   ------------------------------------------------------------ */
+
+@media (max-width: 480px) {
+  html.today-theme-light body .today-v64-story-add,
+  html[data-today-theme="light"] body .today-v64-story-add {
+    flex-basis: 80px !important;
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+  }
+
+  html.today-theme-light body .today-v64-story-add b,
+  html[data-today-theme="light"] body .today-v64-story-add b,
+  html.today-theme-light body .today-v64-story-add small,
+  html[data-today-theme="light"] body .today-v64-story-add small {
+    width: 80px !important;
+    max-width: 80px !important;
+  }
+
+  html.today-theme-light body .today-like-btn,
+  html[data-today-theme="light"] body .today-like-btn {
+    gap: 5px !important;
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* TODAY V112 LIGHT THEME DETAIL FIX END */
+
+</style>
+<style id="today-light-polish-v113">
+
+/* TODAY V113 — LIGHT THEME DETAIL FIX */
+
+/* ==========================================================
+   A. «ЧТО ОСТАВИЛИ СЕГОДНЯ»
+   Выразительная лилово-мятно-розовая поверхность вместо белой.
+   ========================================================== */
+
+html.today-theme-light body section#todayPromotedBlock.ts-promo-wrap,
+html[data-today-theme="light"] body section#todayPromotedBlock.ts-promo-wrap,
+html.today-theme-light body #todayPromotedBlock,
+html[data-today-theme="light"] body #todayPromotedBlock,
+html.today-theme-light body .ts-promo-wrap,
+html[data-today-theme="light"] body .ts-promo-wrap {
+  color: #172033 !important;
+  background-color: #e8e0f8 !important;
+  background-image:
+    radial-gradient(
+      ellipse at 2% 0%,
+      rgba(186, 164, 255, .48),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(123, 213, 187, .40),
+      transparent 53%
+    ),
+    linear-gradient(
+      125deg,
+      #e6ddfb 0%,
+      #d9efe7 56%,
+      #f6e0ec 100%
+    ) !important;
+  border: 1px solid rgba(119, 96, 170, .30) !important;
+  border-radius: 22px !important;
+  padding: 16px !important;
+  margin-top: 18px !important;
+  margin-bottom: 22px !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.85),
+    0 10px 26px rgba(85,70,132,.10) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  outline: 0 !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 13px !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head h3,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head h3 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-promo-head p,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-promo-head p {
+  color: #46536b !important;
+  -webkit-text-fill-color: #46536b !important;
+}
+
+html.today-theme-light body #todayPromotedBlock .ts-kicker,
+html[data-today-theme="light"] body #todayPromotedBlock .ts-kicker {
+  color: #66469c !important;
+  -webkit-text-fill-color: #66469c !important;
+  font-weight: 850 !important;
+}
+
+html.today-theme-light body #todayPromotedList,
+html[data-today-theme="light"] body #todayPromotedList,
+html.today-theme-light body .ts-promoted-list,
+html[data-today-theme="light"] body .ts-promoted-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.today-theme-light body #todayPromotedList > *,
+html[data-today-theme="light"] body #todayPromotedList > * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  border: 1px solid rgba(111, 99, 154, .24) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 5px 16px rgba(75,68,119,.06) !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 1),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 1) {
+  background: linear-gradient(135deg,#e5dcff,#f5e5f0) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 2),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 2) {
+  background: linear-gradient(135deg,#d7f0e6,#e5efff) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n + 3),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n + 3) {
+  background: linear-gradient(135deg,#fce2d8,#f9e5ee) !important;
+}
+
+html.today-theme-light body #todayPromotedList > *:nth-child(4n),
+html[data-today-theme="light"] body #todayPromotedList > *:nth-child(4n) {
+  background: linear-gradient(135deg,#dceaff,#eae2ff) !important;
+}
+
+html.today-theme-light body #todayPromotedList p,
+html[data-today-theme="light"] body #todayPromotedList p,
+html.today-theme-light body #todayPromotedList h4,
+html[data-today-theme="light"] body #todayPromotedList h4,
+html.today-theme-light body #todayPromotedList small,
+html[data-today-theme="light"] body #todayPromotedList small {
+  color: #28334b !important;
+  -webkit-text-fill-color: #28334b !important;
+}
+
+
+/* ==========================================================
+   B. «В ИЗБРАННОЕ»
+   Усиленная специфичность для переопределения #dailyGrid.
+   ========================================================== */
+
+html.today-theme-light body #dailyGrid .today-v80-favorite,
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 29px !important;
+  padding: 5px 9px !important;
+  gap: 5px !important;
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  background: linear-gradient(
+    125deg,#dfd4ff 0%,#d7f0e7 60%,#f5e0ed 100%
+  ) !important;
+  border: 1px solid rgba(115, 91, 164, .34) !important;
+  border-radius: 10px !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.82) !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  line-height: 1.2 !important;
+  font-size: 9px !important;
+}
+
+html.today-theme-light body #dailyGrid .today-v80-favorite [data-v80-star],
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite [data-v80-star] {
+  color: #6947a8 !important;
+  -webkit-text-fill-color: #6947a8 !important;
+}
+
+html.today-theme-light body #dailyGrid .today-v80-favorite [data-v80-favorite-label],
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite [data-v80-favorite-label] {
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+}
+
+html.today-theme-light body #dailyGrid .today-v80-favorite.is-favorite,
+html[data-today-theme="light"] body #dailyGrid .today-v80-favorite.is-favorite {
+  background: linear-gradient(
+    125deg,#fae6b8,#f6e7d4 60%,#f5dfe9
+  ) !important;
+  color: #5a3c18 !important;
+  -webkit-text-fill-color: #5a3c18 !important;
+}
+
+html.today-theme-light body #dailyGrid .card-head,
+html[data-today-theme="light"] body #dailyGrid .card-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+}
+
+html.today-theme-light body #dailyGrid .kind-pill,
+html[data-today-theme="light"] body #dailyGrid .kind-pill,
+html.today-theme-light body #dailyGrid .kind-pill *,
+html[data-today-theme="light"] body #dailyGrid .kind-pill * {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+
+/* ==========================================================
+   C. «В АРХИВ» — НИКАКОГО НАЛОЖЕНИЯ НА CTA-КНОПКИ
+   Инструменты становятся отдельной строкой под действиями карточки.
+   ========================================================== */
+
+html.today-theme-light body .daily-card .card-actions,
+html[data-today-theme="light"] body .daily-card .card-actions {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  z-index: 1 !important;
+  overflow: visible !important;
+}
+
+html.today-theme-light body .daily-card .v50-daily-tools,
+html[data-today-theme="light"] body .daily-card .v50-daily-tools {
+  position: static !important;
+  inset: auto !important;
+  float: none !important;
+  clear: both !important;
+  transform: none !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  align-self: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+  gap: 8px !important;
+  margin: 12px 0 0 !important;
+  padding: 9px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(113, 97, 159, .20) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+}
+
+html.today-theme-light body .daily-card .v50-small-action,
+html[data-today-theme="light"] body .daily-card .v50-small-action,
+html.today-theme-light body .v50-card-tools .v50-small-action,
+html[data-today-theme="light"] body .v50-card-tools .v50-small-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 29px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 7px 11px !important;
+  border: 1px solid rgba(114, 92, 167, .30) !important;
+  border-radius: 10px !important;
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  background: linear-gradient(
+    125deg,#e3d9ff,#d9f1e8 62%,#f7e4ee
+  ) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.86) !important;
+  font: 800 9px/1.2 Manrope,system-ui,sans-serif !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-shadow: none !important;
+}
+
+html.today-theme-light body .daily-card .v50-small-action:hover,
+html[data-today-theme="light"] body .daily-card .v50-small-action:hover {
+  border-color: rgba(102, 78, 163, .52) !important;
+  transform: translateY(-1px) !important;
+}
+
+html.today-theme-light body .daily-card > .v50-daily-tools,
+html[data-today-theme="light"] body .daily-card > .v50-daily-tools {
+  order: 30 !important;
+}
+
+
+/* ==========================================================
+   D. ПЛАВАЮЩАЯ НАВИГАЦИЯ — ЧАТЫ ВЫРАВНИВАЕМ
+   Компактный индикатор сообщений без огромного красного нуля.
+   ========================================================== */
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"],
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  line-height: 1 !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon {
+  display: grid !important;
+  place-items: center !important;
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 26px !important;
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  max-height: 26px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  line-height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon svg,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] .today-v96-chat-icon svg {
+  display: block !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+  transform: none !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  color: #6d55a9 !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] > small,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] > small {
+  display: block !important;
+  position: static !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: .04em !important;
+  color: #59476e !important;
+  -webkit-text-fill-color: #59476e !important;
+  white-space: nowrap !important;
+}
+
+/* The real badge is tagged by the observer in the JS below. */
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"] .today-v113-chat-badge,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"] .today-v113-chat-badge {
+  position: absolute !important;
+  top: 2px !important;
+  right: calc(50% - 23px) !important;
+  z-index: 20 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 15px !important;
+  max-width: 24px !important;
+  height: 15px !important;
+  min-height: 15px !important;
+  max-height: 15px !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  box-sizing: border-box !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(110, 87, 166, .28) !important;
+  color: #463363 !important;
+  -webkit-text-fill-color: #463363 !important;
+  background: linear-gradient(
+    120deg,#e2d7ff,#d6f0e7 70%,#f3deeb
+  ) !important;
+  box-shadow: 0 2px 6px rgba(68, 55, 105, .11) !important;
+  font: 850 9px/1 Manrope,system-ui,sans-serif !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+
+html.today-theme-light body nav.bottom-nav > button[data-nav="chats"].today-v113-has-chat-badge::after,
+html[data-today-theme="light"] body nav.bottom-nav > button[data-nav="chats"].today-v113-has-chat-badge::after {
+  position: absolute !important;
+  top: 2px !important;
+  right: calc(50% - 23px) !important;
+  z-index: 20 !important;
+  min-width: 15px !important;
+  height: 15px !important;
+  padding: 0 4px !important;
+  box-sizing: border-box !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #463363 !important;
+  background: linear-gradient(120deg,#e2d7ff,#d6f0e7 70%,#f3deeb) !important;
+  border: 1px solid rgba(110,87,166,.28) !important;
+  box-shadow: 0 2px 6px rgba(68,55,105,.11) !important;
+  font: 850 9px/1 Manrope,system-ui,sans-serif !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+
+/* END TODAY V113 */
+
+</style>
+<style id="today-light-polish-v114">
+
+/* ============================================================
+   TODAY V114 — MOBILE DISCOVERY REDESIGN
+   Desktop-дизайн оставляем; меняем мобильную компоновку.
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  /* Главная оболочка */
+  html.today-theme-light body #todayV80DailyTools,
+  html[data-today-theme="light"] body #todayV80DailyTools,
+  html.today-theme-light body .today-v80-daily-tools,
+  html[data-today-theme="light"] body .today-v80-daily-tools {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin: 12px 0 18px !important;
+    padding: 14px 12px 13px !important;
+    border: 1px solid rgba(118, 101, 171, .22) !important;
+    border-radius: 20px !important;
+    color: #1b263c !important;
+    background:
+      radial-gradient(
+        ellipse at 0% 0%,
+        rgba(197, 181, 255, .44),
+        transparent 56%
+      ),
+      radial-gradient(
+        ellipse at 100% 100%,
+        rgba(157, 224, 201, .37),
+        transparent 56%
+      ),
+      linear-gradient(
+        145deg,
+        #f0ebff 0%,
+        #e7f4ee 57%,
+        #f9edf3 100%
+      ) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.88),
+      0 8px 22px rgba(76, 67, 122, .075) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Шапка: заголовок и счётчик в одной строке */
+  html.today-theme-light body .today-v80-topline,
+  html[data-today-theme="light"] body .today-v80-topline {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-heading,
+  html[data-today-theme="light"] body .today-v80-heading {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  html.today-theme-light body .today-v80-heading-mark,
+  html[data-today-theme="light"] body .today-v80-heading-mark {
+    flex: 0 0 34px !important;
+    width: 34px !important;
+    height: 34px !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(118, 93, 177, .28) !important;
+    border-radius: 12px !important;
+    color: #6b4aa8 !important;
+    background: linear-gradient(
+      140deg, #e4d9ff, #d6f1e7
+    ) !important;
+    font-size: 15px !important;
+    box-shadow: 0 4px 9px rgba(101, 77, 159, .07) !important;
+  }
+
+  html.today-theme-light body .today-v80-heading > div,
+  html[data-today-theme="light"] body .today-v80-heading > div {
+    display: grid !important;
+    gap: 3px !important;
+    min-width: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-heading strong,
+  html[data-today-theme="light"] body .today-v80-heading strong {
+    display: block !important;
+    color: #20243b !important;
+    -webkit-text-fill-color: #20243b !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -.035em !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  html.today-theme-light body .today-v80-heading small,
+  html[data-today-theme="light"] body .today-v80-heading small {
+    color: #67728a !important;
+    -webkit-text-fill-color: #67728a !important;
+    font-size: 9px !important;
+    font-weight: 650 !important;
+    line-height: 1.25 !important;
+  }
+
+  html.today-theme-light body .today-v80-result-count,
+  html[data-today-theme="light"] body .today-v80-result-count {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    max-width: 108px !important;
+    padding: 6px 7px !important;
+    border: 1px solid rgba(112, 96, 163, .21) !important;
+    border-radius: 10px !important;
+    color: #574578 !important;
+    -webkit-text-fill-color: #574578 !important;
+    background: rgba(255,255,255,.52) !important;
+    font-size: 8px !important;
+    font-weight: 850 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* Поиск: полноценная строка без сжатого текста */
+  html.today-theme-light body .today-v80-search-row,
+  html[data-today-theme="light"] body .today-v80-search-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: stretch !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box,
+  html[data-today-theme="light"] body .today-v80-search-box {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    min-height: 45px !important;
+    box-sizing: border-box !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(115, 101, 165, .24) !important;
+    border-radius: 14px !important;
+    color: #6b50a3 !important;
+    background: rgba(255,255,255,.63) !important;
+    box-shadow: inset 0 1px rgba(255,255,255,.9) !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box > span:first-child,
+  html[data-today-theme="light"] body .today-v80-search-box > span:first-child {
+    flex: 0 0 auto !important;
+    font-size: 23px !important;
+    line-height: 1 !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box input,
+  html[data-today-theme="light"] body .today-v80-search-box input {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    height: 43px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    outline: 0 !important;
+    color: #202b42 !important;
+    -webkit-text-fill-color: #202b42 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+  }
+
+  html.today-theme-light body .today-v80-search-box input::placeholder,
+  html[data-today-theme="light"] body .today-v80-search-box input::placeholder {
+    color: #768098 !important;
+    -webkit-text-fill-color: #768098 !important;
+    opacity: 1 !important;
+  }
+
+  html.today-theme-light body .today-v80-clear,
+  html[data-today-theme="light"] body .today-v80-clear {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    min-height: 45px !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(115, 101, 165, .22) !important;
+    border-radius: 13px !important;
+    color: #594779 !important;
+    -webkit-text-fill-color: #594779 !important;
+    background: linear-gradient(
+      135deg, #e6dcff, #daf0e7
+    ) !important;
+    font-size: 9px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+  }
+
+  html.today-theme-light body .today-v80-clear:disabled,
+  html[data-today-theme="light"] body .today-v80-clear:disabled {
+    opacity: .55 !important;
+  }
+
+  /* Компактная строка фильтров */
+  html.today-theme-light body .today-v80-filter-label,
+  html[data-today-theme="light"] body .today-v80-filter-label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-top: 1px !important;
+    color: #39445d !important;
+    -webkit-text-fill-color: #39445d !important;
+    font-size: 9px !important;
+    font-weight: 900 !important;
+    line-height: 1.3 !important;
+  }
+
+  html.today-theme-light body .today-v80-filter-label > span:last-child,
+  html[data-today-theme="light"] body .today-v80-filter-label > span:last-child {
+    color: #71618f !important;
+    -webkit-text-fill-color: #71618f !important;
+    font-size: 8px !important;
+    font-weight: 750 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Две зоны: закреплённые фильтры, затем горизонтальная лента категорий */
+  html.today-theme-light body .today-v80-chip-row,
+  html[data-today-theme="light"] body .today-v80-chip-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-pinned-filters,
+  html[data-today-theme="light"] body .today-v80-pinned-filters {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-category-filters,
+  html[data-today-theme="light"] body .today-v80-category-filters {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    gap: 7px !important;
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 1px 1px 5px !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-x: contain !important;
+  }
+
+  html.today-theme-light body .today-v80-category-filters::-webkit-scrollbar,
+  html[data-today-theme="light"] body .today-v80-category-filters::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-filter-chip,
+  html[data-today-theme="light"] body .today-v80-filter-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: max-content !important;
+    min-height: 35px !important;
+    padding: 7px 11px !important;
+    border: 1px solid rgba(113, 98, 163, .22) !important;
+    border-radius: 12px !important;
+    color: #4b4669 !important;
+    -webkit-text-fill-color: #4b4669 !important;
+    background: rgba(255,255,255,.62) !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 6px rgba(75,68,117,.035) !important;
+  }
+
+  html.today-theme-light body .today-v80-filter-chip.is-active,
+  html[data-today-theme="light"] body .today-v80-filter-chip.is-active {
+    color: #35264f !important;
+    -webkit-text-fill-color: #35264f !important;
+    background: linear-gradient(
+      125deg, #dcd1ff, #d5efe5 70%, #f1e1f0
+    ) !important;
+    border-color: rgba(104, 81, 168, .43) !important;
+    box-shadow: inset 0 1px rgba(255,255,255,.86) !important;
+  }
+
+  /* Сортировка и плотность: аккуратные блоки без переполнения */
+  html.today-theme-light body .today-v80-controls-row,
+  html[data-today-theme="light"] body .today-v80-controls-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 9px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    padding-top: 10px !important;
+    border-top: 1px solid rgba(113, 98, 163, .17) !important;
+  }
+
+  html.today-theme-light body .today-v80-sort,
+  html[data-today-theme="light"] body .today-v80-sort {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 5px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html.today-theme-light body .today-v80-sort > span,
+  html[data-today-theme="light"] body .today-v80-sort > span {
+    color: #66728a !important;
+    -webkit-text-fill-color: #66728a !important;
+    font-size: 8px !important;
+    font-weight: 850 !important;
+  }
+
+  html.today-theme-light body .today-v80-sort select,
+  html[data-today-theme="light"] body .today-v80-sort select {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    box-sizing: border-box !important;
+    padding: 7px 30px 7px 11px !important;
+    border: 1px solid rgba(113, 98, 163, .23) !important;
+    border-radius: 12px !important;
+    color: #303c56 !important;
+    -webkit-text-fill-color: #303c56 !important;
+    background: rgba(255,255,255,.65) !important;
+    font-size: 10px !important;
+    font-weight: 750 !important;
+  }
+
+  html.today-theme-light body .today-v80-density-group,
+  html[data-today-theme="light"] body .today-v80-density-group {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  html.today-theme-light body .today-v80-density-button,
+  html[data-today-theme="light"] body .today-v80-density-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 38px !important;
+    padding: 8px 9px !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(113, 98, 163, .22) !important;
+    border-radius: 12px !important;
+    color: #4b4669 !important;
+    -webkit-text-fill-color: #4b4669 !important;
+    background: rgba(255,255,255,.59) !important;
+    font-size: 9px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+  }
+
+  html.today-theme-light body .today-v80-density-button.is-active,
+  html[data-today-theme="light"] body .today-v80-density-button.is-active {
+    color: #35264f !important;
+    -webkit-text-fill-color: #35264f !important;
+    background: linear-gradient(
+      125deg, #ded2ff, #d7f0e7
+    ) !important;
+    border-color: rgba(104,81,168,.42) !important;
+  }
+
+  html.today-theme-light body .today-v80-status,
+  html[data-today-theme="light"] body .today-v80-status {
+    color: #5f6a82 !important;
+    -webkit-text-fill-color: #5f6a82 !important;
+    font-size: 9px !important;
+    line-height: 1.4 !important;
+  }
+
+  html.today-theme-light body .today-v80-empty,
+  html[data-today-theme="light"] body .today-v80-empty {
+    padding: 17px 12px !important;
+    border: 1px dashed rgba(113,98,163,.29) !important;
+    border-radius: 15px !important;
+    color: #3d4961 !important;
+    background: rgba(255,255,255,.44) !important;
+  }
+}
+
+
+/* ============================================================
+   ARCHIVE ACTION — CSS FALLBACK
+   JS ниже применяет те же значения непосредственно к кнопке.
+   ============================================================ */
+
+html.today-theme-light body #dailyGrid .v50-card-tools,
+html[data-today-theme="light"] body #dailyGrid .v50-card-tools,
+html.today-theme-light body #communityFeed .v50-card-tools,
+html[data-today-theme="light"] body #communityFeed .v50-card-tools,
+html.today-theme-light body .today-post-card .v50-card-tools,
+html[data-today-theme="light"] body .today-post-card .v50-card-tools {
+  position: static !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  margin: 11px 0 0 !important;
+  padding: 9px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(112,97,158,.20) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  float: none !important;
+  clear: both !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+}
+
+html.today-theme-light body #dailyGrid .daily-card > .v50-daily-tools,
+html[data-today-theme="light"] body #dailyGrid .daily-card > .v50-daily-tools,
+html.today-theme-light body .daily-card > .v50-daily-tools,
+html[data-today-theme="light"] body .daily-card > .v50-daily-tools {
+  grid-column: 1 / -1 !important;
+  align-self: stretch !important;
+  justify-self: stretch !important;
+  order: 50 !important;
+}
+
+html.today-theme-light body button[data-v50-card-action="archive-card"],
+html[data-today-theme="light"] body button[data-v50-card-action="archive-card"],
+html.today-theme-light body .v50-small-action[data-v50-card-action="archive-card"],
+html[data-today-theme="light"] body .v50-small-action[data-v50-card-action="archive-card"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: static !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 31px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(113,90,165,.34) !important;
+  border-radius: 11px !important;
+  color: #493765 !important;
+  -webkit-text-fill-color: #493765 !important;
+  background: linear-gradient(
+    125deg,#e1d7ff 0%,#d7efe7 64%,#f7e3ed 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.87),
+    0 3px 8px rgba(78,65,124,.06) !important;
+  font: 850 9px/1.2 Manrope,system-ui,sans-serif !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html.today-theme-light body button[data-v50-card-action="archive-card"]:hover,
+html[data-today-theme="light"] body button[data-v50-card-action="archive-card"]:hover {
+  background: linear-gradient(
+    125deg,#d9caff 0%,#c9eadd 64%,#f2d6e5 100%
+  ) !important;
+  border-color: rgba(100,76,158,.50) !important;
+}
+
+html.today-theme-light body button[data-v50-card-action="archive-card"]:focus-visible,
+html[data-today-theme="light"] body button[data-v50-card-action="archive-card"]:focus-visible {
+  outline: 2px solid rgba(113,85,174,.50) !important;
+  outline-offset: 2px !important;
+}
+
+@media (max-width: 640px) {
+  html.today-theme-light body #dailyGrid .v50-daily-tools,
+  html[data-today-theme="light"] body #dailyGrid .v50-daily-tools,
+  html.today-theme-light body .v50-card-tools,
+  html[data-today-theme="light"] body .v50-card-tools {
+    gap: 7px !important;
+    margin-top: 10px !important;
+    padding-top: 8px !important;
+  }
+
+  html.today-theme-light body button[data-v50-card-action="archive-card"],
+  html[data-today-theme="light"] body button[data-v50-card-action="archive-card"] {
+    min-height: 32px !important;
+    padding: 8px 11px !important;
+    font-size: 9px !important;
+  }
+}
+
+/* TODAY V114 END */
+
+</style>
+
+
+
+
+
+<link rel="stylesheet" href="./today-games-hub-v1.css?v=20261015152805">
+</head>
+<body class="today-games-route">
+
+<main id="todayGamesHub" class="tg-page" aria-live="polite">
+  <div class="tg-loading">
+    <span class="tg-loader"></span>
+    <b>Открываем игровой мир TODAY</b>
+    <p>Подготавливаем коллекцию игр…</p>
+  </div>
+</main>
+
+<div id="dailyBackdrop" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+<div id="app">
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="brand" id="brandBtn" type="button" aria-label="TODAY"><span class="today-brand-lockup" aria-label="TODAY"><span class="today-logo-mark" aria-hidden="true"><svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="todayLogoG" x1="9" y1="9" x2="63" y2="63" gradientUnits="userSpaceOnUse"><stop stop-color="#3B7CFF"/><stop offset=".42" stop-color="#7D55F5"/><stop offset=".74" stop-color="#23C8E8"/><stop offset="1" stop-color="#4BE1B0"/></linearGradient><linearGradient id="todayLogoG2" x1="30" y1="13" x2="55" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset=".58" stop-color="#E4DDFF"/><stop offset="1" stop-color="#BFEFFF"/></linearGradient><linearGradient id="todayLogoGold" x1="42" y1="4" x2="57" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF4AB"/><stop offset=".52" stop-color="#E6AA22"/><stop offset="1" stop-color="#A15A07"/></linearGradient><filter id="todayLogoShadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#315FE4" flood-opacity=".24"/></filter></defs><g filter="url(#todayLogoShadow)"><ellipse cx="36" cy="39" rx="28" ry="21" stroke="url(#todayLogoG)" stroke-width="5" stroke-linecap="round" transform="rotate(-19 36 39)" stroke-dasharray="112 38"/><ellipse cx="35" cy="36" rx="16.5" ry="16.5" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.48)" stroke-width="1.4"/><circle cx="35" cy="36" r="13.3" fill="#121A31" stroke="url(#todayLogoG)" stroke-width="2.7"/><path d="M24 40C28 26 40 23 48 31C42 32 38 37 37 47C32 46 27 44 24 40Z" fill="url(#todayLogoG)" opacity=".82"/><path d="M30.1 20.2L34.2 31.5L46.8 35.4L35.5 39.5L31.6 52L27.5 40.6L15 36.7L26.3 32.8L30.1 20.2Z" fill="url(#todayLogoG2)" stroke="#FFFFFF" stroke-opacity=".88" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 51C19 56 35 60 49 54C56 51 61 45 65 37" stroke="#24C8EC" stroke-width="2.4" stroke-linecap="round"/><path d="M50 18L52.7 10.5L55.8 17.5L63.3 20.1L56 22.9L53.4 30.3L50.4 23L43 20.4L50 18Z" fill="url(#todayLogoGold)" stroke="#FFF6C7" stroke-width="1.1"/><circle cx="60" cy="9" r="2.2" fill="#53E1BE"/><circle cx="11" cy="15" r="1.7" fill="#A56EFF"/><circle cx="62" cy="56" r="1.7" fill="#45B8FF"/></g></svg></span><span class="today-brand-copy"><span class="today-brand-word">TODAY<span class="today-brand-dot">•</span></span><span class="today-brand-tag">ЖИВИ СЕГОДНЯ · ОСТАВЬ СЛЕД</span></span><span class="today-brand-line" aria-hidden="true"></span></span></button>
+    <div class="top-actions">
+      <div class="coin-badge" id="coinBadge" title="Монеты"><span>●</span><b id="coinCount">0</b></div>
+      <button id="installBtn" class="top-btn hidden" type="button">НА ЭКРАН</button>
+      <a id="profileBtn" class="account-btn today-profile-direct-link" href="./profile.html" data-today-open-profile="1" aria-label="Моя страница"><span id="profileAvatar">✦</span><b id="profileLabel">АККАУНТ</b></a><button id="todayThemeToggle" type="button" aria-label="Переключить тему" title="Переключить светлую или тёмную тему"><span class="today-theme-icon" aria-hidden="true">☼</span><span class="today-theme-label">СВЕТЛАЯ ТЕМА</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero shell" id="homeSection">
+  <div class="hero-copy">
+    <div class="eyebrow">СЕГОДНЯ · <span id="dateLabel">—</span></div>
+    <h1>В 00:00 ЛЕНТА<br><span>ИСЧЕЗНЕТ.</span></h1>
+    <p>Воспоминания остаются. Каждый новый день — новая история.</p>
+    <div class="hero-rail"><span class="pulse-dot"></span><strong id="activityNow">TODAY живёт сейчас</strong><span id="activityText">кто-то уже открыл день</span></div>
+    <!-- TODAY_AUTHOR_SUPPORT_V19 -->
+    <button id="supportAuthorBtn" class="today-support-btn" type="button" aria-haspopup="dialog" aria-label="Поддержать автора TODAY">
+      <span class="today-support-heart" aria-hidden="true">♡</span>
+      <span class="today-support-btn-copy"><strong>Поддержать автора</strong><small>Помочь TODAY жить дальше</small></span>
+      <span class="today-support-arrow" aria-hidden="true">↗</span>
+    </button>
+  </div>
+  <div class="hero-side">
+    <div class="clock-card"><span>ДО ПОЛУНОЧИ</span><strong id="countdown">--:--:--</strong><div class="clock-row"><b id="dayProgress">0%</b><small>дня прошло</small></div><div class="progress"><i id="progressBar"></i></div></div>
+    <div class="scene-card"><span id="sceneName">СЦЕНА ДНЯ</span><strong id="sceneTitle">—</strong><small id="sceneMeta">—</small></div>
+  </div>
+</section>
+
+<section class="activity-strip shell">
+  <div class="live-pill"><i class="live-dot"></i><b id="liveCount">0</b><span>активны сейчас</span></div>
+  <div class="ticker" id="activityTicker">Открывай. Отвечай. Оставляй след.</div>
+  <div class="strip-actions"><span>12 РУБРИК</span><button id="notifyBtn" class="quiet-btn" type="button">УВЕДОМИТЬ</button></div>
+</section>
+
+<section class="today-section shell" aria-labelledby="todayTitle">
+  <div class="section-head"><div><div class="eyebrow">ПРЯМО СЕЙЧАС</div><h2 id="todayTitle">Что происходит сегодня</h2></div><span class="section-note">каждый блок живёт до полуночи</span></div>
+  <div id="dailyGrid" class="daily-grid" aria-live="polite"></div>
+</section>
+
+<section class="community-section shell" id="peopleSection" aria-labelledby="peopleTitle">
+  <div class="section-head"><div><div class="eyebrow">ЛЮДИ</div><h2 id="peopleTitle">Что оставили сегодня</h2></div><button id="peopleRefresh" class="quiet-btn" type="button">ОБНОВИТЬ</button></div>
+  <div class="community-intro">Самые интересные песни, истории, факты, тренды, моменты и следы появляются здесь по ходу дня.</div>
+  <div id="communityFeed" class="community-feed"></div>
+</section>
+
+<section class="ranking-section shell" id="rankSection" aria-labelledby="rankTitle">
+  <div class="section-head"><div><div class="eyebrow">ТОП ДНЯ</div><h2 id="rankTitle">Кто сегодня в игре</h2></div><span class="section-note">очки сгорают в полночь</span></div>
+  <div class="ranking-card"><div id="leaderboard" class="leaderboard"></div></div>
+</section>
+</main>
+
+<footer class="footer shell"><div><strong>TODAY</strong><span>Один интернет. Один день.</span></div><span id="footerScene">Сцена меняется каждый день.</span></footer>
+
+<nav class="bottom-nav today-v96-floating-nav" aria-label="Навигация">
+  <button data-nav="home" class="active" type="button" aria-label="TODAY">
+    <span aria-hidden="true">🌐</span><small>TODAY</small>
+  </button>
+  <button data-nav="people" type="button" aria-label="Люди">
+    <span aria-hidden="true">👥</span><small>ЛЮДИ</small>
+  </button>
+  <button data-nav="games" type="button" aria-label="Игры">
+    <span aria-hidden="true">🎮</span><small>ИГРЫ</small>
+  </button>
+  <button data-nav="chats" type="button" aria-label="Сообщения и чаты">
+    <span class="today-v96-chat-icon" aria-hidden="true">
+      <svg viewBox="0 0 28 28" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 5.75h12.2A3.8 3.8 0 0 1 21 9.55v5.1a3.8 3.8 0 0 1-3.8 3.8h-5.1l-4.6 3.1v-3.2A3.8 3.8 0 0 1 4 14.55v-5A3.8 3.8 0 0 1 5 5.75Z"/>
+        <path d="M16.9 9.1h5.2A2.95 2.95 0 0 1 25 12v5a2.95 2.95 0 0 1-2.95 2.95h-1.2"/>
+        <path d="M8.1 10.7h7.1M8.1 14.1h4.9"/>
+      </svg>
+    </span>
+    <small>ЧАТЫ</small>
+  </button>
+  <a class="today-profile-nav-link" data-nav="me" href="./profile.html"
+     data-today-open-profile="1" aria-label="Моя страница">
+    <span aria-hidden="true">✨</span><small>Я</small>
+  </a>
+</nav>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop"></div><div class="modal-card"><button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="pet" class="pixel-pet hidden" aria-hidden="true"></div>
+<script src="./app.js?v=20261015152805"></script>
+<script src="./social.js?v=20261015152805"></script>
+<script src="./today-art.js?v=20261015190026"></script>
+<script src="./theme.js?v=20261015130000"></script>
+<script src="./today-evolution.js?v=20261015190026"></script>
+<script src="./today-social-v51.js?v=20261015190026"></script>
+<script src="./today-omniverse-v60.js?v=20261015190026"></script>
+<script src="./today-home-v64.js?v=20261015190026"></script>
+<script src="./today-content-v65.js?v=20261015190026"></script>
+<script src="./today-media-v66.js?v=20261015190026"></script>
+<script src="./today-personalization-v67.js?v=20261015190026"></script>
+<script src="./today-ux-v68.js?v=20261015190026"></script>
+  <script src="./today-home-v69.js?v=20261015190026"></script>
+<script src="./today-home-v70.js?v=20261015190026"></script>
+<script src="./today-home-v71.js?v=20261015190026"></script>
+<script src="./today-home-v72.js?v=20261015190026"></script>
+<script src="./today-home-v73.js?v=20261015190026"></script>
+<script src="./today-home-v77.js?v=20261015190026"></script>
+<script src="./today-home-v78.js?v=20261015190026"></script>
+<script src="./today-home-v79.js?v=20261015190026"></script>
+<script src="./today-home-v80.js?v=20261015190026"></script>
+
+
+<script src="./today-arcade-v95.js?v=20261015190035"></script>
+<script src="./today-arcade-v96.js?v=20261015190036"></script>
+
+<script id="today-light-polish-v111-script">
+
+(function () {
+  "use strict";
+
+  if (window.__TODAY_V111_LIGHT_POLISH__) return;
+  window.__TODAY_V111_LIGHT_POLISH__ = true;
+
+  var actionClassPrefix = "today-v111-action--";
+
+  function isLightTheme() {
+    var root = document.documentElement;
+
+    return root.classList.contains("today-theme-light") ||
+      root.dataset.todayTheme === "light";
+  }
+
+  function getLabel(el) {
+    return [
+      el.innerText || "",
+      el.getAttribute("aria-label") || "",
+      el.getAttribute("title") || ""
+    ].join(" ").replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  function actionKind(label) {
+    if (/истор/.test(label)) return "story";
+    if (/фото|фотогал|изображ|галере|сним/.test(label)) return "photo";
+    if (/видео|клип/.test(label)) return "video";
+    if (/музык|песн|аудио/.test(label)) return "music";
+
+    if (/созда|публикац|добавить|опубликов|сохранить|отправить/.test(label)) {
+      return "create";
+    }
+
+    return "mix";
+  }
+
+  function markCreateButtons() {
+    var buttons = document.querySelectorAll(
+      "button, [role='button']"
+    );
+
+    buttons.forEach(function (el) {
+      var oldClasses = Array.from(el.classList).filter(function (name) {
+        return name === "today-v111-action" ||
+          name.indexOf(actionClassPrefix) === 0;
+      });
+
+      if (oldClasses.length) {
+        el.classList.remove.apply(el.classList, oldClasses);
+      }
+
+      if (el.closest(
+        ".bottom-nav, .today-social-nav, .modal-close"
+      )) {
+        return;
+      }
+
+      var label = getLabel(el);
+
+      if (/удалить|удаление|пожаловаться|отменить|закрыть|назад|выход/.test(label)) {
+        return;
+      }
+
+      var forcedZone =
+        el.matches(
+          ".today-v64-create-btn, " +
+          ".today-v64-create-grid button, " +
+          ".today-v66-media-rail-actions button"
+        ) ||
+        !!el.closest(
+          ".today-v64-create-grid, " +
+          ".today-v66-media-rail-actions"
+        );
+
+      var hasActionLabel =
+        /созда|истор|фото|фотогал|изображ|галере|сним|видео|клип|музык|песн|аудио|публикац|добавить|опубликов/.test(label);
+
+      if (!forcedZone && !hasActionLabel) return;
+
+      el.classList.add("today-v111-action");
+      el.classList.add(
+        actionClassPrefix + actionKind(label)
+      );
+    });
+  }
+
+  function isNearWhite(color) {
+    var match = String(color).match(
+      /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i
+    );
+
+    if (!match) return false;
+
+    var r = Number(match[1]);
+    var g = Number(match[2]);
+    var b = Number(match[3]);
+
+    var min = Math.min(r, g, b);
+    var max = Math.max(r, g, b);
+
+    return min >= 215 && (max - min) <= 55;
+  }
+
+  function hasDirectText(el) {
+    return Array.prototype.some.call(
+      el.childNodes,
+      function (node) {
+        return node.nodeType === 3 &&
+          String(node.nodeValue || "").trim().length > 0;
+      }
+    );
+  }
+
+  function removeDarkTextClasses() {
+    document.querySelectorAll(
+      ".today-v111-dark-text"
+    ).forEach(function (el) {
+      el.classList.remove("today-v111-dark-text");
+    });
+  }
+
+  function paintWhiteTextDark() {
+    var selector = [
+      "header", "header *",
+      "main", "main *",
+      "footer", "footer *",
+      ".bottom-nav", ".bottom-nav *",
+      ".today-support-dialog", ".today-support-dialog *",
+      "#modal:not(.today-social-modal):not(.today-social-page):not(.today-v96-crystal)",
+      "#modal:not(.today-social-modal):not(.today-social-page):not(.today-v96-crystal) *"
+    ].join(",");
+
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (el.closest(
+        "svg, script, style, [aria-hidden='true'], #countdown, " +
+        "#modal.today-social-modal, #modal.today-social-page, " +
+        "#modal.today-v96-crystal"
+      )) {
+        return;
+      }
+
+      if (!hasDirectText(el) &&
+          !el.matches("input, textarea, select")) {
+        return;
+      }
+
+      /* Не удаляем уже добавленный класс при повторной проверке:
+         иначе computed color успел бы стать тёмным из-за самого класса. */
+
+      if (el.classList.contains("today-v111-dark-text")) {
+        return;
+      }
+
+      var color = window.getComputedStyle(el).color;
+
+      if (isNearWhite(color)) {
+        el.classList.add("today-v111-dark-text");
+      }
+    });
+  }
+
+  var queued = false;
+
+  function refresh() {
+    markCreateButtons();
+
+    if (!isLightTheme()) {
+      removeDarkTextClasses();
+      return;
+    }
+
+    paintWhiteTextDark();
+  }
+
+  function queueRefresh() {
+    if (queued) return;
+
+    queued = true;
+
+    window.requestAnimationFrame(function () {
+      queued = false;
+      refresh();
+    });
+  }
+
+  var contentObserver = new MutationObserver(queueRefresh);
+
+  contentObserver.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    characterData: true
+  });
+
+  var themeObserver = new MutationObserver(queueRefresh);
+
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "data-today-theme"]
+  });
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    queueRefresh,
+    { once: true }
+  );
+
+  window.addEventListener("load", queueRefresh, { once: true });
+
+  document.addEventListener("click", function (event) {
+    var target = event.target instanceof Element
+      ? event.target
+      : null;
+
+    if (target && target.closest("#todayThemeToggle")) {
+      queueRefresh();
+    }
+  }, true);
+
+  queueRefresh();
+})();
+
+</script>
+
+<script id="today-light-polish-v113-script">
+
+(function () {
+  "use strict";
+
+  if (window.__TODAY_V113_LIGHT_DETAIL_FIX__) return;
+  window.__TODAY_V113_LIGHT_DETAIL_FIX__ = true;
+
+  var promoGradient =
+    "radial-gradient(ellipse at 2% 0%, rgba(186,164,255,.48), transparent 52%)," +
+    "radial-gradient(ellipse at 100% 100%, rgba(123,213,187,.40), transparent 53%)," +
+    "linear-gradient(125deg,#e6ddfb 0%,#d9efe7 56%,#f6e0ec 100%)";
+
+  var promoItemBackgrounds = [
+    "linear-gradient(135deg,#e5dcff,#f5e5f0)",
+    "linear-gradient(135deg,#d7f0e6,#e5efff)",
+    "linear-gradient(135deg,#fce2d8,#f9e5ee)",
+    "linear-gradient(135deg,#dceaff,#eae2ff)"
+  ];
+
+  function isLightTheme() {
+    var root = document.documentElement;
+    return root.classList.contains("today-theme-light") ||
+      root.dataset.todayTheme === "light";
+  }
+
+  function setImportant(node, property, value) {
+    if (!node) return;
+    if (node.style.getPropertyValue(property) !== value ||
+        node.style.getPropertyPriority(property) !== "important") {
+      node.style.setProperty(property, value, "important");
+    }
+  }
+
+  function clearOwnedStyles(node, properties) {
+    if (!node) return;
+    properties.forEach(function (property) {
+      node.style.removeProperty(property);
+    });
+  }
+
+  function applyPromoTheme() {
+    var block = document.querySelector("#todayPromotedBlock");
+    if (!block) return;
+
+    var list = block.querySelector("#todayPromotedList, .ts-promoted-list");
+    if (!isLightTheme()) {
+      clearOwnedStyles(block, [
+        "background", "background-color", "background-image",
+        "border", "border-radius", "padding", "margin-top",
+        "margin-bottom", "box-shadow", "backdrop-filter",
+        "-webkit-backdrop-filter", "outline", "color"
+      ]);
+
+      if (list) {
+        clearOwnedStyles(list, [
+          "background", "border", "box-shadow", "padding"
+        ]);
+        Array.from(list.children).forEach(function (item) {
+          clearOwnedStyles(item, [
+            "background", "color", "border", "border-radius",
+            "box-shadow", "-webkit-text-fill-color"
+          ]);
+        });
+      }
+      return;
+    }
+
+    // Inline !important wins against later dynamically loaded stylesheets.
+    setImportant(block, "background", promoGradient);
+    setImportant(block, "background-color", "#e8e0f8");
+    setImportant(block, "border", "1px solid rgba(119,96,170,.30)");
+    setImportant(block, "border-radius", "22px");
+    setImportant(block, "padding", "16px");
+    setImportant(block, "margin-top", "18px");
+    setImportant(block, "margin-bottom", "22px");
+    setImportant(block, "box-shadow",
+      "inset 0 1px rgba(255,255,255,.85),0 10px 26px rgba(85,70,132,.10)");
+    setImportant(block, "backdrop-filter", "none");
+    setImportant(block, "-webkit-backdrop-filter", "none");
+    setImportant(block, "outline", "0");
+    setImportant(block, "color", "#172033");
+
+    if (!list) return;
+
+    setImportant(list, "background", "transparent");
+    setImportant(list, "border", "0");
+    setImportant(list, "box-shadow", "none");
+    setImportant(list, "padding", "0");
+
+    Array.from(list.children).forEach(function (item, index) {
+      setImportant(
+        item,
+        "background",
+        promoItemBackgrounds[index % promoItemBackgrounds.length]
+      );
+      setImportant(item, "color", "#172033");
+      setImportant(item, "-webkit-text-fill-color", "#172033");
+      setImportant(item, "border", "1px solid rgba(111,99,154,.24)");
+      setImportant(item, "border-radius", "16px");
+      setImportant(item, "box-shadow", "0 5px 16px rgba(75,68,119,.06)");
+    });
+  }
+
+  function tagChatBadge() {
+    var button = document.querySelector(
+      "nav.bottom-nav button[data-nav='chats']"
+    );
+    if (!button) return;
+
+    // Some builds put the unread total in a data attribute consumed by ::after.
+    Array.from(button.attributes).forEach(function (attribute) {
+      if (/unread|badge|count|notification/i.test(attribute.name) &&
+          /^\s*\d{1,4}\s*$/.test(attribute.value)) {
+        button.classList.add("today-v113-has-chat-badge");
+      }
+    });
+
+    var nodes = button.querySelectorAll(
+      "span,b,i,em,strong,div,output"
+    );
+
+    nodes.forEach(function (node) {
+      if (node.closest(".today-v96-chat-icon")) return;
+      if (node.matches("small")) return;
+
+      // An already tagged outer counter owns its descendants.
+      if (node.parentElement &&
+          node.parentElement.closest(".today-v113-chat-badge")) {
+        return;
+      }
+
+      var text = String(node.textContent || "").trim();
+      var className = typeof node.className === "string"
+        ? node.className
+        : "";
+
+      var isCountText = /^\d{1,3}\+?$/.test(text);
+      var isCountClass =
+        /(unread|badge|count|notification|message-counter|chat-counter)/i
+          .test(className);
+
+      if (!isCountText && !isCountClass) return;
+
+      // Do not tag decorative SVG wrappers, icon containers, or label.
+      if (node.querySelector("svg") ||
+          node.classList.contains("today-v96-chat-icon")) {
+        return;
+      }
+
+      node.classList.add("today-v113-chat-badge");
+      button.classList.add("today-v113-has-chat-badge");
+
+      if (isLightTheme()) {
+        setImportant(node, "position", "absolute");
+        setImportant(node, "top", "2px");
+        setImportant(node, "right", "calc(50% - 23px)");
+        setImportant(node, "z-index", "20");
+        setImportant(node, "display", "inline-flex");
+        setImportant(node, "align-items", "center");
+        setImportant(node, "justify-content", "center");
+        setImportant(node, "width", "auto");
+        setImportant(node, "min-width", "15px");
+        setImportant(node, "max-width", "24px");
+        setImportant(node, "height", "15px");
+        setImportant(node, "min-height", "15px");
+        setImportant(node, "max-height", "15px");
+        setImportant(node, "margin", "0");
+        setImportant(node, "padding", "0 4px");
+        setImportant(node, "box-sizing", "border-box");
+        setImportant(node, "border-radius", "999px");
+        setImportant(node, "border", "1px solid rgba(110,87,166,.28)");
+        setImportant(node, "color", "#463363");
+        setImportant(node, "-webkit-text-fill-color", "#463363");
+        setImportant(node, "background",
+          "linear-gradient(120deg,#e2d7ff,#d6f0e7 70%,#f3deeb)");
+        setImportant(node, "box-shadow", "0 2px 6px rgba(68,55,105,.11)");
+        setImportant(node, "font-size", "9px");
+        setImportant(node, "font-weight", "850");
+        setImportant(node, "line-height", "1");
+        setImportant(node, "text-align", "center");
+        setImportant(node, "white-space", "nowrap");
+        setImportant(node, "text-shadow", "none");
+        setImportant(node, "transform", "none");
+      }
+    });
+  }
+
+  function alignChatIcon() {
+    var button = document.querySelector(
+      "nav.bottom-nav button[data-nav='chats']"
+    );
+    if (!button || !isLightTheme()) return;
+
+    var icon = button.querySelector(".today-v96-chat-icon");
+    if (!icon) return;
+
+    setImportant(icon, "position", "relative");
+    setImportant(icon, "display", "grid");
+    setImportant(icon, "place-items", "center");
+    setImportant(icon, "width", "26px");
+    setImportant(icon, "height", "26px");
+    setImportant(icon, "min-height", "26px");
+    setImportant(icon, "margin", "0");
+    setImportant(icon, "padding", "0");
+    setImportant(icon, "transform", "none");
+    setImportant(icon, "line-height", "0");
+
+    var svg = icon.querySelector("svg");
+    if (svg) {
+      setImportant(svg, "display", "block");
+      setImportant(svg, "width", "24px");
+      setImportant(svg, "height", "24px");
+      setImportant(svg, "margin", "0");
+      setImportant(svg, "transform", "none");
+    }
+
+    setImportant(button, "position", "relative");
+    setImportant(button, "align-items", "center");
+    setImportant(button, "justify-content", "center");
+    setImportant(button, "flex-direction", "column");
+    setImportant(button, "gap", "4px");
+  }
+
+  var queued = false;
+
+  function refresh() {
+    applyPromoTheme();
+    tagChatBadge();
+    alignChatIcon();
+  }
+
+  function queueRefresh() {
+    if (queued) return;
+    queued = true;
+
+    window.requestAnimationFrame(function () {
+      queued = false;
+      refresh();
+    });
+  }
+
+  var domObserver = new MutationObserver(queueRefresh);
+  domObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  var themeObserver = new MutationObserver(queueRefresh);
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "data-today-theme"]
+  });
+
+  document.addEventListener("DOMContentLoaded", queueRefresh, { once: true });
+  window.addEventListener("load", queueRefresh, { once: true });
+
+  // Initial attempt plus retries for dynamically injected social elements.
+  queueRefresh();
+  window.setTimeout(queueRefresh, 350);
+  window.setTimeout(queueRefresh, 1200);
+})();
+
+</script>
+
+<script id="today-light-polish-v114-script">
+
+(function () {
+  "use strict";
+
+  if (window.__TODAY_V114_ARCHIVE_MOBILE_FIX__) return;
+  window.__TODAY_V114_ARCHIVE_MOBILE_FIX__ = true;
+
+  var archiveSelector = [
+    'button[data-v50-card-action="archive-card"]',
+    '.v50-small-action[data-v50-card-action="archive-card"]'
+  ].join(",");
+
+  var archiveButtonProperties = [
+    "display", "align-items", "justify-content", "position", "flex",
+    "width", "min-width", "max-width", "min-height", "height",
+    "margin", "padding", "border", "border-radius", "color",
+    "-webkit-text-fill-color", "background", "background-color",
+    "background-image", "box-shadow", "font", "font-family",
+    "font-size", "font-weight", "line-height", "letter-spacing",
+    "text-align", "white-space", "word-break", "overflow-wrap",
+    "text-shadow", "transform", "opacity", "filter", "outline",
+    "outline-offset"
+  ];
+
+  var barProperties = [
+    "position", "display", "flex-flow", "align-items",
+    "justify-content", "gap", "width", "max-width", "min-width",
+    "height", "margin", "padding", "border", "border-top",
+    "border-radius", "background", "background-color",
+    "background-image", "box-shadow", "transform", "float",
+    "clear", "overflow", "z-index", "box-sizing",
+    "grid-column", "align-self", "justify-self", "order"
+  ];
+
+  function isLightTheme() {
+    var root = document.documentElement;
+    return root.classList.contains("today-theme-light") ||
+      root.dataset.todayTheme === "light";
+  }
+
+  function setImportant(node, property, value) {
+    if (!node) return;
+    if (node.style.getPropertyValue(property) !== value ||
+        node.style.getPropertyPriority(property) !== "important") {
+      node.style.setProperty(property, value, "important");
+    }
+  }
+
+  function clearProperties(node, properties) {
+    if (!node) return;
+    properties.forEach(function (property) {
+      node.style.removeProperty(property);
+    });
+  }
+
+  function styleArchiveBar(bar) {
+    if (!bar) return;
+
+    setImportant(bar, "position", "static");
+    setImportant(bar, "display", "flex");
+    setImportant(bar, "flex-flow", "row wrap");
+    setImportant(bar, "align-items", "center");
+    setImportant(bar, "justify-content", "flex-start");
+    setImportant(bar, "gap", "7px");
+    setImportant(bar, "width", "100%");
+    setImportant(bar, "max-width", "100%");
+    setImportant(bar, "min-width", "0");
+    setImportant(bar, "height", "auto");
+    setImportant(bar, "margin", "11px 0 0");
+    setImportant(bar, "padding", "9px 0 0");
+    setImportant(bar, "border", "0");
+    setImportant(bar, "border-top", "1px solid rgba(112,97,158,.20)");
+    setImportant(bar, "border-radius", "0");
+    setImportant(bar, "background", "transparent");
+    setImportant(bar, "box-shadow", "none");
+    setImportant(bar, "transform", "none");
+    setImportant(bar, "float", "none");
+    setImportant(bar, "clear", "both");
+    setImportant(bar, "overflow", "visible");
+    setImportant(bar, "z-index", "1");
+    setImportant(bar, "box-sizing", "border-box");
+
+    if (bar.classList.contains("v50-daily-tools")) {
+      setImportant(bar, "grid-column", "1 / -1");
+      setImportant(bar, "align-self", "stretch");
+      setImportant(bar, "justify-self", "stretch");
+      setImportant(bar, "order", "50");
+    }
+  }
+
+  function styleArchiveButton(button) {
+    if (!button) return;
+
+    setImportant(button, "display", "inline-flex");
+    setImportant(button, "align-items", "center");
+    setImportant(button, "justify-content", "center");
+    setImportant(button, "position", "static");
+    setImportant(button, "flex", "0 0 auto");
+    setImportant(button, "width", "auto");
+    setImportant(button, "min-width", "0");
+    setImportant(button, "max-width", "100%");
+    setImportant(button, "min-height", "31px");
+    setImportant(button, "height", "auto");
+    setImportant(button, "margin", "0");
+    setImportant(button, "padding", "8px 12px");
+    setImportant(button, "border", "1px solid rgba(113,90,165,.34)");
+    setImportant(button, "border-radius", "11px");
+    setImportant(button, "color", "#493765");
+    setImportant(button, "-webkit-text-fill-color", "#493765");
+    setImportant(button, "background",
+      "linear-gradient(125deg,#e1d7ff 0%,#d7efe7 64%,#f7e3ed 100%)");
+    setImportant(button, "background-color", "#e1d7ff");
+    setImportant(button, "box-shadow",
+      "inset 0 1px rgba(255,255,255,.87),0 3px 8px rgba(78,65,124,.06)");
+    setImportant(button, "font-family", "Manrope,system-ui,sans-serif");
+    setImportant(button, "font-size", "9px");
+    setImportant(button, "font-weight", "850");
+    setImportant(button, "line-height", "1.2");
+    setImportant(button, "letter-spacing", "0");
+    setImportant(button, "text-align", "center");
+    setImportant(button, "white-space", "nowrap");
+    setImportant(button, "word-break", "normal");
+    setImportant(button, "overflow-wrap", "normal");
+    setImportant(button, "text-shadow", "none");
+    setImportant(button, "transform", "none");
+    setImportant(button, "opacity", "1");
+    setImportant(button, "filter", "none");
+    setImportant(button, "outline-offset", "2px");
+  }
+
+  function applyArchiveTheme() {
+    var bars = document.querySelectorAll(
+      ".v50-card-tools, .v50-daily-tools"
+    );
+
+    var buttons = document.querySelectorAll(archiveSelector);
+
+    if (!isLightTheme()) {
+      bars.forEach(function (bar) {
+        clearProperties(bar, barProperties);
+      });
+
+      buttons.forEach(function (button) {
+        clearProperties(button, archiveButtonProperties);
+      });
+
+      return;
+    }
+
+    // Only bars containing the real archive action are changed.
+    buttons.forEach(function (button) {
+      var bar = button.closest(".v50-card-tools");
+      if (bar) styleArchiveBar(bar);
+      styleArchiveButton(button);
+    });
+  }
+
+  /*
+   * Mobile discovery styles are in V114 CSS. Keep this helper as a
+   * safety net if another loaded component changes width/overflow inline.
+   */
+  function refreshMobileDiscovery() {
+    if (!isLightTheme()) return;
+    if (window.matchMedia &&
+        !window.matchMedia("(max-width: 640px)").matches) {
+      return;
+    }
+
+    var toolbar = document.querySelector(
+      "#todayV80DailyTools, .today-v80-daily-tools"
+    );
+
+    if (!toolbar) return;
+
+    setImportant(toolbar, "box-sizing", "border-box");
+    setImportant(toolbar, "min-width", "0");
+    setImportant(toolbar, "max-width", "100%");
+
+    var categoryRow = toolbar.querySelector(
+      ".today-v80-category-filters"
+    );
+
+    if (categoryRow) {
+      setImportant(categoryRow, "max-width", "100%");
+      setImportant(categoryRow, "min-width", "0");
+      setImportant(categoryRow, "overflow-x", "auto");
+      setImportant(categoryRow, "overflow-y", "hidden");
+      setImportant(categoryRow, "flex-wrap", "nowrap");
+      setImportant(categoryRow, "scrollbar-width", "none");
+      setImportant(categoryRow, "-webkit-overflow-scrolling", "touch");
+    }
+
+    var search = toolbar.querySelector("[data-v80-search]");
+    if (search) {
+      setImportant(search, "min-width", "0");
+      setImportant(search, "max-width", "100%");
+      setImportant(search, "box-sizing", "border-box");
+    }
+
+    var sort = toolbar.querySelector("[data-v80-sort]");
+    if (sort) {
+      setImportant(sort, "max-width", "100%");
+      setImportant(sort, "box-sizing", "border-box");
+    }
+  }
+
+  var queued = false;
+
+  function refresh() {
+    applyArchiveTheme();
+    refreshMobileDiscovery();
+  }
+
+  function queueRefresh() {
+    if (queued) return;
+    queued = true;
+
+    window.requestAnimationFrame(function () {
+      queued = false;
+      refresh();
+    });
+  }
+
+  /*
+   * Observe dynamic additions and text changes only.
+   * Style writes do not trigger this observer, avoiding an observer loop.
+   */
+  var observer = new MutationObserver(queueRefresh);
+
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    characterData: true
+  });
+
+  var themeObserver = new MutationObserver(queueRefresh);
+
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "data-today-theme"]
+  });
+
+  window.addEventListener("resize", queueRefresh, { passive: true });
+  window.addEventListener("load", queueRefresh, { once: true });
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    queueRefresh,
+    { once: true }
+  );
+
+  queueRefresh();
+  window.setTimeout(queueRefresh, 250);
+  window.setTimeout(queueRefresh, 900);
+})();
+
+</script>
+<script src="./today-games-hub-v1.js?v=20261015152805"></script>
+</body>
+</html>
