@@ -2863,3 +2863,1749 @@ body.today-games-route #todayGamesHub .tg-play {
   pointer-events: auto !important;
   cursor: pointer !important;
 }
+
+/* ==========================================================================
+   TODAY ARCADE V4 — CINEMATIC UNIVERSE
+   ========================================================================== */
+
+body.today-games-route {
+  --tg-v4-width: 1280px;
+  --tg-v4-ink: #f1f4ff;
+  --tg-v4-muted: #a3b3d2;
+  --tg-v4-line: rgba(156,177,235,.17);
+  --tg-v4-panel: rgba(17,27,47,.88);
+  --tg-v4-purple: #9b91ff;
+  --tg-v4-cyan: #6ce8dd;
+  background: #080b16 !important;
+  color: var(--tg-v4-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.today-theme-light body.today-games-route {
+  --tg-v4-ink: #2e2548;
+  --tg-v4-muted: #786c91;
+  --tg-v4-line: rgba(118,95,166,.19);
+  --tg-v4-panel: rgba(255,255,255,.74);
+  --tg-v4-purple: #7460c4;
+  --tg-v4-cyan: #329da2;
+  background: #ede8f7 !important;
+}
+
+/* Общий фон: цветовые поля и мягкая глубина. */
+body.today-games-route #todayGamesHub {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 100vh !important;
+  overflow: clip visible;
+  padding-bottom: max(48px,env(safe-area-inset-bottom)) !important;
+  background:
+    radial-gradient(
+      ellipse at 8% 5%,
+      rgba(101,91,216,.21),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 95% 19%,
+      rgba(24,158,169,.14),
+      transparent 31%
+    ),
+    radial-gradient(
+      ellipse at 60% 85%,
+      rgba(116,55,169,.11),
+      transparent 44%
+    ),
+    linear-gradient(
+      138deg,
+      #080b16 0%,
+      #0c1222 42%,
+      #0b1320 74%,
+      #080d18 100%
+    ) !important;
+  color: var(--tg-v4-ink);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub {
+  background:
+    radial-gradient(
+      ellipse at 4% 3%,
+      rgba(172,154,238,.38),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 94% 18%,
+      rgba(113,209,201,.29),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 65% 84%,
+      rgba(243,186,209,.20),
+      transparent 40%
+    ),
+    linear-gradient(
+      138deg,
+      #eae4f8 0%,
+      #f4eef9 46%,
+      #e2f1ec 100%
+    ) !important;
+}
+
+/* ── Шапка: лаконичная и дорогая ───────────────────────────────────────── */
+
+body.today-games-route .tg-topbar {
+  min-height: 70px;
+  padding: 11px max(22px,calc((100vw - var(--tg-v4-width))/2));
+  border-bottom: 1px solid rgba(161,184,240,.13);
+  background: rgba(7,11,22,.72);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.13),
+    inset 0 1px rgba(255,255,255,.045);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+}
+
+html.today-theme-light body.today-games-route .tg-topbar {
+  border-color: rgba(118,95,166,.15);
+  background: rgba(248,245,253,.79);
+  box-shadow:
+    0 9px 33px rgba(83,64,126,.08),
+    inset 0 1px rgba(255,255,255,.9);
+}
+
+body.today-games-route .tg-brand {
+  gap: 12px;
+  transition: transform .2s ease,opacity .2s ease;
+}
+
+body.today-games-route .tg-brand:hover {
+  transform: translateY(-1px);
+  opacity: .92;
+}
+
+body.today-games-route .tg-brand-mark {
+  flex: 0 0 45px;
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(161,181,255,.30);
+  border-radius: 15px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 28% 10%,rgba(255,255,255,.35),transparent 39%),
+    linear-gradient(145deg,#8374e8 0%,#5258b2 47%,#258d99 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.35),
+    0 9px 24px rgba(69,83,190,.26);
+  font-size: 24px;
+}
+
+body.today-games-route .tg-brand-copy b {
+  font-size: 14px;
+  font-weight: 1000;
+  letter-spacing: .17em;
+}
+
+body.today-games-route .tg-brand-copy small {
+  margin-top: 4px;
+  color: #8da3cc;
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+html.today-theme-light body.today-games-route .tg-brand-copy small {
+  color: #817198;
+}
+
+body.today-games-route .tg-nav-link,
+body.today-games-route #todayThemeToggle {
+  min-height: 41px;
+  padding: 9px 13px;
+  border: 1px solid rgba(143,171,234,.19);
+  border-radius: 13px;
+  color: #e2eaff;
+  background: rgba(26,36,59,.64);
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  transition: transform .18s ease,background .18s ease,border-color .18s ease;
+}
+
+body.today-games-route .tg-nav-link:hover,
+body.today-games-route #todayThemeToggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(154,173,255,.44);
+  background: rgba(52,65,103,.76);
+}
+
+html.today-theme-light body.today-games-route .tg-nav-link,
+html.today-theme-light body.today-games-route #todayThemeToggle {
+  color: #574970;
+  border-color: rgba(118,95,166,.19);
+  background: rgba(255,255,255,.67);
+}
+
+/* ── Новый вступительный экран ─────────────────────────────────────────── */
+
+body.today-games-route #todayGamesHub .tg-v4-opening {
+  position: relative;
+  width: min(var(--tg-v4-width),calc(100% - 48px));
+  margin: 0 auto;
+  padding: 33px 0 26px;
+  overflow: hidden;
+  animation: tg-v4-fade-up .55s ease both;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-opening::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 9%;
+  width: 160px;
+  height: 160px;
+  border: 1px solid rgba(147,168,255,.14);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 18px rgba(147,168,255,.025),
+    0 0 0 38px rgba(147,168,255,.022);
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-opening-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: end;
+  gap: 30px;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-opening-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #a2b0dc;
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-opening-kicker {
+  color: #756598;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-live-dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #74e4d7;
+  box-shadow: 0 0 0 4px rgba(116,228,215,.10);
+}
+
+body.today-games-route #todayGamesHub .tg-v4-live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(116,228,215,.42);
+  border-radius: 50%;
+  animation: tg-v4-pulse 2.3s ease-out infinite;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-opening h2 {
+  max-width: 790px;
+  margin: 15px 0 0;
+  color: #f2f5ff;
+  font-size: clamp(36px,4.7vw,61px);
+  font-weight: 1000;
+  line-height: .98;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-opening h2 {
+  color: #302547;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-opening h2 span {
+  display: inline-block;
+  color: #a7b7ff;
+  background: linear-gradient(95deg,#abb8ff,#8be7df 92%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-opening h2 span {
+  background: linear-gradient(95deg,#7b62c5,#29979b 92%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-opening p {
+  max-width: 570px;
+  margin: 13px 0 0;
+  color: #9eaccb;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-opening p {
+  color: #7b708f;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-metrics {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  padding-bottom: 2px;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-metric {
+  min-width: 84px;
+  padding: 13px 14px;
+  border: 1px solid rgba(151,174,234,.16);
+  border-radius: 15px;
+  background: linear-gradient(
+    145deg,
+    rgba(29,40,66,.61),
+    rgba(17,26,44,.49)
+  );
+  box-shadow: inset 0 1px rgba(255,255,255,.045);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-metric {
+  border-color: rgba(118,95,166,.16);
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.78),
+    rgba(236,230,249,.67)
+  );
+  box-shadow: inset 0 1px rgba(255,255,255,.85);
+}
+
+body.today-games-route #todayGamesHub .tg-v4-metric b {
+  display: block;
+  color: #f0f4ff;
+  font-size: 22px;
+  font-weight: 1000;
+  line-height: 1;
+  letter-spacing: -.06em;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-metric b {
+  color: #4c3c7b;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-metric small {
+  display: block;
+  margin-top: 7px;
+  color: #8fa2c8;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  white-space: nowrap;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-metric small {
+  color: #817397;
+}
+
+/* ── Основная сцена ────────────────────────────────────────────────────── */
+
+body.today-games-route #todayGamesHub .tg-shell {
+  width: min(var(--tg-v4-width),calc(100% - 48px)) !important;
+  max-width: var(--tg-v4-width) !important;
+  margin: 0 auto !important;
+  padding: 5px 0 25px !important;
+}
+
+body.today-games-route #todayGamesHub .tg-feature:not([hidden]) {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1.02fr);
+  align-items: center;
+  gap: clamp(22px,3.5vw,45px);
+  min-height: 435px;
+  padding: clamp(30px,4.2vw,54px);
+  border: 1px solid rgba(155,176,255,.29);
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+  color: #f2f5ff;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(112,97,238,.34),
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 89% 35%,
+      rgba(33,174,191,.21),
+      transparent 37%
+    ),
+    radial-gradient(
+      ellipse at 75% 100%,
+      rgba(124,74,213,.13),
+      transparent 45%
+    ),
+    linear-gradient(
+      120deg,
+      #171a37 0%,
+      #10192e 45%,
+      #151d3c 100%
+    );
+  box-shadow:
+    0 35px 105px rgba(0,0,0,.27),
+    inset 0 1px rgba(255,255,255,.12);
+  animation: tg-v4-fade-up .6s .06s ease both;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-feature:not([hidden]) {
+  color: #302547;
+  border-color: rgba(119,94,183,.26);
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(159,140,239,.42),
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 95% 30%,
+      rgba(89,199,195,.27),
+      transparent 39%
+    ),
+    radial-gradient(
+      ellipse at 73% 100%,
+      rgba(230,162,205,.20),
+      transparent 44%
+    ),
+    linear-gradient(
+      120deg,
+      #e7def8 0%,
+      #f3e8f6 49%,
+      #dcefeb 100%
+    );
+  box-shadow:
+    0 28px 80px rgba(93,68,149,.17),
+    inset 0 1px rgba(255,255,255,.92);
+}
+
+/* Сетка на фоне героя. */
+body.today-games-route #todayGamesHub .tg-feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .37;
+  background-image:
+    linear-gradient(rgba(195,208,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(195,208,255,.07) 1px,transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(125deg,#000 0%,transparent 80%);
+  -webkit-mask-image: linear-gradient(125deg,#000 0%,transparent 80%);
+  pointer-events: none;
+}
+
+/* Световой ореол за арт-объектом. */
+body.today-games-route #todayGamesHub .tg-feature-art::before {
+  content: "";
+  position: absolute;
+  inset: 3%;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(115,142,255,.42) 0%,
+      rgba(89,126,221,.18) 34%,
+      rgba(105,86,213,.07) 55%,
+      transparent 72%
+    );
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-art::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(92%,390px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(173,196,255,.23);
+  border-radius: 50%;
+  transform: translate(-50%,-50%) rotate(-18deg);
+  box-shadow:
+    0 0 0 18px rgba(166,187,255,.035),
+    0 0 0 43px rgba(166,187,255,.026),
+    inset 0 0 38px rgba(112,138,230,.04);
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-art {
+  position: relative;
+  min-width: 0;
+  min-height: 335px;
+  display: grid;
+  place-items: center;
+  perspective: 900px;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-art .ts-game-svg {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-height: 365px;
+  filter:
+    drop-shadow(0 30px 30px rgba(0,0,0,.22))
+    saturate(1.18);
+  transform: translateZ(20px) scale(1.05);
+  animation: tg-v4-hero-float 6s ease-in-out infinite;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-feature-art .ts-game-svg {
+  filter:
+    drop-shadow(0 25px 25px rgba(95,74,149,.19))
+    saturate(1.08);
+}
+
+/* Плавающие HUD-метки поверх главной иллюстрации. */
+body.today-games-route #todayGamesHub .tg-v4-art-hud {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-art-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid rgba(177,195,255,.24);
+  border-radius: 13px;
+  color: #edf2ff;
+  background: rgba(12,20,39,.63);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.15),
+    inset 0 1px rgba(255,255,255,.10);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-art-chip {
+  color: #51427a;
+  border-color: rgba(118,95,166,.22);
+  background: rgba(255,255,255,.68);
+  box-shadow:
+    0 10px 25px rgba(91,68,140,.11),
+    inset 0 1px rgba(255,255,255,.92);
+}
+
+body.today-games-route #todayGamesHub .tg-v4-art-chip small {
+  color: #91a6d0;
+  font-size: 7px;
+  font-weight: 950;
+  letter-spacing: .15em;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-art-chip small {
+  color: #82719d;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-art-chip b {
+  font-size: 10px;
+  font-weight: 1000;
+  letter-spacing: .04em;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-art-chip:last-child {
+  align-self: flex-end;
+  margin-top: auto;
+  text-align: right;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-copy h1 {
+  font-size: clamp(42px,5vw,66px);
+  line-height: .93;
+  letter-spacing: -.065em;
+  font-weight: 1000;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-copy h1 span {
+  margin-top: 9px;
+  color: #aabaff;
+  background: linear-gradient(100deg,#b3baff 0%,#8aebdf 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-feature-copy h1 span {
+  background: linear-gradient(100deg,#7660c8 0%,#2b9599 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-copy > p {
+  max-width: 470px;
+  color: #b6c5e2;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-feature-copy > p {
+  color: #6c6085;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-badge {
+  border-color: rgba(174,192,255,.23);
+  color: #e0eaff;
+  background: rgba(86,103,171,.24);
+  box-shadow: inset 0 1px rgba(255,255,255,.07);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-feature-badge {
+  color: #5d488e;
+  border-color: rgba(118,95,166,.22);
+  background: rgba(255,255,255,.55);
+}
+
+body.today-games-route #todayGamesHub .tg-stat {
+  min-width: 95px;
+  border-color: rgba(167,185,255,.17);
+  border-radius: 14px;
+  background: rgba(9,17,34,.30);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-stat {
+  border-color: rgba(118,95,166,.16);
+  background: rgba(255,255,255,.48);
+}
+
+body.today-games-route #todayGamesHub .tg-stat b {
+  font-size: 21px;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-cta {
+  min-height: 51px;
+  padding: 13px 20px;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 15px;
+  background: linear-gradient(110deg,#6d63d6 0%,#5b71d1 45%,#279c9b 100%);
+  box-shadow:
+    0 13px 32px rgba(70,98,201,.30),
+    inset 0 1px rgba(255,255,255,.29);
+  font-weight: 1000;
+  letter-spacing: .005em;
+  transition: transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+
+body.today-games-route #todayGamesHub .tg-feature-cta:hover {
+  transform: translateY(-3px);
+  filter: saturate(1.15);
+  box-shadow:
+    0 18px 38px rgba(70,98,201,.36),
+    inset 0 1px rgba(255,255,255,.34);
+}
+
+/* ── Кинематографичная лента-переход ───────────────────────────────────── */
+
+body.today-games-route #todayGamesHub .tg-v4-signal-row {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  margin: 18px 0 0;
+  border: 1px solid rgba(148,170,228,.14);
+  border-radius: 17px;
+  overflow: hidden;
+  background: rgba(18,28,47,.44);
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-signal-row {
+  border-color: rgba(118,95,166,.16);
+  background: rgba(255,255,255,.44);
+  box-shadow: inset 0 1px rgba(255,255,255,.8);
+}
+
+body.today-games-route #todayGamesHub .tg-v4-signal-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 11px;
+  padding: 14px 17px;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-signal-item + .tg-v4-signal-item {
+  border-left: 1px solid rgba(148,170,228,.14);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-signal-item + .tg-v4-signal-item {
+  border-left-color: rgba(118,95,166,.15);
+}
+
+body.today-games-route #todayGamesHub .tg-v4-signal-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 33px;
+  width: 33px;
+  height: 33px;
+  border: 1px solid rgba(147,169,241,.18);
+  border-radius: 11px;
+  color: #a9b7ff;
+  background: rgba(91,101,178,.14);
+  font-size: 16px;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-signal-icon {
+  color: #7360b6;
+  border-color: rgba(118,95,166,.16);
+  background: rgba(207,197,245,.28);
+}
+
+body.today-games-route #todayGamesHub .tg-v4-signal-copy {
+  min-width: 0;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-signal-copy b {
+  display: block;
+  color: #e4ebff;
+  font-size: 9px;
+  font-weight: 1000;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-signal-copy b {
+  color: #4b3e6b;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-signal-copy small {
+  display: block;
+  margin-top: 4px;
+  color: #8fa2c6;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-v4-signal-copy small {
+  color: #807393;
+}
+
+/* ── Каталог: меньше плотности, больше масштаба ────────────────────────── */
+
+body.today-games-route #todayGamesHub .tg-section-head {
+  margin-top: 43px;
+  margin-bottom: 19px;
+}
+
+body.today-games-route #todayGamesHub .tg-section-head h2 {
+  font-size: clamp(28px,3.2vw,40px);
+  letter-spacing: -.055em;
+  line-height: 1.05;
+}
+
+body.today-games-route #todayGamesHub .tg-section-head p {
+  max-width: 560px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+body.today-games-route #todayGamesHub .tg-count {
+  padding: 10px 13px;
+  border-radius: 13px;
+  border-color: rgba(146,169,232,.19);
+  background: rgba(30,42,71,.65);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-count {
+  color: #65548d;
+  border-color: rgba(118,95,166,.19);
+  background: rgba(255,255,255,.67);
+}
+
+body.today-games-route #todayGamesHub .tg-toolbar {
+  margin: 23px 0 24px;
+  gap: 11px;
+}
+
+body.today-games-route #todayGamesHub .tg-filter {
+  min-height: 41px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  border-color: rgba(148,170,229,.16);
+  color: #bac7e0;
+  background: rgba(22,33,55,.60);
+  font-weight: 900 !important;
+  transition: transform .17s ease,background .17s ease,border-color .17s ease;
+}
+
+body.today-games-route #todayGamesHub .tg-filter:hover {
+  transform: translateY(-2px);
+  border-color: rgba(155,174,255,.40);
+}
+
+body.today-games-route #todayGamesHub .tg-filter.is-active {
+  color: #fff;
+  background: linear-gradient(110deg,#6963c7,#397e9b);
+  box-shadow:
+    0 7px 18px rgba(72,92,178,.22),
+    inset 0 1px rgba(255,255,255,.18);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-filter {
+  color: #6d6085;
+  border-color: rgba(118,95,166,.17);
+  background: rgba(255,255,255,.59);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-filter.is-active {
+  color: #fff;
+  background: linear-gradient(110deg,#7967c9,#399ba1);
+}
+
+body.today-games-route #todayGamesHub .tg-search {
+  min-height: 45px;
+  border-radius: 13px;
+  border-color: rgba(148,170,229,.21);
+  background: rgba(22,33,55,.68);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-search {
+  border-color: rgba(118,95,166,.20);
+  background: rgba(255,255,255,.75);
+}
+
+/* ── Игры как отдельные миры ───────────────────────────────────────────── */
+
+body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+body.today-games-route #todayGamesHub .tg-card:not([hidden]) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(150,172,230,.17);
+  border-radius: 24px;
+  overflow: hidden;
+  color: #edf2ff;
+  background:
+    radial-gradient(
+      ellipse at 90% 0%,
+      rgba(106,125,197,.11),
+      transparent 60%
+    ),
+    linear-gradient(145deg,rgba(24,33,54,.98),rgba(12,21,37,.98));
+  box-shadow:
+    0 15px 38px rgba(0,0,0,.13),
+    inset 0 1px rgba(255,255,255,.055);
+  transform: translateY(0);
+  transition:
+    transform .23s cubic-bezier(.2,.7,.2,1),
+    border-color .23s ease,
+    box-shadow .23s ease;
+  animation: tg-v4-fade-up .44s ease both;
+  animation-delay: calc(min(var(--tg-card-index,0),12) * 22ms);
+}
+
+body.today-games-route #todayGamesHub .tg-card:not([hidden])::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  opacity: .58;
+  background: linear-gradient(90deg,transparent,#a3b7ff,transparent);
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-card:not([hidden]):hover {
+  z-index: 3;
+  transform: translateY(-6px);
+  border-color: rgba(155,177,255,.42);
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.23),
+    0 0 0 1px rgba(141,163,255,.05),
+    inset 0 1px rgba(255,255,255,.07);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-card:not([hidden]) {
+  color: #302645;
+  border-color: rgba(119,95,166,.19);
+  background:
+    radial-gradient(
+      ellipse at 90% 0%,
+      rgba(170,158,233,.14),
+      transparent 60%
+    ),
+    linear-gradient(145deg,rgba(255,255,255,.91),rgba(243,237,251,.85));
+  box-shadow:
+    0 14px 34px rgba(86,62,130,.08),
+    inset 0 1px rgba(255,255,255,.95);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-card:not([hidden]):hover {
+  border-color: rgba(115,91,177,.37);
+  box-shadow:
+    0 24px 48px rgba(86,62,130,.14),
+    inset 0 1px rgba(255,255,255,.95);
+}
+
+/* Индивидуальные тона порталов по ID игры. */
+body.today-games-route #todayGamesHub .tg-card-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1.78;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 17px;
+  background: #111a30;
+  isolation: isolate;
+}
+
+body.today-games-route #todayGamesHub .tg-card-art::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4,8,19,.20) 0%,
+    transparent 35%,
+    transparent 66%,
+    rgba(4,8,19,.20) 100%
+  );
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-card-art::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 44%;
+  aspect-ratio: 1;
+  right: -8%;
+  bottom: -56%;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 13px rgba(255,255,255,.035),
+    0 0 0 31px rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-card-art .ts-game-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  transition: transform .32s ease,filter .32s ease;
+}
+
+body.today-games-route #todayGamesHub
+.tg-card:not([hidden]):hover .tg-card-art .ts-game-svg {
+  transform: scale(1.055);
+  filter: saturate(1.15);
+}
+
+/* Цветовые подписи для отдельных карточек. */
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="match3"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(131,112,255,.34),transparent 65%),
+    linear-gradient(135deg,#171d48,#193c57);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="snake"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(64,236,177,.28),transparent 64%),
+    linear-gradient(135deg,#0d302b,#14243e);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="pulse"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,104,181,.30),transparent 65%),
+    linear-gradient(135deg,#30182f,#18254c);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="breakout"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,159,93,.30),transparent 65%),
+    linear-gradient(135deg,#35201c,#1c2142);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="memory"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(108,185,255,.29),transparent 65%),
+    linear-gradient(135deg,#152f4d,#201b46);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="merge2048"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(248,201,111,.26),transparent 65%),
+    linear-gradient(135deg,#382c1a,#28203f);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="flappy"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(130,164,255,.31),transparent 65%),
+    linear-gradient(135deg,#172c56,#18213a);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="ttt"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(197,141,255,.27),transparent 65%),
+    linear-gradient(135deg,#2b204a,#17253b);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="word"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(100,222,222,.26),transparent 65%),
+    linear-gradient(135deg,#103337,#1a2643);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="colorsnap"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(244,130,162,.31),transparent 65%),
+    linear-gradient(135deg,#351d39,#1b2541);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="stacker"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(129,179,255,.29),transparent 65%),
+    linear-gradient(135deg,#172b4d,#202143);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="laserdodge"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,101,132,.28),transparent 65%),
+    linear-gradient(135deg,#341926,#1d2241);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="quiz"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(248,202,110,.28),transparent 65%),
+    linear-gradient(135deg,#35291e,#20203e);
+}
+
+body.today-games-route #todayGamesHub
+.tg-card[data-game-id="starcatch"] .tg-card-art {
+  background:
+    radial-gradient(circle at 50% 0%,rgba(125,160,255,.32),transparent 65%),
+    linear-gradient(135deg,#171e48,#26345b);
+}
+
+/* Плашка номера портала. */
+body.today-games-route #todayGamesHub .tg-v4-portal-label {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255,255,255,.19);
+  border-radius: 9px;
+  color: #eef3ff;
+  background: rgba(8,13,27,.64);
+  font-size: 7px;
+  font-weight: 1000;
+  letter-spacing: .12em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+body.today-games-route #todayGamesHub .tg-v4-portal-label::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #79e0d5;
+  box-shadow: 0 0 0 3px rgba(121,224,213,.12);
+}
+
+/* Нижняя подпись карточки и кнопка запуска. */
+body.today-games-route #todayGamesHub .tg-card-copy {
+  padding: 15px 5px 4px;
+}
+
+body.today-games-route #todayGamesHub .tg-card h3 {
+  margin-top: 14px;
+  color: #f0f4ff;
+  font-size: 17px;
+  font-weight: 1000;
+  line-height: 1.16;
+  letter-spacing: -.035em;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-card h3 {
+  color: #302645;
+}
+
+body.today-games-route #todayGamesHub .tg-card p {
+  min-height: 47px;
+  margin: 8px 0 16px;
+  color: #a6b6d3;
+  font-size: 10px;
+  line-height: 1.75;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-card p {
+  color: #786e91;
+}
+
+body.today-games-route #todayGamesHub .tg-pill {
+  border-radius: 9px;
+  color: #becbf0;
+  border-color: rgba(142,165,229,.19);
+  background: rgba(79,100,160,.14);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-pill {
+  color: #6c588e;
+  border-color: rgba(118,95,166,.17);
+  background: rgba(217,208,246,.36);
+}
+
+body.today-games-route #todayGamesHub .tg-local-best {
+  color: #8da0c2;
+  font-size: 8px;
+}
+
+body.today-games-route #todayGamesHub .tg-local-best b {
+  color: #e1e9ff;
+  font-size: 10px;
+  font-weight: 1000;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-local-best b {
+  color: #4e3f76;
+}
+
+body.today-games-route #todayGamesHub .tg-card-bottom {
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px solid rgba(146,167,224,.13);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-card-bottom {
+  border-top-color: rgba(118,95,166,.14);
+}
+
+body.today-games-route #todayGamesHub .tg-card-tag {
+  color: #8296bb;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+body.today-games-route #todayGamesHub .tg-play {
+  min-height: 38px;
+  padding: 9px 13px;
+  border: 1px solid rgba(154,177,255,.28);
+  border-radius: 11px;
+  color: #fff;
+  background: linear-gradient(115deg,#6563c7,#327e98);
+  box-shadow:
+    0 6px 14px rgba(45,77,164,.14),
+    inset 0 1px rgba(255,255,255,.18);
+  font-size: 10px !important;
+  font-weight: 1000 !important;
+  cursor: pointer;
+  transition: transform .18s ease,box-shadow .18s ease;
+}
+
+body.today-games-route #todayGamesHub .tg-play:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 20px rgba(45,77,164,.23),
+    inset 0 1px rgba(255,255,255,.21);
+}
+
+/* ── Рекорды: отдельная панель управления ───────────────────────────────── */
+
+body.today-games-route #todayGamesHub .tg-records {
+  margin-top: 48px;
+  padding: clamp(22px,3.5vw,36px);
+  border-radius: 27px;
+  border-color: rgba(147,170,229,.18);
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(92,104,199,.15),
+      transparent 59%
+    ),
+    linear-gradient(145deg,rgba(22,32,52,.94),rgba(12,21,37,.94));
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.12),
+    inset 0 1px rgba(255,255,255,.05);
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-records {
+  color: #302645;
+  border-color: rgba(118,95,166,.18);
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(180,164,238,.19),
+      transparent 59%
+    ),
+    linear-gradient(145deg,rgba(255,255,255,.85),rgba(240,234,250,.82));
+  box-shadow:
+    0 15px 38px rgba(87,64,130,.09),
+    inset 0 1px rgba(255,255,255,.95);
+}
+
+body.today-games-route #todayGamesHub .tg-records h2 {
+  font-size: 29px;
+  letter-spacing: -.05em;
+  font-weight: 1000;
+}
+
+body.today-games-route #todayGamesHub .tg-records p {
+  color: #a7b6d2;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-records p {
+  color: #796f91;
+}
+
+body.today-games-route #todayGamesHub .tg-record-tabs {
+  gap: 8px;
+}
+
+body.today-games-route #todayGamesHub .tg-record-tabs button {
+  min-height: 37px;
+  padding: 8px 12px;
+  border: 1px solid rgba(143,168,230,.18);
+  border-radius: 11px;
+  color: #c1cde7;
+  background: rgba(24,35,57,.72);
+  font-size: 9px;
+  font-weight: 950;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub
+.tg-record-tabs button {
+  color: #6c5d86;
+  border-color: rgba(118,95,166,.17);
+  background: rgba(255,255,255,.66);
+}
+
+body.today-games-route #todayGamesHub .tg-footer {
+  margin-top: 31px;
+  padding: 20px 3px 7px;
+  border-top-color: rgba(144,166,224,.14);
+  color: #8092b6;
+  font-size: 9px;
+  letter-spacing: .07em;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-footer {
+  border-top-color: rgba(118,95,166,.15);
+  color: #847795;
+}
+
+body.today-games-route #todayGamesHub .tg-footer a {
+  color: #b7c6ee;
+  font-weight: 900;
+}
+
+html.today-theme-light body.today-games-route #todayGamesHub .tg-footer a {
+  color: #67568e;
+}
+
+/* ── Мобильная версия: другая композиция, а не уменьшенный десктоп ──────── */
+
+@media (max-width: 1100px) {
+  body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 15px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature:not([hidden]) {
+    grid-template-columns: minmax(0,1fr) minmax(0,.88fr);
+    min-height: 390px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-metric {
+    min-width: 74px;
+    padding: 11px 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  body.today-games-route .tg-topbar {
+    min-height: 60px;
+    padding: 8px 12px;
+    gap: 7px;
+  }
+
+  body.today-games-route .tg-brand {
+    gap: 7px;
+  }
+
+  body.today-games-route .tg-brand-mark {
+    flex-basis: 35px;
+    width: 35px;
+    height: 35px;
+    border-radius: 12px;
+    font-size: 18px;
+  }
+
+  body.today-games-route .tg-brand-copy b {
+    font-size: 10px;
+    letter-spacing: .08em;
+  }
+
+  body.today-games-route .tg-brand-copy small {
+    font-size: 7px;
+    letter-spacing: .05em;
+  }
+
+  body.today-games-route .tg-nav-actions {
+    gap: 4px;
+  }
+
+  body.today-games-route .tg-nav-link,
+  body.today-games-route #todayThemeToggle {
+    min-height: 32px;
+    padding: 6px 8px;
+    border-radius: 9px;
+    gap: 4px;
+    font-size: 8px !important;
+  }
+
+  body.today-games-route .tg-nav-profile {
+    display: none !important;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-opening {
+    width: calc(100% - 26px);
+    padding: 25px 0 19px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-opening-inner {
+    grid-template-columns: minmax(0,1fr);
+    gap: 16px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-opening h2 {
+    margin-top: 12px;
+    font-size: clamp(34px,8.8vw,46px);
+    line-height: .99;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-opening p {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-metrics {
+    width: 100%;
+    gap: 7px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-metric {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-metric b {
+    font-size: 19px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-metric small {
+    font-size: 7px;
+    letter-spacing: .06em;
+  }
+
+  body.today-games-route #todayGamesHub .tg-shell {
+    width: calc(100% - 22px) !important;
+    padding-top: 0 !important;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature:not([hidden]) {
+    grid-template-columns: minmax(0,1fr);
+    gap: 3px;
+    min-height: 0;
+    padding: 22px 19px 18px;
+    border-radius: 25px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature-copy h1 {
+    margin-top: 17px;
+    font-size: clamp(38px,10vw,51px);
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature-copy > p {
+    margin-top: 12px;
+    font-size: 10px;
+    line-height: 1.72;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature-stats {
+    display: flex;
+    gap: 6px;
+    margin-top: 15px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-stat {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 9px 7px;
+    border-radius: 10px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-stat b {
+    font-size: 17px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-stat small {
+    font-size: 6px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature-cta {
+    width: 100%;
+    min-height: 45px;
+    margin-top: 15px;
+    font-size: 10px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature-art {
+    min-height: 210px;
+    max-height: 235px;
+    margin-top: 7px;
+    overflow: hidden;
+  }
+
+  body.today-games-route #todayGamesHub .tg-feature-art .ts-game-svg {
+    width: min(100%,390px);
+    max-height: 230px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-art-chip {
+    padding: 7px 9px;
+    border-radius: 10px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-art-chip small {
+    font-size: 6px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-art-chip b {
+    font-size: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-signal-row {
+    grid-template-columns: minmax(0,1fr);
+    margin-top: 10px;
+    border-radius: 14px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-signal-item {
+    padding: 10px 12px;
+    gap: 9px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-signal-item + .tg-v4-signal-item {
+    border-left: 0;
+    border-top: 1px solid rgba(148,170,228,.13);
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-signal-icon {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-signal-copy b {
+    font-size: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-signal-copy small {
+    font-size: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-section-head {
+    align-items: end;
+    margin-top: 31px;
+    margin-bottom: 14px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-section-head h2 {
+    font-size: 25px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-section-head p {
+    max-width: 300px;
+    font-size: 10px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-count {
+    padding: 8px 9px;
+    font-size: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-toolbar {
+    gap: 8px;
+    margin: 13px 0 15px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-filters {
+    order: 1;
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.today-games-route #todayGamesHub .tg-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.today-games-route #todayGamesHub .tg-filter {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 8px 10px;
+    font-size: 8px !important;
+  }
+
+  body.today-games-route #todayGamesHub .tg-search {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 41px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-random-button {
+    order: 3;
+    min-height: 41px;
+    padding: 8px 10px;
+    gap: 5px;
+    font-size: 9px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card:not([hidden]) {
+    padding: 6px;
+    border-radius: 17px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card-art {
+    border-radius: 12px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-v4-portal-label {
+    top: 6px;
+    left: 6px;
+    gap: 4px;
+    padding: 5px 6px;
+    border-radius: 7px;
+    font-size: 6px;
+    letter-spacing: .07em;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card-copy {
+    padding: 10px 3px 3px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card-meta {
+    gap: 4px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-pill {
+    max-width: 68%;
+    padding: 5px 6px;
+    font-size: 6px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-local-best {
+    font-size: 6px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card h3 {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card p {
+    min-height: 48px;
+    margin: 7px 0 10px;
+    font-size: 8px;
+    line-height: 1.55;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card-bottom {
+    gap: 4px;
+    padding-top: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card-tag {
+    font-size: 6px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-play {
+    min-height: 31px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 8px !important;
+  }
+
+  body.today-games-route #todayGamesHub .tg-records {
+    grid-template-columns: minmax(0,1fr);
+    gap: 14px;
+    margin-top: 32px;
+    padding: 19px;
+    border-radius: 22px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-records h2 {
+    font-size: 24px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-footer {
+    gap: 10px;
+    margin-top: 22px;
+    padding-top: 15px;
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 390px) {
+  body.today-games-route #todayGamesHub .tg-v4-opening h2 {
+    font-size: 32px;
+  }
+
+  body.today-games-route .tg-brand-copy small {
+    display: none;
+  }
+
+  body.today-games-route #todayGamesHub .tg-game-grid:not([hidden]) {
+    gap: 7px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card:not([hidden]) {
+    padding: 5px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card h3 {
+    font-size: 11px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-card-tag {
+    display: none;
+  }
+
+  body.today-games-route #todayGamesHub .tg-random-button {
+    padding: 8px;
+  }
+
+  body.today-games-route #todayGamesHub .tg-random-label {
+    display: none;
+  }
+}
+
+@keyframes tg-v4-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tg-v4-hero-float {
+  0%,100% {
+    transform: translateY(0) scale(1.05);
+  }
+  50% {
+    transform: translateY(-9px) scale(1.05);
+  }
+}
+
+@keyframes tg-v4-pulse {
+  0% {
+    transform: scale(.78);
+    opacity: .85;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.today-games-route #todayGamesHub *,
+  body.today-games-route #todayGamesHub *::before,
+  body.today-games-route #todayGamesHub *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Фильтры сохраняют работоспособность: скрытые элементы не форсируются. */
+body.today-games-route #todayGamesHub [hidden] {
+  display: none !important;
+}

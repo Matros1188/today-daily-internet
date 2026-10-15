@@ -250,6 +250,198 @@
       </div>
     `;
 
+    
+    /* TODAY ARCADE HUB V4 — CINEMATIC UNIVERSE */
+
+    // Новый входной экран перед главной игровой витриной.
+    if (!root.querySelector('.tg-v4-opening')) {
+      const v4Opening = document.createElement('section');
+      v4Opening.className = 'tg-v4-opening';
+      v4Opening.setAttribute('aria-label', 'Добро пожаловать в TODAY ARCADE');
+
+      const v4OpeningInner = document.createElement('div');
+      v4OpeningInner.className = 'tg-v4-opening-inner';
+
+      const v4OpeningCopy = document.createElement('div');
+
+      const v4OpeningKicker = document.createElement('div');
+      v4OpeningKicker.className = 'tg-v4-opening-kicker';
+
+      const v4LiveDot = document.createElement('i');
+      v4LiveDot.className = 'tg-v4-live-dot';
+      v4LiveDot.setAttribute('aria-hidden', 'true');
+
+      v4OpeningKicker.appendChild(v4LiveDot);
+      v4OpeningKicker.appendChild(
+        document.createTextNode(' TODAY / ARCADE UNIVERSE · VOL. 01')
+      );
+
+      const v4OpeningTitle = document.createElement('h2');
+      v4OpeningTitle.appendChild(
+        document.createTextNode('Не листай. ')
+      );
+
+      const v4OpeningAccent = document.createElement('span');
+      v4OpeningAccent.textContent = 'Погружайся.';
+      v4OpeningTitle.appendChild(v4OpeningAccent);
+
+      const v4OpeningDescription = document.createElement('p');
+      v4OpeningDescription.textContent =
+        'Твоя игровая вселенная: большие приключения, быстрые победы ' +
+        'и рекорды, которые хочется побить.';
+
+      v4OpeningCopy.appendChild(v4OpeningKicker);
+      v4OpeningCopy.appendChild(v4OpeningTitle);
+      v4OpeningCopy.appendChild(v4OpeningDescription);
+
+      const v4Metrics = document.createElement('div');
+      v4Metrics.className = 'tg-v4-metrics';
+
+      const v4MetricData = [
+        ['14', 'ИГР В МИРЕ'],
+        ['220', 'УРОВНЕЙ'],
+        ['11', 'ГЛАВ СЮЖЕТА']
+      ];
+
+      v4MetricData.forEach(([number, label]) => {
+        const item = document.createElement('div');
+        item.className = 'tg-v4-metric';
+
+        const value = document.createElement('b');
+        value.textContent = number;
+
+        const caption = document.createElement('small');
+        caption.textContent = label;
+
+        item.appendChild(value);
+        item.appendChild(caption);
+        v4Metrics.appendChild(item);
+      });
+
+      v4OpeningInner.appendChild(v4OpeningCopy);
+      v4OpeningInner.appendChild(v4Metrics);
+      v4Opening.appendChild(v4OpeningInner);
+
+      const v4Shell = root.querySelector('.tg-shell');
+
+      if (v4Shell) {
+        root.insertBefore(v4Opening, v4Shell);
+      } else {
+        root.appendChild(v4Opening);
+      }
+    }
+
+    // HUD на главном игровом арте. Внутри только декоративные элементы:
+    // исходная SVG-иллюстрация и кнопка запуска остаются нетронутыми.
+    const v4Feature = root.querySelector('.tg-feature');
+    const v4FeatureArt = root.querySelector('.tg-feature-art');
+
+    if (v4Feature && v4FeatureArt &&
+        !v4FeatureArt.querySelector('.tg-v4-art-hud')) {
+      const hud = document.createElement('div');
+      hud.className = 'tg-v4-art-hud';
+      hud.setAttribute('aria-hidden', 'true');
+
+      const topChip = document.createElement('div');
+      topChip.className = 'tg-v4-art-chip';
+
+      const topSmall = document.createElement('small');
+      topSmall.textContent = 'TODAY ORIGINAL';
+
+      const topValue = document.createElement('b');
+      topValue.textContent = 'MAIN QUEST / 01';
+
+      topChip.appendChild(topSmall);
+      topChip.appendChild(topValue);
+
+      const bottomChip = document.createElement('div');
+      bottomChip.className = 'tg-v4-art-chip';
+
+      const bottomSmall = document.createElement('small');
+      bottomSmall.textContent = 'STORY CAMPAIGN';
+
+      const bottomValue = document.createElement('b');
+      bottomValue.textContent = '220 LEVELS · 11 CHAPTERS';
+
+      bottomChip.appendChild(bottomSmall);
+      bottomChip.appendChild(bottomValue);
+
+      hud.appendChild(topChip);
+      hud.appendChild(bottomChip);
+      v4FeatureArt.appendChild(hud);
+    }
+
+    // Полоса перехода между главной историей и каталогом.
+    if (v4Feature && !root.querySelector('.tg-v4-signal-row')) {
+      const signalRow = document.createElement('div');
+      signalRow.className = 'tg-v4-signal-row';
+      signalRow.setAttribute('aria-label', 'Возможности игрового центра');
+
+      const signalItems = [
+        [
+          '✧',
+          'MAIN QUEST',
+          'Одна большая история — 220 уровней'
+        ],
+        [
+          'ϟ',
+          'QUICK PLAY',
+          'Короткие игры для быстрых побед'
+        ],
+        [
+          '◈',
+          'PERSONAL BEST',
+          'Возвращайся за новым рекордом'
+        ]
+      ];
+
+      signalItems.forEach(([iconText, titleText, captionText]) => {
+        const item = document.createElement('div');
+        item.className = 'tg-v4-signal-item';
+
+        const icon = document.createElement('span');
+        icon.className = 'tg-v4-signal-icon';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = iconText;
+
+        const copy = document.createElement('div');
+        copy.className = 'tg-v4-signal-copy';
+
+        const title = document.createElement('b');
+        title.textContent = titleText;
+
+        const caption = document.createElement('small');
+        caption.textContent = captionText;
+
+        copy.appendChild(title);
+        copy.appendChild(caption);
+        item.appendChild(icon);
+        item.appendChild(copy);
+        signalRow.appendChild(item);
+      });
+
+      v4Feature.insertAdjacentElement('afterend', signalRow);
+    }
+
+    // Каждая карточка получает аккуратный номер портала.
+    // Существующие game ID, data-social-act и кнопки не изменяются.
+    const v4Cards = Array.from(root.querySelectorAll('[data-tg-card]'));
+
+    v4Cards.forEach((card, index) => {
+      const portalNumber = String(index + 2).padStart(2, '0');
+      card.style.setProperty('--tg-card-index', String(index));
+
+      const art = card.querySelector('.tg-card-art');
+
+      if (art && !art.querySelector('.tg-v4-portal-label')) {
+        const portalLabel = document.createElement('span');
+        portalLabel.className = 'tg-v4-portal-label';
+        portalLabel.textContent = 'PORTAL / ' + portalNumber;
+        portalLabel.setAttribute('aria-hidden', 'true');
+        art.insertBefore(portalLabel, art.firstChild);
+      }
+    });
+
     /* TODAY ARCADE HUB V3 — PREMIUM GAME LOUNGE */
 
     const search = root.querySelector('#tgGameSearch');
