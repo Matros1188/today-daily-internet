@@ -1,0 +1,58 @@
+/* TODAY CRYSTAL BLOCKS V1 — CLEAR GOALS + TEN GAMEPLAY MECHANICS */
+body.today-games-route .ts-m3-block-hud {
+  margin: 12px 0 15px;
+  padding: 12px 14px 11px;
+  border: 1px solid rgba(215,255,82,.24);
+  border-radius: 15px;
+  background: linear-gradient(110deg,rgba(215,255,82,.07),rgba(133,115,221,.075));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+body.today-games-route .ts-m3-block-hud-head {display:flex;align-items:center;justify-content:space-between;gap:12px;color:#eff5ff;font:800 10px/1.4 "IBM Plex Mono",monospace;letter-spacing:.07em;}
+body.today-games-route .ts-m3-block-hud-head span {display:flex;align-items:center;gap:8px;}
+body.today-games-route .ts-m3-block-hud-head span i {display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:rgba(215,255,82,.14);color:#d7ff52;font-size:16px;font-style:normal;}
+body.today-games-route .ts-m3-block-hud-head b {color:#d7ff52;font-size:13px;white-space:nowrap;}
+body.today-games-route .ts-m3-block-track {height:5px;margin:10px 0 8px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;}
+body.today-games-route .ts-m3-block-track i {display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#d7ff52,#76f0df);box-shadow:0 0 12px rgba(215,255,82,.32);transition:width .24s ease;}
+body.today-games-route .ts-m3-block-hud small {display:block;color:#9aa8b8;font-size:10px;line-height:1.55;}
+body.today-games-route .ts-m3-mechanics-help {margin:-4px 0 14px;border:1px solid rgba(151,169,214,.17);border-radius:13px;background:rgba(15,20,35,.42);overflow:hidden;}
+body.today-games-route .ts-m3-mechanics-help>summary {display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;color:#aab9d5;cursor:pointer;list-style:none;font:800 8px/1.4 "IBM Plex Mono",monospace;letter-spacing:.08em;}
+body.today-games-route .ts-m3-mechanics-help>summary::-webkit-details-marker {display:none;}
+body.today-games-route .ts-m3-mechanics-help>summary b {color:#d7ff52;font-size:8px;white-space:nowrap;}
+body.today-games-route .ts-m3-mechanics-help[open]>summary {border-bottom:1px solid rgba(151,169,214,.12);}
+body.today-games-route .ts-m3-mechanics-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(151,169,214,.10);}
+body.today-games-route .ts-m3-mechanics-grid>div {display:flex;align-items:flex-start;gap:9px;min-width:0;padding:10px;background:#101625;}
+body.today-games-route .ts-m3-mechanics-grid>div>i {display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;border:1px solid rgba(215,255,82,.18);border-radius:8px;background:rgba(215,255,82,.06);color:#d7ff52;font-size:13px;font-style:normal;}
+body.today-games-route .ts-m3-mechanics-grid b {display:block;margin:1px 0 3px;color:#edf3ff;font-size:9px;}
+body.today-games-route .ts-m3-mechanics-grid small {display:block;color:#93a2ba;font-size:8px;line-height:1.5;}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-help {background:rgba(248,251,245,.72);border-color:rgba(39,54,59,.13);}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-help>summary {color:#53635e;}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-help>summary b {color:#5f841e;}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-grid {background:rgba(39,54,59,.09);}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-grid>div {background:#f5f8f1;}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-grid>div>i {color:#5f841e;background:rgba(182,219,53,.12);}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-grid b {color:#26342f;}
+html.today-theme-light body.today-games-route .ts-m3-mechanics-grid small {color:#62716c;}
+@media(max-width:520px){body.today-games-route .ts-m3-mechanics-grid {grid-template-columns:minmax(0,1fr);}body.today-games-route .ts-m3-mechanics-grid>div {padding:9px 10px;}body.today-games-route .ts-m3-mechanics-help>summary{font-size:7px;}}
+body.today-games-route .ts-m3-gem {position:relative!important;isolation:isolate;}
+body.today-games-route .ts-m3-block-overlay {position:absolute;inset:2px;z-index:6;display:flex;align-items:flex-start;justify-content:flex-end;gap:2px;padding:2px;border-radius:10px;pointer-events:none;overflow:hidden;border:2px solid rgba(246,200,137,.85);background:linear-gradient(145deg,rgba(52,39,32,.24),rgba(22,24,38,.25));box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 -8px 14px rgba(0,0,0,.13);}
+body.today-games-route .ts-m3-block-overlay::before {content:"";position:absolute;inset:3px;border:1px solid rgba(255,255,255,.18);border-radius:6px;}
+body.today-games-route .ts-m3-block-overlay i {position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:62%;height:62%;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:rgba(16,19,32,.72);color:#fff5dc;font-size:clamp(15px,2.3vw,23px);font-style:normal;text-shadow:0 2px 5px rgba(0,0,0,.6);box-shadow:0 3px 10px rgba(0,0,0,.2);}
+body.today-games-route .ts-m3-block-overlay b {position:relative;z-index:2;display:grid;place-items:center;min-width:17px;height:17px;padding:0 3px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:#161c2a;color:white;font:900 9px/1 "IBM Plex Mono",monospace;box-shadow:0 2px 6px rgba(0,0,0,.35);}
+body.today-games-route .ts-m3-block-overlay em {position:absolute;left:4px;top:4px;z-index:2;display:grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--block-color,#b18aff);color:#101321;font-size:10px;font-style:normal;box-shadow:0 0 10px var(--block-color,#b18aff);}
+body.today-games-route .ts-m3-block-overlay.type-armor {border-color:rgba(226,240,255,.91);background:linear-gradient(135deg,rgba(60,78,98,.30),rgba(13,24,37,.35));}
+body.today-games-route .ts-m3-block-overlay.type-armor i {border-radius:50%;background:rgba(40,56,73,.84);color:#e2f0ff;}
+body.today-games-route .ts-m3-block-overlay.type-prism {border-color:var(--block-color,#b18aff);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15),inset 0 0 14px color-mix(in srgb,var(--block-color,#b18aff) 32%,transparent),0 0 10px color-mix(in srgb,var(--block-color,#b18aff) 20%,transparent);}
+body.today-games-route .ts-m3-block-overlay.type-prism i {background:rgba(30,23,55,.78);color:#fff;}
+body.today-games-route .ts-m3-block-overlay.type-blast {border-color:rgba(255,155,110,.95);background:linear-gradient(145deg,rgba(125,48,35,.32),rgba(34,21,34,.35));}
+body.today-games-route .ts-m3-block-overlay.type-blast i {color:#ffe0bd;background:rgba(87,30,37,.84);}
+body.today-games-route .ts-m3-block-overlay.type-treasure {border-color:rgba(255,226,122,.97);background:linear-gradient(145deg,rgba(121,83,23,.26),rgba(32,27,30,.32));}
+body.today-games-route .ts-m3-block-overlay.type-treasure i {color:#fff0a3;background:rgba(94,66,20,.86);}
+body.today-games-route .ts-m3-block-overlay.type-boss {border-color:rgba(255,221,255,.99);background:linear-gradient(145deg,rgba(101,59,147,.37),rgba(24,20,50,.46));box-shadow:inset 0 0 0 2px rgba(210,179,255,.13),0 0 12px rgba(159,121,232,.26);}
+body.today-games-route .ts-m3-block-overlay.type-boss i {color:#ffddff;background:rgba(51,30,83,.91);}
+body.today-games-route .ts-m3-block-overlay.hp-2::after,body.today-games-route .ts-m3-block-overlay.hp-3::after {content:"";position:absolute;left:18%;top:19%;width:35%;height:31%;border-top:2px solid rgba(255,255,255,.52);border-right:1px solid rgba(255,255,255,.4);transform:skew(-18deg) rotate(14deg);}
+html.today-theme-light body.today-games-route .ts-m3-block-hud {border-color:rgba(80,120,30,.22);background:linear-gradient(110deg,rgba(182,219,53,.14),rgba(117,91,205,.08));}
+html.today-theme-light body.today-games-route .ts-m3-block-hud-head {color:#202a28;}
+html.today-theme-light body.today-games-route .ts-m3-block-hud-head b {color:#507819;}
+html.today-theme-light body.today-games-route .ts-m3-block-track {background:rgba(27,39,36,.12);}
+html.today-theme-light body.today-games-route .ts-m3-block-hud small {color:#62716c;}
+@media(max-width:600px){body.today-games-route .ts-m3-block-hud{margin:9px 0 12px;padding:10px 11px;border-radius:12px;}body.today-games-route .ts-m3-block-hud-head{font-size:9px;}body.today-games-route .ts-m3-block-hud-head span i{width:22px;height:22px;}body.today-games-route .ts-m3-block-hud small{font-size:9px;}body.today-games-route .ts-m3-block-overlay{inset:1px;border-width:1.5px;border-radius:7px;}body.today-games-route .ts-m3-block-overlay i{width:65%;height:60%;border-radius:5px;font-size:15px;}body.today-games-route .ts-m3-block-overlay b{min-width:14px;height:14px;font-size:8px;}}

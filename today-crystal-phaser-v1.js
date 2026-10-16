@@ -1,7 +1,7 @@
-/* TODAY CRYSTAL PHASER V2 — NATIVE INPUT BRIDGE */
+/* TODAY CRYSTAL PHASER V3 — BREAKABLE BLOCK RENDERER */
 (() => {
   'use strict';
-  if (window.__TODAY_CRYSTAL_PHASER && window.__TODAY_CRYSTAL_PHASER.version === '2.0.0') return;
+  if (window.__TODAY_CRYSTAL_PHASER && window.__TODAY_CRYSTAL_PHASER.version === '3.0.0') return;
 
   const CDN = 'https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js';
   const colors = [
@@ -41,6 +41,7 @@
       } : null),
       ice: Array.isArray(run.ice) ? run.ice.slice(0,64) : Array(64).fill(0),
       sigils: Array.isArray(run.sigils) ? run.sigils.slice(0,64) : Array(64).fill(0),
+      blocks: Array.isArray(run.blocks) ? run.blocks.filter(block => block && block.hp > 0).map(block => ({index:block.index,kind:block.kind,hp:block.hp,maxHp:block.maxHp,color:block.color})) : [],
       paused: !!run.paused, ended: !!run.ended
     };
   }
@@ -181,6 +182,7 @@
         scene.tileG = scene.add.graphics();
         scene.overlayG = scene.add.graphics();
         scene.selectionG = scene.add.graphics();
+        scene.blockG = scene.add.graphics();
         scene.boardLayout = null;
         scene._queuedSnapshot = latest;
         let pointerStart = null;
@@ -432,6 +434,28 @@
     if (s.paused || s.ended) {
       scene.overlayG.fillStyle(0x070b18,.20);scene.overlayG.fillRoundedRect(l.bx,l.by,l.boardSize,l.boardSize,radius);
     }
+    // Draw breakable blockers above the crystal layer, while keeping the crystal visible underneath.
+    const bg = scene.blockG;
+    if (bg) {
+      bg.clear();
+      for (const block of (Array.isArray(s.blocks) ? s.blocks : [])) {
+        if (!block || block.hp <= 0 || block.index < 0 || block.index >= 64) continue;
+        const row=Math.floor(block.index/8), col=block.index%8, x=l.x0+col*l.step+2, y=l.y0+row*l.step+2, w=l.cell-4;
+        const palette = block.kind==='boss' ? [0x56316f,0xffdcff] : block.kind==='prism' ? [0x3b2c69,0xd7c0ff] : block.kind==='blast' ? [0x672d32,0xffb08c] : block.kind==='treasure' ? [0x72531d,0xffe79b] : block.kind==='armor' ? [0x364b5e,0xdcecff] : [0x5b412c,0xf4c68e];
+        bg.fillStyle(palette[0], .44); bg.fillRoundedRect(x,y,w,w,Math.max(4,w*.14));
+        bg.lineStyle(Math.max(1,w*.035),palette[1],.92); bg.strokeRoundedRect(x+.5,y+.5,w-1,w-1,Math.max(4,w*.14));
+        bg.lineStyle(Math.max(1,w*.024),0xffffff,.38);
+        if (block.kind==='armor') { bg.beginPath();bg.moveTo(x+w*.24,y+w*.24);bg.lineTo(x+w*.76,y+w*.24);bg.lineTo(x+w*.70,y+w*.62);bg.lineTo(x+w*.5,y+w*.79);bg.lineTo(x+w*.30,y+w*.62);bg.closePath();bg.strokePath(); }
+        else if (block.kind==='prism') { bg.beginPath();bg.moveTo(x+w*.5,y+w*.19);bg.lineTo(x+w*.80,y+w*.5);bg.lineTo(x+w*.5,y+w*.81);bg.lineTo(x+w*.2,y+w*.5);bg.closePath();bg.strokePath();bg.fillStyle([0xb18aff,0x66c8ff,0x4ce0b2,0xffc56c,0xff719e,0xaabde9,0xf5df65][block.color||0],.8);bg.fillCircle(x+w*.5,y+w*.5,w*.10); }
+        else if (block.kind==='blast') { bg.strokeCircle(x+w*.5,y+w*.5,w*.20); for(let k=0;k<8;k++){const a=Math.PI*k/4;bg.beginPath();bg.moveTo(x+w*.5+Math.cos(a)*w*.26,y+w*.5+Math.sin(a)*w*.26);bg.lineTo(x+w*.5+Math.cos(a)*w*.38,y+w*.5+Math.sin(a)*w*.38);bg.strokePath();} }
+        else if (block.kind==='treasure') { bg.beginPath();bg.moveTo(x+w*.5,y+w*.22);bg.lineTo(x+w*.73,y+w*.5);bg.lineTo(x+w*.5,y+w*.78);bg.lineTo(x+w*.27,y+w*.5);bg.closePath();bg.strokePath(); }
+        else if (block.kind==='boss') { bg.strokeCircle(x+w*.5,y+w*.5,w*.27);bg.strokeCircle(x+w*.5,y+w*.5,w*.14);bg.beginPath();bg.moveTo(x+w*.5,y+w*.15);bg.lineTo(x+w*.5,y+w*.85);bg.moveTo(x+w*.15,y+w*.5);bg.lineTo(x+w*.85,y+w*.5);bg.strokePath(); }
+        else { bg.beginPath();bg.moveTo(x+w*.18,y+w*.25);bg.lineTo(x+w*.82,y+w*.25);bg.moveTo(x+w*.18,y+w*.48);bg.lineTo(x+w*.82,y+w*.48);bg.moveTo(x+w*.18,y+w*.71);bg.lineTo(x+w*.82,y+w*.71);bg.strokePath(); }
+        // Durability pips in the top-right corner make reinforced targets instantly readable.
+        for (let p=0;p<Math.min(3,block.hp);p++){bg.fillStyle(0x111827,.96);bg.fillCircle(x+w*.76-p*w*.13,y+w*.16,Math.max(1.5,w*.045));bg.fillStyle(palette[1],1);bg.fillCircle(x+w*.76-p*w*.13,y+w*.16,Math.max(1,w*.025));}
+      }
+      try { scene.children.bringToTop(bg); if (scene.selectionG) scene.children.bringToTop(scene.selectionG); } catch (_) {}
+    }
   }
 
   function spawnBurst(scene,x,y,colorIndex) {
@@ -457,8 +481,8 @@
   }
 
   window.__TODAY_CRYSTAL_PHASER = {
-    version: '2.0.0',
-    renderer: 'phaser-4.2.1',
+    version: '3.0.0',
+    renderer: 'phaser-4.2.1-blocks-v3',
     update(run, animate=true) {
       latest = snapshot(run);
       if (active && active.scene && latest) {
@@ -467,7 +491,7 @@
       }
     },
     stop: teardown,
-    status: () => ({version:'2.0.0', phaser:phaserState, mounted:!!active, ready:!!(active && active.created), input:'direct-gameplay-bridge', swipe:true})
+    status: () => ({version:'3.0.0', phaser:phaserState, mounted:!!active, ready:!!(active && active.created)})
   };
 
   const observer = new MutationObserver(checkBoard);
