@@ -1465,21 +1465,21 @@
     modal(panelShell('CRYSTAL CHRONICLES',`Уровень ${level.id} · ${h(level.name)}`,html));const shell=byId('modal');if(shell){shell.classList.add('today-match3-fullscreen');document.body.classList.add('today-match3-active');}const scrollHost=byId('modalContent');if(scrollHost)scrollHost.scrollTop=0;const scrollCard=shell?.querySelector('.modal-card');if(scrollCard)scrollCard.scrollTop=0;initMatch3CampaignGame(level.id);match3V42EnhanceGame(level,match3ActiveRun,byId('todayMatchBoard'));
   }
   function initMatch3CampaignGame(levelId){
-    const host=byId('todayMatchBoard');if(!host)return;const level=match3LevelById(levelId),run={level,cells:match3FreshBoard(),ice:Array(64).fill(0),sigils:Array(64).fill(0),selected:-1,score:0,moves:level.moves,movesUsed:0,combo:1,collected:0,collectedByColor:{},iceCleared:0,relicsCollected:0,maxCascade:0,sigilsCleared:0,startedAt:Date.now(),ended:false,busy:false,pendingBooster:'',serverReady:match3ServerReady,introLocked:true,missionTimer:null,missionInterval:null,hintTimer:null,hintCooldownUntil:0,lastSwap:null,pendingSpecialTargetColor:null,pendingSuperCombo:false,specialsCreated:0,focus:0,echoesCollected:0,guardianHp:level.id%20===0?12:0,guardianMax:level.id%20===0?12:0,guardianDefeated:false,paused:false,suppressClicksUntil:0};match3PrepareMechanics(run);window.TODAY_CRYSTAL_BLOCKS_V1.initRun(run);match3ActiveRun=run;
+    const host=byId('todayMatchBoard');if(!host)return;const level=match3LevelById(levelId),run={level,cells:match3FreshBoard(),ice:Array(64).fill(0),sigils:Array(64).fill(0),selected:-1,score:0,moves:level.moves,movesUsed:0,combo:1,collected:0,collectedByColor:{},iceCleared:0,relicsCollected:0,maxCascade:0,sigilsCleared:0,startedAt:Date.now(),ended:false,busy:false,pendingBooster:'',serverReady:match3ServerReady,introLocked:true,missionTimer:null,missionInterval:null,hintTimer:null,hintCooldownUntil:0,lastSwap:null,pendingSpecialTargetColor:null,pendingSuperCombo:false,specialsCreated:0,focus:0,echoesCollected:0,guardianHp:level.id%20===0?12:0,guardianMax:level.id%20===0?12:0,guardianDefeated:false,paused:false,suppressClicksUntil:0};match3PrepareMechanics(run);window.TODAY_CRYSTAL_BLOCKS_V1.initRun(run);window.TODAY_CRYSTAL_WORLD_V1.initRun(run);match3ActiveRun=run;
     const draw=(animate=true)=>{
       const useMotion=animate&&!match3V43FastMode();const oldRects=new Map();if(useMotion)for(const el of host.querySelectorAll('[data-gem-uid]'))oldRects.set(el.dataset.gemUid,el.getBoundingClientRect());
       host.innerHTML=run.cells.map((cell,i)=>{
         if(!cell)return '<span class="ts-m3-empty" aria-hidden="true"></span>';
         const overlays=`${run.ice[i]?`<i class="ts-m3-cell-overlay ts-m3-ice" aria-hidden="true">❄${run.ice[i]>1?run.ice[i]:''}</i>`:''}${run.sigils[i]?`<i class="ts-m3-cell-overlay ts-m3-sigil" aria-hidden="true">⛨${run.sigils[i]>1?run.sigils[i]:''}</i>`:''}${cell.relic?'<i class="ts-m3-relic-mark" aria-hidden="true">✦</i>':''}${cell.echo?'<i class="ts-m3-v42-echo" aria-hidden="true">✧</i>':''}${cell.special?`<i class="ts-m3-special-badge special-${cell.special}" aria-hidden="true">${match3SpecialGlyph(cell.special)}</i>`:''}`;const specialClass=cell.special?` has-special is-special-${cell.special}`:'';
         const specialName=cell.special?`, специальный кристалл: ${cell.special==='nova'?'звёздное ядро':cell.special==='bomb'?'бомба':cell.special==='rainbow'?'призматический':cell.special==='rocket-h'?'горизонтальная ракета':'вертикальная ракета'}`:'';
-        return `<button type="button" class="ts-m3-gem gem-${cell.color}${specialClass} ${i===run.selected?'is-selected':''}" data-game-act="match-tap" data-i="${i}" data-gem-uid="${cell.uid}" aria-label="${h(MATCH3_GEMS[cell.color].name)}${specialName}${cell.relic?', королевская реликвия':''}${run.ice[i]?', лёд '+run.ice[i]:''}${run.sigils[i]?', печать тени '+run.sigils[i]:''}, клетка ${Math.floor(i/8)+1}-${i%8+1}">${match3GemSvg(cell.color,cell.uid)}${overlays}${window.TODAY_CRYSTAL_BLOCKS_V1.blockMarkup(run,i)}</button>`;
+        return `<button type="button" class="ts-m3-gem gem-${cell.color}${specialClass} ${i===run.selected?'is-selected':''}" data-game-act="match-tap" data-i="${i}" data-gem-uid="${cell.uid}" aria-label="${h(MATCH3_GEMS[cell.color].name)}${specialName}${cell.relic?', королевская реликвия':''}${run.ice[i]?', лёд '+run.ice[i]:''}${run.sigils[i]?', печать тени '+run.sigils[i]:''}, клетка ${Math.floor(i/8)+1}-${i%8+1}">${match3GemSvg(cell.color,cell.uid)}${overlays}${window.TODAY_CRYSTAL_BLOCKS_V1.blockMarkup(run,i)}${window.TODAY_CRYSTAL_WORLD_V1.blockMarkup(run,i)}</button>`;
       }).join('');
       /* TODAY CRYSTAL PHASER V1 — RENDER BRIDGE */
       try { window.__TODAY_CRYSTAL_PHASER?.update?.(run, useMotion); } catch (phaserBridgeError) { console.warn('[TODAY Crystal Phaser] update skipped', phaserBridgeError); }
       if(useMotion)requestAnimationFrame(()=>{for(const el of host.querySelectorAll('[data-gem-uid]')){const before=oldRects.get(el.dataset.gemUid),after=el.getBoundingClientRect();if(before){const dx=before.left-after.left,dy=before.top-after.top;if(Math.abs(dx)+Math.abs(dy)>1)try{el.animate([{transform:`translate(${dx}px,${dy}px) scale(.86) rotate(-2deg)`},{transform:'translate(0,0) scale(1) rotate(0deg)'}],{duration:240,easing:'cubic-bezier(.18,.88,.22,1)'});}catch(_){}}else try{el.animate([{transform:'translateY(-42px) scale(.62) rotate(-8deg)',opacity:0,filter:'brightness(2.2)'},{transform:'translateY(0) scale(1) rotate(0deg)',opacity:1,filter:'brightness(1)'}],{duration:350,delay:Math.random()*90,easing:'cubic-bezier(.14,.84,.18,1)'});}catch(_){}}});updateHud();};
-    const updateHud=()=>{const set=(id,value)=>{const el=byId(id);if(el)el.textContent=String(value);};set('todayMatchScore',run.score.toLocaleString('ru-RU'));set('todayMatchMoves',run.moves);set('todayMatchCombo','×'+run.combo);set('todayMatchTarget',level.scoreGate.toLocaleString('ru-RU'));const pct=Math.min(100,run.score/Math.max(1,level.scoreGate)*100),bar=byId('todayMatchScoreBar');if(bar)bar.style.width=pct+'%';const track=bar?.closest('.ts-m3-score-track');if(track)track.classList.toggle('is-near-goal',pct>=80);const gameRoot=host.closest('.ts-m3-game');if(gameRoot)gameRoot.classList.toggle('is-near-goal',pct>=80);const hint=gameRoot?.querySelector('[data-game-act="match3-hint"]');if(hint)hint.disabled=run.busy||run.ended||run.introLocked||Date.now()<(run.hintCooldownUntil||0);set('todayMatchScoreLabel',`${run.score.toLocaleString('ru-RU')} / ${level.scoreGate.toLocaleString('ru-RU')} очков`);if(level.colorGoal){const count=run.collectedByColor[level.colorGoal.color]||0;set('todayMatchColorGoal',`${MATCH3_GEMS[level.colorGoal.color].mark} ${MATCH3_GEMS[level.colorGoal.color].name}: ${count} / ${level.colorGoal.count}`);}if(level.iceGoal)set('todayMatchIceGoal',`❄ Лёд: ${run.iceCleared} / ${level.iceGoal.count}`);if(level.relicGoal)set('todayMatchRelicGoal',`✦ Реликвии: ${run.relicsCollected} / ${level.relicGoal.count}`);if(level.chainGoal)set('todayMatchChainGoal',`⛓ Каскад: ${run.maxCascade} / ${level.chainGoal.count}`);if(level.sigilGoal)set('todayMatchSigilGoal',`⛨ Печати: ${run.sigilsCleared} / ${level.sigilGoal.count}`);for(const b of MATCH3_BOOSTERS){const btn=host.parentElement?.parentElement?.querySelector(`[data-game-act="match3-booster-use"][data-booster="${b.id}"]`);if(btn){const qty=Number(match3Progress?.inventory?.[b.id]||0),small=btn.querySelector('small');if(small)small.textContent='В наличии: '+qty;btn.disabled=qty<1||!match3ServerReady||run.ended||run.busy||run.introLocked||run.paused;}}match3V42SyncHud(run,level);window.TODAY_CRYSTAL_BLOCKS_V1.updateHud(run);};
+    const updateHud=()=>{const set=(id,value)=>{const el=byId(id);if(el)el.textContent=String(value);};set('todayMatchScore',run.score.toLocaleString('ru-RU'));set('todayMatchMoves',run.moves);set('todayMatchCombo','×'+run.combo);set('todayMatchTarget',level.scoreGate.toLocaleString('ru-RU'));const pct=Math.min(100,run.score/Math.max(1,level.scoreGate)*100),bar=byId('todayMatchScoreBar');if(bar)bar.style.width=pct+'%';const track=bar?.closest('.ts-m3-score-track');if(track)track.classList.toggle('is-near-goal',pct>=80);const gameRoot=host.closest('.ts-m3-game');if(gameRoot)gameRoot.classList.toggle('is-near-goal',pct>=80);const hint=gameRoot?.querySelector('[data-game-act="match3-hint"]');if(hint)hint.disabled=run.busy||run.ended||run.introLocked||Date.now()<(run.hintCooldownUntil||0);set('todayMatchScoreLabel',`${run.score.toLocaleString('ru-RU')} / ${level.scoreGate.toLocaleString('ru-RU')} очков`);if(level.colorGoal){const count=run.collectedByColor[level.colorGoal.color]||0;set('todayMatchColorGoal',`${MATCH3_GEMS[level.colorGoal.color].mark} ${MATCH3_GEMS[level.colorGoal.color].name}: ${count} / ${level.colorGoal.count}`);}if(level.iceGoal)set('todayMatchIceGoal',`❄ Лёд: ${run.iceCleared} / ${level.iceGoal.count}`);if(level.relicGoal)set('todayMatchRelicGoal',`✦ Реликвии: ${run.relicsCollected} / ${level.relicGoal.count}`);if(level.chainGoal)set('todayMatchChainGoal',`⛓ Каскад: ${run.maxCascade} / ${level.chainGoal.count}`);if(level.sigilGoal)set('todayMatchSigilGoal',`⛨ Печати: ${run.sigilsCleared} / ${level.sigilGoal.count}`);for(const b of MATCH3_BOOSTERS){const btn=host.parentElement?.parentElement?.querySelector(`[data-game-act="match3-booster-use"][data-booster="${b.id}"]`);if(btn){const qty=Number(match3Progress?.inventory?.[b.id]||0),small=btn.querySelector('small');if(small)small.textContent='В наличии: '+qty;btn.disabled=qty<1||!match3ServerReady||run.ended||run.busy||run.introLocked||run.paused;}}match3V42SyncHud(run,level);window.TODAY_CRYSTAL_BLOCKS_V1.updateHud(run);window.TODAY_CRYSTAL_WORLD_V1.updateHud(run,host);};
     const status=text=>{const el=byId('todayMatchStatus');if(el)el.textContent=text;};
-    const won=()=>window.TODAY_CRYSTAL_BLOCKS_V1.isComplete(run)&&run.score>=level.scoreGate&&(!level.colorGoal||Number(run.collectedByColor[level.colorGoal.color]||0)>=level.colorGoal.count)&&(!level.iceGoal||run.iceCleared>=level.iceGoal.count)&&(!level.relicGoal||run.relicsCollected>=level.relicGoal.count)&&(!level.chainGoal||run.maxCascade>=level.chainGoal.count)&&(!level.sigilGoal||run.sigilsCleared>=level.sigilGoal.count);
+    const won=()=>window.TODAY_CRYSTAL_BLOCKS_V1.isComplete(run)&&window.TODAY_CRYSTAL_WORLD_V1.isComplete(run)&&run.score>=level.scoreGate&&(!level.colorGoal||Number(run.collectedByColor[level.colorGoal.color]||0)>=level.colorGoal.count)&&(!level.iceGoal||run.iceCleared>=level.iceGoal.count)&&(!level.relicGoal||run.relicsCollected>=level.relicGoal.count)&&(!level.chainGoal||run.maxCascade>=level.chainGoal.count)&&(!level.sigilGoal||run.sigilsCleared>=level.sigilGoal.count);
     const clearAndResolve=async(startSet,initialBonus=1)=>{
       run.busy=true;let matches=startSet,chain=0;
       while(matches&&matches.length&&chain<14&&!run.ended){
@@ -1490,8 +1490,10 @@
         if(keepIndex>=0&&run.cells[keepIndex]?.special){const alternative=(plan.indices||[]).find(i=>!run.cells[i]?.special);if(alternative!==undefined)keepIndex=alternative;else{plan=null;keepIndex=-1;}}
         const base=[...new Set([...matches])];
         if(keepIndex>=0)for(let i=base.length-1;i>=0;i--)if(base[i]===keepIndex)base.splice(i,1);
+        window.TODAY_CRYSTAL_WORLD_V1.markTargets(run);
         const expanded=match3ExpandSpecialClear(run.cells,base,run.pendingSpecialTargetColor,run.pendingSuperCombo,keepIndex);
-        const toClear=new Set(expanded);if(keepIndex>=0)toClear.delete(keepIndex);
+        const toClear=new Set(window.TODAY_CRYSTAL_WORLD_V1.expandClear(run,expanded));if(keepIndex>=0)toClear.delete(keepIndex);
+        const worldResult=window.TODAY_CRYSTAL_WORLD_V1.applyClear(run,[...toClear],chain);if(worldResult?.message)status(worldResult.message);
         const blockResult=window.TODAY_CRYSTAL_BLOCKS_V1.applyClear(run,[...toClear],chain);if(blockResult?.bonusScore){run.score+=blockResult.bonusScore;run.v42ScorePending=(run.v42ScorePending||0)+blockResult.bonusScore;}if(blockResult?.message)status(blockResult.message);
         for(const i of toClear){const el=host.querySelector(`[data-i="${i}"]`);if(el){el.classList.add('is-matching');if(run.cells[i]?.special)el.classList.add('is-special-trigger');}}
         const specialCount=[...toClear].filter(i=>!!run.cells[i]?.special).length;if(specialCount||plan)match3V42TrackDaily('specials',specialCount+(plan?1:0));match3V42DamageGuardian(run,toClear.size,specialCount,chain);match3V42PlaySound(plan||specialCount?'special':chain>1?'combo':'match');
@@ -1517,23 +1519,112 @@
         for(let attempt=0;attempt<80&&!valid;attempt++){const shuffled=colors.slice();for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}for(let i=0;i<64;i++)if(run.cells[i])run.cells[i].color=shuffled[i];valid=!match3FindMatches(run.cells).length&&match3HasValidMove(run.cells);}
         if(valid){host.classList.add('is-shuffling');setTimeout(()=>host.classList.remove('is-shuffling'),500);status('На поле не осталось ходов — кристаллы перестроены без штрафа.');draw(true);}
       }
-      const blockTurn=window.TODAY_CRYSTAL_BLOCKS_V1.endTurn(run);if(blockTurn?.bonusScore){run.score+=blockTurn.bonusScore;run.v42ScorePending=(run.v42ScorePending||0)+blockTurn.bonusScore;}if(blockTurn?.message)status(blockTurn.message);if(blockTurn?.changed)draw(true);updateHud();if(won()){await match3Finish(true);return;}if(run.moves<=0){await match3Finish(false);return;}run.busy=false;updateHud();
+      const blockTurn=window.TODAY_CRYSTAL_BLOCKS_V1.endTurn(run);const worldTurn=window.TODAY_CRYSTAL_WORLD_V1.endTurn(run);if(worldTurn?.message)status(worldTurn.message);if(blockTurn?.bonusScore){run.score+=blockTurn.bonusScore;run.v42ScorePending=(run.v42ScorePending||0)+blockTurn.bonusScore;}if(blockTurn?.message)status(blockTurn.message);if(blockTurn?.changed)draw(true);updateHud();if(won()){await match3Finish(true);return;}if(run.moves<=0){await match3Finish(false);return;}run.busy=false;updateHud();
     };
     const tap=async index=>{
       if(run.ended||run.busy||run.introLocked||run.paused||!Number.isInteger(index)||index<0||index>=64)return;
+      
+      if(run.worldPendingTool){
+        const tool=run.worldPendingTool;
+        const world=run.world;
+        if(!world||!world.tools){run.worldPendingTool='';return;}
+
+        if(tool==='shuffle'){
+          run.worldPendingTool='';
+          if(Number(world.tools.shuffle||0)<=0){status('Перемешивание закончилось.');return;}
+          if(run.worldActions?.shuffle)run.worldActions.shuffle();
+          return;
+        }
+
+        if(tool==='swap'){
+          if(run.worldToolTarget===null||run.worldToolTarget===undefined){
+            run.worldToolTarget=index;
+            status('Выбери соседний кристалл для бесплатного обмена.');
+            return;
+          }
+
+          const first=run.worldToolTarget,second=index;
+          run.worldToolTarget=null;
+
+          if(first===second){status('Выбери другую соседнюю клетку.');return;}
+          const fr=Math.floor(first/8),fc=first%8;
+          const sr=Math.floor(second/8),sc=second%8;
+
+          if(Math.abs(fr-sr)+Math.abs(fc-sc)!==1||
+             !window.TODAY_CRYSTAL_WORLD_V1.canSwap(run,first,second)){
+            status('Этот обмен недоступен: выбери соседние свободные клетки.');
+            return;
+          }
+
+          if(Number(world.tools.swap||0)<=0){status('Бесплатные обмены закончились.');return;}
+          world.tools.swap--;
+          [run.cells[first],run.cells[second]]=[run.cells[second],run.cells[first]];
+          const freeMatches=match3FindMatches(run.cells);
+
+          if(!freeMatches.length){
+            [run.cells[first],run.cells[second]]=[run.cells[second],run.cells[first]];
+            draw(true);updateHud();
+            status('Обмен отменён: он не создаёт комбинацию.');
+            return;
+          }
+
+          run.worldPendingTool='';
+          run.lastSwap=[first,second];
+          run.pendingSpecialTargetColor=null;
+          run.pendingSuperCombo=false;
+          updateHud();
+          await clearAndResolve(freeMatches,1);
+          if(!run.ended)draw(false);
+          return;
+        }
+
+        if(['hammer','row','column'].includes(tool)){
+          if(Number(world.tools[tool]||0)<=0){
+            run.worldPendingTool='';
+            status('Этот инструмент закончился.');
+            updateHud();
+            return;
+          }
+
+          run.worldPendingTool='';
+          world.tools[tool]--;
+          let remove=[];
+
+          if(tool==='hammer'){
+            remove=[index];
+            status('МОЛОТ! Кристалл разбит прямым ударом.');
+          }else if(tool==='row'){
+            const r=Math.floor(index/8);
+            remove=Array.from({length:8},(_,c)=>r*8+c);
+            status('ГОРИЗОНТАЛЬНЫЙ ИМПУЛЬС! Очищен весь ряд.');
+          }else{
+            const c=index%8;
+            remove=Array.from({length:8},(_,r)=>r*8+c);
+            status('ВЕРТИКАЛЬНЫЙ ИМПУЛЬС! Очищен весь столбец.');
+          }
+
+          run.pendingSpecialTargetColor=null;
+          run.pendingSuperCombo=false;
+          updateHud();
+          await clearAndResolve(remove,1.15);
+          if(!run.ended)draw(false);
+          return;
+        }
+      }
+
       if(run.pendingBooster){const b=run.pendingBooster;run.pendingBooster='';if(b==='focus'){if(Number(run.focus||0)<100){status('Резонанс ещё не готов.');return;}run.focus=0;run.moves--;run.movesUsed++;const rr=Math.floor(index/8),cc=index%8,remove=[];for(let k=0;k<8;k++){remove.push(rr*8+k,k*8+cc);}status('УДАР ХРАНИТЕЛЯ! Строка и столбец очищены резонансом.');run.pendingSpecialTargetColor=null;run.pendingSuperCombo=false;updateHud();await clearAndResolve([...new Set(remove)],1.32);return;}if(b==='hammer'){const r=Math.floor(index/8),c=index%8,remove=[];for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const rr=r+dr,cc=c+dc;if(rr>=0&&rr<8&&cc>=0&&cc<8)remove.push(rr*8+cc);}status('Космический молот разбил кристаллы!');run.pendingSpecialTargetColor=null;run.pendingSuperCombo=false;await clearAndResolve(remove,1.15);return;}if(b==='rainbow'){const color=run.cells[index]?.color;if(!Number.isInteger(color))return;const remove=run.cells.map((cell,i)=>cell?.color===color?i:-1).filter(i=>i>=0);status('Радужный импульс очистил цвет «'+MATCH3_GEMS[color].name+'»!');run.pendingSpecialTargetColor=color;run.pendingSuperCombo=false;await clearAndResolve(remove,1.25);return;}}
       if(run.selected<0){run.selected=index;draw(false);status('Выбери соседний кристалл для обмена. Линия из четырёх создаёт ракету, из пяти — призму.');return;}
       if(index===run.selected){run.selected=-1;draw(false);return;}
       const r1=Math.floor(run.selected/8),c1=run.selected%8,r2=Math.floor(index/8),c2=index%8;
       if(Math.abs(r1-r2)+Math.abs(c1-c2)!==1){run.selected=index;draw(false);status('Можно менять только соседние кристаллы.');return;}
       const first=run.selected,second=index;run.selected=-1;run.busy=true;const tmp=run.cells[first];run.cells[first]=run.cells[second];run.cells[second]=tmp;draw(true);await new Promise(resolve=>setTimeout(resolve,150));
-      if(run.cells[first]?.special||run.cells[second]?.special){const firstSpecial=!!run.cells[first]?.special,secondSpecial=!!run.cells[second]?.special;run.moves--;run.movesUsed++;match3V42TrackDaily('moves',1);run.lastSwap=null;run.pendingSuperCombo=firstSpecial&&secondSpecial;run.pendingSpecialTargetColor=firstSpecial?run.cells[second]?.color:run.cells[first]?.color;status(run.pendingSuperCombo?'СОВМЕЩЕНИЕ СИЛ! Двойная вспышка очищает всё поле.':'Особый кристалл активирован — держись!');updateHud();await clearAndResolve([first,second],run.pendingSuperCombo?1.65:1.35);run.busy=false;if(!run.ended)draw(false);return;}
+      if(run.cells[first]?.special||run.cells[second]?.special){const firstSpecial=!!run.cells[first]?.special,secondSpecial=!!run.cells[second]?.special;run.moves--;run.movesUsed++;match3V42TrackDaily('moves',1);run.lastSwap=null;run.pendingSuperCombo=run.cells[first]?.special==='rainbow'&&run.cells[second]?.special==='rainbow';run.pendingSpecialTargetColor=firstSpecial?run.cells[second]?.color:run.cells[first]?.color;status(run.pendingSuperCombo?'СОВМЕЩЕНИЕ СИЛ! Двойная вспышка очищает всё поле.':'Особый кристалл активирован — держись!');updateHud();await clearAndResolve([first,second],run.pendingSuperCombo?1.65:1.35);run.busy=false;if(!run.ended)draw(false);return;}
       const matches=match3FindMatches(run.cells);
       if(!matches.length){const back=run.cells[first];run.cells[first]=run.cells[second];run.cells[second]=back;draw(true);run.busy=false;status('Такой обмен не создаёт линию. Попробуй другой ход.');return;}
       run.moves--;run.movesUsed++;match3V42TrackDaily('moves',1);run.lastSwap=[first,second];run.pendingSpecialTargetColor=null;run.pendingSuperCombo=false;updateHud();status('Кристаллы резонируют — найди длинную линию для особого самоцвета!');await clearAndResolve(matches,1);run.busy=false;if(!run.ended){draw(false);status('Ход за тобой. Линии из 4–5 кристаллов создают специальные самоцветы.');}
     };
-    run.tap=tap;/* TODAY CRYSTAL PHASER V2 — GAMEPLAY INPUT BRIDGE */window.__TODAY_CRYSTAL_GAMEPLAY_V2={version:'2.0.0',tap(index){if(match3ActiveRun!==run||run.ended||!host.isConnected||!host.closest('.ts-m3-game[data-match3-level]'))return false;const n=Number(index);if(!Number.isInteger(n)||n<0||n>=64)return false;return run.tap(n);},isActive(board){return match3ActiveRun===run&&!run.ended&&host.isConnected&&host===board&&!!host.closest('.ts-m3-game[data-match3-level]');},status(){return {version:'2.0.0',active:match3ActiveRun===run&&!run.ended,paused:!!run.paused,busy:!!run.busy,level:Number(run.level&&run.level.id)||0};}};host.innerHTML='';draw(false);todayMiniGameRuntime={id:'match3',tap};const missionSplash=byId('todayMatchMissionSplash');if(missionSplash)missionSplash.remove();run.introLocked=false;run.busy=false;updateHud();status('Уровень начался! Меняй местами соседние кристаллы.');todayMiniGameCleanup=()=>{clearTimeout(run.missionTimer);clearInterval(run.missionInterval);clearTimeout(run.hintTimer);run.ended=true;run.busy=true;};
-    function collapseColumns(cells){for(let c=0;c<8;c++){const survivors=[];for(let r=7;r>=0;r--){const cell=cells[r*8+c];if(cell)survivors.push(cell);}for(let r=7;r>=0;r--){const offset=7-r;cells[r*8+c]=survivors[offset]||match3NewGem();}}}
+    run.worldActions={shuffle:()=>{if(run.ended||run.busy||!run.world||Number(run.world.tools.shuffle||0)<=0)return;run.world.tools.shuffle--;window.TODAY_CRYSTAL_WORLD_V1.shuffle(run);draw(true);updateHud();status('Поле перемешано без расхода хода.');}};run.tap=tap;/* TODAY CRYSTAL PHASER V2 — GAMEPLAY INPUT BRIDGE */window.__TODAY_CRYSTAL_GAMEPLAY_V2={version:'2.0.0',tap(index){if(match3ActiveRun!==run||run.ended||!host.isConnected||!host.closest('.ts-m3-game[data-match3-level]'))return false;const n=Number(index);if(!Number.isInteger(n)||n<0||n>=64)return false;return run.tap(n);},isActive(board){return match3ActiveRun===run&&!run.ended&&host.isConnected&&host===board&&!!host.closest('.ts-m3-game[data-match3-level]');},status(){return {version:'2.0.0',active:match3ActiveRun===run&&!run.ended,paused:!!run.paused,busy:!!run.busy,level:Number(run.level&&run.level.id)||0};}};host.innerHTML='';draw(false);todayMiniGameRuntime={id:'match3',tap};const missionSplash=byId('todayMatchMissionSplash');if(missionSplash)missionSplash.remove();run.introLocked=false;run.busy=false;updateHud();status('Уровень начался! Меняй местами соседние кристаллы.');todayMiniGameCleanup=()=>{clearTimeout(run.missionTimer);clearInterval(run.missionInterval);clearTimeout(run.hintTimer);run.ended=true;run.busy=true;};
+    function collapseColumns(cells){window.TODAY_CRYSTAL_WORLD_V1.collapse(run,cells,()=>match3NewGem());}
     async function match3Finish(isWin){if(run.ended)return;run.ended=true;run.busy=true;run.combo=1;const seconds=Math.max(1,Math.round((Date.now()-run.startedAt)/1000)),stars=isWin?match3Stars(level,run.score):0,wasComplete=!!match3Progress.levels?.[String(level.id)]?.completed,trophy=level.trophy;if(isWin){match3V42TrackDaily('wins',1);match3V42PlaySound('win');const old=match3Progress.levels?.[String(level.id)]||{};match3Progress.levels[String(level.id)]={completed:true,best_score:Math.max(Number(old.best_score||0),run.score),best_stars:Math.max(Number(old.best_stars||0),stars),best_moves:run.moves,best_duration_sec:seconds,trophy_collected:true,trophy_name:trophy.name};match3Progress.unlocked_level=Math.max(Number(match3Progress.unlocked_level||1),Math.min(221,level.id+1));status('Уровень пройден! Реликвия добавлена в альбом.');}else status('Ходы закончились. Можно переиграть уровень или купить усилитель на карте.');try{match3SaveLocal();}catch(storageError){console.warn('TODAY Crystal Chronicles local result save',storageError);}const v45BackgroundSave=Promise.resolve().then(()=>saveGameResult('match3',run.score,seconds));v45BackgroundSave.catch(error=>console.warn('TODAY Crystal Chronicles deferred save',error));
       if(match3ServerReady&&await currentUser()){try{const result=await todayWithTimeout(rpc('today_match3_save_result',{p_level_id:level.id,p_score:run.score,p_stars:stars,p_moves_used:Math.max(0,run.movesUsed),p_duration_sec:seconds,p_won:!!isWin,p_goal_color:match3GoalCode(level),p_goal_count:match3GoalCount(run,level)}),8000,'Сервер не подтвердил результат уровня за 8 секунд.');if(result?.ok){match3Progress.unlocked_level=Math.max(match3Progress.unlocked_level,Number(result.unlocked_level||1));if(result.coins!==undefined)match3Progress.coins=Number(result.coins);match3ServerReady=true;match3SaveLocal();}else throw new Error(result?.message||'Результат не подтверждён.');}catch(error){console.warn('TODAY Crystal Chronicles result save',error);match3ServerMessage=String(error?.message||error);match3ServerReady=false;}}
       try{updateHud();}catch(hudError){console.warn('TODAY Crystal Chronicles HUD update',hudError);}let panel=byId('todayMatch3Result');const resultModal=byId('modal');const gameRoot=byId('todayMatchBoard')?.closest('.ts-m3-game');if(resultModal){resultModal.classList.add('today-match3-fullscreen');document.body.classList.add('today-match3-active');}if(!panel){panel=document.createElement('section');panel.id='todayMatch3Result';panel.className='ts-m3-result';panel.hidden=true;}if(panel.parentNode!==document.body)document.body.appendChild(panel);panel.dataset.v44ForceVisible='1';panel.hidden=false;panel.style.setProperty('display','flex','important');panel.style.setProperty('visibility','visible','important');panel.style.setProperty('opacity','1','important');panel.style.setProperty('pointer-events','auto','important');panel.style.setProperty('position','fixed','important');panel.style.setProperty('inset','max(9px, env(safe-area-inset-top)) 9px max(9px, env(safe-area-inset-bottom))','important');panel.style.setProperty('z-index','2147483647','important');panel.style.setProperty('flex-direction','column','important');panel.style.setProperty('align-items','center','important');panel.style.setProperty('justify-content','center','important');panel.style.setProperty('overflow','auto','important');panel.dataset.v45BodyOverlay='1';document.body.classList.add('today-match3-result-open');panel.innerHTML='<span class="ts-m3-eyebrow">'+(isWin?'УРОВЕНЬ ПРОЙДЕН':'УРОВЕНЬ ЗАВЕРШЁН')+'</span>'+'<h3>'+(isWin?'ПОЗДРАВЛЯЕМ!':'Попробуй ещё раз')+'</h3>'+'<p>'+(isWin?('Ты получил '+(Number(stars)||0)+' ★ за уровень '+level.id+'.'):('Условие уровня: '+h(match3LevelObjective(level))))+'</p>'+'<div class="ts-m3-result-stars">'+[1,2,3].map(n=>'<span class="'+(n<=stars?'earned':'')+'">★</span>').join('')+'</div>'+'<div class="ts-m3-result-actions">'+(isWin&&level.id<220?'<button type="button" class="ts-primary ts-m3-next" data-game-act="match3-level" data-level="'+(level.id+1)+'">СЛЕДУЮЩИЙ УРОВЕНЬ →</button>':'')+'<button type="button" class="ts-primary" data-game-act="match3-retry" data-level="'+level.id+'">'+(isWin?'Переиграть':'Попробовать снова')+' ↻</button>'+'<button type="button" class="ts-mini" data-game-act="match3-back">К карте кампании</button></div>';if(panel){panel.hidden=false;panel.dataset.v43Outcome=isWin?'win':'fail';panel.innerHTML=`${match3V42FeatureStats(level,run,isWin,stars)}${isWin?'<div class="ts-m3-v43-confetti" aria-hidden="true">✦　✧　✦　✧　✦</div>':''}<div class="ts-m3-result-symbol">${isWin?trophy.icon:'◇'}</div><span class="ts-m3-eyebrow">${isWin?'ПОБЕДА · УРОВЕНЬ ПРОЙДЕН':'ПОПРОБУЙ ЕЩЁ РАЗ'}</span><h3>${isWin?'ПОЗДРАВЛЯЕМ!':'Почти получилось'}</h3><p>${isWin?`Ты набрал ${run.score.toLocaleString('ru-RU')} очков и получил ${stars} ${stars===1?'звезду':stars<5?'звезды':'звёзд'}.`:`Нужно выполнить цель уровня: ${h(match3LevelObjective(level))}. Осталось блоков: ${Number(run.blocksRemaining||0)}.`}</p>${isWin?`<div class="ts-m3-earned-trophy tone-${trophy.tone}"><span>${trophy.icon}</span><div><small>${wasComplete?'РЕЛИКВИЯ УЖЕ В АЛЬБОМЕ':'НОВАЯ РЕЛИКВИЯ · ДОБАВЛЕНА В АЛЬБОМ'}</small><b>${h(trophy.name)}</b><p>Памятный сувенир. Не влияет на очки, монеты, усилители или сложность.</p></div></div>`:''}<div class="ts-m3-result-stars">${[1,2,3].map(n=>`<span class="${n<=stars?'earned':''}">★</span>`).join('')}</div><div class="ts-m3-result-actions"><button type="button" class="ts-primary" data-game-act="match3-retry" data-level="${level.id}">${isWin?'Переиграть ↻':'Попробовать снова ↻'}</button>${isWin&&level.id<220?`<button type="button" class="ts-primary ts-m3-next" data-game-act="match3-level" data-level="${level.id+1}" ${level.id+1>match3Progress.unlocked_level?'disabled':''}>СЛЕДУЮЩИЙ УРОВЕНЬ →</button>`:''}${isWin&&level.id===220?'<button type="button" class="ts-primary" data-game-act="match3-back">Вернуться к принцессе ♕</button>':''}<button type="button" class="ts-mini" data-game-act="match3-back">К карте кампании</button></div>${match3ServerMessage&&!match3ServerReady?`<small class="ts-m3-server-note">Результат сохранён на этом устройстве. Синхронизация: ${h(match3ServerMessage)}</small>`:''}</div>`;}}
