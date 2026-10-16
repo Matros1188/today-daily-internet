@@ -928,9 +928,9 @@
       const g = TODAY_GAMES[id];
       return `<article class="ts-game-card ts-game-${id} ${id==='match3'?'ts-game-card-featured':''}"><div class="ts-game-art" aria-hidden="true">${gameArtwork(id)}</div><div class="ts-game-card-copy"><span class="ts-kicker">TODAY ARCADE</span><h3>${h(g.title)}</h3><p>${h(g.subtitle)}</p><div class="ts-game-card-bottom"><small>Рекорд устройства: <b data-local-best="${id}">${gameBest(id)}</b></small><button class="ts-primary" data-social-act="play-game" data-game="${id}">Играть ↗</button></div></div></article>`;
     }).join('');
-    const html = `<div class="ts-games-home"><div class="ts-games-hero"><span class="ts-kicker">TODAY ORIGINAL · 220 УРОВНЕЙ · ИСТОРИЯ СПАСЕНИЯ ЭЛАРЫ</span><h3>Собери историю из семи кристаллов.</h3><p>CRYSTAL CHRONICLES — главная аркада TODAY. Открывай главы, собирай комбо и возвращай сияние миру.</p><button type="button" class="ts-primary" data-social-act="play-game" data-game="match3">Продолжить кампанию ↗</button></div><div class="ts-game-grid">${cards}</div><section class="ts-game-leaderboard"><div class="ts-list-head"><h3>Рекорды друзей</h3><span class="ts-count">СЕГОДНЯ</span></div><div class="ts-game-leaderboard-tabs">${ids.map(id=>`<button class="ts-mini" data-game-act="leaderboard" data-game="${id}">${h(TODAY_GAMES[id].label)}</button>`).join('')}</div><div id="todayGameLeaderboard" aria-live="polite"><p class="ts-muted">Выбери игру, чтобы посмотреть рекорды друзей за сегодня. Личные рекорды доступны и без аккаунта.</p></div></section></div>`;
+    const html = `<div class="ts-games-home"><div class="ts-games-hero"><span class="ts-kicker">TODAY ORIGINAL · 220 УРОВНЕЙ · ИСТОРИЯ СПАСЕНИЯ ЭЛАРЫ</span><h3>Собери историю из семи кристаллов.</h3><p>CRYSTAL CHRONICLES — главная аркада TODAY. Открывай главы, собирай комбо и возвращай сияние миру.</p><button type="button" class="ts-primary" data-social-act="play-game" data-game="match3">Продолжить кампанию ↗</button></div><div class="ts-game-grid">${cards}</div><section class="ts-game-leaderboard"><div class="ts-list-head"><h3>Рекорды друзей</h3><span class="ts-count">СЕГОДНЯ</span></div><div class="ts-game-leaderboard-tabs">${ids.map(id=>`<button class="ts-mini" data-game-act="leaderboard" data-game="${id}">${h(TODAY_GAMES[id].label)}</button>`).join('')}</div><div class="tglb-period-tabs" role="group" aria-label="Период рейтинга"><button type="button" class="ts-mini is-active" data-game-act="leaderboard-period" data-period="today" aria-pressed="true">Сегодня</button><button type="button" class="ts-mini" data-game-act="leaderboard-period" data-period="week" aria-pressed="false">7 дней</button><button type="button" class="ts-mini" data-game-act="leaderboard-period" data-period="all" aria-pressed="false">Всё время</button></div><div id="todayGameLeaderboard" aria-live="polite"><p class="ts-muted">Выбери игру, чтобы посмотреть рекорды друзей за сегодня. Личные рекорды доступны и без аккаунта.</p></div></section></div>`;
     modal(panelShell('Мини-игры','Короткие игры TODAY — для дороги, очереди и свободной минуты.',html));
-    void loadMiniGameLeaderboard('match3');
+    void loadMiniGameLeaderboard('match3', 'today');
   }
 
   /* TODAY V26 CLEANUP BRIDGES BEGIN */
@@ -956,81 +956,152 @@
     if (EXTRA_GAME_IDS.includes(gameId)) initExtraGame(gameId);
   }
 
-  /* TODAY ARCADE ALL LEADERBOARDS V1 */
-  async function loadMiniGameLeaderboard(gameId) {
+  /* TODAY ARCADE LEADERBOARDS V2 BEGIN */
+  async function loadMiniGameLeaderboard(gameId, period) {
     const host = byId('todayGameLeaderboard');
-    if (!host) return;
-    if (!TODAY_GAMES[gameId]) return;
+    if (!host || !TODAY_GAMES[gameId]) return;
 
-    const tabs = document.querySelectorAll(
+    const allowedPeriods = ['today', 'week', 'all'];
+
+    period = allowedPeriods.includes(period)
+      ? period
+      : (allowedPeriods.includes(loadMiniGameLeaderboard.activePeriod)
+          ? loadMiniGameLeaderboard.activePeriod
+          : 'today');
+
+    loadMiniGameLeaderboard.activeGame = gameId;
+    loadMiniGameLeaderboard.activePeriod = period;
+
+    const periodLabels = {
+      today: 'сегодня',
+      week: 'за 7 дней',
+      all: 'за всё время'
+    };
+
+    document.querySelectorAll(
       '.ts-game-leaderboard-tabs [data-game-act="leaderboard"]'
-    );
-    tabs.forEach(button => {
+    ).forEach(button => {
       const active = button.dataset.game === gameId;
       button.classList.toggle('is-active', active);
       button.setAttribute('aria-pressed', String(active));
     });
 
-    host.innerHTML = '<p class="ts-muted">Загружаем рекорды друзей…</p>';
+    document.querySelectorAll(
+      '.tglb-period-tabs [data-game-act="leaderboard-period"]'
+    ).forEach(button => {
+      const active = button.dataset.period === period;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+
+    host.innerHTML =
+      '<p class="ts-muted">Загружаем рейтинг ' +
+      h(periodLabels[period]) + '…</p>';
 
     try {
       const data = await todayWithTimeout(
-        rpc('today_mini_game_leaderboard', {
+        rpc('today_mini_game_leaderboard_v2', {
           p_game_id: gameId,
+          p_period: period,
           p_limit: 10
         }),
         10000,
-        'Загрузка рекордов заняла слишком много времени.'
+        'Загрузка рейтинга заняла слишком много времени.'
       );
 
       if (data && data.ok === false) {
-        throw new Error(data.message || 'Рейтинг временно недоступен.');
+        throw new Error(
+          data.message || 'Рейтинг временно недоступен.'
+        );
       }
 
-      const rows = Array.isArray(data.scores) ? data.scores : [];
+      const rows = Array.isArray(data?.scores) ? data.scores : [];
+
       const scoreLabel = row => {
         const raw = Math.max(0, Number(row.best_score || 0));
-        // Сервер хранит для PULSE баллы 1000 - миллисекунды.
-        // В рейтинге восстанавливаем читаемое время.
+
         if (gameId === 'pulse') {
-          const milliseconds = Math.max(1, 1000 - Math.min(999, raw));
+          const milliseconds = Math.max(
+            1,
+            1000 - Math.min(999, raw)
+          );
           return milliseconds.toLocaleString('ru-RU') + ' мс';
         }
+
         return Math.floor(raw).toLocaleString('ru-RU');
       };
 
+      const caption =
+        'Лучшие результаты друзей ' +
+        h(data.period_label || periodLabels[period]) +
+        ' · ' + h(TODAY_GAMES[gameId].label);
+
       if (!rows.length) {
         host.innerHTML =
-          '<div class="tglb-empty">За сегодня пока нет рекордов в игре «' +
+          '<div class="tglb-empty">За этот период ещё нет рекордов в игре «' +
           h(TODAY_GAMES[gameId].title) +
-          '». Начни первым — твой результат появится здесь после завершения раунда.</div>';
+          '». Сыграй раунд — результат появится здесь после завершения игры.</div>';
         return;
       }
 
+      const myRank = Number(data.my_rank);
+
+      const me = Number.isFinite(myRank) && myRank > 0
+        ? '<div class="tglb-my-rank"><span>Твоё место среди друзей</span><strong>№ ' +
+          myRank.toLocaleString('ru-RU') +
+          '</strong></div>'
+        : '';
+
+      const renderedRows = rows.map((row, index) => {
+        const rank = Math.max(
+          1,
+          Math.floor(Number(row.rank || index + 1))
+        );
+
+        const isMe = row.is_me === true;
+
+        const name = String(
+          row.display_name || row.username || 'Участник'
+        );
+
+        const rawAvatar = String(row.avatar_url || '');
+
+        const avatar = /^https?:\/\//i.test(rawAvatar)
+          ? '<img src="' + h(rawAvatar) +
+            '" alt="" loading="lazy" referrerpolicy="no-referrer">'
+          : h(name.slice(0, 1) || '✦');
+
+        return '<div class="ts-game-rank' +
+          (rank <= 3 ? ' is-podium' : '') +
+          (isMe ? ' is-me' : '') +
+          '" role="listitem">' +
+          '<b class="tglb-rank-num">' +
+          rank.toLocaleString('ru-RU') +
+          '</b>' +
+          '<span class="ts-game-rank-avatar">' + avatar + '</span>' +
+          '<span class="tglb-player"><span class="tglb-player-name">' +
+          h(name) + '</span>' +
+          (isMe ? '<i class="tglb-you">ВЫ</i>' : '') +
+          '</span>' +
+          '<strong>' + h(scoreLabel(row)) + '</strong>' +
+          '</div>';
+      }).join('');
+
       host.innerHTML =
-        '<p class="tglb-caption">Лучшие результаты друзей за сегодня · ' +
-        h(TODAY_GAMES[gameId].label) +
-        '</p><div class="tglb-results" role="list" aria-label="Рейтинг друзей">' +
-        rows.map((row, index) =>
-          '<div class="ts-game-rank" role="listitem">' +
-            '<b>' + (index + 1) + '</b>' +
-            '<span class="ts-game-rank-avatar">' +
-              (row.avatar_url
-                ? '<img src="' + h(row.avatar_url) + '" alt="">'
-                : h(String(row.display_name || row.username || '✦').slice(0,1))) +
-            '</span>' +
-            '<span>' + h(row.display_name || row.username || 'Участник') + '</span>' +
-            '<strong>' + h(scoreLabel(row)) + '</strong>' +
-          '</div>'
-        ).join('') +
-        '</div>';
+        '<p class="tglb-caption">' + caption + '</p>' +
+        me +
+        '<div class="tglb-results" role="list" aria-label="Рейтинг друзей">' +
+        renderedRows + '</div>';
+
     } catch (error) {
       host.innerHTML =
         '<div class="tglb-error">' +
-        h(error.message || 'Рейтинг временно недоступен.') +
-        '</div><p class="ts-helper">Для онлайн-рейтинга нужен аккаунт. Личные рекорды сохраняются на устройстве.</p>';
+        h(error?.message || 'Рейтинг временно недоступен.') +
+        '</div><p class="ts-helper">Для онлайн-рейтинга нужен аккаунт. ' +
+        'Личные рекорды на устройстве не затрагиваются.</p>';
     }
   }
+  /* TODAY ARCADE LEADERBOARDS V2 END */
 
   /* TODAY CRYSTAL CHRONICLES V43 BEGIN/* TODAY CRYSTAL CHRONICLES V43 BEGIN — MOBILE-FIRST POLISH */
   const MATCH3_V43_LEVEL_STYLES={
@@ -1077,6 +1148,7 @@
     if (action === 'match3-hint') { match3ShowHint(); return; }
     if (handleExtraMiniGameAction(action, button)) return;
     if (action === 'leaderboard') { loadMiniGameLeaderboard(game); return; }
+    if (action === 'leaderboard-period') { loadMiniGameLeaderboard(loadMiniGameLeaderboard.activeGame || 'match3', button.dataset.period || 'today'); return; }
     if (action === 'merge-move') { todayMiniGameRuntime?.move?.(button.dataset.dir); return; }
     if (action === 'merge-restart') { openMiniGame('merge2048'); return; }
     if (action === 'match-tap') { if(match3ActiveRun?.suppressClicksUntil>Date.now())return; todayMiniGameRuntime?.tap?.(Number(button.dataset.i)); return; }

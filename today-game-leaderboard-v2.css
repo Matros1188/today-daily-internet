@@ -1,0 +1,154 @@
+/* TODAY GAME LEADERBOARD V2 */
+.ts-games-home .tglb-period-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 2px 0 12px;
+  padding: 4px;
+  border: 1px solid rgba(151,169,214,.16);
+  border-radius: 14px;
+  background: rgba(10,15,29,.30);
+}
+
+.ts-games-home .tglb-period-tabs > button {
+  min-width: 0;
+  padding: 9px 7px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary, #a5b2c9);
+  font: 700 11px/1.2 "Manrope", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.ts-games-home .tglb-period-tabs > button.is-active {
+  border-color: rgba(215,255,82,.38);
+  background: rgba(215,255,82,.13);
+  color: #e8ff9d;
+  box-shadow: inset 0 0 0 1px rgba(215,255,82,.06);
+}
+
+.ts-games-home .tglb-period-tabs > button:focus-visible {
+  outline: 2px solid #d7ff52;
+  outline-offset: 2px;
+}
+
+.ts-games-home .tglb-my-rank {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(215,255,82,.25);
+  border-radius: 12px;
+  background: linear-gradient(110deg, rgba(215,255,82,.10), rgba(120,217,255,.055));
+  color: #c4d0e6;
+  font-size: 11px;
+}
+
+.ts-games-home .tglb-my-rank strong {
+  color: #e8ff9d;
+  font: 800 12px/1.2 "IBM Plex Mono", monospace;
+  white-space: nowrap;
+}
+
+.ts-games-home .ts-game-rank.is-podium {
+  background: linear-gradient(100deg, rgba(215,255,82,.055), rgba(19,26,44,.43));
+}
+
+.ts-games-home .ts-game-rank.is-podium > b {
+  font-size: 14px;
+}
+
+.ts-games-home .ts-game-rank.is-podium:first-child {
+  border-color: rgba(255,211,113,.28);
+}
+
+.ts-games-home .ts-game-rank.is-me {
+  border-color: rgba(215,255,82,.52);
+  box-shadow: inset 0 0 0 1px rgba(215,255,82,.10);
+}
+
+.ts-games-home .ts-game-rank > .tglb-player {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ts-games-home .tglb-player-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ts-games-home .tglb-you {
+  flex: 0 0 auto;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background: rgba(215,255,82,.14);
+  color: #e8ff9d;
+  font: 800 8px/1.1 "IBM Plex Mono", monospace;
+  font-style: normal;
+  letter-spacing: .04em;
+}
+
+html.today-theme-light .ts-games-home .tglb-period-tabs {
+  border-color: rgba(39,54,59,.12);
+  background: rgba(227,235,226,.72);
+}
+
+html.today-theme-light .ts-games-home .tglb-period-tabs > button {
+  color: #596b65;
+}
+
+html.today-theme-light .ts-games-home .tglb-period-tabs > button.is-active {
+  border-color: rgba(80,120,30,.30);
+  background: rgba(182,219,53,.19);
+  color: #385318;
+}
+
+html.today-theme-light .ts-games-home .tglb-my-rank {
+  border-color: rgba(80,120,30,.24);
+  background: linear-gradient(110deg, rgba(182,219,53,.13), rgba(120,190,216,.10));
+  color: #52645d;
+}
+
+html.today-theme-light .ts-games-home .tglb-my-rank strong {
+  color: #42631c;
+}
+
+html.today-theme-light .ts-games-home .ts-game-rank.is-podium {
+  background: linear-gradient(100deg, rgba(182,219,53,.12), rgba(249,251,246,.94));
+}
+
+html.today-theme-light .ts-games-home .ts-game-rank.is-me {
+  border-color: rgba(80,120,30,.42);
+  box-shadow: inset 0 0 0 1px rgba(80,120,30,.07);
+}
+
+html.today-theme-light .ts-games-home .tglb-you {
+  background: rgba(182,219,53,.22);
+  color: #385318;
+}
+
+@media (max-width: 420px) {
+  .ts-games-home .tglb-period-tabs {
+    gap: 4px;
+    padding: 3px;
+  }
+
+  .ts-games-home .tglb-period-tabs > button {
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+
+  .ts-games-home .tglb-my-rank {
+    padding: 9px 10px;
+  }
+}
