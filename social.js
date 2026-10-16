@@ -772,12 +772,39 @@
     return '';
   }
 
+  /* TODAY ARCADE EXTRA SCORE SYNC V1 */
+  async function submitExtraGameScore(id, score, duration=0) {
+    const safeScore = Math.max(0, Math.floor(Number(score)||0));
+    if (!EXTRA_GAME_IDS.includes(id) || safeScore <= 0) return;
+    try {
+      if (!await currentUser()) return;
+      const result = await todayWithTimeout(
+        rpc('today_mini_game_submit_score', {
+          p_game_id: id,
+          p_score: safeScore,
+          p_duration_sec: Math.max(0, Math.min(7200, Math.floor(Number(duration)||0)))
+        }),
+        10000,
+        'Сохранение рекорда заняло слишком много времени.'
+      );
+      if (!result?.ok) throw new Error(result?.message || 'Сервер не сохранил рекорд.');
+    } catch (error) {
+      console.warn('TODAY extra game score sync; local record preserved', id, error);
+    }
+  }
+
   function saveExtraGameResult(id, score, duration=0) {
     const value = Math.max(0, Math.floor(Number(score)||0));
     let best = 0;
-    try { best = Math.max(0, Number(localStorage.getItem('today-game-best-'+id)||0)); localStorage.setItem('today-game-best-'+id, String(Math.max(best,value))); } catch (_) {}
-    const node = document.querySelector(`[data-local-best="${id}"]`); if(node) node.textContent=String(Math.max(best,value));
-    const scoreNode=byId('todayExtraScore'); if(scoreNode) scoreNode.textContent=String(value);
+    try {
+      best = Math.max(0, Number(localStorage.getItem('today-game-best-'+id)||0));
+      localStorage.setItem('today-game-best-'+id, String(Math.max(best,value)));
+    } catch (_) {}
+    const node = document.querySelector(`[data-local-best="${id}"]`);
+    if (node) node.textContent = String(Math.max(best,value));
+    const scoreNode = byId('todayExtraScore');
+    if (scoreNode) scoreNode.textContent = String(value);
+    if (value > 0) void submitExtraGameScore(id, value, duration);
     return Math.max(best,value);
   }
 
@@ -815,7 +842,7 @@
       let state='idle',started=0,waitTimer=null,best=Infinity;
       const bestNode=document.querySelector('[data-local-best="pulse"]');try{best=Number(localStorage.getItem('today-game-best-pulse')||0)||Infinity;}catch(_){}
       if(bestNode)bestNode.textContent=Number.isFinite(best)?String(best):'—';
-      const tap=()=>{if(state==='idle'||state==='done'){state='waiting';btn.className='ts-extra-pulse waiting';label.textContent='ЖДИ ЗЕЛЁНЫЙ';small.textContent='Не нажимай пока';if(status)status.textContent='Сигнал появится через случайный промежуток.';waitTimer=setTimeout(()=>{if(state!=='waiting')return;state='ready';started=performance.now();btn.className='ts-extra-pulse ready';label.textContent='ЖМИ!';small.textContent='СЕЙЧАС';},1000+Math.random()*2600);return;}if(state==='waiting'){clearTimeout(waitTimer);state='done';btn.className='ts-extra-pulse early';label.textContent='РАНО!';small.textContent='Попробуй ещё';status&&(status.textContent='Фальстарт. Подожди зелёный сигнал.');return;}if(state==='ready'){const ms=Math.round(performance.now()-started);state='done';btn.className='ts-extra-pulse';label.textContent=ms+' МС';small.textContent='Нажми ещё раз для повтора';const stored=Number(localStorage.getItem('today-game-best-pulse')||0);if(!stored||ms<stored){try{localStorage.setItem('today-game-best-pulse',String(ms));}catch(_){}best=ms;}if(bestNode)bestNode.textContent=Number.isFinite(best)?String(best):'—';scoreNode&&(scoreNode.textContent=String(ms));status&&(status.textContent=ms<230?'Молниеносно! Отличная реакция.':ms<330?'Хорошая реакция. Попробуй быстрее.':'Можно быстрее — ещё одна попытка?');}};
+      const tap=()=>{if(state==='idle'||state==='done'){state='waiting';btn.className='ts-extra-pulse waiting';label.textContent='ЖДИ ЗЕЛЁНЫЙ';small.textContent='Не нажимай пока';if(status)status.textContent='Сигнал появится через случайный промежуток.';waitTimer=setTimeout(()=>{if(state!=='waiting')return;state='ready';started=performance.now();btn.className='ts-extra-pulse ready';label.textContent='ЖМИ!';small.textContent='СЕЙЧАС';},1000+Math.random()*2600);return;}if(state==='waiting'){clearTimeout(waitTimer);state='done';btn.className='ts-extra-pulse early';label.textContent='РАНО!';small.textContent='Попробуй ещё';status&&(status.textContent='Фальстарт. Подожди зелёный сигнал.');return;}if(state==='ready'){const ms=Math.round(performance.now()-started);state='done';btn.className='ts-extra-pulse';label.textContent=ms+' МС';small.textContent='Нажми ещё раз для повтора';const stored=Number(localStorage.getItem('today-game-best-pulse')||0);if(!stored||ms<stored){try{localStorage.setItem('today-game-best-pulse',String(ms));}catch(_){}best=ms;}if(bestNode)bestNode.textContent=Number.isFinite(best)?String(best):'—';scoreNode&&(scoreNode.textContent=String(ms));void submitExtraGameScore('pulse',Math.max(1,1000-ms),0);status&&(status.textContent=ms<230?'Молниеносно! Отличная реакция.':ms<330?'Хорошая реакция. Попробуй быстрее.':'Можно быстрее — ещё одна попытка?');}};
       todayMiniGameRuntime={id,tap};cleanup=()=>clearTimeout(waitTimer);
     } else if(id==='breakout'){
       const canvas=byId('todayExtraCanvas'),ctx=canvas?.getContext('2d');if(!canvas||!ctx)return;
