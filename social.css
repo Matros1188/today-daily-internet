@@ -1185,3 +1185,80 @@ html.today-theme-light .ts-merge-controls button { color:#2d3d5d !important; bor
 }
 /* END TODAY V500 MAIN GAME START HOTFIX */
 
+/* TODAY V501 GAMEPLAY THEME ISOLATION — the site theme must not wash out the active game world. */
+html.today-theme-light body.today-match3-active { color-scheme:dark !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen {
+  color-scheme:dark !important; color:#edf3ff !important; background:#07091b !important;
+  border-color:transparent !important; box-shadow:none !important;
+}
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .modal-card,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen #modalContent,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-panel {
+  color:#edf3ff !important; background:linear-gradient(180deg,#090d27 0%,#050817 66%,#090a1e 100%) !important;
+  border-color:rgba(146,168,238,.16) !important; box-shadow:none !important;
+}
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-game { color:#edf3ff !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-game-hud>div,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-inventory,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-story,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-chapter,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-booster-card,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-status,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-console,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-boss,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-journal-card,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-pause-card {
+  color:#e8efff !important; border-color:rgba(151,174,239,.20) !important;
+  background:linear-gradient(145deg,rgba(22,30,65,.96),rgba(7,12,30,.98)) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.065),0 9px 26px rgba(0,0,0,.16) !important;
+}
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-game-hud small,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-objective-copy,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-help,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-statline,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-inventory small,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-panel small { color:#aab9db !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-game-hud b,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-map-title h3,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-inventory h3,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-world-title b { color:#f0f4ff !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-board-wrap,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-panel {
+  color:#e8efff !important; border-color:rgba(139,164,236,.18) !important;
+  background:linear-gradient(145deg,rgba(19,27,59,.96),rgba(6,11,28,.98)) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.06),0 12px 30px rgba(0,0,0,.2) !important;
+}
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-match-board.ts-m3-board {
+  border-color:rgba(156,177,247,.22) !important;
+  background:radial-gradient(ellipse at 50% 0%,rgba(90,100,218,.2),transparent 58%),linear-gradient(145deg,#111a3a,#070d21 70%,#0b1029) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 14px 36px rgba(0,0,0,.28) !important;
+}
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-booster-use,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-quick-actions>button,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-focus>button,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-mini {
+  color:#edf3ff !important; border-color:rgba(150,174,240,.24) !important;
+  background:linear-gradient(145deg,#1a254d,#0d1532) !important;
+}
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-tool,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-tool b,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-tool small,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-world-title,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-progress,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-pill-row { color:#e8efff !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-progress-track,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-tool-track { background:rgba(140,164,225,.16) !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-mechanic-tags>span,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .tcw-pill { color:#d9e5ff !important; border-color:rgba(149,172,236,.20) !important; background:rgba(107,131,196,.12) !important; }
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-pause,
+html.today-theme-light body.today-match3-active #modal.today-match3-fullscreen .ts-m3-v42-journal { background:rgba(4,7,21,.86) !important; }
+html.today-theme-light body.today-match3-result-open #todayMatch3Result[data-v45-body-overlay="1"] {
+  color:#edf3ff !important; color-scheme:dark !important;
+  background:radial-gradient(ellipse at 50% 0%,rgba(98,101,231,.22),transparent 56%),linear-gradient(150deg,#101735 0%,#090f25 62%,#17122d 100%) !important;
+  border-color:rgba(151,171,244,.32) !important; box-shadow:0 28px 90px rgba(0,0,0,.58),inset 0 1px rgba(255,255,255,.08) !important;
+}
+html.today-theme-light body.today-match3-result-open #todayMatch3Result[data-v45-body-overlay="1"] h3 { color:#fff4d8 !important; }
+html.today-theme-light body.today-match3-result-open #todayMatch3Result[data-v45-body-overlay="1"] p { color:#d1dcfa !important; }
+html.today-theme-light body.today-match3-result-open #todayMatch3Result[data-v45-body-overlay="1"] .ts-m3-eyebrow { color:#c8d3ff !important; }
+/* END TODAY V501 GAMEPLAY THEME ISOLATION */
+
