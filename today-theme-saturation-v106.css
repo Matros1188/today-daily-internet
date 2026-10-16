@@ -1,0 +1,676 @@
+/* =========================================================
+   TODAY LIGHT V106 — RICHER PREMIUM LIGHT PALETTE
+   Preserve the lavender / rose / turquoise / peach mood.
+   Only visual properties change. No layout/gameplay changes.
+   ========================================================= */
+
+html.today-theme-light {
+  color-scheme: light !important;
+
+  --today-theme-bg: #eee2ff;
+  --today-theme-surface: rgba(247, 239, 255, .98);
+  --today-theme-text: #33234c;
+  --today-theme-muted: #745b88;
+  --today-theme-border: rgba(124, 75, 190, .43);
+
+  --today-palette-lavender: #b99aff;
+  --today-palette-lavender-deep: #7240c5;
+  --today-palette-rose: #ffb4d9;
+  --today-palette-rose-deep: #cf438e;
+  --today-palette-turquoise: #98eadb;
+  --today-palette-turquoise-deep: #168f82;
+  --today-palette-peach: #ffd5a3;
+
+  --today-v106-violet: #7844ca;
+  --today-v106-pink: #cb438b;
+  --today-v106-teal: #168d81;
+  --today-v106-peach: #aa691c;
+  --today-v106-outline: rgba(122, 76, 185, .42);
+}
+
+/* Page background: a little more color, same soft atmosphere. */
+
+html.today-theme-light body {
+  color: #38264f !important;
+  background-color: #eee4ff !important;
+}
+
+html.today-theme-light #dailyBackdrop {
+  opacity: 1 !important;
+  filter: saturate(1.20) !important;
+  background:
+    radial-gradient(
+      ellipse at 7% 5%,
+      rgba(164, 116, 255, .79),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 94% 12%,
+      rgba(255, 132, 197, .65),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 83% 78%,
+      rgba(66, 211, 190, .52),
+      transparent 37%
+    ),
+    radial-gradient(
+      ellipse at 14% 91%,
+      rgba(196, 158, 255, .61),
+      transparent 39%
+    ),
+    radial-gradient(
+      ellipse at 52% 48%,
+      rgba(255, 222, 184, .25),
+      transparent 51%
+    ),
+    linear-gradient(
+      132deg,
+      #e5d5ff 0%,
+      #f4e4ff 34%,
+      #ffe5f1 66%,
+      #d6f6ed 100%
+    ) !important;
+}
+
+html.today-theme-light .noise {
+  opacity: .035 !important;
+  mix-blend-mode: multiply !important;
+}
+
+/* Header: richer gradients without making it heavy. */
+
+html.today-theme-light .topbar {
+  color: #39244f !important;
+  background: linear-gradient(
+    110deg,
+    rgba(237, 222, 255, .98),
+    rgba(255, 222, 241, .97) 54%,
+    rgba(210, 247, 237, .97)
+  ) !important;
+  border-bottom-color: rgba(123, 78, 184, .37) !important;
+  box-shadow:
+    0 8px 30px rgba(105, 65, 161, .14),
+    inset 0 1px rgba(255, 255, 255, .96) !important;
+  backdrop-filter: blur(24px) saturate(175%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(175%) !important;
+}
+
+html.today-theme-light .today-brand-word,
+html.today-theme-light .today-brand-copy,
+html.today-theme-light .brand,
+html.today-theme-light .topbar .account-btn {
+  color: #39264f !important;
+}
+
+html.today-theme-light .today-brand-tag {
+  color: #8050b1 !important;
+}
+
+/* Main feature cards. */
+
+html.today-theme-light .hero {
+  color: #38244f !important;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(182, 143, 255, .43),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(255, 171, 217, .35),
+      transparent 56%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(247, 237, 255, .98),
+      rgba(255, 231, 246, .96) 56%,
+      rgba(220, 248, 241, .98)
+    ) !important;
+  border-color: rgba(128, 78, 190, .39) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .99),
+    0 18px 46px rgba(103, 65, 159, .14) !important;
+}
+
+html.today-theme-light .hero h1 span {
+  background: linear-gradient(
+    100deg,
+    #7540cc 0%,
+    #c94191 45%,
+    #188f91 85%,
+    #328b70 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+html.today-theme-light h1,
+html.today-theme-light h2,
+html.today-theme-light h3,
+html.today-theme-light h4,
+html.today-theme-light .section-head {
+  color: #382448 !important;
+}
+
+html.today-theme-light .hero-copy > p,
+html.today-theme-light .hero p,
+html.today-theme-light .section-note,
+html.today-theme-light .community-intro {
+  color: #755f87 !important;
+}
+
+html.today-theme-light .eyebrow,
+html.today-theme-light .section-head .eyebrow {
+  color: #8047ba !important;
+}
+
+html.today-theme-light .hero-rail strong {
+  color: #633d94 !important;
+}
+
+html.today-theme-light .ticker {
+  color: #168e83 !important;
+}
+
+/* Cards on the main page. */
+
+html.today-theme-light .clock-card,
+html.today-theme-light .scene-card,
+html.today-theme-light .activity-strip,
+html.today-theme-light .ranking-card,
+html.today-theme-light .daily-card,
+html.today-theme-light .community-card,
+html.today-theme-light .feed-card,
+html.today-theme-light .post-card,
+html.today-theme-light .today-card,
+html.today-theme-light .profile-card,
+html.today-theme-light .settings-card,
+html.today-theme-light .shop-card,
+html.today-theme-light .daily-grid > *,
+html.today-theme-light .community-feed > *,
+html.today-theme-light .leaderboard > *,
+html.today-theme-light #dailyGrid > *,
+html.today-theme-light #communityFeed > *,
+html.today-theme-light #leaderboard > * {
+  border-color: rgba(128, 82, 190, .29) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .98),
+    0 13px 33px rgba(103, 69, 159, .105) !important;
+}
+
+html.today-theme-light .daily-card,
+html.today-theme-light .community-card,
+html.today-theme-light .feed-card,
+html.today-theme-light .post-card,
+html.today-theme-light .today-card,
+html.today-theme-light .profile-card,
+html.today-theme-light .settings-card,
+html.today-theme-light .shop-card {
+  backdrop-filter: blur(18px) saturate(155%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(155%) !important;
+}
+
+/* Social panels, messages and community surfaces. */
+
+html.today-theme-light .ts-panel,
+html.today-theme-light .ts-card,
+html.today-theme-light .ts-form-card,
+html.today-theme-light .ts-user-card,
+html.today-theme-light .ts-chat-row,
+html.today-theme-light .ts-empty,
+html.today-theme-light .ts-promo-wrap,
+html.today-theme-light .ts-promoted-card,
+html.today-theme-light .ts-channel-card,
+html.today-theme-light .ts-list-card,
+html.today-theme-light .ts-chat-create-grid > *,
+html.today-theme-light .ts-profile-post,
+html.today-theme-light .ts-post-card {
+  border-color: rgba(127, 78, 188, .32) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .97),
+    0 12px 30px rgba(102, 67, 159, .095) !important;
+}
+
+html.today-theme-light .ts-panel-head,
+html.today-theme-light .ts-panel-head {
+  border-bottom-color: rgba(128, 78, 188, .24) !important;
+}
+
+html.today-theme-light .ts-panel-head h2,
+html.today-theme-light .ts-panel h3,
+html.today-theme-light .ts-form-card h3,
+html.today-theme-light .ts-list-head h3,
+html.today-theme-light .ts-promoted-card h4,
+html.today-theme-light .ts-user-copy b,
+html.today-theme-light .ts-chat-row-copy b {
+  color: #402653 !important;
+}
+
+html.today-theme-light .ts-panel-head p,
+html.today-theme-light .ts-panel p,
+html.today-theme-light .ts-muted,
+html.today-theme-light .ts-helper,
+html.today-theme-light .ts-user-copy span,
+html.today-theme-light .ts-chat-row-copy small,
+html.today-theme-light .ts-promoted-foot,
+html.today-theme-light .ts-moderation-note,
+html.today-theme-light .ts-form-card label,
+html.today-theme-light .ts-form-card p {
+  color: #765f89 !important;
+}
+
+html.today-theme-light .ts-kicker,
+html.today-theme-light .ts-count,
+html.today-theme-light .ts-game-record {
+  color: #7e49bb !important;
+}
+
+/* Buttons: more colorful while keeping readable text. */
+
+html.today-theme-light .primary-button,
+html.today-theme-light .ts-primary,
+html.today-theme-light .ts-mini-accent {
+  color: #39264f !important;
+  border-color: rgba(127, 78, 188, .37) !important;
+  background: linear-gradient(
+    118deg,
+    #a6eddf 0%,
+    #c9b2ff 53%,
+    #ffbfdc 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .86),
+    0 8px 22px rgba(116, 74, 179, .15) !important;
+}
+
+html.today-theme-light .primary-button:hover,
+html.today-theme-light .ts-primary:hover {
+  filter: saturate(1.12) brightness(1.015) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    0 10px 26px rgba(116, 74, 179, .20) !important;
+}
+
+html.today-theme-light .ts-mini,
+html.today-theme-light .ts-text-button,
+html.today-theme-light .ts-panel .ts-mini,
+html.today-theme-light .quiet-btn {
+  color: #63428f !important;
+  border-color: rgba(130, 83, 191, .32) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 234, 255, .97),
+    rgba(255, 230, 243, .95)
+  ) !important;
+}
+
+html.today-theme-light button.account-btn,
+html.today-theme-light button.quiet-btn,
+html.today-theme-light .top-btn,
+html.today-theme-light #todayThemeToggle {
+  color: #50346e !important;
+  border-color: rgba(130, 80, 188, .37) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(244, 229, 255, .99),
+    rgba(255, 225, 242, .98)
+  ) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .99),
+    0 6px 18px rgba(111, 71, 163, .13) !important;
+}
+
+html.today-theme-light #todayThemeToggle .today-theme-icon {
+  color: #7140c5 !important;
+  background: rgba(185, 154, 255, .42) !important;
+}
+
+html.today-theme-light .coin-badge {
+  color: #73480c !important;
+  border-color: rgba(208, 137, 43, .50) !important;
+  background: linear-gradient(
+    135deg,
+    #fff0ad,
+    #ffd6a2 56%,
+    #ffcbe4
+  ) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .97),
+    0 6px 18px rgba(188, 126, 43, .16) !important;
+}
+
+/* Form controls and visible focus states. */
+
+html.today-theme-light input,
+html.today-theme-light textarea,
+html.today-theme-light select {
+  color: #39284f !important;
+  caret-color: #7844ca !important;
+  accent-color: #8250d1 !important;
+  border-color: rgba(129, 81, 190, .40) !important;
+  background: linear-gradient(
+    135deg,
+    #fff8ff,
+    #f1e7ff 54%,
+    #e1f7f0
+  ) !important;
+}
+
+html.today-theme-light input::placeholder,
+html.today-theme-light textarea::placeholder {
+  color: #917aa7 !important;
+}
+
+html.today-theme-light input:focus,
+html.today-theme-light textarea:focus,
+html.today-theme-light select:focus {
+  border-color: rgba(124, 67, 202, .78) !important;
+  box-shadow:
+    0 0 0 3px rgba(157, 112, 229, .19),
+    inset 0 1px rgba(255, 255, 255, .97) !important;
+}
+
+html.today-theme-light button:focus-visible,
+html.today-theme-light a:focus-visible {
+  outline-color: rgba(126, 73, 202, .77) !important;
+}
+
+/* Dialogs: avoid overriding active full-screen games. */
+
+html.today-theme-light #modal:not(.today-v95-playing):not(.today-v96-playing):not(.today-v96-crystal):not(.today-match3-fullscreen) .modal-card,
+html.today-theme-light .modal:not(.today-v95-playing):not(.today-v96-playing):not(.today-v96-crystal):not(.today-match3-fullscreen) .modal-card {
+  color: #38264d !important;
+  border-color: rgba(128, 78, 190, .40) !important;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(192, 159, 255, .38),
+      transparent 59%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(151, 232, 216, .24),
+      transparent 55%
+    ),
+    linear-gradient(
+      140deg,
+      rgba(249, 240, 255, .99),
+      rgba(230, 247, 243, .99) 57%,
+      rgba(255, 231, 245, .99)
+    ) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .99),
+    0 28px 90px rgba(89, 48, 143, .24) !important;
+}
+
+html.today-theme-light #modal:not(.today-v95-playing):not(.today-v96-playing):not(.today-v96-crystal):not(.today-match3-fullscreen) .modal-close,
+html.today-theme-light .modal:not(.today-v95-playing):not(.today-v96-playing):not(.today-v96-crystal):not(.today-match3-fullscreen) .modal-close {
+  color: #624283 !important;
+  background: rgba(207, 184, 255, .43) !important;
+  border-color: rgba(132, 88, 188, .37) !important;
+}
+
+html.today-theme-light .modal-backdrop {
+  background: rgba(50, 31, 74, .43) !important;
+}
+
+/* Bottom navigation. */
+
+html.today-theme-light .bottom-nav {
+  color: #624b7b !important;
+  background: linear-gradient(
+    100deg,
+    rgba(235, 219, 255, .99),
+    rgba(255, 225, 242, .99) 53%,
+    rgba(208, 246, 237, .99)
+  ) !important;
+  border-color: rgba(129, 78, 186, .39) !important;
+  box-shadow:
+    0 -9px 30px rgba(103, 65, 158, .14),
+    inset 0 1px rgba(255, 255, 255, .98) !important;
+  backdrop-filter: blur(25px) saturate(175%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(175%) !important;
+}
+
+html.today-theme-light .bottom-nav button,
+html.today-theme-light .bottom-nav a,
+html.today-theme-light .bottom-nav button span,
+html.today-theme-light .bottom-nav a span {
+  color: #765c8f !important;
+}
+
+html.today-theme-light .bottom-nav button.active,
+html.today-theme-light .bottom-nav a.active,
+html.today-theme-light .bottom-nav button.active span,
+html.today-theme-light .bottom-nav a.active span {
+  color: #7140c5 !important;
+  text-shadow: 0 0 14px rgba(156, 103, 221, .25) !important;
+}
+
+/* Arcade home and leaderboard. */
+
+html.today-theme-light .ts-games-hero,
+html.today-theme-light .ts-game-card,
+html.today-theme-light .today-v95-discovery,
+html.today-theme-light .today-v96-quest,
+html.today-theme-light .today-v96-seal-shelf {
+  color: #37254e !important;
+  border-color: rgba(128, 78, 190, .33) !important;
+  background:
+    radial-gradient(
+      ellipse at 94% 0,
+      rgba(178, 150, 255, .29),
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 5% 100%,
+      rgba(147, 231, 216, .21),
+      transparent 46%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(249, 240, 255, .98),
+      rgba(255, 231, 246, .97) 57%,
+      rgba(226, 249, 242, .97)
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .99),
+    0 15px 36px rgba(91, 59, 151, .11) !important;
+}
+
+html.today-theme-light .ts-games-hero h3,
+html.today-theme-light .ts-game-card-copy h3,
+html.today-theme-light .today-v95-title,
+html.today-theme-light .today-v96-quest h3,
+html.today-theme-light .today-v96-shelf-copy b {
+  color: #38234f !important;
+}
+
+html.today-theme-light .ts-games-hero p,
+html.today-theme-light .ts-game-card-copy p,
+html.today-theme-light .today-v95-subtitle,
+html.today-theme-light .today-v96-quest p,
+html.today-theme-light .today-v96-shelf-copy small {
+  color: #735d87 !important;
+}
+
+html.today-theme-light .ts-game-art {
+  border-bottom-color: rgba(128, 78, 190, .25) !important;
+}
+
+html.today-theme-light .ts-game-card-bottom {
+  border-top-color: rgba(128, 78, 190, .25) !important;
+}
+
+html.today-theme-light .ts-game-card-bottom small b {
+  color: #6941a7 !important;
+}
+
+html.today-theme-light .ts-game-leaderboard-tabs > button.is-active,
+html.today-theme-light .tglb-period-tabs > button.is-active {
+  color: #5b329c !important;
+  border-color: rgba(120, 65, 196, .48) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(203, 177, 255, .48),
+    rgba(255, 195, 226, .52)
+  ) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(120, 65, 196, .08),
+    0 4px 14px rgba(117, 70, 182, .10) !important;
+}
+
+html.today-theme-light .ts-game-rank,
+html.today-theme-light .tglb-my-rank {
+  border-color: rgba(128, 78, 190, .28) !important;
+  background: linear-gradient(
+    115deg,
+    rgba(240, 228, 255, .93),
+    rgba(255, 234, 246, .90) 55%,
+    rgba(225, 248, 242, .91)
+  ) !important;
+}
+
+html.today-theme-light .ts-game-rank.is-podium {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 226, 167, .77),
+    rgba(255, 231, 244, .91) 55%,
+    rgba(228, 246, 241, .90)
+  ) !important;
+}
+
+html.today-theme-light .ts-game-rank.is-me {
+  border-color: rgba(117, 66, 198, .59) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(117, 66, 198, .13),
+    0 5px 16px rgba(117, 66, 198, .10) !important;
+}
+
+html.today-theme-light .ts-game-rank > b,
+html.today-theme-light .ts-game-rank > strong,
+html.today-theme-light .tglb-my-rank strong {
+  color: #6940ad !important;
+}
+
+html.today-theme-light .ts-game-rank-avatar {
+  border-color: rgba(126, 78, 189, .30) !important;
+  background: linear-gradient(
+    140deg,
+    rgba(199, 173, 255, .60),
+    rgba(255, 203, 230, .60)
+  ) !important;
+}
+
+html.today-theme-light .tglb-you {
+  color: #5c329e !important;
+  background: rgba(195, 164, 255, .40) !important;
+}
+
+html.today-theme-light .tglb-caption {
+  color: #7c559d !important;
+}
+
+html.today-theme-light .tglb-empty,
+html.today-theme-light .tglb-error {
+  border-color: rgba(128, 78, 190, .34) !important;
+  background: rgba(247, 237, 255, .75) !important;
+  color: #705682 !important;
+}
+
+/* Profile route: same palette for profile tabs and surfaces. */
+
+html.today-theme-light body.today-profile-route #todayProfilePage,
+html.today-theme-light body.today-profile-route #todayProfilePage .ts-panel,
+html.today-theme-light body.today-profile-route #todayProfilePage .ts-card,
+html.today-theme-light body.today-profile-route #todayProfilePage .ts-form-card {
+  border-color: rgba(128, 78, 190, .31) !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage button,
+html.today-theme-light body.today-profile-route #todayProfilePage a {
+  accent-color: #8250d1;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button {
+  border-color: rgba(128, 78, 190, .27) !important;
+}
+
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button.active,
+html.today-theme-light body.today-profile-route #todayProfilePage
+.today-profile-v63-tabs button[aria-selected="true"] {
+  color: #6535ac !important;
+  border-color: rgba(120, 65, 196, .49) !important;
+  background: linear-gradient(
+    125deg,
+    rgba(207, 184, 255, .56),
+    rgba(255, 205, 231, .53)
+  ) !important;
+}
+
+/* Preserve saturated artwork without changing page geometry. */
+
+html.today-theme-light .ts-avatar,
+html.today-theme-light .ts-orbit,
+html.today-theme-light .ts-chat-icon,
+html.today-theme-light .ts-status-chip,
+html.today-theme-light .ts-promo-badge {
+  border-color: rgba(125, 79, 187, .30) !important;
+}
+
+html.today-theme-light .ts-status-chip,
+html.today-theme-light .ts-promo-badge {
+  color: #237f77 !important;
+  background: rgba(157, 235, 219, .53) !important;
+}
+
+html.today-theme-light .today-profile-theme-toggle {
+  color: #58357e !important;
+  border-color: rgba(128, 78, 190, .39) !important;
+  background: linear-gradient(
+    130deg,
+    rgba(239, 223, 255, .99),
+    rgba(255, 224, 241, .98)
+  ) !important;
+}
+
+/* Footer, notifications and selection. */
+
+html.today-theme-light .footer {
+  color: #49365d !important;
+  background: linear-gradient(
+    120deg,
+    rgba(236, 221, 255, .98),
+    rgba(217, 247, 239, .98),
+    rgba(255, 227, 242, .98)
+  ) !important;
+  border-color: rgba(128, 78, 190, .32) !important;
+}
+
+html.today-theme-light .footer span {
+  color: #7d6290 !important;
+}
+
+html.today-theme-light .toast {
+  color: #3c2a52 !important;
+  background: linear-gradient(
+    125deg,
+    rgba(247, 235, 255, .99),
+    rgba(215, 247, 239, .99) 57%,
+    rgba(255, 226, 242, .99)
+  ) !important;
+  border-color: rgba(128, 78, 190, .39) !important;
+  box-shadow: 0 10px 32px rgba(95, 58, 151, .19) !important;
+}
+
+html.today-theme-light ::selection {
+  color: #39264f !important;
+  background: rgba(191, 157, 255, .68) !important;
+}
+
+/* End TODAY LIGHT V106 */
