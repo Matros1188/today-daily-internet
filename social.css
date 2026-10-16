@@ -1363,3 +1363,64 @@ html.today-theme-light body.today-match3-result-open #todayMatch3Result[data-v45
 html[data-today-theme="light"] body.today-match3-result-open #todayMatch3Result[data-v45-body-overlay="1"] p { color: #d1dcfa !important; }
 /* END TODAY V502 HARD GAME-WORLD ISOLATION */
 
+
+/* TODAY V505 LIVE OBJECTIVE + SPECIAL GEM SIGILS */
+/* Compact live quest panel: visible in the fullscreen/mobile board where the long intro is hidden. */
+.ts-m3-v42-game .ts-m3-live-objective{
+  position:relative;isolation:isolate;display:grid!important;gap:4px;min-width:0;width:100%;
+  padding:8px 11px;border:1px solid rgba(105,214,224,.28);border-radius:13px;
+  background:linear-gradient(112deg,rgba(26,58,91,.92),rgba(43,39,90,.84));
+  box-shadow:inset 0 1px rgba(255,255,255,.12),0 7px 18px rgba(0,0,0,.14);overflow:hidden;
+}
+.ts-m3-v42-game .ts-m3-live-objective::after{
+  content:"";position:absolute;z-index:-1;right:-27px;top:-39px;width:104px;height:104px;border:1px solid rgba(152,231,239,.12);
+  border-radius:50%;box-shadow:0 0 0 13px rgba(152,231,239,.035),0 0 0 27px rgba(152,231,239,.025);pointer-events:none;
+}
+.ts-m3-live-objective-head{display:flex;align-items:center;gap:7px;min-width:0;}
+.ts-m3-live-objective-mark{display:grid;place-items:center;flex:0 0 auto;width:20px;height:20px;border-radius:7px;
+  border:1px solid rgba(151,248,232,.32);background:linear-gradient(145deg,rgba(124,252,220,.18),rgba(108,146,255,.18));color:#aaf7e3;}
+.ts-m3-live-objective-mark svg{display:block;width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.ts-m3-live-objective-head>span:nth-child(2){color:#9fe8e2;font:900 8px/1.25 'IBM Plex Mono',monospace;letter-spacing:.13em;}
+.ts-m3-live-objective-head>b{margin-left:auto;padding:3px 6px;border:1px solid rgba(116,238,198,.19);border-radius:99px;
+  background:rgba(116,238,198,.08);color:#a4f1d7;font:800 7px/1.1 'IBM Plex Mono',monospace;letter-spacing:.08em;white-space:nowrap;}
+.ts-m3-v42-game .ts-m3-live-objective>p{position:relative;z-index:1;margin:0;max-width:100%;color:#f3f7ff;font-size:clamp(10px,2.3vw,12px);font-weight:780;line-height:1.4;letter-spacing:-.01em;overflow-wrap:anywhere;}
+#modal.today-match3-fullscreen .ts-m3-live-objective{display:grid!important;flex:0 0 auto;margin:0 0 5px!important;}
+#modal.today-match3-fullscreen .ts-m3-live-objective>p{font-size:clamp(10px,2.5vw,12px)!important;line-height:1.35!important;}
+html.today-theme-light .ts-m3-v42-game .ts-m3-live-objective,
+html[data-today-theme="light"] .ts-m3-v42-game .ts-m3-live-objective{
+  border-color:rgba(104,139,191,.28);background:linear-gradient(112deg,rgba(226,241,250,.98),rgba(236,232,252,.97));
+  box-shadow:inset 0 1px #fff,0 7px 18px rgba(49,71,114,.09);
+}
+html.today-theme-light .ts-m3-live-objective-mark,html[data-today-theme="light"] .ts-m3-live-objective-mark{border-color:rgba(78,139,175,.28);background:linear-gradient(145deg,rgba(76,174,172,.13),rgba(112,127,225,.12));color:#397d94;}
+html.today-theme-light .ts-m3-live-objective-head>span:nth-child(2),html[data-today-theme="light"] .ts-m3-live-objective-head>span:nth-child(2){color:#4e718c;}
+html.today-theme-light .ts-m3-live-objective-head>b,html[data-today-theme="light"] .ts-m3-live-objective-head>b{border-color:rgba(69,150,129,.2);background:rgba(73,167,139,.08);color:#337f70;}
+html.today-theme-light .ts-m3-v42-game .ts-m3-live-objective>p,html[data-today-theme="light"] .ts-m3-v42-game .ts-m3-live-objective>p{color:#253b58!important;}
+
+/* Purpose-built glass-cut sigils replace the tiny fallback glyphs on special gems. */
+.ts-m3-v42-game .ts-m3-special-badge{
+  position:absolute!important;top:-3px!important;right:-3px!important;z-index:12!important;display:grid!important;place-items:center!important;
+  width:36%!important;height:36%!important;min-width:16px!important;min-height:16px!important;max-width:25px!important;max-height:25px!important;
+  box-sizing:border-box;padding:2px;border:1px solid rgba(255,255,255,.78)!important;border-radius:7px 5px 7px 5px!important;
+  background:linear-gradient(145deg,#a1fff0,#4d9fe5 53%,#4d4a9f)!important;color:#fff!important;
+  text-shadow:none!important;box-shadow:inset 0 1px rgba(255,255,255,.55),0 2px 6px rgba(0,0,0,.44),0 0 10px rgba(121,218,255,.24)!important;
+  font-size:0!important;line-height:0!important;font-style:normal!important;animation:tsM3V505SigilPulse 2.8s ease-in-out infinite!important;pointer-events:none;
+}
+.ts-m3-v42-game .ts-m3-special-badge>svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1px rgba(11,23,55,.45));}
+.ts-m3-v42-game .ts-m3-special-badge.special-plane{background:linear-gradient(145deg,#b9fff0,#3faea9 48%,#275f99)!important;}
+.ts-m3-v42-game .ts-m3-special-badge.special-nova{background:linear-gradient(145deg,#fff1bc,#f1a15f 47%,#a44f98)!important;box-shadow:inset 0 1px rgba(255,255,255,.62),0 2px 7px rgba(0,0,0,.4),0 0 13px rgba(255,190,119,.32)!important;animation:tsM3V505SigilPulse 2.8s ease-in-out infinite!important;}
+.ts-m3-v42-game .ts-m3-special-badge.special-rocket-h,.ts-m3-v42-game .ts-m3-special-badge.special-rocket-v{background:linear-gradient(145deg,#c6faff,#4da9f5 48%,#5550bf)!important;}
+.ts-m3-v42-game .ts-m3-special-badge.special-bomb{background:linear-gradient(145deg,#ffe5c2,#ff916d 49%,#b54874)!important;}
+.ts-m3-v42-game .ts-m3-special-badge.special-rainbow{background:linear-gradient(145deg,#dcfbff,#8c87ff 48%,#d56bc0)!important;}
+/* No second color-symbol is stamped over the redesigned special-gem insignia. */
+.ts-m3-v42-game.v42-symbols .ts-m3-gem.has-special::after{display:none!important;content:none!important;}
+@keyframes tsM3V505SigilPulse{0%,100%{transform:translateY(0);filter:drop-shadow(0 2px 2px rgba(0,0,0,.22));}50%{transform:translateY(-1px);filter:drop-shadow(0 2px 5px rgba(146,223,255,.35));}}
+@media(max-width:700px){
+  .ts-m3-v42-game .ts-m3-live-objective{gap:3px;padding:7px 9px;border-radius:11px;}
+  .ts-m3-live-objective-mark{width:18px;height:18px;border-radius:6px;}
+  .ts-m3-live-objective-head>span:nth-child(2){font-size:7px;letter-spacing:.11em;}
+  .ts-m3-live-objective-head>b{padding:3px 5px;font-size:6px;}
+  #modal.today-match3-fullscreen .ts-m3-live-objective>p{font-size:10px!important;}
+  .ts-m3-v42-game .ts-m3-special-badge{min-width:15px!important;min-height:15px!important;}
+}
+@media(prefers-reduced-motion:reduce){.ts-m3-v42-game .ts-m3-special-badge{animation:none!important;}}
+/* END TODAY V505 LIVE OBJECTIVE + SPECIAL GEM SIGILS */
