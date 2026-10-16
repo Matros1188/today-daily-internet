@@ -920,6 +920,7 @@
   }
 /* TODAY ARCADE EXPANSION V23 END */
 
+  /* TODAY ARCADE ALL LEADERBOARDS V1 */
   function openMiniGames() {
     stopTodayMiniGame();
     const ids = Object.keys(TODAY_GAMES);
@@ -927,8 +928,9 @@
       const g = TODAY_GAMES[id];
       return `<article class="ts-game-card ts-game-${id} ${id==='match3'?'ts-game-card-featured':''}"><div class="ts-game-art" aria-hidden="true">${gameArtwork(id)}</div><div class="ts-game-card-copy"><span class="ts-kicker">TODAY ARCADE</span><h3>${h(g.title)}</h3><p>${h(g.subtitle)}</p><div class="ts-game-card-bottom"><small>Рекорд устройства: <b data-local-best="${id}">${gameBest(id)}</b></small><button class="ts-primary" data-social-act="play-game" data-game="${id}">Играть ↗</button></div></div></article>`;
     }).join('');
-    const html = `<div class="ts-games-home"><div class="ts-games-hero"><span class="ts-kicker">TODAY ORIGINAL · 220 УРОВНЕЙ · ИСТОРИЯ СПАСЕНИЯ ЭЛАРЫ</span><h3>Собери историю из семи кристаллов.</h3><p>CRYSTAL CHRONICLES — главная аркада TODAY. Открывай главы, собирай комбо и возвращай сияние миру.</p><button type="button" class="ts-primary" data-social-act="play-game" data-game="match3">Продолжить кампанию ↗</button></div><div class="ts-game-grid">${cards}</div><section class="ts-game-leaderboard"><div class="ts-list-head"><h3>Рекорды друзей</h3><span class="ts-count">СЕГОДНЯ</span></div><div class="ts-game-leaderboard-tabs">${ids.filter(id=>!EXTRA_GAME_IDS.includes(id)).map(id=>`<button class="ts-mini" data-game-act="leaderboard" data-game="${id}">${h(TODAY_GAMES[id].label)}</button>`).join('')}</div><div id="todayGameLeaderboard"><p class="ts-muted">Выбери игру, чтобы посмотреть рекорды друзей за сегодня. Личные рекорды доступны и без аккаунта.</p></div></section></div>`;
+    const html = `<div class="ts-games-home"><div class="ts-games-hero"><span class="ts-kicker">TODAY ORIGINAL · 220 УРОВНЕЙ · ИСТОРИЯ СПАСЕНИЯ ЭЛАРЫ</span><h3>Собери историю из семи кристаллов.</h3><p>CRYSTAL CHRONICLES — главная аркада TODAY. Открывай главы, собирай комбо и возвращай сияние миру.</p><button type="button" class="ts-primary" data-social-act="play-game" data-game="match3">Продолжить кампанию ↗</button></div><div class="ts-game-grid">${cards}</div><section class="ts-game-leaderboard"><div class="ts-list-head"><h3>Рекорды друзей</h3><span class="ts-count">СЕГОДНЯ</span></div><div class="ts-game-leaderboard-tabs">${ids.map(id=>`<button class="ts-mini" data-game-act="leaderboard" data-game="${id}">${h(TODAY_GAMES[id].label)}</button>`).join('')}</div><div id="todayGameLeaderboard" aria-live="polite"><p class="ts-muted">Выбери игру, чтобы посмотреть рекорды друзей за сегодня. Личные рекорды доступны и без аккаунта.</p></div></section></div>`;
     modal(panelShell('Мини-игры','Короткие игры TODAY — для дороги, очереди и свободной минуты.',html));
+    void loadMiniGameLeaderboard('match3');
   }
 
   /* TODAY V26 CLEANUP BRIDGES BEGIN */
@@ -954,20 +956,83 @@
     if (EXTRA_GAME_IDS.includes(gameId)) initExtraGame(gameId);
   }
 
+  /* TODAY ARCADE ALL LEADERBOARDS V1 */
   async function loadMiniGameLeaderboard(gameId) {
     const host = byId('todayGameLeaderboard');
     if (!host) return;
-    host.innerHTML = '<p class="ts-muted">Загружаем рекорды…</p>';
+    if (!TODAY_GAMES[gameId]) return;
+
+    const tabs = document.querySelectorAll(
+      '.ts-game-leaderboard-tabs [data-game-act="leaderboard"]'
+    );
+    tabs.forEach(button => {
+      const active = button.dataset.game === gameId;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+
+    host.innerHTML = '<p class="ts-muted">Загружаем рекорды друзей…</p>';
+
     try {
-      const data = await todayWithTimeout(rpc('today_mini_game_leaderboard', {p_game_id:gameId,p_limit:10}), 10000, 'Загрузка рекордов заняла слишком много времени.');
+      const data = await todayWithTimeout(
+        rpc('today_mini_game_leaderboard', {
+          p_game_id: gameId,
+          p_limit: 10
+        }),
+        10000,
+        'Загрузка рекордов заняла слишком много времени.'
+      );
+
+      if (data && data.ok === false) {
+        throw new Error(data.message || 'Рейтинг временно недоступен.');
+      }
+
       const rows = Array.isArray(data.scores) ? data.scores : [];
-      host.innerHTML = rows.length ? rows.map((r,i)=>`<div class="ts-game-rank"><b>${i+1}</b><span class="ts-game-rank-avatar">${r.avatar_url?`<img src="${h(r.avatar_url)}" alt="">`:h((r.display_name||'✦').slice(0,1))}</span><span>${h(r.display_name||r.username||'Участник')}</span><strong>${Number(r.best_score||0).toLocaleString('ru-RU')}</strong></div>`).join('') : '<p class="ts-muted">За сегодня пока нет рекордов. Начни первым.</p>';
+      const scoreLabel = row => {
+        const raw = Math.max(0, Number(row.best_score || 0));
+        // Сервер хранит для PULSE баллы 1000 - миллисекунды.
+        // В рейтинге восстанавливаем читаемое время.
+        if (gameId === 'pulse') {
+          const milliseconds = Math.max(1, 1000 - Math.min(999, raw));
+          return milliseconds.toLocaleString('ru-RU') + ' мс';
+        }
+        return Math.floor(raw).toLocaleString('ru-RU');
+      };
+
+      if (!rows.length) {
+        host.innerHTML =
+          '<div class="tglb-empty">За сегодня пока нет рекордов в игре «' +
+          h(TODAY_GAMES[gameId].title) +
+          '». Начни первым — твой результат появится здесь после завершения раунда.</div>';
+        return;
+      }
+
+      host.innerHTML =
+        '<p class="tglb-caption">Лучшие результаты друзей за сегодня · ' +
+        h(TODAY_GAMES[gameId].label) +
+        '</p><div class="tglb-results" role="list" aria-label="Рейтинг друзей">' +
+        rows.map((row, index) =>
+          '<div class="ts-game-rank" role="listitem">' +
+            '<b>' + (index + 1) + '</b>' +
+            '<span class="ts-game-rank-avatar">' +
+              (row.avatar_url
+                ? '<img src="' + h(row.avatar_url) + '" alt="">'
+                : h(String(row.display_name || row.username || '✦').slice(0,1))) +
+            '</span>' +
+            '<span>' + h(row.display_name || row.username || 'Участник') + '</span>' +
+            '<strong>' + h(scoreLabel(row)) + '</strong>' +
+          '</div>'
+        ).join('') +
+        '</div>';
     } catch (error) {
-      host.innerHTML = `<p class="ts-muted">${h(error.message||'Рейтинг временно недоступен.')}</p><p class="ts-helper">Для онлайн-рейтинга нужен аккаунт. Локальные рекорды продолжают работать.</p>`;
+      host.innerHTML =
+        '<div class="tglb-error">' +
+        h(error.message || 'Рейтинг временно недоступен.') +
+        '</div><p class="ts-helper">Для онлайн-рейтинга нужен аккаунт. Личные рекорды сохраняются на устройстве.</p>';
     }
   }
 
-/* TODAY CRYSTAL CHRONICLES V43 BEGIN — MOBILE-FIRST POLISH */
+  /* TODAY CRYSTAL CHRONICLES V43 BEGIN/* TODAY CRYSTAL CHRONICLES V43 BEGIN — MOBILE-FIRST POLISH */
   const MATCH3_V43_LEVEL_STYLES={
     'первый след':'first-trail','разбитая печать':'broken-seal','письмо из света':'light-letter','тропа созвездий':'star-trail',
     'шёпот хранителей':'guardian-whisper','затерянный ключ':'lost-key','ступени надежды':'hope-steps','капля памяти':'memory-drop',
